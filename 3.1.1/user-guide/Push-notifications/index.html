@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>How to Set up MongoosePush - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "How to Set up MongoosePush";
+    var mkdocs_page_input_path = "user-guide/Push-notifications.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../release_config/">Release/Installation configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">How to Set up MongoosePush</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overall-component-architecture">Overall component architecture</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuring-mongooseim-components">Configuring MongooseIM components</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#mod_event_pusher_push-aka-xmpp-server">mod_event_pusher_push a.k.a. 'XMPP Server'</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mod_pubsub-with-mod_push_service_mongoosepush-aka-app-server">mod_pubsub with mod_push_service_mongoosepush a.k.a. 'App Server'</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#mod_pubsubs-push-node">mod_pubsub's push node</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#mod_push_service_mongoosepush">mod_push_service_mongoosepush</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#starting-mongoosepush">Starting MongoosePush</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Roadmap/">Roadmap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Listener-modules/">Listener Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/client-certificate/">Client Certificate</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/HTTP-authentication-module/">HTTP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Tutorials &raquo;</li>
+        
+      
+    
+    <li>How to Set up MongoosePush</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="how-to-set-up-push-notifications-with-mongoosepush">How to set up Push Notifications with MongoosePush</h2>
+<p>MongooseIM server supports push notifications using FCM (<strong>F</strong>irebase <strong>C</strong>loud <strong>M</strong>essaging)
+and APNS (<strong>A</strong>pple <strong>P</strong>ush <strong>N</strong>otification <strong>S</strong>ervice) providers. Server side push
+notification support is fully compliant with <a href="https://xmpp.org/extensions/xep-0357.html">XEP-0357 Push Notifications</a>, which defines several components that need to work together in order to provide clients with working push notifications.
+The following list shows those components as defined in
+<a href="https://xmpp.org/extensions/xep-0357.html">XEP-0357</a> and MongooseIM components that correspond to those entities:</p>
+<ul>
+<li><em>XMPP Server</em> in MongooseIM is enabled by module <a href="../../modules/mod_event_pusher_push/">mod_event_pusher_push</a></li>
+<li><em>App Server</em> in MongooseIM is enabled by adding a <code>push</code> node type to <a href="../../modules/mod_pubsub/">mod_pubsub</a>'s configuration</li>
+<li><em>XMPP Push Service</em> is implemented as a <a href="https://github.com/esl/MongoosePush">MongoosePush</a> application</li>
+</ul>
+<p>All these entities have to be enabled and properly configured in order to use push notifications.
+So let's get to it, shall we?</p>
+<h3 id="overall-component-architecture">Overall component architecture</h3>
+<p>The components that make push notifications possible in MongooseIM add up to the following architecture:
+<img alt="" src="../PushNotificationscomponents.png" /></p>
+<p>The diagram lists three domains in total - two for MongooseIM and one for <a href="https://github.com/esl/MongoosePush">MongoosePush</a>. Note that this separation is not required, all three components can be on the same host with the same domain.</p>
+<h3 id="configuring-mongooseim-components">Configuring MongooseIM components</h3>
+<p>Firstly, let's configure all the required MongooseIM components, step by step.</p>
+<h4 id="mod_event_pusher_push-aka-xmpp-server"><a href="../../modules/mod_event_pusher_push/">mod_event_pusher_push</a> a.k.a. '<em>XMPP Server</em>'</h4>
+<p>The first component that we need to configure in MongooseIM is the <a href="../../modules/mod_event_pusher_push/">mod_event_pusher_push</a> module.
+This module communicates with XMPP clients directly in order to enable/disable notifications on per-client basis.</p>
+<p>The <a href="../../modules/mod_event_pusher_push/">mod_event_pusher_push</a> module is very easy to enable - just paste the following to your MongooseIM configuration file:</p>
+<pre><code>{mod_event_pusher, [
+  {backends, [
+    {push, [{wpool, [{workers, 100}]}]}
+  ]}
+]}.
+</code></pre>
+<p>And that's basically it.
+You have just enabled the push notification support with 100 asynchronous workers that will handle all push notification related work.</p>
+<p>You can also control the format of the "sender" of the push notification (which ultimately becomes the title of push
+notification) and filter which messages will trigger the notification.
+In that case you need to create a plugin module that implements the <code>mod_event_pusher_push_plugin</code> behaviour and enable this plugin
+as specified in the <a href="../../modules/mod_event_pusher_push/">mod_event_pusher_push</a> documentation.</p>
+<h4 id="mod_pubsub-with-mod_push_service_mongoosepush-aka-app-server"><a href="../../modules/mod_pubsub/">mod_pubsub</a> with <a href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a> a.k.a. '<em>App Server</em>'</h4>
+<p>The next component to configure consist of two modules:</p>
+<ul>
+<li><a href="../../modules/mod_pubsub/">mod_pubsub</a> with a <code>push</code> node type enabled that will act as a sink for push notifications generated by <a href="../../modules/mod_event_pusher_push/">mod_event_pusher_push</a></li>
+<li><a href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a> - a connector to <a href="https://github.com/esl/MongoosePush">MongoosePush</a> application</li>
+</ul>
+<h5 id="mod_pubsubs-push-node"><a href="../../modules/mod_pubsub/">mod_pubsub</a>'s <code>push</code> node</h5>
+<p>According to the <a href="https://xmpp.org/extensions/xep-0357.html">XEP-0357 Push Notifications</a>, all
+notifications generated via the module we have just enabled (i.e. <a href="../../modules/mod_event_pusher_push/">mod_event_pusher_push</a>) have to be send to a push enabled publish-subscribe node.
+In order to allow clients to allocate such a node, we need to enable it in our <a href="../../modules/mod_pubsub/">mod_pubsub</a> on the MongooseIM server that will communicate with the <em>XMPP Push Service</em>.</p>
+<p>The minimal <a href="../../modules/mod_pubsub/">mod_pubsub</a>'s configuration looks as follows:</p>
+<pre><code class="language-erlang">{mod_pubsub, [
+    {plugins, [&lt;&lt;&quot;push&quot;&gt;&gt;]}}
+]}.
+</code></pre>
+<p>Such configuration will enable the <a href="../../modules/mod_pubsub/">mod_pubsub</a> with only one node type available: <code>push</code>.
+Please note that if you want use <a href="../../modules/mod_pubsub/">mod_pubsub</a> as a 'normal' publish-subscribe service, you just need to append the <code>&lt;&lt;"push"&gt;&gt;</code> node type to the <code>plugins</code> list.
+Also, it's important to note, that the first node type on the <code>plugins</code> list, will be the default one (allocated when the client does not provide a node type in the node create stanza).</p>
+<h5 id="mod_push_service_mongoosepush"><a href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a></h5>
+<p>This module acts as a bridge between <a href="../../modules/mod_pubsub/">mod_pubsub</a> that receives notifications from <a href="../../modules/mod_event_pusher_push/">mod_event_pusher_push</a> and passes them to <a href="https://github.com/esl/MongoosePush">MongoosePush</a>, which sends them to <em>FCM</em> and/or <em>APNS</em>. To enable this module type in your configuration:</p>
+<pre><code class="language-Erlang">{http_connections, [{mongoose_push_http,
+    [{server, &quot;https://localhost:8443&quot;}]
+}]}.
+
+{mod_push_service_mongoosepush, [
+    {pool_name, mongoose_push_http},
+    {api_version, &quot;v2&quot;}
+]}.
+</code></pre>
+<p>First, we create the HTTP pool for communicating with <a href="https://github.com/esl/MongoosePush">MongoosePush</a>.
+Here, we assume that <a href="https://github.com/esl/MongoosePush">MongoosePush</a> will be available on the localhost on port 8443 which is the default one.
+Next we enable <a href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>.
+First option is the name of the HTTP pool to use and the second one is the version of <a href="https://github.com/esl/MongoosePush">MongoosePush</a>'s API (currently only "<em>v2</em>" is supported).</p>
+<p>And that's it, we've just completed the entire MongooseIM configuration.
+All we need to do now is to set up <a href="https://github.com/esl/MongoosePush">MongoosePush</a>.</p>
+<h3 id="starting-mongoosepush">Starting <a href="https://github.com/esl/MongoosePush">MongoosePush</a></h3>
+<p>The easiest way to start <a href="https://github.com/esl/MongoosePush">MongoosePush</a> is using its <a href="https://hub.docker.com/r/mongooseim/mongoose-push">docker image</a>.
+But before you can set <a href="https://github.com/esl/MongoosePush">MongoosePush</a> up, you need a <em>FCM</em> application token and/or an <em>APNS</em> application certificate.
+You can get the <em>FCM</em> token <a href="https://console.firebase.google.com/">here</a> and the easiest way of getting an <em>APNS</em> application certificate is by running <a href="https://github.com/fastlane/fastlane/tree/master/pem">this</a> script (please note that you need the certificate in <code>pem</code> format).</p>
+<p>After you get the <em>FCM</em> application token and/or the <em>APNS</em> application certificate, you can prepare to start <a href="https://github.com/esl/MongoosePush">MongoosePush</a>.
+Firstly, prepare the following files structure:</p>
+<ul>
+<li>priv/<ul>
+<li>ssl/<ul>
+<li>rest_cert.pem - The REST endpoint certificate</li>
+<li>rest_key.pem - private key for the REST endpoint certificate</li>
+</ul>
+</li>
+<li>apns/<ul>
+<li>prod_cert.pem - Production APNS app certificate</li>
+<li>prod_key.pem - Production APNS app certificate's private key</li>
+<li>dev_cert.pem - Development APNS app certificate</li>
+<li>dev_key.pem - Development APNS app certificate's private key</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>If your <em>FCM</em> app token is <code>MY_FCM_SECRET_TOKEN</code> and you have the <code>priv</code> directory with all ceriticates in the current directory, start MongoosePush with the following command:</p>
+<pre><code class="language-bash">docker run -v `pwd`/priv:/opt/app/priv \
+  -e PUSH_FCM_APP_KEY=&quot;MY_FCM_SECRET_TOKEN&quot; \
+  -e PUSH_HTTPS_CERTFILE=&quot;/opt/app/priv/ssl/rest_cert.pem&quot; \
+  -e PUSH_HTTPS_KEYFILE=&quot;/opt/app/priv/ssl/rest_key.pem&quot; \
+  -it --rm mongooseim/mongoose-push:latest
+</code></pre>
+<p>If you don't want to use either <em>APNS</em> or <em>FCM</em>, you simply need to pass <code>PUSH_APNS_ENABLED=0</code> or <code>PUSH_FCM_ENABLED=0</code> respectively as additional env variables in your <code>docker run</code> command.
+For more advanced options and configuration please refer to <em>"Quick start / Configuring"</em> in <a href="https://github.com/esl/MongoosePush">MongoosePush</a>'s <a href="https://github.com/esl/MongoosePush/blob/master/README.md"><em>README.md</em></a>.</p>
+<p>When your <a href="https://github.com/esl/MongoosePush">MongoosePush</a> docker is up and running, Push Notifications can be used in your MongooseIM instance.</p>
+<h2 id="using-push-notifications-on-client-side">Using push notifications on client side</h2>
+<p>There are just a few things the XMPP client application needs to receive the push notifications.
+See the diagram to examine the process described in this section along with the example notification flow:
+ <img alt="" src="../push_notifications_example_message_flow.png" /></p>
+<h3 id="registering-with-a-push-service-provider">Registering with a Push Service provider</h3>
+<p>Firstly, the client application has to get a device-specific token from the Push Service Provider (FCM or APNS).
+This process is different, depending on the platform, so please consult your Push Service Provider's manual to see how to get this token.
+For example, <a href="https://firebase.google.com/docs/cloud-messaging/android/client">here</a> you can learn about setting up <em>FCM</em> on <em>Android</em> platform and <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/HandlingRemoteNotifications.html#/apple_ref/doc/uid/TP40008194-CH6-SW1">here</a> you can learn about setting up <em>APNS</em> on <em>iOS</em> platform.</p>
+<p>After this step, your application shall be able to receive <em>FCM</em> or <em>APNS</em> token - it will be required in the next step of this tutorial.</p>
+<h3 id="setting-up-an-xmpp-pubsub-node">Setting up an XMPP <code>pubsub</code> node</h3>
+<p>Please note this first step is specific to the <code>app-server</code> your client application uses.
+In case of MongooseIM, you just need to allocate (create) a special <code>PubSub</code> node that will act as a gateway for all notifications sent by the XMPP chat server.</p>
+<p>Without any further ado, let's configure the <code>PubSub</code>'s <code>push</code> node.
+In this example <code>mypubsub.com</code> is a domain of the MongooseIM server that has <a href="../../modules/mod_pubsub/">mod_pubsub</a> enabled with the <code>push</code> node support.
+The client sends the following stanza to the server:</p>
+<pre><code class="language-xml">&lt;iq type='set'
+    to='pubsub.mypubsub.com'
+    id='create1'&gt;
+  &lt;pubsub xmlns='http://jabber.org/protocol/pubsub'&gt;
+    &lt;create node='punsub_node_for_my_private_iphone' type='push'/&gt;
+  &lt;/pubsub&gt;
+&lt;/iq&gt;
+</code></pre>
+<p>The <code>pubsub.mypubsub.com</code> will be used as a gateway for all notifications and will pass them through to the APNS and/or FCM.</p>
+<p>The most important and only distinction from the standard node creation is the <code>type='push'</code> part of the <code>create</code> element.
+This denotes that you need a node that will handle your push notifications.
+Here we create a node called <code>punsub_node_for_my_private_iphone</code>.
+This node should be unique to the device and you may reuse nodes already created this way.</p>
+<p>After this step, you need to have the <code>pubsub</code> host (here <code>pubsub.mypubsub.com</code>) and the node name (here: <code>punsub_node_for_my_private_iphone</code>).</p>
+<h3 id="enabling-push-notifications">Enabling push notifications</h3>
+<p>The next and the last step is to enable push notifications on the server that handles your messages (and has <a href="../../modules/mod_event_pusher_push/">mod_event_pusher_push</a> enabled).
+Let's assume this server**** is available under the <code>mychat.com</code> domain.</p>
+<p>To enable push notifications in the simplest configuration, just send the following stanza:</p>
+<pre><code class="language-xml">&lt;iq type='set' id='x43'&gt;
+  &lt;enable xmlns='urn:xmpp:push:0' jid='pubsub.mypubsub.com' node='punsub_node_for_my_private_iphone'&gt;
+    &lt;x xmlns='jabber:x:data' type='submit'&gt;
+      &lt;field var='FORM_TYPE'&gt;&lt;value&gt;http://jabber.org/protocol/pubsub#publish-options&lt;/value&gt;&lt;/field&gt;
+      &lt;field var='service'&gt;&lt;value&gt;apns&lt;/value&gt;&lt;/field&gt;
+      &lt;field var='device_id'&gt;&lt;value&gt;your_pns_device_token&lt;/value&gt;&lt;/field&gt;
+      &lt;field var='silent'&gt;&lt;value&gt;false&lt;/value&gt;&lt;/field&gt;
+      &lt;field var='topic'&gt;&lt;value&gt;some_apns_topic&lt;/value&gt;&lt;/field&gt;
+    &lt;/x&gt;
+  &lt;/enable&gt;
+&lt;/iq&gt;
+</code></pre>
+<p>We have now enabled push notifications to be send to the <code>pubsub.mypubsub.com</code> to the node <code>punsub_node_for_my_private_iphone</code> created in previous paragraph.
+In <code>publish-options</code> we have passed the service name that we are using (<code>apns</code> or <code>fcm</code>) and the device token (here: <code>your_pns_device_token</code>) that you received from you push notification service provider (as described in <em>Registering with Push Service provider</em>).
+Those two options are the only ones required, but there are some others that are optional:</p>
+<ul>
+<li><code>mode</code> - which may be either <code>prod</code> or <code>dev</code> (default to <code>prod</code>). Decides which connection pool type on <a href="https://github.com/esl/MongoosePush">MongoosePush</a> shall be used. This may be used when <em>APNS</em> on <a href="https://github.com/esl/MongoosePush">MongoosePush</a> is configured to work with both production and development certificate.</li>
+<li><code>click_action</code> - action to perform when notification is clicked on the device. <code>activity</code> on <em>Android</em> and <code>category</code> on <em>iOS</em>. Please refer to your platform / push notification service provider for more info.</li>
+<li><code>topic</code> - currently only used with <em>APNS</em>. the value is passed to <em>APNS</em> as <code>topic</code> header.
+  For more information please refer to <em>APNS</em> documentation.</li>
+<li><code>silent</code> - if set to <code>true</code>, all notifications will be "silent". This means that only data
+  payload will be send to push notifications provider with no notification. The data payload will
+   contain all notification fields as defined in <a href="https://xmpp.org/extensions/xep-0357.html">XEP-0357</a>.</li>
+</ul>
+<h3 id="disabling-push-notifications">Disabling push notifications</h3>
+<p>Disabling push notifications is very simple. Just send the following stanza to your XMPP chat server:</p>
+<pre><code class="language-xml">&lt;iq type='set' id='x44'&gt;
+  &lt;disable xmlns='urn:xmpp:push:0' jid='pubsub.mypubsub.com' node='punsub_node_for_my_private_iphone'/&gt;
+&lt;/iq&gt;
+</code></pre>
+<p>You may skip the <code>node='punsub_node_for_my_private_iphone'</code> to globally disable push notifications on all nodes that are registered from your <code>JID</code>.
+This may be used to disbale push notifications on all your devices.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../ICE_tutorial/" class="btn btn-neutral float-right" title="How to Set up MongooseICE">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../How-to-build/" class="btn btn-neutral" title="How to Build MongooseIM from source code"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../How-to-build/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../ICE_tutorial/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
