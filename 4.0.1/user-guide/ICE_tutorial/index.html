@@ -1,442 +1,2384 @@
-<!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  
-  
-  <link rel="shortcut icon" href="../../favicon.ico">
-  
-  <title>How to Set up MongooseICE - MongooseIM</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../../css/theme.css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
-  <link href="../../custom.css" rel="stylesheet" />
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "How to Set up MongooseICE";
-    var mkdocs_page_input_path = "user-guide/ICE_tutorial.md";
-    var mkdocs_page_url = null;
-  </script>
-  
-  <script src="../../js/jquery-2.1.1.min.js" defer></script>
-  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script> 
-  
-</head>
-
-<body class="wy-body-for-nav" role="document">
-
-  <div class="wy-grid-for-nav">
-
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
     
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> MongooseIM</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+    
+    
+      
+        <title>How to Set up MongooseICE - MongooseIM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6910b76c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../custom.css">
+    
+      <link rel="stylesheet" href="../../css/version-select.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-to-set-up-mongooseice-iceturnstun-server" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">User guide</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../MongooseIM-High-level-Architecture/">High-level Architecture</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../Features-and-supported-standards/">Features and supported standards</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../Getting-started/">Getting started</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../release_config/">Release/Installation configuration</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../Bootstrap-Scripts/">Bootstrap scripts</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../client-certificate/">Client certificate authentication</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Tutorials</span></p>
-                <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../How-to-build/">How to Build MongooseIM from source code</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../push-notifications/Push-notifications/">How to Set up Push Notifications</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../push-notifications/Push-notifications-client-side/">How to Set up Push Notifications on the client side</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../push-notifications/With-MongoosePush/">How to Set up MongoosePush</a>
-                    </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">How to Set up MongooseICE</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#who-is-this-document-for">Who is this document for?</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#what-is-the-end-result-of-this-tutorial">What is the end result of this tutorial?</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#what-do-i-need-to-begin">What do I need to begin?</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#general-architecture-of-the-environment-built-with-this-tutorial">General architecture of the environment built with this tutorial</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ice-notes">ICE notes</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#setting-up-mongooseim-signalling">Setting up MongooseIM (signalling)</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#users">Users</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#setting-up-mongooseice-turnstun-server">Setting up MongooseICE (TURN/STUN server)</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#how-to-get-and-configure">How to get and configure</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#setting-up-mangosta-android">Setting up Mangosta-Android</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#how-to-get-and-install">How to get and install</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#how-to-configure">How to configure</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#setting-up-raspberrypi">Setting up RaspberryPi</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#the-software">The software</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#how-to-get-and-configure_1">How to get and configure</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#the-end-result">The end result</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#playing-the-video">Playing the video</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../iOS_tutorial/">How to Build an iOS messaging app</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Migration Guide</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.5.0_3.6.0/">3.5.0 to 3.6.0</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.6.0_3.7.0/">3.6.0 to 3.7.0</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.7.0_4.0.0/">3.7.0 to 4.0.0</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/4.0.0_4.0.1/">4.0.0 to 4.0.1</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Platform</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Configuration</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Configuration files</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/general/">Options: General</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/listen/">Options: Listen</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/auth/">Options: Auth</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/outgoing-connections/">Options: Outgoing connections</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Options: Services</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Options: Extension Modules</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/shaper/">Options: Shaper</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">Options: Acl</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/access/">Options: Access</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/s2s/">Options: S2S</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/host_config/">Options: Host config</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/release-options/">Release options</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/TLS-hardening/">TLS hardening</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Authentication methods</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/rdbms/">RDBMS</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/external/">External</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/anonymous/">Anonymous</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/ldap/">LDAP</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/jwt/">JWT</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/riak/">Riak</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/http/">HTTP</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/pki/">PKI</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/dummy/">Dummy</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">REST API</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/gdpr-considerations/">GDPR considerations</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging/">Logging configuration</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-fields/">Logging fields</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/">System Metrics Privacy Policy</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/known-issues/">Known issues</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Developer's guide</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Testing-MongooseIM/">Testing MongooseIM</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/logging/">Logging</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Hooks-and-handlers/">Hooks and Handlers</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/hooks_description/">Hooks description</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/message_routing/">Stanza routing</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/accumulators/">Accumulators</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/flat_options/">Flat options format</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Moving-to-single-app-project-structure/">Moving to single app project structure</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_amp_developers_guide/">mod_amp development</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/SCRAM-serialization/">SCRAM serialization format</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/xep_tool/">xep-tool usage</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/OpenSSL-and-FIPS/">FIPS mode</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Basic-iq-handler/">Basic IQ Handler</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mongoose_wpool/">mongoose_wpool</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Module index</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_rabbit/">RabbitMQ backend</a>
-                </li>
-    </ul>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_extdisco/">mod_extdisco</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
-                    </li>
-                </ul>
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="MongooseIM" class="md-header-nav__button md-logo" aria-label="MongooseIM">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            MongooseIM
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              How to Set up MongooseICE
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
       </div>
     </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">MongooseIM</a>
-      </nav>
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../..">Docs</a> &raquo;</li>
-    
-      
-        
-          <li>Tutorials &raquo;</li>
-        
-      
-    
-    <li>How to Set up MongooseICE</li>
-    <li class="wy-breadcrumbs-aside">
-      
-    </li>
-  </ul>
-  
-  <hr/>
+  </div>
 </div>
-          <div role="main">
-            <div class="section">
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="MongooseIM" class="md-nav__button md-logo" aria-label="MongooseIM">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    MongooseIM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+    <label class="md-nav__link" for="nav-2">
+      User guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="User guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        User guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ABCs-of-MongooseIM/" class="md-nav__link">
+      ABCs of MongooseIM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../MongooseIM-High-level-Architecture/" class="md-nav__link">
+      High-level Architecture
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Features-and-supported-standards/" class="md-nav__link">
+      Features and supported standards
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Getting-started/" class="md-nav__link">
+      Getting started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../release_config/" class="md-nav__link">
+      Release/Installation configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Bootstrap-Scripts/" class="md-nav__link">
+      Bootstrap scripts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../client-certificate/" class="md-nav__link">
+      Client certificate authentication
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    <label class="md-nav__link" for="nav-3">
+      Tutorials
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../How-to-build/" class="md-nav__link">
+      How to Build MongooseIM from source code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../push-notifications/Push-notifications/" class="md-nav__link">
+      How to Set up Push Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../push-notifications/Push-notifications-client-side/" class="md-nav__link">
+      How to Set up Push Notifications on the client side
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../push-notifications/MongoosePush-setup/" class="md-nav__link">
+      How to Set up MongoosePush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        How to Set up MongooseICE
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      How to Set up MongooseICE
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#who-is-this-document-for" class="md-nav__link">
+    Who is this document for?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-the-end-result-of-this-tutorial" class="md-nav__link">
+    What is the end result of this tutorial?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-do-i-need-to-begin" class="md-nav__link">
+    What do I need to begin?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-architecture-of-the-environment-built-with-this-tutorial" class="md-nav__link">
+    General architecture of the environment built with this tutorial
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ice-notes" class="md-nav__link">
+    ICE notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-mongooseim-signalling" class="md-nav__link">
+    Setting up MongooseIM (signalling)
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up MongooseIM (signalling)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#users" class="md-nav__link">
+    Users
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-mongooseice-turnstun-server" class="md-nav__link">
+    Setting up MongooseICE (TURN/STUN server)
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up MongooseICE (TURN/STUN server)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-get-and-configure" class="md-nav__link">
+    How to get and configure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-mangosta-android" class="md-nav__link">
+    Setting up Mangosta-Android
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up Mangosta-Android">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-get-and-install" class="md-nav__link">
+    How to get and install
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-configure" class="md-nav__link">
+    How to configure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-raspberrypi" class="md-nav__link">
+    Setting up RaspberryPi
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up RaspberryPi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-software" class="md-nav__link">
+    The software
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-get-and-configure_1" class="md-nav__link">
+    How to get and configure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-end-result" class="md-nav__link">
+    The end result
+  </a>
+  
+    <nav class="md-nav" aria-label="The end result">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#playing-the-video" class="md-nav__link">
+    Playing the video
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../iOS_tutorial/" class="md-nav__link">
+      How to Build an iOS messaging app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Jingle-SIP-setup/" class="md-nav__link">
+      How to Set up Jingle/SIP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+    <label class="md-nav__link" for="nav-4">
+      Migration Guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Migration Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Migration Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.1.1_3.2.0/" class="md-nav__link">
+      3.1.1 to 3.2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.3.0_3.4.0/" class="md-nav__link">
+      3.3.0 to 3.4.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.5.0_3.6.0/" class="md-nav__link">
+      3.5.0 to 3.6.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.6.0_3.7.0/" class="md-nav__link">
+      3.6.0 to 3.7.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.7.0_4.0.0/" class="md-nav__link">
+      3.7.0 to 4.0.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/4.0.0_4.0.1/" class="md-nav__link">
+      4.0.0 to 4.0.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
+      MAM MUC migration helper
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+    <label class="md-nav__link" for="nav-5">
+      Platform
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Platform" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Platform
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Contributions/" class="md-nav__link">
+      Contributions to ecosystem
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Differentiators/" class="md-nav__link">
+      Differentiators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../History/" class="md-nav__link">
+      History
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+    <label class="md-nav__link" for="nav-6">
+      Configuration
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon"></span>
+        Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/configuration-files/" class="md-nav__link">
+      Configuration files
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/general/" class="md-nav__link">
+      Options: General
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/listen/" class="md-nav__link">
+      Options: Listen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/auth/" class="md-nav__link">
+      Options: Auth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/outgoing-connections/" class="md-nav__link">
+      Options: Outgoing connections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Services/" class="md-nav__link">
+      Options: Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Modules/" class="md-nav__link">
+      Options: Extension Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/shaper/" class="md-nav__link">
+      Options: Shaper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/acl/" class="md-nav__link">
+      Options: Acl
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/access/" class="md-nav__link">
+      Options: Access
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/s2s/" class="md-nav__link">
+      Options: S2S
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/host_config/" class="md-nav__link">
+      Options: Host config
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/release-options/" class="md-nav__link">
+      Release options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Erlang-cookie-security/" class="md-nav__link">
+      Erlang Cookie Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/TLS-hardening/" class="md-nav__link">
+      TLS hardening
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/database-backends-configuration/" class="md-nav__link">
+      Database backends configuration
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
+    <label class="md-nav__link" for="nav-7">
+      Authentication methods
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Authentication methods" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon"></span>
+        Authentication methods
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/rdbms/" class="md-nav__link">
+      RDBMS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/external/" class="md-nav__link">
+      External
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/anonymous/" class="md-nav__link">
+      Anonymous
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/ldap/" class="md-nav__link">
+      LDAP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/jwt/" class="md-nav__link">
+      JWT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/riak/" class="md-nav__link">
+      Riak
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/http/" class="md-nav__link">
+      HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/pki/" class="md-nav__link">
+      PKI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/dummy/" class="md-nav__link">
+      Dummy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" >
+    <label class="md-nav__link" for="nav-8">
+      MongooseIM open XMPP extensions
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="MongooseIM open XMPP extensions" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon"></span>
+        MongooseIM open XMPP extensions
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../open-extensions/muc_light/" class="md-nav__link">
+      MUC light
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../open-extensions/token-reconnection/" class="md-nav__link">
+      Token-based reconnection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" >
+    <label class="md-nav__link" for="nav-9">
+      REST API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="REST API" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        REST API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Client-frontend/" class="md-nav__link">
+      Client/frontend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Metrics-backend/" class="md-nav__link">
+      Metrics backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Administration-backend/" class="md-nav__link">
+      Administration backend
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" >
+    <label class="md-nav__link" for="nav-10">
+      Operation and maintenance
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Operation and maintenance" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon"></span>
+        Operation and maintenance
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/gdpr-considerations/" class="md-nav__link">
+      GDPR considerations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Cluster-management-considerations/" class="md-nav__link">
+      Cluster management considerations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Cluster-configuration-and-node-management/" class="md-nav__link">
+      Cluster configuration and node management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Logging-%26-monitoring/" class="md-nav__link">
+      Logging & monitoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Logging/" class="md-nav__link">
+      Logging configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Humio/" class="md-nav__link">
+      Logging with Humio
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Logging-fields/" class="md-nav__link">
+      Logging fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/" class="md-nav__link">
+      Reloading configuration on a running system
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/MongooseIM-metrics/" class="md-nav__link">
+      Metrics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/" class="md-nav__link">
+      System Metrics Privacy Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/tls-distribution/" class="md-nav__link">
+      Distribution over TLS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/known-issues/" class="md-nav__link">
+      Known issues
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" >
+    <label class="md-nav__link" for="nav-11">
+      Developer's guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Developer's guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon"></span>
+        Developer's guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Testing-MongooseIM/" class="md-nav__link">
+      Testing MongooseIM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/logging/" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Hooks-and-handlers/" class="md-nav__link">
+      Hooks and Handlers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/hooks_description/" class="md-nav__link">
+      Hooks description
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Stanza-routing/" class="md-nav__link">
+      Stanza routing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/accumulators/" class="md-nav__link">
+      Accumulators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/flat_options/" class="md-nav__link">
+      Flat options format
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Moving-to-single-app-project-structure/" class="md-nav__link">
+      Moving to single app project structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/mod_amp_developers_guide/" class="md-nav__link">
+      mod_amp development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/mod_muc_light_developers_guide/" class="md-nav__link">
+      mod_muc_light developers doc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/SCRAM-serialization/" class="md-nav__link">
+      SCRAM serialization format
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/xep_tool/" class="md-nav__link">
+      xep-tool usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/OpenSSL-and-FIPS/" class="md-nav__link">
+      FIPS mode
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Basic-iq-handler/" class="md-nav__link">
+      Basic IQ Handler
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/mongoose_wpool/" class="md-nav__link">
+      mongoose_wpool
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12" >
+    <label class="md-nav__link" for="nav-12">
+      Module index
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Module index" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        <span class="md-nav__icon md-icon"></span>
+        Module index
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_adhoc/" class="md-nav__link">
+      mod_adhoc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_amp/" class="md-nav__link">
+      mod_amp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_auth_token/" class="md-nav__link">
+      mod_auth_token
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_blocking/" class="md-nav__link">
+      mod_blocking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_bosh/" class="md-nav__link">
+      mod_bosh
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_caps/" class="md-nav__link">
+      mod_caps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_carboncopy/" class="md-nav__link">
+      mod_carboncopy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_commands/" class="md-nav__link">
+      mod_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_csi/" class="md-nav__link">
+      mod_csi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_disco/" class="md-nav__link">
+      mod_disco
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12-11" type="checkbox" id="nav-12-11" >
+    <label class="md-nav__link" for="nav-12-11">
+      mod_event_pusher
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="mod_event_pusher" data-md-level="2">
+      <label class="md-nav__title" for="nav-12-11">
+        <span class="md-nav__icon md-icon"></span>
+        mod_event_pusher
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher/" class="md-nav__link">
+      mod_event_pusher
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher_http/" class="md-nav__link">
+      HTTP backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher_push/" class="md-nav__link">
+      Push backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher_sns/" class="md-nav__link">
+      SNS backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher_rabbit/" class="md-nav__link">
+      RabbitMQ backend
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_extdisco/" class="md-nav__link">
+      mod_extdisco
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_global_distrib/" class="md-nav__link">
+      mod_global_distrib
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_http_upload/" class="md-nav__link">
+      mod_http_upload
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_inbox/" class="md-nav__link">
+      mod_inbox
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_jingle_sip/" class="md-nav__link">
+      mod_jingle_sip
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_keystore/" class="md-nav__link">
+      mod_keystore
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_last/" class="md-nav__link">
+      mod_last
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_mam/" class="md-nav__link">
+      mod_mam
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc/" class="md-nav__link">
+      mod_muc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc_commands/" class="md-nav__link">
+      mod_muc_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc_log/" class="md-nav__link">
+      mod_muc_log
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc_light/" class="md-nav__link">
+      mod_muc_light
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc_light_commands/" class="md-nav__link">
+      mod_muc_light_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_offline/" class="md-nav__link">
+      mod_offline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_offline_stub/" class="md-nav__link">
+      mod_offline_stub
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_ping/" class="md-nav__link">
+      mod_ping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_privacy/" class="md-nav__link">
+      mod_privacy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_private/" class="md-nav__link">
+      mod_private
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_pubsub/" class="md-nav__link">
+      mod_pubsub
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_push_service_mongoosepush/" class="md-nav__link">
+      mod_push_service_mongoosepush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_register/" class="md-nav__link">
+      mod_register
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_roster/" class="md-nav__link">
+      mod_roster
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_shared_roster_ldap/" class="md-nav__link">
+      mod_shared_roster_ldap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_sic/" class="md-nav__link">
+      mod_sic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_stream_management/" class="md-nav__link">
+      mod_stream_management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_time/" class="md-nav__link">
+      mod_time
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_vcard/" class="md-nav__link">
+      mod_vcard
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_version/" class="md-nav__link">
+      mod_version
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#who-is-this-document-for" class="md-nav__link">
+    Who is this document for?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-the-end-result-of-this-tutorial" class="md-nav__link">
+    What is the end result of this tutorial?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-do-i-need-to-begin" class="md-nav__link">
+    What do I need to begin?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-architecture-of-the-environment-built-with-this-tutorial" class="md-nav__link">
+    General architecture of the environment built with this tutorial
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ice-notes" class="md-nav__link">
+    ICE notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-mongooseim-signalling" class="md-nav__link">
+    Setting up MongooseIM (signalling)
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up MongooseIM (signalling)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#users" class="md-nav__link">
+    Users
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-mongooseice-turnstun-server" class="md-nav__link">
+    Setting up MongooseICE (TURN/STUN server)
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up MongooseICE (TURN/STUN server)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-get-and-configure" class="md-nav__link">
+    How to get and configure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-mangosta-android" class="md-nav__link">
+    Setting up Mangosta-Android
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up Mangosta-Android">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-get-and-install" class="md-nav__link">
+    How to get and install
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-configure" class="md-nav__link">
+    How to configure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-raspberrypi" class="md-nav__link">
+    Setting up RaspberryPi
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up RaspberryPi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-software" class="md-nav__link">
+    The software
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-get-and-configure_1" class="md-nav__link">
+    How to get and configure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-end-result" class="md-nav__link">
+    The end result
+  </a>
+  
+    <nav class="md-nav" aria-label="The end result">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#playing-the-video" class="md-nav__link">
+    Playing the video
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
               
-                <h2 id="how-to-set-up-mongooseice-iceturnstun-server">How to set up MongooseICE (ICE/TURN/STUN server)</h2>
-<h3 id="introduction">Introduction</h3>
-<h4 id="who-is-this-document-for">Who is this document for?</h4>
+                
+                
+                <h1 id="how-to-set-up-mongooseice-iceturnstun-server">How to set up MongooseICE (ICE/TURN/STUN server)</h1>
+<h2 id="introduction">Introduction</h2>
+<h3 id="who-is-this-document-for">Who is this document for?</h3>
 <p>This tutorial presents our TURN/STUN server in action.
 You get to see how to set up and configure MongooseICE and examine a system utilising its many talents.</p>
 <p>Are you in need of an application requiring NAT traversal? Want to see how a TURN and STUN server would handle it? Or maybe you just like to tinker with interesting technologies and experience setting them up first hand?</p>
 <p>If that's the case, this tutorial is for you.</p>
-<h4 id="what-is-the-end-result-of-this-tutorial">What is the end result of this tutorial?</h4>
+<h3 id="what-is-the-end-result-of-this-tutorial">What is the end result of this tutorial?</h3>
 <p>At the end of the tutorial you will have a working environment with two peers, one sending a live video to another.
 The peer-to-peer communication will not be obstructed by any NATs that may occur in the background.
 The live video stream is only an example here - there are many possible use cases for peer-to-peer communication with NAT traversal.
 We chose to build an example application that shows video streaming, because it's vivid, catchy and fun.</p>
-<h4 id="what-do-i-need-to-begin">What do I need to begin?</h4>
+<h3 id="what-do-i-need-to-begin">What do I need to begin?</h3>
 <p>Before you begin you have to prepare an environment for setting up the components used in this tutorial.
 Here's a list of things you'll need:
 * One Android phone (or at least an Android emulator).
@@ -450,48 +2392,54 @@ You could use a private, local IP address, but then you would need to ensure tha
 <p>Note: the demo will probably work without the NAT, but then there is no point in setting up a TURN server.</p>
 </blockquote>
 <p>We are going to use 2 VPS (Virtual Private Server) that are located somewhere far far away, both having public IPv4 address. Let's say MongooseICE is bound to <em>1.1.1.1</em>, and MongooseIM to <em>2.2.2.2</em>.</p>
-<h4 id="general-architecture-of-the-environment-built-with-this-tutorial">General architecture of the environment built with this tutorial</h4>
+<h3 id="general-architecture-of-the-environment-built-with-this-tutorial">General architecture of the environment built with this tutorial</h3>
 <p>This is the architecture of the system we are building:
 <img alt="ICE example architecture" src="ice_architecture.png" /></p>
 <p>As we know by now, <a href="https://github.com/esl/MongooseIM">MongooseIM</a> is bound to <em>2.2.2.2</em>/<em>myxmpp.com</em> and <a href="https://github.com/esl/MongooseICE">MongooseICE</a> to <em>1.1.1.1</em>.
 We also have a RaspberryPi that is connected to a private network (so is behind some NAT) and an Android phone that is connected to an LTE network and also is behind the carrier's NAT.</p>
-<h4 id="ice-notes">ICE notes</h4>
+<h3 id="ice-notes">ICE notes</h3>
 <p>The end result of this tutorial not only uses <a href="https://github.com/esl/MongooseICE">MongooseICE</a> and <a href="https://github.com/esl/MongooseIM">MongooseIM</a> servers but also uses custom version of <a href="https://github.com/esl/mangosta-android">Mangosta-Android</a> and [DemoStreamerICE].
 Both projects are custom modified and custom made respectively in order to showcase the video streaming using the data relay capabilities provided by <a href="https://github.com/esl/MongooseICE">MongooseICE</a>.
 The streaming itself, along with the signalling protocol, were prepared only for the case of this demo and <strong>are not a part of the platform</strong>.
 Those components exist only to visualize what can be achieved with <a href="https://github.com/esl/MongooseICE">MongooseICE</a> and what can be built on top of it.</p>
-<h3 id="setting-up-mongooseim-signalling">Setting up MongooseIM (signalling)</h3>
+<h2 id="setting-up-mongooseim-signalling">Setting up MongooseIM (signalling)</h2>
 <p>The ICE is nothing without signalling. The signalling protocol itself can be designed specifically for the application that is being deployed or can be implemented based on some standards, e.g. <a href="https://xmpp.org/extensions/xep-0166.html">Jingle</a>.
 Here, we chose to implement the simplest signalling possible, i.e. sending relay addresses via XMPP messages.
 No matter if we decide to go with this approach or with <a href="https://xmpp.org/extensions/xep-0166.html">Jingle</a>, we can use the <a href="https://github.com/esl/MongooseIM">MongooseIM</a> XMPP server as a transport layer for the signalling.
 In order to enable signalling we need an instance of <a href="https://github.com/esl/MongooseIM">MongooseIM</a> running with the simplest configuration, since the only thing we need from it is to provide us with means to communicate between two peers.</p>
-<h4 id="configuration">Configuration</h4>
+<h3 id="configuration">Configuration</h3>
 <p>You can find MongooseIM installation instructions on <a href="../Getting-started/">this page</a>.
-Once you have cloned the repository and compiled the project, you need to modify the <code>mongooseim.toml</code> config file (you can find this file at <code>$REPO/_build/prod/rel/mongooseim/etc/mongooseim.toml</code>, where <code>$REPO</code> is a top-level directory of the cloned repo).</p>
-<pre><code class="language-toml">[general]
-  hosts = [&quot;localhost&quot;, &quot;myxmpp.com&quot;]
-</code></pre>
-<p>This sets the virtual hostname of the XMPP server, so that you can register users in this domain.
-After that, you can start MongooseIM with</p>
-<pre><code>$REPO/_build/prod/rel/mongooseim/bin/mongooseimctl start
-</code></pre>
-<h4 id="users">Users</h4>
+Once you have cloned the repository and compiled the project, you need to modify the <code>mongooseim.toml</code> config file (you can find this file at <code>$REPO/_build/prod/rel/mongooseim/etc/mongooseim.toml</code>, where <code>$REPO</code> is a top-level directory of the cloned repo).
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[general]</span>
+  <span class="n">hosts</span> <span class="o">=</span> <span class="k">[&quot;localhost&quot;, &quot;myxmpp.com&quot;]</span>
+</code></pre></div>
+</td></tr></table>
+This sets the virtual hostname of the XMPP server, so that you can register users in this domain.
+After that, you can start MongooseIM with
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">$REPO</span>/_build/prod/rel/mongooseim/bin/mongooseimctl start
+</code></pre></div>
+</td></tr></table></p>
+<h3 id="users">Users</h3>
 <p>After we finish setting up <a href="https://github.com/esl/MongooseIM">MongooseIM</a>, we need to register some users.
 For this demo we need two users: <em>movie@myxmpp.com</em> and <em>phone@myxmpp.com</em>, for RaspberryPi and the Android phone respectively.
 In order to do that, type:</p>
-<pre><code class="language-bash">$REPO/_build/prod/rel/mongooseim/bin/mongooseimctl register_identified phone myxmpp.com xmpp_password
-$REPO/_build/prod/rel/mongooseim/bin/mongooseimctl register_identified movie myxmpp.com xmpp_password
-</code></pre>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">$REPO</span>/_build/prod/rel/mongooseim/bin/mongooseimctl register_identified phone myxmpp.com xmpp_password
+<span class="nv">$REPO</span>/_build/prod/rel/mongooseim/bin/mongooseimctl register_identified movie myxmpp.com xmpp_password
+</code></pre></div>
+</td></tr></table>
 <p>on the machine that has <a href="https://github.com/esl/MongooseIM">MongooseIM</a> installed.</p>
 <p>As you can see here, we have created those two users, both with the password <em>xmpp_password</em> for simplicity.</p>
-<h3 id="setting-up-mongooseice-turnstun-server">Setting up MongooseICE (TURN/STUN server)</h3>
+<h2 id="setting-up-mongooseice-turnstun-server">Setting up MongooseICE (TURN/STUN server)</h2>
 <p>Now, since <a href="https://github.com/esl/MongooseIM">MongooseIM</a> handles the signalling, we need the TURN relay and the STUN server to send peer-to-peer data.
 For that we are going to use the star of this tutorial - <a href="https://github.com/esl/MongooseICE">MongooseICE</a>.</p>
-<h4 id="how-to-get-and-configure">How to get and configure</h4>
+<h3 id="how-to-get-and-configure">How to get and configure</h3>
 <p>The whole documentation that describes all options and deployment methods, can be found on the <a href="https://github.com/esl/MongooseICE">project's github page</a>.
-Let's get to it! (this command assumes that we are on the server for <a href="https://github.com/esl/MongooseICE">MongooseICE</a> and that it has Docker installed):</p>
-<pre><code class="language-bash">docker run -it --net=host -e &quot;MONGOOSEICE_UDP_RELAY_IP=1.1.1.1&quot; -e &quot;MONGOOSEICE_STUN_SECRET=secret&quot; -e &quot;MONGOOSEICE_UDP_REALM=myrelay&quot; mongooseim/mongooseice:0.4.0
-</code></pre>
+Let's get to it! (this command assumes that we are on the server for <a href="https://github.com/esl/MongooseICE">MongooseICE</a> and that it has Docker installed):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -it --net<span class="o">=</span>host -e <span class="s2">&quot;MONGOOSEICE_UDP_RELAY_IP=1.1.1.1&quot;</span> -e <span class="s2">&quot;MONGOOSEICE_STUN_SECRET=secret&quot;</span> -e <span class="s2">&quot;MONGOOSEICE_UDP_REALM=myrelay&quot;</span> mongooseim/mongooseice:0.4.0
+</code></pre></div>
+</td></tr></table></p>
 <p>This command starts the <a href="https://github.com/esl/MongooseICE">MongooseICE</a> server in the Docker container, attaching its virtual network interface to the network interface of the host machine the Docker deamon is running on.
 There are three important configuration options we have to set via environment variables:</p>
 <ul>
@@ -500,14 +2448,14 @@ There are three important configuration options we have to set via environment v
 <li><strong>MONGOOSEICE_UDP_REALM</strong> - This is just a name for your TURN relay.</li>
 </ul>
 <p>And that's it! <a href="https://github.com/esl/MongooseICE">MongooseICE</a> is now ready to roll!</p>
-<h3 id="setting-up-mangosta-android">Setting up Mangosta-Android</h3>
-<h4 id="how-to-get-and-install">How to get and install</h4>
+<h2 id="setting-up-mangosta-android">Setting up Mangosta-Android</h2>
+<h3 id="how-to-get-and-install">How to get and install</h3>
 <p>The source code of the video-stream-demo-enabled <a href="https://github.com/esl/mangosta-android">Mangosta-Android</a> can be found on the <a href="https://github.com/esl/mangosta-android/tree/ice_demo_kt">ice_demo_kt</a> branch.
-If you want to tinker with it and compile it yourself, you can do that. All you need is <a href="https://developer.android.com/studio/index.html">Android Studio 2.3+</a>.
+If you want to tinker with it and compile it yourself, you can do that. All you need is <a href="https://developer.android.com/studio">Android Studio 2.3+</a>.
 The compilation is pretty straightforward, so I'm not going to explain it here.
 If you are interested in how it works, most of the code is in the <code>inaka.com.mangosta.videostream</code> package.
 If you don't want to compile this application from source, you can just install <a href="https://drive.google.com/file/d/0B48g-HBQ5xpxclQ2RnBFMUluRU0/view?usp=sharing">this .apk</a> on your phone and that's it.</p>
-<h4 id="how-to-configure">How to configure</h4>
+<h3 id="how-to-configure">How to configure</h3>
 <p>Right after you start <a href="https://github.com/esl/mangosta-android">Mangosta-Android</a> for the first time, you will need to login to your XMPP server.
 In order to do that, just enter the JID you have created for the phone (<em>phone@myxmpp.com</em>), the password (<em>xmpp_password</em>) and the server address (<em>2.2.2.2</em> or <em>myxmpp.com</em> if you've set up the domain to actually point to this IP address), and then confirm by clicking "Enter".</p>
 <p><img alt="Mangosta login" src="mangosta_login.png" /></p>
@@ -526,33 +2474,47 @@ The process is shown on the screenshots below.</p>
 Now you can click "<em>TEST CONNECTION</em>" to, well..., test the connection.
 If everything works, you can "<em>SAVE</em>" the settings.
 Now your <a href="https://github.com/esl/mangosta-android">Mangosta-Android</a> is ready to play streamed video, but we still need the source...</p>
-<h3 id="setting-up-raspberrypi">Setting up RaspberryPi</h3>
+<h2 id="setting-up-raspberrypi">Setting up RaspberryPi</h2>
 <p>Let's configure the video source now.
 In our case it will be a RaspberryPi with <a href="https://elixir-lang.org/install.html">Elixir</a> and <a href="https://ffmpeg.org">ffmpeg</a> installed running <a href="https://github.com/esl/ice_demo">our ICE demo application</a>.</p>
-<h4 id="the-software">The software</h4>
+<h3 id="the-software">The software</h3>
 <p>For this demo we provide a simple XMPP client that also is able to send live video stream using <a href="https://ffmpeg.org">ffmpeg</a> whenever other peer asks for it via XMPP.
 This client is written in <a href="https://elixir-lang.org/install.html">Elixir</a>, so we can run it from source quite easily.</p>
-<h4 id="how-to-get-and-configure_1">How to get and configure</h4>
+<h3 id="how-to-get-and-configure_1">How to get and configure</h3>
 <p>You can get the client's sources <a href="https://github.com/esl/ice_demo">here</a>.
-For now we only need to run it, so let's get to it (on our RaspberryPi):</p>
-<pre><code class="language-bash">git clone https://github.com/esl/ice_demo.git
-cd ice_demo
+For now we only need to run it, so let's get to it (on our RaspberryPi):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>git clone https://github.com/esl/ice_demo.git
+<span class="nb">cd</span> ice_demo
 mix deps.get
 iex -S mix
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
 <p>After a while we should get into Elixir shell.
-In order to enable the streamer, we need to start it, providing some configuration options (in the Elixir shell):</p>
-<pre><code class="language-elixir">opts = [
-jid: &quot;movie@myxmpp.com&quot;,
-password: &quot;xmpp_password&quot;,
-host: &quot;myxmpp.com&quot;,
-turn_addr: &quot;1.1.1.1:3784&quot;
-turn_username: &quot;username&quot;,
-turn_secret: &quot;secret&quot;,
-video_file: &quot;/home/pi/sintel.h264&quot;
-]
-ICEDemo.start_movie(opts)
-</code></pre>
+In order to enable the streamer, we need to start it, providing some configuration options (in the Elixir shell):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">opts</span> <span class="o">=</span> <span class="p">[</span>
+<span class="ss">jid</span><span class="p">:</span> <span class="s2">&quot;movie@myxmpp.com&quot;</span><span class="p">,</span>
+<span class="ss">password</span><span class="p">:</span> <span class="s2">&quot;xmpp_password&quot;</span><span class="p">,</span>
+<span class="ss">host</span><span class="p">:</span> <span class="s2">&quot;myxmpp.com&quot;</span><span class="p">,</span>
+<span class="ss">turn_addr</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1:3784&quot;</span>
+<span class="ss">turn_username</span><span class="p">:</span> <span class="s2">&quot;username&quot;</span><span class="p">,</span>
+<span class="ss">turn_secret</span><span class="p">:</span> <span class="s2">&quot;secret&quot;</span><span class="p">,</span>
+<span class="ss">video_file</span><span class="p">:</span> <span class="s2">&quot;/home/pi/sintel.h264&quot;</span>
+<span class="p">]</span>
+<span class="nc">ICEDemo</span><span class="o">.</span><span class="n">start_movie</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table></p>
 <p>The first 3 options are all about connecting to the XMPP server - we use "<em>movie@myxmpp.com</em>" user that we created earlier.
 Next 3 options are about connecting to the <a href="https://github.com/esl/MongooseICE">MongooseICE</a> server.
 Those are similar to ones we set in <a href="https://github.com/esl/mangosta-android">Mangosta-Android</a>.
@@ -560,63 +2522,93 @@ The last one points to the video file that will be streamed on request.
 This file has to be raw, H.264-encoded, video-only file.
 If you are not sure how to get one, you can just use <a href="https://drive.google.com/file/d/0B48g-HBQ5xpxeVlUSks2bVRlLTQ/view?usp=sharing">this one</a> (pre-rendered <a href="https://durian.blender.org/">Sintel, OpenBlender project</a>).
 With this configuration, our RaspberryPi is ready to stream!</p>
-<h3 id="the-end-result">The end result</h3>
-<h4 id="playing-the-video">Playing the video</h4>
+<h2 id="the-end-result">The end result</h2>
+<h3 id="playing-the-video">Playing the video</h3>
 <p>Now we finally can get out phone and start streaming the video!
 In order to do that, we have to click the "<em>New video stream</em>" button as shown on the screenshots below, enter the JID of the RaspberryPi and confirm with the "<em>Stream!</em>" button.</p>
 <p><img alt="Mangosta start streaming" src="mangosta_start_stream.png" /></p>
 <p>Hopefully, now you can see the video on your own mobile device.</p>
+                
               
-            </div>
+              
+                
+
+
+              
+            </article>
           </div>
-          <footer>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../iOS_tutorial/" class="btn btn-neutral float-right" title="How to Build an iOS messaging app">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../push-notifications/With-MongoosePush/" class="btn btn-neutral" title="How to Set up MongoosePush"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../push-notifications/MongoosePush-setup/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                How to Set up MongoosePush
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../iOS_tutorial/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                How to Build an iOS messaging app
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     </div>
   
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-    
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
   </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
-        </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
       
-        <span><a href="../push-notifications/With-MongoosePush/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <script src="../../js/version-select.js"></script>
       
-      
-        <span style="margin-left: 15px"><a href="../iOS_tutorial/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
-</div>
-    <script>var base_url = '../..';</script>
-    <script src="../../js/theme.js" defer></script>
-      <script src="../../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        };
-    </script>
-
-</body>
+    
+  </body>
 </html>
