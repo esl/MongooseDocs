@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>mod_inbox - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "mod_inbox";
+    var mkdocs_page_input_path = "modules/mod_inbox.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Push-notifications/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/outgoing-connections/">Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Listener-modules/">Listener Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/client-certificate/">Client Certificate</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/HTTP-authentication-module/">HTTP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">mod_inbox</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Module index &raquo;</li>
+        
+      
+    
+    <li>mod_inbox</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h3 id="module-description">Module Description</h3>
+<p><code>Inbox</code> is an experimental feature implemented as a few seperate modules.
+To use it, enable mod_inbox in the config file.</p>
+<h3 id="options">Options</h3>
+<ul>
+<li><strong>backend</strong> (atom, default: <code>rdbms</code>) - Database backend to use. For now, only <code>rdbms</code> is supported.</li>
+<li><strong>reset_markers</strong> (list, default: <code>[displayed]</code>) - List of atom chat markers that when sent, will reset the unread message counter for a conversation.
+This works when <a href="https://xmpp.org/extensions/xep-0333.html">Chat Markers</a> are enabled on the client side.
+Possible values are from the set: <code>displayed</code>, <code>received</code>, <code>acknowledged</code>. Setting as empty list (not recommended) means that no chat marker can decrease the counter value.</li>
+<li><strong>groupchat</strong> (list, default: <code>[muclight]</code>) - The list indicating which groupchats will be included in inbox.
+Possible values are <code>muclight</code> <a href="https://xmpp.org/extensions/inbox/muc-light.html">Multi-User Chat Light</a> or <code>muc</code> <a href="https://xmpp.org/extensions/xep-0045.html">Multi-User Chat</a>.</li>
+<li><strong>aff_changes</strong> (boolean, default: <code>true</code>) - use this option when <code>muclight</code> is enabled.
+Indicates if MUC Light affiliation change messages should be included in the conversation inbox.
+Only changes that affect the user directly will be stored in their inbox.</li>
+<li><strong>remove_on_kicked</strong> (boolean, default: <code>true</code>) - use this option when <code>muclight</code> is enabled.
+If true, the inbox conversation is removed for a user when they are removed from the groupchat.</li>
+<li><strong>iqdisc</strong> (atom, default: <code>no_queue</code>)</li>
+</ul>
+<h3 id="note-about-supported-rdbms">Note about supported RDBMS</h3>
+<p><code>mod_inbox</code> executes upsert queries, which have different syntax in every supported RDBMS.
+Inbox currently supports the following DBs:</p>
+<ul>
+<li>MySQL via native driver</li>
+<li>PgSQL via native driver</li>
+<li>MSSQL via ODBC driver</li>
+</ul>
+<h3 id="legacy-muc-support">Legacy MUC support</h3>
+<p>Inbox comes with support for the legacy MUC as well. It stores all groupchat messages sent to
+room in each sender's and recipient's inboxes and private messages. Currently it is not possible to
+configure it to store system messages like <a href="https://xmpp.org/extensions/xep-0045.html#enter-subject">subject</a> 
+or <a href="https://xmpp.org/extensions/xep-0045.html#affil">affiliation</a> change.</p>
+<h3 id="filtering-and-ordering">Filtering and ordering</h3>
+<p>Inbox query results may be filtered by time range and sorted by timestamp.
+By default, <code>mod_inbox</code> returns all conversations, listing the ones updated most recently first.</p>
+<p>A client may specify three parameters:</p>
+<ul>
+<li>Start date for the result set (variable <code>start</code>, value: ISO timestamp)</li>
+<li>End date for the result set (variable <code>end</code>, value: ISO timestamp)</li>
+<li>Order by timestamp (variable <code>order</code>, values: <code>asc</code>, <code>desc</code>)</li>
+<li>Show only conversations with unread messages (variable <code>hidden_read</code>,
+  values: <code>true</code>, <code>false</code>)</li>
+</ul>
+<p>They are encoded inside a standard XMPP <a href="https://xmpp.org/extensions/xep-0004.html">Data Forms</a> format.
+Dates must be formatted according to <a href="https://xmpp.org/extensions/xep-0082.html">XMPP Date and Time Profiles</a>.
+It is not mandatory to add an empty data form if a client prefers to use default values (<code>&lt;query/&gt;</code> element may be empty).
+However, the IQ type must be "set", even when data form is missing.</p>
+<p>Your client application may request the currently supported form with IQ get:</p>
+<pre><code>Client:
+
+&lt;iq type='get' id='c94a88ddf4957128eafd08e233f4b964'&gt;
+  &lt;query xmlns='erlang-solutions.com:xmpp:inbox:0'/&gt;
+&lt;/iq&gt;
+
+Server:
+
+&lt;iq from='alicE@localhost' to='alicE@localhost/res1' id='c94a88ddf4957128eafd08e233f4b964' type='result'&gt;
+  &lt;query xmlns='erlang-solutions.com:xmpp:inbox:0'&gt;
+    &lt;x xmlns='jabber:x:data' type='form'&gt;
+      &lt;field type='hidden' var='FORM_TYPE'&gt;&lt;value&gt;erlang-solutions.com:xmpp:inbox:0&lt;/value&gt;&lt;/field&gt;
+      &lt;field var='start' type='text-single'/&gt;
+      &lt;field var='end' type='text-single'/&gt;
+      &lt;field var='order' type='list-single'&gt;
+        &lt;value&gt;desc&lt;/value&gt;
+        &lt;option label='Ascending by timestamp'&gt;&lt;value&gt;asc&lt;/value&gt;&lt;/option&gt;
+        &lt;option label='Descending by timestamp'&gt;&lt;value&gt;desc&lt;/value&gt;&lt;/option&gt;
+      &lt;/field&gt;
+      &lt;field var='hidden_read' type='text-single' value='false'/&gt;
+    &lt;/x&gt;
+  &lt;/query&gt;
+&lt;/iq&gt;
+</code></pre>
+<h3 id="example-request">Example Request</h3>
+<pre><code>Alice sends:
+
+&lt;message type=&quot;chat&quot; to=&quot;bOb@localhost/res1&quot; id=”123”&gt;
+  &lt;body&gt;Hello&lt;/body&gt;
+&lt;/message&gt;
+
+Bob receives:
+
+&lt;message from=&quot;alicE@localhost/res1&quot; to=&quot;bOb@localhost/res1&quot; id=“123” xml:lang=&quot;en&quot; type=&quot;chat&quot;&gt;
+  &lt;body&gt;Hello&lt;/body&gt;
+&lt;/message&gt;
+
+Alice sends:
+
+&lt;iq type=&quot;set&quot; id=&quot;10bca&quot;&gt;
+  &lt;inbox xmlns=”erlang-solutions.com:xmpp:inbox:0” queryid=&quot;b6&quot;&gt;
+    &lt;x xmlns='jabber:x:data' type='form'&gt;
+      &lt;field type='hidden' var='FORM_TYPE'&gt;&lt;value&gt;erlang-solutions.com:xmpp:inbox:0&lt;/value&gt;&lt;/field&gt;
+      &lt;field type='text-single' var='start'&gt;&lt;value&gt;2018-07-10T12:00:00Z&lt;/value&gt;&lt;/field&gt;
+      &lt;field type='text-single' var='end'&gt;&lt;value&gt;2018-07-11T12:00:00Z&lt;/value&gt;&lt;/field&gt;
+      &lt;field type='list-single' var='order'&gt;&lt;value&gt;asc&lt;/value&gt;&lt;/field&gt;
+      &lt;field type='text-single' var='hidden_read'&gt;&lt;value&gt;true&lt;/value&gt;&lt;/field&gt;
+    &lt;/x&gt;
+  &lt;/inbox&gt;
+&lt;/iq&gt;
+
+
+Alice receives:
+
+&lt;message from=&quot;alicE@localhost&quot; to=&quot;alicE@localhost&quot; id=&quot;9b759&quot;&gt;
+  &lt;result xmlns=&quot;erlang-solutions.com:xmpp:inbox:0&quot; unread=&quot;0&quot; queryid=&quot;b6&quot;&gt;
+    &lt;forwarded xmlns=&quot;urn:xmpp:forward:0&quot;&gt;
+      &lt;delay xmlns=&quot;urn:xmpp:delay&quot; stamp=&quot;2018-07-10T23:08:25.123456Z&quot;/&gt;
+      &lt;message xml:lang=&quot;en&quot; type=&quot;chat&quot; to=&quot;bOb@localhost/res1&quot; from=&quot;alicE@localhost/res1&quot; id=”123”&gt;
+        &lt;body&gt;Hello&lt;/body&gt;
+      &lt;/message&gt;
+    &lt;/forwarded&gt;
+  &lt;/result&gt;
+&lt;/message&gt;
+
+&lt;iq from=&quot;alicE@localhost&quot; to=&quot;alicE@localhost/res1&quot; id=&quot;b6&quot; type=&quot;result&quot;&gt;
+  &lt;fin xmlns='erlang-solutions.com:xmpp:inbox:0'&gt;
+    &lt;count&gt;1&lt;/count&gt;
+    &lt;unread-messages&gt;0&lt;/unread-messages&gt;
+    &lt;active-conversations&gt;0&lt;/active-conversations&gt;
+  &lt;/fin&gt;
+&lt;/iq&gt;
+
+</code></pre>
+<p>Inbox query result IQ stanza returns the following values:</p>
+<ul>
+<li><code>count</code>: the number of all conversations (if <code>hidden_unread</code> value was set
+  to true, this value will be equal to <code>active_conversations</code>)</li>
+<li><code>unread-messages</code>: total number of unread messages from all
+  conversations</li>
+<li><code>active-conversations</code>: the number of conversations with unread
+  message(s)</li>
+</ul>
+<h3 id="example-error-response">Example error response</h3>
+<pre><code>Alice sends request with invalid value of start field:
+
+&lt;iq type='set' id='a78478f20103ff8354d7834d0ba2fdb2'&gt;
+  &lt;inbox xmlns='erlang-solutions.com:xmpp:inbox:0'&gt;
+    &lt;x xmlns='jabber:x:data' type='submit'&gt;
+      &lt;field type='text-single' var='start'&gt;
+        &lt;value&gt;invalid&lt;/value&gt;
+      &lt;/field&gt;
+    &lt;/x&gt;
+  &lt;/inbox&gt;
+&lt;/iq&gt;
+
+Alice receives an error with description of the first encountered invalid
+value: 
+
+&lt;iq from='alicE@localhost' to='alicE@localhost/res1'
+    id='a78478f20103ff8354d7834d0ba2fdb2' type='error'&gt;
+  &lt;error code='400' type='modify'&gt;
+    &lt;bad-rquest xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/&gt;
+    &lt;text xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'&gt;
+      Invalid inbox form field value, field=start, value=invalid
+    &lt;/text&gt;
+  &lt;/error&gt;
+&lt;/iq&gt;
+</code></pre>
+<h3 id="example-configuration">Example Configuration</h3>
+<pre><code>{mod_inbox, [{backend, rdbms},
+             {reset_markers, [displayed]},
+             {aff_changes, true},
+             {remove_on_kicked, true},
+             {groupchat, [muclight]}
+            ]},
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../mod_disco/" class="btn btn-neutral float-right" title="mod_disco">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../mod_csi/" class="btn btn-neutral" title="mod_csi"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../mod_csi/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../mod_disco/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

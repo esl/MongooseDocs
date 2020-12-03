@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>mod_muc_light developers doc - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "mod_muc_light developers doc";
+    var mkdocs_page_input_path = "developers-guide/mod_muc_light_developers_guide.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Push-notifications/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/outgoing-connections/">Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Listener-modules/">Listener Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/client-certificate/">Client Certificate</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/HTTP-authentication-module/">HTTP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">mod_muc_light developers doc</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#source-header-and-test-suite-files">Source, header and test suite files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#hooks-handled-by-this-extension">Hooks handled by this extension</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#hooks-executed-by-this-extension">Hooks executed by this extension</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#advantages-and-drawbacks-compared-to-classic-muc">Advantages and drawbacks (compared to classic MUC)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ideas-for-further-development">Ideas for Further Development</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#easy">Easy</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#medium">Medium</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hard">Hard</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Developer's guide &raquo;</li>
+        
+      
+    
+    <li>mod_muc_light developers doc</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="the-developers-guide-to-mod_muc_light">The Developer's Guide to mod_muc_light</h1>
+<p>This is an in-depth guide on <code>mod_muc_light</code> design decisions and implementation.</p>
+<h2 id="source-header-and-test-suite-files">Source, header and test suite files</h2>
+<p>All source files can be found in <code>src/</code>.</p>
+<ul>
+<li>
+<p><code>mod_muc_light.erl</code>
+  Main module.
+  It implements the <code>gen_mod</code> behaviour.
+  It subscribes to some essential hooks and exports several functions, mostly callbacks.
+  It handles integration with <code>mod_disco</code>, <code>mod_privacy</code> and <code>mod_roster</code>.
+  All operations that take place outside the room (including the room creation) are implemented here.
+  Last but not least - this module prevents <code>service-unavailable</code> errors being sent when an offline user receives a groupchat message.</p>
+</li>
+<li>
+<p><code>mod_muc_light_codec.erl</code>
+  A behaviour implemented by modules that translate the MUC Light internal data format to stanzas for clients and vice versa.
+  Besides specifying callbacks, it implements generic error encoder function.</p>
+</li>
+<li>
+<p><code>mod_muc_light_codec_legacy.erl</code>
+  An implementation of XEP-0045 compatibility mode.
+  Note, that while some parts of the legacy mode are implemented directly in <code>mod_muc_light.erl</code>, the stanza translation takes place here.
+  It does not utilise the full potential of the MUC Light extension but allows using the standard MUC implementation in XMPP client libraries for prototyping or the transition phase.
+  Not recommended for production systems (less efficient than modern codec and requires more round-trips).</p>
+</li>
+<li>
+<p><code>mod_muc_light_codec_modern.erl</code>
+  An implementation of a modern MUC Light protocol, described in the XEP.
+  Supports all MUC Light features.</p>
+</li>
+<li>
+<p><code>mod_muc_light_commands.erl</code>
+  MUC Light-related commands.
+  They are registered in the <code>mongoose_commands</code> module, so they are available via the REST API.</p>
+</li>
+<li>
+<p><code>mod_muc_light_db.erl</code>
+  A behaviour implemented by database backends for the MUC Light extension.</p>
+</li>
+<li>
+<p><code>mod_muc_light_db_mnesia.erl</code>
+  A Mnesia backend for this extension.
+  Uses transactions for room metadata updates (configuration and affiliation list) and dirty reads whenever possible.</p>
+</li>
+<li>
+<p><code>mod_muc_light_db_rdbms.erl</code>
+  An SQL backend for <code>mod_muc_light</code>.
+  <code>create_room</code>, <code>destroy_room</code>, <code>remove_user</code>, <code>set_config</code>, <code>modify_aff_users</code> execute at least one query in a single transaction.
+  <code>room_exists</code>, <code>get_user_rooms</code>, <code>get_user_rooms_count</code>, <code>get_config</code>, <code>get_blocking</code>, <code>set_blocking</code>, <code>get_aff_users</code> execute only one query per function call.
+  <code>get_info</code> executes 3 <code>SELECT</code> queries, not protected by a transaction.</p>
+</li>
+<li>
+<p><code>mod_muc_light_db_rdbms_sql.erl</code>
+  SQL queries for <code>mod_muc_light_db_rdbms.erl</code>.</p>
+</li>
+<li>
+<p><code>mod_muc_light_room.erl</code>
+  This module handles everything that occurs inside the room: access checks, metadata changes, message broadcasting etc.</p>
+</li>
+<li>
+<p><code>mod_muc_light_utils.erl</code>
+  Utilities shared by other MUC Light modules.
+  It includes the room configuration processing and the affiliation logic.</p>
+</li>
+</ul>
+<p>The header file can be found in <code>include/</code>.</p>
+<ul>
+<li><code>mod_muc_light.hrl</code>
+  It contains definitions of MUC Light namespaces, default configuration options and several common data types and records.</li>
+</ul>
+<p>There are 2 test suites and one helper module in <code>big_tests/tests</code>.</p>
+<ul>
+<li>
+<p><code>muc_light_SUITE.erl</code>
+  Main test suite, checks all the most important functionalities of the MUC Light extension.</p>
+</li>
+<li>
+<p><code>muc_light_legacy_SUITE.erl</code>
+  <code>muc_light_SUITE.erl</code> equivalent that uses XEP-0045 compatibility mode.</p>
+</li>
+<li>
+<p><code>muc_helper.erl</code>
+  Provides handy iterators over room participants.
+  Used in MUC Light suites but in the future could be used in <code>muc_SUITE</code> as well.</p>
+</li>
+</ul>
+<h2 id="hooks-handled-by-this-extension">Hooks handled by this extension</h2>
+<ul>
+<li>
+<p><code>offline_groupchat_message_hook</code> handled by <code>mod_muc_light:prevent_service_unavailable/3</code> - Prevents the default behaviour of sending <code>service-unavailable</code> error to the room when a groupchat message is sent to an offline occupant.</p>
+</li>
+<li>
+<p><code>remove_user</code> handled by <code>mod_muc_light:remove_user/2</code> - Triggers DB cleanup of all data related to the removed user.
+ Includes a broadcast of a notification about user removal from occupied rooms.</p>
+</li>
+<li>
+<p><code>disco_local_items</code> handled by <code>mod_muc_light:get_muc_service/5</code> - Adds a MUC service item to the Disco result.
+ Uses either a MUC Light or a classic MUC namespace when the legacy mode is enabled.</p>
+</li>
+<li>
+<p><code>roster_get</code> handled by <code>mod_muc_light:add_rooms_to_roster/2</code> - Injects room items to the user's roster.</p>
+</li>
+<li>
+<p><code>privacy_iq_get</code>, <code>privacy_iq_set</code> handled by <code>mod_muc_light:process_iq_get/5</code> and <code>mod_muc_light:process_iq_set/4</code> respectively - These callbacks handle blocking settings when legacy mode is enabled.</p>
+</li>
+<li>
+<p><code>is_muc_room_owner</code>, <code>muc_room_pid</code>, <code>can_access_room</code>, <code>can_access_identity</code> used by <code>mod_muc_light:is_room_owner/3</code>, <code>mod_muc_light:muc_room_pid/2</code>, <code>mod_muc_light:can_access_room/3</code> and <code>mod_muc_light:can_access_identity/3</code> respectively - Callbacks that provide essential data for the <code>mod_mam_muc</code> extension.</p>
+</li>
+</ul>
+<h2 id="hooks-executed-by-this-extension">Hooks executed by this extension</h2>
+<ul>
+<li>
+<p><code>filter_room_packet</code> by codecs - Allows <code>mod_mam_muc</code> to archive groupchat messages.</p>
+</li>
+<li>
+<p><code>room_send_packet</code> by codecs</p>
+</li>
+<li>
+<p><code>forget_room</code> by <code>mod_muc_light_db_mnesia</code> and <code>mod_muc_light_room</code> - It is a part of <code>mod_mam_muc</code> integration as well.
+ A hook used for MAM cleanup upon room destruction.</p>
+</li>
+</ul>
+<h2 id="advantages-and-drawbacks-compared-to-classic-muc">Advantages and drawbacks (compared to classic MUC)</h2>
+<p>The new MUC implementation brings quite a few benefits to the table:</p>
+<ul>
+<li>It is fully distributed - Does not have SPOF, concurrent senders do not block each other, especially in large rooms.
+ Message broadcasting is being done in sender c2s context.</li>
+<li>It does not use presences - Much less traffic and stable membership information, especially on mobile networks.</li>
+<li>It provides built-in blocking support - Instead of blocking traffic like Privacy Lists do, it handles blocklists internally, preventing the blocker from being added to or by blocked entities.</li>
+<li>Less round-trips - A room can be created and configured with an initial list of occupants with a single request.</li>
+<li>Versioning - Reduces traffic and allows clients to reliably and quickly detect that the room state has changed.</li>
+<li>Isolation - Processing errors are contained in a sender context, not affecting other room occupants.</li>
+<li>Fully customisable room configuration - Your users can store any meta room information you allow.</li>
+</ul>
+<p>Drawbacks are:</p>
+<ul>
+<li>Requires DB transactions to ensure Room state consistency.</li>
+<li>Fetches the occupant list from DB for every message that is broadcasted.</li>
+<li>Due to concurrent message broadcast, it is possible for occupants to receive messages in a different order (given the messages are broadcasted at the exactly same time).</li>
+<li>With stream resumption disabled or when resumption times out, user may miss a message in a following scenario:</li>
+<li>Message A archived</li>
+<li>Message B archived</li>
+<li>Message B delivered to the user</li>
+<li>User loses connection</li>
+<li>Resumption timeout</li>
+<li>User queries MAM for all messages after B and misses A</li>
+</ul>
+<h2 id="ideas-for-further-development">Ideas for Further Development</h2>
+<h3 id="easy">Easy</h3>
+<ul>
+<li>Add more tests for negative cases</li>
+</ul>
+<h3 id="medium">Medium</h3>
+<ul>
+<li>Add optional per-room processes to avoid the need of DB transactions and ensure message ordering (maybe "hard"?).</li>
+<li>Riak backend</li>
+<li>Redis backend</li>
+</ul>
+<h3 id="hard">Hard</h3>
+<ul>
+<li>Room metadata cache (maybe "medium"?).</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../SCRAM-serialization/" class="btn btn-neutral float-right" title="SCRAM serialization format">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../mod_amp_developers_guide/" class="btn btn-neutral" title="mod_amp development"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../mod_amp_developers_guide/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../SCRAM-serialization/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
