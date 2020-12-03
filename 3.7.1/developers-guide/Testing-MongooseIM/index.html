@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>Testing MongooseIM - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Testing MongooseIM";
+    var mkdocs_page_input_path = "developers-guide/Testing-MongooseIM.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Bootstrap-Scripts/">Bootstrap scripts</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications/">How to Set up Push Notifications</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications-client-side/">How to Set up Push Notifications on the client side</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/With-MongoosePush/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.5.0_3.6.0/">3.5.0 to 3.6.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.6.0_3.7.0/">3.6.0 to 3.7.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/TLS-hardening/">TLS hardening</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/outgoing-connections/">Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Listener-modules/">Listener Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/client-certificate/">Client Certificate</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/HTTP-authentication-module/">HTTP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/Riak-authentication-module/">Riak Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/Dummy-authentication-module/">Dummy Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/gdpr-considerations/">GDPR considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/">System Metrics Privacy Policy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Testing MongooseIM</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#important">IMPORTANT!</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#docker">Docker</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mssql-connectivity">MSSQL connectivity</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-print-the-instructions">How to print the instructions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#test-runner-examples">Test runner examples</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#test-runner-completion">Test runner completion</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#viewing-test-reports">Viewing test reports</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#rerun-big-tests">Rerun big tests</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Developer's guide &raquo;</li>
+        
+      
+    
+    <li>Testing MongooseIM</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="test-runner">Test runner</h1>
+<p>The test runner script is used to compile MongooseIM and run tests.</p>
+<h2 id="important">IMPORTANT!</h2>
+<ul>
+<li>ODBC preset can only be tested <a href="../../operation-and-maintenance/known-issues/">on Ubuntu Xenial x64</a>.</li>
+<li>SELinux may prevent containers from accessing the disk. Please either disable it or add proper rules to the policy.</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<h3 id="docker">Docker</h3>
+<p>Docker must be installed on the local system and the user executing the tests must have privileges to start new containers (usually achieved by adding the user to the <code>docker</code> group).</p>
+<h3 id="mssql-connectivity">MSSQL connectivity</h3>
+<p>MongooseIM requires FreeTDS in order to connect to MSSQL container.</p>
+<p>First of all, please install the driver itself:</p>
+<pre><code class="language-bash"># Ubuntu
+$ sudo apt install freetds-dev tdsodbc
+
+# CentOS
+$ sudo yum install freetds
+
+# macOS
+$ brew install freetds
+</code></pre>
+<p>Then, please modify <code>tools/travis-setup-db.sh</code> script to use the proper FreeTDS paths.
+Find a configuration block starting with <code>[mongoose-mssql]</code>.</p>
+<ul>
+<li>In case of Ubuntu, you don't need to change anything.</li>
+<li>For CentOS, change <code>Driver</code> and <code>Setup</code> to point <code>/usr/lib64/libtdsodbc.so.0</code> and <code>/usr/lib64/libtdsS.so</code> respectively.</li>
+<li>For macOS, remove the <code>Setup</code> line and set <code>Driver</code> to <code>Driver = /usr/local/Cellar/freetds/[current version]/lib/libtdsodbc.so</code>.</li>
+</ul>
+<h2 id="how-to-print-the-instructions">How to print the instructions</h2>
+<p>The help command prints a list of supported options.</p>
+<pre><code class="language-bash">./tools/test-runner.sh --help
+</code></pre>
+<h2 id="test-runner-examples">Test runner examples</h2>
+<p>Usage example:</p>
+<pre><code class="language-bash">./tools/test-runner.sh --db redis --preset internal_mnesia
+</code></pre>
+<p>The command runs both big (feature) and small (unit) tests.</p>
+<p>To view more examples, run:</p>
+<pre><code class="language-bash">./tools/test-runner.sh --examples
+</code></pre>
+<h2 id="test-runner-completion">Test runner completion</h2>
+<p>Test runner supports shell TAB completion.</p>
+<p>To enable completion in bash or zsh, run:</p>
+<pre><code class="language-bash">source tools/test-runner-complete.sh
+</code></pre>
+<p>To view completion examples, run:</p>
+<pre><code class="language-bash">./tools/test-runner.sh --examples-complete
+</code></pre>
+<h2 id="viewing-test-reports">Viewing test reports</h2>
+<p>To view test execution results, run:</p>
+<pre><code class="language-bash">./tools/test-runner.sh --show-big-reports
+./tools/test-runner.sh --show-small-reports
+</code></pre>
+<h2 id="rerun-big-tests">Rerun big tests</h2>
+<p>Very often we want to restart a specific suite when some test failed.</p>
+<p>For example, some test has failed in <code>mam_SUITE</code>. The command was used to
+execute tests:</p>
+<pre><code class="language-bash">./tools/test-runner.sh --skip-small-tests --db mysql --preset mysql_mnesia --skip-stop-nodes
+</code></pre>
+<p><code>--skip-stop-nodes</code> is optional here, because if any big test fails, then nodes
+would be still running.</p>
+<p>We can just execute the same command, but it would rebuild nodes and start
+them.</p>
+<p>The command can be used instead:</p>
+<pre><code class="language-bash">./tools/test-runner.sh --rerun-big-tests -- mam
+</code></pre>
+<p><code>--rerun-big-tests</code> expands into
+<code>--skip-small-tests --skip-setup-db --dev-nodes --test-hosts --skip-cover --skip-preset</code>.</p>
+<p>And <code>mam</code> is used to run <code>mam_SUITE</code> suite only.</p>
+<h1 id="unit-tests-aka-small-tests">Unit tests (a.k.a. "small tests")</h1>
+<p>These test suites are aimed at testing various modules and libraries standalone, without launching a MongooseIM instance.
+They are very useful for developing/debugging libraries.</p>
+<p>The test suites are located in <code>test/</code> directory.
+To run all of them, use <code>./rebar3 ct</code>; to run just a selected suite, use <code>./rebar3 ct --suite test/my_selected_SUITE</code>.
+Rebar recompiles all the code automatically, there is no need for a separate compilation step.</p>
+<p>If all the tests pass, you wll get no output and summary log will be available in ct.log.
+If any of the tests fail the summary log is printed to stdout.</p>
+<p>Detailed test results in a nice HTML format are saved in</p>
+<pre><code>_build/test/logs/ct_run.[something][datetime]/
+</code></pre>
+<p>Unit test running example using test runner:</p>
+<pre><code class="language-bash"># Run all small tests, show progress
+./tools/test-runner.sh --skip-big-tests --verbose
+
+# Run sha_SUITE without cover
+./tools/test-runner.sh --skip-big-tests sha --skip-cover
+
+# Run reload_cluster group in ejabberd_config_SUITE, show progress
+./tools/test-runner.sh --skip-big-tests ejabberd_config:reload_cluster --verbose
+</code></pre>
+<h1 id="end-to-end-tests-aka-big-tests">End-to-end tests (a.k.a. "big tests")</h1>
+<h2 id="using-test-runner">Using test runner</h2>
+<p>Most important options are preset and database:</p>
+<pre><code class="language-bash"># Runs privacy_SUITE and private_SUITE with MySQL
+./tools/test-runner.sh --skip-small-tests --db mysql --preset mysql_mnesia -- privacy private
+
+
+# Runs MAM tests for MUC light with MySQL and Postgres
+./tools/test-runner.sh --skip-small-tests --db mysql pgsql --preset mysql_mnesia pgsql_mnesia -- mam:rdbms_muc_light
+
+# Runs rdbms_SUITE with MSSQL
+# Inits a single MongooseIM node (works for some tests only)
+# Disables cover
+./tools/test-runner.sh --skip-small-tests --db mssql --preset rdbms_mssql_mnesia --test-hosts mim --dev-nodes mim1 -- rdbms --skip-cover
+</code></pre>
+<h2 id="tldr">TL;DR</h2>
+<p>In shell #1:</p>
+<pre><code class="language-sh">$ cd $MONGOOSEIM
+$ ./rebar3 compile
+$ make devrel
+</code></pre>
+<p>In shell #2:</p>
+<pre><code class="language-sh">$ cd $MONGOOSEIM/_build/mim1/rel/mongooseim
+$ ./bin/mongooseimctl live
+</code></pre>
+<p>In shell #3:</p>
+<pre><code class="language-sh">$ cd $MONGOOSEIM/_build/mim2/rel/mongooseim
+$ ./bin/mongooseimctl live
+</code></pre>
+<p>In shell #4:</p>
+<pre><code class="language-sh">$ cd $MONGOOSEIM/_build/mim3/rel/mongooseim
+$ ./bin/mongooseimctl live
+</code></pre>
+<p>In shell #5:</p>
+<pre><code class="language-sh">$ cd $MONGOOSEIM/_build/fed1/rel/mongooseim
+$ ./bin/mongooseimctl live
+</code></pre>
+<p>In shell #6:</p>
+<pre><code class="language-sh">$ cd $MONGOOSEIM/_build/reg1/rel/mongooseim
+$ ./bin/mongooseimctl live
+</code></pre>
+<p>Back to shell #1:</p>
+<pre><code class="language-sh">$ cd big_tests/
+$ make quicktest
+</code></pre>
+<p>Wait for the tests to finish and celebrate (or wallow in despair and grief)!</p>
+<p>One-liner alternative for tmux users:</p>
+<pre><code class="language-sh">./rebar3 compile
+make devrel
+tmux new-window -n mim1 '_build/mim1/rel/mongooseim/bin/mongooseimctl live'
+tmux new-window -n mim2 '_build/mim2/rel/mongooseim/bin/mongooseimctl live'
+tmux new-window -n mim3 '_build/mim3/rel/mongooseim/bin/mongooseimctl live'
+tmux new-window -n fed1 '_build/fed1/rel/mongooseim/bin/mongooseimctl live'
+tmux new-window -n reg1 '_build/fed1/rel/mongooseim/bin/mongooseimctl live'
+_build/mim1/rel/mongooseim/bin/mongooseimctl started
+_build/mim2/rel/mongooseim/bin/mongooseimctl started
+_build/mim3/rel/mongooseim/bin/mongooseimctl started
+_build/fed1/rel/mongooseim/bin/mongooseimctl started
+_build/reg1/rel/mongooseim/bin/mongooseimctl started
+make -C big_tests quicktest
+</code></pre>
+<p>Start a new tmux and paste the commands.</p>
+<h2 id="step-by-step-breakdown">Step-by-step breakdown</h2>
+<p><code>make devrel</code> builds four server nodes, preconfigured for a wide range of features covered by end-to-end tests.</p>
+<ul>
+<li><code>$MONGOOSEIM/_build/mim1/rel</code>, for most test SUITEs</li>
+<li><code>$MONGOOSEIM/_build/mim*/rel</code>, in order to test cluster-related commands;;</li>
+<li><code>$MONGOOSEIM/_build/fed1/rel</code>, in order to test XMPP federation (server to server communication, S2S).</li>
+<li><code>$MONGOOSEIM/_build/reg1/rel</code>, in order to test global distribution feature.</li>
+</ul>
+<p>In general, running a server in the interactive mode (i.e. <code>mongooseimctl live</code>) is not required to test it, but it's convenient as any warnings and errors can be spotted in real time.
+It's also easy to inspect the server state or trace execution (e.g. using <code>dbg</code>) in case of anything going wrong in some of the tests.
+To run the server in the background instead of the interactive mode, use <code>mongooseimctl start &amp;&amp; mongooseimctl started</code>.</p>
+<p>The <code>quicktest</code> configuration is a relatively comprehensive one, giving good overview of what does and what doesn't work in the system, without repeating tests.
+Why would we want to ever repeat the tests?
+In order to test different backends of the same parts of the system.
+E.g. a message archive might store messages in MySQL/PostgreSQL or Riak KV - the glue code between the XMPP logic module and database is different in each case, therefore repeating the same tests with different databases is necessary to guarantee a truthful code coverage measurement.</p>
+<h2 id="testing-a-feature-in-development-tdd">Testing a feature in development / TDD</h2>
+<p>The whole suite takes a significant amount of time to complete.
+When you develop a new feature, the speed of iterating is crucial to maintain the flow (who doesn't like the feeling?!) and not lose focus.</p>
+<p>In  <code>$MONGOOSEIM/big_tests/</code> we have:</p>
+<pre><code>$ tree big_tests/ -L 1 -F
+big_tests/
+├── Makefile
+├── README.md
+├── default.spec
+├── test.config
+├── tests/
+└── ...
+</code></pre>
+<p><code>tests/</code> is where the test suites reside.</p>
+<p><code>*.config</code> files are the suite configuration files - they contain predefined XMPP client specifications, server addresses and XMPP domains to use, and options required by test support libraries (i.e. <a href="https://github.com/esl/escalus/">Escalus</a>).</p>
+<p><code>*.spec</code> files are the test specifications - they define the configuration file to use, the suites, test groups or individual test cases to run or skip, and some less important things.</p>
+<p><code>default.spec</code> is the default when running <code>make quicktest</code>, but it can be overridden with a <code>TESTSPEC</code> variable:</p>
+<pre><code class="language-sh"># make sure we're in $MONGOOSEIM/big_tests/
+cd $MONGOOSEIM/big_tests/
+make quicktest TESTSPEC=my-feature.spec
+</code></pre>
+<p>To speed up the development cycle, developers usually create a <code>.spec</code> file for each feature (or each project, if you're cloning away) and only enable the suites / test groups they are working on.
+The allows testing only the parts of the system that are actually being changed.
+It's worth running <code>default.spec</code> once in a while to check for regressions.</p>
+<p>Consult the <code>default.spec</code> file to see how to run only selected tests/groups/cases.</p>
+<p>If you're sure that none of the test dependencies have changed and you only edited the test suites and/or MongooseIM code, it's possible to speed up the tests by skipping the Rebar dependency and compilation checks by providing <code>PREPARE=</code> (i.e. an empty value):</p>
+<pre><code class="language-sh">make quicktest PREPARE=
+</code></pre>
+<p>Consult the <code>big_tests/Makefile</code> to see how it works.</p>
+<h3 id="applying-code-changes">Applying code changes</h3>
+<p>When working on a feature or a bug fix you often modify the code and check if it works as expected.
+In order to change the code on dev nodes that are already generated (<code>mim*</code> and <code>fed*</code>) recompile the code for a specific node.
+For example, to update the code on <code>mim1</code> node all you have to do is:</p>
+<pre><code class="language-sh">./rebar3 as mim1 compile
+</code></pre>
+<p>A similar command applies to other nodes, the important thing being rebar3's profile.</p>
+<p>When the above command finishes, the code can be reloaded on the server by either reloading changed module(s) in the node's shell, e.g. <code>l(mongoose_riak)</code>, or restarting the node.</p>
+<h3 id="reading-test-reports">Reading test reports</h3>
+<p>When finished, the test engine writes detailed html reports into a directory:</p>
+<pre><code>big_tests/ct_report/ct_run.[gobbledygook][datetime]/
+</code></pre>
+<p>Each run is saved into a new directory. This snippet:</p>
+<pre><code>#!/bin/bash
+
+lst=$(ls -rt ct_report | grep ct_run | tail -n 1)
+rm ct_report/lastrun
+ln -s $lst ct_report/lastrun
+</code></pre>
+<p>can be of some help.</p>
+<h2 id="checking-coverage">Checking coverage</h2>
+<p>If you want to check how much of the code is covered by tests, run:</p>
+<pre><code>make cover_quicktest
+</code></pre>
+<p>Note: You need all the mim nodes (mim1, mim2 and mim3) up and running, even if you only run some of the tests. If any of the nodes is down, the test will crash.</p>
+<p>This command will recompile and reload the code on dev nodes with coverage enabled and run test suites as defined in the spec.
+Coverage statistics will be available in <code>big_tests/ct_report/cover.html</code> and <code>coverage</code> subdirectory.</p>
+<h2 id="advanced-topics">Advanced topics</h2>
+<p>There are many more options available.
+One of them is sequentially testing a number of preset configurations - we do it every day on Travis, testing MongooseIM with various OTP versions and database backends.
+Altogether, we have eight preset configuration.</p>
+<p>If you want to dig deeper, consult <code>.travis.yml</code> and <code>tools/travis-test.sh</code>, everything we do is there.</p>
+<h3 id="gathering-test-reports-from-travis-tests">Gathering test reports from Travis tests</h3>
+<p>If you test your MongooseIM fork on Travis, you might want to access test reports (which also include node logs and crash dumps) that are created by the test runner.</p>
+<h4 id="uploading-reports-to-s3">Uploading reports to S3</h4>
+<p>Our script uses AWS CLI to upload test results to an S3 bucket.
+Simply set <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-environment.html">relevant environment variables</a> in your repository settings on Travis (at least <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code> have to be set), and enjoy test reports landing straight into your bucket (<code>AWS_BUCKET</code> variable should store the bucket's name).</p>
+<h4 id="uploading-reports-to-google-drive">Uploading reports to Google Drive</h4>
+<p>To store test results in Google Drive you need to <a href="https://developers.google.com/identity/protocols/OAuth2ServiceAccount">create a new project and obtain service account credentials</a>.
+You must also add Google Drive API to your project - to do this, navigate to <em>APIs &amp; Services</em> in your project console and find &amp; add <em>Google Drive API</em> in the <em>Library</em> tab.
+Once downloaded, encode the credentials file with base64 (e.g. <code>cat serviceCreds.json | base64</code>) and use the result as <code>GDRIVE_SERVICE_ACCOUNT_CREDENTIALS</code> environment variable in your Travis repository settings.</p>
+<h5 id="saving-reports-on-your-personal-account">Saving reports on your personal account</h5>
+<p>The uploaded files will belong to the project that you created, i.e. will not be immediately visible from your personal Google Drive UI.
+To be able to upload files to your personal account, you can share the reports' directory with the project account.
+First, note the ID of the project's user that you created to gain the service account credentials (e.g. <code>test-123@fair-smile-123456.iam.gserviceaccount.com</code>).
+You can see this <a href="https://console.developers.google.com/iam-admin/serviceaccounts/project">on the Service Accounts tab of the project console</a>.
+Now, create a directory on your Google Drive that will serve as the test root directory.
+Go into the directory's sharing options and paste in the project's user ID, granting it write access.
+Click to expand the <em>advanced</em> sharing options and note the ID of the shared directory that's displayed in the share link (e.g. if the link is <code>https://drive.google.com/drive/folders/1234567890abcdef?usp=sharing</code>, the directory's ID is <code>1234567890abcdef</code>).
+Finally, set <code>GDRIVE_PARENT_DIR</code> environment variable of your Travis build to the directory ID that you noted in the previous step.</p>
+<h2 id="load-testing">Load testing</h2>
+<p>Alongside CI, we do also CLT (Continuous Load Testing).
+We have our own load testing infrastructure, called Tide, which is triggered after every successful test run, and gives us a feedback on changes to MongooseIM performance.</p>
+<p>Test results are publicly available on the <a href="http://tide.erlang-solutions.com/public">Hello Tide!</a> page.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../logging/" class="btn btn-neutral float-right" title="Logging">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../operation-and-maintenance/known-issues/" class="btn btn-neutral" title="Known issues"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../operation-and-maintenance/known-issues/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../logging/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

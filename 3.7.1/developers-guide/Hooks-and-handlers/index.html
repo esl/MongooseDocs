@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>Hooks and Handlers - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Hooks and Handlers";
+    var mkdocs_page_input_path = "developers-guide/Hooks-and-handlers.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Bootstrap-Scripts/">Bootstrap scripts</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications/">How to Set up Push Notifications</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications-client-side/">How to Set up Push Notifications on the client side</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/With-MongoosePush/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.5.0_3.6.0/">3.5.0 to 3.6.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.6.0_3.7.0/">3.6.0 to 3.7.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/TLS-hardening/">TLS hardening</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/outgoing-connections/">Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Listener-modules/">Listener Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/client-certificate/">Client Certificate</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/HTTP-authentication-module/">HTTP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/Riak-authentication-module/">Riak Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/Dummy-authentication-module/">Dummy Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/gdpr-considerations/">GDPR considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/">System Metrics Privacy Policy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Hooks and Handlers</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#running-a-hook">Running a hook</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#basic-usage">Basic usage</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#getting-results-from-handlers">Getting results from handlers</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#sidenote-folds">Sidenote: Folds</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#using-accumulators">Using accumulators</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sidenote-something-deprecated">Sidenote: something deprecated</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#error-handling-in-hooks">Error handling in hooks</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sidenote-code-yet-to-be-written">Sidenote: Code yet to be written</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sidenote-multiple-domains">Sidenote: Multiple Domains</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#registering-hook-handlers">Registering hook handlers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#unregistering-handlers">Unregistering handlers</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#sidenote-metrics">Sidenote: Metrics</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#writing-handlers">Writing handlers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#hooks-list-and-how-to-extract-it">Hooks list and how to extract it</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#creating-your-own-hooks">Creating your own hooks</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Developer's guide &raquo;</li>
+        
+      
+    
+    <li>Hooks and Handlers</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="hooks-handlers-and-accumulators">Hooks, handlers and accumulators</h1>
+<p>The hooks and handlers mechanism is one of the core architectural features of MongooseIM.
+It allows for loose coupling between components of the system by calling only those which are available and configured to be used at runtime.</p>
+<p>It can be thought of as a simple eventing mechanism notifying about certain things happening in the server.
+That results in an extensible system with pluggable extra functionality.</p>
+<p>To focus our attention, we'll analyze <code>mod_offline</code> which is responsible for storing messages for delivery to users unavailable at the time of sending.
+<code>mod_offline</code> is an implementation of <a href="http://xmpp.org/extensions/xep-0203.html">XEP-0203</a>.</p>
+<h2 id="running-a-hook">Running a hook</h2>
+<h3 id="basic-usage">Basic usage</h3>
+<p><code>ejabberd_sm</code> (ejabberd/MongooseIM session manager) is the module discovering whether the recipient of a message is available or not.
+That's where storing the message for later delivery takes place.
+It is possible, but not recommended, to save a message in an offline storage by calling <code>mod_offline</code> directly:</p>
+<pre><code class="language-erlang">mod_offline:store_packet(From, To, Packet)
+</code></pre>
+<p>Note that in this example <code>ejabberd_sm</code> is coupled with <code>mod_offline</code>.
+I.e. if <code>mod_offline</code> was not available, the code would simply crash; if it was misconfigured or turned off, the behaviour would be undefined.
+To avoid that coupling and also to enable other (<a href="#sidenote-yet-to-be-written">possibly yet to be written</a>) code to carry out some action at this particular moment, <code>ejabberd_sm</code> instead calls:</p>
+<pre><code class="language-erlang">Acc1 = ejabberd_hooks:run_fold(offline_message_hook,
+                               LServer,
+                               Acc,
+                               [From, To, Packet])
+</code></pre>
+<p>The extra level of indirection introduced by this call gives the flexibility to determine at runtime what code actually gets run at this point.
+<code>offline_message_hook</code> is just the name of the hook (in other words of the event that is being signalled);
+<code>From</code>, <code>To</code> and <code>Packet</code> are the arguments passed to the handler just as they would in case of the function being called directly;
+<code>LServer</code> is <a href="#sidenote-multiple-domains">the XMPP domain for which this hook is signalled</a>.</p>
+<h3 id="getting-results-from-handlers">Getting results from handlers</h3>
+<p>Hook handlers are called by "folding".
+This means that each handler on a list is passed a set of arguments and an initial value that it then modifies, returns and hands over to the next handler in line.</p>
+<p>A simple example would look like this:</p>
+<pre><code class="language-erlang">ListOfSomething = ejabberd_hooks:run_fold(a_certain_hook,
+                                          StateData#state.server,
+                                          [],
+                                          [StateData#state.user,
+                                           StateData#state.server])
+</code></pre>
+<p>The initial value of the accumulator being passed through the sequence of handlers (in this case an empty list <code>[]</code>) is inserted between the XMPP domain <code>StateData#state.server</code> and handler arguments.
+In between the XMPP domain (<code>StateData#state.server</code>) and handler arguments is the initial value of the accumulator being passed through the sequence of handlers is inserted - in this case an empty list (<code>[]</code>).</p>
+<h4 id="sidenote-folds">Sidenote: Folds</h4>
+<p>If you haven't encountered the term <em>fold</em> before, think of it as <em>reduce</em> (like <code>Array.reduce</code>) in Ruby-speak, roughly equivalent to the Reduce step in MapReduce, sometimes called <em>accumulate</em>, <em>aggregate</em> or <em>compress</em>.
+<a href="http://en.wikipedia.org/wiki/Fold_%28higher-order_function%29">See Wikipedia for more.</a></p>
+<h3 id="using-accumulators">Using accumulators</h3>
+<p>MongooseIM uses a dedicated data structure to accumulate data related to stanza processing (see <a href="../accumulators/">"Accumulators"</a>).
+It is instantiated with an incoming stanza, passed along throughout the processing chain, supplied to and returned from certain hook calls, and terminated when stanza is leaving MongooseIM.</p>
+<p>If a Mongoose accumulator is passed to a hook, handlers should store their return values in one of 3 ways:</p>
+<ul>
+<li>If it is a one-off value which doesn't need to be passed on along with the accumulator (can be overwritten any time), use <code>mongoose_acc:set(hook, result, Value, Acc)</code>.</li>
+<li>If the value is to be passed on to be reused within the current processing context, use <code>mongoose_acc:set(Namespace, Key, Value, Acc)</code>.</li>
+<li>If the value should be passed on to the recipient's session, pubsub node etc. use <code>mongoose_acc:set_permanent(Namespace, Key, Value, Acc)</code>.</li>
+</ul>
+<p>A real life example, then, with regard to <code>mod_offline</code> is the <code>resend_offline_messages_hook</code> run in <code>ejabberd_c2s</code>:</p>
+<pre><code class="language-erlang">Acc1 = ejabberd_hooks:run_fold(resend_offline_messages_hook,
+                               StateData#state.server,
+                               Acc,
+                               [StateData#state.user, StateData#state.server]),
+Rs = mongoose_acc:get(offline, messages, Acc1, []),
+
+</code></pre>
+<h3 id="sidenote-something-deprecated">Sidenote: something deprecated</h3>
+<p>In the past you may have found some calls to <code>ejabberd_hooks:run/3</code> in the MongooseIM source code.
+Under the hood it called the same handlers with <code>ok</code> as the initial accumulator.
+This is deprecated and some day will be removed.</p>
+<h3 id="error-handling-in-hooks">Error handling in hooks</h3>
+<p>Hooks are meant to decouple modules; in other words, the caller signals that some event took place or that it intends to use a certain feature or a set of features, but how and if those features are implemented is beyond its interest.
+For that reason hooks don't use the "let it crash" approach. Instead it is rather like "fire-and-forget", more similar in principle to the <code>Pid ! signal</code> way.</p>
+<p>In practical terms: if a handler throws an error the hook machine logs a message and proceeds to the next handler with an unmodified accumulator.
+If there are no handlers registered for a given hook, the <code>run_fold</code> call simply has no effect.</p>
+<h3 id="sidenote-code-yet-to-be-written">Sidenote: Code yet to be written</h3>
+<p>Let's imagine, that when building a <a href="http://en.wikipedia.org/wiki/Minimum_viable_product">minimum viable product</a> we settle on using <code>mod_offline</code> for delayed delivery of messages to unavailable clients.
+However, while the product evolves (or the relevant client software catches up) we might drop <code>mod_offline</code> in favour of a more sophisticated solution like <a href="http://xmpp.org/extensions/xep-0313.html">Message Archive Management</a> which would require a different action to be taken at the same point.
+Thanks to loose coupling and <code>ejabberd_hooks</code> it's possible to turn off <code>mod_offline</code> and turn on <code>mod_mam</code> without changing
+a single line of code in <code>ejabberd_sm</code>.</p>
+<p>The only required change is to the configuration (apart from deploying the new module) which can even be performed at runtime - without restarting the server.</p>
+<h3 id="sidenote-multiple-domains">Sidenote: Multiple Domains</h3>
+<p>A MongooseIM cluster may serve more than one domain at the same time.
+E.g. it is quite common that services like Multi User Chat or Publish-Subscribe are available as subdomains of the main XMPP domain served by an installation.</p>
+<h2 id="registering-hook-handlers">Registering hook handlers</h2>
+<p>In order to store a packet when <code>ejabberd_sm</code> runs <code>offline_message_hook</code> the relevant module must register a handler for this hook.
+To attain the runtime configurability the module should register the handlers when it's loaded and unregister them when
+it's unloaded.
+That's usually done in, respectively, <code>start/2</code> and <code>stop/1</code> functions.
+Here is the relevant snippet from <code>mod_offline:start/2</code>:</p>
+<pre><code class="language-erlang">ejabberd_hooks:add(offline_message_hook, Host,
+                   ?MODULE, store_packet, 50)
+</code></pre>
+<p>It is clearly visible that the handler is added to the <code>offline_message_hook</code>.</p>
+<p><code>Host</code> corresponds to the <code>LServer</code> used in the aforementioned call to the <code>ejabberd_hooks:run_fold</code>, i.e. it's the XMPP domain for which the handler is to be executed.</p>
+<p>The handler itself is specified as a module-function pair;
+the arity of the function is not specified at the registration nor verified when calling the handler.
+This may change in the future, but for now we recommend calling the hooks through the <code>mongoose_hooks</code> module and checking the arity there when writing a handler.
+If the handler expects an incorrect number of arguments it will simply crash.</p>
+<p>Multiple handlers may be registered for the same hook.
+The last argument, 50, is the sequence number of this handler in the handler chain.
+The higher the number, the later in the sequence the handler will be executed.
+It's reasonable to keep this number small (e.g. in the range 0-100), though there's no real limit other than the size of the integer type in the Erlang VM.</p>
+<h2 id="unregistering-handlers">Unregistering handlers</h2>
+<p>Pluggability also requires the components to be unpluggable at will.
+For that purpose there's the option to unregister a hook handler.
+It's done in <code>mod_offline:stop/1</code> in a similar fashion to:</p>
+<pre><code class="language-erlang">ejabberd_hooks:delete(offline_message_hook, Host,
+                      ?MODULE, store_packet, 50)
+</code></pre>
+<p>The arguments are exactly the same as passed to <code>ejabberd_hooks:add/5</code>.</p>
+<h3 id="sidenote-metrics">Sidenote: Metrics</h3>
+<p>Every time a hook is run, a corresponding metric of the same name in the same host is incremented by one.
+There are some exceptions though as some metrics were implemented before the generic hook metrics.
+List of hooks not updating generic metrics can be found in the <code>mongoose_metrics:hook_to_name/1</code> function.
+Such skipped hooks update metrics defined in the <code>mongoose_metrics_hooks</code> module.</p>
+<h2 id="writing-handlers">Writing handlers</h2>
+<p>The signature of a handler has to follow three rules:</p>
+<ul>
+<li>Correct arity (the number of args passed to <code>run_fold</code> in <code>mongoose_hooks</code> + 1).</li>
+<li>The first arg is a mutable accumulator (may be <code>mongoose_acc</code> in particular).</li>
+<li>Returns an accumulator of the same type as the input one.</li>
+</ul>
+<p>Let's look at this example, from MongooseIM codebase:</p>
+<pre><code class="language-erlang">
+process_iq_get(Acc, #jid{ lserver = FromS } = From, To, #iq{} = IQ, _ActiveList) -&gt;
+    MUCHost = gen_mod:get_module_opt_subhost(FromS, ?MODULE, default_host()),
+    case {mod_muc_light_codec_backend:decode(From, To, IQ),
+          gen_mod:get_module_opt_by_subhost(MUCHost, ?MODULE, blocking, ?DEFAULT_BLOCKING)} of
+        {{ok, {get, #blocking{} = Blocking}}, true} -&gt;
+            Items = mod_muc_light_db_backend:get_blocking(jid:to_lus(From), MUCHost),
+            mod_muc_light_codec_backend:encode(
+              {get, Blocking#blocking{ items = Items }}, From, jid:to_lus(To),
+              fun(_, _, Packet) -&gt; put(encode_res, Packet) end),
+            #xmlel{ children = ResponseChildren } = erase(encode_res),
+            Result = {result, ResponseChildren},
+            {stop, mongoose_acc:set(hook, result, Result, Acc)};
+        {{ok, {get, #blocking{}}}, false} -&gt;
+            Result = {error, ?ERR_BAD_REQUEST},
+            {stop, mongoose_acc:set(hook, result, Result, Acc)};
+        _ -&gt;
+            Result = {error, ?ERR_BAD_REQUEST},
+            mongoose_acc:set(hook, result, Result, Acc)
+    end.
+</code></pre>
+<p>As seen in this example, a handler receives an accumulator, puts some value into it and returns it
+for further processing.</p>
+<p>There's also one important feature to note: in some cases our handler returns a tuple  <code>{stop, Acc}</code>.
+This skips calling the latter actions in the handler sequence, while the call to <code>run_fold</code> returns the Acc.
+If a handler returns just an atom <code>stop</code>, then all later actions are skipped and <code>run_fold</code> returns <code>stopped</code>.</p>
+<p>Watch out! Different handlers may be registered for the same hook - the priority mechanism orders their execution.
+If a handler returns <code>stop</code> but runs early in the handler chain, it may prevent some other handler from running at all!
+That might or might not be intentional.
+It may be especially surprising in case of handlers from different modules registered for the same hook.
+Always ensure what handlers are registered for a given hook (<code>grep</code> is your friend) and that you understand their interdependencies.</p>
+<h2 id="hooks-list-and-how-to-extract-it">Hooks list and how to extract it</h2>
+<p>The following command should give you a list of all the hooks available in MongooseIM:</p>
+<pre><code class="language-bash">$ find src/ -name '*.erl' -print | xargs ./tools/find-hooks.awk \
+&gt; | sort | uniq
+adhoc_local_commands
+adhoc_local_items
+...
+...
+...
+webadmin_user_parse_query
+</code></pre>
+<p>Refer to <code>grep</code>/<code>ack</code> to find where they're used.</p>
+<p>Here are the contents of <code>find-hooks.awk</code>:</p>
+<pre><code class="language-awk">#!/usr/bin/env awk -f
+BEGIN {
+    RS=&quot;)&quot;
+    ORS=&quot;&quot;
+    FS=&quot;[ (,]&quot;
+}
+
+$0 ~ /ejabberd_hooks:run/ {
+    found = -1
+    for (i = 1; i &lt; NF; i++) {
+        if ($i ~ /ejabberd_hooks:run/) {
+            found = i
+        }
+    }
+    if (found != -1 &amp;&amp; $(found+1) != &quot;&quot; &amp;&amp; $(found+1) ~ /^[a-z]/)
+        print $(found+1)&quot;\n&quot;
+}
+</code></pre>
+<h2 id="creating-your-own-hooks">Creating your own hooks</h2>
+<p>There's no special function or any setup necessary to create a new hook.
+The only thing that needs to be done is calling <code>ejabberd_hooks:run/3</code> or <code>ejabberd_hooks:run_fold/4</code> with the name of the new hook and relevant arguments.
+If you want static code analysis though, you should put the new hook inside <code>mongoose_hooks</code> with a correct type specification.</p>
+<p>Of course, as long as no module registers handlers for this hook just running, it won't have any effects.</p>
+<p>Similar is the case when a module registers handlers for some hook, but that hook is never run in the code.
+That won't have an effect either.</p>
+<p>The following is a self-contained example of a module which both runs and registers a few handlers for a completely new hook.
+The handlers are run sequentially using disparate priorities and passing over an accumulator value.
+One of the handlers stops the handler execution chain prematurely by returning <code>{stop, NewVal}</code>.
+It's also possible to try out what happens when the same hook is run with different XMPP domains by passing an argument to <code>run_custom_hook/1</code> - we'll see that the handlers are registered for a particular domain only.</p>
+<p>At the end, you can see a printout of an accumulator with some debugging info.</p>
+<p>To cut the long story short:</p>
+<pre><code class="language-erlang">-module(mod_hook_example).
+-author(&quot;bartek&quot;).
+
+-behaviour(gen_mod).
+
+-include(&quot;mongoose.hrl&quot;).
+
+%% API
+-export([run_custom_hook/1]).
+
+%% gen_mod callbacks
+-export([start/2,
+         stop/1]).
+
+%% Hook handlers
+-export([first_handler/2,
+         stopping_handler/2,
+         never_run_handler/2]).
+
+start(Host, _Opts) -&gt;
+    ejabberd_hooks:add(custom_new_hook, Host, ?MODULE, first_handler, 25),
+    ejabberd_hooks:add(custom_new_hook, Host, ?MODULE, stopping_handler, 50),
+    ejabberd_hooks:add(custom_new_hook, Host, ?MODULE, never_run_handler, 75).
+
+stop(Host) -&gt;
+    ejabberd_hooks:delete(custom_new_hook, Host, ?MODULE, first_handler, 25),
+    ejabberd_hooks:delete(custom_new_hook, Host, ?MODULE, stopping_handler, 50),
+    ejabberd_hooks:delete(custom_new_hook, Host, ?MODULE, never_run_handler, 75).
+
+run_custom_hook(Host) -&gt;
+    Acc = mongoose_acc:new(#{ location =&gt; ?LOCATION, lserver =&gt; Host, element =&gt; undefined }),
+    Acc1 = mongoose_acc:set(example, value, 5, Acc),
+    ResultAcc = ejabberd_hooks:run_fold(custom_new_hook, Host, Acc1, [2]),
+    ResultValue = mongoose_acc:get(example, value, ResultAcc),
+    ?INFO_MSG(&quot;Final hook result: ~p&quot;, [ResultValue]),
+    ?INFO_MSG(&quot;Returned accumulator: ~p&quot;, [ResultAcc]).
+
+first_handler(Acc, Number) -&gt;
+    V0 = mongoose_acc:get(example, value, Acc),
+    Result = V0 + Number,
+    ?INFO_MSG(&quot;First handler~n&quot;
+    &quot;  value: ~p~n&quot;
+    &quot;  argument: ~p~n&quot;
+    &quot;  will return: ~p&quot;,
+        [V0, Number, Result]),
+    mongoose_acc:set(example, value, Result, Acc).
+
+stopping_handler(Acc, Number) -&gt;
+    V0 = mongoose_acc:get(example, value, Acc),
+    Result = V0 + Number,
+    ?INFO_MSG(&quot;Stopping handler~n&quot;
+    &quot;  value: ~p~n&quot;
+    &quot;  argument: ~p~n&quot;
+    &quot;  will return: ~p&quot;,
+        [V0, Number, Result]),
+    {stop, mongoose_acc:set(example, value, Result, Acc)}.
+
+never_run_handler(Acc, Number) -&gt;
+    ?INFO_MSG(&quot;This hook won't run as it's registered with a priority bigger &quot;
+    &quot;than that of stopping_handler/2 is. &quot;
+    &quot;It doesn't matter what it returns. &quot;
+    &quot;This text should never get printed.&quot;, []),
+    Acc * Number.
+</code></pre>
+<p>The module is intended to be used from the shell for educational purposes:</p>
+<pre><code class="language-erlang">(mongooseim@localhost)1&gt; gen_mod:is_loaded(&lt;&lt;&quot;localhost&quot;&gt;&gt;, mod_hook_example).
+false
+(mongooseim@localhost)2&gt; gen_mod:start_module(&lt;&lt;&quot;localhost&quot;&gt;&gt;, mod_hook_example, [no_opts]).
+{ok,ok}
+(mongooseim@localhost)3&gt; gen_mod:is_loaded(&lt;&lt;&quot;localhost&quot;&gt;&gt;, mod_hook_example).
+true
+(mongooseim@localhost)4&gt; ejabberd_loglevel:set_custom(mod_hook_example, 4).
+[{{lager_file_backend,&quot;ejabberd.log&quot;},ok},
+ {lager_console_backend,ok},
+ {lager_manager_killer,ok}]
+(mongooseim@localhost)5&gt; mod_hook_example:run_custom_hook(&lt;&lt;&quot;localhost&quot;&gt;&gt;).
+17:48:55.421 [info] First handler
+  value: 5
+  argument: 2
+  will return: 7
+ok
+17:48:55.421 [info] Stopping handler
+  value: 7
+  argument: 2
+  will return: 9
+17:48:55.421 [info] Final hook result: 9
+(mongooseim@localhost)6&gt; 17:48:55.421 [info] Returned accumulator: #{lserver =&gt; &lt;&lt;&quot;localhost&quot;&gt;&gt;,mongoose_acc =&gt; true,non_strippable =&gt; {set,0,16,16,8,80,48,{[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]},{{[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]}}},origin_location =&gt; {mod_hook_example,run_custom_hook,31},origin_pid =&gt; &lt;0.1189.0&gt;,origin_stanza =&gt; undefined,ref =&gt; #Ref&lt;0.3348369203.60555266.196226&gt;,stanza =&gt; undefined,timestamp =&gt; {1538,408935,405141},{example,value} =&gt; 9}
+
+(mongooseim@localhost)6&gt; mod_hook_example:run_custom_hook(&lt;&lt;&quot;another-domain&quot;&gt;&gt;).
+ok
+17:49:11.672 [info] Final hook result: 5
+(mongooseim@localhost)7&gt; 17:49:11.673 [info] Returned accumulator: #{lserver =&gt; &lt;&lt;&quot;another-domain&quot;&gt;&gt;,mongoose_acc =&gt; true,non_strippable =&gt; {set,0,16,16,8,80,48,{[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]},{{[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]}}},origin_location =&gt; {mod_hook_example,run_custom_hook,31},origin_pid =&gt; &lt;0.1189.0&gt;,origin_stanza =&gt; undefined,ref =&gt; #Ref&lt;0.3348369203.60555270.195733&gt;,stanza =&gt; undefined,timestamp =&gt; {1538,408951,672653},{example,value} =&gt; 5}
+
+(mongooseim@localhost)7&gt; gen_mod:stop_module(&lt;&lt;&quot;localhost&quot;&gt;&gt;, mod_hook_example).
+ok
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../hooks_description/" class="btn btn-neutral float-right" title="Hooks description">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../logging/" class="btn btn-neutral" title="Logging"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../logging/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../hooks_description/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
