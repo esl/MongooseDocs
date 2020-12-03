@@ -1,0 +1,2755 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+    
+    
+      
+        <title>Hooks and Handlers - MongooseIM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6910b76c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../custom.css">
+    
+      <link rel="stylesheet" href="../../css/version-select.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hooks-handlers-and-accumulators" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="MongooseIM" class="md-header-nav__button md-logo" aria-label="MongooseIM">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            MongooseIM
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Hooks and Handlers
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="MongooseIM" class="md-nav__button md-logo" aria-label="MongooseIM">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    MongooseIM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+    <label class="md-nav__link" for="nav-2">
+      User guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="User guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        User guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/ABCs-of-MongooseIM/" class="md-nav__link">
+      ABCs of MongooseIM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/MongooseIM-High-level-Architecture/" class="md-nav__link">
+      High-level Architecture
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Features-and-supported-standards/" class="md-nav__link">
+      Features and supported standards
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Getting-started/" class="md-nav__link">
+      Getting started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/release_config/" class="md-nav__link">
+      Release/Installation configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Bootstrap-Scripts/" class="md-nav__link">
+      Bootstrap scripts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/client-certificate/" class="md-nav__link">
+      Client certificate authentication
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+    <label class="md-nav__link" for="nav-3">
+      Tutorials
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/How-to-build/" class="md-nav__link">
+      How to Build MongooseIM from source code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/push-notifications/Push-notifications/" class="md-nav__link">
+      How to Set up Push Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/push-notifications/Push-notifications-client-side/" class="md-nav__link">
+      How to Set up Push Notifications on the client side
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/push-notifications/MongoosePush-setup/" class="md-nav__link">
+      How to Set up MongoosePush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/ICE_tutorial/" class="md-nav__link">
+      How to Set up MongooseICE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/iOS_tutorial/" class="md-nav__link">
+      How to Build an iOS messaging app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Jingle-SIP-setup/" class="md-nav__link">
+      How to Set up Jingle/SIP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+    <label class="md-nav__link" for="nav-4">
+      Migration Guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Migration Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Migration Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.1.1_3.2.0/" class="md-nav__link">
+      3.1.1 to 3.2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.3.0_3.4.0/" class="md-nav__link">
+      3.3.0 to 3.4.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.5.0_3.6.0/" class="md-nav__link">
+      3.5.0 to 3.6.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.6.0_3.7.0/" class="md-nav__link">
+      3.6.0 to 3.7.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.7.0_4.0.0/" class="md-nav__link">
+      3.7.0 to 4.0.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/4.0.0_4.0.1/" class="md-nav__link">
+      4.0.0 to 4.0.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
+      MAM MUC migration helper
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+    <label class="md-nav__link" for="nav-5">
+      Platform
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Platform" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Platform
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Contributions/" class="md-nav__link">
+      Contributions to ecosystem
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Differentiators/" class="md-nav__link">
+      Differentiators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../History/" class="md-nav__link">
+      History
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+    <label class="md-nav__link" for="nav-6">
+      Configuration
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon"></span>
+        Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Advanced-configuration/" class="md-nav__link">
+      Configuration files
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/general/" class="md-nav__link">
+      Options: General
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/listen/" class="md-nav__link">
+      Options: Listen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/auth/" class="md-nav__link">
+      Options: Auth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/outgoing-connections/" class="md-nav__link">
+      Options: Outgoing connections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Services/" class="md-nav__link">
+      Options: Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Modules/" class="md-nav__link">
+      Options: Extension Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/shaper/" class="md-nav__link">
+      Options: Shaper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/acl/" class="md-nav__link">
+      Options: Acl
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/access/" class="md-nav__link">
+      Options: Access
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/s2s/" class="md-nav__link">
+      Options: S2S
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/host_config/" class="md-nav__link">
+      Options: Host config
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/release-options/" class="md-nav__link">
+      Release options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Erlang-cookie-security/" class="md-nav__link">
+      Erlang Cookie Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/TLS-hardening/" class="md-nav__link">
+      TLS hardening
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/database-backends-configuration/" class="md-nav__link">
+      Database backends configuration
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
+    <label class="md-nav__link" for="nav-7">
+      Authentication methods
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Authentication methods" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon"></span>
+        Authentication methods
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/rdbms/" class="md-nav__link">
+      RDBMS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/external/" class="md-nav__link">
+      External
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/anonymous/" class="md-nav__link">
+      Anonymous
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/ldap/" class="md-nav__link">
+      LDAP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/jwt/" class="md-nav__link">
+      JWT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/riak/" class="md-nav__link">
+      Riak
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/http/" class="md-nav__link">
+      HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/pki/" class="md-nav__link">
+      PKI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/dummy/" class="md-nav__link">
+      Dummy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" >
+    <label class="md-nav__link" for="nav-8">
+      MongooseIM open XMPP extensions
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="MongooseIM open XMPP extensions" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon"></span>
+        MongooseIM open XMPP extensions
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../open-extensions/muc_light/" class="md-nav__link">
+      MUC light
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../open-extensions/token-reconnection/" class="md-nav__link">
+      Token-based reconnection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" >
+    <label class="md-nav__link" for="nav-9">
+      REST API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="REST API" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        REST API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Client-frontend/" class="md-nav__link">
+      Client/frontend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Metrics-backend/" class="md-nav__link">
+      Metrics backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Administration-backend/" class="md-nav__link">
+      Administration backend
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" >
+    <label class="md-nav__link" for="nav-10">
+      Operation and maintenance
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Operation and maintenance" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon"></span>
+        Operation and maintenance
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/gdpr-considerations/" class="md-nav__link">
+      GDPR considerations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Cluster-management-considerations/" class="md-nav__link">
+      Cluster management considerations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Cluster-configuration-and-node-management/" class="md-nav__link">
+      Cluster configuration and node management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Logging-%26-monitoring/" class="md-nav__link">
+      Logging & monitoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Logging/" class="md-nav__link">
+      Logging configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Humio/" class="md-nav__link">
+      Logging with Humio
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Logging-fields/" class="md-nav__link">
+      Logging fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/" class="md-nav__link">
+      Reloading configuration on a running system
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/MongooseIM-metrics/" class="md-nav__link">
+      Metrics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/" class="md-nav__link">
+      System Metrics Privacy Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/tls-distribution/" class="md-nav__link">
+      Distribution over TLS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/known-issues/" class="md-nav__link">
+      Known issues
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" checked>
+    <label class="md-nav__link" for="nav-11">
+      Developer's guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Developer's guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon"></span>
+        Developer's guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Testing-MongooseIM/" class="md-nav__link">
+      Testing MongooseIM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../logging/" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Hooks and Handlers
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Hooks and Handlers
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running-a-hook" class="md-nav__link">
+    Running a hook
+  </a>
+  
+    <nav class="md-nav" aria-label="Running a hook">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    Basic usage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-results-from-handlers" class="md-nav__link">
+    Getting results from handlers
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting results from handlers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sidenote-folds" class="md-nav__link">
+    Sidenote: Folds
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-accumulators" class="md-nav__link">
+    Using accumulators
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sidenote-something-deprecated" class="md-nav__link">
+    Sidenote: something deprecated
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling-in-hooks" class="md-nav__link">
+    Error handling in hooks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sidenote-code-yet-to-be-written" class="md-nav__link">
+    Sidenote: Code yet to be written
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sidenote-multiple-domains" class="md-nav__link">
+    Sidenote: Multiple Domains
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-hook-handlers" class="md-nav__link">
+    Registering hook handlers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unregistering-handlers" class="md-nav__link">
+    Unregistering handlers
+  </a>
+  
+    <nav class="md-nav" aria-label="Unregistering handlers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sidenote-metrics" class="md-nav__link">
+    Sidenote: Metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-handlers" class="md-nav__link">
+    Writing handlers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hooks-list-and-how-to-extract-it" class="md-nav__link">
+    Hooks list and how to extract it
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-your-own-hooks" class="md-nav__link">
+    Creating your own hooks
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../hooks_description/" class="md-nav__link">
+      Hooks description
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Stanza-routing/" class="md-nav__link">
+      Stanza routing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../accumulators/" class="md-nav__link">
+      Accumulators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../flat_options/" class="md-nav__link">
+      Flat options format
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Moving-to-single-app-project-structure/" class="md-nav__link">
+      Moving to single app project structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_amp_developers_guide/" class="md-nav__link">
+      mod_amp development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_muc_light_developers_guide/" class="md-nav__link">
+      mod_muc_light developers doc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../SCRAM-serialization/" class="md-nav__link">
+      SCRAM serialization format
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xep_tool/" class="md-nav__link">
+      xep-tool usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../OpenSSL-and-FIPS/" class="md-nav__link">
+      FIPS mode
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Basic-iq-handler/" class="md-nav__link">
+      Basic IQ Handler
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mongoose_wpool/" class="md-nav__link">
+      mongoose_wpool
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12" >
+    <label class="md-nav__link" for="nav-12">
+      Module index
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Module index" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        <span class="md-nav__icon md-icon"></span>
+        Module index
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_adhoc/" class="md-nav__link">
+      mod_adhoc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_amp/" class="md-nav__link">
+      mod_amp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_auth_token/" class="md-nav__link">
+      mod_auth_token
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_blocking/" class="md-nav__link">
+      mod_blocking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_bosh/" class="md-nav__link">
+      mod_bosh
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_caps/" class="md-nav__link">
+      mod_caps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_carboncopy/" class="md-nav__link">
+      mod_carboncopy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_commands/" class="md-nav__link">
+      mod_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_csi/" class="md-nav__link">
+      mod_csi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_disco/" class="md-nav__link">
+      mod_disco
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12-11" type="checkbox" id="nav-12-11" >
+    <label class="md-nav__link" for="nav-12-11">
+      mod_event_pusher
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="mod_event_pusher" data-md-level="2">
+      <label class="md-nav__title" for="nav-12-11">
+        <span class="md-nav__icon md-icon"></span>
+        mod_event_pusher
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher/" class="md-nav__link">
+      mod_event_pusher
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher_http/" class="md-nav__link">
+      HTTP backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher_push/" class="md-nav__link">
+      Push backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher_sns/" class="md-nav__link">
+      SNS backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher_rabbit/" class="md-nav__link">
+      RabbitMQ backend
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_extdisco/" class="md-nav__link">
+      mod_extdisco
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_global_distrib/" class="md-nav__link">
+      mod_global_distrib
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_http_upload/" class="md-nav__link">
+      mod_http_upload
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_inbox/" class="md-nav__link">
+      mod_inbox
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_jingle_sip/" class="md-nav__link">
+      mod_jingle_sip
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_keystore/" class="md-nav__link">
+      mod_keystore
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_last/" class="md-nav__link">
+      mod_last
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_mam/" class="md-nav__link">
+      mod_mam
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc/" class="md-nav__link">
+      mod_muc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc_commands/" class="md-nav__link">
+      mod_muc_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc_log/" class="md-nav__link">
+      mod_muc_log
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc_light/" class="md-nav__link">
+      mod_muc_light
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc_light_commands/" class="md-nav__link">
+      mod_muc_light_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_offline/" class="md-nav__link">
+      mod_offline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_offline_stub/" class="md-nav__link">
+      mod_offline_stub
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_ping/" class="md-nav__link">
+      mod_ping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_privacy/" class="md-nav__link">
+      mod_privacy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_private/" class="md-nav__link">
+      mod_private
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_pubsub/" class="md-nav__link">
+      mod_pubsub
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_push_service_mongoosepush/" class="md-nav__link">
+      mod_push_service_mongoosepush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_register/" class="md-nav__link">
+      mod_register
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_roster/" class="md-nav__link">
+      mod_roster
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_shared_roster_ldap/" class="md-nav__link">
+      mod_shared_roster_ldap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_sic/" class="md-nav__link">
+      mod_sic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_stream_management/" class="md-nav__link">
+      mod_stream_management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_time/" class="md-nav__link">
+      mod_time
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_vcard/" class="md-nav__link">
+      mod_vcard
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_version/" class="md-nav__link">
+      mod_version
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running-a-hook" class="md-nav__link">
+    Running a hook
+  </a>
+  
+    <nav class="md-nav" aria-label="Running a hook">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    Basic usage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-results-from-handlers" class="md-nav__link">
+    Getting results from handlers
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting results from handlers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sidenote-folds" class="md-nav__link">
+    Sidenote: Folds
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-accumulators" class="md-nav__link">
+    Using accumulators
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sidenote-something-deprecated" class="md-nav__link">
+    Sidenote: something deprecated
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling-in-hooks" class="md-nav__link">
+    Error handling in hooks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sidenote-code-yet-to-be-written" class="md-nav__link">
+    Sidenote: Code yet to be written
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sidenote-multiple-domains" class="md-nav__link">
+    Sidenote: Multiple Domains
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-hook-handlers" class="md-nav__link">
+    Registering hook handlers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unregistering-handlers" class="md-nav__link">
+    Unregistering handlers
+  </a>
+  
+    <nav class="md-nav" aria-label="Unregistering handlers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sidenote-metrics" class="md-nav__link">
+    Sidenote: Metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-handlers" class="md-nav__link">
+    Writing handlers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hooks-list-and-how-to-extract-it" class="md-nav__link">
+    Hooks list and how to extract it
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-your-own-hooks" class="md-nav__link">
+    Creating your own hooks
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="hooks-handlers-and-accumulators">Hooks, handlers and accumulators</h1>
+<p>The hooks and handlers mechanism is one of the core architectural features of MongooseIM.
+It allows for loose coupling between components of the system by calling only those which are available and configured to be used at runtime.</p>
+<p>It can be thought of as a simple eventing mechanism notifying about certain things happening in the server.
+That results in an extensible system with pluggable extra functionality.</p>
+<p>To focus our attention, we'll analyze <code>mod_offline</code> which is responsible for storing messages for delivery to users unavailable at the time of sending.
+<code>mod_offline</code> is an implementation of <a href="http://xmpp.org/extensions/xep-0203.html">XEP-0203: Delayed Delivery</a>.</p>
+<h2 id="running-a-hook">Running a hook</h2>
+<h3 id="basic-usage">Basic usage</h3>
+<p><code>ejabberd_sm</code> (ejabberd/MongooseIM session manager) is the module discovering whether the recipient of a message is available or not.
+That's where storing the message for later delivery takes place.
+It is possible, but not recommended, to save a message in an offline storage by calling <code>mod_offline</code> directly:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">mod_offline</span><span class="p">:</span><span class="nf">store_packet</span><span class="p">(</span><span class="nv">From</span><span class="p">,</span> <span class="nv">To</span><span class="p">,</span> <span class="nv">Packet</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>Note that in this example <code>ejabberd_sm</code> is coupled with <code>mod_offline</code>.
+I.e. if <code>mod_offline</code> was not available, the code would simply crash; if it was misconfigured or turned off, the behaviour would be undefined.
+To avoid that coupling and also to enable other (<a href="#sidenote-code-yet-to-be-written">possibly yet to be written</a>) code to carry out some action at this particular moment, <code>ejabberd_sm</code> would instead call:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">Acc1</span> <span class="o">=</span> <span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">run_fold</span><span class="p">(</span><span class="n">offline_message_hook</span><span class="p">,</span>
+                               <span class="nv">LServer</span><span class="p">,</span>
+                               <span class="nv">Acc</span><span class="p">,</span>
+                               <span class="p">[</span><span class="nv">From</span><span class="p">,</span> <span class="nv">To</span><span class="p">,</span> <span class="nv">Packet</span><span class="p">])</span>
+</code></pre></div>
+</td></tr></table>
+<p>The extra level of indirection introduced by this call gives the flexibility to determine at runtime what code actually gets run at this point.
+<code>offline_message_hook</code> is just the name of the hook (in other words of the event that is being signalled);
+<code>From</code>, <code>To</code> and <code>Packet</code> are the arguments passed to the handler just as they would in case of the function being called directly;
+<code>LServer</code> is <a href="#sidenote-multiple-domains">the XMPP domain for which this hook is signalled</a>.</p>
+<p><strong>Notice:</strong> For the clarity of the explanation of the hooks mechanism, the provided code snippets are not exactly taken from the current code.
+The reasons for it will be described <a href="#creating-your-own-hooks">later</a>.</p>
+<h3 id="getting-results-from-handlers">Getting results from handlers</h3>
+<p>Hook handlers are called by "folding".
+This means that each handler on a list is passed a set of arguments and an initial value that it then modifies, returns and hands over to the next handler in line.</p>
+<p>A simple example would look like this:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">ListOfSomething</span> <span class="o">=</span> <span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">run_fold</span><span class="p">(</span><span class="n">a_certain_hook</span><span class="p">,</span>
+                                          <span class="nv">StateData</span><span class="nl">#state.server</span><span class="p">,</span>
+                                          <span class="p">[],</span>
+                                          <span class="p">[</span><span class="nv">StateData</span><span class="nl">#state.user</span><span class="p">,</span>
+                                           <span class="nv">StateData</span><span class="nl">#state.server</span><span class="p">])</span>
+</code></pre></div>
+</td></tr></table>
+<p>The initial value of the accumulator being passed through the sequence of handlers (in this case an empty list <code>[]</code>) is inserted between the XMPP domain <code>StateData#state.server</code> and handler arguments.
+In between the XMPP domain (<code>StateData#state.server</code>) and handler arguments is the initial value of the accumulator being passed through the sequence of handlers is inserted - in this case an empty list (<code>[]</code>).</p>
+<h4 id="sidenote-folds">Sidenote: Folds</h4>
+<p>If you haven't encountered the term <em>fold</em> before, think of it as <em>reduce</em> (like <code>Array.reduce</code>) in Ruby-speak, roughly equivalent to the Reduce step in MapReduce, sometimes called <em>accumulate</em>, <em>aggregate</em> or <em>compress</em>.
+<a href="http://en.wikipedia.org/wiki/Fold_%28higher-order_function%29">See Wikipedia for more.</a></p>
+<h3 id="using-accumulators">Using accumulators</h3>
+<p>MongooseIM uses a dedicated data structure to accumulate data related to stanza processing (see <a href="../accumulators/">"Accumulators"</a>).
+It is instantiated with an incoming stanza, passed along throughout the processing chain, supplied to and returned from certain hook calls, and terminated when stanza is leaving MongooseIM.</p>
+<p>If a Mongoose accumulator is passed to a hook, handlers should store their return values in one of 3 ways:</p>
+<ul>
+<li>If it is a one-off value which doesn't need to be passed on along with the accumulator (can be overwritten any time), use <code>mongoose_acc:set(hook, result, Value, Acc)</code>.</li>
+<li>If the value is to be passed on to be reused within the current processing context, use <code>mongoose_acc:set(Namespace, Key, Value, Acc)</code>.</li>
+<li>If the value should be passed on to the recipient's session, pubsub node etc. use <code>mongoose_acc:set_permanent(Namespace, Key, Value, Acc)</code>.</li>
+</ul>
+<p>A real life example, then, with regard to <code>mod_offline</code> is the <code>resend_offline_messages_hook</code> run in <code>ejabberd_c2s</code>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">Acc1</span> <span class="o">=</span> <span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">run_fold</span><span class="p">(</span><span class="n">resend_offline_messages_hook</span><span class="p">,</span>
+                               <span class="nv">StateData</span><span class="nl">#state.server</span><span class="p">,</span>
+                               <span class="nv">Acc</span><span class="p">,</span>
+                               <span class="p">[</span><span class="nv">StateData</span><span class="nl">#state.user</span><span class="p">,</span> <span class="nv">StateData</span><span class="nl">#state.server</span><span class="p">]),</span>
+<span class="nv">Rs</span> <span class="o">=</span> <span class="nn">mongoose_acc</span><span class="p">:</span><span class="nb">get</span><span class="p">(</span><span class="n">offline</span><span class="p">,</span> <span class="n">messages</span><span class="p">,</span> <span class="nv">Acc1</span><span class="p">,</span> <span class="p">[]),</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="sidenote-something-deprecated">Sidenote: something deprecated</h3>
+<p>In the past you may have found some calls to <code>ejabberd_hooks:run/3</code> in the MongooseIM source code.
+Under the hood it called the same handlers with <code>ok</code> as the initial accumulator.
+This is deprecated and some day will be removed.</p>
+<h3 id="error-handling-in-hooks">Error handling in hooks</h3>
+<p>Hooks are meant to decouple modules; in other words, the caller signals that some event took place or that it intends to use a certain feature or a set of features, but how and if those features are implemented is beyond its interest.
+For that reason hooks don't use the "let it crash" approach. Instead it is rather like "fire-and-forget", more similar in principle to the <code>Pid ! signal</code> way.</p>
+<p>In practical terms: if a handler throws an error the hook machine logs a message and proceeds to the next handler with an unmodified accumulator.
+If there are no handlers registered for a given hook, the <code>run_fold</code> call simply has no effect.</p>
+<h3 id="sidenote-code-yet-to-be-written">Sidenote: Code yet to be written</h3>
+<p>Let's imagine, that when building a <a href="http://en.wikipedia.org/wiki/Minimum_viable_product">minimum viable product</a> we settle on using <code>mod_offline</code> for delayed delivery of messages to unavailable clients.
+However, while the product evolves (or the relevant client software catches up) we might drop <code>mod_offline</code> in favour of a more sophisticated solution like <a href="http://xmpp.org/extensions/xep-0313.html">Message Archive Management</a> which would require a different action to be taken at the same point.
+Thanks to loose coupling and <code>ejabberd_hooks</code> it's possible to turn off <code>mod_offline</code> and turn on <code>mod_mam</code> without changing
+a single line of code in <code>ejabberd_sm</code>.</p>
+<p>The only required change is to the configuration (apart from deploying the new module) which can even be performed at runtime - without restarting the server.</p>
+<h3 id="sidenote-multiple-domains">Sidenote: Multiple Domains</h3>
+<p>A MongooseIM cluster may serve more than one domain at the same time.
+E.g. it is quite common that services like Multi User Chat or Publish-Subscribe are available as subdomains of the main XMPP domain served by an installation.</p>
+<h2 id="registering-hook-handlers">Registering hook handlers</h2>
+<p>In order to store a packet when <code>ejabberd_sm</code> runs <code>offline_message_hook</code> the relevant module must register a handler for this hook.
+To attain the runtime configurability the module should register the handlers when it's loaded and unregister them when
+it's unloaded.
+That's usually done in, respectively, <code>start/2</code> and <code>stop/1</code> functions.
+Here is the relevant snippet from <code>mod_offline:start/2</code>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">add</span><span class="p">(</span><span class="n">offline_message_hook</span><span class="p">,</span> <span class="nv">Host</span><span class="p">,</span>
+                   <span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">store_packet</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>It is clearly visible that the handler is added to the <code>offline_message_hook</code>.</p>
+<p><code>Host</code> corresponds to the <code>LServer</code> used in the aforementioned call to the <code>ejabberd_hooks:run_fold</code>, i.e. it's the XMPP domain for which the handler is to be executed.</p>
+<p>The handler itself is specified as a module-function pair;
+the arity of the function is not specified at the registration nor verified when calling the handler.
+This may change in the future, but for now we recommend calling the hooks through the <code>mongoose_hooks</code> module and checking the arity there when writing a handler.
+If the handler expects an incorrect number of arguments it will simply crash.</p>
+<p>Multiple handlers may be registered for the same hook.
+The last argument, 50, is the sequence number of this handler in the handler chain.
+The higher the number, the later in the sequence the handler will be executed.
+It's reasonable to keep this number small (e.g. in the range 0-100), though there's no real limit other than the size of the integer type in the Erlang VM.</p>
+<h2 id="unregistering-handlers">Unregistering handlers</h2>
+<p>Pluggability also requires the components to be unpluggable at will.
+For that purpose there's the option to unregister a hook handler.
+It's done in <code>mod_offline:stop/1</code> in a similar fashion to:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">delete</span><span class="p">(</span><span class="n">offline_message_hook</span><span class="p">,</span> <span class="nv">Host</span><span class="p">,</span>
+                      <span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">store_packet</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>The arguments are exactly the same as passed to <code>ejabberd_hooks:add/5</code>.</p>
+<h3 id="sidenote-metrics">Sidenote: Metrics</h3>
+<p>Every time a hook is run, a corresponding metric of the same name in the same host is incremented by one.
+There are some exceptions though as some metrics were implemented before the generic hook metrics.
+List of hooks not updating generic metrics can be found in the <code>mongoose_metrics:hook_to_name/1</code> function.
+Such skipped hooks update metrics defined in the <code>mongoose_metrics_hooks</code> module.</p>
+<h2 id="writing-handlers">Writing handlers</h2>
+<p>The signature of a handler has to follow three rules:</p>
+<ul>
+<li>Correct arity (the number of args passed to <code>run_fold</code> in <code>mongoose_hooks</code> + 1).</li>
+<li>The first arg is a mutable accumulator (may be <code>mongoose_acc</code> in particular).</li>
+<li>Returns an accumulator of the same type as the input one.</li>
+</ul>
+<p>Let's look at this example, from MongooseIM codebase:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nf">process_iq_get</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span> <span class="nl">#jid</span><span class="p">{</span> <span class="n">lserver</span> <span class="o">=</span> <span class="nv">FromS</span> <span class="p">}</span> <span class="o">=</span> <span class="nv">From</span><span class="p">,</span> <span class="nv">To</span><span class="p">,</span> <span class="nl">#iq</span><span class="p">{}</span> <span class="o">=</span> <span class="nv">IQ</span><span class="p">,</span> <span class="p">_</span><span class="nv">ActiveList</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nv">MUCHost</span> <span class="o">=</span> <span class="nn">gen_mod</span><span class="p">:</span><span class="nf">get_module_opt_subhost</span><span class="p">(</span><span class="nv">FromS</span><span class="p">,</span> <span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">default_host</span><span class="p">()),</span>
+    <span class="k">case</span> <span class="p">{</span><span class="nn">mod_muc_light_codec_backend</span><span class="p">:</span><span class="nf">decode</span><span class="p">(</span><span class="nv">From</span><span class="p">,</span> <span class="nv">To</span><span class="p">,</span> <span class="nv">IQ</span><span class="p">),</span>
+          <span class="nn">gen_mod</span><span class="p">:</span><span class="nf">get_module_opt_by_subhost</span><span class="p">(</span><span class="nv">MUCHost</span><span class="p">,</span> <span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">blocking</span><span class="p">,</span> <span class="o">?</span><span class="nv">DEFAULT_BLOCKING</span><span class="p">)}</span> <span class="k">of</span>
+        <span class="p">{{</span><span class="n">ok</span><span class="p">,</span> <span class="p">{</span><span class="nb">get</span><span class="p">,</span> <span class="nl">#blocking</span><span class="p">{}</span> <span class="o">=</span> <span class="nv">Blocking</span><span class="p">}},</span> <span class="n">true</span><span class="p">}</span> <span class="o">-&gt;</span>
+            <span class="nv">Items</span> <span class="o">=</span> <span class="nn">mod_muc_light_db_backend</span><span class="p">:</span><span class="nf">get_blocking</span><span class="p">(</span><span class="nn">jid</span><span class="p">:</span><span class="nf">to_lus</span><span class="p">(</span><span class="nv">From</span><span class="p">),</span> <span class="nv">MUCHost</span><span class="p">),</span>
+            <span class="nn">mod_muc_light_codec_backend</span><span class="p">:</span><span class="nf">encode</span><span class="p">(</span>
+              <span class="p">{</span><span class="nb">get</span><span class="p">,</span> <span class="nv">Blocking</span><span class="nl">#blocking</span><span class="p">{</span> <span class="n">items</span> <span class="o">=</span> <span class="nv">Items</span> <span class="p">}},</span> <span class="nv">From</span><span class="p">,</span> <span class="nn">jid</span><span class="p">:</span><span class="nf">to_lus</span><span class="p">(</span><span class="nv">To</span><span class="p">),</span>
+              <span class="k">fun</span><span class="p">(_,</span> <span class="p">_,</span> <span class="nv">Packet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">put</span><span class="p">(</span><span class="n">encode_res</span><span class="p">,</span> <span class="nv">Packet</span><span class="p">)</span> <span class="k">end</span><span class="p">),</span>
+            <span class="nl">#xmlel</span><span class="p">{</span> <span class="n">children</span> <span class="o">=</span> <span class="nv">ResponseChildren</span> <span class="p">}</span> <span class="o">=</span> <span class="nb">erase</span><span class="p">(</span><span class="n">encode_res</span><span class="p">),</span>
+            <span class="nv">Result</span> <span class="o">=</span> <span class="p">{</span><span class="n">result</span><span class="p">,</span> <span class="nv">ResponseChildren</span><span class="p">},</span>
+            <span class="p">{</span><span class="n">stop</span><span class="p">,</span> <span class="nn">mongoose_acc</span><span class="p">:</span><span class="nf">set</span><span class="p">(</span><span class="n">hook</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="nv">Result</span><span class="p">,</span> <span class="nv">Acc</span><span class="p">)};</span>
+        <span class="p">{{</span><span class="n">ok</span><span class="p">,</span> <span class="p">{</span><span class="nb">get</span><span class="p">,</span> <span class="nl">#blocking</span><span class="p">{}}},</span> <span class="n">false</span><span class="p">}</span> <span class="o">-&gt;</span>
+            <span class="nv">Result</span> <span class="o">=</span> <span class="p">{</span><span class="n">error</span><span class="p">,</span> <span class="o">?</span><span class="nv">ERR_BAD_REQUEST</span><span class="p">},</span>
+            <span class="p">{</span><span class="n">stop</span><span class="p">,</span> <span class="nn">mongoose_acc</span><span class="p">:</span><span class="nf">set</span><span class="p">(</span><span class="n">hook</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="nv">Result</span><span class="p">,</span> <span class="nv">Acc</span><span class="p">)};</span>
+        <span class="p">_</span> <span class="o">-&gt;</span>
+            <span class="nv">Result</span> <span class="o">=</span> <span class="p">{</span><span class="n">error</span><span class="p">,</span> <span class="o">?</span><span class="nv">ERR_BAD_REQUEST</span><span class="p">},</span>
+            <span class="nn">mongoose_acc</span><span class="p">:</span><span class="nf">set</span><span class="p">(</span><span class="n">hook</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="nv">Result</span><span class="p">,</span> <span class="nv">Acc</span><span class="p">)</span>
+    <span class="k">end</span><span class="p">.</span>
+</code></pre></div>
+</td></tr></table>
+<p>As seen in this example, a handler receives an accumulator, puts some value into it and returns it
+for further processing.</p>
+<p>There's also one important feature to note: in some cases our handler returns a tuple  <code>{stop, Acc}</code>.
+This skips calling the latter actions in the handler sequence, while the call to <code>run_fold</code> returns the Acc.
+If a handler returns just an atom <code>stop</code>, then all later actions are skipped and <code>run_fold</code> returns <code>stopped</code>.</p>
+<p>Watch out! Different handlers may be registered for the same hook - the priority mechanism orders their execution.
+If a handler returns <code>stop</code> but runs early in the handler chain, it may prevent some other handler from running at all!
+That might or might not be intentional.
+It may be especially surprising in case of handlers from different modules registered for the same hook.
+Always ensure what handlers are registered for a given hook (<code>grep</code> is your friend) and that you understand their interdependencies.</p>
+<h2 id="hooks-list-and-how-to-extract-it">Hooks list and how to extract it</h2>
+<p>The following command should give you a list of all the hooks available in MongooseIM:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ find src/ -name <span class="s1">&#39;*.erl&#39;</span> -print <span class="p">|</span> xargs ./tools/find-hooks.awk <span class="se">\</span>
+&gt; <span class="p">|</span> sort <span class="p">|</span> uniq
+adhoc_local_commands
+adhoc_local_items
+...
+...
+...
+webadmin_user_parse_query
+</code></pre></div>
+</td></tr></table>
+<p>Refer to <code>grep</code>/<code>ack</code> to find where they're used.</p>
+<p>Here are the contents of <code>find-hooks.awk</code>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">#!/usr/bin/env awk -f</span>
+<span class="nb">BEGIN</span> <span class="p">{</span>
+    <span class="nb">RS</span><span class="o">=</span><span class="s2">&quot;)&quot;</span>
+    <span class="nx">ORS</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+    <span class="nb">FS</span><span class="o">=</span><span class="s2">&quot;[ (,]&quot;</span>
+<span class="p">}</span>
+
+<span class="o">$</span><span class="mi">0</span> <span class="o">~</span> <span class="sr">/ejabberd_hooks:run/</span> <span class="p">{</span>
+    <span class="nx">found</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nb">NF</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">$</span><span class="nx">i</span> <span class="o">~</span> <span class="sr">/ejabberd_hooks:run/</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">found</span> <span class="o">=</span> <span class="nx">i</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">found</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="o">$</span><span class="p">(</span><span class="nx">found</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="o">&amp;&amp;</span> <span class="o">$</span><span class="p">(</span><span class="nx">found</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">~</span> <span class="sr">/^[a-z]/</span><span class="p">)</span>
+        <span class="kr">print</span> <span class="o">$</span><span class="p">(</span><span class="nx">found</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="s2">&quot;\n&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<h2 id="creating-your-own-hooks">Creating your own hooks</h2>
+<p>There's no special function or any setup necessary to create a new hook.
+The only thing that needs to be done is calling <code>ejabberd_hooks:run_fold/4</code> with the name of the new hook and relevant arguments.</p>
+<p>However, if you want static code analysis, you should put the new hook inside <code>mongoose_hooks</code> with a correct type specification.
+We've added this module to provide some security and type checking in places where the hooks are run.
+This is the way all hooks are called in MongooseIM (see the examples in the <a href="../hooks_description/">hooks description</a>).</p>
+<p>Of course, as long as no module registers handlers for a hook, running a <code>run_fold</code> won't have any effects.</p>
+<p>Similar is the case when a module registers handlers for some hook, but that hook is never run in the code.
+That won't have an effect either.</p>
+<p>The following is a self-contained example of a module which both runs and registers a few handlers for a completely new hook.
+The handlers are run sequentially using disparate priorities and passing over an accumulator value.
+One of the handlers stops the handler execution chain prematurely by returning <code>{stop, NewVal}</code>.
+It's also possible to try out what happens when the same hook is run with different XMPP domains by passing an argument to <code>run_custom_hook/1</code> - we'll see that the handlers are registered for a particular domain only.</p>
+<p>At the end, you can see a printout of an accumulator with some debugging info.</p>
+<p>To cut the long story short:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">-</span><span class="ni">module</span><span class="p">(</span><span class="n">mod_hook_example</span><span class="p">).</span>
+<span class="p">-</span><span class="ni">author</span><span class="p">(</span><span class="s">&quot;bartek&quot;</span><span class="p">).</span>
+
+<span class="p">-</span><span class="ni">behaviour</span><span class="p">(</span><span class="n">gen_mod</span><span class="p">).</span>
+
+<span class="p">-</span><span class="ni">include</span><span class="p">(</span><span class="s">&quot;mongoose.hrl&quot;</span><span class="p">).</span>
+
+<span class="c">%% API</span>
+<span class="p">-</span><span class="ni">export</span><span class="p">([</span><span class="n">run_custom_hook</span><span class="o">/</span><span class="mi">1</span><span class="p">]).</span>
+
+<span class="c">%% gen_mod callbacks</span>
+<span class="p">-</span><span class="ni">export</span><span class="p">([</span><span class="n">start</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+         <span class="n">stop</span><span class="o">/</span><span class="mi">1</span><span class="p">]).</span>
+
+<span class="c">%% Hook handlers</span>
+<span class="p">-</span><span class="ni">export</span><span class="p">([</span><span class="n">first_handler</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+         <span class="n">stopping_handler</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+         <span class="n">never_run_handler</span><span class="o">/</span><span class="mi">2</span><span class="p">]).</span>
+
+<span class="nf">start</span><span class="p">(</span><span class="nv">Host</span><span class="p">,</span> <span class="p">_</span><span class="nv">Opts</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">add</span><span class="p">(</span><span class="n">custom_new_hook</span><span class="p">,</span> <span class="nv">Host</span><span class="p">,</span> <span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">first_handler</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
+    <span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">add</span><span class="p">(</span><span class="n">custom_new_hook</span><span class="p">,</span> <span class="nv">Host</span><span class="p">,</span> <span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">stopping_handler</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>
+    <span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">add</span><span class="p">(</span><span class="n">custom_new_hook</span><span class="p">,</span> <span class="nv">Host</span><span class="p">,</span> <span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">never_run_handler</span><span class="p">,</span> <span class="mi">75</span><span class="p">).</span>
+
+<span class="nf">stop</span><span class="p">(</span><span class="nv">Host</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">delete</span><span class="p">(</span><span class="n">custom_new_hook</span><span class="p">,</span> <span class="nv">Host</span><span class="p">,</span> <span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">first_handler</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
+    <span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">delete</span><span class="p">(</span><span class="n">custom_new_hook</span><span class="p">,</span> <span class="nv">Host</span><span class="p">,</span> <span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">stopping_handler</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>
+    <span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">delete</span><span class="p">(</span><span class="n">custom_new_hook</span><span class="p">,</span> <span class="nv">Host</span><span class="p">,</span> <span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">never_run_handler</span><span class="p">,</span> <span class="mi">75</span><span class="p">).</span>
+
+<span class="nf">run_custom_hook</span><span class="p">(</span><span class="nv">Host</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nv">Acc</span> <span class="o">=</span> <span class="nn">mongoose_acc</span><span class="p">:</span><span class="nf">new</span><span class="p">(#{</span> <span class="n">location</span> <span class="o">=&gt;</span> <span class="o">?</span><span class="nv">LOCATION</span><span class="p">,</span> <span class="n">lserver</span> <span class="o">=&gt;</span> <span class="nv">Host</span><span class="p">,</span> <span class="nb">element</span> <span class="o">=&gt;</span> <span class="n">undefined</span> <span class="p">}),</span>
+    <span class="nv">Acc1</span> <span class="o">=</span> <span class="nn">mongoose_acc</span><span class="p">:</span><span class="nf">set</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="nv">Acc</span><span class="p">),</span>
+    <span class="nv">ResultAcc</span> <span class="o">=</span> <span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">run_fold</span><span class="p">(</span><span class="n">custom_new_hook</span><span class="p">,</span> <span class="nv">Host</span><span class="p">,</span> <span class="nv">Acc1</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+    <span class="nv">ResultValue</span> <span class="o">=</span> <span class="nn">mongoose_acc</span><span class="p">:</span><span class="nb">get</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nv">ResultAcc</span><span class="p">),</span>
+    <span class="o">?</span><span class="nv">LOG_INFO</span><span class="p">(#{</span><span class="n">what</span> <span class="o">=&gt;</span> <span class="n">hook_finished</span><span class="p">,</span> <span class="n">result</span> <span class="o">=&gt;</span> <span class="nv">ResultValue</span><span class="p">,</span> <span class="n">result_acc</span> <span class="o">=&gt;</span> <span class="nv">ResultAcc</span><span class="p">}).</span>
+
+<span class="nf">first_handler</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span> <span class="nv">Number</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nv">V0</span> <span class="o">=</span> <span class="nn">mongoose_acc</span><span class="p">:</span><span class="nb">get</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nv">Acc</span><span class="p">),</span>
+    <span class="nv">Result</span> <span class="o">=</span> <span class="nv">V0</span> <span class="o">+</span> <span class="nv">Number</span><span class="p">,</span>
+    <span class="o">?</span><span class="nv">LOG_INFO</span><span class="p">(#{</span><span class="n">what</span> <span class="o">=&gt;</span> <span class="n">first_handler</span><span class="p">,</span> <span class="n">value</span> <span class="o">=&gt;</span> <span class="nv">V0</span><span class="p">,</span> <span class="n">argument</span> <span class="o">=&gt;</span> <span class="nv">Number</span><span class="p">,</span> <span class="n">result</span> <span class="o">=&gt;</span> <span class="nv">Result</span><span class="p">}),</span>
+    <span class="nn">mongoose_acc</span><span class="p">:</span><span class="nf">set</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nv">Result</span><span class="p">,</span> <span class="nv">Acc</span><span class="p">).</span>
+
+<span class="nf">stopping_handler</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span> <span class="nv">Number</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nv">V0</span> <span class="o">=</span> <span class="nn">mongoose_acc</span><span class="p">:</span><span class="nb">get</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nv">Acc</span><span class="p">),</span>
+    <span class="nv">Result</span> <span class="o">=</span> <span class="nv">V0</span> <span class="o">+</span> <span class="nv">Number</span><span class="p">,</span>
+    <span class="o">?</span><span class="nv">LOG_INFO</span><span class="p">(#{</span><span class="n">what</span> <span class="o">=&gt;</span> <span class="n">stopping_handler</span><span class="p">,</span> <span class="n">value</span> <span class="o">=&gt;</span> <span class="nv">V0</span><span class="p">,</span> <span class="n">argument</span> <span class="o">=&gt;</span> <span class="nv">Number</span><span class="p">,</span> <span class="n">result</span> <span class="o">=&gt;</span> <span class="nv">Result</span><span class="p">}),</span>
+    <span class="p">{</span><span class="n">stop</span><span class="p">,</span> <span class="nn">mongoose_acc</span><span class="p">:</span><span class="nf">set</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nv">Result</span><span class="p">,</span> <span class="nv">Acc</span><span class="p">)}.</span>
+
+<span class="nf">never_run_handler</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span> <span class="nv">Number</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="o">?</span><span class="nv">LOG_INFO</span><span class="p">(#{</span><span class="n">what</span> <span class="o">=&gt;</span> <span class="n">never_run_handler</span><span class="p">,</span>
+                <span class="n">text</span> <span class="o">=&gt;</span> <span class="o">&lt;&lt;</span><span class="s">&quot;This hook won&#39;t run as it&#39;s registered with a priority bigger &quot;</span>
+                          <span class="s">&quot;than that of stopping_handler/2 is. &quot;</span>
+                          <span class="s">&quot;This text should never get printed.&quot;</span><span class="o">&gt;&gt;</span><span class="p">}),</span>
+    <span class="nv">Acc</span> <span class="o">*</span> <span class="nv">Number</span><span class="p">.</span>
+</code></pre></div>
+</td></tr></table>
+<p>The module is intended to be used from the shell for educational purposes:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">mongooseim</span><span class="p">@</span><span class="n">localhost</span><span class="p">)</span><span class="mi">1</span><span class="o">&gt;</span> <span class="nn">gen_mod</span><span class="p">:</span><span class="nf">is_loaded</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;localhost&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">mod_hook_example</span><span class="p">).</span>
+<span class="nf">false</span>
+<span class="p">(</span><span class="n">mongooseim</span><span class="p">@</span><span class="n">localhost</span><span class="p">)</span><span class="mi">2</span><span class="o">&gt;</span> <span class="nn">gen_mod</span><span class="p">:</span><span class="nf">start_module</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;localhost&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">mod_hook_example</span><span class="p">,</span> <span class="p">[</span><span class="n">no_opts</span><span class="p">]).</span>
+<span class="p">{</span><span class="n">ok</span><span class="p">,</span><span class="n">ok</span><span class="p">}</span>
+<span class="p">(</span><span class="n">mongooseim</span><span class="p">@</span><span class="n">localhost</span><span class="p">)</span><span class="mi">3</span><span class="o">&gt;</span> <span class="nn">gen_mod</span><span class="p">:</span><span class="nf">is_loaded</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;localhost&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">mod_hook_example</span><span class="p">).</span>
+<span class="nf">true</span>
+<span class="p">(</span><span class="n">mongooseim</span><span class="p">@</span><span class="n">localhost</span><span class="p">)</span><span class="mi">4</span><span class="o">&gt;</span> <span class="nn">mongoose_logs</span><span class="p">:</span><span class="nf">set_module_loglevel</span><span class="p">(</span><span class="n">mod_hook_example</span><span class="p">,</span> <span class="n">info</span><span class="p">).</span>
+<span class="nf">ok</span>
+<span class="p">(</span><span class="n">mongooseim</span><span class="p">@</span><span class="n">localhost</span><span class="p">)</span><span class="mi">5</span><span class="o">&gt;</span> <span class="nn">mod_hook_example</span><span class="p">:</span><span class="nf">run_custom_hook</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;localhost&quot;</span><span class="o">&gt;&gt;</span><span class="p">).</span>
+<span class="k">when</span><span class="o">=</span><span class="mi">2020</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">02</span><span class="nv">T10</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">14</span><span class="p">.</span><span class="mi">875981</span><span class="o">+</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="n">level</span><span class="o">=</span><span class="n">error</span> <span class="n">what</span><span class="o">=</span><span class="n">first_handler</span> <span class="n">pid</span><span class="o">=&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">2321</span><span class="p">.</span><span class="mi">0</span><span class="o">&gt;</span> <span class="n">at</span><span class="o">=</span><span class="nn">mod_hook_example</span><span class="p">:</span><span class="n">first_handler</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="mi">40</span> <span class="n">value</span><span class="o">=</span><span class="mi">5</span> <span class="n">result</span><span class="o">=</span><span class="mi">7</span> <span class="n">argument</span><span class="o">=</span><span class="mi">2</span>
+<span class="k">when</span><span class="o">=</span><span class="mi">2020</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">02</span><span class="nv">T10</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">14</span><span class="p">.</span><span class="mi">876248</span><span class="o">+</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="n">level</span><span class="o">=</span><span class="n">error</span> <span class="n">what</span><span class="o">=</span><span class="n">stopping_handler</span> <span class="n">pid</span><span class="o">=&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">2321</span><span class="p">.</span><span class="mi">0</span><span class="o">&gt;</span> <span class="n">at</span><span class="o">=</span><span class="nn">mod_hook_example</span><span class="p">:</span><span class="n">stopping_handler</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span><span class="mi">46</span> <span class="n">value</span><span class="o">=</span><span class="mi">7</span> <span class="n">result</span><span class="o">=</span><span class="mi">9</span> <span class="n">argument</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">ok</span>
+<span class="k">when</span><span class="o">=</span><span class="mi">2020</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">02</span><span class="nv">T10</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">14</span><span class="p">.</span><span class="mi">876453</span><span class="o">+</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="n">level</span><span class="o">=</span><span class="n">error</span> <span class="n">what</span><span class="o">=</span><span class="n">hook_finished</span> <span class="n">pid</span><span class="o">=&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">2321</span><span class="p">.</span><span class="mi">0</span><span class="o">&gt;</span> <span class="n">at</span><span class="o">=</span><span class="nn">mod_hook_example</span><span class="p">:</span><span class="n">run_custom_hook</span><span class="o">/</span><span class="mi">1</span><span class="p">:</span><span class="mi">35</span> <span class="n">result_acc_</span><span class="p">{</span><span class="n">example</span><span class="p">,</span><span class="n">value</span><span class="p">}</span><span class="o">=</span><span class="mi">9</span> <span class="n">result_acc_timestamp</span><span class="o">=</span><span class="mi">1606904954871246</span> <span class="n">result_acc_stanza</span><span class="o">=</span><span class="n">undefined</span> <span class="n">result_acc_ref</span><span class="o">=</span><span class="err">#</span><span class="nv">Ref</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">186499973</span><span class="p">.</span><span class="mi">2771648514</span><span class="p">.</span><span class="mi">42380</span><span class="o">&gt;</span> <span class="n">result_acc_origin_stanza</span><span class="o">=</span><span class="n">undefined</span> <span class="n">result_acc_origin_pid</span><span class="o">=&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">2321</span><span class="p">.</span><span class="mi">0</span><span class="o">&gt;</span> <span class="n">result_acc_origin_location_mfa</span><span class="o">=</span><span class="p">{</span><span class="n">mod_hook_example</span><span class="p">,</span><span class="n">run_custom_hook</span><span class="p">,</span><span class="mi">1</span><span class="p">}</span> <span class="n">result_acc_origin_location_line</span><span class="o">=</span><span class="mi">31</span> <span class="n">result_acc_origin_location_file</span><span class="o">=/</span><span class="nv">Users</span><span class="o">/</span><span class="n">mikhailuvarov</span><span class="o">/</span><span class="n">erlang</span><span class="o">/</span><span class="n">esl</span><span class="o">/</span><span class="nv">MongooseIM</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">mod_hook_example</span><span class="p">.</span><span class="n">erl</span> <span class="n">result_acc_non_strippable</span><span class="o">=</span> <span class="n">result_acc_mongoose_acc</span><span class="o">=</span><span class="n">true</span> <span class="n">result_acc_lserver</span><span class="o">=</span><span class="n">localhost</span> <span class="n">result</span><span class="o">=</span><span class="mi">9</span>
+</code></pre></div>
+</td></tr></table>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../logging/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Logging
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../hooks_description/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Hooks description
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../js/version-select.js"></script>
+      
+    
+  </body>
+</html>

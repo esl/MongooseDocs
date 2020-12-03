@@ -1,0 +1,3184 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+    
+    
+      
+        <title>mod_muc - MongooseIM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6910b76c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../custom.css">
+    
+      <link rel="stylesheet" href="../../css/version-select.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-description" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="MongooseIM" class="md-header-nav__button md-logo" aria-label="MongooseIM">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            MongooseIM
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              mod_muc
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="MongooseIM" class="md-nav__button md-logo" aria-label="MongooseIM">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    MongooseIM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+    <label class="md-nav__link" for="nav-2">
+      User guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="User guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        User guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/ABCs-of-MongooseIM/" class="md-nav__link">
+      ABCs of MongooseIM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/MongooseIM-High-level-Architecture/" class="md-nav__link">
+      High-level Architecture
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Features-and-supported-standards/" class="md-nav__link">
+      Features and supported standards
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Getting-started/" class="md-nav__link">
+      Getting started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/release_config/" class="md-nav__link">
+      Release/Installation configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Bootstrap-Scripts/" class="md-nav__link">
+      Bootstrap scripts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/client-certificate/" class="md-nav__link">
+      Client certificate authentication
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+    <label class="md-nav__link" for="nav-3">
+      Tutorials
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/How-to-build/" class="md-nav__link">
+      How to Build MongooseIM from source code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/push-notifications/Push-notifications/" class="md-nav__link">
+      How to Set up Push Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/push-notifications/Push-notifications-client-side/" class="md-nav__link">
+      How to Set up Push Notifications on the client side
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/push-notifications/MongoosePush-setup/" class="md-nav__link">
+      How to Set up MongoosePush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/ICE_tutorial/" class="md-nav__link">
+      How to Set up MongooseICE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/iOS_tutorial/" class="md-nav__link">
+      How to Build an iOS messaging app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Jingle-SIP-setup/" class="md-nav__link">
+      How to Set up Jingle/SIP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+    <label class="md-nav__link" for="nav-4">
+      Migration Guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Migration Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Migration Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.1.1_3.2.0/" class="md-nav__link">
+      3.1.1 to 3.2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.3.0_3.4.0/" class="md-nav__link">
+      3.3.0 to 3.4.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.5.0_3.6.0/" class="md-nav__link">
+      3.5.0 to 3.6.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.6.0_3.7.0/" class="md-nav__link">
+      3.6.0 to 3.7.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.7.0_4.0.0/" class="md-nav__link">
+      3.7.0 to 4.0.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/4.0.0_4.0.1/" class="md-nav__link">
+      4.0.0 to 4.0.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
+      MAM MUC migration helper
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+    <label class="md-nav__link" for="nav-5">
+      Platform
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Platform" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Platform
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Contributions/" class="md-nav__link">
+      Contributions to ecosystem
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Differentiators/" class="md-nav__link">
+      Differentiators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../History/" class="md-nav__link">
+      History
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+    <label class="md-nav__link" for="nav-6">
+      Configuration
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon"></span>
+        Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Advanced-configuration/" class="md-nav__link">
+      Configuration files
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/general/" class="md-nav__link">
+      Options: General
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/listen/" class="md-nav__link">
+      Options: Listen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/auth/" class="md-nav__link">
+      Options: Auth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/outgoing-connections/" class="md-nav__link">
+      Options: Outgoing connections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Services/" class="md-nav__link">
+      Options: Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Modules/" class="md-nav__link">
+      Options: Extension Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/shaper/" class="md-nav__link">
+      Options: Shaper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/acl/" class="md-nav__link">
+      Options: Acl
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/access/" class="md-nav__link">
+      Options: Access
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/s2s/" class="md-nav__link">
+      Options: S2S
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/host_config/" class="md-nav__link">
+      Options: Host config
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/release-options/" class="md-nav__link">
+      Release options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Erlang-cookie-security/" class="md-nav__link">
+      Erlang Cookie Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/TLS-hardening/" class="md-nav__link">
+      TLS hardening
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/database-backends-configuration/" class="md-nav__link">
+      Database backends configuration
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
+    <label class="md-nav__link" for="nav-7">
+      Authentication methods
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Authentication methods" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon"></span>
+        Authentication methods
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/rdbms/" class="md-nav__link">
+      RDBMS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/external/" class="md-nav__link">
+      External
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/anonymous/" class="md-nav__link">
+      Anonymous
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/ldap/" class="md-nav__link">
+      LDAP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/jwt/" class="md-nav__link">
+      JWT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/riak/" class="md-nav__link">
+      Riak
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/http/" class="md-nav__link">
+      HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/pki/" class="md-nav__link">
+      PKI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/dummy/" class="md-nav__link">
+      Dummy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" >
+    <label class="md-nav__link" for="nav-8">
+      MongooseIM open XMPP extensions
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="MongooseIM open XMPP extensions" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon"></span>
+        MongooseIM open XMPP extensions
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../open-extensions/muc_light/" class="md-nav__link">
+      MUC light
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../open-extensions/token-reconnection/" class="md-nav__link">
+      Token-based reconnection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" >
+    <label class="md-nav__link" for="nav-9">
+      REST API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="REST API" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        REST API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Client-frontend/" class="md-nav__link">
+      Client/frontend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Metrics-backend/" class="md-nav__link">
+      Metrics backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Administration-backend/" class="md-nav__link">
+      Administration backend
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" >
+    <label class="md-nav__link" for="nav-10">
+      Operation and maintenance
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Operation and maintenance" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon"></span>
+        Operation and maintenance
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/gdpr-considerations/" class="md-nav__link">
+      GDPR considerations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Cluster-management-considerations/" class="md-nav__link">
+      Cluster management considerations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Cluster-configuration-and-node-management/" class="md-nav__link">
+      Cluster configuration and node management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Logging-%26-monitoring/" class="md-nav__link">
+      Logging & monitoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Logging/" class="md-nav__link">
+      Logging configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Humio/" class="md-nav__link">
+      Logging with Humio
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Logging-fields/" class="md-nav__link">
+      Logging fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/" class="md-nav__link">
+      Reloading configuration on a running system
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/MongooseIM-metrics/" class="md-nav__link">
+      Metrics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/" class="md-nav__link">
+      System Metrics Privacy Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/tls-distribution/" class="md-nav__link">
+      Distribution over TLS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/known-issues/" class="md-nav__link">
+      Known issues
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" >
+    <label class="md-nav__link" for="nav-11">
+      Developer's guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Developer's guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon"></span>
+        Developer's guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Testing-MongooseIM/" class="md-nav__link">
+      Testing MongooseIM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/logging/" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Hooks-and-handlers/" class="md-nav__link">
+      Hooks and Handlers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/hooks_description/" class="md-nav__link">
+      Hooks description
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Stanza-routing/" class="md-nav__link">
+      Stanza routing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/accumulators/" class="md-nav__link">
+      Accumulators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/flat_options/" class="md-nav__link">
+      Flat options format
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Moving-to-single-app-project-structure/" class="md-nav__link">
+      Moving to single app project structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/mod_amp_developers_guide/" class="md-nav__link">
+      mod_amp development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/mod_muc_light_developers_guide/" class="md-nav__link">
+      mod_muc_light developers doc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/SCRAM-serialization/" class="md-nav__link">
+      SCRAM serialization format
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/xep_tool/" class="md-nav__link">
+      xep-tool usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/OpenSSL-and-FIPS/" class="md-nav__link">
+      FIPS mode
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Basic-iq-handler/" class="md-nav__link">
+      Basic IQ Handler
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/mongoose_wpool/" class="md-nav__link">
+      mongoose_wpool
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12" checked>
+    <label class="md-nav__link" for="nav-12">
+      Module index
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Module index" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        <span class="md-nav__icon md-icon"></span>
+        Module index
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_adhoc/" class="md-nav__link">
+      mod_adhoc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_amp/" class="md-nav__link">
+      mod_amp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_auth_token/" class="md-nav__link">
+      mod_auth_token
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_blocking/" class="md-nav__link">
+      mod_blocking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_bosh/" class="md-nav__link">
+      mod_bosh
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_caps/" class="md-nav__link">
+      mod_caps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_carboncopy/" class="md-nav__link">
+      mod_carboncopy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_commands/" class="md-nav__link">
+      mod_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_csi/" class="md-nav__link">
+      mod_csi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_disco/" class="md-nav__link">
+      mod_disco
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12-11" type="checkbox" id="nav-12-11" >
+    <label class="md-nav__link" for="nav-12-11">
+      mod_event_pusher
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="mod_event_pusher" data-md-level="2">
+      <label class="md-nav__title" for="nav-12-11">
+        <span class="md-nav__icon md-icon"></span>
+        mod_event_pusher
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_event_pusher/" class="md-nav__link">
+      mod_event_pusher
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_event_pusher_http/" class="md-nav__link">
+      HTTP backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_event_pusher_push/" class="md-nav__link">
+      Push backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_event_pusher_sns/" class="md-nav__link">
+      SNS backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_event_pusher_rabbit/" class="md-nav__link">
+      RabbitMQ backend
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_extdisco/" class="md-nav__link">
+      mod_extdisco
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_global_distrib/" class="md-nav__link">
+      mod_global_distrib
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_http_upload/" class="md-nav__link">
+      mod_http_upload
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_inbox/" class="md-nav__link">
+      mod_inbox
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_jingle_sip/" class="md-nav__link">
+      mod_jingle_sip
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_keystore/" class="md-nav__link">
+      mod_keystore
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_last/" class="md-nav__link">
+      mod_last
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_mam/" class="md-nav__link">
+      mod_mam
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        mod_muc
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      mod_muc
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#module-description" class="md-nav__link">
+    Module Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    Options
+  </a>
+  
+    <nav class="md-nav" aria-label="Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_muchost" class="md-nav__link">
+    modules.mod_muc.host
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucbackend" class="md-nav__link">
+    modules.mod_muc.backend
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucaccess" class="md-nav__link">
+    modules.mod_muc.access
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucaccess_create" class="md-nav__link">
+    modules.mod_muc.access_create
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucaccess_admin" class="md-nav__link">
+    modules.mod_muc.access_admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucaccess_persistent" class="md-nav__link">
+    modules.mod_muc.access_persistent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_muchistory_size" class="md-nav__link">
+    modules.mod_muc.history_size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucroom_shaper" class="md-nav__link">
+    modules.mod_muc.room_shaper
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmax_room_id" class="md-nav__link">
+    modules.mod_muc.max_room_id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmax_room_name" class="md-nav__link">
+    modules.mod_muc.max_room_name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmax_room_desc" class="md-nav__link">
+    modules.mod_muc.max_room_desc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmin_message_interval" class="md-nav__link">
+    modules.mod_muc.min_message_interval
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmin_presence_interval" class="md-nav__link">
+    modules.mod_muc.min_presence_interval
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmax_users" class="md-nav__link">
+    modules.mod_muc.max_users
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmax_users_admin_threshold" class="md-nav__link">
+    modules.mod_muc.max_users_admin_threshold
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucuser_message_shaper" class="md-nav__link">
+    modules.mod_muc.user_message_shaper
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucuser_presence_shaper" class="md-nav__link">
+    modules.mod_muc.user_presence_shaper
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmax_user_conferences" class="md-nav__link">
+    modules.mod_muc.max_user_conferences
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_muchttp_auth_pool" class="md-nav__link">
+    modules.mod_muc.http_auth_pool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucload_permanent_rooms_at_startup" class="md-nav__link">
+    modules.mod_muc.load_permanent_rooms_at_startup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_muchibernate_timeout" class="md-nav__link">
+    modules.mod_muc.hibernate_timeout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_muchibernated_room_check_interval" class="md-nav__link">
+    modules.mod_muc.hibernated_room_check_interval
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_muchibernated_room_timeout" class="md-nav__link">
+    modules.mod_muc.hibernated_room_timeout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucdefault_room" class="md-nav__link">
+    modules.mod_muc.default_room
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-configuration" class="md-nav__link">
+    Example Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-optimisations" class="md-nav__link">
+    Performance optimisations
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance optimisations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rooms-process-hibernation" class="md-nav__link">
+    Room's process hibernation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#room-deep-hibernation" class="md-nav__link">
+    Room deep hibernation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#external-http-authentication" class="md-nav__link">
+    External HTTP Authentication
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    Metrics
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_muc_commands/" class="md-nav__link">
+      mod_muc_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_muc_log/" class="md-nav__link">
+      mod_muc_log
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_muc_light/" class="md-nav__link">
+      mod_muc_light
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_muc_light_commands/" class="md-nav__link">
+      mod_muc_light_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_offline/" class="md-nav__link">
+      mod_offline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_offline_stub/" class="md-nav__link">
+      mod_offline_stub
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_ping/" class="md-nav__link">
+      mod_ping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_privacy/" class="md-nav__link">
+      mod_privacy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_private/" class="md-nav__link">
+      mod_private
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_pubsub/" class="md-nav__link">
+      mod_pubsub
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_push_service_mongoosepush/" class="md-nav__link">
+      mod_push_service_mongoosepush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_register/" class="md-nav__link">
+      mod_register
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_roster/" class="md-nav__link">
+      mod_roster
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_shared_roster_ldap/" class="md-nav__link">
+      mod_shared_roster_ldap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_sic/" class="md-nav__link">
+      mod_sic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_stream_management/" class="md-nav__link">
+      mod_stream_management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_time/" class="md-nav__link">
+      mod_time
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_vcard/" class="md-nav__link">
+      mod_vcard
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_version/" class="md-nav__link">
+      mod_version
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#module-description" class="md-nav__link">
+    Module Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    Options
+  </a>
+  
+    <nav class="md-nav" aria-label="Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_muchost" class="md-nav__link">
+    modules.mod_muc.host
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucbackend" class="md-nav__link">
+    modules.mod_muc.backend
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucaccess" class="md-nav__link">
+    modules.mod_muc.access
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucaccess_create" class="md-nav__link">
+    modules.mod_muc.access_create
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucaccess_admin" class="md-nav__link">
+    modules.mod_muc.access_admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucaccess_persistent" class="md-nav__link">
+    modules.mod_muc.access_persistent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_muchistory_size" class="md-nav__link">
+    modules.mod_muc.history_size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucroom_shaper" class="md-nav__link">
+    modules.mod_muc.room_shaper
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmax_room_id" class="md-nav__link">
+    modules.mod_muc.max_room_id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmax_room_name" class="md-nav__link">
+    modules.mod_muc.max_room_name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmax_room_desc" class="md-nav__link">
+    modules.mod_muc.max_room_desc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmin_message_interval" class="md-nav__link">
+    modules.mod_muc.min_message_interval
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmin_presence_interval" class="md-nav__link">
+    modules.mod_muc.min_presence_interval
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmax_users" class="md-nav__link">
+    modules.mod_muc.max_users
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmax_users_admin_threshold" class="md-nav__link">
+    modules.mod_muc.max_users_admin_threshold
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucuser_message_shaper" class="md-nav__link">
+    modules.mod_muc.user_message_shaper
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucuser_presence_shaper" class="md-nav__link">
+    modules.mod_muc.user_presence_shaper
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucmax_user_conferences" class="md-nav__link">
+    modules.mod_muc.max_user_conferences
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_muchttp_auth_pool" class="md-nav__link">
+    modules.mod_muc.http_auth_pool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucload_permanent_rooms_at_startup" class="md-nav__link">
+    modules.mod_muc.load_permanent_rooms_at_startup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_muchibernate_timeout" class="md-nav__link">
+    modules.mod_muc.hibernate_timeout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_muchibernated_room_check_interval" class="md-nav__link">
+    modules.mod_muc.hibernated_room_check_interval
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_muchibernated_room_timeout" class="md-nav__link">
+    modules.mod_muc.hibernated_room_timeout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_mucdefault_room" class="md-nav__link">
+    modules.mod_muc.default_room
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-configuration" class="md-nav__link">
+    Example Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-optimisations" class="md-nav__link">
+    Performance optimisations
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance optimisations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rooms-process-hibernation" class="md-nav__link">
+    Room's process hibernation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#room-deep-hibernation" class="md-nav__link">
+    Room deep hibernation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#external-http-authentication" class="md-nav__link">
+    External HTTP Authentication
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    Metrics
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>mod_muc</h1>
+                
+                <h3 id="module-description">Module Description</h3>
+<p>This module implements <a href="http://xmpp.org/extensions/xep-0045.html">XEP-0045: Multi-User Chat</a> (MUC).
+It's a common XMPP group chat solution.
+This extension consists of two Erlang modules: <code>mod_muc</code> and <code>mod_muc_room</code>, the latter being the room code itself.
+Note that only <code>mod_muc</code> needs to be enabled in the configuration file.
+Also <code>mod_muc_log</code> is a logging submodule.</p>
+<h2 id="options">Options</h2>
+<h3 id="modulesmod_muchost"><code>modules.mod_muc.host</code></h3>
+<ul>
+<li><strong>Syntax:</strong> string, a valid subdomain</li>
+<li><strong>Default:</strong> <code>"conference.@HOST@"</code></li>
+<li><strong>Example:</strong> <code>host = "group.@HOST@"</code></li>
+</ul>
+<p>Subdomain for MUC service to reside under. <code>@HOST@</code> is replaced with each served domain.</p>
+<h3 id="modulesmod_mucbackend"><code>modules.mod_muc.backend</code></h3>
+<ul>
+<li><strong>Syntax:</strong> string, one of <code>"mnesia"</code> or <code>"rdbms"</code></li>
+<li><strong>Default:</strong> <code>"mnesia"</code></li>
+<li><strong>Example:</strong> <code>backend = "rdbms"</code></li>
+</ul>
+<p>Storage backend.</p>
+<h3 id="modulesmod_mucaccess"><code>modules.mod_muc.access</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"all"</code></li>
+<li><strong>Example:</strong> <code>access = "muc"</code></li>
+</ul>
+<p>Access Rule to determine who is allowed to use the MUC service.</p>
+<h3 id="modulesmod_mucaccess_create"><code>modules.mod_muc.access_create</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"all"</code></li>
+<li><strong>Example:</strong> <code>access_create = "muc_create"</code></li>
+</ul>
+<p>Access Rule to determine who is allowed to create rooms.</p>
+<h3 id="modulesmod_mucaccess_admin"><code>modules.mod_muc.access_admin</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"none"</code></li>
+<li><strong>Example:</strong> <code>access_admin = "muc_create"</code></li>
+</ul>
+<p>Access Rule to determine who is the administrator in all rooms.</p>
+<h3 id="modulesmod_mucaccess_persistent"><code>modules.mod_muc.access_persistent</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"all"</code></li>
+<li><strong>Example:</strong> <code>access_persistent = "none"</code></li>
+</ul>
+<p>Access Rule to determine who is allowed to make the rooms persistent.
+In order to change this parameter, the user must not only match the Access Rule but also be the owner of the room.</p>
+<h3 id="modulesmod_muchistory_size"><code>modules.mod_muc.history_size</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>20</code></li>
+<li><strong>Example:</strong> <code>history_size = 30</code></li>
+</ul>
+<p>Room message history to be kept in RAM. After node restart, the history is lost.</p>
+<h3 id="modulesmod_mucroom_shaper"><code>modules.mod_muc.room_shaper</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"none"</code></li>
+<li><strong>Example:</strong> <code>room_shaper = "muc_room_shaper"</code></li>
+</ul>
+<p>Limits per-room data throughput with traffic shaper.</p>
+<h3 id="modulesmod_mucmax_room_id"><code>modules.mod_muc.max_room_id</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
+<li><strong>Example:</strong> <code>max_room_id = 30</code></li>
+</ul>
+<p>Maximum room username length (in JID).</p>
+<h3 id="modulesmod_mucmax_room_name"><code>modules.mod_muc.max_room_name</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
+<li><strong>Example:</strong> <code>max_room_name = 30</code></li>
+</ul>
+<p>Maximum room name length.</p>
+<h3 id="modulesmod_mucmax_room_desc"><code>modules.mod_muc.max_room_desc</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
+<li><strong>Example:</strong> <code>max_room_desc = 140</code></li>
+</ul>
+<p>Maximum room description length.</p>
+<h3 id="modulesmod_mucmin_message_interval"><code>modules.mod_muc.min_message_interval</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>0</code></li>
+<li><strong>Example:</strong> <code>min_message_interval = 1</code></li>
+</ul>
+<p>Minimal interval (in seconds) between messages processed by the room.</p>
+<h3 id="modulesmod_mucmin_presence_interval"><code>modules.mod_muc.min_presence_interval</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>0</code></li>
+<li><strong>Example:</strong> <code>min_presence_interval = 1</code></li>
+</ul>
+<p>Minimal interval (in seconds) between presences processed by the room.</p>
+<h3 id="modulesmod_mucmax_users"><code>modules.mod_muc.max_users</code></h3>
+<ul>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> <code>200</code></li>
+<li><strong>Example:</strong> <code>max_users = 100</code></li>
+</ul>
+<p>Absolute maximum user count per room on the node.</p>
+<h3 id="modulesmod_mucmax_users_admin_threshold"><code>modules.mod_muc.max_users_admin_threshold</code></h3>
+<ul>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> <code>5</code></li>
+<li><strong>Example:</strong> <code>max_users_admin_threshold = 10</code></li>
+</ul>
+<p>When the server checks if a new user can join a room and they are an admin,
+<code>max_users_admin_threshold</code> is added to <code>max_users</code> during occupant limit check.</p>
+<h3 id="modulesmod_mucuser_message_shaper"><code>modules.mod_muc.user_message_shaper</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"none"</code></li>
+<li><strong>Example:</strong> <code>user_message_shaper = "muc_user_msg_shaper"</code></li>
+</ul>
+<p>Shaper for user messages processed by a room (global for the room).</p>
+<h3 id="modulesmod_mucuser_presence_shaper"><code>modules.mod_muc.user_presence_shaper</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"none"</code></li>
+<li><strong>Example:</strong> <code>user_presence_shaper = "muc_user_presence_shaper"</code></li>
+</ul>
+<p>Shaper for user presences processed by a room (global for the room).</p>
+<h3 id="modulesmod_mucmax_user_conferences"><code>modules.mod_muc.max_user_conferences</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>10</code></li>
+<li><strong>Example:</strong> <code>max_user_conferences = 5</code></li>
+</ul>
+<p>Specifies the number of rooms that a user can occupy simultaneously.</p>
+<h3 id="modulesmod_muchttp_auth_pool"><code>modules.mod_muc.http_auth_pool</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"none"</code></li>
+<li><strong>Example:</strong> <code>http_auth_pool = "external_auth"</code></li>
+</ul>
+<p>If an external HTTP service is chosen to check passwords for password-protected rooms,
+this option specifies the HTTP pool name to use (see <a href="#external-http-authentication">External HTTP Authentication</a> below).</p>
+<h3 id="modulesmod_mucload_permanent_rooms_at_startup"><code>modules.mod_muc.load_permanent_rooms_at_startup</code></h3>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>load_permanent_rooms_at_startup = true</code></li>
+</ul>
+<p>Load all rooms at startup. Because it can be unsafe when there are many rooms,
+it is disabled by default.</p>
+<h3 id="modulesmod_muchibernate_timeout"><code>modules.mod_muc.hibernate_timeout</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>90000</code> (milliseconds, 90 seconds)</li>
+<li><strong>Example:</strong> <code>hibernate_timeout = 60000</code></li>
+</ul>
+<p>Timeout (in milliseconds) defining the inactivity period after which the room's process should be hibernated.</p>
+<h3 id="modulesmod_muchibernated_room_check_interval"><code>modules.mod_muc.hibernated_room_check_interval</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
+<li><strong>Example:</strong> <code>hibernated_room_check_interval = 120000</code></li>
+</ul>
+<p>Interval defining how often the hibernated rooms will be checked (a timer is global for a node).</p>
+<h3 id="modulesmod_muchibernated_room_timeout"><code>modules.mod_muc.hibernated_room_timeout</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
+<li><strong>Example:</strong> <code>hibernated_room_timeout = 120000</code></li>
+</ul>
+<p>A time after which a hibernated room is stopped (deeply hibernated).
+ See <a href="#performance-optimisations">MUC performance optimisation</a>.</p>
+<h3 id="modulesmod_mucdefault_room"><code>modules.mod_muc.default_room</code></h3>
+<ul>
+<li><strong>Syntax:</strong> A TOML table of options described below</li>
+<li><strong>Default:</strong> Default room options</li>
+<li><strong>Example:</strong></li>
+</ul>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="k">[modules.mod_muc.default_room]</span>
+    <span class="n">password_protected</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;An example description.&quot;</span>
+
+    <span class="k">[[modules.mod_muc.default_room.affiliations]]</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="s">&quot;alice&quot;</span>
+        <span class="n">server</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span>
+        <span class="n">resource</span> <span class="o">=</span> <span class="s">&quot;resource1&quot;</span>
+        <span class="n">affiliation</span> <span class="o">=</span> <span class="s">&quot;member&quot;</span>
+</code></pre></div>
+</td></tr></table>
+<p>or:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">default_room</span><span class="p">.</span><span class="n">password_protected</span> <span class="o">=</span> <span class="kc">true</span>
+  <span class="n">default_room</span><span class="p">.</span><span class="n">description</span> <span class="o">=</span> <span class="s">&quot;An example description.&quot;</span>
+
+  <span class="k">[[modules.mod_muc.default_room.affiliations]]</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="s">&quot;alice&quot;</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span>
+    <span class="n">resource</span> <span class="o">=</span> <span class="s">&quot;resource1&quot;</span>
+    <span class="n">affiliation</span> <span class="o">=</span> <span class="s">&quot;member&quot;</span>
+</code></pre></div>
+</td></tr></table>
+<p>Available room configuration options to be overridden in the initial state:</p>
+<ul>
+<li>
+<p><code>modules.mod_muc.default_room.title</code></p>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> <code>""</code></li>
+<li><strong>Example:</strong> <code>title = "example_title"</code> </li>
+</ul>
+<p>Room title, short free text.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.description</code></p>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> <code>""</code></li>
+<li><strong>Example:</strong> <code>description = "An example description."</code> </li>
+</ul>
+<p>Room description, long free text.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.allow_change_subj</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>allow_change_subj = false</code> </li>
+</ul>
+<p>Allow all occupants to change the room subject.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.allow_query_users</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>allow_query_users = false</code></li>
+</ul>
+<p>Allow occupants to send IQ queries to other occupants.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.allow_private_messages</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>allow_private_messages = false</code></li>
+</ul>
+<p>Allow private messaging between occupants.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.allow_visitor_status</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>allow_visitor_status = false</code></li>
+</ul>
+<p>Allow occupants to use text statuses in presences.
+When disabled, text is removed by the room before broadcasting.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.allow_visitor_nickchange</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>allow_visitor_nickchange = false</code></li>
+</ul>
+<p>Allow occupants to change nicknames.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.public</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>public = false</code></li>
+</ul>
+<p>Room is included in the list available via Service Discovery.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.public_list</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>public_list = false</code></li>
+</ul>
+<p>Member list can be fetched by non-members.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.persistent</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>persistent = true</code></li>
+</ul>
+<p>Room will be stored in DB and survive even when the last occupant leaves or the node is restarted.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.moderated</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>moderated = false</code></li>
+</ul>
+<p>Only occupants with a "voice" can send group chat messages.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.members_by_default</code></p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>members_by_default = false</code></li>
+</ul>
+<p>All new occupants are members by default, unless they have a different affiliation assigned.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.members_only</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>members_only = true</code></li>
+</ul>
+<p>Only users with a member affiliation can join the room.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.allow_user_invites</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>allow_user_invites = true</code></li>
+</ul>
+<p>Allow ordinary members to send mediated invitations.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.allow_multiple_sessions</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>allow_multiple_sessions = true</code></li>
+</ul>
+<p>Allow multiple user session to use the same nick.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.password_protected</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>password_protected = true</code></li>
+</ul>
+<p>Room is protected with a password.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.password</code> </p>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> <code>""</code></li>
+<li><strong>Example:</strong> <code>password = "secret"</code></li>
+</ul>
+<p>Room password is required upon joining.
+This option has no effect when <code>password_protected</code> is <code>false</code>.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.anonymous</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>anonymous = false</code></li>
+</ul>
+<p>Room is anonymous, meaning occupants can't see each others real JIDs, except for the room moderators.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.max_users</code> </p>
+<ul>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> <code>200</code></li>
+<li><strong>Example:</strong> <code>max_users = 100</code></li>
+</ul>
+<p>Maximum user count per room. Admins and the room owner are not affected.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.logging</code></p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>logging = true</code></li>
+</ul>
+<p>Enables logging of room events (messages, presences) to a file on the disk.
+Uses <code>mod_muc_log</code>.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.maygetmemberlist</code> </p>
+<ul>
+<li><strong>Syntax:</strong> array of non-empty strings</li>
+<li><strong>Default:</strong> <code>[]</code></li>
+<li><strong>Example:</strong> <code>maygetmemberlist = ["moderator"]</code></li>
+</ul>
+<p>An array of roles and/or privileges that enable retrieving the room's member list.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.affiliations</code> </p>
+<ul>
+<li><strong>Syntax:</strong> array of tables with keys:<ul>
+<li><code>user</code> - non-empty string,</li>
+<li><code>server</code> - string, a valid domain,</li>
+<li><code>resource</code> - string,</li>
+<li><code>affiliation</code> - non-empty string</li>
+</ul>
+</li>
+<li><strong>Default:</strong> <code>[]</code></li>
+<li><strong>Example:</strong></li>
+</ul>
+</li>
+</ul>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[modules.mod_muc.default_room.affiliations]]</span>
+  <span class="n">user</span> <span class="o">=</span> <span class="s">&quot;alice&quot;</span>
+  <span class="n">server</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span>
+  <span class="n">resource</span> <span class="o">=</span> <span class="s">&quot;resource1&quot;</span>
+  <span class="n">affiliation</span> <span class="o">=</span> <span class="s">&quot;member&quot;</span>
+
+<span class="k">[[modules.mod_muc.default_room.affiliations]]</span>
+  <span class="n">user</span> <span class="o">=</span> <span class="s">&quot;bob&quot;</span>
+  <span class="n">server</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span>
+  <span class="n">resource</span> <span class="o">=</span> <span class="s">&quot;resource2&quot;</span>
+  <span class="n">affiliation</span> <span class="o">=</span> <span class="s">&quot;owner&quot;</span>
+</code></pre></div>
+</td></tr></table>
+<p>This is the default list of affiliations set for every new room.</p>
+<ul>
+<li>
+<p><code>modules.mod_muc.default_room.subject</code> </p>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> <code>""</code></li>
+<li><strong>Example:</strong> <code>subject = "Lambda days"</code></li>
+</ul>
+<p>A default subject for new room.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.subject_author</code></p>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> <code>""</code></li>
+<li><strong>Example:</strong> <code>subject_author = "Alice"</code></li>
+</ul>
+<p>A nick name of the default subject's author.</p>
+</li>
+</ul>
+<h2 id="example-configuration">Example Configuration</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_muc]</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;muc.example.com&quot;</span>
+  <span class="n">access</span> <span class="o">=</span> <span class="s">&quot;muc&quot;</span>
+  <span class="n">access_create</span> <span class="o">=</span> <span class="s">&quot;muc_create&quot;</span>
+  <span class="n">http_auth_pool</span> <span class="o">=</span> <span class="s">&quot;my_auth_pool&quot;</span>
+  <span class="n">default_room</span><span class="p">.</span><span class="n">password_protected</span> <span class="o">=</span> <span class="kc">true</span>
+
+  <span class="k">[[modules.mod_muc.default_room.affiliations]]</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="s">&quot;alice&quot;</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span>
+    <span class="n">resource</span> <span class="o">=</span> <span class="s">&quot;resource1&quot;</span>
+    <span class="n">affiliation</span> <span class="o">=</span> <span class="s">&quot;member&quot;</span>
+
+  <span class="k">[[modules.mod_muc.default_room.affiliations]]</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="s">&quot;bob&quot;</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span>
+    <span class="n">resource</span> <span class="o">=</span> <span class="s">&quot;resource2&quot;</span>
+    <span class="n">affiliation</span> <span class="o">=</span> <span class="s">&quot;owner&quot;</span>
+</code></pre></div>
+</td></tr></table>
+<h2 id="performance-optimisations">Performance optimisations</h2>
+<p>Each room is represented by an Erlang process with its own state and can consume memory even if it's not used.
+In large installations with many rooms, this might cause performance issues.
+To address that problem MongooseIM has 2 levels of MUC rooms memory optimisations.</p>
+<h3 id="rooms-process-hibernation">Room's process hibernation</h3>
+<p>By default the room's process is hibernated by the Erlang VM 90 seconds after the last activity.
+This timeout can be modified by <code>hibernate_timeout</code> option.</p>
+<h3 id="room-deep-hibernation">Room deep hibernation</h3>
+<p>MongooseIM introduces an additional option of deep hibernation for unused rooms.
+This optimisation works only for persistent rooms as only these can be restored on demand.
+The improvement works as follows:
+1. All room processes are traversed at a chosen <code>hibernated_room_check_interval</code>.
+1. If a <code>hibernated_room_timeout</code> is exceeded, a "stop" signal is sent to a unused room.
+1. The room's process is stopped only if there are no online users or if the only one is its owner.
+If the owner is online, a presence of a type unavailable is sent to it indicating that the room's process is being terminated.</p>
+<p>The room's process can be recreated on demand, for example when a presence sent to it, or the owner wants to add more users to the room.</p>
+<h2 id="external-http-authentication">External HTTP Authentication</h2>
+<p>MUC rooms can be protected by a password that is set by the room owner.
+Note that MongooseIM supports another custom solution, where each attempt to enter or create a room requires the password to be checked by an external HTTP service.
+To enable this option, you need to:</p>
+<ul>
+<li>Configure an <a href="../../advanced-configuration/outgoing-connections/#http-options">HTTP connection pool</a>.</li>
+<li>Set the name of the connection pool as the value of the <code>http_auth_pool</code> option of <code>mod_muc</code>.</li>
+<li>Enable the <code>password_protected</code> default room option (without setting the password itself).</li>
+</ul>
+<p>Whenever a user tries to enter or create a room, the server will receive a GET request to the <code>check_password</code> path.
+It should return a 200 response with a JSON object <code>{"code": Code, "msg": Message}</code> in the response body.
+If the server returns something else, an error presence will be sent back to the client.</p>
+<ul>
+<li><code>Code</code> is the status code: 0 indicates a successful authentication, any other value means the authentication failed.</li>
+<li><code>Message</code> is a string containing the message to be sent back to the XMPP client indicating the reason for a failed authentication.
+ When authentication succeeds it is ignored and can contain anything ( eg. the string <code>"OK"</code>).</li>
+</ul>
+<p><strong>Example:</strong></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[outgoing_pools.http.my_auth_pool]</span>
+  <span class="n">strategy</span> <span class="o">=</span> <span class="s">&quot;available_worker&quot;</span>
+  <span class="n">connection</span><span class="p">.</span><span class="n">host</span> <span class="o">=</span> <span class="s">&quot;http://my_server:8000&quot;</span>
+
+<span class="k">[modules.mod_muc]</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;muc.example.com&quot;</span>
+  <span class="n">access</span> <span class="o">=</span> <span class="s">&quot;muc&quot;</span>
+  <span class="n">access_create</span> <span class="o">=</span> <span class="s">&quot;muc_create&quot;</span>
+  <span class="n">http_auth_pool</span> <span class="o">=</span> <span class="s">&quot;my_auth_pool&quot;</span>
+  <span class="n">default_room</span><span class="p">.</span><span class="n">password_protected</span> <span class="o">=</span> <span class="kc">true</span>
+</code></pre></div>
+</td></tr></table>
+<h2 id="metrics">Metrics</h2>
+<p>If you'd like to learn more about metrics in MongooseIM, please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">MongooseIM metrics</a> page.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[global, mod_muc, deep_hibernations]</code></td>
+<td>spiral</td>
+<td>A room process is stopped (applies only to persistent rooms).</td>
+</tr>
+<tr>
+<td><code>[global, mod_muc, process_recreations]</code></td>
+<td>spiral</td>
+<td>A room process is recreated from a persisted state.</td>
+</tr>
+<tr>
+<td><code>[global, mod_muc, hibernations]</code></td>
+<td>spiral</td>
+<td>A room process becomes hibernated (garbage collected and put in wait state).</td>
+</tr>
+<tr>
+<td><code>[global, mod_muc, hibernated_rooms]</code></td>
+<td>value</td>
+<td>How many rooms are in hibernated state. Does not include rooms in "deep hibernation".</td>
+</tr>
+<tr>
+<td><code>[global, mod_muc, online_rooms]</code></td>
+<td>value</td>
+<td>How many rooms have running processes (includes rooms in a hibernated state).</td>
+</tr>
+</tbody>
+</table>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../mod_mam/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                mod_mam
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../mod_muc_commands/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                mod_muc_commands
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../js/version-select.js"></script>
+      
+    
+  </body>
+</html>
