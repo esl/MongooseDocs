@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>HTTP Authentication Module - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "HTTP Authentication Module";
+    var mkdocs_page_input_path = "authentication-backends/HTTP-authentication-module.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Push-notifications/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/TLS-hardening/">TLS hardening</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/outgoing-connections/">Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Listener-modules/">Listener Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/client-certificate/">Client Certificate</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">HTTP Authentication Module</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/gdpr-considerations/">GDPR considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Authentication backends &raquo;</li>
+        
+      
+    
+    <li>HTTP Authentication Module</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="overview">Overview</h2>
+<p>The purpose of this module is to connect with an external REST API and delegate the authentication operations to it whenever possible.
+The component must implement the API described in one of the next sections for <code>ejabberd_auth_http</code> to work out of the box.</p>
+<p>The module can be especially useful for users maintaining their own central user database which is shared with other services. It fits perfectly when the client application uses a custom authentication token and MongooseIM has to validate it externally.</p>
+<h2 id="configuration">Configuration</h2>
+<h3 id="how-to-enable">How to enable</h3>
+<p>For a full reference please check <a href="../../Advanced-configuration/#authentication">Advanced-configuration#authentication</a>.
+The simplest way is to just replace the default <code>auth_method</code> option in <code>rel/files/mongooseim.cfg</code> with <code>{auth_method, http}</code>.</p>
+<p>Enabling the module <strong>is not enough!</strong> 
+Please follow instructions below.</p>
+<h3 id="configuration-options">Configuration options</h3>
+<p><code>ejabberd_auth_http</code> uses an outgoing http connection pool called <code>auth</code>.
+The pool has to be defined in outgoing_pools section (see <a href="../advanced-configuration/outgoing-connections#http-connections-setup">Outgoing-connections#/http-connections</a>).
+The following options can be set in the <code>auth_opts</code> tuple in <code>rel/files/mongooseim.cfg</code>:</p>
+<ul>
+<li><code>basic_auth</code> (default: <code>""</code>) - HTTP Basic Authentication in format <code>"username:password"</code>; auth service doesn't have to require authentication for HTTP auth to work</li>
+</ul>
+<h4 id="example">Example</h4>
+<pre><code>{auth_opts, [
+             {basic_auth, &quot;mongooseim:DzviNQw3qyGJDrJDu+ClyA&quot;},
+            ]}.
+</code></pre>
+<h2 id="scram-support">SCRAM support</h2>
+<p><code>ejabberd_auth_http</code> can use the SCRAM method.
+When SCRAM is enabled, the passwords sent to the auth service are serialised and the same serialised format is expected when fetching a password from the component.</p>
+<p>It is transparent when MongooseIM is responsible for all DB operations such as password setting, account creation etc.</p>
+<p>The service CAN perform the (de)serialization of SCRAM-encoded passwords.
+You can find more details on the <a href="../../developers-guide/SCRAM-serialization/">SCRAM serialization</a> page.</p>
+<h2 id="authentication-service-api">Authentication service API</h2>
+<h3 id="url-format">URL format</h3>
+<p>All GET requests include the following URL-encoded query string: <code>?user=&lt;username&gt;&amp;server=&lt;domain&gt;&amp;pass=&lt;password&gt;</code>.</p>
+<p>All POST requests have the following URL-encoded string in the request body: <code>user=&lt;username&gt;&amp;server=&lt;domain&gt;&amp;pass=&lt;password&gt;</code>.</p>
+<p>If a certain method does not need a password, the value of <code>pass</code> is <strong>undefined</strong>, so it shouldn't be used.</p>
+<h3 id="return-codes">Return codes</h3>
+<p>For the best integration, the return code range should not exceed the list below:</p>
+<ul>
+<li>500 - internal server error</li>
+<li>409 - conflict</li>
+<li>404 - not found</li>
+<li>403 - not allowed</li>
+<li>401 - not authorised</li>
+<li>400 - other error, should be sent in response body</li>
+<li>204 - success, no return data</li>
+<li>201 - created</li>
+<li>200 - success, return value in response body</li>
+</ul>
+<p>Whenever the specification says "anything else", service should use one of the codes from the list above.</p>
+<p>Some requests consider multiple return codes a "success".
+It is up to the server-side developer to pick one of the codes.</p>
+<h3 id="http-header-content-length">HTTP header <code>Content-Length</code></h3>
+<p><strong>IMPORTANT:</strong> The authentication server MUST include a <code>Content-Length</code> HTTP header in the response.
+A body can be missing in the first data chunk read from a socket, leading to strange authentication errors.</p>
+<h3 id="method-register">Method <code>register</code></h3>
+<ul>
+<li><strong>Description:</strong> Creates a user account.</li>
+<li><strong>HTTP method:</strong> POST</li>
+<li><strong>Type:</strong> mandatory when <code>mod_register</code> is enabled</li>
+<li><strong>Return values:</strong><ul>
+<li>201 - success</li>
+<li>409 - user already exists</li>
+<li>anything else - will be treated as failure</li>
+</ul>
+</li>
+</ul>
+<h3 id="method-check_password">Method <code>check_password</code></h3>
+<ul>
+<li><strong>Description:</strong> Must respond if the password is valid for the user.</li>
+<li><strong>HTTP method:</strong> GET</li>
+<li><strong>Type:</strong> mandatory when SCRAM is not used</li>
+<li><strong>Return values:</strong><ul>
+<li>200, <code>true</code> or <code>false</code> in the body</li>
+<li>anything else - will be treated as <code>false</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="method-get_password">Method <code>get_password</code></h3>
+<ul>
+<li><strong>Description:</strong> Must return the user's password in plaintext or in the SCRAM serialised form.</li>
+<li><strong>HTTP method:</strong> GET</li>
+<li><strong>Type:</strong> mandatory when SCRAM or DIGEST SASL mechanism is used</li>
+<li><strong>Return values:</strong><ul>
+<li>200, password in the body</li>
+<li>anything else - <code>get_password</code> will fail</li>
+</ul>
+</li>
+</ul>
+<h3 id="method-user_exists">Method <code>user_exists</code></h3>
+<ul>
+<li><strong>Description:</strong> Must return the information whether the user exists in DB.</li>
+<li><strong>HTTP method:</strong> GET</li>
+<li><strong>Type:</strong> mandatory</li>
+<li><strong>Return values:</strong><ul>
+<li>200, <code>true</code> or <code>false</code> in body</li>
+<li>anything else - will be treated as <code>false</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="method-set_password">Method <code>set_password</code></h3>
+<ul>
+<li><strong>Description:</strong> Must set user's password in the internal database to a provided value.
+ The value should not be transformed (except for URL-decoding) before writing into the DB.</li>
+<li><strong>HTTP method:</strong> POST</li>
+<li><strong>Type:</strong> mandatory when <code>mod_register</code> is enabled</li>
+<li><strong>Return values:</strong><ul>
+<li>200 or 201 or 204 - success</li>
+<li>anything else - will be treated as <code>false</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="method-remove_user">Method <code>remove_user</code></h3>
+<ul>
+<li><strong>Description:</strong> Removes a user account.</li>
+<li><strong>HTTP method:</strong> POST</li>
+<li><strong>Type:</strong> mandatory when <code>mod_register</code> is enabled</li>
+<li><strong>Return values:</strong><ul>
+<li>200 or 201 or 204 - success</li>
+<li>404 - user does not exist</li>
+<li>403 - not allowed for some reason</li>
+<li>40X - will be treated as <code>bad request</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="method-remove_user_validate">Method <code>remove_user_validate</code></h3>
+<ul>
+<li><strong>Description:</strong> Removes a user account only if the provided password is valid.</li>
+<li><strong>HTTP method:</strong> POST</li>
+<li><strong>Type:</strong> mandatory when <code>mod_register</code> is enabled</li>
+<li><strong>Return values:</strong><ul>
+<li>200 or 201 or 204 - success</li>
+<li>404 - user does not exist</li>
+<li>403 - invalid user password or not allowed for other reason</li>
+<li>40X - will be treated as <code>bad request</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="authentication-service-api-recipes">Authentication service API recipes</h3>
+<p>Below you can find some examples of the auth service APIs and MongooseIM-side configuration along with use cases.</p>
+<h4 id="system-using-a-common-custom-auth-token">System using a common, custom auth token</h4>
+<p>An Auth token is provided as a password.</p>
+<ul>
+<li><strong>Service implements:</strong> <code>check_password</code>, <code>user_exists</code></li>
+<li><strong>MongooseIM config:</strong> <code>password_format</code>: <code>plain</code>, <code>mod_register</code> disabled</li>
+<li><strong>Client side:</strong> MUST NOT use <code>DIGEST-MD5</code> mechanism; use <code>PLAIN</code></li>
+</ul>
+<h4 id="central-database-of-plaintext-passwords">Central database of plaintext passwords</h4>
+<ul>
+<li><strong>Service implements:</strong> <code>check_password</code>, <code>get_password</code>, <code>user_exists</code></li>
+<li><strong>MongooseIM config:</strong> <code>password_format</code>: <code>plain</code>, <code>mod_register</code> disabled</li>
+<li><strong>Client side:</strong> May use any available auth method</li>
+</ul>
+<h4 id="central-database-able-to-process-scram">Central database able to process SCRAM</h4>
+<ul>
+<li><strong>Service implements:</strong> <code>get_password</code>, <code>user_exists</code></li>
+<li><strong>MongooseIM config:</strong> <code>password_format</code>: <code>scram</code>, <code>mod_register</code> disabled</li>
+<li><strong>Client side:</strong> May use any available auth method</li>
+</ul>
+<h4 id="godlike-mongooseim">Godlike MongooseIM</h4>
+<ul>
+<li><strong>Service implements:</strong> all methods</li>
+<li><strong>MongooseIM config:</strong> <code>password_format</code>: <code>scram</code> (recommended) or <code>plain</code>, <code>mod_register</code> enabled</li>
+<li><strong>Client side:</strong> May use any available auth method</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../JWT-authentication-module/" class="btn btn-neutral float-right" title="JWT Authentication Module">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../External-authentication-module/" class="btn btn-neutral" title="External Authentication Module"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../External-authentication-module/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../JWT-authentication-module/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

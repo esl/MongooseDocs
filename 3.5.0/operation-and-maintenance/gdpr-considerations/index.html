@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>GDPR considerations - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "GDPR considerations";
+    var mkdocs_page_input_path = "operation-and-maintenance/gdpr-considerations.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Push-notifications/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/TLS-hardening/">TLS hardening</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/outgoing-connections/">Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Listener-modules/">Listener Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/client-certificate/">Client Certificate</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/HTTP-authentication-module/">HTTP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">GDPR considerations</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#data-affected-by-gdpr-commands">Data affected by GDPR commands</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#gdpr-cli-commands">GDPR CLI commands</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-gdpr-safe-user-account">Creating a GDPR-safe user account</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#example">Example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#retrieval-of-personal-data">Retrieval of Personal Data</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#example_1">Example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#removal-of-personal-data">Removal of Personal Data</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#example_2">Example</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#technical-limitations-of-gdpr-retrieval-and-removal">Technical limitations of GDPR retrieval and removal</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Operation and maintenance &raquo;</li>
+        
+      
+    
+    <li>GDPR considerations</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="gdpr-considerations">GDPR considerations</h1>
+<p>This page describes what GDPR implies in terms of server management.</p>
+<h2 id="data-affected-by-gdpr-commands">Data affected by GDPR commands</h2>
+<ul>
+<li>inbox - All entries in the subject's inbox. If their messages are stored in other users' inbox, they will not be removed.</li>
+<li>message archive - Same as above for 1-1 messages. In case of group chat messages, they are retrieved as personal data but not removed.</li>
+<li>offline storage - All messages stored for delivery.</li>
+<li>roster - All entries in the subject's roster. Other users' rosters are NOT affected, even if they include the subject's JID or other data.</li>
+<li>vCard - The entire content of the subject's vCard.</li>
+<li>private XML storage - All items stored by the subject will be removed.</li>
+<li>publish-subscribe<ul>
+<li>retrieval: all subject's subscriptions and nodes (with their payloads included). </li>
+<li>removal: subject's subscriptions, push and PEP nodes (with their data included). </li>
+</ul>
+</li>
+</ul>
+<h2 id="gdpr-cli-commands">GDPR CLI commands</h2>
+<p>All CLI commands are accessible via <code>mongooseimctl</code> command, located in <code>bin/</code> inside MIM release.</p>
+<p>Personal data retrieval requires <code>service_admin_extra</code> with <code>gdpr</code> group enabled.</p>
+<h3 id="creating-a-gdpr-safe-user-account">Creating a GDPR-safe user account</h3>
+<p><code>mongooseimctl register &lt;domain&gt; &lt;password&gt;</code></p>
+<p>This command will create an anonymised JID with a random username part.
+It ensures that no personal information will be leaked via logs or database entries, which include the user's JID.</p>
+<h4 id="example">Example</h4>
+<pre><code>$ mongooseimctl register localhost abc123
+User 1567-420657-155810-C1CEC31F5C993258@localhost successfully registered
+</code></pre>
+<h3 id="retrieval-of-personal-data">Retrieval of Personal Data</h3>
+<p><code>mongooseimctl retrieve_personal_data &lt;username&gt; &lt;domain&gt; &lt;filepath for the output as a zip&gt;</code></p>
+<p>It retrieves personal data accessible to the server (see "Technical limitations" section below).
+The directory where the zip file will be created must already exist.</p>
+<p>After the execution is complete, a zip file will appear in the specified folder with personal information in CSV files grouped by type.</p>
+<h4 id="example_1">Example</h4>
+<p><code>mongooseimctl retrieve_personal_data 1567-420657-155810-C1CEC31F5C993258 localhost /home/mongooseim/gdpr/1567-420657-155810-C1CEC31F5C993258.zip</code></p>
+<h3 id="removal-of-personal-data">Removal of Personal Data</h3>
+<p><code>mongooseimctl unregister &lt;username&gt; &lt;domain&gt;</code></p>
+<p>It removes the user's account along with all associated personal data accessible to the server (see "Technical limitations" section below).</p>
+<h4 id="example_2">Example</h4>
+<p><code>mongooseimctl unregister 1567-420657-155810-C1CEC31F5C993258 localhost</code></p>
+<h2 id="technical-limitations-of-gdpr-retrieval-and-removal">Technical limitations of GDPR retrieval and removal</h2>
+<p>Both GDPR retrieval and removal will process the data available via configured extensions and database(s).
+If a part of personal information is managed by an extension that is e.g. temporarily disabled, it won't be retrieved/deleted.</p>
+<p>If any MIM extension you had enabled on production is now disabled or you've switched one of them (or e.g. auth module) to another database, it is possible that some personal data will not be retrieved or removed as expected.
+In such case, please consider starting a separate MIM instance that is configured to access all places, where personal data may be stored.
+You may also extract the missing pieces of information on your own, however we won't cover the details of this method in this guide.</p>
+<p>Please also visit <a href="../known-issues/">Known issues page</a> to learn about a <code>mod_mam_muc</code> issue that may manifest in some environments.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Cluster-management-considerations/" class="btn btn-neutral float-right" title="Cluster management considerations">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../rest-api/Administration-backend/" class="btn btn-neutral" title="Administration backend"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../rest-api/Administration-backend/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Cluster-management-considerations/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

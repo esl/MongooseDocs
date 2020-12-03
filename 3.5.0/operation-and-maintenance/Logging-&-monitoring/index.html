@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>Logging & monitoring - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Logging & monitoring";
+    var mkdocs_page_input_path = "operation-and-maintenance/Logging-&-monitoring.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Push-notifications/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/TLS-hardening/">TLS hardening</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/outgoing-connections/">Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Listener-modules/">Listener Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/client-certificate/">Client Certificate</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/HTTP-authentication-module/">HTTP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../gdpr-considerations/">GDPR considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Logging & monitoring</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#using-syslog">Using syslog</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#further-multiserver-integration">Further / multiserver integration</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Operation and maintenance &raquo;</li>
+        
+      
+    
+    <li>Logging & monitoring</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="logs">Logs</h2>
+<p>We strongly recommend storing logs in one centralized place when working in a clustered environment.
+MongooseIM uses Lager - the logging framework.
+Its backend can be easily replaced; the <code>syslog</code> backend is included by default in MongooseIM.</p>
+<h3 id="using-syslog">Using syslog</h3>
+<p>To activate the syslog backend you have to edit <code>rel/files/app.config</code> and uncomment the line:</p>
+<pre><code>%% use below line to add syslog backend for Lager
+%        {lager_syslog_backend, [ "mongooseim", local0, info]},
+</code></pre>
+<p>Remember to provide a parameter list to make your lager syslog backend running:</p>
+<ul>
+<li>The first parameter is a string to tag all the syslog messages with.
+ The default is <code>mongooseim</code>.</li>
+<li>The second one is the facility to log to (see the syslog documentation).</li>
+<li>The last parameter is the lager level at which the backend accepts messages.
+ In our case it's <code>info</code>.</li>
+</ul>
+<p>Depending on the system platform you use, remember also to add the appropriate line in the syslog config file:</p>
+<pre><code>local0.info                     /var/log/mongooseim.log
+</code></pre>
+<p>Now all the logs of level <code>info</code> will be passed to the <code>/var/log/mongooseim.log</code> file.</p>
+<p>Example log (e.g <code>tail -f /var/log/mongooseim.log</code>):</p>
+<pre><code>Apr  1 12:36:49 User.local mongooseim[6068]: [info] &lt;0.7.0&gt; Application mnesia started on node mongooseim@localhost
+</code></pre>
+<h3 id="further-multiserver-integration">Further / multiserver integration</h3>
+<p>For more advanced processing and analysis of logs, including gathering logs from multiple machines, you can use one of the many available systems (e.g. logstash/elasticsearch/kibana, graylog, splunk), which collect data from the syslog and are beyond the scope of this documentation.</p>
+<h2 id="monitoring">Monitoring</h2>
+<h3 id="wombatoam">WombatOAM</h3>
+<p>WombatOAM is an operations and maintenance framework for Erlang based systems.
+Its Web Dashboard displays this data in an aggregated manner.
+Additionally, WombatOAM provides interfaces to feed the data to other OAM tools such as Graphite, Nagios or Zabbix.</p>
+<p>For more information see: <a href="https://www.erlang-solutions.com/products/wombat-oam.html">WombatOAM</a>.</p>
+<h3 id="graphite-collectd">graphite-collectd</h3>
+<p>To monitor MongooseIM during load testing, we recommend the following open source applications:</p>
+<ul>
+<li><a href="https://grafana.com/">Grafana</a> is used for data presentation.</li>
+<li><a href="http://graphiteapp.org/">Graphite</a> is a server used for metrics storage.</li>
+<li><a href="http://collectd.org/">collectd</a> is a daemon running on the monitored nodes capturing data related to CPU and Memory usage, IO etc.</li>
+</ul>
+<h3 id="plug-in-exometer-reporters">Plug-in Exometer reporters</h3>
+<p>MongooseIM uses <a href="https://github.com/esl/exometer_core">a fork of Exometer library</a> for collecting metrics.
+Exometer has many plug-in reporters that can send metrics to external services. We maintain <a href="https://github.com/esl/exometer_report_graphite">exometer_report_graphite</a> and <a href="https://github.com/esl/exometer_report_statsd">exometer_report_statsd</a> for Graphite and StatsD respectively.
+It is possible to enable them in MoongooseIM via the <code>app.config</code> file.
+The file sits next to the <code>mongooseim.cfg</code> file in the <code>rel/files</code> and <code>_REL_DIR_/etc</code> directories.</p>
+<p>Below you can find a sample configuration.
+It shows setting up a reporter connecting to graphite running on localhost.</p>
+<p>You can see an additional option not listed in the Exometer docs - <code>mongooseim_report_interval</code>, which sets the metrics' resolution, i.e. how often Exometer gathers and sends metrics through reporters.
+By default, the resolution is set to 60 seconds.</p>
+<pre><code class="language-erl">...
+{exometer_core, [
+    {mongooseim_report_interval, 60000}, %% 60 seconds
+    {report, [
+        {reporters, [
+                     {exometer_report_graphite, [
+                                                 {prefix, &quot;mongooseim&quot;},
+                                                 {connect_timeout, 5000},
+                                                 {host, &quot;127.0.0.1&quot;},
+                                                 {port, 2003},
+                                                 {api_key, &quot;&quot;}
+                                                ]}
+                    ]}
+    ]}
+  ]}
+...
+</code></pre>
+<h3 id="run-graphite-grafana-in-docker-quick-start">Run Graphite &amp; Grafana in Docker - quick start</h3>
+<p>The following commands will download the latest version of <code>kamon/grafana_graphite</code> docker image that contains both Grafana and Graphite, and start them while mounting local directory <code>./docker-grafana-graphite-master/data</code> for metrics persistance:</p>
+<pre><code>$ curl -SL https://github.com/kamon-io/docker-grafana-graphite/archive/master.tar.gz | tar -xzf -
+$ make -C docker-grafana-graphite-master up
+</code></pre>
+<p>Go to http://localhost to view Grafana dashboard that's already set up to use metrics from Graphite.</p>
+<h3 id="add-metrics-to-grafana-dashboard">Add metrics to Grafana dashboard</h3>
+<p>We recommend the following metrics as a baseling for tracking your MongooseIM installation.
+For time-based metrics, you can choose to display multiple calculated values for a reporting period - we recommend tracking at least <code>max</code>, <code>median</code> and <code>mean</code>.</p>
+<pre><code>Session count:                   &lt;prefix&gt;.global.totalSessionCount.value
+XMPP messages received:          &lt;prefix&gt;.&lt;domain&gt;.xmppMessageReceived.one
+XMPP messages sent:              &lt;prefix&gt;.&lt;domain&gt;.xmppMessageSent.one
+Successful logins:               &lt;prefix&gt;.&lt;domain&gt;.sessionSuccessfulLogins.one
+Logouts:                         &lt;prefix&gt;.&lt;domain&gt;.sessionLogouts.one
+Authorization time:              &lt;prefix&gt;.&lt;domain&gt;.backends.auth.authorize.&lt;value-type&gt;
+RDBMS &quot;simple&quot; query time:       &lt;prefix&gt;.&lt;domain&gt;.backends.mongoose_rdbms.query.&lt;value-type&gt;
+RDBMS prepared query time:       &lt;prefix&gt;.&lt;domain&gt;.backends.mongoose_rdbms.execute.&lt;value-type&gt;
+MAM lookups:                     &lt;prefix&gt;.&lt;domain&gt;.mam_lookup_messages.one
+MAM archivization time:          &lt;prefix&gt;.&lt;domain&gt;.backends.mod_mam.archive.&lt;value-type&gt;
+MAM lookup time:                 &lt;prefix&gt;.&lt;domain&gt;.backends.mod_mam.lookup.&lt;value-type&gt;
+MAM private messages flush time: &lt;prefix&gt;.&lt;domain&gt;.mod_mam_rdbms_async_pool_writer.flush_time.&lt;value-type&gt;
+MAM MUC messages flush time:     &lt;prefix&gt;.&lt;domain&gt;.mod_mam_muc_rdbms_async_pool_writer.flush_time.&lt;value-type&gt;
+</code></pre>
+<p>Note that RDBMS metrics are only relevant if MongooseIM is <a href="../../advanced-configuration/database-backends-configuration/">configured with an RDBMS backend</a>, MAM metrics when <a href="../../modules/mod_mam/">mod_mam is enabled</a> and MAM flush times when MAM is configured with an RDBMS backend with <code>async_writer</code> option (default).</p>
+<h4 id="example-graph-in-grafana">Example graph in Grafana</h4>
+<p><img alt="An example graph in Grafana" src="../example-grafana-graph.png" /></p>
+<p>This screenshot shows a graph plotting the RDBMS simple query time metric mentioned above.
+The graph is plotted for three nodes with each node having a different prefix: <code>mongoose.node1</code>, <code>mongoose.node2</code> and <code>mongoose.node3</code>.</p>
+<p>The queries take metrics for all nodes and all domains (<code>**</code> is a wildcard for multiple parts of the metric name) and group them <em>per-node</em> and <em>per-value-type</em> (respectively <code>1</code>st and <code>-1</code>st part of the metric's name).
+Parts of the names are indexed from <code>0</code>.</p>
+<p>Time-based metrics in MongooseIM are given in <strong>microseconds</strong>, so to display human-readable values in graph's legend, the Y-axis unit has to be edited on the <code>Axes</code> tab.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Reloading-configuration-on-a-running-system/" class="btn btn-neutral float-right" title="Reloading configuration on a running system">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Cluster-configuration-and-node-management/" class="btn btn-neutral" title="Cluster configuration and node management"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../Cluster-configuration-and-node-management/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Reloading-configuration-on-a-running-system/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

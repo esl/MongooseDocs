@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>Listener Modules - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Listener Modules";
+    var mkdocs_page_input_path = "advanced-configuration/Listener-modules.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Push-notifications/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../TLS-hardening/">TLS hardening</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../outgoing-connections/">Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Listener Modules</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#general">General</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#common-tls-options">Common TLS options</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fast_tls-specific-options">fast_tls - specific options</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#just_tls-specific-options">just_tls - specific options</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/client-certificate/">Client Certificate</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/HTTP-authentication-module/">HTTP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/gdpr-considerations/">GDPR considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Configuration &raquo;</li>
+        
+      
+    
+    <li>Listener Modules</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>Some of the MongooseIM modules are specialised in handling user connections.
+They can be used in the <code>listen</code> clause in the <code>mongooseim.cfg</code> file.
+See this section for their description and configuration options.</p>
+<p>Options described with a value type (e.g. string, integer) are key-value tuples.
+Other options are enabled by being added as atoms.
+E.g. a tuple option might be: <code>{access, c2s}</code> while other options are added as: <code>starttls</code>.</p>
+<h2 id="client-to-server-c2s-ejabberd_c2s">Client-to-server (C2S): <code>ejabberd_c2s</code></h2>
+<p>Handles pure XMPP client-to-server (C2S) connections, relies on <code>ejabberd_listener</code> for listening.
+It processes the incoming data from the user client, while the data reception and parsing is executed with <code>ejabberd_receiver</code>'s help.
+You only need to declare running <code>ejabberd_c2s</code>, to have the other 2 modules started and used.</p>
+<p><strong>Default port:</strong> 5222</p>
+<h3 id="configuration">Configuration</h3>
+<h4 id="general">General</h4>
+<ul>
+<li><code>access</code> (atom, default: <code>c2s</code>) - Access Rule to use for C2S connections.</li>
+<li><code>c2s_shaper</code> (atom, default: <code>none</code>) - Connection shaper to use for incoming C2S stanzas.</li>
+<li><code>max_stanza_size</code> (positive integer, default: infinity) - Maximum allowed incoming stanza size.
+ <strong>Warning:</strong> this limit is checked <strong>after</strong> the input data parsing, so it does not apply to the input data size itself.</li>
+<li><code>backlog</code> (positive integer, default 100) - overrides the default TCP backlog value</li>
+<li><code>max_fsm_queue</code> (positive integer, the value of this option set global) - message queue limit to prevent resource exhaustion; overrides the global value of this option</li>
+<li><code>hibernate_after</code> (integer, default: 0) - Time in milliseconds after which a client process spawned by this listener will hibernate.
+  Hibernation greatly reduces memory consumption of client processes, but <em>may</em> result in increased CPU consumption if a client is used <em>very</em> frequently.
+  The default, recommended value of 0 means that the client processes will hibernate at every opportunity.</li>
+<li><code>acceptors_num</code> (integer, default: 100) - For TCP-based listeners: the number of processes accepting new connections on the listening socket.</li>
+<li><code>zlib</code> (atom or a positive integer, default: disabled) - Enables ZLIB support, the integer value is a limit for a decompressed output size (to prevent successful <a href="https://xmpp.org/community/security-notices/uncontrolled-resource-consumption-with-highly-compressed-xmpp-stanzas.html">ZLIB bomb attack</a>); the limit can be disabled with an atom 'unlimited'.</li>
+</ul>
+<h4 id="common-tls-options">Common TLS options</h4>
+<ul>
+<li><code>starttls</code> (default: disabled) - Enables StartTLS support; requires <code>certfile</code>.</li>
+<li><code>starttls_required</code> (default: disabled) - enforces StartTLS usage.</li>
+<li><code>tls</code> (default: disabled) - When this option is set, clients must initiate a TLS session immediately after connecting, before beginning the normal XML stream.</li>
+<li><code>tls_module</code> (atom, default: <code>fast_tls</code>) - Provides a TLS library to use. <code>fast_tls</code> uses OpenSSL-based NIFs, while <code>just_tls</code> uses Erlang TLS implementation provided by OTP. They are fully interchangeable, with some exceptions (<code>ejabberd_c2s</code> options supported by only one of them are explicitly described, e.g. <code>crlfiles</code>).</li>
+<li><code>certfile</code> (string, default: no certfile will be used) - Path to the X509 PEM file with a certificate and a private key (not protected by a password).
+  If the certificate is signed by an intermediate CA, you should specify here the whole CA chain by concatenating all public keys together and appending the private key after that.</li>
+<li><code>cafile</code> (string, default: no CA file will be used) - Path to the X509 PEM file with a CA chain that will be used to verify clients. Won't have any effect if <code>verify_peer</code> is not enabled.</li>
+<li><code>verify_peer</code> (default: disabled) - Enforces verification of a client certificate. Requires a valid <code>cafile</code>.</li>
+<li><code>dhfile</code> (string, default: no DH file will be used) - Path to the Diffie Hellman parameter file</li>
+</ul>
+<h4 id="fast_tls-specific-options"><code>fast_tls</code> - specific options</h4>
+<ul>
+<li><code>ciphers</code> (string, default: <code>"TLSv1.2:TLSv1.3"</code>) - <a name="c2s-ciphers"></a>Cipher suites to use with StartTLS or TLS. Please refer to the <a href="http://www.openssl.org/docs/man1.0.2/apps/ciphers.html">OpenSSL documentation</a> for the cipher string format.</li>
+<li><code>protocol_options</code> List of OpenSSL options, the default value is <code>["no_sslv2", "no_sslv3", "no_tlsv1, "no_tlsv1_1"]</code>. You can find the mappings between supported options and actual OpenSSL flags in the <code>fast_tls</code> <a href="https://github.com/processone/fast_tls/blob/master/c_src/options.h">source code</a>.</li>
+</ul>
+<h4 id="just_tls-specific-options"><code>just_tls</code> - specific options</h4>
+<ul>
+<li><code>crlfiles</code> (list of strings, default: []) - A list of paths to Certificate Revocation Lists.</li>
+</ul>
+<h2 id="http-based-services-bosh-websocket-rest-ejabberd_cowboy">HTTP-based services (BOSH, WebSocket, REST): <code>ejabberd_cowboy</code></h2>
+<p>Manages all HTTP-based services, such as BOSH (HTTP long-polling) and WebSocket.
+Unlike <code>ejabberd_c2s</code>, it doesn't use <code>ejabberd_receiver</code> or <code>ejabberd_listener</code>.</p>
+<p><strong>Default port:</strong> 5280</p>
+<h3 id="configuration_1">Configuration</h3>
+<ul>
+<li><code>ip</code> (IP tuple, default: <code>{0,0,0,0}</code>) - IP address to bind to.</li>
+<li><code>num_acceptors</code> (positive integer, default: 100) - Number of acceptors.</li>
+<li><code>transport_options</code> (proplist, default: []) - Ranch-specific transport options.
+ See <a href="https://ninenines.eu/docs/en/ranch/1.7/manual/ranch/#_opt">ranch:opt()</a>.</li>
+<li><code>protocol_options</code> (proplist, default: []) - Protocol configuration options for Cowboy.
+ See <a href="https://ninenines.eu/docs/en/cowboy/2.6/manual/cowboy_http/">Cowboy HTTP module docs</a>.</li>
+<li>
+<p><code>ssl</code> (list of ssl options, required for https, no default value) - If specified, https will be used.
+ Accepts all ranch_ssl options that don't take fun() parameters.
+ Only <code>certfile</code> and <code>keyfile</code> are mandatory.
+ See <a href="https://github.com/ninenines/ranch/blob/master/doc/src/manual/ranch_ssl.asciidoc">ranch_ssl documentation</a> for details. A minimal usage would be as follows:</p>
+<pre><code>{ssl, [
+    {certfile, "priv/ssl/fake_cert.pem"},
+    {keyfile, "priv/ssl/fake_key.pem"},
+]},
+</code></pre>
+<p>Here, <code>certfile</code> and <code>keyfile</code> specify the certificate and private key files respectively.
+If the keyfile is password-protected, one will need to specify the password with <code>{password, "secret"}</code>.
+If the certificate is signed by an intermediate CA, one will probably want to specify the CA chain with <code>cacertfile</code> option.</p>
+<p>Note that <code>port</code>, <code>ip</code> and <code>max_connections</code> are taken from the listener config above and will be ignored if specified under <code>ssl</code>.</p>
+</li>
+<li>
+<p><code>modules</code> (list of tuples: <code>{Host, Path, Modules}</code>) - List of enabled HTTP-based modules. <code>"_"</code> equals any host.</p>
+<ul>
+<li>
+<p><code>mod_bosh</code> - BOSH connections handler.
+ Default declaration:</p>
+<pre><code>`{"_", "/http-bind", mod_bosh}`
+</code></pre>
+</li>
+<li>
+<p><code>mod_websockets</code> - Websocket connections as defined in <a href="https://tools.ietf.org/html/rfc7395">RFC 7395</a>.
+You can pass optional parameters:</p>
+<ul>
+<li><code>{timeout, Val}</code> (positive integer, default: infinity) - the time after which an inactive user is disconnected.</li>
+<li><code>{ping_rate, Val}</code> (positive integer, default: none) - the Ping rate points to the time between pings sent by server.
+ By declaring this field you enable server-side pinging.</li>
+<li><code>{max_stanza_size, Val}</code> (positive integer, default: infinity) - Maximum allowed incoming stanza size.
+  <strong>Warning:</strong> this limit is checked <strong>after</strong> the input data parsing, so it does not apply to the input data size itself.</li>
+<li><code>{ejabberd_service, Params}</code> (default: []) - this enables external component connections over WebSockets.
+ See the <a href="#ejabberd_service">ejabberd_service</a> section for more details how to configure it.</li>
+</ul>
+<p>Default declaration:</p>
+<pre><code>`{"_", "/ws-xmpp", mod_websockets, []}`
+</code></pre>
+</li>
+<li>
+<p><i>(OBSOLETE)</i> <code>mongoose_api</code> - REST API for accessing internal MongooseIM metrics.
+    Please refer to the <a href="../../rest-api/Metrics-backend/">REST interface to metrics</a> page for more information.
+Default declaration:</p>
+<pre><code>`{"localhost", "/api", mongoose_api, [{handlers, [mongoose_api_metrics]}]}`
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><code>mongoose_api_admin</code> -  REST API for admin commands. Exposes all mongoose_commands.
+                    It expects one optional argument:</p>
+<ul>
+<li>Credentials: <code>{auth, {Username, Password}}</code>.
+    If they're not provided, authorization is disabled.</li>
+</ul>
+<p>Example:</p>
+<pre><code>    `{"localhost", "/api", mongoose_api_admin, [{auth, {&lt;&lt;"ala"&gt;&gt;, &lt;&lt;"makotaipsa"&gt;&gt;}}]}`
+</code></pre>
+</li>
+<li>
+<p><code>mongoose_api_client</code> - REST API for client side commands.
+     Exposes all mongoose_commands marked as "user".</p>
+<p>Example:</p>
+<pre><code>    `{"localhost", "/api/contacts/{:jid}", mongoose_api_client_contacts, []}`
+</code></pre>
+</li>
+</ul>
+<h3 id="http-module-mod_cowboy">HTTP module: <code>mod_cowboy</code></h3>
+<p>This module provides an additional routing layer on top of HTTP(s) or WS(S) protocols.
+It allows other HTTP/WS modules to coexist under the same URL on the single port.
+Packets are forwarded to them based on the protocol.
+This mechanism is transparent to actual handlers so the path sharing does not require any additional code.</p>
+<p>Example: If you wish, you can use BOSH and WS XMPP handlers (mod_bosh, mod_websockets) on a single port and a URL without any code modifications.</p>
+<p>Here's an example of its configuration (added to ejabberd_cowboy modules list described above):</p>
+<pre><code class="language-Erlang">{&quot;_&quot;, &quot;/[...]&quot;, mod_cowboy, [{http, mod_revproxy,
+                               [{timeout, 5000},
+                                % time limit for upstream to respond
+                                {body_length, 8000000},
+                                % maximum body size (may be infinity)
+                                {custom_headers, [{&lt;&lt;&quot;header&quot;&gt;&gt;,&lt;&lt;&quot;value&quot;&gt;&gt;}]}
+                                % list of extra headers that are send to upstream
+                               ]},
+                               {ws, xmpp, mod_websockets}
+                              ]},
+</code></pre>
+<p>According to this configuration, all HTTP requests will go through the <code>mod_revproxy</code> module (see <a href="../../modules/mod_revproxy/">mod_revproxy</a> for more details).
+As for now, all WebSocket connections with the <code>Sec-WebSocket-Protocol: xmpp</code> header, will go through the mod_websockets connection.
+This is the MongooseIM's regular websocket connection handler.</p>
+<h2 id="server-to-server-s2s-ejabberd_s2s_in">Server-to-server (S2S): <code>ejabberd_s2s_in</code></h2>
+<p>Handles incoming server-to-server (S2S) connections (federation).
+Relies on <code>ejabberd_listener</code> and <code>ejabberd_receiver</code> just like <code>ejabberd_c2s</code>.</p>
+<p><strong>Note:</strong> Many S2S options are configured as top-level config options and they apply to both incoming and outgoing connections.
+Please refer to the <a href="../../Advanced-configuration/">Advanced configuration</a> for more information.</p>
+<p><strong>Default port:</strong> 5269</p>
+<h3 id="configuration_2">Configuration</h3>
+<ul>
+<li><code>shaper</code> (atom, default: <code>none</code>) - Connection shaper to use for incoming S2S data.</li>
+<li><code>max_stanza_size</code> (positive integer, default: infinity) - Maximum allowed incoming stanza size.
+ <strong>Warning:</strong> this limit is checked <strong>after</strong> input data parsing, so it does not apply to the input data size itself.</li>
+<li><code>protocol_options</code> List of supported SSL protocols, default "no_sslv3".
+ It also accepts "no_tlsv1" and "no_tlsv1_1"</li>
+<li><code>dhfile</code> (string, default: no DH file will be used) - Path to the Diffie Hellman parameter file</li>
+<li><code>ciphers</code> (string, default: <code>"TLSv1.2:TLSv1.3"</code>) - cipher suites to use with StartTLS. <a name="s2s-ciphers"></a></li>
+<li><code>cafile</code> (string, default: no CA file will be used) - Path to the X509 PEM file with a CA chain that will be used to verify clients (here server initiating S2S connection).</li>
+</ul>
+<h2 id="xmpp-components-ejabberd_service">XMPP components: <code>ejabberd_service</code></h2>
+<p>Interface for XMPP components (<a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114: Jabber Component Protocol</a>), enabling communication between servers and "external" components over the XMPP network.</p>
+<p><strong>Default port:</strong> 8888</p>
+<h3 id="configuration_3">Configuration</h3>
+<ul>
+<li><code>access</code> (atom, default: <code>all</code>) - Access Rule to use for incoming component connections.</li>
+<li><code>password</code> (string) - the service is protected with this password</li>
+<li><code>shaper_rule</code> (atom, default: <code>none</code>) - Connection shaper to use for incoming component traffic.</li>
+<li><code>service_check_from</code> (boolean, default: <code>true</code>) - Checks whether the server should verify the "from" field in stanzas from the component</li>
+<li><code>max_fsm_queue</code> (positive integer, the value of this option set global) - message queue limit to prevent resource exhaustion; overrides the global value of this option</li>
+<li><code>hidden_components</code> (boolean, default: <code>false</code>) - All components connected to an endpoint with this option enabled will be considered "hidden" (see explanation below).</li>
+<li><code>conflict_behaviour</code> (<code>disconnect</code>, <code>kick_old</code>, default: <code>disconnect</code>) - If set to <code>kick_old</code>, in case of a routing conflict it stops the previous connection (see the explanation below). </li>
+</ul>
+<p>According to (<a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114: Jabber Component Protocol</a>) component's hostname should be given in the <stream:stream> element.</p>
+<h3 id="custom-extension-to-the-protocol">Custom extension to the protocol</h3>
+<p>In order to register a component for all virtual hosts served by the server (listed in global variable hosts), the component must add the attribute <code>is_subdomain="true"</code> to the opening stream element.
+This maybe helpful if someone wants to have a single instance of a component serving multiple virtual hosts.
+The <code>is_subdomain</code> attribute is optional and the default behaviour is as described in the XEP.</p>
+<h3 id="hidden-components">Hidden components</h3>
+<p>Hidden components have a special flag enabled in the internal component table.
+Alone, it doesn't change the server behaviour in any way, but it may be used by other modules and extensions to execute special logic.
+An example would be <a href="../../modules/mod_disco/"><code>mod_disco</code></a>, which may be configured to filter out hidden components from disco results, so they won't be discoverable by clients.
+A reason to do so could be reduced traffic - systems with many components could return very long disco responses.
+Also, some deployments would like to avoid revealing some services; not because it is a security threat (this method does not prevent clients from communicating with hidden components), but rather because they are not meant to interact with clients directly (e.g. helper components for other components).</p>
+<h2 id="conflict-behaviour">Conflict behaviour</h2>
+<p>By default, when a component tries to connect and a registration conflict occures, we drop such connection by sending:</p>
+<pre><code class="language-xml">&lt;stream:error&gt;
+  &lt;conflict xmlns='urn:ietf:params:xml:ns:xmpp-streams'/&gt;
+&lt;/stream:error&gt;
+&lt;/stream:stream&gt;
+</code></pre>
+<p>It makes implementing the reconnection logic difficult, because the old connection would not allow any other connections.</p>
+<p>By setting <code>{conflict_behaviour, kick_old}</code>, we drop any old connections registered at the same host, before accepting new ones.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../acl/" class="btn btn-neutral float-right" title="ACL">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Modules/" class="btn btn-neutral" title="Extension Modules"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../Modules/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../acl/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
