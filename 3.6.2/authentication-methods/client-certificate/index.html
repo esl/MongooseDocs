@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>Client Certificate - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Client Certificate";
+    var mkdocs_page_input_path = "authentication-methods/client-certificate.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications/">How to Set up Push Notifications</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications-client-side/">How to Set up Push Notifications on the client side</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/With-MongoosePush/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.5.0_3.6.0/">3.5.0 to 3.6.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/TLS-hardening/">TLS hardening</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/outgoing-connections/">Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Listener-modules/">Listener Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Client Certificate</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/HTTP-authentication-module/">HTTP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/Riak-authentication-module/">Riak Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/Dummy-authentication-module/">Dummy Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/gdpr-considerations/">GDPR considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/">System Metrics Privacy Policy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Authentication methods &raquo;</li>
+        
+      
+    
+    <li>Client Certificate</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="overview">Overview</h2>
+<p>Clients connected to MongooseIM may authenticate with their TLS certificates.
+This method uses the <code>SASL EXTERNAL</code> mechanism.</p>
+<h2 id="server-side-prerequisites">Server-side prerequisites</h2>
+<h3 id="properly-configure-ejabberd_c2s-listener">Properly configure <code>ejabberd_c2s</code> listener</h3>
+<p>A server must request the certificate from a client, so you'll need to enable <code>verify_peer</code> option and provide a path to CA chain that may be used for client's certificate check (<code>cafile</code> option).</p>
+<p>Please check <a href="../../advanced-configuration/Listener-modules/#client-to-server-c2s-ejabberd_c2s">Listener modules</a> page for more information or simply follow the examples at the end of this section.</p>
+<h3 id="properly-configure-ejabberd_cowboy-listener">Properly configure <code>ejabberd_cowboy</code> listener</h3>
+<p>SASL EXTERNAL authentication is also possible for WebSocketSecure and BOSH connections over HTTPS.
+Similarly as in <code>ejabberd_c2s</code> case, the server must request the certificate from the client.
+In this case it's enabled by adding the following options to <code>ssl</code> option of <code>ejabberd_cowboy</code> :</p>
+<ul>
+<li><code>{verify, verify_peer}</code> - this is to tell Erlang's SSL to request the cert from the client</li>
+<li><code>{cacertfile, "/path/to/ca.pem"}</code> - this is to tell Erlang's SSL where  the CA cert file is in order to check if the cert is correctly signed</li>
+</ul>
+<p>Please check <a href="../../advanced-configuration/Listener-modules/#http-based-services-bosh-websocket-rest-ejabberd_cowboy">Listener modules</a> for more details regarding <code>ejabberd_cowboy</code> configuration.</p>
+<h3 id="enable-sasl-external-method">Enable <code>SASL EXTERNAL</code> method</h3>
+<p>A <code>SASL EXTERNAL</code> authentication method is disabled by default.
+In order to enable it, please add <a href="../../Advanced-configuration/#authentication"><code>sasl_mechanisms</code> option</a> to MongooseIM config file.
+Its value must include a <code>cyrsasl_external</code> item.
+Obviously the list may be longer, if the system should support both the certificate and password based authentication.</p>
+<p>The <code>SASL EXTERNAL</code> authentication method requires a digital client certificate.
+This digital certificate should contain <code>xmppAddr</code> field(s), which is always checked first.
+If there is more than one JID specified in the <code>xmppAddr</code> fields, the client must include the authorisation entity which corresponds to the one of the specified JIDs.</p>
+<p>When no <code>xmppAddr</code> is specified, the <code>cn</code> (common name) field might be used to provide client's username, but it is optional (not enabled by default).
+There are three possible ways of using the <code>SASL EXTERNAL</code> authentication
+method. It can be configured by adding one of the following options to
+the list of <code>auth_opts</code> in MongooseIM config file:</p>
+<ul>
+<li><code>{cyrsasl_external, standard}</code> - do not accept a certificate with no <code>xmpp_addrs</code> field (default);</li>
+<li><code>{cyrsasl_external, use_common_name}</code> - use the <code>common_name</code> field if it is provided in the certificate;</li>
+<li><code>{cyrsasl_external, allow_just_user_identity}</code> - accept a certificate if there are no <code>xmpp_addrs</code>
+provided and use the user identity from the authentication request.</li>
+</ul>
+<p>If the client certificate does not contain a JID, the client must provide one in authorisation entity. </p>
+<p>For the details please refer to <a href="https://xmpp.org/extensions/xep-0178.html">XEP-0178 Best Practices for Use of SASL EXTERNAL with Certificates</a>.</p>
+<h3 id="enable-compatible-authentication-backend">Enable compatible authentication backend</h3>
+<p>You need to enable one of the following authentication backends by using the <a href="../../Advanced-configuration/#authentication"><code>auth_method</code> option</a> in the MongooseIM configuration file.</p>
+<ul>
+<li><code>pki</code> - accepts user credentials,</li>
+<li><code>http</code> - accepts user credentials if the provided certificate is <a href="../../authentication-backends/HTTP-authentication-module/#method-get_certs">known and valid</a></li>
+<li><code>ldap</code> - accepts user credentials if a corresponding user account exists in LDAP.</li>
+</ul>
+<h3 id="self-signed-certificates">Self-signed certificates</h3>
+<p>By default MongooseIM doesn't accept self-signed certs for the SASL-EXTERNAL authentication.
+For development purposes, it is possible to tell MongooseIM to accept them.</p>
+<h4 id="self-signed-certificates-for-regular-tcptls-connections">Self-signed certificates for regular TCP/TLS connections</h4>
+<p>In order to tell MongooseIM to accept self-signed certs, the <code>ssl_options</code> list needs to be added to <code>ejabberd_c2s</code> listener config like below:</p>
+<pre><code class="language-Erlang">{ssl_options, [{verify_fun, {selfsigned_peer, DisconnectOnVerificationFailure}}]}
+</code></pre>
+<p>where the <code>DisconnectOnVerificationFailure</code> is a boolean with the following meaning only for <code>just_tls</code>:</p>
+<ul>
+<li><code>true</code> - the connection is closed if a certificate is invalid,</li>
+<li><code>false</code> - the connection isn't closed, but the certificate is not returned if it's invalid.
+  This leads to an authentication failure but allows the client to choose a different auth method if available.</li>
+</ul>
+<p>For <code>fast_tls</code> backend, the configuration is the same, only the <code>DisconnectOnVerificationFailure</code> is ignored.</p>
+<h4 id="self-signed-certificates-for-ws-or-bosh">Self-signed certificates for WS or BOSH</h4>
+<p>In order to accept self-signed certs for WS or BOSH connections, the <code>ssl</code> option list of <code>ejabberd_cowboy</code> must contain the following pair:</p>
+<pre><code class="language-Erlang">{verify_mode, selfsigned_peer}
+</code></pre>
+<h3 id="examples">Examples</h3>
+<p>Certificate authentication only.</p>
+<pre><code class="language-Erlang">{listen, [
+           (...)
+           {5222, ejabberd_c2s, [
+                                  (...)
+                                  {cafile, &quot;/path/to/ca.pem&quot;},
+                                  verify_peer,
+                                  (...)
+                                ]},
+           (...)
+
+           {5285, ejabberd_cowboy, [
+
+                                    {ssl, [(...),
+                                           {verify, verify_peer},
+                                           {cacertfile, &quot;/path/to/ca.pem&quot;}
+                                           ]},
+                                    {modules, [{mod_websockets, []},
+                                               {mod_bosh, []}]},
+                                    (...)
+
+           ]},
+
+           (...)
+         ]}.
+
+{auth_method, [pki]}.
+
+{sasl_mechanisms, [cyrsasl_external]}.
+</code></pre>
+<p>Authentication with a client certificate (validated with provided CA chain) or password (validated with data stored in RDBMS).</p>
+<pre><code>{listen, [
+           (...)
+           {5222, ejabberd_c2s, [
+                                  (...)
+                                  {cafile, &quot;/path/to/ca.pem&quot;},
+                                  verify_peer,
+                                  (...)
+                                ]},
+           (...)
+         ]}.
+
+
+{auth_method, [rdbms, pki]}.
+
+{sasl_mechanisms, [cyrsasl_scram, cyrsasl_external]}.
+</code></pre>
+<h2 id="client-certificate-prerequisites">Client certificate prerequisites</h2>
+<p><code>SASL EXTERNAL</code> will be offered by the server <strong>only when a client provides a valid certificate</strong>.</p>
+<p>Please check documentation of a specific authentication backend you're going to use.</p>
+<h2 id="usage-example-gajim">Usage example - Gajim</h2>
+<p>Verified with Gajim 0.16.8, installed from package <code>gajim-0.16.8-1.fc25.noarch</code>.</p>
+<h3 id="generate-client-certificate">Generate client certificate</h3>
+<pre><code>openssl genrsa -des3 -out rootCA.key 4096
+openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.crt
+openssl genrsa -out client.key 2048
+openssl req -new -key client.key -out client.csr # Remember to provide username as Common Name!
+openssl x509 -req -in client.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out client.crt -days 500 -sha256
+openssl pkcs12 -export -inkey client.key -in client.crt -out client.p12
+</code></pre>
+<h3 id="configure-mongooseim">Configure MongooseIM</h3>
+<p>See examples in the section above. We recommend using the first snippet for simplicity.</p>
+<p>You don't need to pre-create a user account in order to log in with a certificate.</p>
+<h3 id="add-an-account-in-gajim">Add an account in Gajim</h3>
+<ol>
+<li>Edit -&gt; Accounts -&gt; Add.</li>
+<li>Pick "I already have an account I want to use".</li>
+<li>Jabber ID is <code>[Common Name from certificate]@localhost</code> (domain is different if you've changed it in <code>hosts</code> option). Press "Next".</li>
+<li>Untick "Connect when I press Finish" and press "Advanced".</li>
+<li>Unfold "Client certificate" and choose the <code>.p12</code> you've created earlier. Tick "Certificate is encrypted".</li>
+<li>Click "Close" and set status to "Available". Tell Gajim to ingnore the unverified server certificate (by default it's self-signed).</li>
+</ol>
+<p>If Gajim fails to connect, try to restart it.
+Version 0.16.8 sometimes "forgets" to ask for the client certificate password.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../authentication-backends/External-authentication-module/" class="btn btn-neutral float-right" title="External Authentication Module">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../advanced-configuration/Services/" class="btn btn-neutral" title="Services"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../advanced-configuration/Services/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../authentication-backends/External-authentication-module/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

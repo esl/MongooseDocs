@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>mod_global_distrib - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "mod_global_distrib";
+    var mkdocs_page_input_path = "modules/mod_global_distrib.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications/">How to Set up Push Notifications</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications-client-side/">How to Set up Push Notifications on the client side</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/With-MongoosePush/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.5.0_3.6.0/">3.5.0 to 3.6.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/TLS-hardening/">TLS hardening</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/outgoing-connections/">Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Listener-modules/">Listener Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/client-certificate/">Client Certificate</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/HTTP-authentication-module/">HTTP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/Riak-authentication-module/">Riak Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/Dummy-authentication-module/">Dummy Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/gdpr-considerations/">GDPR considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/">System Metrics Privacy Policy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">mod_global_distrib</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Module index &raquo;</li>
+        
+      
+    
+    <li>mod_global_distrib</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h3 id="module-description">Module Description</h3>
+<p>This module enables global distribution of a single XMPP domain.
+With <code>mod_global_distrib</code>, multiple distinct MongooseIM clusters can share a single domain name and route messages to the specific datacenter where the recipient is available.</p>
+<h3 id="how-it-works">How it works</h3>
+<p>There are multiple subsystems that cooperate to enable global distribution:</p>
+<h4 id="metadata-sharing">Metadata sharing</h4>
+<p>Sharing of metadata is done by leveraging a database with cross-datacenter replication.
+Currently, only Redis is supported, with <a href="https://github.com/Netflix/dynomite">Dynomite</a> layer for replication.
+The most important metadata stored in the database is a <strong>session/routing table</strong>.
+The table stores mappings between currently logged users' JIDs and datacenters on which they are logged in.
+Because access to the session table is very frequent, its entries are additionally cached on each node.</p>
+<p>To preserve consistency between database instances, all data is stored with a set expiration time and is periodically refreshed.
+Each node of each cluster is responsible for refreshing its own data.
+Thus, in an event of a netsplit, datacenters' information about unreachable datacenters' users will expire, as those users are now unreachable; but once the connection is reestablished, the data will be replicated again as datacenters refresh their entries.
+Additionally, to prevent edge cases where an incoming message is received and replied to before the datacenter learns about the sender's host, an incoming message also carries information about its origin which may be used to temporarily update the local routing table.</p>
+<h5 id="redis-entries">Redis entries</h5>
+<p>Following structures are stored in Redis:</p>
+<ul>
+<li>JID mappings are stored as normal key-value entries, where user's JID (full and bare) is the key, and the value is the local hostname where the user is logged in.
+Example: <code>"user1@example.com/res" -&gt; "dc2.example.com"</code>.</li>
+<li>Domains of components and services registered on the globally distributed host are stored in per-node set structures where the key is <code>&lt;local_host&gt;#&lt;node_name&gt;#{domains}</code>, and the values are the domain names.
+Example: <code>"dc1.example.com#mongoose1@dc1.example.com#{domains}" -&gt; {"muc1.example.com", "muc2.example.com"}</code>.</li>
+<li>Domains of non-hidden components and services (see <a href="../../advanced-configuration/Listener-modules/#xmpp-components-ejabberd_service"><code>ejabberd_service</code></a> documentation) are stored in per-node set structures where the key is <code>&lt;local_host&gt;#&lt;node_name&gt;#{public_domains}</code>, and the values are the domain names.</li>
+<li>Declared endpoints available on a node are similarly stored in a per-node set structure where the key is <code>&lt;local_host&gt;#&lt;node_name&gt;#{endpoints}</code> and the values represent the TCP endpoints of the node.
+Example: <code>"dc1.example.com#mongoose1@dc1.example.com#{endpoints}" -&gt; {"172.16.2.14#8231", "2001:0db8:85a3:0000:0000:8a2e:0370:7334#8882"}</code>.</li>
+<li>Nodes that comprise a host are stored in a set structure with key <code>&lt;local_host&gt;#{nodes}</code> and values being the names of the nodes.
+Example: <code>"dc2.example.com#{nodes}" -&gt; {"node1@dc2.example.com", "node3@dc2.example.com"}</code>.</li>
+<li>Hosts are stored in a set with key <code>hosts</code> and values being the individual local XMPP domains.
+Example: <code>"hosts" -&gt; {"dc1.example.com", "dc2.example.com"}</code>.</li>
+</ul>
+<h4 id="message-routing">Message routing</h4>
+<p><code>mod_global_distrib</code> establishes its own listeners and dedicated TCP/TLS connections for message routing.
+Each node listens on preconfigured endpoints, where each node in a datacenter can have any number of endpoints, including none.
+The endpoints are shared between all datacenters.
+If a node becomes unavailable, its endpoint entries in the database will expire and will be readded once the node comes back online.</p>
+<p>Connections between nodes in distinct datacenters are opened on the first request and then maintained as long as the destination endpoint is present in Redis.
+When a node needs to connect to a remote cluster, specified number of connections are opened to every endpoint reported by that datacenter.
+Global distribution features automatic rebalancing feature that will "disable" connections when their respective endpoints disappear from Redis.
+A new pool of connections is created each time a new endpoint is recognised.
+Whenever a node receives a message that is determined (by consulting the session table) to be destined for another datacenter, the routing procedure in the current datacenter is interrupted, the message is transported to the other datacenter via the dedicated connections, and the routing procedure is restarted there by a dedicated (but potentially short lived) worker process bound to the sender's JID (or subdomain if the sender's JIDs does not belong to the globally distributed domain).
+Client's process binds itself to a connection to a remote datacenter on first use, and henceforth always uses this connection to route messages directed to this datacenter.
+This - along with the dedicated worker process on the receiver's side - ensures that simple cross-datacenter messages between two entities are delivered in their sending order.</p>
+<p>It may happen that a message is rerouted through multiple datacenters (e.g. if the user has reconnected to a different datacenter while the message was already in flight).
+Messages are given a TTL parameter by the source datacenter so that they cannot be rerouted indefinitely.
+The TTL is decreased on each reroute.
+Note that in the edge case of multi-datacenter routing, the messages may be received out-of-order at the destination datacenter.</p>
+<h4 id="bounce">Bounce</h4>
+<p>Consider the following edge case: user <strong>U1</strong> logged into datacenter <strong>DC2</strong> quickly reconnects to datacenter <strong>DC3</strong>.
+Because session table has not yet been replicated, <strong>DC2</strong> does not see <strong>U1</strong> in the session table, while a different datacenter <strong>DC1</strong> still sees <strong>U1</strong> logged into <strong>DC2</strong>.
+When <strong>U2</strong>, logged into <strong>DC1</strong>, sends a message to <strong>U1</strong>, it will now be rerouted to <strong>DC2</strong> even though the user is now available at <strong>DC3</strong>.</p>
+<p><img alt="State after U1's reconnection" src="../mod_global_distrib_bounce_example.svg" /></p>
+<p>Bounce mechanism solves this and similar edge cases by storing messages for which there is no known routing in the current datacenter.
+The stored messages are then assigned a bounce-TTL value and periodically - with backoff - are attempted to be routed again.
+In the example above, the message from <strong>U2</strong> would be temporarily stored at <strong>DC2</strong> and rerouted successfully once <strong>DC2</strong> learns (via replication) that <strong>U1</strong> is available at <strong>DC3</strong>.</p>
+<blockquote>
+<p>Note: bounce mechanism, similarly to multi-datacenter routing, may result in out-of-order messages being received at the destination datacenter.</p>
+</blockquote>
+<h4 id="metrics">Metrics</h4>
+<p>Global distribution modules expose several per-datacenter metrics that can be used to monitor health of the system. All metrics begin with <strong>global.mod_global_distrib</strong> prefix:</p>
+<ul>
+<li><code>outgoing.messages.&lt;host&gt;</code>: number of cross-datacenter messages sent by this cluster to a given host.</li>
+<li><code>incoming.messages.&lt;host&gt;</code>: number of cross-datacenter messages received by this cluster from a given host.</li>
+<li><code>incoming.transfer_time.&lt;host&gt;</code> <em>[us]</em>: time elapsed between sending and receiving the message over the network from a given host.
+  The duration is calculated using wall clock times on sender and receiver node.</li>
+<li><code>outgoing.queue_time.&lt;host&gt;</code> <em>[us]</em>: time elapsed while message waits in a queue of a sender's connection to a given host.
+  High value of this metric may be remedied by increasing the number of connections to other hosts.</li>
+<li><code>incoming.queue_time</code> <em>[us]</em>: time elapsed while message waits in routing worker's queue.
+  This value is not reported per-host as routing workers are bound to the sender's JID.</li>
+<li><code>incoming.established</code>: incremented when a new connection is established from another cluster.
+  At this point the origin domain of the cluster is not known, so this metric is common for all of them.</li>
+<li><code>incoming.first_packet.&lt;host&gt;</code>: incremented when a receiver process gets the first packet from a remote cluster and learns its local domain.</li>
+<li><code>incoming.closed.&lt;host&gt;</code>: incremented when an incoming connection gets closed.</li>
+<li><code>incoming.errored.&lt;host&gt;</code>: incremented when an incoming connection gets closed with an error.</li>
+<li><code>outgoing.established.&lt;host&gt;</code>: incremented when an outgoing connection is established.</li>
+<li><code>outgoing.closed.&lt;host&gt;</code>: incremented when an outgoing connection gets closed.</li>
+<li><code>outgoing.errored.&lt;host&gt;</code>: incremented when an outgoing connection gets closed with an error.</li>
+<li><code>mapping_fetch_time</code> <em>[us]</em>: time spent on fetching an entry from the session table, cached or otherwise.</li>
+<li><code>mapping_fetches</code>: number of fetches of session table entries, cached or otherwise.</li>
+<li><code>mapping_cache_misses</code>: number of fetches of session table entries that hit the database.</li>
+<li><code>delivered_with_ttl</code>: A histogram of packets' TTL values recorded when the global routing layer decides to route them locally (but not due to TTL = 0).</li>
+<li><code>stop_ttl_zero</code>: A number of packets that weren't processed by global routing due to TTL=0.</li>
+<li><code>bounce_queue_size</code>: a number of messages enqueued for rerouting (the value of this metric is individual per MongooseIM node!).</li>
+</ul>
+<h3 id="notes">Notes</h3>
+<ul>
+<li>You should only start <code>mod_global_distrib</code> by configuring it under <code>modules</code> option in <code>mongooseim.cfg</code>. Do not add it as host-specific module via <code>host_config</code>.</li>
+<li>Do not use <code>mod_offline</code> on domains given via <code>global_host</code> or <code>local_host</code> options, as it will decrease messaging robustness; the users logged in other datacenters will not be registered as available by <code>mod_offline</code>, and so the messages will not be flushed.</li>
+</ul>
+<h3 id="options">Options</h3>
+<ul>
+<li><strong>global_host</strong> (string, required): The XMPP domain that will be shared between datacenters.
+  <em>Note:</em> this needs to be one of the domains given in <code>host</code> option in <code>mongooseim.cfg</code>.</li>
+<li><strong>local_host</strong> (string, required): XMPP domain that maps uniquely to the local datacenter; it will be used for inter-center routing.
+  <em>Note:</em> this needs to be one of the domains given in <code>host</code> option in <code>mongooseim.cfg</code>.</li>
+<li><strong>message_ttl</strong> (integer, default: <code>4</code>): Number of times a message can be rerouted between datacenters.</li>
+<li><strong>connections</strong> (list, default: <code>[]</code>): Options for connections maintained by the module; see <em>Connections' options</em> section.</li>
+<li><strong>cache</strong> (list, default: <code>[]</code>): Options for caching database lookups; see <em>Database cache options</em> section.</li>
+<li><strong>bounce</strong> (list | <code>false</code>, default: <code>[]</code>): Options for message bouncing; if <code>false</code>, message bouncing is disabled.
+  See <em>Message bouncing options</em> section.</li>
+<li><strong>redis</strong> (list, default: <code>[]</code>): Options for Redis session storage backend.</li>
+<li><strong>hosts_refresh_interval</strong> (integer, default: 3000) - The interval (in milliseconds) telling how often Redis should be asked if new hosts appeared.</li>
+</ul>
+<h4 id="connections-options">Connections' options</h4>
+<ul>
+<li><strong>endpoints</strong> (list, default: <code>[{LocalHost, 5555}]</code>): A list of <code>{Host, Port}</code> tuples on which the server will listen for connections.
+  <code>Host</code> can be given as a hostname, in which case it will be resolved to an IP address before first on module start.
+  The endpoint list will be shared with other datacenters via the replicated backend.</li>
+<li><strong>advertised_endpoints</strong> (list | false, default: false): A list of <code>{Host, Port}</code> tuples which will be advertised in Redis and therefore used to establish connection with this node by other nodes. If not specified, <code>endpoints</code> value (after resolution) is considered <code>advertised_endpoints</code>. The host may be either IP or domain, just like in case of endpoints. The difference is, the domain name won't be resolved but inserted directly to the mappings backend instead.</li>
+<li><strong>connections_per_endpoint</strong> (integer, default: <code>1</code>): Number of outgoing connections that will be established from the current node to each endpoint assigned to a remote domain.</li>
+<li><strong>endpoint_refresh_interval</strong> (seconds, default: <code>60</code>): An interval between remote endpoint list refresh (and connection rebalancing).
+  A separate timer is maintained for every remote domain.</li>
+<li><strong>endpoint_refresh_interval_when_empty</strong> (seconds, default: <code>3</code>): Endpoint refresh interval, when list of endpoints is empty.</li>
+<li><strong>disabled_gc_interval</strong> (seconds, default: <code>60</code>): An interval between disabled endpoints "garbage collection".
+  It means that disabled endpoints are periodically verified and if Global Distribution detects that connections is no longer alive, the connection pool is closed completely.</li>
+<li><strong>tls_opts</strong> (list, required): Options for TLS connections passed to the <code>fast_tls</code> driver.<a name="tls_opts"></a>
+  May be set to <code>false</code>, in which case all data will be sent via standard TCP connections.
+  Otherwise, they should at least include <code>certfile</code> and <code>cafile</code> options.</li>
+</ul>
+<h4 id="redis-session-storage-options">Redis session storage options</h4>
+<ul>
+<li><strong>pool</strong> (atom, default: <code>global_distrib</code>): Name of the redis pool defined in <a href="../../advanced-configuration/outgoing-connections/">outgoing pools</a>.</li>
+<li><strong>expire_after</strong> (integer, default: <code>120</code>): Number of seconds after which a session entry written by this cluster will expire.</li>
+<li><strong>refresh_after</strong> (integer, default: <code>60</code>): Number of seconds after which session's expiration timer will be refreshed.</li>
+</ul>
+<h4 id="database-cache-options">Database cache options</h4>
+<ul>
+<li><strong>cache_missed</strong> (boolean, default: <code>true</code>): Determines whether an internal session cache should cache lookup failures.
+  When <code>false</code>, only successful database lookups will result in the value being cached.
+  Changing this option has great negative impact on performance.</li>
+<li><strong>domain_lifetime_seconds</strong> (integer, default: <code>600</code>): How long should subdomain mappings be cached (e.g. <code>muc.example.com -&gt; datacenter1.test</code>).</li>
+<li><strong>jid_lifetime_seconds</strong> (integer, default: <code>5</code>): How long should full and bare JID mappings be cached (e.g. <code>user1@example.com/res1 -&gt; datacenter1.test</code>).</li>
+<li><strong>max_jids</strong> (integer, default: <code>10000</code>): The maximum number of JID entries that can be stored in cache at any point in time.</li>
+</ul>
+<h4 id="message-bouncing-options">Message bouncing options</h4>
+<ul>
+<li><strong>resend_after_ms</strong> (integer, default: <code>200</code>): Time after which message will be resent in case of delivery error.</li>
+<li><strong>max_retries</strong> (integer, default: <code>4</code>): Number of times message delivery will be retried in case of errors.</li>
+</ul>
+<h4 id="global-distribution-and-service-discovery">Global Distribution and Service Discovery</h4>
+<p><code>mod_global_distrib</code> extension relies on <a href="../mod_disco/"><code>mod_disco</code></a>'s option <code>users_can_see_hidden_services</code>, when provided. If it is not configured, the default value is <code>true</code>. <code>mod_disco</code> does not have to be enabled for <code>mod_global_distrib</code> to work, as this parameter is used only for processing Disco requests by Global Distribution.</p>
+<h3 id="overriding-remote-datacenter-endpoints">Overriding remote datacenter endpoints</h3>
+<p>There may be cases when the endpoint list given via <strong>endpoints</strong> option does not accurately specify endpoints on which the node may be reached from other datacenters; e.g. in case the node is behind NAT, or in testing environment.
+The endpoints used for connection to a remote datacenter may be overridden by global option <code>{ {global_distrib_addr, Host}, [{IP, Port}] }</code>.</p>
+<h3 id="example-configuration">Example configuration</h3>
+<h4 id="configuring-mod_global_distrib">Configuring mod_global_distrib</h4>
+<pre><code class="language-Erlang">{mod_global_distrib, [
+        {global_host, &quot;example.com&quot;},
+        {local_host, &quot;datacenter1.example.com&quot;},
+        {connections, [
+              {endpoints, [{&quot;172.16.0.2&quot;, 5555}]},
+              {num_of_connections, 22},
+              {tls_opts, [
+                    {certfile, &quot;/home/user/dc1.pem&quot;},
+                    {cafile, &quot;/home/user/ca.pem&quot;}
+                   ]}
+             ]},
+        {cache, [
+              {domain_lifetime_seconds, 60}
+             ]},
+        {bounce, [
+              {resend_after_ms, 300},
+              {max_retries, 3}
+             ]},
+        {redis, [
+              {pool, global_distrib}
+             ]}
+       ]}
+</code></pre>
+<h4 id="overriding-endpoints-to-a-remote-datacenter">Overriding endpoints to a remote datacenter</h4>
+<pre><code class="language-Erlang">{ {global_distrib_addr, &quot;datacenter2.example.com&quot;}, [{&quot;124.12.4.3&quot;, 5556}, {&quot;182.172.23.55&quot;, 5555}] }.
+</code></pre>
+<h4 id="configuring-dynomite">Configuring Dynomite</h4>
+<p>For more information about Dynomite configuration, consult <a href="https://github.com/Netflix/dynomite/wiki">Dynomite wiki</a>.</p>
+<pre><code class="language-yaml">dyn_o_mite:
+  datacenter: dc1
+  rack: rack1
+  dyn_listen: 172.16.0.3:8101
+  dyn_seeds:
+  - 124.12.4.4:8101:rack1:dc2:1383429731
+  listen: 172.16.0.3:8102
+  servers:
+  - 172.16.0.4:6379:1
+  tokens: '138342973'
+  secure_server_option: datacenter
+  pem_key_file: dynomite.pem
+  data_store: 0
+  stats_listen: 0.0.0.0:22221
+</code></pre>
+<pre><code class="language-yaml">dyn_o_mite:
+  datacenter: dc2
+  rack: rack1
+  dyn_listen: 124.12.4.4:8101
+  dyn_seeds:
+  - 172.16.0.3:8101:rack1:dc1:1383429731
+  listen: 124.12.4.4:8102
+  servers:
+  - 124.12.4.5:6379:1
+  tokens: '138342973'
+  secure_server_option: datacenter
+  pem_key_file: dynomite.pem
+  data_store: 0
+  stats_listen: 0.0.0.0:22221
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../mod_event_pusher/" class="btn btn-neutral float-right" title="mod_event_pusher">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../mod_disco/" class="btn btn-neutral" title="mod_disco"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../mod_disco/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../mod_event_pusher/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

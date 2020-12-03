@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>mod_mam - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "mod_mam";
+    var mkdocs_page_input_path = "modules/mod_mam.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications/">How to Set up Push Notifications</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications-client-side/">How to Set up Push Notifications on the client side</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/With-MongoosePush/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.5.0_3.6.0/">3.5.0 to 3.6.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/TLS-hardening/">TLS hardening</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/outgoing-connections/">Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Listener-modules/">Listener Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/client-certificate/">Client Certificate</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/HTTP-authentication-module/">HTTP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/Riak-authentication-module/">Riak Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/Dummy-authentication-module/">Dummy Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/gdpr-considerations/">GDPR considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/">System Metrics Privacy Policy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">mod_mam</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#full-text-search">Full Text Search</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#note-on-full-text-search-with-elasticsearch-backend">Note on full text search with ElasticSearch backend</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Module index &raquo;</li>
+        
+      
+    
+    <li>mod_mam</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h3 id="module-description">Module Description</h3>
+<p>This module implements <a href="https://xmpp.org/extensions/xep-0313.html">XEP-0313 (Message Archive Management)</a>.
+It enables a service to store all user messages for one-to-one chats as well as group chats (MUC, MultiUser Chat).
+It uses <a href="http://xmpp.org/extensions/xep-0059.html">XEP-0059: Result Set Management</a> for paging.
+It is a highly customizable module, that requires some skill and knowledge to operate properly and efficiently.</p>
+<p>MongooseIM is compatible with MAM 0.4-0.6.</p>
+<p>Configure MAM with different storage backends:</p>
+<ul>
+<li>RDBMS (databases like MySQL, PostgreSQL, MS SQL Server)</li>
+<li>Riak KV (NOSQL)</li>
+<li>Cassandra (NOSQL)</li>
+<li>ElasticSearch (NOSQL)</li>
+</ul>
+<p><code>mod_mam_meta</code> is a meta-module that ensures all relevant <code>mod_mam_*</code> modules are loaded and properly configured.</p>
+<h4 id="full-text-search">Full Text Search</h4>
+<p>This module allows message filtering by their text body (if enabled, see <em>Common backend options</em>).
+This means that an XMPP client, while requesting messages from the archive may not only specify standard form fields (<code>with</code>, <code>start</code>, <code>end</code>), but also <code>full-text-search</code> (of type <code>text-single</code>).
+If this happens, the client will receive only messages that contain words specified in the request.</p>
+<p>The exact behaviour, like whether word ordering matters, may depend on the storage backend in use.
+For now <code>rdbms</code> backend has very limited support for this feature, while <code>cassandra</code> does not support it at all.
+<code>riak</code> and <code>elasticsearch</code> backends, on the other hand, should provide you with the best results when it comes to text filtering.</p>
+<p><code>mod_mam_rdbms_arch</code> returns all messages that contain all search words, order
+of words does not matter. Messages are sorted by timestamp (not by relevance).</p>
+<h5 id="note-on-full-text-search-with-elasticsearch-backend">Note on full text search with ElasticSearch backend</h5>
+<p>When using ElasticSearch MAM backend, the value provided in <code>full-text-search</code> form field will be passed to ElasticSearch as <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html">Simple Search Query</a>.
+If you're using our official ElasticSearch mappings from <code>priv/elasticsearch</code> then the query analyzer is set to <code>english</code>.
+Also note that the default separator for the search query is <code>AND</code> (which roughly means that ElasticSearch will search for messages containing all the terms provided in the query string).</p>
+<h3 id="options">Options</h3>
+<ul>
+<li><strong>backend</strong> (atom, default: <code>rdbms</code>) - Database backend to use. <code>rdbms</code>, <code>riak</code>, <code>cassandra</code> and <code>elasticsearch</code> are supported.</li>
+<li><strong>no_stanzaid_element</strong> (boolean, default: <code>false</code>) - Do not add a <code>&lt;stanza-id/&gt;</code> element from MAM v0.6.</li>
+<li><strong>is_archivable_message</strong> (module, default: <code>mod_mam_utils</code>) - Name of a module implementing <a href="#is_archivable_message"><code>is_archivable_message/3</code> callback</a> that determines if the message should be archived.
+ <strong>Warning</strong>: if you are using MUC Light, make sure this option is set to the MUC Light domain.</li>
+<li><strong>archive_chat_markers</strong> (boolean, default: <code>false</code>) - If set to true, XEP-0333 chat markers will be archived. See more details <a href="#archiving-chat-markers">here</a></li>
+<li><strong>pm</strong> (list | <code>false</code>, default: <code>[]</code>) - Override options for archivization of one-to-one messages. If the value of this option is <code>false</code>, one-to-one message archive is disabled.</li>
+<li><strong>muc</strong> (list | <code>false</code>, default: <code>false</code>) - Override options for archivization of group chat messages. If the value of this option is <code>false</code>, group chat message archive is disabled.</li>
+<li><strong>extra_lookup_params</strong> (atom, default: <code>undefined</code>) - a module implementing <code>mam_iq</code> behaviour.
+ If this option has value other then undefined, function <code>extra_lookup_params/2</code> from this module will be called when building MAM lookup parameters.
+ This can be used to extend currently supported MAM query fields by a custom field or fields.
+ This field(s) can be added to lookup params later passed to MAM backend.</li>
+</ul>
+<p><strong>backend</strong>, <strong>no_stanzaid_element</strong> and <strong>is_archivable_message</strong> will be applied to both <code>pm</code> and <code>muc</code> (if they are enabled), unless overriden explicitly (see example below).</p>
+<h4 id="pm-specific-options">PM-specific options</h4>
+<ul>
+<li><strong>archive_groupchats</strong> (boolean, default: <code>true</code>) - When enabled, MAM will store groupchat messages in recipients' individual archives. <strong>USE WITH CAUTION!</strong> May increase archive size significantly. Disabling this option for existing installation will neither remove such messages from MAM storage, nor will filter out them from search results.
+MongooseIM will print a warning on startup if <code>pm</code> MAM is enabled without <code>archive_groupchats</code> being explicitly set to a specific value. In one of the future MongooseIM releases this option will default to <code>false</code> (as it's more common use case and less DB-consuming) and the warning message will be removed.</li>
+</ul>
+<h4 id="muc-specific-options">MUC-specific options</h4>
+<ul>
+<li><strong>host</strong> (string, default: <code>"conference.@HOST@"</code>) - MUC host that will be archived if MUC archiving is enabled.</li>
+</ul>
+<h4 id="example">Example</h4>
+<p>The example below presents how to override common option for <code>muc</code> module specifically.</p>
+<pre><code class="language-erlang">{mod_mam_meta, [
+  {backend, rdbms},
+  {async_writer, true}, %% this option enables async writer for RDBMS backend
+  {muc, [
+    {async_writer, false} %% disable async writer for MUC archive only
+  ]}
+]}
+</code></pre>
+<h4 id="rdbms-backend-options">RDBMS backend options</h4>
+<p>These options will only have effect when the <code>rdbms</code> backend is used:</p>
+<ul>
+<li><strong>cache_users</strong> (boolean, default: <code>true</code>) - Enables Archive ID to integer mappings cache.</li>
+<li><strong>rdbms_message_format</strong> (atom, default: <code>internal</code>) - When set to <code>simple</code>, stores messages in XML and full JIDs.
+ When set to <code>internal</code>, stores messages and JIDs in internal format.
+ <strong>Warning</strong>: Archive MUST be empty to change this option.</li>
+<li><strong>async_writer</strong> (boolean, default: <code>true</code>) - Enables an asynchronous writer that is faster than the synchronous one but harder to debug.
+  The async writers store batches of messages with a certain delay (see <strong>flush_interval</strong>), so the results of the lookup operations executed right after message routing may be incomplete until the configured time passes.</li>
+<li><strong>flush_interval</strong> (integer, default: <code>2000</code>) How often (in milliseconds) the buffered messages are flushed to a DB.</li>
+<li><strong>max_batch_size</strong> (integer, default, <code>30</code>) Max size of the batch insert query for an async writer.
+  If the buffer is full, messages are flushed to a database immediately and the flush timer is reset.</li>
+</ul>
+<h4 id="common-backend-options">Common backend options</h4>
+<ul>
+<li><strong>user_prefs_store</strong> (atom, default: <code>false</code>) - Leaving this option as <code>false</code> will prevent users from setting their archiving preferences. It will also increase performance. Other possible values are:<ul>
+<li><code>rdbms</code> (RDBMS backend only) - User archiving preferences saved in RDBMS. Slow and not recommended, but might be used for simplicity (keeping everything in RDBMS).</li>
+<li><code>cassandra</code> (Cassandra backend only) - User archiving preferences are saved in Cassandra.</li>
+<li><code>mnesia</code> (recommended) - User archiving preferences saved in Mnesia and accessed without transactions. Recommended in most deployments, could be overloaded with lots of users updating their preferences at once. There's a small risk of an inconsistent (in a rather harmless way) state of the preferences table.</li>
+</ul>
+</li>
+<li><strong>full_text_search</strong> (boolean, default: <code>true</code>) - Enables full text search in message archive (see <em>Full Text Search</em> paragraph). Please note that the full text search is currently only implemented for <code>rdbms</code> and <code>riak</code> backends. Also, full text search works only for messages archived while this option is enabled.</li>
+</ul>
+<h4 id="is_archivable_message3-callback"><a id="is_archivable_message"></a><code>is_archivable_message/3</code> callback</h4>
+<p><code>is_archivable_message</code> option has to name a module exporting <code>is_archivable_message/3</code> function conforming to the spec:</p>
+<pre><code class="language-erlang">-spec is_archivable_message(Mod :: module(), Dir :: incoming | outgoing,
+                          Packet :: exml:element()) -&gt; boolean().
+</code></pre>
+<p>Servers SHOULD NOT archive messages that do not have a <code>&lt;body/&gt;</code> child tag. Servers SHOULD NOT archive delayed messages.</p>
+<p>By default, all messages that hold meaningful content, rather than state changes such as Chat State Notifications, are archived.</p>
+<h4 id="archiving-chat-markers">Archiving chat markers</h4>
+<p>Archiving chat markers can be enabled by setting <code>archive_chat_markers</code> option to <code>true</code>. However it only works if
+<code>is_archivable_message</code> callback module is set to <code>mod_mam_utils</code> or isn't set at all.</p>
+<p>When performing full text search chat markers are treated as if they had empty message body.</p>
+<h3 id="riak-backend">Riak backend</h3>
+<p>The Riak KV backend for MAM stores messages in weekly buckets so it's easier to remove old buckets.
+Archive querying is done using Riak KV 2.0 <a href="http://docs.basho.com/riak/2.1.1/dev/using/search/">search mechanism</a> called Yokozuna.
+Your instance of Riak KV must be configured with Yokozuna enabled.</p>
+<p>This backend works with Riak KV 2.0 and above, but we recommend version 2.1.1.</p>
+<h5 id="riak-specific-options">Riak-specific options</h5>
+<ul>
+<li>
+<p><code>bucket_type</code> (default <code>&lt;&lt;"mam_yz"&gt;&gt;</code>) - Riak bucket type.</p>
+</li>
+<li>
+<p><code>search_index</code> (default <code>&lt;&lt;"mam"&gt;&gt;</code>) - Riak index name.</p>
+</li>
+</ul>
+<h3 id="cassandra-backend">Cassandra backend</h3>
+<p>Please consult <a href="../../advanced-configuration/outgoing-connections/#cassandra-connection-setup">Outgoing connections</a> page to learn how to properly configure Cassandra connection pool.
+By default, <code>mod_mam</code> Cassandra backend requires <code>global</code> pool with <code>default</code> tag:</p>
+<pre><code class="language-erlang">{outgoing_pools, [
+    {cassandra, global, default, [], []}.
+]}.
+</code></pre>
+<h3 id="elasticsearch-backend">ElasticSearch backend</h3>
+<p>First, make sure that your ElasticSearch cluster has expected indexes and mappings in place.
+Please consult <a href="../../advanced-configuration/outgoing-connections/#elasticsearch-connection-setup">Outgoing connections</a> page to learn how to properly configure ElasticSearch connection pool.</p>
+<h3 id="example-configuration">Example configuration</h3>
+<pre><code class="language-erlang">{mod_mam_meta, [
+        {backend, rdbms},
+
+        {no_stanzaid_element, true},
+
+        {pm, [{user_prefs_store, rdbms}]},
+        {muc, [
+               {host, &quot;muc.example.com&quot;},
+               {rdbms_message_format, simple},
+               {async_writer, false},
+               {user_prefs_store, mnesia}
+              ]}
+       ]}.
+</code></pre>
+<h3 id="metrics">Metrics</h3>
+<p>If you'd like to learn more about metrics in MongooseIM, please visit <a href="../../operation-and-maintenance/Mongoose-metrics/">MongooseIM metrics</a> page.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[Host, modMamArchiveRemoved]</code></td>
+<td>spiral</td>
+<td>User's entire archive is removed.</td>
+</tr>
+<tr>
+<td><code>[Host, modMamArchived]</code></td>
+<td>spiral</td>
+<td>A message is stored in user's archive.</td>
+</tr>
+<tr>
+<td><code>[Host, modMamDropped]</code></td>
+<td>spiral</td>
+<td>A message couldn't be enqueued due to an overloaded async worker.</td>
+</tr>
+<tr>
+<td><code>[Host, modMamDropped2]</code></td>
+<td>spiral</td>
+<td>A message couldn't be stored in the DB (and got dropped).</td>
+</tr>
+<tr>
+<td><code>[Host, modMamDroppedIQ]</code></td>
+<td>spiral</td>
+<td>MAM IQ has been dropped due to: high query frequency/invalid syntax or type.</td>
+</tr>
+<tr>
+<td><code>[Host, modMamFlushed]</code></td>
+<td>spiral</td>
+<td>Message was stored in a DB asynchronously.</td>
+</tr>
+<tr>
+<td><code>[Host, modMamForwarded]</code></td>
+<td>spiral</td>
+<td>A message is sent to a client as a part of a MAM query result.</td>
+</tr>
+<tr>
+<td><code>[Host, modMamLookups]</code></td>
+<td>spiral</td>
+<td>A MAM lookup is performed.</td>
+</tr>
+<tr>
+<td><code>[Host, modMamSinglePurges]</code></td>
+<td>spiral</td>
+<td>A single purge request is processed by MAM.</td>
+</tr>
+<tr>
+<td><code>[Host, modMamMultiplePurges]</code></td>
+<td>spiral</td>
+<td>A bulk purge request is processed by MAM.</td>
+</tr>
+<tr>
+<td><code>[Host, modMamPrefsGets]</code></td>
+<td>spiral</td>
+<td>Archiving preferences have been requested by a client.</td>
+</tr>
+<tr>
+<td><code>[Host, modMamPrefsSets]</code></td>
+<td>spiral</td>
+<td>Archiving preferences have been updated by a client.</td>
+</tr>
+<tr>
+<td><code>[Host, modMucMamArchiveRemoved]</code></td>
+<td>spiral</td>
+<td>Room's entire archive is removed.</td>
+</tr>
+<tr>
+<td><code>[Host, modMucMamArchived]</code></td>
+<td>spiral</td>
+<td>A message is stored in room's archive.</td>
+</tr>
+<tr>
+<td><code>[Host, modMucMamForwarded]</code></td>
+<td>spiral</td>
+<td>A message is sent to a client as a part of a MAM query result from MUC room.</td>
+</tr>
+<tr>
+<td><code>[Host, modMucMamLookups]</code></td>
+<td>spiral</td>
+<td>A MAM lookup in MUC room is performed.</td>
+</tr>
+<tr>
+<td><code>[Host, modMucMamSinglePurges]</code></td>
+<td>spiral</td>
+<td>A single purge request for MUC room is processed by MAM.</td>
+</tr>
+<tr>
+<td><code>[Host, modMucMamMultiplePurges]</code></td>
+<td>spiral</td>
+<td>A bulk purge request for MUC room is processed by MAM.</td>
+</tr>
+<tr>
+<td><code>[Host, modMucMamPrefsGets]</code></td>
+<td>spiral</td>
+<td>MUC archiving preferences have been requested by a client.</td>
+</tr>
+<tr>
+<td><code>[Host, modMucMamPrefsSets]</code></td>
+<td>spiral</td>
+<td>MUC archiving preferences have been updated by a client.</td>
+</tr>
+<tr>
+<td><code>[Host, mod_mam_rdbms_async_pool_writer, per_message_flush_time]</code></td>
+<td>histogram</td>
+<td>Average time per message insert measured in an async MAM worker.</td>
+</tr>
+<tr>
+<td><code>[Host, mod_mam_rdbms_async_pool_writer, flush_time]</code></td>
+<td>histogram</td>
+<td>Average time per flush of all buffered messages measured in an async MAM worker.</td>
+</tr>
+<tr>
+<td><code>[Host, mod_mam_muc_rdbms_async_pool_writer, per_message_flush_time]</code></td>
+<td>histogram</td>
+<td>Average time per message insert measured in an async MUC MAM worker.</td>
+</tr>
+<tr>
+<td><code>[Host, mod_mam_muc_rdbms_async_pool_writer, flush_time]</code></td>
+<td>histogram</td>
+<td>Average time per flush of all buffered messages measured in an async MUC MAM worker.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Backend action</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lookup</code></td>
+<td>A lookup in an archive.</td>
+</tr>
+<tr>
+<td><code>archive</code></td>
+<td>One message is saved in an archive.</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../mod_muc/" class="btn btn-neutral float-right" title="mod_muc">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../mod_last/" class="btn btn-neutral" title="mod_last"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../mod_last/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../mod_muc/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
