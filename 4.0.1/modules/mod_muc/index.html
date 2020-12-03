@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>mod_muc - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "mod_muc";
+    var mkdocs_page_input_path = "modules/mod_muc.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Bootstrap-Scripts/">Bootstrap scripts</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/client-certificate/">Client certificate authentication</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications/">How to Set up Push Notifications</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications-client-side/">How to Set up Push Notifications on the client side</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/With-MongoosePush/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.5.0_3.6.0/">3.5.0 to 3.6.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.6.0_3.7.0/">3.6.0 to 3.7.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.7.0_4.0.0/">3.7.0 to 4.0.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/4.0.0_4.0.1/">4.0.0 to 4.0.1</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Configuration files</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/general/">Options: General</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/listen/">Options: Listen</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/auth/">Options: Auth</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/outgoing-connections/">Options: Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Options: Services</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Options: Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/shaper/">Options: Shaper</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">Options: Acl</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/access/">Options: Access</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/s2s/">Options: S2S</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/host_config/">Options: Host config</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/release-options/">Release options</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/TLS-hardening/">TLS hardening</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/rdbms/">RDBMS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/external/">External</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/anonymous/">Anonymous</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/ldap/">LDAP</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/jwt/">JWT</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/riak/">Riak</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/http/">HTTP</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/pki/">PKI</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/dummy/">Dummy</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/gdpr-considerations/">GDPR considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging/">Logging configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-fields/">Logging fields</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/">System Metrics Privacy Policy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_extdisco/">mod_extdisco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">mod_muc</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Module index &raquo;</li>
+        
+      
+    
+    <li>mod_muc</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h3 id="module-description">Module Description</h3>
+<p>This module implements <a href="http://xmpp.org/extensions/xep-0045.html">XEP-0045: Multi-User Chat</a> (MUC).
+It's a common XMPP group chat solution.
+This extension consists of two Erlang modules: <code>mod_muc</code> and <code>mod_muc_room</code>, the latter being the room code itself.
+Note that only <code>mod_muc</code> needs to be enabled in the configuration file.
+Also <code>mod_muc_log</code> is a logging submodule.</p>
+<h3 id="options">Options</h3>
+<h4 id="modulesmod_muchost"><code>modules.mod_muc.host</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, a valid subdomain</li>
+<li><strong>Default:</strong> <code>"conference.@HOST@"</code></li>
+<li><strong>Example:</strong> <code>host = "group.@HOST@"</code></li>
+</ul>
+<p>Subdomain for MUC service to reside under. <code>@HOST@</code> is replaced with each served domain.</p>
+<h4 id="modulesmod_mucbackend"><code>modules.mod_muc.backend</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, one of <code>"mnesia"</code> or <code>"rdbms"</code></li>
+<li><strong>Default:</strong> <code>"mnesia"</code></li>
+<li><strong>Example:</strong> <code>backend = "rdbms"</code></li>
+</ul>
+<p>Storage backend.</p>
+<h4 id="modulesmod_mucaccess"><code>modules.mod_muc.access</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"all"</code></li>
+<li><strong>Example:</strong> <code>access = "muc"</code></li>
+</ul>
+<p>Access Rule to determine who is allowed to use the MUC service.</p>
+<h4 id="modulesmod_mucaccess_create"><code>modules.mod_muc.access_create</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"all"</code></li>
+<li><strong>Example:</strong> <code>access_create = "muc_create"</code></li>
+</ul>
+<p>Access Rule to determine who is allowed to create rooms.</p>
+<h4 id="modulesmod_mucaccess_admin"><code>modules.mod_muc.access_admin</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"none"</code></li>
+<li><strong>Example:</strong> <code>access_admin = "muc_create"</code></li>
+</ul>
+<p>Access Rule to determine who is the administrator in all rooms.</p>
+<h4 id="modulesmod_mucaccess_persistent"><code>modules.mod_muc.access_persistent</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"all"</code></li>
+<li><strong>Example:</strong> <code>access_persistent = "none"</code></li>
+</ul>
+<p>Access Rule to determine who is allowed to make the rooms persistent.
+In order to change this parameter, the user must not only match the Access Rule but also be the owner of the room.</p>
+<h4 id="modulesmod_muchistory_size"><code>modules.mod_muc.history_size</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>20</code></li>
+<li><strong>Example:</strong> <code>history_size = 30</code></li>
+</ul>
+<p>Room message history to be kept in RAM. After node restart, the history is lost.</p>
+<h4 id="modulesmod_mucroom_shaper"><code>modules.mod_muc.room_shaper</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"none"</code></li>
+<li><strong>Example:</strong> <code>room_shaper = "muc_room_shaper"</code></li>
+</ul>
+<p>Limits per-room data throughput with traffic shaper.</p>
+<h4 id="modulesmod_mucmax_room_id"><code>modules.mod_muc.max_room_id</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
+<li><strong>Example:</strong> <code>max_room_id = 30</code></li>
+</ul>
+<p>Maximum room username length (in JID).</p>
+<h4 id="modulesmod_mucmax_room_name"><code>modules.mod_muc.max_room_name</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
+<li><strong>Example:</strong> <code>max_room_name = 30</code></li>
+</ul>
+<p>Maximum room name length.</p>
+<h4 id="modulesmod_mucmax_room_desc"><code>modules.mod_muc.max_room_desc</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
+<li><strong>Example:</strong> <code>max_room_desc = 140</code></li>
+</ul>
+<p>Maximum room description length.</p>
+<h4 id="modulesmod_mucmin_message_interval"><code>modules.mod_muc.min_message_interval</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>0</code></li>
+<li><strong>Example:</strong> <code>min_message_interval = 1</code></li>
+</ul>
+<p>Minimal interval (in seconds) between messages processed by the room.</p>
+<h4 id="modulesmod_mucmin_presence_interval"><code>modules.mod_muc.min_presence_interval</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>0</code></li>
+<li><strong>Example:</strong> <code>min_presence_interval = 1</code></li>
+</ul>
+<p>Minimal interval (in seconds) between presences processed by the room.</p>
+<h4 id="modulesmod_mucmax_users"><code>modules.mod_muc.max_users</code></h4>
+<ul>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> <code>200</code></li>
+<li><strong>Example:</strong> <code>max_users = 100</code></li>
+</ul>
+<p>Absolute maximum user count per room on the node.</p>
+<h4 id="modulesmod_mucmax_users_admin_threshold"><code>modules.mod_muc.max_users_admin_threshold</code></h4>
+<ul>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> <code>5</code></li>
+<li><strong>Example:</strong> <code>max_users_admin_threshold = 10</code></li>
+</ul>
+<p>When the server checks if a new user can join a room and they are an admin,
+ <code>max_users_admin_threshold</code> is added to <code>max_users</code> during occupant limit check.</p>
+<h4 id="modulesmod_mucuser_message_shaper"><code>modules.mod_muc.user_message_shaper</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"none"</code></li>
+<li><strong>Example:</strong> <code>user_message_shaper = "muc_user_msg_shaper"</code></li>
+</ul>
+<p>Shaper for user messages processed by a room (global for the room).</p>
+<h4 id="modulesmod_mucuser_presence_shaper"><code>modules.mod_muc.user_presence_shaper</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"none"</code></li>
+<li><strong>Example:</strong> <code>user_presence_shaper = "muc_user_presence_shaper"</code></li>
+</ul>
+<p>Shaper for user presences processed by a room (global for the room).</p>
+<h4 id="modulesmod_mucmax_user_conferences"><code>modules.mod_muc.max_user_conferences</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>10</code></li>
+<li><strong>Example:</strong> <code>max_user_conferences = 5</code></li>
+</ul>
+<p>Specifies the number of rooms that a user can occupy simultaneously.</p>
+<h4 id="modulesmod_muchttp_auth_pool"><code>modules.mod_muc.http_auth_pool</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> <code>"none"</code></li>
+<li><strong>Example:</strong> <code>http_auth_pool = "external_auth"</code></li>
+</ul>
+<p>If an external HTTP service is chosen to check passwords for password-protected rooms,
+this option specifies the HTTP pool name to use (see <a href="#external-http-authentication">External HTTP Authentication</a> below).</p>
+<h4 id="modulesmod_mucload_permanent_rooms_at_startup"><code>modules.mod_muc.load_permanent_rooms_at_startup</code></h4>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>load_permanent_rooms_at_startup = true</code></li>
+</ul>
+<p>Load all rooms at startup. Because it can be unsafe when there are many rooms,
+it is disabled by default.</p>
+<h4 id="modulesmod_muchibernate_timeout"><code>modules.mod_muc.hibernate_timeout</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>90000</code> (milliseconds, 90 seconds)</li>
+<li><strong>Example:</strong> <code>hibernate_timeout = 60000</code></li>
+</ul>
+<p>Timeout (in milliseconds) defining the inactivity period after which the room's process should be hibernated.</p>
+<h4 id="modulesmod_muchibernated_room_check_interval"><code>modules.mod_muc.hibernated_room_check_interval</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
+<li><strong>Example:</strong> <code>hibernated_room_check_interval = 120000</code></li>
+</ul>
+<p>Interval defining how often the hibernated rooms will be checked (a timer is global for a node).</p>
+<h4 id="modulesmod_muchibernated_room_timeout"><code>modules.mod_muc.hibernated_room_timeout</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
+<li><strong>Example:</strong> <code>hibernated_room_timeout = 120000</code></li>
+</ul>
+<p>A time after which a hibernated room is stopped (deeply hibernated).
+ See <a href="#performance-optimisations">MUC performance optimisation</a>.</p>
+<h4 id="modulesmod_mucdefault_room"><code>modules.mod_muc.default_room</code></h4>
+<ul>
+<li><strong>Syntax:</strong> A TOML table of options described below</li>
+<li><strong>Default:</strong> Default room options</li>
+<li><strong>Example:</strong>  </li>
+</ul>
+<pre><code class="language-toml">  [modules.mod_muc.default_room]
+    password_protected = true
+    description = &quot;An example description.&quot;
+
+    [[modules.mod_muc.default_room.affiliations]]
+        user = &quot;alice&quot;
+        server = &quot;localhost&quot;
+        resource = &quot;resource1&quot;
+        affiliation = &quot;member&quot;
+</code></pre>
+<p>or:</p>
+<pre><code class="language-toml">  default_room.password_protected = true
+  default_room.description = &quot;An example description.&quot;
+
+  [[modules.mod_muc.default_room.affiliations]]
+    user = &quot;alice&quot;
+    server = &quot;localhost&quot;
+    resource = &quot;resource1&quot;
+    affiliation = &quot;member&quot;
+</code></pre>
+<p>Available room configuration options to be overridden in the initial state:</p>
+<ul>
+<li>
+<p><code>modules.mod_muc.default_room.title</code></p>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> <code>""</code></li>
+<li><strong>Example:</strong> <code>title = "example_title"</code> </li>
+</ul>
+<p>Room title, short free text.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.description</code></p>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> <code>""</code></li>
+<li><strong>Example:</strong> <code>description = "An example description."</code> </li>
+</ul>
+<p>Room description, long free text.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.allow_change_subj</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>allow_change_subj = false</code> </li>
+</ul>
+<p>Allow all occupants to change the room subject.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.allow_query_users</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>allow_query_users = false</code></li>
+</ul>
+<p>Allow occupants to send IQ queries to other occupants.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.allow_private_messages</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>allow_private_messages = false</code></li>
+</ul>
+<p>Allow private messaging between occupants.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.allow_visitor_status</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>allow_visitor_status = false</code></li>
+</ul>
+<p>Allow occupants to use text statuses in presences.
+When disabled, text is removed by the room before broadcasting.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.allow_visitor_nickchange</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>allow_visitor_nickchange = false</code></li>
+</ul>
+<p>Allow occupants to change nicknames.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.public</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>public = false</code></li>
+</ul>
+<p>Room is included in the list available via Service Discovery.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.public_list</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>public_list = false</code></li>
+</ul>
+<p>Member list can be fetched by non-members.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.persistent</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>persistent = true</code></li>
+</ul>
+<p>Room will be stored in DB and survive even when the last occupant leaves or the node is restarted.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.moderated</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>moderated = false</code></li>
+</ul>
+<p>Only occupants with a "voice" can send group chat messages.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.members_by_default</code></p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>members_by_default = false</code></li>
+</ul>
+<p>All new occupants are members by default, unless they have a different affiliation assigned.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.members_only</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>members_only = true</code></li>
+</ul>
+<p>Only users with a member affiliation can join the room.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.allow_user_invites</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>allow_user_invites = true</code></li>
+</ul>
+<p>Allow ordinary members to send mediated invitations.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.allow_multiple_sessions</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>allow_multiple_sessions = true</code></li>
+</ul>
+<p>Allow multiple user session to use the same nick.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.password_protected</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>password_protected = true</code></li>
+</ul>
+<p>Room is protected with a password.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.password</code> </p>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> <code>""</code></li>
+<li><strong>Example:</strong> <code>password = "secret"</code></li>
+</ul>
+<p>Room password is required upon joining.
+This option has no effect when <code>password_protected</code> is <code>false</code>.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.anonymous</code> </p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>anonymous = false</code></li>
+</ul>
+<p>Room is anonymous, meaning occupants can't see each others real JIDs, except for the room moderators.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.max_users</code> </p>
+<ul>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> <code>200</code></li>
+<li><strong>Example:</strong> <code>max_users = 100</code></li>
+</ul>
+<p>Maximum user count per room. Admins and the room owner are not affected.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.logging</code></p>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>logging = true</code></li>
+</ul>
+<p>Enables logging of room events (messages, presences) to a file on the disk.
+Uses <code>mod_muc_log</code>.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.maygetmemberlist</code> </p>
+<ul>
+<li><strong>Syntax:</strong> array of non-empty strings</li>
+<li><strong>Default:</strong> <code>[]</code></li>
+<li><strong>Example:</strong> <code>maygetmemberlist = ["moderator"]</code></li>
+</ul>
+<p>An array of roles and/or privileges that enable retrieving the room's member list.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.affiliations</code> </p>
+<ul>
+<li><strong>Syntax:</strong> array of tables with keys:<ul>
+<li><code>user</code> - non-empty string,</li>
+<li><code>server</code> - string, a valid domain,</li>
+<li><code>resource</code> - string,</li>
+<li><code>affiliation</code> - non-empty string</li>
+</ul>
+</li>
+<li><strong>Default:</strong> <code>[]</code></li>
+<li><strong>Example:</strong></li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-toml">[[modules.mod_muc.default_room.affiliations]]
+  user = &quot;alice&quot;
+  server = &quot;localhost&quot;
+  resource = &quot;resource1&quot;
+  affiliation = &quot;member&quot;
+
+[[modules.mod_muc.default_room.affiliations]]
+  user = &quot;bob&quot;
+  server = &quot;localhost&quot;
+  resource = &quot;resource2&quot;
+  affiliation = &quot;owner&quot;
+</code></pre>
+<p>This is the default list of affiliations set for every new room.</p>
+<ul>
+<li>
+<p><code>modules.mod_muc.default_room.subject</code> </p>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> <code>""</code></li>
+<li><strong>Example:</strong> <code>subject = "Lambda days"</code></li>
+</ul>
+<p>A default subject for new room.</p>
+</li>
+<li>
+<p><code>modules.mod_muc.default_room.subject_author</code></p>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> <code>""</code></li>
+<li><strong>Example:</strong> <code>subject_author = "Alice"</code></li>
+</ul>
+<p>A nick name of the default subject's author.</p>
+</li>
+</ul>
+<h3 id="example-configuration">Example Configuration</h3>
+<pre><code class="language-toml">[modules.mod_muc]
+  host = &quot;muc.example.com&quot;
+  access = &quot;muc&quot;
+  access_create = &quot;muc_create&quot;
+  http_auth_pool = &quot;my_auth_pool&quot;
+  default_room.password_protected = true
+
+  [[modules.mod_muc.default_room.affiliations]]
+    user = &quot;alice&quot;
+    server = &quot;localhost&quot;
+    resource = &quot;resource1&quot;
+    affiliation = &quot;member&quot;
+
+  [[modules.mod_muc.default_room.affiliations]]
+    user = &quot;bob&quot;
+    server = &quot;localhost&quot;
+    resource = &quot;resource2&quot;
+    affiliation = &quot;owner&quot;
+</code></pre>
+<h3 id="performance-optimisations">Performance optimisations</h3>
+<p>Each room is represented by an Erlang process with its own state and can consume memory even if it's not used.
+In large installations with many rooms, this might cause performance issues.
+To address that problem MongooseIM has 2 levels of MUC rooms memory optimisations.</p>
+<h4 id="rooms-process-hibernation">Room's process hibernation</h4>
+<p>By default the room's process is hibernated by the Erlang VM 90 seconds after the last activity.
+This timeout can be modified by <code>hibernate_timeout</code> option.</p>
+<h4 id="room-deep-hibernation">Room deep hibernation</h4>
+<p>MongooseIM introduces an additional option of deep hibernation for unused rooms.
+This optimisation works only for persistent rooms as only these can be restored on demand.
+The improvement works as follows:
+1. All room processes are traversed at a chosen <code>hibernated_room_check_interval</code>.
+1. If a <code>hibernated_room_timeout</code> is exceeded, a "stop" signal is sent to a unused room.
+1. The room's process is stopped only if there are no online users or if the only one is its owner.
+If the owner is online, a presence of a type unavailable is sent to it indicating that the room's process is being terminated.</p>
+<p>The room's process can be recreated on demand, for example when a presence sent to it, or the owner wants to add more users to the room.</p>
+<h3 id="external-http-authentication">External HTTP Authentication</h3>
+<p>MUC rooms can be protected by a password that is set by the room owner.
+Note that MongooseIM supports another custom solution, where each attempt to enter or create a room requires the password to be checked by an external HTTP service.
+To enable this option, you need to:</p>
+<ul>
+<li>Configure an <a href="../../advanced-configuration/outgoing-connections/#http-connections-setup">HTTP connection pool</a>.</li>
+<li>Set the name of the connection pool as the value of the <code>http_auth_pool</code> option of <code>mod_muc</code>.</li>
+<li>Enable the <code>password_protected</code> default room option (without setting the password itself).</li>
+</ul>
+<p>Whenever a user tries to enter or create a room, the server will receive a GET request to the <code>check_password</code> path.
+It should return a 200 response with a JSON object <code>{"code": Code, "msg": Message}</code> in the response body.
+If the server returns something else, an error presence will be sent back to the client.</p>
+<ul>
+<li><code>Code</code> is the status code: 0 indicates a successful authentication, any other value means the authentication failed.</li>
+<li><code>Message</code> is a string containing the message to be sent back to the XMPP client indicating the reason for a failed authentication.
+ When authentication succeeds it is ignored and can contain anything ( eg. the string <code>"OK"</code>).</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-toml">[outgoing_pools.http.my_auth_pool]
+  strategy = &quot;available_worker&quot;
+  connection.host = &quot;http://my_server:8000&quot;
+
+[modules.mod_muc]
+  host = &quot;muc.example.com&quot;
+  access = &quot;muc&quot;
+  access_create = &quot;muc_create&quot;
+  http_auth_pool = &quot;my_auth_pool&quot;
+  default_room.password_protected = true
+</code></pre>
+<h3 id="metrics">Metrics</h3>
+<p>If you'd like to learn more about metrics in MongooseIM, please visit <a href="../../operation-and-maintenance/Mongoose-metrics/">MongooseIM metrics</a> page.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[global, mod_muc, deep_hibernations]</code></td>
+<td>spiral</td>
+<td>A room process is stopped (applies only to persistent rooms).</td>
+</tr>
+<tr>
+<td><code>[global, mod_muc, process_recreations]</code></td>
+<td>spiral</td>
+<td>A room process is recreated from a persisted state.</td>
+</tr>
+<tr>
+<td><code>[global, mod_muc, hibernations]</code></td>
+<td>spiral</td>
+<td>A room process becomes hibernated (garbage collected and put in wait state).</td>
+</tr>
+<tr>
+<td><code>[global, mod_muc, hibernated_rooms]</code></td>
+<td>value</td>
+<td>How many rooms are in hibernated state. Does not include rooms in "deep hibernation".</td>
+</tr>
+<tr>
+<td><code>[global, mod_muc, online_rooms]</code></td>
+<td>value</td>
+<td>How many rooms have running processes (includes rooms in a hibernated state).</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../mod_muc_commands/" class="btn btn-neutral float-right" title="mod_muc_commands">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../mod_mam/" class="btn btn-neutral" title="mod_mam"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../mod_mam/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../mod_muc_commands/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

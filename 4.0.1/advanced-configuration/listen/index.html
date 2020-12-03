@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>Options: Listen - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Options: Listen";
+    var mkdocs_page_input_path = "advanced-configuration/listen.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Bootstrap-Scripts/">Bootstrap scripts</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/client-certificate/">Client certificate authentication</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications/">How to Set up Push Notifications</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications-client-side/">How to Set up Push Notifications on the client side</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/With-MongoosePush/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.5.0_3.6.0/">3.5.0 to 3.6.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.6.0_3.7.0/">3.6.0 to 3.7.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.7.0_4.0.0/">3.7.0 to 4.0.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/4.0.0_4.0.1/">4.0.0 to 4.0.1</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Configuration files</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../general/">Options: General</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Options: Listen</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#listenport">listen.*.port</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#listenip_address">listen.*.ip_address</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#listenproto">listen.*.proto</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#listenip_version">listen.*.ip_version</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../auth/">Options: Auth</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../outgoing-connections/">Options: Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Services/">Options: Services</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Modules/">Options: Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../shaper/">Options: Shaper</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../acl/">Options: Acl</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../access/">Options: Access</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../s2s/">Options: S2S</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../host_config/">Options: Host config</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../release-options/">Release options</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../TLS-hardening/">TLS hardening</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/rdbms/">RDBMS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/external/">External</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/anonymous/">Anonymous</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/ldap/">LDAP</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/jwt/">JWT</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/riak/">Riak</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/http/">HTTP</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/pki/">PKI</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/dummy/">Dummy</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/gdpr-considerations/">GDPR considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging/">Logging configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-fields/">Logging fields</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/">System Metrics Privacy Policy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_extdisco/">mod_extdisco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Configuration &raquo;</li>
+        
+      
+    
+    <li>Options: Listen</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>The <code>listen</code> section specifies how MongooseIM handles incoming connections.</p>
+<ul>
+<li><strong>Scope:</strong> local</li>
+<li>
+<p><strong>Syntax:</strong> Each listener is specified in a subsection starting with <code>[[listen.type]]</code> where <code>type</code> is one of the allowed listener types, handling different types of incoming connections:</p>
+<ul>
+<li><code>c2s</code> - client-to-server XMPP connections,</li>
+<li><code>s2s</code> - server-to-server XMPP connections,</li>
+<li><code>service</code> - XMPP connections from external components,</li>
+<li><code>http</code> - HTTP connections from clients or other services.</li>
+</ul>
+</li>
+</ul>
+<p>The double-bracket syntax is used because there can be multiple listeners of a given type, so for each listener type there is a TOML array of one or more tables (subsections).</p>
+<ul>
+<li><strong>Default:</strong> None - each listener needs to be enabled explicitly. Typical listeners are already specified in the example configuration file.</li>
+<li><strong>Example:</strong> The simplest XMPP listener configuration, handling only incoming XMPP client connections:</li>
+</ul>
+<pre><code class="language-toml">[[listen.c2s]]
+  port = 5222
+</code></pre>
+<h1 id="general-listener-options">General listener options</h1>
+<p>The options listed below are the same for all listener types. They set the basic listening socket options. Only <code>port</code> is required, the rest can be used to change the default settings.</p>
+<h4 id="listenport"><code>listen.*.port</code></h4>
+<ul>
+<li><strong>Syntax:</strong> integer, port number</li>
+<li><strong>Default:</strong> no default, this option is mandatory.</li>
+<li><strong>Example:</strong> <code>port = 5222</code></li>
+</ul>
+<p>The port number to which the listening socket is bound.</p>
+<h4 id="listenip_address"><code>listen.*.ip_address</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string with the IP address</li>
+<li><strong>Default:</strong> all-zeros address (e.g. <code>"0.0.0.0"</code> for IPv4)</li>
+<li><strong>Example:</strong> <code>ip_address = "127.0.0.1"</code></li>
+</ul>
+<p>The IP address to which the listening socket is bound.</p>
+<h4 id="listenproto"><code>listen.*.proto</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, <code>"udp"</code> or <code>"tcp"</code></li>
+<li><strong>Default:</strong> <code>"tcp"</code></li>
+<li><strong>Example:</strong> <code>proto = "udp"</code></li>
+</ul>
+<p>The protocol, which is TCP by default. There is no reason to change this for XMPP or HTTP listeners.</p>
+<h4 id="listenip_version"><code>listen.*.ip_version</code></h4>
+<ul>
+<li><strong>Syntax:</strong> integer, <code>4</code> or <code>6</code></li>
+<li><strong>Default:</strong> if <code>ip_address</code> is specified, the IP version is determined from that address, otherwise it is <code>4</code></li>
+<li><strong>Example:</strong> <code>ip_version = 6</code></li>
+</ul>
+<p>Allows to set the IP version to IPv6. Does not need to be set if <code>ip_address</code> is defined.</p>
+<h1 id="xmpp-listener-options">XMPP listener options</h1>
+<p>The options listed below can be set for the <code>c2s</code>, <code>s2s</code> and <code>service</code> listeners to adjust their parameters.</p>
+<h4 id="listenbacklog"><code>listen.*.backlog</code></h4>
+<ul>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> <code>100</code></li>
+<li><strong>Example:</strong> <code>backlog = 1000</code></li>
+</ul>
+<p>Overrides the default TCP backlog value.</p>
+<h4 id="listenproxy_protocol"><code>listen.*.proxy_protocol</code></h4>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>proxy_protocol = true</code></li>
+</ul>
+<p>When set to <code>true</code>, <a href="https://www.haproxy.com/blog/haproxy/proxy-protocol/">Proxy Protocol</a> is enabled and each connecting client has to provide a proxy header. Use only with a proxy (or a load balancer) to allow it to provide the connection details (including the source IP address) of the original client. Versions 1 and 2 of the protocol are supported.</p>
+<h4 id="listenhibernate_after"><code>listen.*.hibernate_after</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>0</code></li>
+<li><strong>Example:</strong> <code>hibernate_after = 10</code></li>
+</ul>
+<p>Time in milliseconds after which a client process spawned by this listener will hibernate.
+Hibernation greatly reduces memory consumption of client processes, but <em>may</em> result in increased CPU consumption if a client is used <em>very</em> frequently.
+The default, recommended value of 0 means that the client processes will hibernate at every opportunity.</p>
+<h4 id="listenmax_stanza_size"><code>listen.*.max_stanza_size</code></h4>
+<ul>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> not set, unlimited size</li>
+<li><strong>Example:</strong> <code>max_stanza_size = 10_000</code></li>
+</ul>
+<p>Maximum allowed incoming stanza size in bytes.
+<strong>Warning:</strong> this limit is checked <strong>after</strong> the input data parsing, so it does not apply to the input data size itself.</p>
+<h4 id="listennum_acceptors"><code>listen.*.num_acceptors</code></h4>
+<ul>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> <code>100</code></li>
+<li><strong>Example:</strong> <code>num_acceptors = 200</code></li>
+</ul>
+<p>The number of processes accepting new connections on the listening socket.</p>
+<h4 id="listenmax_fsm_queue"><code>listen.*.max_fsm_queue</code></h4>
+<ul>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> not set - no limit</li>
+<li><strong>Example:</strong> <code>max_fsm_queue = 1000</code></li>
+</ul>
+<p>Message queue limit to prevent resource exhaustion; overrides the value set in the <code>general</code> section.
+This option does <strong>not</strong> work for <code>s2s</code> listeners - the <code>general</code> value is used for them.</p>
+<h1 id="client-to-server-c2s-listenc2s">Client-to-server (C2S): <code>[[listen.c2s]]</code></h1>
+<p>Handles XMPP client-to-server (C2S) connections.
+The recommended port number for a C2S listener is 5222 <a href="https://tools.ietf.org/html/rfc6120#section-14.7">as registered in the XMPP protocol</a>.
+The following options are supported for each C2S listener:</p>
+<h4 id="listenc2saccess"><code>listen.c2s.access</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, rule name or <code>"all"</code></li>
+<li><strong>Default:</strong> <code>"all"</code></li>
+<li><strong>Example:</strong> <code>access = "c2s"</code></li>
+</ul>
+<p>The rule that determines who is allowed to connect. By default the rule is <code>"all"</code>, which means that anyone can connect. The rule referenced here needs to be defined in the <code>access</code> configuration section.</p>
+<h4 id="listenc2sshaper"><code>listen.c2s.shaper</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, rule name</li>
+<li><strong>Default:</strong> <code>"none"</code> (no shaper)</li>
+<li><strong>Example:</strong> <code>shaper = "c2s_shaper"</code></li>
+</ul>
+<p>The rule that determines what traffic shaper is used to limit the incoming XMPP traffic to prevent the server from being flooded with incoming data.
+The rule referenced here needs to be defined in the <code>access</code> configuration section.
+The value of the access rule needs to be either the shaper name or the string <code>"none"</code>, which means no shaper.</p>
+<h4 id="listenc2szlib"><code>listen.c2s.zlib</code></h4>
+<ul>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> not set, disabled</li>
+<li><strong>Example:</strong> <code>zlib = 1024</code></li>
+</ul>
+<p>Enables ZLIB support, the integer value is a limit for a decompressed output size in bytes (to prevent a successful <a href="https://xmpp.org/community/security-notices/uncontrolled-resource-consumption-with-highly-compressed-xmpp-stanzas.html">ZLIB bomb attack</a>).</p>
+<h2 id="tls-options-for-c2s">TLS options for C2S</h2>
+<p>The following options allow enabling and configuring TLS which makes the client-to-server conenctions secure.
+They all have the <code>tls.</code> prefix.</p>
+<h4 id="listenc2stlsmode"><code>listen.c2s.tls.mode</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, one of <code>"tls"</code>, <code>"starttls"</code>, <code>"starttls_required"</code></li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>tls.mode = "starttls"</code></li>
+</ul>
+<p>By default there is no encryption for the incoming connections. You can change this by setting the <code>tls.mode</code> option to one of the following modes:</p>
+<ul>
+<li><code>tls</code> - clients must initiate a TLS session immediately after connecting, before beginning the normal XML stream,</li>
+<li><code>starttls</code> - enables StartTLS support; requires <code>certfile</code>,</li>
+<li><code>starttls_required</code> - enables and enforces StartTLS usage.</li>
+</ul>
+<h4 id="listenc2stlsverify_peer"><code>listen.c2s.tls.verify_peer</code></h4>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>verify_peer = true</code></li>
+</ul>
+<p>Enforces verification of a client certificate. Requires a valid <code>cacertfile</code>.</p>
+<h4 id="listenc2stlsmodule"><code>listen.c2s.tls.module</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, one of <code>"just_tls"</code>, <code>"fast_tls"</code></li>
+<li><strong>Default:</strong> <code>"fast_tls"</code></li>
+<li><strong>Example:</strong> <code>tls.module = "just_tls"</code></li>
+</ul>
+<p>By default the TLS library used for C2S connections is <code>fast_tls</code>, which uses OpenSSL-based NIFs. It is possible to change it to <code>just_tls</code> - Erlang TLS implementation provided by OTP. Some TLS-related options described here have different formats for these two libraries.</p>
+<p>Requires setting <code>tls.verify_mode</code>.  When set to <code>false</code>, it allows the client to connect even though the certificate verification failed. It is then up to the authentication layer to accept or reject the client connection. This behaviour mimics the FastTLS one.</p>
+<h4 id="listenc2stlscertfile"><code>listen.c2s.tls.certfile</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, path in the file system</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>tls.certfile = "server.pem"</code></li>
+</ul>
+<p>Path to the X509 PEM file with a certificate and a private key (not protected by a password). If the certificate is signed by an intermediate CA, you should specify here the whole CA chain by concatenating all public keys together and appending the private key after that.</p>
+<h4 id="listenc2stlscacertfile"><code>listen.c2s.tls.cacertfile</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, path in the file system</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>tls.cacertfile = "ca.pem"</code></li>
+</ul>
+<p>Path to the X509 PEM file with a CA chain that will be used to verify clients. It won't have any effect if <code>verify_peer</code> is not enabled.</p>
+<h4 id="listenc2stlsdhfile"><code>listen.c2s.tls.dhfile</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, path in the file system</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>tls.dhfile = "dh.pem"</code></li>
+</ul>
+<p>Path to the Diffie-Hellman parameter file.</p>
+<h4 id="listenc2stlsprotocol_options-only-for-fast_tls"><code>listen.c2s.tls.protocol_options</code> - only for <code>fast_tls</code></h4>
+<ul>
+<li><strong>Syntax:</strong> array of strings</li>
+<li><strong>Default:</strong> <code>["no_sslv2", "no_sslv3", "no_tlsv1", "no_tlsv1_1"]</code></li>
+<li><strong>Example:</strong> <code>tls.protocol_options = ["no_tlsv1", "no_tlsv1_1"]</code></li>
+</ul>
+<p>A list of OpenSSL options for FastTLS. You can find the mappings between supported options and actual OpenSSL flags in the <code>fast_tls</code> <a href="https://github.com/processone/fast_tls/blob/master/c_src/options.h">source code</a>.</p>
+<h4 id="listenc2stlsciphers-for-fast_tls"><code>listen.c2s.tls.ciphers</code> - for <code>fast_tls</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string with the OpenSSL cipher suite specification</li>
+<li><strong>Default:</strong> <code>"TLSv1.2:TLSv1.3"</code></li>
+<li><strong>Example:</strong> <code>tls.ciphers = "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384"</code></li>
+</ul>
+<p>Cipher suites to use with StartTLS or TLS. Please refer to the <a href="http://www.openssl.org/docs/man1.0.2/apps/ciphers.html">OpenSSL documentation</a> for the cipher string format.</p>
+<h4 id="listenc2stlsciphers-for-just_tls"><code>listen.c2s.tls.ciphers</code> - for <code>just_tls</code></h4>
+<ul>
+<li><strong>Syntax:</strong> array of tables with the following keys: <code>cipher</code>, <code>key_exchange</code>, <code>mac</code>, <code>prf</code> and string values.</li>
+<li><strong>Default:</strong> not set, all supported cipher suites are accepted</li>
+<li><strong>Example:</strong> <code>tls.ciphers = "[{cipher = "aes_25_gcm", key_exchange = "any", mac = "aead", "prf = sha384"}]"</code></li>
+</ul>
+<p>Cipher suites to use with StartTLS or TLS. For allowed values, see the <a href="https://erlang.org/doc/man/ssl.html#type-ciphers">Erlang/OTP SSL documentation</a></p>
+<h4 id="listenc2stlsverify_mode-only-for-just_tls"><code>listen.c2s.tls.verify_mode</code> - only for <code>just_tls</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, one of <code>"peer"</code>, <code>"selfsigned_peer"</code>, <code>"none"</code></li>
+<li><strong>Default:</strong> not set (equivalent to <code>"peer"</code> in the current version of Erlang/OTP)</li>
+<li><strong>Example:</strong> <code>tls.verify_mode = "selfsigned_peer"</code></li>
+</ul>
+<p>Specifies the way certificate verification works:</p>
+<ul>
+<li><code>peer</code> - makes sure the peer's certificate is valid and signed by a trusted CA,</li>
+<li><code>selfsigned_peer</code> - makes sure the peer's certificate is valid, but allows self-signed certificates,</li>
+<li><code>none</code> - any certificate is accepted.</li>
+</ul>
+<h4 id="listenc2stlsdisconnect_on_failure-only-for-just_tls"><code>listen.c2s.tls.disconnect_on_failure</code> - only for <code>just_tls</code></h4>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>tls.disconnect_on_failure = false</code></li>
+</ul>
+<h4 id="listenc2stlsversions-only-for-just_tls"><code>listen.c2s.tls.versions</code> - only for <code>just_tls</code></h4>
+<ul>
+<li><strong>Syntax:</strong> array of strings</li>
+<li><strong>Default:</strong> not set, all supported versions are accepted</li>
+<li><strong>Example:</strong> <code>tls.versions = ["tlsv1.2", "tlsv1.3"]</code></li>
+</ul>
+<p>TLS versions to use with StartTLS or TLS. For allowed values, see the <a href="https://erlang.org/doc/man/ssl.html#type-protocol_version">Erlang/OTP SSL documentation</a></p>
+<h4 id="listenc2stlscrl_files-only-for-just_tls"><code>listen.c2s.tls.crl_files</code> - only for <code>just_tls</code></h4>
+<ul>
+<li><strong>Syntax:</strong> array of strings, paths in the file system</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>tls.crl_files = ["certs.crl"]</code></li>
+</ul>
+<p>Specifies the paths to Certificate Revocation Lists.</p>
+<h3 id="c2s-example">C2S Example</h3>
+<p>The following section configures two C2S listeners.</p>
+<pre><code class="language-toml">[[listen.c2s]]
+  port = 5222
+  zlib = 10000
+  access = &quot;c2s&quot;
+  shaper = &quot;c2s_shaper&quot;
+  max_stanza_size = 65536
+  tls.mode = &quot;starttls&quot;
+  tls.certfile = &quot;server.pem&quot;
+  tls.dhfile = &quot;dh_server.pem&quot;
+
+[[listen.c2s]]
+  port = 5223
+  zlib = 4096
+  access = &quot;c2s&quot;
+  shaper = &quot;c2s_shaper&quot;
+  max_stanza_size = 65536
+</code></pre>
+<ul>
+<li>One at port 5222, which accepts a plain TCP connection and allows to use StartTLS for upgrading it to an encrypted one. The files containing the certificate and the DH parameter are also provided.</li>
+<li>One at port 5223, which accepts only encrypted TLS connections - this is the legacy method as StartTLS is preferred.</li>
+</ul>
+<p>Both listeners use ZLIB and the <code>c2s</code> and <code>c2s_shaper</code> rules for access management and traffic shaping, respectively.</p>
+<h2 id="server-to-server-s2s-listens2s">Server-to-server (S2S): <code>[[listen.s2s]]</code></h2>
+<p>Handles incoming server-to-server (S2S) connections (federation).
+The recommended port number for an S2S listener is 5269 <a href="https://tools.ietf.org/html/rfc6120#section-14.7">as registered in the XMPP protocol</a>.</p>
+<p><strong>Note:</strong> Many S2S options are configured in the <code>s2s</code> section of the configuration file and they apply to both incoming and outgoing connections.</p>
+<h4 id="listens2sshaper"><code>listen.s2s.shaper</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, name of the shaper rule or <code>"none"</code></li>
+<li><strong>Default:</strong> <code>"none"</code> - no shaper</li>
+<li><strong>Example:</strong> <code>shaper = "s2s_shaper"</code></li>
+</ul>
+<p>Name of the rule that determines what traffic shaper is used to limit the incoming XMPP traffic to prevent the server from being flooded with incoming data. The rule referenced here needs to be defined in the <code>access</code> config section and it should return the shaper name or the value <code>"none"</code>.</p>
+<h3 id="tls-options-for-s2s">TLS options for S2S</h3>
+<p>S2S connections do not use TLS encryption unless enabled with the <code>use_starttls</code> option in the <code>s2s</code> section.
+Here you can specify some additional options of the TLS encryption.</p>
+<h4 id="listens2stlscacertfile"><code>listen.s2s.tls.cacertfile</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, path in the file system</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>tls.cacertfile = "ca.pem"</code></li>
+</ul>
+<p>Path to the X509 PEM file with a CA chain that will be used to verify the connecting XMPP servers (acting as clients here). It won't have any effect if <code>verify_peer</code> is not enabled.</p>
+<h4 id="listens2stlsdhfile"><code>listen.s2s.tls.dhfile</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, path in the file system</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>tls.dhfile = "dh.pem"</code></li>
+</ul>
+<p>Path to the Diffie-Hellman parameter file.</p>
+<h4 id="listens2stlsciphers"><code>listen.s2s.tls.ciphers</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string with the OpenSSL cipher suite specification</li>
+<li><strong>Default:</strong> <code>"TLSv1.2:TLSv1.3"</code></li>
+<li><strong>Example:</strong> <code>tls.ciphers = "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384"</code></li>
+</ul>
+<p>Cipher suites to use with StartTLS. Please refer to the <a href="http://www.openssl.org/docs/man1.0.2/apps/ciphers.html">OpenSSL documentation</a> for the cipher string format.</p>
+<h3 id="s2s-example">S2S Example</h3>
+<p>The following section configures an S2S listener with some basic settings set up.
+The <code>s2s_shaper</code> access rule is used, which requires a definition in the <code>access</code> section.</p>
+<pre><code class="language-toml">[[listen.s2s]]
+  port = 5269
+  shaper = &quot;s2s_shaper&quot;
+  max_stanza_size = 131072
+  tls.dhfile = &quot;dh_server.pem&quot;
+</code></pre>
+<h2 id="xmpp-components-listenservice">XMPP Components: <code>[[listen.service]]</code></h2>
+<p>Interface for external services acting as XMPP components (<a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114: Jabber Component Protocol</a>), enabling communication between MongooseIM and external services over the XMPP network. The recommended port number for a component listener is 8888.</p>
+<p>According to (<a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114: Jabber Component Protocol</a>) the component's hostname should be given in the <stream:stream> element.</p>
+<h4 id="listenserviceaccess"><code>listen.service.access</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, rule name or <code>"all"</code></li>
+<li><strong>Default:</strong> <code>"all"</code></li>
+<li><strong>Example:</strong> <code>access = "component"</code></li>
+</ul>
+<p>Determines who is allowed to connect to the listener. By default the rule is <code>all</code>, which means that any external component can connect. The access rule referenced here needs to be defined in the <code>access</code> configuration section.</p>
+<h4 id="listenservicepassword"><code>listen.service.password</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> no default, this option is mandatory</li>
+<li><strong>Example:</strong> <code>password = "secret"</code></li>
+</ul>
+<p>The external component needs to authenticate with this password to connect.</p>
+<h4 id="listenserviceshaper_rule"><code>listen.service.shaper_rule</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, name of the shaper</li>
+<li><strong>Default:</strong> <code>"none"</code></li>
+<li><strong>Example:</strong> <code>shaper = "component_shaper"</code></li>
+</ul>
+<p>The traffic shaper used to limit the XMPP traffic to prevent the server from being flooded with incoming data.
+Contrary to the C2S and S2S shapers, here the shaper name directly references the shaper that needs to be defined in the <a href="../shaper/"><code>shaper</code></a> section.</p>
+<h4 id="listenservicecheck_from"><code>listen.service.check_from</code></h4>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>check_from = false</code></li>
+</ul>
+<p>Specifies whether the server should verify the "from" field in stanzas from the component.</p>
+<h4 id="listenservicehidden_components"><code>listen.service.hidden_components</code></h4>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>hidden_components = true</code></li>
+</ul>
+<p>All components connected to an endpoint with this option enabled will be considered "hidden".</p>
+<p>Hidden components have a special flag enabled in the internal component table.
+Alone, it doesn't change the server behaviour in any way, but it may be used by other modules and extensions to execute special logic.
+An example would be <a href="../../modules/mod_disco/"><code>mod_disco</code></a>, which may be configured to filter out hidden components from disco results, so they won't be discoverable by clients.
+A reason to do so could be reduced traffic - systems with many components could return very long disco responses.
+Also, some deployments would like to avoid revealing some services; not because it is a security threat (this method does not prevent clients from communicating with hidden components), but rather because they are not meant to interact with clients directly (e.g. helper components for other components).</p>
+<h4 id="listenserviceconflict_behaviour"><code>listen.service.conflict_behaviour</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, one of: <code>"disconnect"</code>, <code>"kick_old"</code></li>
+<li><strong>Default:</strong> <code>"disconnect"</code></li>
+<li><strong>Example:</strong> <code>conflict_behaviour = "kick_old"</code></li>
+</ul>
+<p>By default, when a component tries to connect and a registration conflict occurs, the connection is dropped with the following error:</p>
+<pre><code class="language-xml">&lt;stream:error&gt;
+  &lt;conflict xmlns='urn:ietf:params:xml:ns:xmpp-streams'/&gt;
+&lt;/stream:error&gt;
+&lt;/stream:stream&gt;
+</code></pre>
+<p>It makes implementing the reconnection logic difficult, because the old connection would not allow any other connections.
+By setting this option to <code>kick_old</code>, we drop any old connections registered at the same host before accepting new ones.</p>
+<h3 id="custom-extension-to-the-protocol">Custom extension to the protocol</h3>
+<p>In order to register a component for all virtual hosts served by the server (see <code>hosts</code> in the <code>general</code> section), the component must add the attribute <code>is_subdomain="true"</code> to the opening stream element.
+This maybe helpful if someone wants to have a single instance of a component serving multiple virtual hosts.
+The <code>is_subdomain</code> attribute is optional and the default behaviour is as described in <a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114</a>.</p>
+<h3 id="service-listener-example">Service listener example</h3>
+<p>The following section configures a service listener, accepting connections from external components.
+The IP address is limited to loopback to prevent connections from different hosts.
+All components are allowed to connect, but they need to provide the password.
+The shaper named <code>fast</code> needs to be defined in the <code>shaper</code> section.</p>
+<pre><code class="language-toml">[[listen.service]]
+  port = 8888
+  access = &quot;all&quot;
+  shaper_rule = &quot;fast&quot;
+  ip_address = &quot;127.0.0.1&quot;
+  password = &quot;secret&quot;
+</code></pre>
+<h2 id="http-based-services-listenhttp">HTTP-based services: <code>[[listen.http]]</code></h2>
+<p>Manages all HTTP-based services, such as BOSH (HTTP long-polling), WebSocket and REST.
+It uses the <a href="https://ninenines.eu/docs/en/cowboy/2.6/manual">Cowboy</a> web server.
+Recommended port number: 5280 for BOSH/WS.</p>
+<p>There are the following options for each of the HTTP listeners:</p>
+<h4 id="listenhttphandlers"><code>listen.http.handlers</code></h4>
+<ul>
+<li>
+<p><strong>Syntax:</strong> each handler is specified in a subsection starting with <code>[[listen.http.handlers.type]]</code> where <code>type</code> is one of the allowed handler types, handling different connection types, e.g.</p>
+<ul>
+<li><code>mod_bosh</code> - for <a href="https://xmpp.org/extensions/xep-0124.html">BOSH</a> connections,</li>
+<li><code>mod_websockets</code> - for <a href="https://tools.ietf.org/html/rfc6455">WebSocket</a> connections,</li>
+<li><code>mongoose_api_*</code>, <code>mongoose_client_api_*</code>, ... - for REST API.</li>
+</ul>
+<p>These types are described below in more detail.
+The double-bracket syntax is used because there can be multiple handlers of a given type, so for each type there is a TOML array of one or more tables (subsections).</p>
+</li>
+<li>
+<p><strong>Default:</strong> there is no default, all handlers need to be specified explicitly.</p>
+</li>
+<li><strong>Example:</strong> two handlers, one for BOSH and one for WebSockets</li>
+</ul>
+<pre><code class="language-toml">  [[listen.http.handlers.mod_bosh]]
+    host = &quot;_&quot;
+    path = &quot;/http-bind&quot;
+
+  [[listen.http.handlers.mod_websockets]]
+    host = &quot;_&quot;
+    path = &quot;/ws-xmpp&quot;
+</code></pre>
+<h3 id="common-handler-options">Common handler options</h3>
+<h4 id="listenhttphandlershost"><code>listen.http.handlers.*.host</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> no default, mandatory option</li>
+<li><strong>Example:</strong> <code>host = "localhost"</code></li>
+</ul>
+<p>Host name for this handler or <code>"_"</code> for any host.</p>
+<h4 id="listenhttphandlerspath"><code>listen.http.handlers.*.path</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> no default, mandatory option</li>
+<li><strong>Example:</strong> <code>path = "/ws-xmpp"</code></li>
+</ul>
+<p>Path for this handler.</p>
+<h3 id="handler-types-bosh-mod_bosh">Handler types: BOSH - <code>mod_bosh</code></h3>
+<p>To handle incoming BOSH traffic you need to configure the <code>mod_bosh</code> module in the <code>modules</code> section as well.</p>
+<h3 id="handler-types-websockets-mod_websockets">Handler types: WebSockets - <code>mod_websockets</code></h3>
+<p>Websocket connections as defined in <a href="https://tools.ietf.org/html/rfc7395">RFC 7395</a>.
+You can pass the following optional parameters:</p>
+<h4 id="listenhttphandlersmod_websocketstimeout"><code>listen.http.handlers.mod_websockets.timeout</code></h4>
+<ul>
+<li><strong>Syntax:</strong> positive integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
+<li><strong>Example:</strong> <code>timeout = 60_000</code></li>
+</ul>
+<p>The time (in milliseconds) after which an inactive user is disconnected.</p>
+<h4 id="listenhttphandlersmod_websocketsping_rate"><code>listen.http.handlers.mod_websockets.ping_rate</code></h4>
+<ul>
+<li><strong>Syntax:</strong> positive integer or the string <code>"none"</code></li>
+<li><strong>Default:</strong> <code>"none"</code></li>
+<li><strong>Example:</strong> <code>ping_rate = 10_000</code></li>
+</ul>
+<p>The time between pings sent by server. By setting this option you enable server-side pinging.</p>
+<h4 id="listenhttphandlersmod_websocketsmax_stanza_size"><code>listen.http.handlers.mod_websockets.max_stanza_size</code></h4>
+<ul>
+<li><strong>Syntax:</strong> positive integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
+<li><strong>Example:</strong> <code>max_stanza_size = 10_000</code></li>
+</ul>
+<p>Maximum allowed incoming stanza size.
+<strong>Warning:</strong> this limit is checked <strong>after</strong> the input data parsing, so it does not apply to the input data size itself.</p>
+<h4 id="listenhttphandlersmod_websocketsservice"><code>listen.http.handlers.mod_websockets.service</code></h4>
+<ul>
+<li><strong>Syntax:</strong> an array of <code>listen.service.*</code> options</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong></li>
+</ul>
+<pre><code class="language-toml">[listen.http.handlers.mod_websockets.service]
+  access = &quot;all&quot;
+  shaper_rule = &quot;fast&quot;
+  password = &quot;secret&quot;
+</code></pre>
+<p>This subsection enables external component connections over WebSockets.
+See the <a href="#xmpp-components-listenservice">service</a> listener section for details.</p>
+<h3 id="handler-types-rest-api-admin-mongoose_api_admin">Handler types: REST API - Admin - <code>mongoose_api_admin</code></h3>
+<p>For more information about the API, see the <a href="../../rest-api/Administration-backend/">REST interface</a> documentation.
+The following options are supported for this handler:</p>
+<h4 id="listenhttphandlersmongoose_api_adminusername"><code>listen.http.handlers.mongoose_api_admin.username</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>username = "admin"</code></li>
+</ul>
+<p>When set, enables authentication for the admin API, otherwise it is disabled. Requires setting <code>password</code>.</p>
+<h4 id="listenhttphandlersmongoose_api_adminpassword"><code>listen.http.handlers.mongoose_api_admin.password</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>password = "secret"</code></li>
+</ul>
+<p>Required to enable authentication for the admin API.</p>
+<h3 id="handler-types-rest-api-client">Handler types: REST API - Client</h3>
+<p>To enable the REST API for clients, several handlers need to be added:</p>
+<ul>
+<li><code>mongoose_client_api_*</code> - handles individual API endpoints. You can add and remove these to enable particular functionality.</li>
+<li><code>lasse_handler</code> - provides the <a href="https://github.com/inaka/lasse">SSE handler</a> which is required for the client HTTP API, should not be changed.</li>
+<li><code>cowboy_*</code> - hosts the Swagger web-based documentation, should not be changed, but can be removed to disable the API docs.</li>
+</ul>
+<p>The recommended configuration is shown in <a href="#example-3-client-api">Example 3</a> below.
+Please refer to <a href="../../rest-api/Client-frontend/">REST interface</a> documentation for more information.</p>
+<h3 id="handler-types-metrics-api-obsolete-mongoose_api">Handler types: Metrics API (obsolete) - <code>mongoose_api</code></h3>
+<p>REST API for accessing the internal MongooseIM metrics.
+Please refer to the <a href="../../rest-api/Metrics-backend/">REST interface to metrics</a> page for more information.
+The following option is required:</p>
+<h4 id="listenhttphandlersmongoose_apihandlers"><code>listen.http.handlers.mongoose_api.handlers</code></h4>
+<ul>
+<li><strong>Syntax:</strong> array of strings - Erlang modules</li>
+<li><strong>Default:</strong> not set, this is a mandatory option for this handler</li>
+<li><strong>Example:</strong> <code>handlers = ["mongoose_api_metrics"]</code></li>
+</ul>
+<h3 id="transport-options">Transport options</h3>
+<p>The options listed below are used to modify the HTTP transport settings.</p>
+<h4 id="listenhttptransportnum_acceptors"><code>listen.http.transport.num_acceptors</code></h4>
+<ul>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> <code>100</code></li>
+<li><strong>Example:</strong> <code>transport.num_acceptors = 10</code></li>
+</ul>
+<p>Number of HTTP connection acceptors.</p>
+<h4 id="listenhttptransportmax_connections"><code>listen.http.transport.max_connections</code></h4>
+<ul>
+<li><strong>Syntax:</strong> positive integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>1024</code></li>
+<li><strong>Example:</strong> <code>transport.max_connections = "infinity"</code></li>
+</ul>
+<p>Maximum number of open connections. The default value of 1024 is set by the <a href="https://ninenines.eu/docs/en/ranch/1.7/guide/">Ranch</a> library.</p>
+<h3 id="tls-https-options">TLS (HTTPS) options</h3>
+<p>By default the HTTP listener does not use TLS.
+To use TLS (HTTPS), you need to add a TOML table (subsection) called <code>tls</code> to the config file with the <code>certfile</code> and <code>keyfile</code> options that specify the location of the certificate and private key files, respectively.
+If the keyfile is password-protected, <code>password</code> is required as well.
+If the certificate is signed by an intermediate CA, one will probably want to specify the CA chain with the <code>cacertfile</code> option.
+The library used for HTTP is the Erlang TLS implementation provided by OTP - see <a href="https://github.com/ninenines/ranch/blob/master/doc/src/manual/ranch_ssl.asciidoc">ranch_ssl</a> for details.</p>
+<h4 id="listenhttptlsverify_peer"><code>listen.http.tls.verify_peer</code></h4>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>tls.verify_peer = true</code></li>
+</ul>
+<p>Enforces verification of a client certificate. Requires a valid <code>cacertfile</code>.</p>
+<h4 id="listenhttptlsverify_mode"><code>listen.http.tls.verify_mode</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, one of <code>"peer"</code>, <code>"selfsigned_peer"</code>, <code>"none"</code></li>
+<li><strong>Default:</strong> not set (equivalent to <code>"peer"</code> in the current version of Erlang/OTP)</li>
+<li><strong>Example:</strong> <code>tls.verify_mode = "selfsigned_peer"</code></li>
+</ul>
+<p>Specifies the way certificate verification works:</p>
+<ul>
+<li><code>peer</code> - makes sure the peer's certificate is valid and signed by a trusted CA,</li>
+<li><code>selfsigned_peer</code> - makes sure the peer's certificate is valid, but allows self-signed certificates,</li>
+<li><code>none</code> - any certificate is accepted.</li>
+</ul>
+<h4 id="listenhttptlscertfile"><code>listen.http.tls.certfile</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, path in the file system</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>tls.certfile = "server.pem"</code></li>
+</ul>
+<p>Path to the X509 PEM file with a certificate and a private key (not protected by a password). If the certificate is signed by an intermediate CA, you should specify here the whole CA chain by concatenating all public keys together and appending the private key after that.</p>
+<h4 id="listenhttptlscacertfile"><code>listen.http.tls.cacertfile</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, path in the file system</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>tls.cacertfile = "ca.pem"</code></li>
+</ul>
+<p>Path to the X509 PEM file with a CA chain that will be used to verify clients. It won't have any effect if <code>verify_peer</code> is not enabled.</p>
+<h4 id="listenhttptlsdhfile"><code>listen.http.tls.dhfile</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, path in the file system</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>tls.dhfile = "dh.pem"</code></li>
+</ul>
+<p>Path to the Diffie-Hellman parameter file.</p>
+<h4 id="listenhttptlsciphers"><code>listen.http.tls.ciphers</code></h4>
+<ul>
+<li><strong>Syntax:</strong> array of tables with the following keys: <code>cipher</code>, <code>key_exchange</code>, <code>mac</code>, <code>prf</code> and string values.</li>
+<li><strong>Default:</strong> not set, all supported cipher suites are accepted</li>
+<li><strong>Example:</strong> <code>tls.ciphers = "[{cipher = "aes_25_gcm", key_exchange = "any", mac = "aead", "prf = sha384"}]"</code></li>
+</ul>
+<p>Cipher suites to use. For allowed values, see the <a href="https://erlang.org/doc/man/ssl.html#type-ciphers">Erlang/OTP SSL documentation</a></p>
+<h4 id="listenhttptlsversions"><code>listen.http.tls.versions</code></h4>
+<ul>
+<li><strong>Syntax:</strong> array of strings</li>
+<li><strong>Default:</strong> not set, all supported versions are accepted</li>
+<li><strong>Example:</strong> <code>tls.versions = ["tlsv1.2", "tlsv1.3"]</code></li>
+</ul>
+<p>TLS versions to use. For allowed values, see the <a href="https://erlang.org/doc/man/ssl.html#type-protocol_version">Erlang/OTP SSL documentation</a></p>
+<h4 id="listenhttptlskeyfile"><code>listen.http.tls.keyfile</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, path in the file system</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>tls.keyfile = "key.pem"</code></li>
+</ul>
+<p>Path to the X509 PEM file with the private key.</p>
+<h4 id="listenhttptlspassword"><code>listen.http.tls.password</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>tls.password = "secret"</code></li>
+</ul>
+<p>Password to the X509 PEM file with the private key.</p>
+<h3 id="protocol-options">Protocol options</h3>
+<p>These are some additional options of the HTTP protocol.</p>
+<h4 id="listenhttpprotocolcompress"><code>listen.http.protocol.compress</code></h4>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> false</li>
+<li><strong>Example:</strong> <code>protocol.compress = "true"</code></li>
+</ul>
+<p>Compresses response bodies automatically when the client supports it.</p>
+<h3 id="http-listener-examples">HTTP listener examples</h3>
+<p>The examples shown below are included in the provided default configuration file.</p>
+<h4 id="example-1-bosh-and-ws">Example 1. BOSH and WS</h4>
+<p>The following listener accepts BOSH and WebSocket connections and has TLS configured.</p>
+<pre><code class="language-toml">[[listen.http]]
+  port = 5285
+  tls.certfile = &quot;mycert.pem&quot;
+  tls.keyfile = &quot;mykey.pem&quot;
+  tls.password =  &quot;secret&quot;
+
+  [[listen.http.handlers.mod_bosh]]
+    host = &quot;_&quot;
+    path = &quot;/http-bind&quot;
+
+  [[listen.http.handlers.mod_websockets]]
+    host = &quot;_&quot;
+    path = &quot;/ws-xmpp&quot;
+</code></pre>
+<h4 id="example-2-admin-api">Example 2. Admin API</h4>
+<p>REST API for administration, the listener is bound to <code>127.0.0.1</code> for increased security.
+The number of acceptors and connections is specified (reduced).</p>
+<pre><code class="language-toml">[[listen.http]]
+  ip_address = &quot;127.0.0.1&quot;
+  port = 8088
+  transport.num_acceptors = 5
+  transport.max_connections = 10
+
+  [[listen.http.handlers.mongoose_api_admin]]
+    host = &quot;localhost&quot;
+    path = &quot;/api&quot;
+</code></pre>
+<h4 id="example-3-client-api">Example 3. Client API</h4>
+<p>REST API for clients.</p>
+<pre><code class="language-toml">[[listen.http]]
+  port = 8089
+  transport.max_connections = 1024
+  protocol.compress = true
+
+  [[listen.http.handlers.lasse_handler]]
+    host = &quot;_&quot;
+    path = &quot;/api/sse&quot;
+    module = &quot;mongoose_client_api_sse&quot;
+
+  [[listen.http.handlers.mongoose_client_api_messages]]
+    host = &quot;_&quot;
+    path = &quot;/api/messages/[:with]&quot;
+
+  [[listen.http.handlers.mongoose_client_api_contacts]]
+    host = &quot;_&quot;
+    path = &quot;/api/contacts/[:jid]&quot;
+
+  [[listen.http.handlers.mongoose_client_api_rooms]]
+    host = &quot;_&quot;
+    path = &quot;/api/rooms/[:id]&quot;
+
+  [[listen.http.handlers.mongoose_client_api_rooms_config]]
+    host = &quot;_&quot;
+    path = &quot;/api/rooms/[:id]/config&quot;
+
+  [[listen.http.handlers.mongoose_client_api_rooms_users]]
+    host = &quot;_&quot;
+    path = &quot;/api/rooms/:id/users/[:user]&quot;
+
+  [[listen.http.handlers.mongoose_client_api_rooms_messages]]
+    host = &quot;_&quot;
+    path = &quot;/api/rooms/[:id]/messages&quot;
+
+  [[listen.http.handlers.cowboy_swagger_redirect_handler]]
+    host = &quot;_&quot;
+    path = &quot;/api-docs&quot;
+
+  [[listen.http.handlers.cowboy_swagger_json_handler]]
+    host = &quot;_&quot;
+    path = &quot;/api-docs/swagger.json&quot;
+
+  [[listen.http.handlers.cowboy_static]]
+    host = &quot;_&quot;
+    path = &quot;/api-docs/[...]&quot;
+    type = &quot;priv_dir&quot;
+    app = &quot;cowboy_swagger&quot;
+    content_path = &quot;swagger&quot;
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../auth/" class="btn btn-neutral float-right" title="Options: Auth">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../general/" class="btn btn-neutral" title="Options: General"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../general/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../auth/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
