@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>xep-tool usage - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "xep-tool usage";
+    var mkdocs_page_input_path = "developers-guide/xep_tool.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Push-notifications/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Roadmap/">Roadmap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Listener-modules/">Listener Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/client-certificate/">Client Certificate</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/HTTP-authentication-module/">HTTP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">xep-tool usage</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#sign-your-module-file-first">Sign your module file first</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#mandatory-xep-and-version">Mandatory xep and version</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#specific-url">Specific URL</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#comment">Comment</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#compile-and-run">Compile and run</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#generated-file-example">Generated file example</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Developer's guide &raquo;</li>
+        
+      
+    
+    <li>xep-tool usage</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="xep-tool-usage">XEP-tool usage</h1>
+<p>The XEP-tool is the answer for developers who wonder how to maintain an actual list of supported XEPs.
+It's a fast and easy way to automatically produce documentation from raw, beam files.
+This is a quick guide on how to enjoy the usage of the XEP-tool.</p>
+<h3 id="sign-your-module-file-first">Sign your module file first</h3>
+<p>The architecture of MongooseIM determines that almost every XEP or feature implementation resides in its own file. 
+It is not strictly enforced but usually the file is named with a <code>mod_</code> prefix. 
+For example <code>mod_privacy</code> file implements <a href="http://xmpp.org/extensions/xep-0016.html">XEP-0016: Privacy Lists</a>.</p>
+<h4 id="mandatory-xep-and-version">Mandatory <code>xep</code> and <code>version</code></h4>
+<p>In order to let the XEP-tool know about your module, we add a special attribute <code>xep</code> at the begining of the <code>mod_privacy</code> module:</p>
+<pre><code>-xep([{xep, 16}, {version, &quot;1.6&quot;}]).
+</code></pre>
+<p>Now we know that this module implements to <a href="http://xmpp.org/extensions/xep-0016.html">XEP-0016: Privacy Lists</a> with version 1.6.</p>
+<p>It gives the tool enough information to generate a URL to the XEP homepage.
+There are also some variations of the <code>xep</code> attribute like:</p>
+<p>You ought to remember to specify <code>xep</code> and <code>version</code> attributes every time.
+You can also put several <code>xep</code> attributes in one module.
+For example <code>mod_mam_muc</code> implements attributes of <a href="http://xmpp.org/extensions/xep-0313.html">XEP-0313: Message Archive Management</a> and also <a href="http://xmpp.org/extensions/xep-0045.html">XEP-0045: Multi-User Chat</a>.</p>
+<p>Just list them one after another:</p>
+<pre><code class="language-erlang">-xep([{xep, 45}, {version, &quot;1.25&quot;}]).
+-xep([{xep, 313}, {version, &quot;0.5.1&quot;}]).
+</code></pre>
+<h4 id="specific-url">Specific URL</h4>
+<pre><code>-xep([{xep, 16}, {version, &quot;1.6&quot;}, {url, &quot;http://xmpp.org/extensions/xep-0016.html&quot;}]).
+</code></pre>
+<h4 id="comment">Comment</h4>
+<pre><code>-xep([{xep, 16}, {version, &quot;1.6&quot;}, {comment, &quot;Example comment: Partial Implemented&quot;}]).
+</code></pre>
+<p>And the XEP-tool will do the work!</p>
+<h3 id="compile-and-run">Compile and run</h3>
+<p>You've just finished marking your modules. 
+The only thing left is to <code>make compile</code> MongooseIM in order to generate the .beam files.
+To run the XEP tool, you must issue an additional subcommand. 
+There are two choices:</p>
+<ul>
+<li><code>markdown</code>: to produce a markdown list of supported XEPs. 
+ This option also needs an output file as an argument.</li>
+<li><code>list</code>: to print out supported XEPs to the console.</li>
+</ul>
+<p>For example, to run our XEP-tool with a <code>markdown</code> command, type:</p>
+<p><code>make xeplist</code></p>
+<p>Or do it manually:</p>
+<p><code>$MONGOOSEIM_ROOT/tools/xep_tool/xep_tool.escript markdown &lt;PATH_TO_EBIN&gt; &lt;OPTIONAL_OUTPUT_FILE&gt;</code></p>
+<p>In our case, from MongooseIM root directory:</p>
+<p><code>./tools/xep_tool/xep_tool.escript markdown ebin list.md</code></p>
+<p>The Markdown list with unique XEP names and URLs is saved to file <code>list.md</code>
+You can copy-paste the content of this file to your main README file.</p>
+<h3 id="generated-file-example">Generated file example</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.xmpp.org/extensions/xep-0012.html">XEP-0012: Last Activity</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0016.html">XEP-0016: Privacy Lists</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0018.html">XEP-0018: Invisible Presence</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0022.html">XEP-0022: Message Events</a></td>
+</tr>
+<tr>
+<td><a href="http://www.xmpp.org/extensions/xep-0023.html">XEP-0023: Message Expiration</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0030.html">XEP-0030: Service Discovery</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0045.html">XEP-0045: Multi-User Chat</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0049.html">XEP-0049: Private XML Storage</a></td>
+</tr>
+<tr>
+<td><a href="http://www.xmpp.org/extensions/xep-0050.html">XEP-0050: Ad-Hoc Commands</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0054.html">XEP-0054: vcard-temp</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0055.html">XEP-0055: Jabber Search</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0059.html">XEP-0059: Result Set Management</a></td>
+</tr>
+<tr>
+<td><a href="http://www.xmpp.org/extensions/xep-0068.html">XEP-0068: Field Standardization for Data Forms</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0077.html">XEP-0077: In-Band Registration</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0078.html">XEP-0078: Non-SASL Authentication</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0079.html">XEP-0079: Advanced Message Processing</a></td>
+</tr>
+<tr>
+<td><a href="http://www.xmpp.org/extensions/xep-0082.html">XEP-0082: XMPP Date and Time Profiles</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0083.html">XEP-0083: Nested Roster Groups</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0085.html">XEP-0085: Chat State Notifications</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0086.html">XEP-0086: Error Condition Mappings</a></td>
+</tr>
+<tr>
+<td><a href="http://www.xmpp.org/extensions/xep-0093.html">XEP-0093: Roster Item Exchange</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0114.html">XEP-0114: Jabber Component Protocol</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0124.html">XEP-0124: Bidirectional-streams Over Synchronous HTTP (BOSH)</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0126.html">XEP-0126: Invisibility</a></td>
+</tr>
+<tr>
+<td><a href="http://www.xmpp.org/extensions/xep-0138.html">XEP-0138: Stream Compression</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0157.html">XEP-0157: Contact Addresses for XMPP Services</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0160.html">XEP-0160: Best Practices for Handling Offline Messages</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0170.html">XEP-0170: Recommended Order of Stream Feature Negotiation</a></td>
+</tr>
+<tr>
+<td><a href="http://www.xmpp.org/extensions/xep-0175.html">XEP-0175: Best Practices for Use of SASL ANONYMOUS</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0198.html">XEP-0198: Stream Management</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0199.html">XEP-0199: XMPP Ping</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0202.html">XEP-0202: Entity Time</a></td>
+</tr>
+<tr>
+<td><a href="http://www.xmpp.org/extensions/xep-0206.html">XEP-0206: XMPP Over BOSH</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0212.html">XEP-0212: XMPP Basic Server 2008</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0237.html">XEP-0237: Roster Versioning</a></td>
+<td><a href="http://www.xmpp.org/extensions/xep-0279.html">XEP-0279: Server IP Check</a></td>
+</tr>
+<tr>
+<td><a href="http://www.xmpp.org/extensions/xep-0280.html">XEP-0280: Message Carbons</a></td>
+<td><a href="http://xmpp.org/extensions/attic/xep-0313-0.2.html">XEP-0313: Message Archive Management</a></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../OpenSSL-and-FIPS/" class="btn btn-neutral float-right" title="FIPS mode">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../SCRAM-serialization/" class="btn btn-neutral" title="SCRAM serialization format"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../SCRAM-serialization/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../OpenSSL-and-FIPS/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

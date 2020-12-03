@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>Accumulators - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Accumulators";
+    var mkdocs_page_input_path = "developers-guide/accumulators.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Push-notifications/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Roadmap/">Roadmap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Listener-modules/">Listener Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/client-certificate/">Client Certificate</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/HTTP-authentication-module/">HTTP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Accumulators</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#implementation">Implementation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#stripping-and-persistence">Stripping and "persistence"</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#entry-points">Entry points</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ejabberd_c2ssession_established2">ejabberd_c2s:session_established/2</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ejabberd_c2shandle_incoming_message3">ejabberd_c2s:handle_incoming_message/3</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ejabberd_s2s_inroute_incoming_stanza4">ejabberd_s2s_in:route_incoming_stanza/4</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#hooks">Hooks</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#exit-points">Exit points</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ejabberd_c2ssend_element3">ejabberd_c2s:send_element/3</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ejabberd_routerroute4">ejabberd_router:route/4</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sample-usage-actual-and-potential">Sample usage, actual and potential</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#privacy-check">Privacy check</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tracing-hooks-and-handlers">Tracing hooks and handlers</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#performance-measurement">Performance measurement</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mod_amp">mod_amp</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Developer's guide &raquo;</li>
+        
+      
+    
+    <li>Accumulators</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="accumulators">Accumulators</h1>
+<p>XMPP stanza processing starts in the <code>ejabberd_c2s</code> module, which receives the stanza from a socket, or in <code>ejabberd_s2s_in</code> which receives stanzas from federated XMPP clusters.
+The stanza is processed and eventually it and/or other messages are sent out, either to the original sender, to another c2s process within the same MongooseIM installation, or to another XMPP server.</p>
+<p>At the beginning of the main processing chain an accumulator is created containing the original stanza, some values extracted from the stanza and additional info:</p>
+<ul>
+<li>ref - a unique reference of the acc, useful for tracing</li>
+<li>timestamp - current time</li>
+<li>element - the original stanza</li>
+<li>name - &lt;&lt;"message"&gt;&gt;, &lt;&lt;"presence"&gt;&gt; or &lt;&lt;"iq"&gt;&gt;</li>
+<li>type - e.g. &lt;&lt;"set"&gt;&gt; (in iq)</li>
+<li>attrs - attributs of the root xml element of the stanza</li>
+<li>from, to - full jids of the sender and recipient in binary form</li>
+<li>from_jid, to_jid - same as #jid{} records.</li>
+<li>origin_sid - session id (SID) of <code>ejabberd_c2s</code>. Set when we receive a stanza
+  from the user device. <em>property</em>, <em>optional</em>.</li>
+<li>origin_jid - full JID of <code>ejabberd_c2s</code>.
+  Set the same time as <code>origin_sid</code>. <em>property</em>, <em>optional</em>.</li>
+</ul>
+<p>It is then passed through all the stages until it reaches the end of its life.
+Throughout the process it is the very same accumulator; it is therefore possible to store a value in it on one stage of the processing and retrieve the same value later on.</p>
+<p>The main assumption is that whatever the MongooseIM does, it is always triggered by a stanza entering the system, one way or another (with an exeption for REST methods and mongooseimctl, that should have their own methods of creating and processing an accumulator).
+The stanza should always be packed into an accumulator and passed on, so that internally every action is performed the same way.</p>
+<p>There are three main benefits from this approach:</p>
+<p>a) performance - if we need to do something involving inspecting a stanza or more complicated operations (e.g. privacy check) we don't need to do it multiple times on various stages of processing - instead we can do it once and store the result in an accumulator</p>
+<p>b) debugging - it is now very easy to produce an exact track record of a stanza</p>
+<p>c) simplified implementation of modules which inherently involve multi-stage processing (e.g. mod_amp)</p>
+<h2 id="implementation">Implementation</h2>
+<p>The accumulator is implemented in the <code>mongoose_acc</code> module, which exposes a number of methods for creating and modifying stanzas and retrieving values from them.
+Under the hood an accumulator is just a map, but it may change in the future.</p>
+<p>Initially an accumulator should be created from an <code>#xmlel{}</code> using <code>mongoose_acc:from_element/1</code> or <code>mongoose_acc:from_element/3</code>.
+It should also contain <code>from</code>, <code>from_jid</code>, <code>to</code> and <code>to_jid</code> (those are set automatically if <code>mongoose_acc::from_element/3</code> is used), <code>user</code> and <code>server</code>.
+Instantiation functions also set <code>timestamp</code> and <code>ref</code>.
+The <code>to</code> part is optional, since not every stanza is directed to a specified jid.</p>
+<p>Some attributes are calculated upon request and stored: these are <code>command</code>, <code>xmlns</code> and <code>iq_query_info</code>.
+If they are needed, you should first use <code>mongoose_acc:require/2</code> and then just get:</p>
+<pre><code>Acc1 = mongoose_acc:require(command, Acc),
+Cmd = mongoose_acc:get(command, Acc1)
+</code></pre>
+<p>You can set whatever attributes you want, but treat them as read-only - an accumulator is meant
+to accumulate results and carry them forward with it, not to introduced a semi-mutable data structure.
+If you put a value to a key which already exists it will work, at least as of today, but may also produce a warning.
+Some day it may stop working, you have been warned.</p>
+<p>If you need to store multiple values under the same key, then either:
+* use mongoose_acc:append/3
+* or generate a unique derivative key for each use</p>
+<p>There is one exception: if you really must treat an acc to carry just one value back from a call,
+use a key <code>result</code>, this is not monitored.</p>
+<p>For mass updates (multiple key at once) consider using <code>mongoose_acc:update/2</code>, it may be
+slightly more efficient. Be aware, however, that it will not warn you if you
+overwrite an existing key.</p>
+<h2 id="stripping-and-persistence">Stripping and "persistence"</h2>
+<p>Accumulator is used mostly to cache values for reuse within a c2s process; when it goes out to somewhere else it is stripped of all its attrributes except some used for tracing (ref, timestamp).
+If you want it to carry some values along with it use a dedicated api for setting "persistent" properties:</p>
+<pre><code>Acc2 = mongoose_acc:add_prop(myprop, 123, Acc1),
+V = mongoose_acc:get_prop(myprop, Acc2).
+</code></pre>
+<p>The rationale behind stripping an accumulator is that many values stored in it are context-dependend.
+For example, in a c2s process <code>user</code> and <code>server</code> refer to the owner of the process.
+When an accumulator goes from the sender's process to the c2s of the recipient, the <code>user</code> attribute (and sometime the <code>server</code>) has to change.
+There are also many cached values which are not valid anymore when user changes.
+Thus, we remove everything except some tracing parameters (ref, timestamp), original sender and recipient, and those properties which were explicitly declared as "persistent" (by calling <code>mongoose_acc:add_prop/3</code>).</p>
+<h2 id="entry-points">Entry points</h2>
+<p>The stanza enters MongooseIM in the following places:</p>
+<h3 id="ejabberd_c2ssession_established2"><code>ejabberd_c2s:session_established/2</code></h3>
+<p>This is the handler for a stanza received from an XMPP client, after the session has been fully established (before that there is only technical communication between the user and the server, the main processing chain is not started).
+Here we initialise the accumulator and pass it on.</p>
+<h3 id="ejabberd_c2shandle_incoming_message3"><code>ejabberd_c2s:handle_incoming_message/3</code></h3>
+<p>This is called by <code>ejabberd_c2s:handle_info/3</code> when an accumulator from another c2s process is received.
+It is a ready-made accumulator, but stripped of all cached values; it preserves the original <code>ref</code>, <code>timestamp</code>, <code>from</code> and <code>to</code>, but doesn't have the <code>user</code> and <code>server</code> which have to be set here since they are likely to differ.</p>
+<h3 id="ejabberd_s2s_inroute_incoming_stanza4"><code>ejabberd_s2s_in:route_incoming_stanza/4</code></h3>
+<p>Here is where a stanza from another MongooseIM server is received.</p>
+<h2 id="hooks">Hooks</h2>
+<p>Many of the MongooseIM functionalities are implemented in submodules which attach their handlers to hooks (this is covered in detail in <a href="../Hooks-and-handlers/">"Hooks and handlers"</a>.
+When it comes to the accumulators, the following rules apply:</p>
+<ul>
+<li>when using <code>run_fold</code> there are only a few cases in which something else should be passed as the accumulator.
+ This is the case when for example handlers are supposed to modify the state (the state should be the accumulator).
+ Your handlers should stash their results in the acc, so that you can extract what you need and pass the modified acc on.</li>
+<li>avoid passing superfluous arguments to handlers - e.g. a <code>Server</code> in hook args is redundant since it is already present in the accumulator.</li>
+<li>do not use <code>run</code> - it is against the main design principles.
+ Handlers have been rewritten so that they accept an acc as the first arg.
+ If you use <code>run_fold</code> you have to provide an accumulator, if you use <code>run</code> an empty accumulator is created and passed to the handlers.
+ Note that <code>run</code> is deprecated now and at some point will be removed.</li>
+</ul>
+<p>Most handlers have already been modified so that they accept an instance of <code>mongoose_acc:t()</code> as the first argument and return value by storing it inside it.
+How the accumulator is used within a module is up to the implementors of the module.</p>
+<h2 id="exit-points">Exit points</h2>
+<p>The notion of an exit point is a bit vague, because sending a stanza out of MongooseIM doesn't necessarily mean that processing of the accumulator is terminated.
+A single stanza entering the system creates an acc, but then may result in multiple stanzas going out - for example changing a privacy list triggers presence updates and a roster push.
+It is in fact hard to determine when the process has really been finished.
+The approach is to pass along one acc and, when something is just about to be sent out, either send a text and return the acc or pass on a clone of the acc and return the original one.
+This gives us an option to record a fact that a stanza has been sent out.
+Every sending function calls <code>mongoose_acc:record_sending</code>, which gives you an opportunity to later consult the <code>send_result</code> key to check what send attempts have been made and with what effect.
+When the last stanza in the whole process is leaving the system we have a complete record of what we have sent in the meantime.</p>
+<p>An 'exit point' is where we call a function sending something out of the system and, if all goes well, returning the original accumulator possibly with an additional track record of what's just been done.</p>
+<p>See the diagram to examine this concept.
+Note that Acc1 going to the routing has the same <code>ref</code> as the one returning to the next function:</p>
+<p><img alt="You should see an image here; if you don't, use plantuml to generate it from accum_path.uml" src="../accum_path.png" /></p>
+<p>An 'exit point' function should be called with an acc AND a stanza to be sent out. 
+Sometimes the stanza is the original one (which is stored in the accumulator as <code>element</code>), sometimes it's not.
+The 'exit point' should return an accumulator.</p>
+<h3 id="ejabberd_c2ssend_element3"><code>ejabberd_c2s:send_element/3</code></h3>
+<p>Here we send a stanza to an XMPP client.
+It is often called directly by a c2s process when it needs to respond to its "owner".</p>
+<h3 id="ejabberd_routerroute4"><code>ejabberd_router:route/4</code></h3>
+<p>This function is called when a stanza is ready to be sent.
+It makes an attempt to route it out via the appropriate channel - either locally to the same or another c2s process, or somewhere else via s2s.
+The stanza can be sent or dropped, or it may error out - whatever it does this function returns the original accumulator, optionally with the track record of what it tried to send, how and to what effect (see the commented out code in <code>mongoose_acc:record_sending/4</code>).</p>
+<p>Under the hood the routing modules work by passing an original accumulator and a stanza which is to be sent, which may be the original
+xml element, same element with modifications, or a broadcast.</p>
+<p>Eventually there are three things that may happen:
+* the accumulator is sent to another c2s process, pubsub node or muc room - in this case we produce another fresh accumulator out of the data to be sent, stripping it of all caches and the likes but preserving original ref and timestamp and those attrs that should be carried on (<code>mongoose_acc:strip/2</code>)
+* stanza is stored as offline
+* stanza is sent out to another XMPP server via <code>ejabberd_s2s</code>.</p>
+<h2 id="sample-usage-actual-and-potential">Sample usage, actual and potential</h2>
+<h3 id="privacy-check">Privacy check</h3>
+<p>Stanzas are often checked against privacy lists.
+According to the current <code>mongoose_privacy:privacy_check_packet</code> implementation, the result is stored in an accumulator so if a check has to be repeated it is just one map read.</p>
+<h3 id="tracing-hooks-and-handlers">Tracing hooks and handlers</h3>
+<p><code>ejabberd_hooks:record</code> functions contain some (commented out for now) code which adds a record to the accumulator every time it is passed to a hook and every time it goes through a hook handler.
+This is very valuable for debugging.</p>
+<h3 id="performance-measurement">Performance measurement</h3>
+<p>Given that each accumulator has a timestamp denoting its creation time, it is now very easy to implement a metric showing the stanza processing time, or even multiple metrics splitting it into stages.</p>
+<h3 id="mod_amp"><code>mod_amp</code></h3>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Moving-to-single-app-project-structure/" class="btn btn-neutral float-right" title="Moving to single app project structure">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../message_routing/" class="btn btn-neutral" title="Stanza routing"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../message_routing/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Moving-to-single-app-project-structure/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

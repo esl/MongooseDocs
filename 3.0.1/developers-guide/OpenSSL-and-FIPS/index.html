@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>FIPS mode - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "FIPS mode";
+    var mkdocs_page_input_path = "developers-guide/OpenSSL-and-FIPS.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Push-notifications/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Roadmap/">Roadmap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Basic-configuration/">Basic Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Advanced Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Listener-modules/">Listener Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">ACL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/client-certificate/">Client Certificate</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication backends</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/External-authentication-module/">External Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/HTTP-authentication-module/">HTTP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/JWT-authentication-module/">JWT Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/LDAP-authentication-module/">LDAP Authentication Module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-backends/PKI-authentication-module/">PKI Authentication Module</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">FIPS mode</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#incompatibilities">Incompatibilities</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#build-erlangotp-with-fips-support">Build Erlang/OTP with FIPS support</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#building-mongooseim-with-a-custom-openssl">Building MongooseIM with a custom OpenSSL</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-to-enabledisable-fips-mode">How to enable/disable FIPS mode</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-check-if-the-fips-mode-is-enabled">How to check if the FIPS mode is enabled</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#log-message">Log message</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run-time-check">Run-time check</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cipher-suites-difference">Cipher suites difference</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_revproxy/">mod_revproxy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Developer's guide &raquo;</li>
+        
+      
+    
+    <li>FIPS mode</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="openssl-fips">OpenSSL FIPS</h1>
+<p>Support for OpenSSL FIPS was added to MongooseIM in version 1.7.0.</p>
+<h2 id="incompatibilities">Incompatibilities</h2>
+<p>Currently known incompatible features are:</p>
+<ul>
+<li>SASL auth mechanism DIGEST-MD5: due to a forbidden MD5 hash function in FIPS mode.</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<h3 id="build-erlangotp-with-fips-support">Build Erlang/OTP with FIPS support</h3>
+<p>Make sure the option <code>--enable-fips</code> is specified for <code>configure</code> command.
+If you want to use a different OpenSSL than the default one, specify the option <code>--with-ssl=PATH_TO_YOUR_OPENSSL</code> as well.
+Here's an example of a command for building Erlang/OTP with kerl:</p>
+<pre><code>KERL_CONFIGURE_OPTIONS=&quot;--enable-fips&quot; ./kerl build 20.0 20.0-fips
+</code></pre>
+<h3 id="building-mongooseim-with-a-custom-openssl">Building MongooseIM with a custom OpenSSL</h3>
+<p>If you want to use a custom OpenSSL, please export the CFLAGS and LDFLAGS env vars pointing to a FIPS compliant OpenSSL before running <code>./rebar3 compile</code> or <code>make rel</code>.</p>
+<pre><code>OPENSSL_LIB=~/openssl/lib #put your path here
+OPENSSL_INC=~/openssl/inc #put your path here
+
+export LDFLAGS=&quot;-Wl,-rpath=$OPENSSL_LIB -L$OPENSSL_LIB&quot;
+export CFLAGS=&quot;-I$OPENSSL_INC&quot;
+</code></pre>
+<h3 id="how-to-enabledisable-fips-mode">How to enable/disable FIPS mode</h3>
+<p>Find <code>etc/app.config</code> in the release directory. 
+FIPS mode is an option of the crypto application. 
+In order to enable/disable it, add the following section to <code>app.config</code>:</p>
+<pre><code class="language-erlang">{crypto, [{fips_mode, Value}]},
+</code></pre>
+<p>where <code>Value</code> is either <code>true</code> or <code>false</code>.</p>
+<h2 id="how-to-check-if-the-fips-mode-is-enabled">How to check if the FIPS mode is enabled</h2>
+<h4 id="log-message">Log message</h4>
+<p>When MongooseIM starts, it prints the following log message if FIPS mode is enabled</p>
+<pre><code>2015-02-25 14:30:54.501 [warning] &lt;0.242.0&gt;@mongoose_fips:do_notify:37 FIPS mode enabled
+</code></pre>
+<h4 id="run-time-check">Run-time check</h4>
+<p>Run the following function in the MongooseIM console:</p>
+<pre><code class="language-erlang">mongoose_fips:status().
+</code></pre>
+<p>The function returns:
+* not_enabled - fips_mode is not set to true in etc/app.config
+* enabled - fips_mode is set to true in etc/app.config
+* not_supported - erlang compiled without fips support</p>
+<h3 id="cipher-suites-difference">Cipher suites difference</h3>
+<p>A test using a <code>cipher_suites_test.sh</code> script (available in the tools directory) can be performed on MongooseIM with FIPS mode enabled and disabled. 
+We've used <code>OpenSSL 1.0.1j-fips</code>.</p>
+<p>Here are all the cipher suites available when the <strong>FIPS</strong> mode is <strong>enabled</strong> (the list may vary for different openssl versions):</p>
+<ul>
+<li>ECDHE-RSA-AES256-SHA</li>
+<li>DHE-RSA-AES256-SHA</li>
+<li>AES256-SHA</li>
+<li>ECDHE-RSA-DES-CBC3-SHA</li>
+<li>EDH-RSA-DES-CBC3-SHA</li>
+<li>DES-CBC3-SHA</li>
+<li>ECDHE-RSA-AES128-SHA</li>
+<li>DHE-RSA-AES128-SHA</li>
+<li>AES128-SHA</li>
+</ul>
+<p>Here are all the cipher suites available when the <strong>FIPS</strong> mode is <strong>disabled</strong> (the list may vary for different openssl versions):</p>
+<ul>
+<li>ECDHE-RSA-AES256-SHA</li>
+<li>DHE-RSA-AES256-SHA</li>
+<li>DHE-RSA-CAMELLIA256-SHA</li>
+<li>AES256-SHA</li>
+<li>CAMELLIA256-SHA</li>
+<li>ECDHE-RSA-DES-CBC3-SHA</li>
+<li>EDH-RSA-DES-CBC3-SHA</li>
+<li>DES-CBC3-SHA</li>
+<li>ECDHE-RSA-AES128-SHA</li>
+<li>DHE-RSA-AES128-SHA</li>
+<li>DHE-RSA-SEED-SHA</li>
+<li>DHE-RSA-CAMELLIA128-SHA</li>
+<li>AES128-SHA</li>
+<li>SEED-SHA</li>
+<li>CAMELLIA128-SHA</li>
+<li>ECDHE-RSA-RC4-SHA</li>
+<li>RC4-SHA</li>
+<li>RC4-MD5</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../modules/mod_adhoc/" class="btn btn-neutral float-right" title="mod_adhoc">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../xep_tool/" class="btn btn-neutral" title="xep-tool usage"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../xep_tool/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../modules/mod_adhoc/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
