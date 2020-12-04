@@ -1,0 +1,3224 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+    
+    
+      
+        <title>mod_global_distrib - MongooseIM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6910b76c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/custom.css">
+    
+      <link rel="stylesheet" href="../../css/version-select.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-description" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="MongooseIM" class="md-header-nav__button md-logo" aria-label="MongooseIM">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            MongooseIM
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              mod_global_distrib
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="MongooseIM" class="md-nav__button md-logo" aria-label="MongooseIM">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    MongooseIM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+    <label class="md-nav__link" for="nav-2">
+      User guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="User guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        User guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/ABCs-of-MongooseIM/" class="md-nav__link">
+      ABCs of MongooseIM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/MongooseIM-High-level-Architecture/" class="md-nav__link">
+      High-level Architecture
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Features-and-supported-standards/" class="md-nav__link">
+      Features and supported standards
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Getting-started/" class="md-nav__link">
+      Getting started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/release_config/" class="md-nav__link">
+      Release/Installation configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Bootstrap-Scripts/" class="md-nav__link">
+      Bootstrap scripts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/client-certificate/" class="md-nav__link">
+      Client certificate authentication
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+    <label class="md-nav__link" for="nav-3">
+      Tutorials
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/How-to-build/" class="md-nav__link">
+      How to Build MongooseIM from source code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/push-notifications/Push-notifications/" class="md-nav__link">
+      How to Set up Push Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/push-notifications/Push-notifications-client-side/" class="md-nav__link">
+      How to Set up Push Notifications on the client side
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/push-notifications/MongoosePush-setup/" class="md-nav__link">
+      How to Set up MongoosePush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/ICE_tutorial/" class="md-nav__link">
+      How to Set up MongooseICE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/iOS_tutorial/" class="md-nav__link">
+      How to Build an iOS messaging app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Jingle-SIP-setup/" class="md-nav__link">
+      How to Set up Jingle/SIP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+    <label class="md-nav__link" for="nav-4">
+      Migration Guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Migration Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Migration Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.1.1_3.2.0/" class="md-nav__link">
+      3.1.1 to 3.2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.3.0_3.4.0/" class="md-nav__link">
+      3.3.0 to 3.4.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.5.0_3.6.0/" class="md-nav__link">
+      3.5.0 to 3.6.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.6.0_3.7.0/" class="md-nav__link">
+      3.6.0 to 3.7.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.7.0_4.0.0/" class="md-nav__link">
+      3.7.0 to 4.0.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/4.0.0_4.0.1/" class="md-nav__link">
+      4.0.0 to 4.0.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
+      MAM MUC migration helper
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+    <label class="md-nav__link" for="nav-5">
+      Platform
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Platform" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Platform
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Contributions/" class="md-nav__link">
+      Contributions to ecosystem
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Differentiators/" class="md-nav__link">
+      Differentiators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../History/" class="md-nav__link">
+      History
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+    <label class="md-nav__link" for="nav-6">
+      Configuration
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon"></span>
+        Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/configuration-files/" class="md-nav__link">
+      Configuration files
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/general/" class="md-nav__link">
+      Options: General
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/listen/" class="md-nav__link">
+      Options: Listen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/auth/" class="md-nav__link">
+      Options: Auth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/outgoing-connections/" class="md-nav__link">
+      Options: Outgoing connections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Services/" class="md-nav__link">
+      Options: Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Modules/" class="md-nav__link">
+      Options: Extension Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/shaper/" class="md-nav__link">
+      Options: Shaper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/acl/" class="md-nav__link">
+      Options: Acl
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/access/" class="md-nav__link">
+      Options: Access
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/s2s/" class="md-nav__link">
+      Options: S2S
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/host_config/" class="md-nav__link">
+      Options: Host config
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/release-options/" class="md-nav__link">
+      Release options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Erlang-cookie-security/" class="md-nav__link">
+      Erlang Cookie Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/TLS-hardening/" class="md-nav__link">
+      TLS hardening
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/database-backends-configuration/" class="md-nav__link">
+      Database backends configuration
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
+    <label class="md-nav__link" for="nav-7">
+      Authentication methods
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Authentication methods" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon"></span>
+        Authentication methods
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/rdbms/" class="md-nav__link">
+      RDBMS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/external/" class="md-nav__link">
+      External
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/anonymous/" class="md-nav__link">
+      Anonymous
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/ldap/" class="md-nav__link">
+      LDAP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/jwt/" class="md-nav__link">
+      JWT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/riak/" class="md-nav__link">
+      Riak
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/http/" class="md-nav__link">
+      HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/pki/" class="md-nav__link">
+      PKI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/dummy/" class="md-nav__link">
+      Dummy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" >
+    <label class="md-nav__link" for="nav-8">
+      MongooseIM open XMPP extensions
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="MongooseIM open XMPP extensions" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon"></span>
+        MongooseIM open XMPP extensions
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../open-extensions/muc_light/" class="md-nav__link">
+      MUC light
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../open-extensions/token-reconnection/" class="md-nav__link">
+      Token-based reconnection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" >
+    <label class="md-nav__link" for="nav-9">
+      REST API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="REST API" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        REST API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Client-frontend/" class="md-nav__link">
+      Client/frontend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Metrics-backend/" class="md-nav__link">
+      Metrics backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Administration-backend/" class="md-nav__link">
+      Administration backend
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" >
+    <label class="md-nav__link" for="nav-10">
+      Operation and maintenance
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Operation and maintenance" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon"></span>
+        Operation and maintenance
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/gdpr-considerations/" class="md-nav__link">
+      GDPR considerations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Cluster-management-considerations/" class="md-nav__link">
+      Cluster management considerations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Cluster-configuration-and-node-management/" class="md-nav__link">
+      Cluster configuration and node management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Logging-%26-monitoring/" class="md-nav__link">
+      Logging & monitoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Logging/" class="md-nav__link">
+      Logging configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Humio/" class="md-nav__link">
+      Logging with Humio
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Logging-fields/" class="md-nav__link">
+      Logging fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/" class="md-nav__link">
+      Reloading configuration on a running system
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/MongooseIM-metrics/" class="md-nav__link">
+      Metrics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/" class="md-nav__link">
+      System Metrics Privacy Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/tls-distribution/" class="md-nav__link">
+      Distribution over TLS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../operation-and-maintenance/known-issues/" class="md-nav__link">
+      Known issues
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" >
+    <label class="md-nav__link" for="nav-11">
+      Developer's guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Developer's guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon"></span>
+        Developer's guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Testing-MongooseIM/" class="md-nav__link">
+      Testing MongooseIM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/logging/" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Hooks-and-handlers/" class="md-nav__link">
+      Hooks and Handlers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/hooks_description/" class="md-nav__link">
+      Hooks description
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Stanza-routing/" class="md-nav__link">
+      Stanza routing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/accumulators/" class="md-nav__link">
+      Accumulators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/flat_options/" class="md-nav__link">
+      Flat options format
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Moving-to-single-app-project-structure/" class="md-nav__link">
+      Moving to single app project structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/mod_amp_developers_guide/" class="md-nav__link">
+      mod_amp development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/mod_muc_light_developers_guide/" class="md-nav__link">
+      mod_muc_light developers doc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/SCRAM-serialization/" class="md-nav__link">
+      SCRAM serialization format
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/xep_tool/" class="md-nav__link">
+      xep-tool usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/OpenSSL-and-FIPS/" class="md-nav__link">
+      FIPS mode
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Basic-iq-handler/" class="md-nav__link">
+      Basic IQ Handler
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/mongoose_wpool/" class="md-nav__link">
+      mongoose_wpool
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12" checked>
+    <label class="md-nav__link" for="nav-12">
+      Module index
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Module index" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        <span class="md-nav__icon md-icon"></span>
+        Module index
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_adhoc/" class="md-nav__link">
+      mod_adhoc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_amp/" class="md-nav__link">
+      mod_amp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_auth_token/" class="md-nav__link">
+      mod_auth_token
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_blocking/" class="md-nav__link">
+      mod_blocking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_bosh/" class="md-nav__link">
+      mod_bosh
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_caps/" class="md-nav__link">
+      mod_caps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_carboncopy/" class="md-nav__link">
+      mod_carboncopy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_commands/" class="md-nav__link">
+      mod_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_csi/" class="md-nav__link">
+      mod_csi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_disco/" class="md-nav__link">
+      mod_disco
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12-11" type="checkbox" id="nav-12-11" >
+    <label class="md-nav__link" for="nav-12-11">
+      mod_event_pusher
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="mod_event_pusher" data-md-level="2">
+      <label class="md-nav__title" for="nav-12-11">
+        <span class="md-nav__icon md-icon"></span>
+        mod_event_pusher
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_event_pusher/" class="md-nav__link">
+      mod_event_pusher
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_event_pusher_http/" class="md-nav__link">
+      HTTP backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_event_pusher_push/" class="md-nav__link">
+      Push backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_event_pusher_sns/" class="md-nav__link">
+      SNS backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_event_pusher_rabbit/" class="md-nav__link">
+      RabbitMQ backend
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_extdisco/" class="md-nav__link">
+      mod_extdisco
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        mod_global_distrib
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      mod_global_distrib
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#module-description" class="md-nav__link">
+    Module Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    How it works
+  </a>
+  
+    <nav class="md-nav" aria-label="How it works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metadata-sharing" class="md-nav__link">
+    Metadata sharing
+  </a>
+  
+    <nav class="md-nav" aria-label="Metadata sharing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#redis-entries" class="md-nav__link">
+    Redis entries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-routing" class="md-nav__link">
+    Message routing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bounce" class="md-nav__link">
+    Bounce
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    Metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    Options
+  </a>
+  
+    <nav class="md-nav" aria-label="Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribglobal_host" class="md-nav__link">
+    modules.mod_global_distrib.global_host
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distriblocal_host" class="md-nav__link">
+    modules.mod_global_distrib.local_host
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribmessage_ttl" class="md-nav__link">
+    modules.mod_global_distrib.message_ttl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribhosts_refresh_interval" class="md-nav__link">
+    modules.mod_global_distrib.hosts_refresh_interval
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connections-options" class="md-nav__link">
+    Connections' options
+  </a>
+  
+    <nav class="md-nav" aria-label="Connections' options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionsendpoints" class="md-nav__link">
+    modules.mod_global_distrib.connections.endpoints
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionsadvertised_endpoints" class="md-nav__link">
+    modules.mod_global_distrib.connections.advertised_endpoints
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionsconnections_per_endpoint" class="md-nav__link">
+    modules.mod_global_distrib.connections.connections_per_endpoint
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionsendpoint_refresh_interval" class="md-nav__link">
+    modules.mod_global_distrib.connections.endpoint_refresh_interval
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionsendpoint_refresh_interval_when_empty" class="md-nav__link">
+    modules.mod_global_distrib.connections.endpoint_refresh_interval_when_empty
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionsdisabled_gc_interval" class="md-nav__link">
+    modules.mod_global_distrib.connections.disabled_gc_interval
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tls-options" class="md-nav__link">
+    TLS options
+  </a>
+  
+    <nav class="md-nav" aria-label="TLS options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionstlsenabled" class="md-nav__link">
+    modules.mod_global_distrib.connections.tls.enabled
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionstlscertfile" class="md-nav__link">
+    modules.mod_global_distrib.connections.tls.certfile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionstlscacertfile" class="md-nav__link">
+    modules.mod_global_distrib.connections.tls.cacertfile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionstlsciphers" class="md-nav__link">
+    modules.mod_global_distrib.connections.tls.ciphers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionstlsdhfile" class="md-nav__link">
+    modules.mod_global_distrib.connections.tls.dhfile
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redis-session-storage-options" class="md-nav__link">
+    Redis session storage options
+  </a>
+  
+    <nav class="md-nav" aria-label="Redis session storage options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribredispool" class="md-nav__link">
+    modules.mod_global_distrib.redis.pool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribredisexpire_after" class="md-nav__link">
+    modules.mod_global_distrib.redis.expire_after
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribredisrefresh_after" class="md-nav__link">
+    modules.mod_global_distrib.redis.refresh_after
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-cache-options" class="md-nav__link">
+    Database cache options
+  </a>
+  
+    <nav class="md-nav" aria-label="Database cache options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribcachecache_missed" class="md-nav__link">
+    modules.mod_global_distrib.cache.cache_missed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribcachedomain_lifetime_seconds" class="md-nav__link">
+    modules.mod_global_distrib.cache.domain_lifetime_seconds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribcachejid_lifetime_seconds" class="md-nav__link">
+    modules.mod_global_distrib.cache.jid_lifetime_seconds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribcachemax_jids" class="md-nav__link">
+    modules.mod_global_distrib.cache.max_jids
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-bouncing-options" class="md-nav__link">
+    Message bouncing options
+  </a>
+  
+    <nav class="md-nav" aria-label="Message bouncing options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribbounceenabled" class="md-nav__link">
+    modules.mod_global_distrib.bounce.enabled
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribbounceresend_after_ms" class="md-nav__link">
+    modules.mod_global_distrib.bounce.resend_after_ms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribbouncemax_retries" class="md-nav__link">
+    modules.mod_global_distrib.bounce.max_retries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#global-distribution-and-service-discovery" class="md-nav__link">
+    Global Distribution and Service Discovery
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overriding-remote-datacenter-endpoints" class="md-nav__link">
+    Overriding remote datacenter endpoints
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-configuration" class="md-nav__link">
+    Example configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Example configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-mod_global_distrib" class="md-nav__link">
+    Configuring mod_global_distrib
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overriding-endpoints-to-a-remote-datacenter" class="md-nav__link">
+    Overriding endpoints to a remote datacenter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-dynomite" class="md-nav__link">
+    Configuring Dynomite
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_http_upload/" class="md-nav__link">
+      mod_http_upload
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_inbox/" class="md-nav__link">
+      mod_inbox
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_jingle_sip/" class="md-nav__link">
+      mod_jingle_sip
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_keystore/" class="md-nav__link">
+      mod_keystore
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_last/" class="md-nav__link">
+      mod_last
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_mam/" class="md-nav__link">
+      mod_mam
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_muc/" class="md-nav__link">
+      mod_muc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_muc_commands/" class="md-nav__link">
+      mod_muc_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_muc_log/" class="md-nav__link">
+      mod_muc_log
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_muc_light/" class="md-nav__link">
+      mod_muc_light
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_muc_light_commands/" class="md-nav__link">
+      mod_muc_light_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_offline/" class="md-nav__link">
+      mod_offline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_offline_stub/" class="md-nav__link">
+      mod_offline_stub
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_ping/" class="md-nav__link">
+      mod_ping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_privacy/" class="md-nav__link">
+      mod_privacy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_private/" class="md-nav__link">
+      mod_private
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_pubsub/" class="md-nav__link">
+      mod_pubsub
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_push_service_mongoosepush/" class="md-nav__link">
+      mod_push_service_mongoosepush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_register/" class="md-nav__link">
+      mod_register
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_roster/" class="md-nav__link">
+      mod_roster
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_shared_roster_ldap/" class="md-nav__link">
+      mod_shared_roster_ldap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_sic/" class="md-nav__link">
+      mod_sic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_stream_management/" class="md-nav__link">
+      mod_stream_management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_time/" class="md-nav__link">
+      mod_time
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_vcard/" class="md-nav__link">
+      mod_vcard
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mod_version/" class="md-nav__link">
+      mod_version
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#module-description" class="md-nav__link">
+    Module Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    How it works
+  </a>
+  
+    <nav class="md-nav" aria-label="How it works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metadata-sharing" class="md-nav__link">
+    Metadata sharing
+  </a>
+  
+    <nav class="md-nav" aria-label="Metadata sharing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#redis-entries" class="md-nav__link">
+    Redis entries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-routing" class="md-nav__link">
+    Message routing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bounce" class="md-nav__link">
+    Bounce
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    Metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    Options
+  </a>
+  
+    <nav class="md-nav" aria-label="Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribglobal_host" class="md-nav__link">
+    modules.mod_global_distrib.global_host
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distriblocal_host" class="md-nav__link">
+    modules.mod_global_distrib.local_host
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribmessage_ttl" class="md-nav__link">
+    modules.mod_global_distrib.message_ttl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribhosts_refresh_interval" class="md-nav__link">
+    modules.mod_global_distrib.hosts_refresh_interval
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connections-options" class="md-nav__link">
+    Connections' options
+  </a>
+  
+    <nav class="md-nav" aria-label="Connections' options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionsendpoints" class="md-nav__link">
+    modules.mod_global_distrib.connections.endpoints
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionsadvertised_endpoints" class="md-nav__link">
+    modules.mod_global_distrib.connections.advertised_endpoints
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionsconnections_per_endpoint" class="md-nav__link">
+    modules.mod_global_distrib.connections.connections_per_endpoint
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionsendpoint_refresh_interval" class="md-nav__link">
+    modules.mod_global_distrib.connections.endpoint_refresh_interval
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionsendpoint_refresh_interval_when_empty" class="md-nav__link">
+    modules.mod_global_distrib.connections.endpoint_refresh_interval_when_empty
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionsdisabled_gc_interval" class="md-nav__link">
+    modules.mod_global_distrib.connections.disabled_gc_interval
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tls-options" class="md-nav__link">
+    TLS options
+  </a>
+  
+    <nav class="md-nav" aria-label="TLS options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionstlsenabled" class="md-nav__link">
+    modules.mod_global_distrib.connections.tls.enabled
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionstlscertfile" class="md-nav__link">
+    modules.mod_global_distrib.connections.tls.certfile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionstlscacertfile" class="md-nav__link">
+    modules.mod_global_distrib.connections.tls.cacertfile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionstlsciphers" class="md-nav__link">
+    modules.mod_global_distrib.connections.tls.ciphers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionstlsdhfile" class="md-nav__link">
+    modules.mod_global_distrib.connections.tls.dhfile
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redis-session-storage-options" class="md-nav__link">
+    Redis session storage options
+  </a>
+  
+    <nav class="md-nav" aria-label="Redis session storage options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribredispool" class="md-nav__link">
+    modules.mod_global_distrib.redis.pool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribredisexpire_after" class="md-nav__link">
+    modules.mod_global_distrib.redis.expire_after
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribredisrefresh_after" class="md-nav__link">
+    modules.mod_global_distrib.redis.refresh_after
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-cache-options" class="md-nav__link">
+    Database cache options
+  </a>
+  
+    <nav class="md-nav" aria-label="Database cache options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribcachecache_missed" class="md-nav__link">
+    modules.mod_global_distrib.cache.cache_missed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribcachedomain_lifetime_seconds" class="md-nav__link">
+    modules.mod_global_distrib.cache.domain_lifetime_seconds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribcachejid_lifetime_seconds" class="md-nav__link">
+    modules.mod_global_distrib.cache.jid_lifetime_seconds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribcachemax_jids" class="md-nav__link">
+    modules.mod_global_distrib.cache.max_jids
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-bouncing-options" class="md-nav__link">
+    Message bouncing options
+  </a>
+  
+    <nav class="md-nav" aria-label="Message bouncing options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribbounceenabled" class="md-nav__link">
+    modules.mod_global_distrib.bounce.enabled
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribbounceresend_after_ms" class="md-nav__link">
+    modules.mod_global_distrib.bounce.resend_after_ms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribbouncemax_retries" class="md-nav__link">
+    modules.mod_global_distrib.bounce.max_retries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#global-distribution-and-service-discovery" class="md-nav__link">
+    Global Distribution and Service Discovery
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overriding-remote-datacenter-endpoints" class="md-nav__link">
+    Overriding remote datacenter endpoints
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-configuration" class="md-nav__link">
+    Example configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Example configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-mod_global_distrib" class="md-nav__link">
+    Configuring mod_global_distrib
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overriding-endpoints-to-a-remote-datacenter" class="md-nav__link">
+    Overriding endpoints to a remote datacenter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-dynomite" class="md-nav__link">
+    Configuring Dynomite
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>mod_global_distrib</h1>
+                
+                <h2 id="module-description">Module Description</h2>
+<p>This module enables global distribution of a single XMPP domain.
+With <code>mod_global_distrib</code>, multiple distinct MongooseIM clusters can share a single domain name and route messages to the specific datacenter where the recipient is available.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>There are multiple subsystems that cooperate to enable global distribution:</p>
+<h3 id="metadata-sharing">Metadata sharing</h3>
+<p>Sharing of metadata is done by leveraging a database with cross-datacenter replication.
+Currently, only Redis is supported, with <a href="https://github.com/Netflix/dynomite">Dynomite</a> layer for replication.
+The most important metadata stored in the database is a <strong>session/routing table</strong>.
+The table stores mappings between currently logged users' JIDs and datacenters on which they are logged in.
+Because access to the session table is very frequent, its entries are additionally cached on each node.</p>
+<p>To preserve consistency between database instances, all data is stored with a set expiration time and is periodically refreshed.
+Each node of each cluster is responsible for refreshing its own data.
+Thus, in an event of a netsplit, datacenters' information about unreachable datacenters' users will expire, as those users are now unreachable; but once the connection is reestablished, the data will be replicated again as datacenters refresh their entries.
+Additionally, to prevent edge cases where an incoming message is received and replied to before the datacenter learns about the sender's host, an incoming message also carries information about its origin which may be used to temporarily update the local routing table.</p>
+<h4 id="redis-entries">Redis entries</h4>
+<p>Following structures are stored in Redis:</p>
+<ul>
+<li>JID mappings are stored as normal key-value entries, where user's JID (full and bare) is the key, and the value is the local hostname where the user is logged in.
+Example: <code>"user1@example.com/res" -&gt; "dc2.example.com"</code>.</li>
+<li>Domains of components and services registered on the globally distributed host are stored in per-node set structures where the key is <code>&lt;local_host&gt;#&lt;node_name&gt;#{domains}</code>, and the values are the domain names.
+Example: <code>"dc1.example.com#mongoose1@dc1.example.com#{domains}" -&gt; {"muc1.example.com", "muc2.example.com"}</code>.</li>
+<li>Domains of non-hidden components and services (see the <a href="../../advanced-configuration/listen/#xmpp-components-listenservice"><code>XMPP Components</code></a> documentation) are stored in per-node set structures where the key is <code>&lt;local_host&gt;#&lt;node_name&gt;#{public_domains}</code>, and the values are the domain names.</li>
+<li>Declared endpoints available on a node are similarly stored in a per-node set structure where the key is <code>&lt;local_host&gt;#&lt;node_name&gt;#{endpoints}</code> and the values represent the TCP endpoints of the node.
+Example: <code>"dc1.example.com#mongoose1@dc1.example.com#{endpoints}" -&gt; {"172.16.2.14#8231", "2001:0db8:85a3:0000:0000:8a2e:0370:7334#8882"}</code>.</li>
+<li>Nodes that comprise a host are stored in a set structure with key <code>&lt;local_host&gt;#{nodes}</code> and values being the names of the nodes.
+Example: <code>"dc2.example.com#{nodes}" -&gt; {"node1@dc2.example.com", "node3@dc2.example.com"}</code>.</li>
+<li>Hosts are stored in a set with key <code>hosts</code> and values being the individual local XMPP domains.
+Example: <code>"hosts" -&gt; {"dc1.example.com", "dc2.example.com"}</code>.</li>
+</ul>
+<h3 id="message-routing">Message routing</h3>
+<p><code>mod_global_distrib</code> establishes its own listeners and dedicated TCP/TLS connections for message routing.
+Each node listens on preconfigured endpoints, where each node in a datacenter can have any number of endpoints, including none.
+The endpoints are shared between all datacenters.
+If a node becomes unavailable, its endpoint entries in the database will expire and will be readded once the node comes back online.</p>
+<p>Connections between nodes in distinct datacenters are opened on the first request and then maintained as long as the destination endpoint is present in Redis.
+When a node needs to connect to a remote cluster, specified number of connections are opened to every endpoint reported by that datacenter.
+Global distribution features automatic rebalancing feature that will "disable" connections when their respective endpoints disappear from Redis.
+A new pool of connections is created each time a new endpoint is recognised.
+Whenever a node receives a message that is determined (by consulting the session table) to be destined for another datacenter, the routing procedure in the current datacenter is interrupted, the message is transported to the other datacenter via the dedicated connections, and the routing procedure is restarted there by a dedicated (but potentially short lived) worker process bound to the sender's JID (or subdomain if the sender's JIDs does not belong to the globally distributed domain).
+Client's process binds itself to a connection to a remote datacenter on first use, and henceforth always uses this connection to route messages directed to this datacenter.
+This - along with the dedicated worker process on the receiver's side - ensures that simple cross-datacenter messages between two entities are delivered in their sending order.</p>
+<p>It may happen that a message is rerouted through multiple datacenters (e.g. if the user has reconnected to a different datacenter while the message was already in flight).
+Messages are given a TTL parameter by the source datacenter so that they cannot be rerouted indefinitely.
+The TTL is decreased on each reroute.
+Note that in the edge case of multi-datacenter routing, the messages may be received out-of-order at the destination datacenter.</p>
+<h3 id="bounce">Bounce</h3>
+<p>Consider the following edge case: user <strong>U1</strong> logged into datacenter <strong>DC2</strong> and then quickly reconnected to datacenter <strong>DC3</strong>.
+Because session table has not yet been replicated, <strong>DC2</strong> does not see <strong>U1</strong> in the session table, while a different datacenter <strong>DC1</strong> still sees <strong>U1</strong> logged into <strong>DC2</strong>.
+When <strong>U2</strong> logged into <strong>DC1</strong> and sent a message to <strong>U1</strong>, it will now be rerouted to <strong>DC2</strong> even though the user is now available at <strong>DC3</strong>.</p>
+<p><img alt="State after U1's reconnection" src="../mod_global_distrib_bounce_example.svg" /></p>
+<p>Bounce mechanism solves this and similar edge cases by storing messages for which there is no known routing in the current datacenter.
+The stored messages are then assigned a bounce-TTL value and periodically - with backoff - are attempted to be routed again.
+In the example above, the message from <strong>U2</strong> would be temporarily stored at <strong>DC2</strong> and rerouted successfully once <strong>DC2</strong> learns (via replication) that <strong>U1</strong> is available at <strong>DC3</strong>.</p>
+<blockquote>
+<p>Note: bounce mechanism, similarly to multi-datacenter routing, may result in out-of-order messages being received at the destination datacenter.</p>
+</blockquote>
+<h3 id="metrics">Metrics</h3>
+<p>Global distribution modules expose several per-datacenter metrics that can be used to monitor health of the system. All metrics begin with <strong>global.mod_global_distrib</strong> prefix:</p>
+<ul>
+<li><code>outgoing.messages.&lt;host&gt;</code>: number of cross-datacenter messages sent by this cluster to a given host.</li>
+<li><code>incoming.messages.&lt;host&gt;</code>: number of cross-datacenter messages received by this cluster from a given host.</li>
+<li><code>incoming.transfer_time.&lt;host&gt;</code> <em>[us]</em>: time elapsed between sending and receiving the message over the network from a given host.
+  The duration is calculated using wall clock times on sender and receiver node.</li>
+<li><code>outgoing.queue_time.&lt;host&gt;</code> <em>[us]</em>: time elapsed while message waits in a queue of a sender's connection to a given host.
+  High value of this metric may be remedied by increasing the number of connections to other hosts.</li>
+<li><code>incoming.queue_time</code> <em>[us]</em>: time elapsed while message waits in routing worker's queue.
+  This value is not reported per-host as routing workers are bound to the sender's JID.</li>
+<li><code>incoming.established</code>: incremented when a new connection is established from another cluster.
+  At this point the origin domain of the cluster is not known, so this metric is common for all of them.</li>
+<li><code>incoming.first_packet.&lt;host&gt;</code>: incremented when a receiver process gets the first packet from a remote cluster and learns its local domain.</li>
+<li><code>incoming.closed.&lt;host&gt;</code>: incremented when an incoming connection gets closed.</li>
+<li><code>incoming.errored.&lt;host&gt;</code>: incremented when an incoming connection gets closed with an error.</li>
+<li><code>outgoing.established.&lt;host&gt;</code>: incremented when an outgoing connection is established.</li>
+<li><code>outgoing.closed.&lt;host&gt;</code>: incremented when an outgoing connection gets closed.</li>
+<li><code>outgoing.errored.&lt;host&gt;</code>: incremented when an outgoing connection gets closed with an error.</li>
+<li><code>mapping_fetch_time</code> <em>[us]</em>: time spent on fetching an entry from the session table, cached or otherwise.</li>
+<li><code>mapping_fetches</code>: number of fetches of session table entries, cached or otherwise.</li>
+<li><code>mapping_cache_misses</code>: number of fetches of session table entries that hit the database.</li>
+<li><code>delivered_with_ttl</code>: A histogram of packets' TTL values recorded when the global routing layer decides to route them locally (but not due to TTL = 0).</li>
+<li><code>stop_ttl_zero</code>: A number of packets that weren't processed by global routing due to TTL=0.</li>
+<li><code>bounce_queue_size</code>: a number of messages enqueued for rerouting (the value of this metric is individual per MongooseIM node!).</li>
+</ul>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>You should only start <code>mod_global_distrib</code> by configuring it under <code>modules</code> option in <code>mongooseim.toml</code>. Do not add it as host-specific module via <code>host_config</code>.</li>
+<li>Do not use <code>mod_offline</code> on domains given via <code>global_host</code> or <code>local_host</code> options, as it will decrease messaging robustness; the users logged in other datacenters will not be registered as available by <code>mod_offline</code>, and so the messages will not be flushed.</li>
+</ul>
+<h2 id="options">Options</h2>
+<h3 id="modulesmod_global_distribglobal_host"><code>modules.mod_global_distrib.global_host</code></h3>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> none, this option is mandatory</li>
+<li><strong>Example:</strong> <code>global_host = "example.com"</code></li>
+</ul>
+<p>The XMPP domain that will be shared between datacenters.
+<em>Note:</em> this needs to be one of the domains given in <code>general.hosts</code> option in <code>mongooseim.toml</code>.</p>
+<h3 id="modulesmod_global_distriblocal_host"><code>modules.mod_global_distrib.local_host</code></h3>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> none, this option is mandatory</li>
+<li><strong>Example:</strong> <code>local_host = "datacenter1.example.com"</code></li>
+</ul>
+<p>XMPP domain that maps uniquely to the local datacenter; it will be used for inter-center routing.
+<em>Note:</em> this needs to be one of the domains given in <code>general.hosts</code> option in <code>mongooseim.toml</code>.</p>
+<h3 id="modulesmod_global_distribmessage_ttl"><code>modules.mod_global_distrib.message_ttl</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>4</code></li>
+<li><strong>Example:</strong> <code>message_ttl = 5</code></li>
+</ul>
+<p>Number of times a message can be rerouted between datacenters.</p>
+<h3 id="modulesmod_global_distribhosts_refresh_interval"><code>modules.mod_global_distrib.hosts_refresh_interval</code></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer, value given in milliseconds</li>
+<li><strong>Default:</strong> <code>3000</code></li>
+<li><strong>Example:</strong> <code>hosts_refresh_interval = 3000</code></li>
+</ul>
+<p>The interval telling how often Redis should be asked if new hosts appeared.</p>
+<h3 id="connections-options">Connections' options</h3>
+<h4 id="modulesmod_global_distribconnectionsendpoints"><code>modules.mod_global_distrib.connections.endpoints</code></h4>
+<ul>
+<li><strong>Syntax:</strong> Array of TOML tables with the following keys: <code>host</code> and <code>port</code>, and the following values: {host = <code>string</code>, port = <code>non_negative_integer</code>}</li>
+<li><strong>Default:</strong> <code>[{host = "LocalHost", port = 5555}]</code></li>
+<li><strong>Example:</strong> <code>endpoints = [{host = "172.16.0.2", port = 5555}]</code></li>
+</ul>
+<p>A list of endpoints on which the server will listen for connections.
+<code>host</code> can be given as a hostname, in which case it will be resolved to an IP address on module start.
+The endpoint list will be shared with other datacenters via the replicated backend.</p>
+<h4 id="modulesmod_global_distribconnectionsadvertised_endpoints"><code>modules.mod_global_distrib.connections.advertised_endpoints</code></h4>
+<ul>
+<li><strong>Syntax:</strong> Array of TOML tables with the following keys: <code>host</code> and <code>port</code>, and the following values: {host = <code>string</code>, port = <code>non_negative_integer</code>} <strong>or</strong> <code>false</code></li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>advertised_endpoints = [{host = "172.16.0.2", port = 5555}]</code></li>
+</ul>
+<p>A list of endpoints which will be advertised in Redis and therefore used to establish connection with this node by other nodes. If not specified, <code>endpoints</code> value (after resolution) is considered <code>advertised_endpoints</code>. The host may be either IP or domain, just like in case of endpoints. The difference is, the domain name won't be resolved but inserted directly to the mappings backend instead.</p>
+<h4 id="modulesmod_global_distribconnectionsconnections_per_endpoint"><code>modules.mod_global_distrib.connections.connections_per_endpoint</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>1</code></li>
+<li><strong>Example:</strong> <code>connections_per_endpoint = 30</code></li>
+</ul>
+<p>Number of outgoing connections that will be established from the current node to each endpoint assigned to a remote domain.</p>
+<h4 id="modulesmod_global_distribconnectionsendpoint_refresh_interval"><code>modules.mod_global_distrib.connections.endpoint_refresh_interval</code></h4>
+<ul>
+<li><strong>Syntax:</strong> positive integer, value given in seconds</li>
+<li><strong>Default:</strong> <code>60</code></li>
+<li><strong>Example:</strong> <code>endpoint_refresh_interval = 30</code></li>
+</ul>
+<p>An interval between remote endpoint list refresh (and connection rebalancing).
+A separate timer is maintained for every remote domain.</p>
+<h4 id="modulesmod_global_distribconnectionsendpoint_refresh_interval_when_empty"><code>modules.mod_global_distrib.connections.endpoint_refresh_interval_when_empty</code></h4>
+<ul>
+<li><strong>Syntax:</strong> positive integer, value given in seconds</li>
+<li><strong>Default:</strong> <code>3</code></li>
+<li><strong>Example:</strong> <code>endpoint_refresh_interval_when_empty = 3</code></li>
+</ul>
+<p>Endpoint refresh interval, when array of endpoints is empty.</p>
+<h4 id="modulesmod_global_distribconnectionsdisabled_gc_interval"><code>modules.mod_global_distrib.connections.disabled_gc_interval</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer, value given in seconds</li>
+<li><strong>Default:</strong> <code>60</code></li>
+<li><strong>Example:</strong> <code>disabled_gc_interval = 60</code></li>
+</ul>
+<p>An interval between disabled endpoints "garbage collection".
+It means that disabled endpoints are periodically verified and if Global Distribution detects that connections is no longer alive, the connection pool is closed completely.</p>
+<h3 id="tls-options">TLS options</h3>
+<h4 id="modulesmod_global_distribconnectionstlsenabled"><code>modules.mod_global_distrib.connections.tls.enabled</code></h4>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>enabled = true</code></li>
+</ul>
+<p>To enable TLS support the <code>cacertfile</code> and <code>certfile</code> options have to be present.
+These options will be passed to the <code>fast_tls</code> driver.</p>
+<p>If <code>tls</code> is disabled, all data will be sent via standard TCP connections.</p>
+<h4 id="modulesmod_global_distribconnectionstlscertfile"><code>modules.mod_global_distrib.connections.tls.certfile</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, path in the file system</li>
+<li><strong>Default:</strong> none, this options is mandatory to enable TLS support</li>
+<li><strong>Example:</strong> <code>certfile = "priv/dc1.pem"</code></li>
+</ul>
+<h4 id="modulesmod_global_distribconnectionstlscacertfile"><code>modules.mod_global_distrib.connections.tls.cacertfile</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, path in the file system</li>
+<li><strong>Default:</strong> none, this options is mandatory to enable TLS support</li>
+<li><strong>Example:</strong> <code>cacertfile = "priv/ca.pem"</code></li>
+</ul>
+<h4 id="modulesmod_global_distribconnectionstlsciphers"><code>modules.mod_global_distrib.connections.tls.ciphers</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>ciphers = "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384"</code></li>
+</ul>
+<p>Cipher suites to use with StartTLS or TLS. Please refer to the <a href="https://www.openssl.org/docs/man1.0.2/man1/ciphers.html">OpenSSL documentation</a> for the cipher string format.</p>
+<h4 id="modulesmod_global_distribconnectionstlsdhfile"><code>modules.mod_global_distrib.connections.tls.dhfile</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, path in the file system</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>dhfile = "dh.pem"</code></li>
+</ul>
+<h3 id="redis-session-storage-options">Redis session storage options</h3>
+<h4 id="modulesmod_global_distribredispool"><code>modules.mod_global_distrib.redis.pool</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> <code>"global_distrib"</code></li>
+<li><strong>Example:</strong> <code>pool = "global_distrib"</code></li>
+</ul>
+<p>Name of the redis pool defined in <a href="../../advanced-configuration/outgoing-connections/">outgoing pools</a>.</p>
+<h4 id="modulesmod_global_distribredisexpire_after"><code>modules.mod_global_distrib.redis.expire_after</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>120</code></li>
+<li><strong>Example:</strong> <code>expire_after = 120</code></li>
+</ul>
+<p>Number of seconds after which a session entry written by this cluster will expire.</p>
+<h4 id="modulesmod_global_distribredisrefresh_after"><code>modules.mod_global_distrib.redis.refresh_after</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>60</code></li>
+<li><strong>Example:</strong> <code>refresh_after = 60</code></li>
+</ul>
+<p>Number of seconds after which session's expiration timer will be refreshed.</p>
+<h3 id="database-cache-options">Database cache options</h3>
+<p>Options for caching database lookups, by default no options are passed.</p>
+<h4 id="modulesmod_global_distribcachecache_missed"><code>modules.mod_global_distrib.cache.cache_missed</code></h4>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>cache_missed = true</code></li>
+</ul>
+<p>Determines whether an internal session cache should cache lookup failures.
+When <code>false</code>, only successful database lookups will result in the value being cached.
+Changing this option has great negative impact on performance.</p>
+<h4 id="modulesmod_global_distribcachedomain_lifetime_seconds"><code>modules.mod_global_distrib.cache.domain_lifetime_seconds</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer, value given in seconds</li>
+<li><strong>Default:</strong> <code>600</code></li>
+<li><strong>Example:</strong> <code>domain_lifetime_seconds = 600</code></li>
+</ul>
+<p>How long should subdomain mappings be cached (e.g. <code>muc.example.com -&gt; datacenter1.test</code>).</p>
+<h4 id="modulesmod_global_distribcachejid_lifetime_seconds"><code>modules.mod_global_distrib.cache.jid_lifetime_seconds</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer, value given in seconds</li>
+<li><strong>Default:</strong> <code>5</code></li>
+<li><strong>Example:</strong> <code>jid_lifetime_seconds = 5</code></li>
+</ul>
+<p>How long should full and bare JID mappings be cached (e.g. <code>user1@example.com/res1 -&gt; datacenter1.test</code>).</p>
+<h4 id="modulesmod_global_distribcachemax_jids"><code>modules.mod_global_distrib.cache.max_jids</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>10000</code></li>
+<li><strong>Example:</strong> <code>max_jids = 10000</code></li>
+</ul>
+<p>The maximum number of JID entries that can be stored in cache at any point in time.</p>
+<h3 id="message-bouncing-options">Message bouncing options</h3>
+<h4 id="modulesmod_global_distribbounceenabled"><code>modules.mod_global_distrib.bounce.enabled</code></h4>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>enabled = false</code></li>
+</ul>
+<p>Whether message bouncing should be enabled or not.
+Setting this option to <code>false</code> makes other <code>bounce</code> options have no effect.</p>
+<h4 id="modulesmod_global_distribbounceresend_after_ms"><code>modules.mod_global_distrib.bounce.resend_after_ms</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>200</code></li>
+<li><strong>Example:</strong> <code>resend_after_ms = 200</code></li>
+</ul>
+<p>Time after which message will be resent in case of delivery error.</p>
+<h4 id="modulesmod_global_distribbouncemax_retries"><code>modules.mod_global_distrib.bounce.max_retries</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>4</code></li>
+<li><strong>Example:</strong> <code>max_retries = 4</code></li>
+</ul>
+<p>Number of times message delivery will be retried in case of errors.</p>
+<h3 id="global-distribution-and-service-discovery">Global Distribution and Service Discovery</h3>
+<p><code>mod_global_distrib</code> extension relies on <a href="../mod_disco/"><code>mod_disco</code></a>'s option <code>users_can_see_hidden_services</code>, when provided. If it is not configured, the default value is <code>true</code>. <code>mod_disco</code> does not have to be enabled for <code>mod_global_distrib</code> to work, as this parameter is used only for processing Disco requests by Global Distribution.</p>
+<h2 id="overriding-remote-datacenter-endpoints">Overriding remote datacenter endpoints</h2>
+<p>There may be cases when the endpoint list given via <strong>endpoints</strong> option does not accurately specify endpoints on which the node may be reached from other datacenters; e.g. in case the node is behind NAT, or in testing environment.
+The endpoints used for connection to a remote datacenter may be overridden by global option <code>{ {global_distrib_addr, Host}, [{IP, Port}] }</code>.</p>
+<h2 id="example-configuration">Example configuration</h2>
+<h3 id="configuring-mod_global_distrib">Configuring mod_global_distrib</h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_global_distrib]</span>
+  <span class="n">global_host</span> <span class="o">=</span> <span class="s">&quot;example.com&quot;</span>
+  <span class="n">local_host</span> <span class="o">=</span> <span class="s">&quot;datacenter1.example.com&quot;</span>
+  <span class="n">connections</span><span class="p">.</span><span class="n">endpoints</span> <span class="o">=</span> <span class="k">[{host = &quot;172.16.0.2&quot;, port = 5555}]</span>
+  <span class="n">connections</span><span class="p">.</span><span class="n">advertised_endpoints</span> <span class="o">=</span> <span class="k">[{host = &quot;172.16.0.2&quot;, port = 5555}]</span>
+  <span class="n">connections</span><span class="p">.</span><span class="n">tls</span><span class="p">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">true</span>
+  <span class="n">connections</span><span class="p">.</span><span class="n">tls</span><span class="p">.</span><span class="n">certfile</span> <span class="o">=</span> <span class="s">&quot;priv/dc1.pem&quot;</span>
+  <span class="n">connections</span><span class="p">.</span><span class="n">tls</span><span class="p">.</span><span class="n">cacertfile</span> <span class="o">=</span> <span class="s">&quot;priv/ca.pem&quot;</span>
+  <span class="n">connections</span><span class="p">.</span><span class="n">connections_per_endpoint</span> <span class="o">=</span> <span class="mi">30</span>
+  <span class="n">cache</span><span class="p">.</span><span class="n">domain_lifetime_seconds</span> <span class="o">=</span> <span class="mi">60</span>
+  <span class="n">bounce</span><span class="p">.</span><span class="n">resend_after_ms</span> <span class="o">=</span> <span class="mi">300</span>
+  <span class="n">bounce</span><span class="p">.</span><span class="n">max_retries</span> <span class="o">=</span> <span class="mi">3</span>
+  <span class="n">redis</span><span class="p">.</span><span class="n">pool</span> <span class="o">=</span> <span class="s">&quot;global_distrib&quot;</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="overriding-endpoints-to-a-remote-datacenter">Overriding endpoints to a remote datacenter</h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="p">{</span><span class="n">global_distrib_addr</span><span class="p">,</span> <span class="s">&quot;datacenter2.example.com&quot;</span><span class="p">},</span> <span class="p">[{</span><span class="s">&quot;124.12.4.3&quot;</span><span class="p">,</span> <span class="mi">5556</span><span class="p">},</span> <span class="p">{</span><span class="s">&quot;182.172.23.55&quot;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">}]</span> <span class="p">}.</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="configuring-dynomite">Configuring Dynomite</h3>
+<p>For more information about Dynomite configuration, consult <a href="https://github.com/Netflix/dynomite/wiki">Dynomite wiki</a>.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">dyn_o_mite</span><span class="p">:</span>
+  <span class="nt">datacenter</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dc1</span>
+  <span class="nt">rack</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rack1</span>
+  <span class="nt">dyn_listen</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">172.16.0.3:8101</span>
+  <span class="nt">dyn_seeds</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">124.12.4.4:8101:rack1:dc2:1383429731</span>
+  <span class="nt">listen</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">172.16.0.3:8102</span>
+  <span class="nt">servers</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">172.16.0.4:6379:1</span>
+  <span class="nt">tokens</span><span class="p">:</span> <span class="s">&#39;138342973&#39;</span>
+  <span class="nt">secure_server_option</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">datacenter</span>
+  <span class="nt">pem_key_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dynomite.pem</span>
+  <span class="nt">data_store</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+  <span class="nt">stats_listen</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.0.0:22221</span>
+</code></pre></div>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">dyn_o_mite</span><span class="p">:</span>
+  <span class="nt">datacenter</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dc2</span>
+  <span class="nt">rack</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rack1</span>
+  <span class="nt">dyn_listen</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">124.12.4.4:8101</span>
+  <span class="nt">dyn_seeds</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">172.16.0.3:8101:rack1:dc1:1383429731</span>
+  <span class="nt">listen</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">124.12.4.4:8102</span>
+  <span class="nt">servers</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">124.12.4.5:6379:1</span>
+  <span class="nt">tokens</span><span class="p">:</span> <span class="s">&#39;138342973&#39;</span>
+  <span class="nt">secure_server_option</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">datacenter</span>
+  <span class="nt">pem_key_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dynomite.pem</span>
+  <span class="nt">data_store</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+  <span class="nt">stats_listen</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.0.0:22221</span>
+</code></pre></div>
+</td></tr></table>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../mod_extdisco/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                mod_extdisco
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../mod_http_upload/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                mod_http_upload
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../js/version-select.js"></script>
+      
+    
+  </body>
+</html>

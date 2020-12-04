@@ -1,0 +1,2890 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+    
+    
+      
+        <title>Metrics - MongooseIM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6910b76c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/custom.css">
+    
+      <link rel="stylesheet" href="../../css/version-select.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mongooseim-metrics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="MongooseIM" class="md-header-nav__button md-logo" aria-label="MongooseIM">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            MongooseIM
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Metrics
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="MongooseIM" class="md-nav__button md-logo" aria-label="MongooseIM">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    MongooseIM
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+    <label class="md-nav__link" for="nav-2">
+      User guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="User guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        User guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/ABCs-of-MongooseIM/" class="md-nav__link">
+      ABCs of MongooseIM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/MongooseIM-High-level-Architecture/" class="md-nav__link">
+      High-level Architecture
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Features-and-supported-standards/" class="md-nav__link">
+      Features and supported standards
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Getting-started/" class="md-nav__link">
+      Getting started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/release_config/" class="md-nav__link">
+      Release/Installation configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Bootstrap-Scripts/" class="md-nav__link">
+      Bootstrap scripts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/client-certificate/" class="md-nav__link">
+      Client certificate authentication
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+    <label class="md-nav__link" for="nav-3">
+      Tutorials
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/How-to-build/" class="md-nav__link">
+      How to Build MongooseIM from source code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/push-notifications/Push-notifications/" class="md-nav__link">
+      How to Set up Push Notifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/push-notifications/Push-notifications-client-side/" class="md-nav__link">
+      How to Set up Push Notifications on the client side
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/push-notifications/MongoosePush-setup/" class="md-nav__link">
+      How to Set up MongoosePush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/ICE_tutorial/" class="md-nav__link">
+      How to Set up MongooseICE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/iOS_tutorial/" class="md-nav__link">
+      How to Build an iOS messaging app
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/Jingle-SIP-setup/" class="md-nav__link">
+      How to Set up Jingle/SIP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+    <label class="md-nav__link" for="nav-4">
+      Migration Guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Migration Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Migration Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.1.1_3.2.0/" class="md-nav__link">
+      3.1.1 to 3.2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.3.0_3.4.0/" class="md-nav__link">
+      3.3.0 to 3.4.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.5.0_3.6.0/" class="md-nav__link">
+      3.5.0 to 3.6.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.6.0_3.7.0/" class="md-nav__link">
+      3.6.0 to 3.7.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/3.7.0_4.0.0/" class="md-nav__link">
+      3.7.0 to 4.0.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/4.0.0_4.0.1/" class="md-nav__link">
+      4.0.0 to 4.0.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
+      MAM MUC migration helper
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+    <label class="md-nav__link" for="nav-5">
+      Platform
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Platform" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Platform
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Contributions/" class="md-nav__link">
+      Contributions to ecosystem
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Differentiators/" class="md-nav__link">
+      Differentiators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../History/" class="md-nav__link">
+      History
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+    <label class="md-nav__link" for="nav-6">
+      Configuration
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon"></span>
+        Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/configuration-files/" class="md-nav__link">
+      Configuration files
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/general/" class="md-nav__link">
+      Options: General
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/listen/" class="md-nav__link">
+      Options: Listen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/auth/" class="md-nav__link">
+      Options: Auth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/outgoing-connections/" class="md-nav__link">
+      Options: Outgoing connections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Services/" class="md-nav__link">
+      Options: Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Modules/" class="md-nav__link">
+      Options: Extension Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/shaper/" class="md-nav__link">
+      Options: Shaper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/acl/" class="md-nav__link">
+      Options: Acl
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/access/" class="md-nav__link">
+      Options: Access
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/s2s/" class="md-nav__link">
+      Options: S2S
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/host_config/" class="md-nav__link">
+      Options: Host config
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/release-options/" class="md-nav__link">
+      Release options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/Erlang-cookie-security/" class="md-nav__link">
+      Erlang Cookie Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/TLS-hardening/" class="md-nav__link">
+      TLS hardening
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced-configuration/database-backends-configuration/" class="md-nav__link">
+      Database backends configuration
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
+    <label class="md-nav__link" for="nav-7">
+      Authentication methods
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Authentication methods" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon"></span>
+        Authentication methods
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/rdbms/" class="md-nav__link">
+      RDBMS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/external/" class="md-nav__link">
+      External
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/anonymous/" class="md-nav__link">
+      Anonymous
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/ldap/" class="md-nav__link">
+      LDAP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/jwt/" class="md-nav__link">
+      JWT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/riak/" class="md-nav__link">
+      Riak
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/http/" class="md-nav__link">
+      HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/pki/" class="md-nav__link">
+      PKI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../authentication-methods/dummy/" class="md-nav__link">
+      Dummy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" >
+    <label class="md-nav__link" for="nav-8">
+      MongooseIM open XMPP extensions
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="MongooseIM open XMPP extensions" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon"></span>
+        MongooseIM open XMPP extensions
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../open-extensions/muc_light/" class="md-nav__link">
+      MUC light
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../open-extensions/token-reconnection/" class="md-nav__link">
+      Token-based reconnection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" >
+    <label class="md-nav__link" for="nav-9">
+      REST API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="REST API" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        REST API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Client-frontend/" class="md-nav__link">
+      Client/frontend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Metrics-backend/" class="md-nav__link">
+      Metrics backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../rest-api/Administration-backend/" class="md-nav__link">
+      Administration backend
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
+    <label class="md-nav__link" for="nav-10">
+      Operation and maintenance
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Operation and maintenance" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon"></span>
+        Operation and maintenance
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gdpr-considerations/" class="md-nav__link">
+      GDPR considerations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Cluster-management-considerations/" class="md-nav__link">
+      Cluster management considerations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Cluster-configuration-and-node-management/" class="md-nav__link">
+      Cluster configuration and node management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Logging-%26-monitoring/" class="md-nav__link">
+      Logging & monitoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Logging/" class="md-nav__link">
+      Logging configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Humio/" class="md-nav__link">
+      Logging with Humio
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Logging-fields/" class="md-nav__link">
+      Logging fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Reloading-configuration-on-a-running-system/" class="md-nav__link">
+      Reloading configuration on a running system
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Metrics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Metrics
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#metrics-types" class="md-nav__link">
+    Metrics types
+  </a>
+  
+    <nav class="md-nav" aria-label="Metrics types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spiral" class="md-nav__link">
+    spiral
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value" class="md-nav__link">
+    value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gauge" class="md-nav__link">
+    gauge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proplist" class="md-nav__link">
+    proplist
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#histogram" class="md-nav__link">
+    histogram
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#per-host-metrics" class="md-nav__link">
+    Per host metrics
+  </a>
+  
+    <nav class="md-nav" aria-label="Per host metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hook-metrics" class="md-nav__link">
+    Hook metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#presences-rosters" class="md-nav__link">
+    Presences &amp; rosters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#privacy-lists" class="md-nav__link">
+    Privacy lists
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other" class="md-nav__link">
+    Other
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extension-specific-metrics" class="md-nav__link">
+    Extension-specific metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#global-metrics" class="md-nav__link">
+    Global metrics
+  </a>
+  
+    <nav class="md-nav" aria-label="Global metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-metrics" class="md-nav__link">
+    Data metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vm-metrics" class="md-nav__link">
+    VM metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backend-metrics" class="md-nav__link">
+    Backend metrics
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../System-Metrics-Privacy-Policy/" class="md-nav__link">
+      System Metrics Privacy Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tls-distribution/" class="md-nav__link">
+      Distribution over TLS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../known-issues/" class="md-nav__link">
+      Known issues
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" >
+    <label class="md-nav__link" for="nav-11">
+      Developer's guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Developer's guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon"></span>
+        Developer's guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Testing-MongooseIM/" class="md-nav__link">
+      Testing MongooseIM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/logging/" class="md-nav__link">
+      Logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Hooks-and-handlers/" class="md-nav__link">
+      Hooks and Handlers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/hooks_description/" class="md-nav__link">
+      Hooks description
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Stanza-routing/" class="md-nav__link">
+      Stanza routing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/accumulators/" class="md-nav__link">
+      Accumulators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/flat_options/" class="md-nav__link">
+      Flat options format
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Moving-to-single-app-project-structure/" class="md-nav__link">
+      Moving to single app project structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/mod_amp_developers_guide/" class="md-nav__link">
+      mod_amp development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/mod_muc_light_developers_guide/" class="md-nav__link">
+      mod_muc_light developers doc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/SCRAM-serialization/" class="md-nav__link">
+      SCRAM serialization format
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/xep_tool/" class="md-nav__link">
+      xep-tool usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/OpenSSL-and-FIPS/" class="md-nav__link">
+      FIPS mode
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/Basic-iq-handler/" class="md-nav__link">
+      Basic IQ Handler
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developers-guide/mongoose_wpool/" class="md-nav__link">
+      mongoose_wpool
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12" >
+    <label class="md-nav__link" for="nav-12">
+      Module index
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Module index" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        <span class="md-nav__icon md-icon"></span>
+        Module index
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_adhoc/" class="md-nav__link">
+      mod_adhoc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_amp/" class="md-nav__link">
+      mod_amp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_auth_token/" class="md-nav__link">
+      mod_auth_token
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_blocking/" class="md-nav__link">
+      mod_blocking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_bosh/" class="md-nav__link">
+      mod_bosh
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_caps/" class="md-nav__link">
+      mod_caps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_carboncopy/" class="md-nav__link">
+      mod_carboncopy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_commands/" class="md-nav__link">
+      mod_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_csi/" class="md-nav__link">
+      mod_csi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_disco/" class="md-nav__link">
+      mod_disco
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12-11" type="checkbox" id="nav-12-11" >
+    <label class="md-nav__link" for="nav-12-11">
+      mod_event_pusher
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="mod_event_pusher" data-md-level="2">
+      <label class="md-nav__title" for="nav-12-11">
+        <span class="md-nav__icon md-icon"></span>
+        mod_event_pusher
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher/" class="md-nav__link">
+      mod_event_pusher
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher_http/" class="md-nav__link">
+      HTTP backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher_push/" class="md-nav__link">
+      Push backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher_sns/" class="md-nav__link">
+      SNS backend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_event_pusher_rabbit/" class="md-nav__link">
+      RabbitMQ backend
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_extdisco/" class="md-nav__link">
+      mod_extdisco
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_global_distrib/" class="md-nav__link">
+      mod_global_distrib
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_http_upload/" class="md-nav__link">
+      mod_http_upload
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_inbox/" class="md-nav__link">
+      mod_inbox
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_jingle_sip/" class="md-nav__link">
+      mod_jingle_sip
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_keystore/" class="md-nav__link">
+      mod_keystore
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_last/" class="md-nav__link">
+      mod_last
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_mam/" class="md-nav__link">
+      mod_mam
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc/" class="md-nav__link">
+      mod_muc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc_commands/" class="md-nav__link">
+      mod_muc_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc_log/" class="md-nav__link">
+      mod_muc_log
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc_light/" class="md-nav__link">
+      mod_muc_light
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_muc_light_commands/" class="md-nav__link">
+      mod_muc_light_commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_offline/" class="md-nav__link">
+      mod_offline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_offline_stub/" class="md-nav__link">
+      mod_offline_stub
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_ping/" class="md-nav__link">
+      mod_ping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_privacy/" class="md-nav__link">
+      mod_privacy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_private/" class="md-nav__link">
+      mod_private
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_pubsub/" class="md-nav__link">
+      mod_pubsub
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_push_service_mongoosepush/" class="md-nav__link">
+      mod_push_service_mongoosepush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_register/" class="md-nav__link">
+      mod_register
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_roster/" class="md-nav__link">
+      mod_roster
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_shared_roster_ldap/" class="md-nav__link">
+      mod_shared_roster_ldap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_sic/" class="md-nav__link">
+      mod_sic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_stream_management/" class="md-nav__link">
+      mod_stream_management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_time/" class="md-nav__link">
+      mod_time
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_vcard/" class="md-nav__link">
+      mod_vcard
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../modules/mod_version/" class="md-nav__link">
+      mod_version
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#metrics-types" class="md-nav__link">
+    Metrics types
+  </a>
+  
+    <nav class="md-nav" aria-label="Metrics types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spiral" class="md-nav__link">
+    spiral
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value" class="md-nav__link">
+    value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gauge" class="md-nav__link">
+    gauge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proplist" class="md-nav__link">
+    proplist
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#histogram" class="md-nav__link">
+    histogram
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#per-host-metrics" class="md-nav__link">
+    Per host metrics
+  </a>
+  
+    <nav class="md-nav" aria-label="Per host metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hook-metrics" class="md-nav__link">
+    Hook metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#presences-rosters" class="md-nav__link">
+    Presences &amp; rosters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#privacy-lists" class="md-nav__link">
+    Privacy lists
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other" class="md-nav__link">
+    Other
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extension-specific-metrics" class="md-nav__link">
+    Extension-specific metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#global-metrics" class="md-nav__link">
+    Global metrics
+  </a>
+  
+    <nav class="md-nav" aria-label="Global metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-metrics" class="md-nav__link">
+    Data metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vm-metrics" class="md-nav__link">
+    VM metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backend-metrics" class="md-nav__link">
+    Backend metrics
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="mongooseim-metrics">MongooseIM metrics</h1>
+<p>MongooseIM by default collects many metrics showing the user behaviour and general system statistics.
+They are managed by <a href="https://github.com/Feuerlabs/exometer">exometer</a>.
+MongooseIM uses <a href="https://github.com/esl/exometer/tree/1.2.1-patched">ESL's fork of this project</a>.</p>
+<p>All metrics are divided into the following groups:</p>
+<ul>
+<li>Per host metrics: Gathered separately for every XMPP host supported by the cluster.
+ <strong>Warning:</strong> If a cluster supports many (thousands or more) domains, performance issues might occur.
+ To avoid this, use global equivalents of the metrics with <code>all_metrics_are_global</code> config option.<ul>
+<li>Hook metrics.
+They are created for every <a href="../../developers-guide/Hooks-and-handlers/">hook</a> and incremented on every call to it.</li>
+</ul>
+</li>
+<li>Global metrics: Metrics common for all XMPP hosts.<ul>
+<li>Data metrics.
+These are misc. metrics related to data transfers (e.g. sent and received stanza size statistics).</li>
+<li>VM metrics. Basic Erlang VM statistics.</li>
+</ul>
+</li>
+<li>Backend metrics: Histograms with timings of calls to various backends.</li>
+</ul>
+<h2 id="metrics-types">Metrics types</h2>
+<h3 id="spiral"><code>spiral</code></h3>
+<p>This kind of metric provides 2 values: <code>total</code> event count (e.g. stanzas processed) and a value in 60s window (<code>one</code> value).
+Dividing <code>one</code> value by 60 provides an average per-second value over last minute.</p>
+<p><strong>Example:</strong> <code>[{total, 1000}, {one, 20}]</code></p>
+<h3 id="value"><code>value</code></h3>
+<p>A simple value.
+It is actually a one-element proplist: <code>[{value, N}]</code>.</p>
+<p><strong>Example:</strong> <code>[{value, 256}]</code></p>
+<h3 id="gauge"><code>gauge</code></h3>
+<p>It is similar to a <code>value</code> type but consists of two properties:</p>
+<ul>
+<li><code>value</code></li>
+<li><code>ms_since_reset</code> - Time in milliseconds elapsed from the last metric update.</li>
+</ul>
+<p><strong>Example:</strong> <code>[{value, 12}, {ms_since_reset, 91761}]</code></p>
+<h3 id="proplist"><code>proplist</code></h3>
+<p>A metric which is a nonstandard proplist.
+You can find the lists of keys in metrics descriptions.</p>
+<p><strong>Example:</strong> <code>[{total,295941736}, {processes_used,263766824}, {atom_used,640435}, {binary,1513152}, {ets,3942592}, {system,32182072}]</code></p>
+<h3 id="histogram"><code>histogram</code></h3>
+<p>A histogram collects values over a sliding window of 60s and exposes the following stats:</p>
+<ul>
+<li><code>n</code> - A number of samples.</li>
+<li><code>mean</code> - An arithmetic mean.</li>
+<li><code>min</code></li>
+<li><code>max</code></li>
+<li><code>median</code></li>
+<li><code>50</code>, <code>75</code>, <code>90</code>, <code>95</code>, <code>99</code>, <code>999</code> - 50th, 75th, 90th, 95th, 99th and 99.9th percentile</li>
+</ul>
+<h2 id="per-host-metrics">Per host metrics</h2>
+<h3 id="hook-metrics">Hook metrics</h3>
+<p>There are more hook metrics than what is listed in this table, because they are automatically created for every new hook.
+As a result it makes more sense to maintain a list of the most relevant or useful items, rather than keeping this table fully in sync with the code.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[Host, anonymous_purge_hook]</code></td>
+<td>spiral</td>
+<td>An anonymous user disconnects.</td>
+</tr>
+<tr>
+<td><code>[Host, c2s_unauthenticated_iq]</code></td>
+<td>spiral</td>
+<td>An IQ sent from a user to a server without authentication.</td>
+</tr>
+<tr>
+<td><code>[Host, disco_info]</code></td>
+<td>spiral</td>
+<td>An information about the server has been requested via Disco protocol.</td>
+</tr>
+<tr>
+<td><code>[Host, disco_local_features]</code></td>
+<td>spiral</td>
+<td>A list of server features is gathered.</td>
+</tr>
+<tr>
+<td><code>[Host, disco_local_identity]</code></td>
+<td>spiral</td>
+<td>A list of server identities is gathered.</td>
+</tr>
+<tr>
+<td><code>[Host, disco_local_items]</code></td>
+<td>spiral</td>
+<td>A list of server's items (e.g. services) is gathered.</td>
+</tr>
+<tr>
+<td><code>[Host, disco_sm_features]</code></td>
+<td>spiral</td>
+<td>A list of user's features is gathered.</td>
+</tr>
+<tr>
+<td><code>[Host, disco_sm_identity]</code></td>
+<td>spiral</td>
+<td>A list of user's identities is gathered.</td>
+</tr>
+<tr>
+<td><code>[Host, disco_sm_items]</code></td>
+<td>spiral</td>
+<td>A list of user's items is gathered.</td>
+</tr>
+<tr>
+<td><code>[Host, mam_lookup_messages]</code></td>
+<td>spiral</td>
+<td>An archive lookup is performed.</td>
+</tr>
+<tr>
+<td><code>[Host, offline_message_hook]</code></td>
+<td>spiral</td>
+<td>A message was sent to an offline user. (Except for "error", "headline" and "groupchat" message types.)</td>
+</tr>
+<tr>
+<td><code>[Host, offline_groupchat_message_hook]</code></td>
+<td>spiral</td>
+<td>A groupchat message was sent to an offline user.</td>
+</tr>
+<tr>
+<td><code>[Host, privacy_updated_list]</code></td>
+<td>spiral</td>
+<td>User's privacy list is updated.</td>
+</tr>
+<tr>
+<td><code>[Host, resend_offline_messages_hook]</code></td>
+<td>spiral</td>
+<td>A list of offline messages is gathered for delivery to a user's new connection.</td>
+</tr>
+<tr>
+<td><code>[Host, roster_get_subscription_lists]</code></td>
+<td>spiral</td>
+<td>Presence subscription lists (based on which presence updates are broadcasted) are gathered.</td>
+</tr>
+<tr>
+<td><code>[Host, roster_in_subscription]</code></td>
+<td>spiral</td>
+<td>A presence with subscription update is processed.</td>
+</tr>
+<tr>
+<td><code>[Host, roster_out_subscription]</code></td>
+<td>spiral</td>
+<td>A presence with subscription update is received from a client.</td>
+</tr>
+<tr>
+<td><code>[Host, sm_broadcast]</code></td>
+<td>spiral</td>
+<td>A stanza is broadcasted to all of user's resources.</td>
+</tr>
+<tr>
+<td><code>[Host, unset_presence_hook]</code></td>
+<td>spiral</td>
+<td>A user disconnects or sends an <code>unavailable</code> presence.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="presences-rosters">Presences &amp; rosters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[Host, modPresenceSubscriptions]</code></td>
+<td>spiral</td>
+<td>Presence subscription is processed.</td>
+</tr>
+<tr>
+<td><code>[Host, modPresenceUnsubscriptions]</code></td>
+<td>spiral</td>
+<td>Presence unsubscription is processed.</td>
+</tr>
+<tr>
+<td><code>[Host, modRosterGets]</code></td>
+<td>spiral</td>
+<td>User's roster is fetched.</td>
+</tr>
+<tr>
+<td><code>[Host, modRosterPush]</code></td>
+<td>spiral</td>
+<td>A roster update is pushed to a single session.</td>
+</tr>
+<tr>
+<td><code>[Host, modRosterSets]</code></td>
+<td>spiral</td>
+<td>User's roster is updated.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="privacy-lists">Privacy lists</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[Host, modPrivacyGets]</code></td>
+<td>spiral</td>
+<td>IQ privacy <code>get</code> is processed.</td>
+</tr>
+<tr>
+<td><code>[Host, modPrivacyPush]</code></td>
+<td>spiral</td>
+<td>Privacy list update is sent to a single session.</td>
+</tr>
+<tr>
+<td><code>[Host, modPrivacySets]</code></td>
+<td>spiral</td>
+<td>IQ privacy <code>set</code> is processed.</td>
+</tr>
+<tr>
+<td><code>[Host, modPrivacySetsActive]</code></td>
+<td>spiral</td>
+<td>Active privacy list is changed.</td>
+</tr>
+<tr>
+<td><code>[Host, modPrivacySetsDefault]</code></td>
+<td>spiral</td>
+<td>Default privacy list is changed.</td>
+</tr>
+<tr>
+<td><code>[Host, modPrivacyStanzaAll]</code></td>
+<td>spiral</td>
+<td>A packet is checked against the privacy list.</td>
+</tr>
+<tr>
+<td><code>[Host, modPrivacyStanzaDenied]</code></td>
+<td>spiral</td>
+<td>Privacy list check resulted in <code>deny</code>.</td>
+</tr>
+<tr>
+<td><code>[Host, modPrivacyStanzaBlocked]</code></td>
+<td>spiral</td>
+<td>Privacy list check resulted in <code>block</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="other">Other</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[Host, sessionAuthAnonymous]</code></td>
+<td>spiral</td>
+<td>A client authenticates anonymously.</td>
+</tr>
+<tr>
+<td><code>[Host, sessionAuthFails]</code></td>
+<td>spiral</td>
+<td>A client failed to authenticate.</td>
+</tr>
+<tr>
+<td><code>[Host, sessionCount]</code></td>
+<td>counter</td>
+<td>Number of active sessions.</td>
+</tr>
+<tr>
+<td><code>[Host, sessionLogouts]</code></td>
+<td>spiral</td>
+<td>A client session is closed.</td>
+</tr>
+<tr>
+<td><code>[Host, sessionSuccessfulLogins]</code></td>
+<td>spiral</td>
+<td>A client session is opened.</td>
+</tr>
+<tr>
+<td><code>[Host, xmppErrorIq]</code></td>
+<td>spiral</td>
+<td>An <code>error</code> IQ is sent to a client.</td>
+</tr>
+<tr>
+<td><code>[Host, xmppErrorMessage]</code></td>
+<td>spiral</td>
+<td>An <code>error</code> message is sent to a client.</td>
+</tr>
+<tr>
+<td><code>[Host, xmppErrorPresence]</code></td>
+<td>spiral</td>
+<td>An <code>error</code> presence is sent to a client.</td>
+</tr>
+<tr>
+<td><code>[Host, xmppErrorTotal]</code></td>
+<td>spiral</td>
+<td>A stanza with <code>error</code> type is routed.</td>
+</tr>
+<tr>
+<td><code>[Host, xmppMessageBounced]</code></td>
+<td>spiral</td>
+<td>A <code>service-unavailable</code> error is sent, because the message recipient if offline.</td>
+</tr>
+<tr>
+<td><code>[Host, xmppIqSent]</code></td>
+<td>spiral</td>
+<td>An IQ is sent by a client.</td>
+</tr>
+<tr>
+<td><code>[Host, xmppMessageSent]</code></td>
+<td>spiral</td>
+<td>A message is sent by a client</td>
+</tr>
+<tr>
+<td><code>[Host, xmppPresenceSent]</code></td>
+<td>spiral</td>
+<td>A presence is sent by a client.</td>
+</tr>
+<tr>
+<td><code>[Host, xmppStanzaSent]</code></td>
+<td>spiral</td>
+<td>A stanza is sent by a client.</td>
+</tr>
+<tr>
+<td><code>[Host, xmppIqReceived]</code></td>
+<td>spiral</td>
+<td>An IQ is sent to a client.</td>
+</tr>
+<tr>
+<td><code>[Host, xmppMessageReceived]</code></td>
+<td>spiral</td>
+<td>A message is sent to a client.</td>
+</tr>
+<tr>
+<td><code>[Host, xmppPresenceReceived]</code></td>
+<td>spiral</td>
+<td>A presence is sent to a client.</td>
+</tr>
+<tr>
+<td><code>[Host, xmppStanzaReceived]</code></td>
+<td>spiral</td>
+<td>A stanza is sent to a client.</td>
+</tr>
+<tr>
+<td><code>[Host, xmppStanzaCount]</code></td>
+<td>spiral</td>
+<td>A stanza is sent to a client.</td>
+</tr>
+<tr>
+<td><code>[Host, xmppStanzaDropped]</code></td>
+<td>spiral</td>
+<td>A stanza is dropped due to an AMP rule or a <code>filter_packet</code> processing flow.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="extension-specific-metrics">Extension-specific metrics</h3>
+<p>Metrics specific to an extension, e.g. Message Archive Management, are described in respective module documentation pages.</p>
+<h2 id="global-metrics">Global metrics</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[global, routingErrors]</code></td>
+<td>spiral</td>
+<td>It is not possible to route a stanza (all routing handlers failed).</td>
+</tr>
+<tr>
+<td><code>[global, nodeSessionCount]</code></td>
+<td>value</td>
+<td>A number of sessions connected to a given MongooseIM node.</td>
+</tr>
+<tr>
+<td><code>[global, totalSessionCount]</code></td>
+<td>value</td>
+<td>A number of sessions connected to a MongooseIM cluster.</td>
+</tr>
+<tr>
+<td><code>[global, uniqueSessionCount]</code></td>
+<td>value</td>
+<td>A number of unique users connected to a MongooseIM cluster (e.g. 3 sessions of the same user will be counted as 1 in this metric).</td>
+</tr>
+<tr>
+<td><code>[global, cache, unique_sessions_number]</code></td>
+<td>gauge</td>
+<td>A cached value of <code>uniqueSessionCount</code>. It is automatically updated when a unique session count is calculated.</td>
+</tr>
+<tr>
+<td><code>[global, nodeUpTime]</code></td>
+<td>value</td>
+<td>Node uptime.</td>
+</tr>
+<tr>
+<td><code>[global, clusterSize]</code></td>
+<td>value</td>
+<td>A number of nodes in a MongooseIM cluster seen by a given MongooseIM node.</td>
+</tr>
+<tr>
+<td><code>[global, tcpPortsUsed]</code></td>
+<td>value</td>
+<td>A number of open tcp connections. This should relate to the number of connected sessions and databases, as well as federations and http requests, in order to detect connection leaks.</td>
+</tr>
+<tr>
+<td><code>[global, processQueueLengths]</code></td>
+<td>probe</td>
+<td>The number of queued messages in the internal message queue of every erlang process, and the internal queue of every fsm (ejabberd_c2s). This is sampled every 30 seconds asynchronously. It is a good indicator of an overloaded system: if too many messages are queued at the same time, the system is not able to process the data at the rate it was designed for.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-metrics">Data metrics</h3>
+<table>
+<thead>
+<tr>
+<th>Metric name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[global, data, xmpp, received, xml_stanza_size]</code></td>
+<td>histogram</td>
+<td>A size (in bytes) of a received stanza after decompression and decryption.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, sent, xml_stanza_size]</code></td>
+<td>histogram</td>
+<td>A size (in bytes) of a stanza sent to a client socket.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, received, compressed_size]</code></td>
+<td>histogram</td>
+<td>A size (in bytes) of a received stanza before decompression.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, sent, compressed_size]</code></td>
+<td>histogram</td>
+<td>A size (in bytes) of a stanza after compression.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, received, encrypted_size]</code></td>
+<td>histogram</td>
+<td>A size (in bytes) of a received stanza before decryption.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, sent, encrypted_size]</code></td>
+<td>histogram</td>
+<td>A size (in bytes) of a stanza after encryption.</td>
+</tr>
+<tr>
+<td><code>[global, data, dist]</code></td>
+<td>proplist</td>
+<td>Network stats for an Erlang distributed communication. A proplist with values: <code>recv_oct</code>, <code>recv_cnt</code>, <code>recv_max</code>, <code>send_oct</code>, <code>send_max</code>, <code>send_cnt</code>, <code>send_pend</code>, <code>connections</code></td>
+</tr>
+<tr>
+<td><code>[global, data, rdbms, PoolName]</code></td>
+<td>proplist</td>
+<td>For every RDBMS pool defined, an instance of this metric is available. It is a proplist with values <code>workers</code>, <code>recv_oct</code>, <code>recv_cnt</code>, <code>recv_max</code>, <code>send_oct</code>, <code>send_max</code>, <code>send_cnt</code>, <code>send_pend</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vm-metrics">VM metrics</h3>
+<table>
+<thead>
+<tr>
+<th>Metric name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[global, erlang, memory]</code></td>
+<td>proplist</td>
+<td>A proplist with <code>total</code>, <code>processes_used</code>, <code>atom_used</code>, <code>binary</code>, <code>ets</code> and <code>system</code> memory stats.</td>
+</tr>
+<tr>
+<td><code>[global, erlang, system_info]</code></td>
+<td>proplist</td>
+<td>A proplist with <code>port_count</code>, <code>port_limit</code>, <code>process_count</code>, <code>process_limit</code>, <code>ets_limit</code> stats.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backend-metrics">Backend metrics</h2>
+<p>Some extension modules expose histograms with timings of calls made to their backends.
+Please check the documentation of modules that are enabled in your config file, in order to learn if they provide them.</p>
+<p>All module backend metrics names use the following convention: <code>[global, backends, Module, BackendAction]</code> and <code>[global, backends, Module, BackendAction, count]</code>.
+The former is a histogram of operation times. However, the time is not recorded if a backend operation exits with an exception.
+The latter is a number of calls (spiral metric), incremented for <em>every</em> call (even a failed one).</p>
+<p>Besides these, following authentication metrics are always available:</p>
+<ul>
+<li><code>[Host, backends, auth, authorize]</code></li>
+<li><code>[Host, backends, auth, check_password]</code></li>
+<li><code>[Host, backends, auth, try_register]</code></li>
+<li><code>[Host, backends, auth, does_user_exist]</code></li>
+</ul>
+<p>These are <strong>total</strong> times of respective operations.
+One operation usually requires only a single call to an auth backend but sometimes with e.g. 3 backends configured, the operation may fail for first 2 backends.
+In such case, these metrics will be updated with combined time of 2 failed and 1 successful request.</p>
+<p>Additionally, the RDBMS layer in MongooseIM exposes two more metrics, if RDBMS is configured:</p>
+<ul>
+<li><code>[global, backends, mongoose_rdbms, query]</code> - Execution time of a "simple"" (not prepared) query by a DB driver.</li>
+<li><code>[global, backends, mongoose_rdbms, execute]</code> - Execution time of a prepared query by a DB driver.</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../Reloading-configuration-on-a-running-system/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Reloading configuration on a running system
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../System-Metrics-Privacy-Policy/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                System Metrics Privacy Policy
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../js/version-select.js"></script>
+      
+    
+  </body>
+</html>
