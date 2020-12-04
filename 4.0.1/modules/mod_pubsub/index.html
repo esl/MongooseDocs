@@ -1,2529 +1,397 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>mod_pubsub - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
-      
-      <link rel="shortcut icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
-    
-    
-      
-        <title>mod_pubsub - MongooseIM</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../assets/stylesheets/main.6910b76c.min.css">
-      
-        
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
-        
-      
-    
-    
-    
-      
-        
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-      
-    
-    
-    
-      <link rel="stylesheet" href="../../custom.css">
-    
-      <link rel="stylesheet" href="../../css/version-select.css">
-    
-    
-      
-    
-    
-  </head>
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
   
+  <script>
+    // Current page data
+    var mkdocs_page_name = "mod_pubsub";
+    var mkdocs_page_input_path = "modules/mod_pubsub.md";
+    var mkdocs_page_url = null;
+  </script>
   
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
-      
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
   
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#what-is-pubsub" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-      
+</head>
 
-<header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="../.." title="MongooseIM" class="md-header-nav__button md-logo" aria-label="MongooseIM">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<body class="wy-body-for-nav" role="document">
 
-    </a>
-    <label class="md-header-nav__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
-    </label>
-    <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
-            MongooseIM
-          </span>
-          <span class="md-header-nav__topic md-ellipsis">
-            
-              mod_pubsub
-            
-          </span>
-        </div>
-      
-    </div>
+  <div class="wy-grid-for-nav">
+
     
-      <label class="md-header-nav__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-      </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
-      <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Bootstrap-Scripts/">Bootstrap scripts</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/client-certificate/">Client certificate authentication</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications/">How to Set up Push Notifications</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications-client-side/">How to Set up Push Notifications on the client side</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/With-MongoosePush/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.5.0_3.6.0/">3.5.0 to 3.6.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.6.0_3.7.0/">3.6.0 to 3.7.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.7.0_4.0.0/">3.7.0 to 4.0.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/4.0.0_4.0.1/">4.0.0 to 4.0.1</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Configuration files</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/general/">Options: General</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/listen/">Options: Listen</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/auth/">Options: Auth</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/outgoing-connections/">Options: Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Services/">Options: Services</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/Modules/">Options: Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/shaper/">Options: Shaper</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/acl/">Options: Acl</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/access/">Options: Access</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/s2s/">Options: S2S</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/host_config/">Options: Host config</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/release-options/">Release options</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/TLS-hardening/">TLS hardening</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../advanced-configuration/database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/rdbms/">RDBMS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/external/">External</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/anonymous/">Anonymous</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/ldap/">LDAP</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/jwt/">JWT</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/riak/">Riak</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/http/">HTTP</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/pki/">PKI</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/dummy/">Dummy</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/gdpr-considerations/">GDPR considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging/">Logging configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-fields/">Logging fields</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/">System Metrics Privacy Policy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_extdisco/">mod_extdisco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">mod_pubsub</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../mod_version/">mod_version</a>
+                    </li>
+                </ul>
       </div>
     </div>
-  </div>
-</div>
-    
-    
-  </nav>
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="MongooseIM" class="md-nav__button md-logo" aria-label="MongooseIM">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
-
-    </a>
-    MongooseIM
-  </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../.." class="md-nav__link">
-      Home
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
-    <label class="md-nav__link" for="nav-2">
-      User guide
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="User guide" data-md-level="1">
-      <label class="md-nav__title" for="nav-2">
-        <span class="md-nav__icon md-icon"></span>
-        User guide
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/ABCs-of-MongooseIM/" class="md-nav__link">
-      ABCs of MongooseIM
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/MongooseIM-High-level-Architecture/" class="md-nav__link">
-      High-level Architecture
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/Features-and-supported-standards/" class="md-nav__link">
-      Features and supported standards
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/Getting-started/" class="md-nav__link">
-      Getting started
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/release_config/" class="md-nav__link">
-      Release/Installation configuration
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/Bootstrap-Scripts/" class="md-nav__link">
-      Bootstrap scripts
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/client-certificate/" class="md-nav__link">
-      Client certificate authentication
-    </a>
-  </li>
-
-        
-      </ul>
     </nav>
-  </li>
 
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
     
       
+        
+          <li>Module index &raquo;</li>
+        
       
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
-    <label class="md-nav__link" for="nav-3">
-      Tutorials
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
-        <span class="md-nav__icon md-icon"></span>
-        Tutorials
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/How-to-build/" class="md-nav__link">
-      How to Build MongooseIM from source code
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/push-notifications/Push-notifications/" class="md-nav__link">
-      How to Set up Push Notifications
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/push-notifications/Push-notifications-client-side/" class="md-nav__link">
-      How to Set up Push Notifications on the client side
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/push-notifications/MongoosePush-setup/" class="md-nav__link">
-      How to Set up MongoosePush
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/ICE_tutorial/" class="md-nav__link">
-      How to Set up MongooseICE
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/iOS_tutorial/" class="md-nav__link">
-      How to Build an iOS messaging app
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/Jingle-SIP-setup/" class="md-nav__link">
-      How to Set up Jingle/SIP
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
+    <li>mod_pubsub</li>
+    <li class="wy-breadcrumbs-aside">
       
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
-    <label class="md-nav__link" for="nav-4">
-      Migration Guide
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Migration Guide" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        <span class="md-nav__icon md-icon"></span>
-        Migration Guide
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrations/3.1.1_3.2.0/" class="md-nav__link">
-      3.1.1 to 3.2.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrations/3.3.0_3.4.0/" class="md-nav__link">
-      3.3.0 to 3.4.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrations/3.5.0_3.6.0/" class="md-nav__link">
-      3.5.0 to 3.6.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrations/3.6.0_3.7.0/" class="md-nav__link">
-      3.6.0 to 3.7.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrations/3.7.0_4.0.0/" class="md-nav__link">
-      3.7.0 to 4.0.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrations/4.0.0_4.0.1/" class="md-nav__link">
-      4.0.0 to 4.0.1
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
-      MAM MUC migration helper
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
-    <label class="md-nav__link" for="nav-5">
-      Platform
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Platform" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
-        <span class="md-nav__icon md-icon"></span>
-        Platform
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Contributions/" class="md-nav__link">
-      Contributions to ecosystem
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Differentiators/" class="md-nav__link">
-      Differentiators
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../History/" class="md-nav__link">
-      History
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
-    <label class="md-nav__link" for="nav-6">
-      Configuration
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
-        <span class="md-nav__icon md-icon"></span>
-        Configuration
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/configuration-files/" class="md-nav__link">
-      Configuration files
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/general/" class="md-nav__link">
-      Options: General
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/listen/" class="md-nav__link">
-      Options: Listen
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/auth/" class="md-nav__link">
-      Options: Auth
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/outgoing-connections/" class="md-nav__link">
-      Options: Outgoing connections
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/Services/" class="md-nav__link">
-      Options: Services
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/Modules/" class="md-nav__link">
-      Options: Extension Modules
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/shaper/" class="md-nav__link">
-      Options: Shaper
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/acl/" class="md-nav__link">
-      Options: Acl
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/access/" class="md-nav__link">
-      Options: Access
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/s2s/" class="md-nav__link">
-      Options: S2S
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/host_config/" class="md-nav__link">
-      Options: Host config
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/release-options/" class="md-nav__link">
-      Release options
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/Erlang-cookie-security/" class="md-nav__link">
-      Erlang Cookie Security
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/TLS-hardening/" class="md-nav__link">
-      TLS hardening
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced-configuration/database-backends-configuration/" class="md-nav__link">
-      Database backends configuration
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
-    <label class="md-nav__link" for="nav-7">
-      Authentication methods
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Authentication methods" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
-        <span class="md-nav__icon md-icon"></span>
-        Authentication methods
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/rdbms/" class="md-nav__link">
-      RDBMS
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/external/" class="md-nav__link">
-      External
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/anonymous/" class="md-nav__link">
-      Anonymous
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/ldap/" class="md-nav__link">
-      LDAP
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/jwt/" class="md-nav__link">
-      JWT
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/riak/" class="md-nav__link">
-      Riak
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/http/" class="md-nav__link">
-      HTTP
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/pki/" class="md-nav__link">
-      PKI
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/dummy/" class="md-nav__link">
-      Dummy
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" >
-    <label class="md-nav__link" for="nav-8">
-      MongooseIM open XMPP extensions
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="MongooseIM open XMPP extensions" data-md-level="1">
-      <label class="md-nav__title" for="nav-8">
-        <span class="md-nav__icon md-icon"></span>
-        MongooseIM open XMPP extensions
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../open-extensions/muc_light/" class="md-nav__link">
-      MUC light
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../open-extensions/token-reconnection/" class="md-nav__link">
-      Token-based reconnection
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" >
-    <label class="md-nav__link" for="nav-9">
-      REST API
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="REST API" data-md-level="1">
-      <label class="md-nav__title" for="nav-9">
-        <span class="md-nav__icon md-icon"></span>
-        REST API
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../rest-api/Client-frontend/" class="md-nav__link">
-      Client/frontend
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../rest-api/Metrics-backend/" class="md-nav__link">
-      Metrics backend
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../rest-api/Administration-backend/" class="md-nav__link">
-      Administration backend
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" >
-    <label class="md-nav__link" for="nav-10">
-      Operation and maintenance
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Operation and maintenance" data-md-level="1">
-      <label class="md-nav__title" for="nav-10">
-        <span class="md-nav__icon md-icon"></span>
-        Operation and maintenance
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/gdpr-considerations/" class="md-nav__link">
-      GDPR considerations
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/Cluster-management-considerations/" class="md-nav__link">
-      Cluster management considerations
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/Cluster-configuration-and-node-management/" class="md-nav__link">
-      Cluster configuration and node management
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/Logging-%26-monitoring/" class="md-nav__link">
-      Logging & monitoring
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/Logging/" class="md-nav__link">
-      Logging configuration
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/Humio/" class="md-nav__link">
-      Logging with Humio
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/Logging-fields/" class="md-nav__link">
-      Logging fields
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/" class="md-nav__link">
-      Reloading configuration on a running system
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/MongooseIM-metrics/" class="md-nav__link">
-      Metrics
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/" class="md-nav__link">
-      System Metrics Privacy Policy
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/tls-distribution/" class="md-nav__link">
-      Distribution over TLS
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/known-issues/" class="md-nav__link">
-      Known issues
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" >
-    <label class="md-nav__link" for="nav-11">
-      Developer's guide
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Developer's guide" data-md-level="1">
-      <label class="md-nav__title" for="nav-11">
-        <span class="md-nav__icon md-icon"></span>
-        Developer's guide
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/Testing-MongooseIM/" class="md-nav__link">
-      Testing MongooseIM
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/logging/" class="md-nav__link">
-      Logging
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/Hooks-and-handlers/" class="md-nav__link">
-      Hooks and Handlers
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/hooks_description/" class="md-nav__link">
-      Hooks description
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/Stanza-routing/" class="md-nav__link">
-      Stanza routing
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/accumulators/" class="md-nav__link">
-      Accumulators
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/flat_options/" class="md-nav__link">
-      Flat options format
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/Moving-to-single-app-project-structure/" class="md-nav__link">
-      Moving to single app project structure
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/mod_amp_developers_guide/" class="md-nav__link">
-      mod_amp development
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/mod_muc_light_developers_guide/" class="md-nav__link">
-      mod_muc_light developers doc
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/SCRAM-serialization/" class="md-nav__link">
-      SCRAM serialization format
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/xep_tool/" class="md-nav__link">
-      xep-tool usage
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/OpenSSL-and-FIPS/" class="md-nav__link">
-      FIPS mode
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/Basic-iq-handler/" class="md-nav__link">
-      Basic IQ Handler
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/mongoose_wpool/" class="md-nav__link">
-      mongoose_wpool
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12" checked>
-    <label class="md-nav__link" for="nav-12">
-      Module index
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Module index" data-md-level="1">
-      <label class="md-nav__title" for="nav-12">
-        <span class="md-nav__icon md-icon"></span>
-        Module index
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_adhoc/" class="md-nav__link">
-      mod_adhoc
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_amp/" class="md-nav__link">
-      mod_amp
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_auth_token/" class="md-nav__link">
-      mod_auth_token
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_blocking/" class="md-nav__link">
-      mod_blocking
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_bosh/" class="md-nav__link">
-      mod_bosh
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_caps/" class="md-nav__link">
-      mod_caps
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_carboncopy/" class="md-nav__link">
-      mod_carboncopy
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_commands/" class="md-nav__link">
-      mod_commands
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_csi/" class="md-nav__link">
-      mod_csi
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_disco/" class="md-nav__link">
-      mod_disco
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12-11" type="checkbox" id="nav-12-11" >
-    <label class="md-nav__link" for="nav-12-11">
-      mod_event_pusher
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="mod_event_pusher" data-md-level="2">
-      <label class="md-nav__title" for="nav-12-11">
-        <span class="md-nav__icon md-icon"></span>
-        mod_event_pusher
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_event_pusher/" class="md-nav__link">
-      mod_event_pusher
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_event_pusher_http/" class="md-nav__link">
-      HTTP backend
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_event_pusher_push/" class="md-nav__link">
-      Push backend
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_event_pusher_sns/" class="md-nav__link">
-      SNS backend
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_event_pusher_rabbit/" class="md-nav__link">
-      RabbitMQ backend
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_extdisco/" class="md-nav__link">
-      mod_extdisco
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_global_distrib/" class="md-nav__link">
-      mod_global_distrib
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_http_upload/" class="md-nav__link">
-      mod_http_upload
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_inbox/" class="md-nav__link">
-      mod_inbox
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_jingle_sip/" class="md-nav__link">
-      mod_jingle_sip
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_keystore/" class="md-nav__link">
-      mod_keystore
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_last/" class="md-nav__link">
-      mod_last
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_mam/" class="md-nav__link">
-      mod_mam
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_muc/" class="md-nav__link">
-      mod_muc
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_muc_commands/" class="md-nav__link">
-      mod_muc_commands
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_muc_log/" class="md-nav__link">
-      mod_muc_log
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_muc_light/" class="md-nav__link">
-      mod_muc_light
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_muc_light_commands/" class="md-nav__link">
-      mod_muc_light_commands
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_offline/" class="md-nav__link">
-      mod_offline
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_offline_stub/" class="md-nav__link">
-      mod_offline_stub
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_ping/" class="md-nav__link">
-      mod_ping
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_privacy/" class="md-nav__link">
-      mod_privacy
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_private/" class="md-nav__link">
-      mod_private
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        mod_pubsub
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
-      mod_pubsub
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-pubsub" class="md-nav__link">
-    What is PubSub?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#module-description" class="md-nav__link">
-    Module Description
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#options" class="md-nav__link">
-    Options
-  </a>
-  
-    <nav class="md-nav" aria-label="Options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubiqdisctype" class="md-nav__link">
-    modules.mod_pubsub.iqdisc.type
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubhost" class="md-nav__link">
-    modules.mod_pubsub.host
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubbackend" class="md-nav__link">
-    modules.mod_pubsub.backend
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubaccess_createnode" class="md-nav__link">
-    modules.mod_pubsub.access_createnode
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubmax_items_node" class="md-nav__link">
-    modules.mod_pubsub.max_items_node
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubmax_subscriptions_node" class="md-nav__link">
-    modules.mod_pubsub.max_subscriptions_node
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubnodetree" class="md-nav__link">
-    modules.mod_pubsub.nodetree
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubignore_pep_from_offline" class="md-nav__link">
-    modules.mod_pubsub.ignore_pep_from_offline
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsublast_item_cache" class="md-nav__link">
-    modules.mod_pubsub.last_item_cache
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubplugins" class="md-nav__link">
-    modules.mod_pubsub.plugins
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubpep_mapping" class="md-nav__link">
-    modules.mod_pubsub.pep_mapping
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubdefault_node_config" class="md-nav__link">
-    modules.mod_pubsub.default_node_config
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubitem_publisher" class="md-nav__link">
-    modules.mod_pubsub.item_publisher
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubsync_broadcast" class="md-nav__link">
-    modules.mod_pubsub.sync_broadcast
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cache-backend" class="md-nav__link">
-    Cache Backend
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-configuration" class="md-nav__link">
-    Example Configuration
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#nodetrees" class="md-nav__link">
-    Nodetrees
-  </a>
-  
-    <nav class="md-nav" aria-label="Nodetrees">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tree" class="md-nav__link">
-    "tree"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dag" class="md-nav__link">
-    "dag"
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#plugins" class="md-nav__link">
-    Plugins
-  </a>
-  
-    <nav class="md-nav" aria-label="Plugins">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#flat" class="md-nav__link">
-    "flat"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hometree" class="md-nav__link">
-    "hometree"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pep" class="md-nav__link">
-    "pep"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dag_1" class="md-nav__link">
-    "dag"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#push" class="md-nav__link">
-    "push"
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
-    Metrics
-  </a>
-  
-    <nav class="md-nav" aria-label="Metrics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#overall-pubsub-action-metrics" class="md-nav__link">
-    Overall PubSub action metrics
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#backend-operations" class="md-nav__link">
-    Backend operations
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_push_service_mongoosepush/" class="md-nav__link">
-      mod_push_service_mongoosepush
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_register/" class="md-nav__link">
-      mod_register
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_roster/" class="md-nav__link">
-      mod_roster
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_shared_roster_ldap/" class="md-nav__link">
-      mod_shared_roster_ldap
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_sic/" class="md-nav__link">
-      mod_sic
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_stream_management/" class="md-nav__link">
-      mod_stream_management
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_time/" class="md-nav__link">
-      mod_time
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_vcard/" class="md-nav__link">
-      mod_vcard
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../mod_version/" class="md-nav__link">
-      mod_version
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
+    </li>
   </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-pubsub" class="md-nav__link">
-    What is PubSub?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#module-description" class="md-nav__link">
-    Module Description
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#options" class="md-nav__link">
-    Options
-  </a>
-  
-    <nav class="md-nav" aria-label="Options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubiqdisctype" class="md-nav__link">
-    modules.mod_pubsub.iqdisc.type
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubhost" class="md-nav__link">
-    modules.mod_pubsub.host
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubbackend" class="md-nav__link">
-    modules.mod_pubsub.backend
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubaccess_createnode" class="md-nav__link">
-    modules.mod_pubsub.access_createnode
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubmax_items_node" class="md-nav__link">
-    modules.mod_pubsub.max_items_node
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubmax_subscriptions_node" class="md-nav__link">
-    modules.mod_pubsub.max_subscriptions_node
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubnodetree" class="md-nav__link">
-    modules.mod_pubsub.nodetree
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubignore_pep_from_offline" class="md-nav__link">
-    modules.mod_pubsub.ignore_pep_from_offline
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsublast_item_cache" class="md-nav__link">
-    modules.mod_pubsub.last_item_cache
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubplugins" class="md-nav__link">
-    modules.mod_pubsub.plugins
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubpep_mapping" class="md-nav__link">
-    modules.mod_pubsub.pep_mapping
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubdefault_node_config" class="md-nav__link">
-    modules.mod_pubsub.default_node_config
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubitem_publisher" class="md-nav__link">
-    modules.mod_pubsub.item_publisher
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_pubsubsync_broadcast" class="md-nav__link">
-    modules.mod_pubsub.sync_broadcast
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cache-backend" class="md-nav__link">
-    Cache Backend
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-configuration" class="md-nav__link">
-    Example Configuration
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#nodetrees" class="md-nav__link">
-    Nodetrees
-  </a>
-  
-    <nav class="md-nav" aria-label="Nodetrees">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tree" class="md-nav__link">
-    "tree"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dag" class="md-nav__link">
-    "dag"
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#plugins" class="md-nav__link">
-    Plugins
-  </a>
-  
-    <nav class="md-nav" aria-label="Plugins">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#flat" class="md-nav__link">
-    "flat"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hometree" class="md-nav__link">
-    "hometree"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pep" class="md-nav__link">
-    "pep"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dag_1" class="md-nav__link">
-    "dag"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#push" class="md-nav__link">
-    "push"
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
-    Metrics
-  </a>
-  
-    <nav class="md-nav" aria-label="Metrics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#overall-pubsub-action-metrics" class="md-nav__link">
-    Overall PubSub action metrics
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#backend-operations" class="md-nav__link">
-    Backend operations
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
               
-                
-                
-                  <h1>mod_pubsub</h1>
-                
-                <h2 id="what-is-pubsub">What is PubSub?</h2>
+                <h3 id="what-is-pubsub">What is PubSub?</h3>
 <p>PubSub is a design pattern which mostly promotes a loose coupling between two kinds of entities - publishers and subscribers.
 Like their names suggest, in the pubsub world we have publishers who fire events, and subscribers who wish to be notified about those events when publishers push data.
 There might be several subscribers, several publishers, and even several channels (or nodes) where the events are sent.</p>
-<h2 id="module-description">Module Description</h2>
-<p>This module implements <a href="http://www.xmpp.org/extensions/xep-0060.html">XEP-0060: Publish-Subscribe</a>.
+<h3 id="module-description">Module Description</h3>
+<p>This module implements <a href="http://www.xmpp.org/extensions/xep-0060.html">XEP-0060 (Publish-Subscribe)</a>.
 Due to the complexity of the protocol, the PubSub engine makes successive calls to the <code>nodetree</code> and <code>node plugins</code> in order to check the validity of requests, perform the corresponding action and return a result or appropriate error.
 Such an architecture makes it much easier to write custom pubsub plugins and add new storage backends.
 It's all about tailoring PubSub to your needs!</p>
-<h2 id="options">Options</h2>
-<h3 id="modulesmod_pubsubiqdisctype"><code>modules.mod_pubsub.iqdisc.type</code></h3>
+<h3 id="options">Options</h3>
+<h4 id="modulesmod_pubsubiqdisctype"><code>modules.mod_pubsub.iqdisc.type</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"one_queue"</code>, <code>"no_queue"</code>, <code>"queues"</code>, <code>"parallel"</code></li>
 <li><strong>Default:</strong> <code>"no_queue"</code></li>
 </ul>
 <p>Strategy to handle incoming stanzas. For details, please refer to
 <a href="../../advanced-configuration/Modules/#iq-processing-policies">IQ processing policies</a>.</p>
-<h3 id="modulesmod_pubsubhost"><code>modules.mod_pubsub.host</code></h3>
+<h4 id="modulesmod_pubsubhost"><code>modules.mod_pubsub.host</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> <code>"pubsub.@HOST@"</code></li>
@@ -2531,42 +399,42 @@ It's all about tailoring PubSub to your needs!</p>
 </ul>
 <p>Subdomain for Pubsub service to reside under.
 <code>@HOST@</code> is replaced with each served domain.</p>
-<h3 id="modulesmod_pubsubbackend"><code>modules.mod_pubsub.backend</code></h3>
+<h4 id="modulesmod_pubsubbackend"><code>modules.mod_pubsub.backend</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"mnesia"</code>, <code>"rdbms"</code></li>
 <li><strong>Default:</strong> <code>"mnesia"</code></li>
 <li><strong>Example:</strong> <code>backend = "rdbms"</code></li>
 </ul>
 <p>Database backend to use.</p>
-<h3 id="modulesmod_pubsubaccess_createnode"><code>modules.mod_pubsub.access_createnode</code></h3>
+<h4 id="modulesmod_pubsubaccess_createnode"><code>modules.mod_pubsub.access_createnode</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, rule name, or <code>"all"</code></li>
 <li><strong>Default:</strong> <code>"all"</code></li>
 <li><strong>Example:</strong> <code>access_createnode = "all"</code></li>
 </ul>
 <p>Specifies who is allowed to create pubsub nodes. The access rule referenced here needs to be defined in the <a href="../../advanced-configuration/access">access</a> section.</p>
-<h3 id="modulesmod_pubsubmax_items_node"><code>modules.mod_pubsub.max_items_node</code></h3>
+<h4 id="modulesmod_pubsubmax_items_node"><code>modules.mod_pubsub.max_items_node</code></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> <code>10</code></li>
 <li><strong>Example:</strong> <code>max_items_node = 10</code></li>
 </ul>
 <p>Defines the maximum number of items that can be stored in a node.</p>
-<h3 id="modulesmod_pubsubmax_subscriptions_node"><code>modules.mod_pubsub.max_subscriptions_node</code></h3>
+<h4 id="modulesmod_pubsubmax_subscriptions_node"><code>modules.mod_pubsub.max_subscriptions_node</code></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> not specified (no limit)</li>
 <li><strong>Example:</strong> <code>max_subscriptions_node = 10</code></li>
 </ul>
 <p>The maximum number of subscriptions managed by a node. By default there is no limit.</p>
-<h3 id="modulesmod_pubsubnodetree"><code>modules.mod_pubsub.nodetree</code></h3>
+<h4 id="modulesmod_pubsubnodetree"><code>modules.mod_pubsub.nodetree</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> <code>"tree"</code></li>
 <li><strong>Example:</strong> <code>nodetree = "tree"</code></li>
 </ul>
 <p>Specifies the storage and organisation of the pubsub nodes. See the section below.</p>
-<h3 id="modulesmod_pubsubignore_pep_from_offline"><code>modules.mod_pubsub.ignore_pep_from_offline</code></h3>
+<h4 id="modulesmod_pubsubignore_pep_from_offline"><code>modules.mod_pubsub.ignore_pep_from_offline</code></h4>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>true</code></li>
@@ -2574,21 +442,21 @@ It's all about tailoring PubSub to your needs!</p>
 </ul>
 <p>Specifies whether or not we should get last published PEP items from users in our roster which are offline when we connect.
 The default option is <code>true</code> hence we will get only the last items from the online contacts.</p>
-<h3 id="modulesmod_pubsublast_item_cache"><code>modules.mod_pubsub.last_item_cache</code></h3>
+<h4 id="modulesmod_pubsublast_item_cache"><code>modules.mod_pubsub.last_item_cache</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"mnesia"</code>, <code>"rdbms"</code>, <code>"false"</code></li>
 <li><strong>Default:</strong> <code>"false"</code></li>
 <li><strong>Example:</strong> <code>last_item_cache = "mnesia"</code></li>
 </ul>
 <p>If enabled, PubSub will cache the last published items in the nodes. It may increase PubSub performance but at a price of an increased memory usage.</p>
-<h3 id="modulesmod_pubsubplugins"><code>modules.mod_pubsub.plugins</code></h3>
+<h4 id="modulesmod_pubsubplugins"><code>modules.mod_pubsub.plugins</code></h4>
 <ul>
 <li><strong>Syntax:</strong> array of strings</li>
 <li><strong>Default:</strong> <code>["flat"]</code></li>
 <li><strong>Example:</strong> <code>plugins = ["flat", "pep"]</code></li>
 </ul>
 <p>List of enabled pubsub plugins.</p>
-<h3 id="modulesmod_pubsubpep_mapping"><code>modules.mod_pubsub.pep_mapping</code></h3>
+<h4 id="modulesmod_pubsubpep_mapping"><code>modules.mod_pubsub.pep_mapping</code></h4>
 <ul>
 <li><strong>Syntax:</strong> TOML table with the following keys: <code>"namespace"</code>, <code>"node"</code> and string values.</li>
 <li><strong>Default:</strong> <code>[]</code></li>
@@ -2596,7 +464,7 @@ The default option is <code>true</code> hence we will get only the last items fr
 </ul>
 <p>This permits creating a Key-Value list to define a custom node plugin on a given PEP namespace.
 E.g. pair <code>{"urn:xmpp:microblog:0", "mb"}</code> will use module <code>node_mb</code> instead of <code>node_pep</code> when the specified namespace is used.</p>
-<h3 id="modulesmod_pubsubdefault_node_config"><code>modules.mod_pubsub.default_node_config</code></h3>
+<h4 id="modulesmod_pubsubdefault_node_config"><code>modules.mod_pubsub.default_node_config</code></h4>
 <ul>
 <li><strong>Syntax:</strong> TOML table with the following values: string, boolean or non-negative integer.</li>
 <li><strong>Default:</strong> <code>[]</code></li>
@@ -2604,7 +472,7 @@ E.g. pair <code>{"urn:xmpp:microblog:0", "mb"}</code> will use module <code>node
 </ul>
 <p>Overrides the default node configuration, regradless of the node plugin.
 Node configuration still uses the default configuration defined by the node plugin, and overrides any items by the value defined in this configurable list.</p>
-<h3 id="modulesmod_pubsubitem_publisher"><code>modules.mod_pubsub.item_publisher</code></h3>
+<h4 id="modulesmod_pubsubitem_publisher"><code>modules.mod_pubsub.item_publisher</code></h4>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
@@ -2612,81 +480,70 @@ Node configuration still uses the default configuration defined by the node plug
 </ul>
 <p>When enabled, a JID of the publisher will be saved in the item metadata.
 This effectively makes them an owner of this item.</p>
-<h3 id="modulesmod_pubsubsync_broadcast"><code>modules.mod_pubsub.sync_broadcast</code></h3>
+<h4 id="modulesmod_pubsubsync_broadcast"><code>modules.mod_pubsub.sync_broadcast</code></h4>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
 <li><strong>Example:</strong> <code>sync_broadcast = false</code></li>
 </ul>
 <p>If false, routing of notifications to subscribers is done in a separate Erlang process. As a consequence, some notifications <em>may</em> arrive to the subscribers in the wrong order (however, the two events would have to be published at the exact same time).</p>
-<h3 id="cache-backend">Cache Backend</h3>
+<h4 id="cache-backend">Cache Backend</h4>
 <p>Caching is disabled by default.
 You may enable it by specifying the backend it should use.
 It is not coupled with the main DB backend, so it is possible to store the cached data in <code>mnesia</code>, while the actual PubSub information is kept in RDBMS (and vice versa!).</p>
-<h2 id="example-configuration">Example Configuration</h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_pubsub]</span>
-  <span class="n">access_createnode</span> <span class="o">=</span> <span class="s">&quot;pubsub_createnode&quot;</span>
-  <span class="n">ignore_pep_from_offline</span> <span class="o">=</span> <span class="kc">false</span>
-  <span class="n">backend</span> <span class="o">=</span> <span class="s">&quot;rdbms&quot;</span>
-  <span class="n">last_item_cache</span> <span class="o">=</span> <span class="s">&quot;mnesia&quot;</span>
-  <span class="n">max_items_node</span> <span class="o">=</span> <span class="mi">1000</span>
-  <span class="n">plugins</span> <span class="o">=</span> <span class="k">[&quot;flat&quot;, &quot;pep&quot;]</span>
+<h3 id="example-configuration">Example Configuration</h3>
+<pre><code class="language-toml">[modules.mod_pubsub]
+  access_createnode = &quot;pubsub_createnode&quot;
+  ignore_pep_from_offline = false
+  backend = &quot;rdbms&quot;
+  last_item_cache = &quot;mnesia&quot;
+  max_items_node = 1000
+  plugins = [&quot;flat&quot;, &quot;pep&quot;]
 
-  <span class="k">[[modules.mod_pubsub.pep_mapping]]</span>
-    <span class="n">namespace</span> <span class="o">=</span> <span class="s">&quot;urn:xmpp:microblog:0&quot;</span>
-    <span class="n">node</span> <span class="o">=</span> <span class="s">&quot;mb&quot;</span>
-</code></pre></div>
-</td></tr></table>
-<h2 id="nodetrees">Nodetrees</h2>
+  [[modules.mod_pubsub.pep_mapping]]
+    namespace = &quot;urn:xmpp:microblog:0&quot;
+    node = &quot;mb&quot;
+</code></pre>
+<h3 id="nodetrees">Nodetrees</h3>
 <p>Called on <code>get</code>, <code>create</code> and <code>delete</code> node.
 Only one nodetree can be used per host and is shared by all node plugins.</p>
-<h3 id="tree"><code>"tree"</code></h3>
+<h4 id="tree"><code>"tree"</code></h4>
 <p>Stores nodes in a tree structure.
 Every node name must be formatted like a UNIX path (e.g. <code>/top/middle/leaf</code>).
 When a node is created, its direct ancestor must already exist, so in order to create <code>/top/middle/leaf</code>, <code>/top/middle</code> is needed.
 A user may create any top-level node.
 A user may create a subnode of a node, only if they own it or it was created by the service.</p>
-<h3 id="dag"><code>"dag"</code></h3>
-<p>Provides experimental support for <a href="http://xmpp.org/extensions/xep-0248.html">XEP-0248: PubSub Collection Nodes</a>.
+<h4 id="dag"><code>"dag"</code></h4>
+<p>Provides experimental support for <a href="http://xmpp.org/extensions/xep-0248.html">XEP-0248 (PubSub Collection Nodes)</a>.
 In this case you should also add the <code>"dag"</code> node plugin as default, for example: <code>plugins = ["dag", "flat", "hometree", "pep"]</code>.</p>
-<h2 id="plugins">Plugins</h2>
+<h3 id="plugins">Plugins</h3>
 <p>They handle affiliations, subscriptions and items and also provide default node conﬁguration and features.
 PubSub clients can define which plugin to use when creating a node by adding <code>type='plugin-name'</code> attribute to the create stanza element.
 If such an attribute is not specified, the default plugin will be the first on the plugin list.</p>
-<h3 id="flat"><code>"flat"</code></h3>
+<h4 id="flat"><code>"flat"</code></h4>
 <p>No node hierarchy.
 It handles the standard PubSub case.</p>
-<h3 id="hometree"><code>"hometree"</code></h3>
+<h4 id="hometree"><code>"hometree"</code></h4>
 <p>Uses the exact same features as the flat plugin but additionally organises nodes in a tree.
 Basically it follows a scheme similar to the filesystem's structure.
 Every user can create nodes in their own home root: e.g <code>/home/user</code>.
 Each node can contain items and/or sub-nodes.</p>
-<h3 id="pep"><code>"pep"</code></h3>
-<p>Implementation of <a href="http://xmpp.org/extensions/xep-0163.html">XEP-0163: Personal Eventing Protocol</a>.
+<h4 id="pep"><code>"pep"</code></h4>
+<p>Implementation of <a href="http://xmpp.org/extensions/xep-0163.html">XEP-0060 (Personal Eventing Protocol)</a>.
 In this case, items are not persisted but kept in an in-memory cache.
 When the <code>pep</code> plugin is enabled, a user can have their own node (exposed as their bare jid) with a common namespace.
 Requires module <code>mod_caps</code> to be enabled.</p>
-<h3 id="dag_1"><code>"dag"</code></h3>
-<p>Implementation of <a href="https://xmpp.org/extensions/xep-0248.html">XEP-0248: PubSub Collection Nodes</a>.
+<h4 id="dag_1"><code>"dag"</code></h4>
+<p>Implementation of <a href="https://xmpp.org/extensions/xep-0248.html">XEP-0248 (PubSub Collection Nodes)</a>.
 Every node takes a place in a collection and becomes either a collection node (and have only sub-nodes) or a leaf node (contains only items).</p>
-<h3 id="push"><code>"push"</code></h3>
-<p>Special node type that may be used as a target node for <a href="https://xmpp.org/extensions/xep-0357.html">XEP-0357: Push Notifications</a> capable services (e.g. <code>mod_event_pusher_push</code>).
+<h4 id="push"><code>"push"</code></h4>
+<p>Special node type that may be used as a target node for <a href="https://xmpp.org/extensions/xep-0357.html">XEP-0357 (Push Notifications)</a> capable services (e.g. <code>mod_event_pusher_push</code>).
 For each published notification, a hook <code>push_notification</code> is run.
 You may enable as many modules that support this hook (all module with <code>mod_push_service_*</code> name prefix) as you like (see for example <code>mod_push_service_mongoosepush</code>).
 This node type <strong>requires</strong> <code>publish-options</code> with at least <code>device_id</code> and <code>service</code> fields supplied.</p>
-<h2 id="metrics">Metrics</h2>
-<p>If you'd like to learn more about metrics in MongooseIM, please visit the <a href="../../operation-and-maintenance/MongooseIM-metrics/">MongooseIM metrics</a> page.</p>
-<h3 id="overall-pubsub-action-metrics">Overall PubSub action metrics</h3>
+<h3 id="metrics">Metrics</h3>
+<p>If you'd like to learn more about metrics in MongooseIM, please visit the <a href="../../operation-and-maintenance/Mongoose-metrics/">MongooseIM metrics</a> page.</p>
+<h4 id="overall-pubsub-action-metrics">Overall PubSub action metrics</h4>
 <p>For every PubSub action, like node creation, subscription, publication the following metrics are available:</p>
 <ul>
 <li>count - a spiral metric showing the number of given action invocations</li>
@@ -2777,7 +634,7 @@ This node type <strong>requires</strong> <code>publish-options</code> with at le
 <li><code>HOST</code> is the XMPP host for which <code>mod_pubsub</code> is running. Can be set to <code>global</code> if all metrics are set to be global.</li>
 <li><code>TYPE</code> is one of the following <code>count</code>, <code>errors</code>, <code>time</code> (described above the table)</li>
 </ul>
-<h3 id="backend-operations">Backend operations</h3>
+<h4 id="backend-operations">Backend operations</h4>
 <p>The are also more detailed metrics measuring execution time of backend operations.</p>
 <p>Metrics for these actions may be found under <code>mod_pubsub_db</code> subkey.</p>
 <table>
@@ -2878,87 +735,57 @@ This node type <strong>requires</strong> <code>publish-options</code> with at le
 </tr>
 </tbody>
 </table>
-                
               
-              
-                
-
-
-              
-            </article>
+            </div>
           </div>
-        </div>
-      </main>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        
-<footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
-        
-          <a href="../mod_private/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-            </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                mod_private
-              </div>
-            </div>
-          </a>
-        
-        
-          <a href="../mod_push_service_mongoosepush/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                mod_push_service_mongoosepush
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-      </div>
+        <a href="../mod_push_service_mongoosepush/" class="btn btn-neutral float-right" title="mod_push_service_mongoosepush">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../mod_private/" class="btn btn-neutral" title="mod_private"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
   </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
-    </div>
-    
-      <script src="../../assets/javascripts/vendor.fd16492e.min.js"></script>
-      <script src="../../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
       
-      <script>
-        app = initialize({
-          base: "../..",
-          features: [],
-          search: Object.assign({
-            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
-          }, typeof search !== "undefined" && search)
-        })
-      </script>
       
-        <script src="../../js/version-select.js"></script>
+        <span><a href="../mod_private/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-    
-  </body>
+      
+        <span style="margin-left: 15px"><a href="../mod_push_service_mongoosepush/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
 </html>

@@ -1,3383 +1,387 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+  <title>Options: Listen - MongooseIM</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
-      
-      <link rel="shortcut icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
-    
-    
-      
-        <title>Options: Listen - MongooseIM</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../assets/stylesheets/main.6910b76c.min.css">
-      
-        
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
-        
-      
-    
-    
-    
-      
-        
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-      
-    
-    
-    
-      <link rel="stylesheet" href="../../custom.css">
-    
-      <link rel="stylesheet" href="../../css/version-select.css">
-    
-    
-      
-    
-    
-  </head>
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../custom.css" rel="stylesheet" />
   
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Options: Listen";
+    var mkdocs_page_input_path = "advanced-configuration/listen.md";
+    var mkdocs_page_url = null;
+  </script>
   
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
-      
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
   
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#general-listener-options" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-      
+</head>
 
-<header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="../.." title="MongooseIM" class="md-header-nav__button md-logo" aria-label="MongooseIM">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<body class="wy-body-for-nav" role="document">
 
-    </a>
-    <label class="md-header-nav__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
-    </label>
-    <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
-            MongooseIM
-          </span>
-          <span class="md-header-nav__topic md-ellipsis">
-            
-              Options: Listen
-            
-          </span>
-        </div>
-      
-    </div>
+  <div class="wy-grid-for-nav">
+
     
-      <label class="md-header-nav__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-      </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
-      <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongooseIM</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Get-to-know-MongooseIM/">ABCs of MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/MongooseIM-High-level-Architecture/">High-level Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Features-and-supported-standards/">Features and supported standards</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Getting-started/">Getting started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/release_config/">Release/Installation configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Bootstrap-Scripts/">Bootstrap scripts</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/client-certificate/">Client certificate authentication</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/How-to-build/">How to Build MongooseIM from source code</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications/">How to Set up Push Notifications</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/Push-notifications-client-side/">How to Set up Push Notifications on the client side</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/push-notifications/With-MongoosePush/">How to Set up MongoosePush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/ICE_tutorial/">How to Set up MongooseICE</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/iOS_tutorial/">How to Build an iOS messaging app</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user-guide/Jingle-SIP-setup/">How to Set up Jingle/SIP</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Migration Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.1.1_3.2.0/">3.1.1 to 3.2.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.3.0_3.4.0/">3.3.0 to 3.4.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.5.0_3.6.0/">3.5.0 to 3.6.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.6.0_3.7.0/">3.6.0 to 3.7.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/3.7.0_4.0.0/">3.7.0 to 4.0.0</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/4.0.0_4.0.1/">4.0.0 to 4.0.1</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../migrations/jid-from-mam-muc-script/">MAM MUC migration helper</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Platform</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Contributions/">Contributions to ecosystem</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Differentiators/">Differentiators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../History/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../../Advanced-configuration/">Configuration files</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../general/">Options: General</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Options: Listen</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#listenport">listen.*.port</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#listenip_address">listen.*.ip_address</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#listenproto">listen.*.proto</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#listenip_version">listen.*.ip_version</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../auth/">Options: Auth</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../outgoing-connections/">Options: Outgoing connections</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Services/">Options: Services</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Modules/">Options: Extension Modules</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../shaper/">Options: Shaper</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../acl/">Options: Acl</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../access/">Options: Access</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../s2s/">Options: S2S</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../host_config/">Options: Host config</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../release-options/">Release options</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Erlang-cookie-security/">Erlang Cookie Security</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../TLS-hardening/">TLS hardening</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../database-backends-configuration/">Database backends configuration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Authentication methods</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/rdbms/">RDBMS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/external/">External</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/anonymous/">Anonymous</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/ldap/">LDAP</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/jwt/">JWT</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/riak/">Riak</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/http/">HTTP</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/pki/">PKI</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authentication-methods/dummy/">Dummy</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">MongooseIM open XMPP extensions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/muc_light/">MUC light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../open-extensions/token-reconnection/">Token-based reconnection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">REST API</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Client-frontend/">Client/frontend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Metrics-backend/">Metrics backend</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../rest-api/Administration-backend/">Administration backend</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operation and maintenance</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/gdpr-considerations/">GDPR considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-management-considerations/">Cluster management considerations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">Cluster configuration and node management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging & monitoring</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging/">Logging configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Logging-fields/">Logging fields</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/">Reloading configuration on a running system</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/Mongoose-metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/">System Metrics Privacy Policy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/tls-distribution/">Distribution over TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../operation-and-maintenance/known-issues/">Known issues</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer's guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Testing-MongooseIM/">Testing MongooseIM</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/logging/">Logging</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Hooks-and-handlers/">Hooks and Handlers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/hooks_description/">Hooks description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/message_routing/">Stanza routing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/accumulators/">Accumulators</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/flat_options/">Flat options format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Moving-to-single-app-project-structure/">Moving to single app project structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_amp_developers_guide/">mod_amp development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mod_muc_light_developers_guide/">mod_muc_light developers doc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/SCRAM-serialization/">SCRAM serialization format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/xep_tool/">xep-tool usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/OpenSSL-and-FIPS/">FIPS mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/Basic-iq-handler/">Basic IQ Handler</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developers-guide/mongoose_wpool/">mongoose_wpool</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Module index</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_adhoc/">mod_adhoc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_amp/">mod_amp</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_auth_token/">mod_auth_token</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_blocking/">mod_blocking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_bosh/">mod_bosh</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_caps/">mod_caps</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_carboncopy/">mod_carboncopy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_commands/">mod_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_csi/">mod_csi</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_inbox/">mod_inbox</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_disco/">mod_disco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_global_distrib/">mod_global_distrib</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">mod_event_pusher</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher/">mod_event_pusher</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_http/">HTTP backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_push/">Push backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_sns/">SNS backend</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modules/mod_event_pusher_rabbit/">RabbitMQ backend</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_extdisco/">mod_extdisco</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_http_upload/">mod_http_upload</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_jingle_sip/">mod_jingle_sip</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_keystore/">mod_keystore</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_last/">mod_last</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_mam/">mod_mam</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc/">mod_muc</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_commands/">mod_muc_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_log/">mod_muc_log</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light/">mod_muc_light</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_muc_light_commands/">mod_muc_light_commands</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline/">mod_offline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_offline_stub/">mod_offline_stub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_ping/">mod_ping</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_privacy/">mod_privacy</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_private/">mod_private</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_pubsub/">mod_pubsub</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_register/">mod_register</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_roster/">mod_roster</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_shared_roster_ldap/">mod_shared_roster_ldap</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_sic/">mod_sic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_stream_management/">mod_stream_management</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_time/">mod_time</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_vcard/">mod_vcard</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../modules/mod_version/">mod_version</a>
+                    </li>
+                </ul>
       </div>
     </div>
-  </div>
-</div>
-    
-    
-  </nav>
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="MongooseIM" class="md-nav__button md-logo" aria-label="MongooseIM">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
-
-    </a>
-    MongooseIM
-  </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../.." class="md-nav__link">
-      Home
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
-    <label class="md-nav__link" for="nav-2">
-      User guide
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="User guide" data-md-level="1">
-      <label class="md-nav__title" for="nav-2">
-        <span class="md-nav__icon md-icon"></span>
-        User guide
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/ABCs-of-MongooseIM/" class="md-nav__link">
-      ABCs of MongooseIM
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/MongooseIM-High-level-Architecture/" class="md-nav__link">
-      High-level Architecture
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/Features-and-supported-standards/" class="md-nav__link">
-      Features and supported standards
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/Getting-started/" class="md-nav__link">
-      Getting started
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/release_config/" class="md-nav__link">
-      Release/Installation configuration
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/Bootstrap-Scripts/" class="md-nav__link">
-      Bootstrap scripts
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/client-certificate/" class="md-nav__link">
-      Client certificate authentication
-    </a>
-  </li>
-
-        
-      </ul>
     </nav>
-  </li>
 
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongooseIM</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
     
       
+        
+          <li>Configuration &raquo;</li>
+        
       
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
-    <label class="md-nav__link" for="nav-3">
-      Tutorials
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
-        <span class="md-nav__icon md-icon"></span>
-        Tutorials
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/How-to-build/" class="md-nav__link">
-      How to Build MongooseIM from source code
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/push-notifications/Push-notifications/" class="md-nav__link">
-      How to Set up Push Notifications
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/push-notifications/Push-notifications-client-side/" class="md-nav__link">
-      How to Set up Push Notifications on the client side
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/push-notifications/MongoosePush-setup/" class="md-nav__link">
-      How to Set up MongoosePush
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/ICE_tutorial/" class="md-nav__link">
-      How to Set up MongooseICE
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/iOS_tutorial/" class="md-nav__link">
-      How to Build an iOS messaging app
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user-guide/Jingle-SIP-setup/" class="md-nav__link">
-      How to Set up Jingle/SIP
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
+    <li>Options: Listen</li>
+    <li class="wy-breadcrumbs-aside">
       
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
-    <label class="md-nav__link" for="nav-4">
-      Migration Guide
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Migration Guide" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        <span class="md-nav__icon md-icon"></span>
-        Migration Guide
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrations/3.1.1_3.2.0/" class="md-nav__link">
-      3.1.1 to 3.2.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrations/3.3.0_3.4.0/" class="md-nav__link">
-      3.3.0 to 3.4.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrations/3.5.0_3.6.0/" class="md-nav__link">
-      3.5.0 to 3.6.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrations/3.6.0_3.7.0/" class="md-nav__link">
-      3.6.0 to 3.7.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrations/3.7.0_4.0.0/" class="md-nav__link">
-      3.7.0 to 4.0.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrations/4.0.0_4.0.1/" class="md-nav__link">
-      4.0.0 to 4.0.1
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
-      MAM MUC migration helper
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
-    <label class="md-nav__link" for="nav-5">
-      Platform
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Platform" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
-        <span class="md-nav__icon md-icon"></span>
-        Platform
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Contributions/" class="md-nav__link">
-      Contributions to ecosystem
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Differentiators/" class="md-nav__link">
-      Differentiators
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../History/" class="md-nav__link">
-      History
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
-    <label class="md-nav__link" for="nav-6">
-      Configuration
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
-        <span class="md-nav__icon md-icon"></span>
-        Configuration
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../configuration-files/" class="md-nav__link">
-      Configuration files
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../general/" class="md-nav__link">
-      Options: General
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Options: Listen
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
-      Options: Listen
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#general-listener-options" class="md-nav__link">
-    General listener options
-  </a>
-  
-    <nav class="md-nav" aria-label="General listener options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenport" class="md-nav__link">
-    listen.*.port
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenip_address" class="md-nav__link">
-    listen.*.ip_address
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenproto" class="md-nav__link">
-    listen.*.proto
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenip_version" class="md-nav__link">
-    listen.*.ip_version
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#xmpp-listener-options" class="md-nav__link">
-    XMPP listener options
-  </a>
-  
-    <nav class="md-nav" aria-label="XMPP listener options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenbacklog" class="md-nav__link">
-    listen.*.backlog
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenproxy_protocol" class="md-nav__link">
-    listen.*.proxy_protocol
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhibernate_after" class="md-nav__link">
-    listen.*.hibernate_after
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenmax_stanza_size" class="md-nav__link">
-    listen.*.max_stanza_size
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listennum_acceptors" class="md-nav__link">
-    listen.*.num_acceptors
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenmax_fsm_queue" class="md-nav__link">
-    listen.*.max_fsm_queue
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#client-to-server-c2s-listenc2s" class="md-nav__link">
-    Client-to-server (C2S): [[listen.c2s]]
-  </a>
-  
-    <nav class="md-nav" aria-label="Client-to-server (C2S): [[listen.c2s]]">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenc2saccess" class="md-nav__link">
-    listen.c2s.access
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2sshaper" class="md-nav__link">
-    listen.c2s.shaper
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2szlib" class="md-nav__link">
-    listen.c2s.zlib
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tls-options-for-c2s" class="md-nav__link">
-    TLS options for C2S
-  </a>
-  
-    <nav class="md-nav" aria-label="TLS options for C2S">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsmode" class="md-nav__link">
-    listen.c2s.tls.mode
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsverify_peer" class="md-nav__link">
-    listen.c2s.tls.verify_peer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsmodule" class="md-nav__link">
-    listen.c2s.tls.module
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlscertfile" class="md-nav__link">
-    listen.c2s.tls.certfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlscacertfile" class="md-nav__link">
-    listen.c2s.tls.cacertfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsdhfile" class="md-nav__link">
-    listen.c2s.tls.dhfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsprotocol_options-only-for-fast_tls" class="md-nav__link">
-    listen.c2s.tls.protocol_options - only for fast_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsciphers-for-fast_tls" class="md-nav__link">
-    listen.c2s.tls.ciphers - for fast_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsciphers-for-just_tls" class="md-nav__link">
-    listen.c2s.tls.ciphers - for just_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsverify_mode-only-for-just_tls" class="md-nav__link">
-    listen.c2s.tls.verify_mode - only for just_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsdisconnect_on_failure-only-for-just_tls" class="md-nav__link">
-    listen.c2s.tls.disconnect_on_failure - only for just_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsversions-only-for-just_tls" class="md-nav__link">
-    listen.c2s.tls.versions - only for just_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlscrl_files-only-for-just_tls" class="md-nav__link">
-    listen.c2s.tls.crl_files - only for just_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#c2s-example" class="md-nav__link">
-    C2S Example
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#server-to-server-s2s-listens2s" class="md-nav__link">
-    Server-to-server (S2S): [[listen.s2s]]
-  </a>
-  
-    <nav class="md-nav" aria-label="Server-to-server (S2S): [[listen.s2s]]">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listens2sshaper" class="md-nav__link">
-    listen.s2s.shaper
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tls-options-for-s2s" class="md-nav__link">
-    TLS options for S2S
-  </a>
-  
-    <nav class="md-nav" aria-label="TLS options for S2S">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listens2stlscacertfile" class="md-nav__link">
-    listen.s2s.tls.cacertfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listens2stlsdhfile" class="md-nav__link">
-    listen.s2s.tls.dhfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listens2stlsciphers" class="md-nav__link">
-    listen.s2s.tls.ciphers
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#s2s-example" class="md-nav__link">
-    S2S Example
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#xmpp-components-listenservice" class="md-nav__link">
-    XMPP Components: [[listen.service]]
-  </a>
-  
-    <nav class="md-nav" aria-label="XMPP Components: [[listen.service]]">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenserviceaccess" class="md-nav__link">
-    listen.service.access
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenservicepassword" class="md-nav__link">
-    listen.service.password
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenserviceshaper_rule" class="md-nav__link">
-    listen.service.shaper_rule
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenservicecheck_from" class="md-nav__link">
-    listen.service.check_from
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenservicehidden_components" class="md-nav__link">
-    listen.service.hidden_components
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenserviceconflict_behaviour" class="md-nav__link">
-    listen.service.conflict_behaviour
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-extension-to-the-protocol" class="md-nav__link">
-    Custom extension to the protocol
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#service-listener-example" class="md-nav__link">
-    Service listener example
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#http-based-services-listenhttp" class="md-nav__link">
-    HTTP-based services: [[listen.http]]
-  </a>
-  
-    <nav class="md-nav" aria-label="HTTP-based services: [[listen.http]]">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlers" class="md-nav__link">
-    listen.http.handlers
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#common-handler-options" class="md-nav__link">
-    Common handler options
-  </a>
-  
-    <nav class="md-nav" aria-label="Common handler options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlershost" class="md-nav__link">
-    listen.http.handlers.*.host
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlerspath" class="md-nav__link">
-    listen.http.handlers.*.path
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#handler-types-bosh-mod_bosh" class="md-nav__link">
-    Handler types: BOSH - mod_bosh
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#handler-types-websockets-mod_websockets" class="md-nav__link">
-    Handler types: WebSockets - mod_websockets
-  </a>
-  
-    <nav class="md-nav" aria-label="Handler types: WebSockets - mod_websockets">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmod_websocketstimeout" class="md-nav__link">
-    listen.http.handlers.mod_websockets.timeout
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmod_websocketsping_rate" class="md-nav__link">
-    listen.http.handlers.mod_websockets.ping_rate
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmod_websocketsmax_stanza_size" class="md-nav__link">
-    listen.http.handlers.mod_websockets.max_stanza_size
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmod_websocketsservice" class="md-nav__link">
-    listen.http.handlers.mod_websockets.service
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#handler-types-rest-api-admin-mongoose_api_admin" class="md-nav__link">
-    Handler types: REST API - Admin - mongoose_api_admin
-  </a>
-  
-    <nav class="md-nav" aria-label="Handler types: REST API - Admin - mongoose_api_admin">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmongoose_api_adminusername" class="md-nav__link">
-    listen.http.handlers.mongoose_api_admin.username
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmongoose_api_adminpassword" class="md-nav__link">
-    listen.http.handlers.mongoose_api_admin.password
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#handler-types-rest-api-client" class="md-nav__link">
-    Handler types: REST API - Client
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#handler-types-metrics-api-obsolete-mongoose_api" class="md-nav__link">
-    Handler types: Metrics API (obsolete) - mongoose_api
-  </a>
-  
-    <nav class="md-nav" aria-label="Handler types: Metrics API (obsolete) - mongoose_api">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmongoose_apihandlers" class="md-nav__link">
-    listen.http.handlers.mongoose_api.handlers
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#transport-options" class="md-nav__link">
-    Transport options
-  </a>
-  
-    <nav class="md-nav" aria-label="Transport options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptransportnum_acceptors" class="md-nav__link">
-    listen.http.transport.num_acceptors
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptransportmax_connections" class="md-nav__link">
-    listen.http.transport.max_connections
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tls-https-options" class="md-nav__link">
-    TLS (HTTPS) options
-  </a>
-  
-    <nav class="md-nav" aria-label="TLS (HTTPS) options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlsverify_peer" class="md-nav__link">
-    listen.http.tls.verify_peer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlsverify_mode" class="md-nav__link">
-    listen.http.tls.verify_mode
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlscertfile" class="md-nav__link">
-    listen.http.tls.certfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlscacertfile" class="md-nav__link">
-    listen.http.tls.cacertfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlsdhfile" class="md-nav__link">
-    listen.http.tls.dhfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlsciphers" class="md-nav__link">
-    listen.http.tls.ciphers
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlsversions" class="md-nav__link">
-    listen.http.tls.versions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlskeyfile" class="md-nav__link">
-    listen.http.tls.keyfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlspassword" class="md-nav__link">
-    listen.http.tls.password
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#protocol-options" class="md-nav__link">
-    Protocol options
-  </a>
-  
-    <nav class="md-nav" aria-label="Protocol options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttpprotocolcompress" class="md-nav__link">
-    listen.http.protocol.compress
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#http-listener-examples" class="md-nav__link">
-    HTTP listener examples
-  </a>
-  
-    <nav class="md-nav" aria-label="HTTP listener examples">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-1-bosh-and-ws" class="md-nav__link">
-    Example 1. BOSH and WS
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-2-admin-api" class="md-nav__link">
-    Example 2. Admin API
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-3-client-api" class="md-nav__link">
-    Example 3. Client API
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../auth/" class="md-nav__link">
-      Options: Auth
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../outgoing-connections/" class="md-nav__link">
-      Options: Outgoing connections
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../Services/" class="md-nav__link">
-      Options: Services
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../Modules/" class="md-nav__link">
-      Options: Extension Modules
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../shaper/" class="md-nav__link">
-      Options: Shaper
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../acl/" class="md-nav__link">
-      Options: Acl
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../access/" class="md-nav__link">
-      Options: Access
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../s2s/" class="md-nav__link">
-      Options: S2S
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../host_config/" class="md-nav__link">
-      Options: Host config
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../release-options/" class="md-nav__link">
-      Release options
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../Erlang-cookie-security/" class="md-nav__link">
-      Erlang Cookie Security
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../TLS-hardening/" class="md-nav__link">
-      TLS hardening
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../database-backends-configuration/" class="md-nav__link">
-      Database backends configuration
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
-    <label class="md-nav__link" for="nav-7">
-      Authentication methods
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Authentication methods" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
-        <span class="md-nav__icon md-icon"></span>
-        Authentication methods
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/rdbms/" class="md-nav__link">
-      RDBMS
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/external/" class="md-nav__link">
-      External
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/anonymous/" class="md-nav__link">
-      Anonymous
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/ldap/" class="md-nav__link">
-      LDAP
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/jwt/" class="md-nav__link">
-      JWT
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/riak/" class="md-nav__link">
-      Riak
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/http/" class="md-nav__link">
-      HTTP
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/pki/" class="md-nav__link">
-      PKI
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../authentication-methods/dummy/" class="md-nav__link">
-      Dummy
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" >
-    <label class="md-nav__link" for="nav-8">
-      MongooseIM open XMPP extensions
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="MongooseIM open XMPP extensions" data-md-level="1">
-      <label class="md-nav__title" for="nav-8">
-        <span class="md-nav__icon md-icon"></span>
-        MongooseIM open XMPP extensions
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../open-extensions/muc_light/" class="md-nav__link">
-      MUC light
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../open-extensions/token-reconnection/" class="md-nav__link">
-      Token-based reconnection
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" >
-    <label class="md-nav__link" for="nav-9">
-      REST API
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="REST API" data-md-level="1">
-      <label class="md-nav__title" for="nav-9">
-        <span class="md-nav__icon md-icon"></span>
-        REST API
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../rest-api/Client-frontend/" class="md-nav__link">
-      Client/frontend
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../rest-api/Metrics-backend/" class="md-nav__link">
-      Metrics backend
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../rest-api/Administration-backend/" class="md-nav__link">
-      Administration backend
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" >
-    <label class="md-nav__link" for="nav-10">
-      Operation and maintenance
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Operation and maintenance" data-md-level="1">
-      <label class="md-nav__title" for="nav-10">
-        <span class="md-nav__icon md-icon"></span>
-        Operation and maintenance
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/gdpr-considerations/" class="md-nav__link">
-      GDPR considerations
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/Cluster-management-considerations/" class="md-nav__link">
-      Cluster management considerations
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/Cluster-configuration-and-node-management/" class="md-nav__link">
-      Cluster configuration and node management
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/Logging-%26-monitoring/" class="md-nav__link">
-      Logging & monitoring
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/Logging/" class="md-nav__link">
-      Logging configuration
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/Humio/" class="md-nav__link">
-      Logging with Humio
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/Logging-fields/" class="md-nav__link">
-      Logging fields
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/Reloading-configuration-on-a-running-system/" class="md-nav__link">
-      Reloading configuration on a running system
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/MongooseIM-metrics/" class="md-nav__link">
-      Metrics
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/" class="md-nav__link">
-      System Metrics Privacy Policy
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/tls-distribution/" class="md-nav__link">
-      Distribution over TLS
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../operation-and-maintenance/known-issues/" class="md-nav__link">
-      Known issues
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" >
-    <label class="md-nav__link" for="nav-11">
-      Developer's guide
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Developer's guide" data-md-level="1">
-      <label class="md-nav__title" for="nav-11">
-        <span class="md-nav__icon md-icon"></span>
-        Developer's guide
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/Testing-MongooseIM/" class="md-nav__link">
-      Testing MongooseIM
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/logging/" class="md-nav__link">
-      Logging
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/Hooks-and-handlers/" class="md-nav__link">
-      Hooks and Handlers
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/hooks_description/" class="md-nav__link">
-      Hooks description
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/Stanza-routing/" class="md-nav__link">
-      Stanza routing
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/accumulators/" class="md-nav__link">
-      Accumulators
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/flat_options/" class="md-nav__link">
-      Flat options format
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/Moving-to-single-app-project-structure/" class="md-nav__link">
-      Moving to single app project structure
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/mod_amp_developers_guide/" class="md-nav__link">
-      mod_amp development
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/mod_muc_light_developers_guide/" class="md-nav__link">
-      mod_muc_light developers doc
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/SCRAM-serialization/" class="md-nav__link">
-      SCRAM serialization format
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/xep_tool/" class="md-nav__link">
-      xep-tool usage
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/OpenSSL-and-FIPS/" class="md-nav__link">
-      FIPS mode
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/Basic-iq-handler/" class="md-nav__link">
-      Basic IQ Handler
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../developers-guide/mongoose_wpool/" class="md-nav__link">
-      mongoose_wpool
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12" >
-    <label class="md-nav__link" for="nav-12">
-      Module index
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Module index" data-md-level="1">
-      <label class="md-nav__title" for="nav-12">
-        <span class="md-nav__icon md-icon"></span>
-        Module index
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_adhoc/" class="md-nav__link">
-      mod_adhoc
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_amp/" class="md-nav__link">
-      mod_amp
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_auth_token/" class="md-nav__link">
-      mod_auth_token
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_blocking/" class="md-nav__link">
-      mod_blocking
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_bosh/" class="md-nav__link">
-      mod_bosh
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_caps/" class="md-nav__link">
-      mod_caps
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_carboncopy/" class="md-nav__link">
-      mod_carboncopy
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_commands/" class="md-nav__link">
-      mod_commands
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_csi/" class="md-nav__link">
-      mod_csi
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_disco/" class="md-nav__link">
-      mod_disco
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12-11" type="checkbox" id="nav-12-11" >
-    <label class="md-nav__link" for="nav-12-11">
-      mod_event_pusher
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="mod_event_pusher" data-md-level="2">
-      <label class="md-nav__title" for="nav-12-11">
-        <span class="md-nav__icon md-icon"></span>
-        mod_event_pusher
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_event_pusher/" class="md-nav__link">
-      mod_event_pusher
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_event_pusher_http/" class="md-nav__link">
-      HTTP backend
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_event_pusher_push/" class="md-nav__link">
-      Push backend
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_event_pusher_sns/" class="md-nav__link">
-      SNS backend
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_event_pusher_rabbit/" class="md-nav__link">
-      RabbitMQ backend
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_extdisco/" class="md-nav__link">
-      mod_extdisco
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_global_distrib/" class="md-nav__link">
-      mod_global_distrib
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_http_upload/" class="md-nav__link">
-      mod_http_upload
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_inbox/" class="md-nav__link">
-      mod_inbox
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_jingle_sip/" class="md-nav__link">
-      mod_jingle_sip
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_keystore/" class="md-nav__link">
-      mod_keystore
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_last/" class="md-nav__link">
-      mod_last
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_mam/" class="md-nav__link">
-      mod_mam
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_muc/" class="md-nav__link">
-      mod_muc
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_muc_commands/" class="md-nav__link">
-      mod_muc_commands
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_muc_log/" class="md-nav__link">
-      mod_muc_log
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_muc_light/" class="md-nav__link">
-      mod_muc_light
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_muc_light_commands/" class="md-nav__link">
-      mod_muc_light_commands
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_offline/" class="md-nav__link">
-      mod_offline
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_offline_stub/" class="md-nav__link">
-      mod_offline_stub
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_ping/" class="md-nav__link">
-      mod_ping
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_privacy/" class="md-nav__link">
-      mod_privacy
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_private/" class="md-nav__link">
-      mod_private
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_pubsub/" class="md-nav__link">
-      mod_pubsub
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_push_service_mongoosepush/" class="md-nav__link">
-      mod_push_service_mongoosepush
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_register/" class="md-nav__link">
-      mod_register
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_roster/" class="md-nav__link">
-      mod_roster
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_shared_roster_ldap/" class="md-nav__link">
-      mod_shared_roster_ldap
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_sic/" class="md-nav__link">
-      mod_sic
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_stream_management/" class="md-nav__link">
-      mod_stream_management
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_time/" class="md-nav__link">
-      mod_time
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_vcard/" class="md-nav__link">
-      mod_vcard
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../modules/mod_version/" class="md-nav__link">
-      mod_version
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
+    </li>
   </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#general-listener-options" class="md-nav__link">
-    General listener options
-  </a>
-  
-    <nav class="md-nav" aria-label="General listener options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenport" class="md-nav__link">
-    listen.*.port
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenip_address" class="md-nav__link">
-    listen.*.ip_address
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenproto" class="md-nav__link">
-    listen.*.proto
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenip_version" class="md-nav__link">
-    listen.*.ip_version
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#xmpp-listener-options" class="md-nav__link">
-    XMPP listener options
-  </a>
-  
-    <nav class="md-nav" aria-label="XMPP listener options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenbacklog" class="md-nav__link">
-    listen.*.backlog
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenproxy_protocol" class="md-nav__link">
-    listen.*.proxy_protocol
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhibernate_after" class="md-nav__link">
-    listen.*.hibernate_after
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenmax_stanza_size" class="md-nav__link">
-    listen.*.max_stanza_size
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listennum_acceptors" class="md-nav__link">
-    listen.*.num_acceptors
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenmax_fsm_queue" class="md-nav__link">
-    listen.*.max_fsm_queue
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#client-to-server-c2s-listenc2s" class="md-nav__link">
-    Client-to-server (C2S): [[listen.c2s]]
-  </a>
-  
-    <nav class="md-nav" aria-label="Client-to-server (C2S): [[listen.c2s]]">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenc2saccess" class="md-nav__link">
-    listen.c2s.access
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2sshaper" class="md-nav__link">
-    listen.c2s.shaper
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2szlib" class="md-nav__link">
-    listen.c2s.zlib
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tls-options-for-c2s" class="md-nav__link">
-    TLS options for C2S
-  </a>
-  
-    <nav class="md-nav" aria-label="TLS options for C2S">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsmode" class="md-nav__link">
-    listen.c2s.tls.mode
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsverify_peer" class="md-nav__link">
-    listen.c2s.tls.verify_peer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsmodule" class="md-nav__link">
-    listen.c2s.tls.module
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlscertfile" class="md-nav__link">
-    listen.c2s.tls.certfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlscacertfile" class="md-nav__link">
-    listen.c2s.tls.cacertfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsdhfile" class="md-nav__link">
-    listen.c2s.tls.dhfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsprotocol_options-only-for-fast_tls" class="md-nav__link">
-    listen.c2s.tls.protocol_options - only for fast_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsciphers-for-fast_tls" class="md-nav__link">
-    listen.c2s.tls.ciphers - for fast_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsciphers-for-just_tls" class="md-nav__link">
-    listen.c2s.tls.ciphers - for just_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsverify_mode-only-for-just_tls" class="md-nav__link">
-    listen.c2s.tls.verify_mode - only for just_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsdisconnect_on_failure-only-for-just_tls" class="md-nav__link">
-    listen.c2s.tls.disconnect_on_failure - only for just_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsversions-only-for-just_tls" class="md-nav__link">
-    listen.c2s.tls.versions - only for just_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlscrl_files-only-for-just_tls" class="md-nav__link">
-    listen.c2s.tls.crl_files - only for just_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#c2s-example" class="md-nav__link">
-    C2S Example
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#server-to-server-s2s-listens2s" class="md-nav__link">
-    Server-to-server (S2S): [[listen.s2s]]
-  </a>
-  
-    <nav class="md-nav" aria-label="Server-to-server (S2S): [[listen.s2s]]">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listens2sshaper" class="md-nav__link">
-    listen.s2s.shaper
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tls-options-for-s2s" class="md-nav__link">
-    TLS options for S2S
-  </a>
-  
-    <nav class="md-nav" aria-label="TLS options for S2S">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listens2stlscacertfile" class="md-nav__link">
-    listen.s2s.tls.cacertfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listens2stlsdhfile" class="md-nav__link">
-    listen.s2s.tls.dhfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listens2stlsciphers" class="md-nav__link">
-    listen.s2s.tls.ciphers
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#s2s-example" class="md-nav__link">
-    S2S Example
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#xmpp-components-listenservice" class="md-nav__link">
-    XMPP Components: [[listen.service]]
-  </a>
-  
-    <nav class="md-nav" aria-label="XMPP Components: [[listen.service]]">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenserviceaccess" class="md-nav__link">
-    listen.service.access
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenservicepassword" class="md-nav__link">
-    listen.service.password
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenserviceshaper_rule" class="md-nav__link">
-    listen.service.shaper_rule
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenservicecheck_from" class="md-nav__link">
-    listen.service.check_from
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenservicehidden_components" class="md-nav__link">
-    listen.service.hidden_components
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenserviceconflict_behaviour" class="md-nav__link">
-    listen.service.conflict_behaviour
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-extension-to-the-protocol" class="md-nav__link">
-    Custom extension to the protocol
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#service-listener-example" class="md-nav__link">
-    Service listener example
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#http-based-services-listenhttp" class="md-nav__link">
-    HTTP-based services: [[listen.http]]
-  </a>
-  
-    <nav class="md-nav" aria-label="HTTP-based services: [[listen.http]]">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlers" class="md-nav__link">
-    listen.http.handlers
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#common-handler-options" class="md-nav__link">
-    Common handler options
-  </a>
-  
-    <nav class="md-nav" aria-label="Common handler options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlershost" class="md-nav__link">
-    listen.http.handlers.*.host
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlerspath" class="md-nav__link">
-    listen.http.handlers.*.path
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#handler-types-bosh-mod_bosh" class="md-nav__link">
-    Handler types: BOSH - mod_bosh
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#handler-types-websockets-mod_websockets" class="md-nav__link">
-    Handler types: WebSockets - mod_websockets
-  </a>
-  
-    <nav class="md-nav" aria-label="Handler types: WebSockets - mod_websockets">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmod_websocketstimeout" class="md-nav__link">
-    listen.http.handlers.mod_websockets.timeout
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmod_websocketsping_rate" class="md-nav__link">
-    listen.http.handlers.mod_websockets.ping_rate
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmod_websocketsmax_stanza_size" class="md-nav__link">
-    listen.http.handlers.mod_websockets.max_stanza_size
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmod_websocketsservice" class="md-nav__link">
-    listen.http.handlers.mod_websockets.service
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#handler-types-rest-api-admin-mongoose_api_admin" class="md-nav__link">
-    Handler types: REST API - Admin - mongoose_api_admin
-  </a>
-  
-    <nav class="md-nav" aria-label="Handler types: REST API - Admin - mongoose_api_admin">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmongoose_api_adminusername" class="md-nav__link">
-    listen.http.handlers.mongoose_api_admin.username
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmongoose_api_adminpassword" class="md-nav__link">
-    listen.http.handlers.mongoose_api_admin.password
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#handler-types-rest-api-client" class="md-nav__link">
-    Handler types: REST API - Client
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#handler-types-metrics-api-obsolete-mongoose_api" class="md-nav__link">
-    Handler types: Metrics API (obsolete) - mongoose_api
-  </a>
-  
-    <nav class="md-nav" aria-label="Handler types: Metrics API (obsolete) - mongoose_api">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmongoose_apihandlers" class="md-nav__link">
-    listen.http.handlers.mongoose_api.handlers
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#transport-options" class="md-nav__link">
-    Transport options
-  </a>
-  
-    <nav class="md-nav" aria-label="Transport options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptransportnum_acceptors" class="md-nav__link">
-    listen.http.transport.num_acceptors
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptransportmax_connections" class="md-nav__link">
-    listen.http.transport.max_connections
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tls-https-options" class="md-nav__link">
-    TLS (HTTPS) options
-  </a>
-  
-    <nav class="md-nav" aria-label="TLS (HTTPS) options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlsverify_peer" class="md-nav__link">
-    listen.http.tls.verify_peer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlsverify_mode" class="md-nav__link">
-    listen.http.tls.verify_mode
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlscertfile" class="md-nav__link">
-    listen.http.tls.certfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlscacertfile" class="md-nav__link">
-    listen.http.tls.cacertfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlsdhfile" class="md-nav__link">
-    listen.http.tls.dhfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlsciphers" class="md-nav__link">
-    listen.http.tls.ciphers
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlsversions" class="md-nav__link">
-    listen.http.tls.versions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlskeyfile" class="md-nav__link">
-    listen.http.tls.keyfile
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttptlspassword" class="md-nav__link">
-    listen.http.tls.password
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#protocol-options" class="md-nav__link">
-    Protocol options
-  </a>
-  
-    <nav class="md-nav" aria-label="Protocol options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttpprotocolcompress" class="md-nav__link">
-    listen.http.protocol.compress
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#http-listener-examples" class="md-nav__link">
-    HTTP listener examples
-  </a>
-  
-    <nav class="md-nav" aria-label="HTTP listener examples">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-1-bosh-and-ws" class="md-nav__link">
-    Example 1. BOSH and WS
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-2-admin-api" class="md-nav__link">
-    Example 2. Admin API
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-3-client-api" class="md-nav__link">
-    Example 3. Client API
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
               
-                
-                
-                  <h1>Options: Listen</h1>
-                
                 <p>The <code>listen</code> section specifies how MongooseIM handles incoming connections.</p>
 <ul>
 <li><strong>Scope:</strong> local</li>
@@ -3396,58 +400,56 @@
 <li><strong>Default:</strong> None - each listener needs to be enabled explicitly. Typical listeners are already specified in the example configuration file.</li>
 <li><strong>Example:</strong> The simplest XMPP listener configuration, handling only incoming XMPP client connections:</li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.c2s]]</span>
-  <span class="n">port</span> <span class="o">=</span> <span class="mi">5222</span>
-</code></pre></div>
-</td></tr></table>
-<h2 id="general-listener-options">General listener options</h2>
+<pre><code class="language-toml">[[listen.c2s]]
+  port = 5222
+</code></pre>
+<h1 id="general-listener-options">General listener options</h1>
 <p>The options listed below are the same for all listener types. They set the basic listening socket options. Only <code>port</code> is required, the rest can be used to change the default settings.</p>
-<h3 id="listenport"><code>listen.*.port</code></h3>
+<h4 id="listenport"><code>listen.*.port</code></h4>
 <ul>
 <li><strong>Syntax:</strong> integer, port number</li>
 <li><strong>Default:</strong> no default, this option is mandatory.</li>
 <li><strong>Example:</strong> <code>port = 5222</code></li>
 </ul>
 <p>The port number to which the listening socket is bound.</p>
-<h3 id="listenip_address"><code>listen.*.ip_address</code></h3>
+<h4 id="listenip_address"><code>listen.*.ip_address</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string with the IP address</li>
 <li><strong>Default:</strong> all-zeros address (e.g. <code>"0.0.0.0"</code> for IPv4)</li>
 <li><strong>Example:</strong> <code>ip_address = "127.0.0.1"</code></li>
 </ul>
 <p>The IP address to which the listening socket is bound.</p>
-<h3 id="listenproto"><code>listen.*.proto</code></h3>
+<h4 id="listenproto"><code>listen.*.proto</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, <code>"udp"</code> or <code>"tcp"</code></li>
 <li><strong>Default:</strong> <code>"tcp"</code></li>
 <li><strong>Example:</strong> <code>proto = "udp"</code></li>
 </ul>
 <p>The protocol, which is TCP by default. There is no reason to change this for XMPP or HTTP listeners.</p>
-<h3 id="listenip_version"><code>listen.*.ip_version</code></h3>
+<h4 id="listenip_version"><code>listen.*.ip_version</code></h4>
 <ul>
 <li><strong>Syntax:</strong> integer, <code>4</code> or <code>6</code></li>
 <li><strong>Default:</strong> if <code>ip_address</code> is specified, the IP version is determined from that address, otherwise it is <code>4</code></li>
 <li><strong>Example:</strong> <code>ip_version = 6</code></li>
 </ul>
 <p>Allows to set the IP version to IPv6. Does not need to be set if <code>ip_address</code> is defined.</p>
-<h2 id="xmpp-listener-options">XMPP listener options</h2>
+<h1 id="xmpp-listener-options">XMPP listener options</h1>
 <p>The options listed below can be set for the <code>c2s</code>, <code>s2s</code> and <code>service</code> listeners to adjust their parameters.</p>
-<h3 id="listenbacklog"><code>listen.*.backlog</code></h3>
+<h4 id="listenbacklog"><code>listen.*.backlog</code></h4>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> <code>100</code></li>
 <li><strong>Example:</strong> <code>backlog = 1000</code></li>
 </ul>
 <p>Overrides the default TCP backlog value.</p>
-<h3 id="listenproxy_protocol"><code>listen.*.proxy_protocol</code></h3>
+<h4 id="listenproxy_protocol"><code>listen.*.proxy_protocol</code></h4>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
 <li><strong>Example:</strong> <code>proxy_protocol = true</code></li>
 </ul>
 <p>When set to <code>true</code>, <a href="https://www.haproxy.com/blog/haproxy/proxy-protocol/">Proxy Protocol</a> is enabled and each connecting client has to provide a proxy header. Use only with a proxy (or a load balancer) to allow it to provide the connection details (including the source IP address) of the original client. Versions 1 and 2 of the protocol are supported.</p>
-<h3 id="listenhibernate_after"><code>listen.*.hibernate_after</code></h3>
+<h4 id="listenhibernate_after"><code>listen.*.hibernate_after</code></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> <code>0</code></li>
@@ -3456,7 +458,7 @@
 <p>Time in milliseconds after which a client process spawned by this listener will hibernate.
 Hibernation greatly reduces memory consumption of client processes, but <em>may</em> result in increased CPU consumption if a client is used <em>very</em> frequently.
 The default, recommended value of 0 means that the client processes will hibernate at every opportunity.</p>
-<h3 id="listenmax_stanza_size"><code>listen.*.max_stanza_size</code></h3>
+<h4 id="listenmax_stanza_size"><code>listen.*.max_stanza_size</code></h4>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> not set, unlimited size</li>
@@ -3464,14 +466,14 @@ The default, recommended value of 0 means that the client processes will hiberna
 </ul>
 <p>Maximum allowed incoming stanza size in bytes.
 <strong>Warning:</strong> this limit is checked <strong>after</strong> the input data parsing, so it does not apply to the input data size itself.</p>
-<h3 id="listennum_acceptors"><code>listen.*.num_acceptors</code></h3>
+<h4 id="listennum_acceptors"><code>listen.*.num_acceptors</code></h4>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> <code>100</code></li>
 <li><strong>Example:</strong> <code>num_acceptors = 200</code></li>
 </ul>
 <p>The number of processes accepting new connections on the listening socket.</p>
-<h3 id="listenmax_fsm_queue"><code>listen.*.max_fsm_queue</code></h3>
+<h4 id="listenmax_fsm_queue"><code>listen.*.max_fsm_queue</code></h4>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> not set - no limit</li>
@@ -3479,18 +481,18 @@ The default, recommended value of 0 means that the client processes will hiberna
 </ul>
 <p>Message queue limit to prevent resource exhaustion; overrides the value set in the <code>general</code> section.
 This option does <strong>not</strong> work for <code>s2s</code> listeners - the <code>general</code> value is used for them.</p>
-<h2 id="client-to-server-c2s-listenc2s">Client-to-server (C2S): <code>[[listen.c2s]]</code></h2>
+<h1 id="client-to-server-c2s-listenc2s">Client-to-server (C2S): <code>[[listen.c2s]]</code></h1>
 <p>Handles XMPP client-to-server (C2S) connections.
 The recommended port number for a C2S listener is 5222 <a href="https://tools.ietf.org/html/rfc6120#section-14.7">as registered in the XMPP protocol</a>.
 The following options are supported for each C2S listener:</p>
-<h3 id="listenc2saccess"><code>listen.c2s.access</code></h3>
+<h4 id="listenc2saccess"><code>listen.c2s.access</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, rule name or <code>"all"</code></li>
 <li><strong>Default:</strong> <code>"all"</code></li>
 <li><strong>Example:</strong> <code>access = "c2s"</code></li>
 </ul>
 <p>The rule that determines who is allowed to connect. By default the rule is <code>"all"</code>, which means that anyone can connect. The rule referenced here needs to be defined in the <code>access</code> configuration section.</p>
-<h3 id="listenc2sshaper"><code>listen.c2s.shaper</code></h3>
+<h4 id="listenc2sshaper"><code>listen.c2s.shaper</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, rule name</li>
 <li><strong>Default:</strong> <code>"none"</code> (no shaper)</li>
@@ -3499,7 +501,7 @@ The following options are supported for each C2S listener:</p>
 <p>The rule that determines what traffic shaper is used to limit the incoming XMPP traffic to prevent the server from being flooded with incoming data.
 The rule referenced here needs to be defined in the <code>access</code> configuration section.
 The value of the access rule needs to be either the shaper name or the string <code>"none"</code>, which means no shaper.</p>
-<h3 id="listenc2szlib"><code>listen.c2s.zlib</code></h3>
+<h4 id="listenc2szlib"><code>listen.c2s.zlib</code></h4>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> not set, disabled</li>
@@ -3509,7 +511,7 @@ The value of the access rule needs to be either the shaper name or the string <c
 <h2 id="tls-options-for-c2s">TLS options for C2S</h2>
 <p>The following options allow enabling and configuring TLS which makes the client-to-server conenctions secure.
 They all have the <code>tls.</code> prefix.</p>
-<h3 id="listenc2stlsmode"><code>listen.c2s.tls.mode</code></h3>
+<h4 id="listenc2stlsmode"><code>listen.c2s.tls.mode</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"tls"</code>, <code>"starttls"</code>, <code>"starttls_required"</code></li>
 <li><strong>Default:</strong> not set</li>
@@ -3521,14 +523,14 @@ They all have the <code>tls.</code> prefix.</p>
 <li><code>starttls</code> - enables StartTLS support; requires <code>certfile</code>,</li>
 <li><code>starttls_required</code> - enables and enforces StartTLS usage.</li>
 </ul>
-<h3 id="listenc2stlsverify_peer"><code>listen.c2s.tls.verify_peer</code></h3>
+<h4 id="listenc2stlsverify_peer"><code>listen.c2s.tls.verify_peer</code></h4>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
 <li><strong>Example:</strong> <code>verify_peer = true</code></li>
 </ul>
 <p>Enforces verification of a client certificate. Requires a valid <code>cacertfile</code>.</p>
-<h3 id="listenc2stlsmodule"><code>listen.c2s.tls.module</code></h3>
+<h4 id="listenc2stlsmodule"><code>listen.c2s.tls.module</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"just_tls"</code>, <code>"fast_tls"</code></li>
 <li><strong>Default:</strong> <code>"fast_tls"</code></li>
@@ -3536,49 +538,49 @@ They all have the <code>tls.</code> prefix.</p>
 </ul>
 <p>By default the TLS library used for C2S connections is <code>fast_tls</code>, which uses OpenSSL-based NIFs. It is possible to change it to <code>just_tls</code> - Erlang TLS implementation provided by OTP. Some TLS-related options described here have different formats for these two libraries.</p>
 <p>Requires setting <code>tls.verify_mode</code>.  When set to <code>false</code>, it allows the client to connect even though the certificate verification failed. It is then up to the authentication layer to accept or reject the client connection. This behaviour mimics the FastTLS one.</p>
-<h3 id="listenc2stlscertfile"><code>listen.c2s.tls.certfile</code></h3>
+<h4 id="listenc2stlscertfile"><code>listen.c2s.tls.certfile</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>tls.certfile = "server.pem"</code></li>
 </ul>
 <p>Path to the X509 PEM file with a certificate and a private key (not protected by a password). If the certificate is signed by an intermediate CA, you should specify here the whole CA chain by concatenating all public keys together and appending the private key after that.</p>
-<h3 id="listenc2stlscacertfile"><code>listen.c2s.tls.cacertfile</code></h3>
+<h4 id="listenc2stlscacertfile"><code>listen.c2s.tls.cacertfile</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>tls.cacertfile = "ca.pem"</code></li>
 </ul>
 <p>Path to the X509 PEM file with a CA chain that will be used to verify clients. It won't have any effect if <code>verify_peer</code> is not enabled.</p>
-<h3 id="listenc2stlsdhfile"><code>listen.c2s.tls.dhfile</code></h3>
+<h4 id="listenc2stlsdhfile"><code>listen.c2s.tls.dhfile</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>tls.dhfile = "dh.pem"</code></li>
 </ul>
 <p>Path to the Diffie-Hellman parameter file.</p>
-<h3 id="listenc2stlsprotocol_options-only-for-fast_tls"><code>listen.c2s.tls.protocol_options</code> - only for <code>fast_tls</code></h3>
+<h4 id="listenc2stlsprotocol_options-only-for-fast_tls"><code>listen.c2s.tls.protocol_options</code> - only for <code>fast_tls</code></h4>
 <ul>
 <li><strong>Syntax:</strong> array of strings</li>
 <li><strong>Default:</strong> <code>["no_sslv2", "no_sslv3", "no_tlsv1", "no_tlsv1_1"]</code></li>
 <li><strong>Example:</strong> <code>tls.protocol_options = ["no_tlsv1", "no_tlsv1_1"]</code></li>
 </ul>
 <p>A list of OpenSSL options for FastTLS. You can find the mappings between supported options and actual OpenSSL flags in the <code>fast_tls</code> <a href="https://github.com/processone/fast_tls/blob/master/c_src/options.h">source code</a>.</p>
-<h3 id="listenc2stlsciphers-for-fast_tls"><code>listen.c2s.tls.ciphers</code> - for <code>fast_tls</code></h3>
+<h4 id="listenc2stlsciphers-for-fast_tls"><code>listen.c2s.tls.ciphers</code> - for <code>fast_tls</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string with the OpenSSL cipher suite specification</li>
 <li><strong>Default:</strong> <code>"TLSv1.2:TLSv1.3"</code></li>
 <li><strong>Example:</strong> <code>tls.ciphers = "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384"</code></li>
 </ul>
 <p>Cipher suites to use with StartTLS or TLS. Please refer to the <a href="http://www.openssl.org/docs/man1.0.2/apps/ciphers.html">OpenSSL documentation</a> for the cipher string format.</p>
-<h3 id="listenc2stlsciphers-for-just_tls"><code>listen.c2s.tls.ciphers</code> - for <code>just_tls</code></h3>
+<h4 id="listenc2stlsciphers-for-just_tls"><code>listen.c2s.tls.ciphers</code> - for <code>just_tls</code></h4>
 <ul>
 <li><strong>Syntax:</strong> array of tables with the following keys: <code>cipher</code>, <code>key_exchange</code>, <code>mac</code>, <code>prf</code> and string values.</li>
 <li><strong>Default:</strong> not set, all supported cipher suites are accepted</li>
 <li><strong>Example:</strong> <code>tls.ciphers = "[{cipher = "aes_25_gcm", key_exchange = "any", mac = "aead", "prf = sha384"}]"</code></li>
 </ul>
 <p>Cipher suites to use with StartTLS or TLS. For allowed values, see the <a href="https://erlang.org/doc/man/ssl.html#type-ciphers">Erlang/OTP SSL documentation</a></p>
-<h3 id="listenc2stlsverify_mode-only-for-just_tls"><code>listen.c2s.tls.verify_mode</code> - only for <code>just_tls</code></h3>
+<h4 id="listenc2stlsverify_mode-only-for-just_tls"><code>listen.c2s.tls.verify_mode</code> - only for <code>just_tls</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"peer"</code>, <code>"selfsigned_peer"</code>, <code>"none"</code></li>
 <li><strong>Default:</strong> not set (equivalent to <code>"peer"</code> in the current version of Erlang/OTP)</li>
@@ -3590,20 +592,20 @@ They all have the <code>tls.</code> prefix.</p>
 <li><code>selfsigned_peer</code> - makes sure the peer's certificate is valid, but allows self-signed certificates,</li>
 <li><code>none</code> - any certificate is accepted.</li>
 </ul>
-<h3 id="listenc2stlsdisconnect_on_failure-only-for-just_tls"><code>listen.c2s.tls.disconnect_on_failure</code> - only for <code>just_tls</code></h3>
+<h4 id="listenc2stlsdisconnect_on_failure-only-for-just_tls"><code>listen.c2s.tls.disconnect_on_failure</code> - only for <code>just_tls</code></h4>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>true</code></li>
 <li><strong>Example:</strong> <code>tls.disconnect_on_failure = false</code></li>
 </ul>
-<h3 id="listenc2stlsversions-only-for-just_tls"><code>listen.c2s.tls.versions</code> - only for <code>just_tls</code></h3>
+<h4 id="listenc2stlsversions-only-for-just_tls"><code>listen.c2s.tls.versions</code> - only for <code>just_tls</code></h4>
 <ul>
 <li><strong>Syntax:</strong> array of strings</li>
 <li><strong>Default:</strong> not set, all supported versions are accepted</li>
 <li><strong>Example:</strong> <code>tls.versions = ["tlsv1.2", "tlsv1.3"]</code></li>
 </ul>
 <p>TLS versions to use with StartTLS or TLS. For allowed values, see the <a href="https://erlang.org/doc/man/ssl.html#type-protocol_version">Erlang/OTP SSL documentation</a></p>
-<h3 id="listenc2stlscrl_files-only-for-just_tls"><code>listen.c2s.tls.crl_files</code> - only for <code>just_tls</code></h3>
+<h4 id="listenc2stlscrl_files-only-for-just_tls"><code>listen.c2s.tls.crl_files</code> - only for <code>just_tls</code></h4>
 <ul>
 <li><strong>Syntax:</strong> array of strings, paths in the file system</li>
 <li><strong>Default:</strong> not set</li>
@@ -3612,39 +614,23 @@ They all have the <code>tls.</code> prefix.</p>
 <p>Specifies the paths to Certificate Revocation Lists.</p>
 <h3 id="c2s-example">C2S Example</h3>
 <p>The following section configures two C2S listeners.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.c2s]]</span>
-  <span class="n">port</span> <span class="o">=</span> <span class="mi">5222</span>
-  <span class="n">zlib</span> <span class="o">=</span> <span class="mi">10000</span>
-  <span class="n">access</span> <span class="o">=</span> <span class="s">&quot;c2s&quot;</span>
-  <span class="n">shaper</span> <span class="o">=</span> <span class="s">&quot;c2s_shaper&quot;</span>
-  <span class="n">max_stanza_size</span> <span class="o">=</span> <span class="mi">65536</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;starttls&quot;</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">certfile</span> <span class="o">=</span> <span class="s">&quot;server.pem&quot;</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">dhfile</span> <span class="o">=</span> <span class="s">&quot;dh_server.pem&quot;</span>
+<pre><code class="language-toml">[[listen.c2s]]
+  port = 5222
+  zlib = 10000
+  access = &quot;c2s&quot;
+  shaper = &quot;c2s_shaper&quot;
+  max_stanza_size = 65536
+  tls.mode = &quot;starttls&quot;
+  tls.certfile = &quot;server.pem&quot;
+  tls.dhfile = &quot;dh_server.pem&quot;
 
-<span class="k">[[listen.c2s]]</span>
-  <span class="n">port</span> <span class="o">=</span> <span class="mi">5223</span>
-  <span class="n">zlib</span> <span class="o">=</span> <span class="mi">4096</span>
-  <span class="n">access</span> <span class="o">=</span> <span class="s">&quot;c2s&quot;</span>
-  <span class="n">shaper</span> <span class="o">=</span> <span class="s">&quot;c2s_shaper&quot;</span>
-  <span class="n">max_stanza_size</span> <span class="o">=</span> <span class="mi">65536</span>
-</code></pre></div>
-</td></tr></table>
+[[listen.c2s]]
+  port = 5223
+  zlib = 4096
+  access = &quot;c2s&quot;
+  shaper = &quot;c2s_shaper&quot;
+  max_stanza_size = 65536
+</code></pre>
 <ul>
 <li>One at port 5222, which accepts a plain TCP connection and allows to use StartTLS for upgrading it to an encrypted one. The files containing the certificate and the DH parameter are also provided.</li>
 <li>One at port 5223, which accepts only encrypted TLS connections - this is the legacy method as StartTLS is preferred.</li>
@@ -3654,7 +640,7 @@ They all have the <code>tls.</code> prefix.</p>
 <p>Handles incoming server-to-server (S2S) connections (federation).
 The recommended port number for an S2S listener is 5269 <a href="https://tools.ietf.org/html/rfc6120#section-14.7">as registered in the XMPP protocol</a>.</p>
 <p><strong>Note:</strong> Many S2S options are configured in the <code>s2s</code> section of the configuration file and they apply to both incoming and outgoing connections.</p>
-<h3 id="listens2sshaper"><code>listen.s2s.shaper</code></h3>
+<h4 id="listens2sshaper"><code>listen.s2s.shaper</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, name of the shaper rule or <code>"none"</code></li>
 <li><strong>Default:</strong> <code>"none"</code> - no shaper</li>
@@ -3688,35 +674,30 @@ Here you can specify some additional options of the TLS encryption.</p>
 <h3 id="s2s-example">S2S Example</h3>
 <p>The following section configures an S2S listener with some basic settings set up.
 The <code>s2s_shaper</code> access rule is used, which requires a definition in the <code>access</code> section.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.s2s]]</span>
-  <span class="n">port</span> <span class="o">=</span> <span class="mi">5269</span>
-  <span class="n">shaper</span> <span class="o">=</span> <span class="s">&quot;s2s_shaper&quot;</span>
-  <span class="n">max_stanza_size</span> <span class="o">=</span> <span class="mi">131072</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">dhfile</span> <span class="o">=</span> <span class="s">&quot;dh_server.pem&quot;</span>
-</code></pre></div>
-</td></tr></table>
+<pre><code class="language-toml">[[listen.s2s]]
+  port = 5269
+  shaper = &quot;s2s_shaper&quot;
+  max_stanza_size = 131072
+  tls.dhfile = &quot;dh_server.pem&quot;
+</code></pre>
 <h2 id="xmpp-components-listenservice">XMPP Components: <code>[[listen.service]]</code></h2>
 <p>Interface for external services acting as XMPP components (<a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114: Jabber Component Protocol</a>), enabling communication between MongooseIM and external services over the XMPP network. The recommended port number for a component listener is 8888.</p>
-<p>According to <a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114: Jabber Component Protocol</a> the component's hostname should be given in the <stream:stream> element.</p>
-<h3 id="listenserviceaccess"><code>listen.service.access</code></h3>
+<p>According to (<a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114: Jabber Component Protocol</a>) the component's hostname should be given in the <stream:stream> element.</p>
+<h4 id="listenserviceaccess"><code>listen.service.access</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, rule name or <code>"all"</code></li>
 <li><strong>Default:</strong> <code>"all"</code></li>
 <li><strong>Example:</strong> <code>access = "component"</code></li>
 </ul>
 <p>Determines who is allowed to connect to the listener. By default the rule is <code>all</code>, which means that any external component can connect. The access rule referenced here needs to be defined in the <code>access</code> configuration section.</p>
-<h3 id="listenservicepassword"><code>listen.service.password</code></h3>
+<h4 id="listenservicepassword"><code>listen.service.password</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> no default, this option is mandatory</li>
 <li><strong>Example:</strong> <code>password = "secret"</code></li>
 </ul>
 <p>The external component needs to authenticate with this password to connect.</p>
-<h3 id="listenserviceshaper_rule"><code>listen.service.shaper_rule</code></h3>
+<h4 id="listenserviceshaper_rule"><code>listen.service.shaper_rule</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, name of the shaper</li>
 <li><strong>Default:</strong> <code>"none"</code></li>
@@ -3724,14 +705,14 @@ The <code>s2s_shaper</code> access rule is used, which requires a definition in 
 </ul>
 <p>The traffic shaper used to limit the XMPP traffic to prevent the server from being flooded with incoming data.
 Contrary to the C2S and S2S shapers, here the shaper name directly references the shaper that needs to be defined in the <a href="../shaper/"><code>shaper</code></a> section.</p>
-<h3 id="listenservicecheck_from"><code>listen.service.check_from</code></h3>
+<h4 id="listenservicecheck_from"><code>listen.service.check_from</code></h4>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>true</code></li>
 <li><strong>Example:</strong> <code>check_from = false</code></li>
 </ul>
 <p>Specifies whether the server should verify the "from" field in stanzas from the component.</p>
-<h3 id="listenservicehidden_components"><code>listen.service.hidden_components</code></h3>
+<h4 id="listenservicehidden_components"><code>listen.service.hidden_components</code></h4>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
@@ -3743,52 +724,42 @@ Alone, it doesn't change the server behaviour in any way, but it may be used by 
 An example would be <a href="../../modules/mod_disco/"><code>mod_disco</code></a>, which may be configured to filter out hidden components from disco results, so they won't be discoverable by clients.
 A reason to do so could be reduced traffic - systems with many components could return very long disco responses.
 Also, some deployments would like to avoid revealing some services; not because it is a security threat (this method does not prevent clients from communicating with hidden components), but rather because they are not meant to interact with clients directly (e.g. helper components for other components).</p>
-<h3 id="listenserviceconflict_behaviour"><code>listen.service.conflict_behaviour</code></h3>
+<h4 id="listenserviceconflict_behaviour"><code>listen.service.conflict_behaviour</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, one of: <code>"disconnect"</code>, <code>"kick_old"</code></li>
 <li><strong>Default:</strong> <code>"disconnect"</code></li>
 <li><strong>Example:</strong> <code>conflict_behaviour = "kick_old"</code></li>
 </ul>
 <p>By default, when a component tries to connect and a registration conflict occurs, the connection is dropped with the following error:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;stream:error&gt;</span>
-  <span class="nt">&lt;conflict</span> <span class="na">xmlns=</span><span class="s">&#39;urn:ietf:params:xml:ns:xmpp-streams&#39;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/stream:error&gt;</span>
-<span class="nt">&lt;/stream:stream&gt;</span>
-</code></pre></div>
-</td></tr></table>
+<pre><code class="language-xml">&lt;stream:error&gt;
+  &lt;conflict xmlns='urn:ietf:params:xml:ns:xmpp-streams'/&gt;
+&lt;/stream:error&gt;
+&lt;/stream:stream&gt;
+</code></pre>
 <p>It makes implementing the reconnection logic difficult, because the old connection would not allow any other connections.
 By setting this option to <code>kick_old</code>, we drop any old connections registered at the same host before accepting new ones.</p>
 <h3 id="custom-extension-to-the-protocol">Custom extension to the protocol</h3>
 <p>In order to register a component for all virtual hosts served by the server (see <code>hosts</code> in the <code>general</code> section), the component must add the attribute <code>is_subdomain="true"</code> to the opening stream element.
 This maybe helpful if someone wants to have a single instance of a component serving multiple virtual hosts.
-The <code>is_subdomain</code> attribute is optional and the default behaviour is as described in <a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114: Jabber Component Protocol</a>.</p>
+The <code>is_subdomain</code> attribute is optional and the default behaviour is as described in <a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114</a>.</p>
 <h3 id="service-listener-example">Service listener example</h3>
 <p>The following section configures a service listener, accepting connections from external components.
 The IP address is limited to loopback to prevent connections from different hosts.
 All components are allowed to connect, but they need to provide the password.
 The shaper named <code>fast</code> needs to be defined in the <code>shaper</code> section.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.service]]</span>
-  <span class="n">port</span> <span class="o">=</span> <span class="mi">8888</span>
-  <span class="n">access</span> <span class="o">=</span> <span class="s">&quot;all&quot;</span>
-  <span class="n">shaper_rule</span> <span class="o">=</span> <span class="s">&quot;fast&quot;</span>
-  <span class="n">ip_address</span> <span class="o">=</span> <span class="s">&quot;127.0.0.1&quot;</span>
-  <span class="n">password</span> <span class="o">=</span> <span class="s">&quot;secret&quot;</span>
-</code></pre></div>
-</td></tr></table>
+<pre><code class="language-toml">[[listen.service]]
+  port = 8888
+  access = &quot;all&quot;
+  shaper_rule = &quot;fast&quot;
+  ip_address = &quot;127.0.0.1&quot;
+  password = &quot;secret&quot;
+</code></pre>
 <h2 id="http-based-services-listenhttp">HTTP-based services: <code>[[listen.http]]</code></h2>
 <p>Manages all HTTP-based services, such as BOSH (HTTP long-polling), WebSocket and REST.
 It uses the <a href="https://ninenines.eu/docs/en/cowboy/2.6/manual">Cowboy</a> web server.
 Recommended port number: 5280 for BOSH/WS.</p>
 <p>There are the following options for each of the HTTP listeners:</p>
-<h3 id="listenhttphandlers"><code>listen.http.handlers</code></h3>
+<h4 id="listenhttphandlers"><code>listen.http.handlers</code></h4>
 <ul>
 <li>
 <p><strong>Syntax:</strong> each handler is specified in a subsection starting with <code>[[listen.http.handlers.type]]</code> where <code>type</code> is one of the allowed handler types, handling different connection types, e.g.</p>
@@ -3803,23 +774,16 @@ The double-bracket syntax is used because there can be multiple handlers of a gi
 <li>
 <p><strong>Default:</strong> there is no default, all handlers need to be specified explicitly.</p>
 </li>
-<li><strong>Example:</strong> two handlers, one for BOSH and one for WebSockets
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="k">[[listen.http.handlers.mod_bosh]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/http-bind&quot;</span>
-
-  <span class="k">[[listen.http.handlers.mod_websockets]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/ws-xmpp&quot;</span>
-</code></pre></div>
-</td></tr></table></li>
+<li><strong>Example:</strong> two handlers, one for BOSH and one for WebSockets</li>
 </ul>
+<pre><code class="language-toml">  [[listen.http.handlers.mod_bosh]]
+    host = &quot;_&quot;
+    path = &quot;/http-bind&quot;
+
+  [[listen.http.handlers.mod_websockets]]
+    host = &quot;_&quot;
+    path = &quot;/ws-xmpp&quot;
+</code></pre>
 <h3 id="common-handler-options">Common handler options</h3>
 <h4 id="listenhttphandlershost"><code>listen.http.handlers.*.host</code></h4>
 <ul>
@@ -3868,15 +832,11 @@ You can pass the following optional parameters:</p>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong></li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[listen.http.handlers.mod_websockets.service]</span>
-  <span class="n">access</span> <span class="o">=</span> <span class="s">&quot;all&quot;</span>
-  <span class="n">shaper_rule</span> <span class="o">=</span> <span class="s">&quot;fast&quot;</span>
-  <span class="n">password</span> <span class="o">=</span> <span class="s">&quot;secret&quot;</span>
-</code></pre></div>
-</td></tr></table>
+<pre><code class="language-toml">[listen.http.handlers.mod_websockets.service]
+  access = &quot;all&quot;
+  shaper_rule = &quot;fast&quot;
+  password = &quot;secret&quot;
+</code></pre>
 <p>This subsection enables external component connections over WebSockets.
 See the <a href="#xmpp-components-listenservice">service</a> listener section for details.</p>
 <h3 id="handler-types-rest-api-admin-mongoose_api_admin">Handler types: REST API - Admin - <code>mongoose_api_admin</code></h3>
@@ -4018,235 +978,135 @@ The library used for HTTP is the Erlang TLS implementation provided by OTP - see
 <p>The examples shown below are included in the provided default configuration file.</p>
 <h4 id="example-1-bosh-and-ws">Example 1. BOSH and WS</h4>
 <p>The following listener accepts BOSH and WebSocket connections and has TLS configured.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.http]]</span>
-  <span class="n">port</span> <span class="o">=</span> <span class="mi">5285</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">certfile</span> <span class="o">=</span> <span class="s">&quot;mycert.pem&quot;</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">keyfile</span> <span class="o">=</span> <span class="s">&quot;mykey.pem&quot;</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">password</span> <span class="o">=</span>  <span class="s">&quot;secret&quot;</span>
+<pre><code class="language-toml">[[listen.http]]
+  port = 5285
+  tls.certfile = &quot;mycert.pem&quot;
+  tls.keyfile = &quot;mykey.pem&quot;
+  tls.password =  &quot;secret&quot;
 
-  <span class="k">[[listen.http.handlers.mod_bosh]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/http-bind&quot;</span>
+  [[listen.http.handlers.mod_bosh]]
+    host = &quot;_&quot;
+    path = &quot;/http-bind&quot;
 
-  <span class="k">[[listen.http.handlers.mod_websockets]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/ws-xmpp&quot;</span>
-</code></pre></div>
-</td></tr></table>
+  [[listen.http.handlers.mod_websockets]]
+    host = &quot;_&quot;
+    path = &quot;/ws-xmpp&quot;
+</code></pre>
 <h4 id="example-2-admin-api">Example 2. Admin API</h4>
 <p>REST API for administration, the listener is bound to <code>127.0.0.1</code> for increased security.
 The number of acceptors and connections is specified (reduced).</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.http]]</span>
-  <span class="n">ip_address</span> <span class="o">=</span> <span class="s">&quot;127.0.0.1&quot;</span>
-  <span class="n">port</span> <span class="o">=</span> <span class="mi">8088</span>
-  <span class="n">transport</span><span class="p">.</span><span class="n">num_acceptors</span> <span class="o">=</span> <span class="mi">5</span>
-  <span class="n">transport</span><span class="p">.</span><span class="n">max_connections</span> <span class="o">=</span> <span class="mi">10</span>
+<pre><code class="language-toml">[[listen.http]]
+  ip_address = &quot;127.0.0.1&quot;
+  port = 8088
+  transport.num_acceptors = 5
+  transport.max_connections = 10
 
-  <span class="k">[[listen.http.handlers.mongoose_api_admin]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/api&quot;</span>
-</code></pre></div>
-</td></tr></table>
+  [[listen.http.handlers.mongoose_api_admin]]
+    host = &quot;localhost&quot;
+    path = &quot;/api&quot;
+</code></pre>
 <h4 id="example-3-client-api">Example 3. Client API</h4>
 <p>REST API for clients.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.http]]</span>
-  <span class="n">port</span> <span class="o">=</span> <span class="mi">8089</span>
-  <span class="n">transport</span><span class="p">.</span><span class="n">max_connections</span> <span class="o">=</span> <span class="mi">1024</span>
-  <span class="n">protocol</span><span class="p">.</span><span class="n">compress</span> <span class="o">=</span> <span class="kc">true</span>
+<pre><code class="language-toml">[[listen.http]]
+  port = 8089
+  transport.max_connections = 1024
+  protocol.compress = true
 
-  <span class="k">[[listen.http.handlers.lasse_handler]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/api/sse&quot;</span>
-    <span class="n">module</span> <span class="o">=</span> <span class="s">&quot;mongoose_client_api_sse&quot;</span>
+  [[listen.http.handlers.lasse_handler]]
+    host = &quot;_&quot;
+    path = &quot;/api/sse&quot;
+    module = &quot;mongoose_client_api_sse&quot;
 
-  <span class="k">[[listen.http.handlers.mongoose_client_api_messages]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/api/messages/[:with]&quot;</span>
+  [[listen.http.handlers.mongoose_client_api_messages]]
+    host = &quot;_&quot;
+    path = &quot;/api/messages/[:with]&quot;
 
-  <span class="k">[[listen.http.handlers.mongoose_client_api_contacts]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/api/contacts/[:jid]&quot;</span>
+  [[listen.http.handlers.mongoose_client_api_contacts]]
+    host = &quot;_&quot;
+    path = &quot;/api/contacts/[:jid]&quot;
 
-  <span class="k">[[listen.http.handlers.mongoose_client_api_rooms]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/api/rooms/[:id]&quot;</span>
+  [[listen.http.handlers.mongoose_client_api_rooms]]
+    host = &quot;_&quot;
+    path = &quot;/api/rooms/[:id]&quot;
 
-  <span class="k">[[listen.http.handlers.mongoose_client_api_rooms_config]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/api/rooms/[:id]/config&quot;</span>
+  [[listen.http.handlers.mongoose_client_api_rooms_config]]
+    host = &quot;_&quot;
+    path = &quot;/api/rooms/[:id]/config&quot;
 
-  <span class="k">[[listen.http.handlers.mongoose_client_api_rooms_users]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/api/rooms/:id/users/[:user]&quot;</span>
+  [[listen.http.handlers.mongoose_client_api_rooms_users]]
+    host = &quot;_&quot;
+    path = &quot;/api/rooms/:id/users/[:user]&quot;
 
-  <span class="k">[[listen.http.handlers.mongoose_client_api_rooms_messages]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/api/rooms/[:id]/messages&quot;</span>
+  [[listen.http.handlers.mongoose_client_api_rooms_messages]]
+    host = &quot;_&quot;
+    path = &quot;/api/rooms/[:id]/messages&quot;
 
-  <span class="k">[[listen.http.handlers.cowboy_swagger_redirect_handler]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/api-docs&quot;</span>
+  [[listen.http.handlers.cowboy_swagger_redirect_handler]]
+    host = &quot;_&quot;
+    path = &quot;/api-docs&quot;
 
-  <span class="k">[[listen.http.handlers.cowboy_swagger_json_handler]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/api-docs/swagger.json&quot;</span>
+  [[listen.http.handlers.cowboy_swagger_json_handler]]
+    host = &quot;_&quot;
+    path = &quot;/api-docs/swagger.json&quot;
 
-  <span class="k">[[listen.http.handlers.cowboy_static]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/api-docs/[...]&quot;</span>
-    <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;priv_dir&quot;</span>
-    <span class="n">app</span> <span class="o">=</span> <span class="s">&quot;cowboy_swagger&quot;</span>
-    <span class="n">content_path</span> <span class="o">=</span> <span class="s">&quot;swagger&quot;</span>
-</code></pre></div>
-</td></tr></table>
-                
+  [[listen.http.handlers.cowboy_static]]
+    host = &quot;_&quot;
+    path = &quot;/api-docs/[...]&quot;
+    type = &quot;priv_dir&quot;
+    app = &quot;cowboy_swagger&quot;
+    content_path = &quot;swagger&quot;
+</code></pre>
               
-              
-                
-
-
-              
-            </article>
+            </div>
           </div>
-        </div>
-      </main>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        
-<footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
-        
-          <a href="../general/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-            </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Options: General
-              </div>
-            </div>
-          </a>
-        
-        
-          <a href="../auth/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Options: Auth
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-      </div>
+        <a href="../auth/" class="btn btn-neutral float-right" title="Options: Auth">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../general/" class="btn btn-neutral" title="Options: General"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
   </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
-    </div>
-    
-      <script src="../../assets/javascripts/vendor.fd16492e.min.js"></script>
-      <script src="../../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
       
-      <script>
-        app = initialize({
-          base: "../..",
-          features: [],
-          search: Object.assign({
-            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
-          }, typeof search !== "undefined" && search)
-        })
-      </script>
       
-        <script src="../../js/version-select.js"></script>
+        <span><a href="../general/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-    
-  </body>
+      
+        <span style="margin-left: 15px"><a href="../auth/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
 </html>
