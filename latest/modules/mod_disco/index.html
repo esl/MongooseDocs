@@ -517,6 +517,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/4.0.1_4.x.x/" class="md-nav__link">
+        4.0.1 to 4.x.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         MAM MUC migration helper
       </a>
@@ -2252,18 +2264,18 @@ Please note that <code>mod_disco</code> doesn't verify these domains, so if no h
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">server_info</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="p">{</span><span class="n">module</span> <span class="o">=</span> <span class="s">&quot;all&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;abuse-address&quot;</span><span class="p">,</span> <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;admin@example.com&quot;</span><span class="p">]}</span>
-<span class="p">]</span>
+                <span class="p">{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;abuse-address&quot;</span><span class="p">,</span> <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;admin@example.com&quot;</span><span class="p">]}</span>
+              <span class="p">]</span>
 </code></pre></div>
 </td></tr></table>
 Adds extra disco information to all or chosen modules.
 New fields will be added in a manner compliant with <a href="https://xmpp.org/extensions/xep-0157.html">XEP-0157: Contact Addresses for XMPP Services</a>.</li>
 </ul>
-<p>Required keys and their values for each entry:</p>
+<p>Keys and their values for each entry:</p>
 <ul>
-<li><code>module</code> - the string <code>"all"</code> or an array of module names for which the additional server information is to be returned</li>
-<li><code>name</code> - a non-empty string with the name of the field</li>
-<li><code>urls</code> - an array of valid addresses</li>
+<li><code>name</code> - required, a non-empty string with the name of the field</li>
+<li><code>urls</code> - required, an array of valid addresses</li>
+<li><code>modules</code> - optional, an array of module names for which the additional server information is to be returned. By default the server information is returned for all modules.</li>
 </ul>
 <h3 id="modulesmod_discousers_can_see_hidden_services"><code>modules.mod_disco.users_can_see_hidden_services</code></h3>
 <ul>
@@ -2287,8 +2299,8 @@ will still receive full disco results.</p>
   <span class="n">iqdisc</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="s">&quot;one_queue&quot;</span>
   <span class="n">extra_domains</span> <span class="o">=</span> <span class="k">[&quot;some_domain&quot;, &quot;another_domain&quot;]</span>
   <span class="n">server_info</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="n">module</span> <span class="o">=</span> <span class="s">&quot;all&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;abuse-address&quot;</span><span class="p">,</span> <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;admin@example.com&quot;</span><span class="p">]},</span>
-    <span class="p">{</span><span class="n">module</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;mod_muc&quot;</span><span class="p">,</span> <span class="s">&quot;mod_disco&quot;</span><span class="p">],</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;friendly-spirits&quot;</span><span class="p">,</span> <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;spirit1@localhost&quot;</span><span class="p">,</span> <span class="s">&quot;spirit2@localhost&quot;</span><span class="p">]}</span>
+    <span class="p">{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;abuse-address&quot;</span><span class="p">,</span> <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;admin@example.com&quot;</span><span class="p">]},</span>
+    <span class="p">{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;friendly-spirits&quot;</span><span class="p">,</span> <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;spirit1@localhost&quot;</span><span class="p">,</span> <span class="s">&quot;spirit2@localhost&quot;</span><span class="p">],</span> <span class="n">modules</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;mod_muc&quot;</span><span class="p">,</span> <span class="s">&quot;mod_disco&quot;</span><span class="p">]}</span>
   <span class="p">]</span>
   <span class="n">users_can_see_hidden_services</span> <span class="o">=</span> <span class="kc">true</span>
 </code></pre></div>

@@ -517,6 +517,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/4.0.1_4.x.x/" class="md-nav__link">
+        4.0.1 to 4.x.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         MAM MUC migration helper
       </a>
@@ -1921,13 +1933,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#modulesmod_global_distribconnectionstlsenabled" class="md-nav__link">
-    modules.mod_global_distrib.connections.tls.enabled
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#modulesmod_global_distribconnectionstlscertfile" class="md-nav__link">
     modules.mod_global_distrib.connections.tls.certfile
   </a>
@@ -2638,13 +2643,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#modulesmod_global_distribconnectionstlsenabled" class="md-nav__link">
-    modules.mod_global_distrib.connections.tls.enabled
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#modulesmod_global_distribconnectionstlscertfile" class="md-nav__link">
     modules.mod_global_distrib.connections.tls.certfile
   </a>
@@ -2985,8 +2983,8 @@ In the example above, the message from <strong>U2</strong> would be temporarily 
 The endpoint list will be shared with other datacenters via the replicated backend.</p>
 <h4 id="modulesmod_global_distribconnectionsadvertised_endpoints"><code>modules.mod_global_distrib.connections.advertised_endpoints</code></h4>
 <ul>
-<li><strong>Syntax:</strong> Array of TOML tables with the following keys: <code>host</code> and <code>port</code>, and the following values: {host = <code>string</code>, port = <code>non_negative_integer</code>} <strong>or</strong> <code>false</code></li>
-<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Syntax:</strong> Array of TOML tables with the following keys: <code>host</code> and <code>port</code>, and the following values: {host = <code>string</code>, port = <code>non_negative_integer</code>}</li>
+<li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>advertised_endpoints = [{host = "172.16.0.2", port = 5555}]</code></li>
 </ul>
 <p>A list of endpoints which will be advertised in Redis and therefore used to establish connection with this node by other nodes. If not specified, <code>endpoints</code> value (after resolution) is considered <code>advertised_endpoints</code>. The host may be either IP or domain, just like in case of endpoints. The difference is, the domain name won't be resolved but inserted directly to the mappings backend instead.</p>
@@ -3014,22 +3012,16 @@ A separate timer is maintained for every remote domain.</p>
 <p>Endpoint refresh interval, when array of endpoints is empty.</p>
 <h4 id="modulesmod_global_distribconnectionsdisabled_gc_interval"><code>modules.mod_global_distrib.connections.disabled_gc_interval</code></h4>
 <ul>
-<li><strong>Syntax:</strong> non-negative integer, value given in seconds</li>
+<li><strong>Syntax:</strong> positive integer, value given in seconds</li>
 <li><strong>Default:</strong> <code>60</code></li>
 <li><strong>Example:</strong> <code>disabled_gc_interval = 60</code></li>
 </ul>
 <p>An interval between disabled endpoints "garbage collection".
 It means that disabled endpoints are periodically verified and if Global Distribution detects that connections is no longer alive, the connection pool is closed completely.</p>
 <h3 id="tls-options">TLS options</h3>
-<h4 id="modulesmod_global_distribconnectionstlsenabled"><code>modules.mod_global_distrib.connections.tls.enabled</code></h4>
-<ul>
-<li><strong>Syntax:</strong> boolean</li>
-<li><strong>Default:</strong> <code>false</code></li>
-<li><strong>Example:</strong> <code>enabled = true</code></li>
-</ul>
-<p>To enable TLS support the <code>cacertfile</code> and <code>certfile</code> options have to be present.
+<p><strong>Note:</strong> By default <code>tls</code> is disabled and all data will be sent via standard TCP connections.</p>
+<p>To enable TLS support, the <code>cacertfile</code> and <code>certfile</code> options have to be present.
 These options will be passed to the <code>fast_tls</code> driver.</p>
-<p>If <code>tls</code> is disabled, all data will be sent via standard TCP connections.</p>
 <h4 id="modulesmod_global_distribconnectionstlscertfile"><code>modules.mod_global_distrib.connections.tls.certfile</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
@@ -3065,7 +3057,7 @@ These options will be passed to the <code>fast_tls</code> driver.</p>
 <p>Name of the redis pool defined in <a href="../../advanced-configuration/outgoing-connections/">outgoing pools</a>.</p>
 <h4 id="modulesmod_global_distribredisexpire_after"><code>modules.mod_global_distrib.redis.expire_after</code></h4>
 <ul>
-<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> <code>120</code></li>
 <li><strong>Example:</strong> <code>expire_after = 120</code></li>
 </ul>
@@ -3150,13 +3142,11 @@ The endpoints used for connection to a remote datacenter may be overridden by gl
  9
 10
 11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_global_distrib]</span>
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_global_distrib]</span>
   <span class="n">global_host</span> <span class="o">=</span> <span class="s">&quot;example.com&quot;</span>
   <span class="n">local_host</span> <span class="o">=</span> <span class="s">&quot;datacenter1.example.com&quot;</span>
   <span class="n">connections</span><span class="p">.</span><span class="n">endpoints</span> <span class="o">=</span> <span class="k">[{host = &quot;172.16.0.2&quot;, port = 5555}]</span>
   <span class="n">connections</span><span class="p">.</span><span class="n">advertised_endpoints</span> <span class="o">=</span> <span class="k">[{host = &quot;172.16.0.2&quot;, port = 5555}]</span>
-  <span class="n">connections</span><span class="p">.</span><span class="n">tls</span><span class="p">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">true</span>
   <span class="n">connections</span><span class="p">.</span><span class="n">tls</span><span class="p">.</span><span class="n">certfile</span> <span class="o">=</span> <span class="s">&quot;priv/dc1.pem&quot;</span>
   <span class="n">connections</span><span class="p">.</span><span class="n">tls</span><span class="p">.</span><span class="n">cacertfile</span> <span class="o">=</span> <span class="s">&quot;priv/ca.pem&quot;</span>
   <span class="n">connections</span><span class="p">.</span><span class="n">connections_per_endpoint</span> <span class="o">=</span> <span class="mi">30</span>

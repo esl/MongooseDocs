@@ -517,6 +517,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/4.0.1_4.x.x/" class="md-nav__link">
+        4.0.1 to 4.x.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         MAM MUC migration helper
       </a>
@@ -862,22 +874,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#listenc2stlsciphers" class="md-nav__link">
+    listen.c2s.tls.ciphers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#listenc2stlsprotocol_options-only-for-fast_tls" class="md-nav__link">
     listen.c2s.tls.protocol_options - only for fast_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsciphers-for-fast_tls" class="md-nav__link">
-    listen.c2s.tls.ciphers - for fast_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsciphers-for-just_tls" class="md-nav__link">
-    listen.c2s.tls.ciphers - for just_tls
   </a>
   
 </li>
@@ -2959,22 +2964,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#listenc2stlsciphers" class="md-nav__link">
+    listen.c2s.tls.ciphers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#listenc2stlsprotocol_options-only-for-fast_tls" class="md-nav__link">
     listen.c2s.tls.protocol_options - only for fast_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsciphers-for-fast_tls" class="md-nav__link">
-    listen.c2s.tls.ciphers - for fast_tls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenc2stlsciphers-for-just_tls" class="md-nav__link">
-    listen.c2s.tls.ciphers - for just_tls
   </a>
   
 </li>
@@ -3649,6 +3647,13 @@ They all have the <code>tls.</code> prefix.</p>
 <li><strong>Example:</strong> <code>tls.dhfile = "dh.pem"</code></li>
 </ul>
 <p>Path to the Diffie-Hellman parameter file.</p>
+<h3 id="listenc2stlsciphers"><code>listen.c2s.tls.ciphers</code></h3>
+<ul>
+<li><strong>Syntax:</strong> string with the OpenSSL cipher suite specification</li>
+<li><strong>Default:</strong> for <code>fast_tls</code> the default is<code>"TLSv1.2:TLSv1.3"</code>. For <code>just_tls</code> this option is not set by default - all supported suites are accepted.</li>
+<li><strong>Example:</strong> <code>tls.ciphers = "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384"</code></li>
+</ul>
+<p>Cipher suites to use with StartTLS or TLS. Please refer to the <a href="http://www.openssl.org/docs/man1.0.2/apps/ciphers.html">OpenSSL documentation</a> for the cipher string format. For <code>fast_tls</code>, this string can be used to specify versions as well. For <code>just_tls</code>, see the <a href="https://erlang.org/doc/man/ssl.html#type-ciphers">Erlang/OTP SSL documentation</a> for allowed values.</p>
 <h3 id="listenc2stlsprotocol_options-only-for-fast_tls"><code>listen.c2s.tls.protocol_options</code> - only for <code>fast_tls</code></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings</li>
@@ -3656,20 +3661,6 @@ They all have the <code>tls.</code> prefix.</p>
 <li><strong>Example:</strong> <code>tls.protocol_options = ["no_tlsv1", "no_tlsv1_1"]</code></li>
 </ul>
 <p>A list of OpenSSL options for FastTLS. You can find the mappings between supported options and actual OpenSSL flags in the <code>fast_tls</code> <a href="https://github.com/processone/fast_tls/blob/master/c_src/options.h">source code</a>.</p>
-<h3 id="listenc2stlsciphers-for-fast_tls"><code>listen.c2s.tls.ciphers</code> - for <code>fast_tls</code></h3>
-<ul>
-<li><strong>Syntax:</strong> string with the OpenSSL cipher suite specification</li>
-<li><strong>Default:</strong> <code>"TLSv1.2:TLSv1.3"</code></li>
-<li><strong>Example:</strong> <code>tls.ciphers = "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384"</code></li>
-</ul>
-<p>Cipher suites to use with StartTLS or TLS. Please refer to the <a href="http://www.openssl.org/docs/man1.0.2/apps/ciphers.html">OpenSSL documentation</a> for the cipher string format.</p>
-<h3 id="listenc2stlsciphers-for-just_tls"><code>listen.c2s.tls.ciphers</code> - for <code>just_tls</code></h3>
-<ul>
-<li><strong>Syntax:</strong> array of tables with the following keys: <code>cipher</code>, <code>key_exchange</code>, <code>mac</code>, <code>prf</code> and string values.</li>
-<li><strong>Default:</strong> not set, all supported cipher suites are accepted</li>
-<li><strong>Example:</strong> <code>tls.ciphers = "[{cipher = "aes_25_gcm", key_exchange = "any", mac = "aead", "prf = sha384"}]"</code></li>
-</ul>
-<p>Cipher suites to use with StartTLS or TLS. For allowed values, see the <a href="https://erlang.org/doc/man/ssl.html#type-ciphers">Erlang/OTP SSL documentation</a></p>
 <h3 id="listenc2stlsverify_mode-only-for-just_tls"><code>listen.c2s.tls.verify_mode</code> - only for <code>just_tls</code></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"peer"</code>, <code>"selfsigned_peer"</code>, <code>"none"</code></li>
@@ -3941,8 +3932,8 @@ You can pass the following optional parameters:</p>
 <p>The time (in milliseconds) after which an inactive user is disconnected.</p>
 <h4 id="listenhttphandlersmod_websocketsping_rate"><code>listen.http.handlers.mod_websockets.ping_rate</code></h4>
 <ul>
-<li><strong>Syntax:</strong> positive integer or the string <code>"none"</code></li>
-<li><strong>Default:</strong> <code>"none"</code></li>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> not set - pings disabled</li>
 <li><strong>Example:</strong> <code>ping_rate = 10_000</code></li>
 </ul>
 <p>The time between pings sent by server. By setting this option you enable server-side pinging.</p>
@@ -4071,11 +4062,11 @@ The library used for HTTP is the Erlang TLS implementation provided by OTP - see
 <p>Path to the Diffie-Hellman parameter file.</p>
 <h4 id="listenhttptlsciphers"><code>listen.http.tls.ciphers</code></h4>
 <ul>
-<li><strong>Syntax:</strong> array of tables with the following keys: <code>cipher</code>, <code>key_exchange</code>, <code>mac</code>, <code>prf</code> and string values.</li>
+<li><strong>Syntax:</strong> string with the OpenSSL cipher suite specification</li>
 <li><strong>Default:</strong> not set, all supported cipher suites are accepted</li>
-<li><strong>Example:</strong> <code>tls.ciphers = "[{cipher = "aes_25_gcm", key_exchange = "any", mac = "aead", "prf = sha384"}]"</code></li>
+<li><strong>Example:</strong> <code>tls.ciphers = "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384"</code></li>
 </ul>
-<p>Cipher suites to use. For allowed values, see the <a href="https://erlang.org/doc/man/ssl.html#type-ciphers">Erlang/OTP SSL documentation</a></p>
+<p>Cipher suites to use. Please refer to the <a href="http://www.openssl.org/docs/man1.0.2/apps/ciphers.html">OpenSSL documentation</a> for the cipher string format. For allowed values, see the <a href="http://www.openssl.org/docs/man1.0.2/apps/ciphers.html">Erlang/OTP OpenSSL documentation</a>.</p>
 <h4 id="listenhttptlsversions"><code>listen.http.tls.versions</code></h4>
 <ul>
 <li><strong>Syntax:</strong> array of strings</li>

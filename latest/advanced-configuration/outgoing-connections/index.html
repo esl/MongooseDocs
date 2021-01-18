@@ -517,6 +517,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/4.0.1_4.x.x/" class="md-nav__link">
+        4.0.1 to 4.x.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         MAM MUC migration helper
       </a>
@@ -3256,9 +3268,8 @@ The interface for outgoing connections management was unified and is now availab
 <li><code>elastic</code> - pool of connections to ElasticSearch server</li>
 <li><code>rdbms</code> - pool of connections to an RDBMS database</li>
 <li><code>rabbit</code> - pool of connections to a RabbitMQ server</li>
-<li><code>ldap</code> - pool of connections to an LDAP server</li>
 <li>
-<p><code>generic</code> - pool of generic workers not associated directly with a particular connection</p>
+<p><code>ldap</code> - pool of connections to an LDAP server</p>
 </li>
 <li>
 <p><strong>Syntax:</strong> Each pool is specified in a subsection starting with <code>[outgoing_pools.type.tag]</code>, where <code>type</code> is one of available connection types and <code>tag</code> is an arbitrary value uniquely identifying the pool within its type.
@@ -3683,11 +3694,11 @@ If the certificate is signed by an intermediate CA, you should specify here the 
 <p>Password to the X509 PEM file with the private key.</p>
 <h3 id="outgoing_poolsconnectiontlsciphers"><code>outgoing_pools.*.*.connection.tls.ciphers</code></h3>
 <ul>
-<li><strong>Syntax:</strong> array of tables with the following keys: <code>cipher</code>, <code>key_exchange</code>, <code>mac</code>, <code>prf</code> and string values.</li>
+<li><strong>Syntax:</strong> string with the OpenSSL cipher suite specification</li>
 <li><strong>Default:</strong> not set, all supported cipher suites are accepted</li>
-<li><strong>Example:</strong> <code>tls.ciphers = "[{cipher = "aes_25_gcm", key_exchange = "any", mac = "aead", "prf = sha384"}]"</code></li>
+<li><strong>Example:</strong> <code>tls.ciphers = "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384"</code></li>
 </ul>
-<p>Cipher suites to use. For allowed values, see the <a href="https://erlang.org/doc/man/ssl.html#type-ciphers">Erlang/OTP SSL documentation</a></p>
+<p>Cipher suites to use. Please refer to the <a href="http://www.openssl.org/docs/man1.0.2/apps/ciphers.html">OpenSSL documentation</a> for the cipher string format. For allowed values, see the <a href="https://erlang.org/doc/man/ssl.html#type-ciphers">Erlang/OTP SSL documentation</a>.</p>
 <h3 id="outgoing_poolsconnectiontlsversions"><code>outgoing_pools.*.*.connection.tls.versions</code></h3>
 <ul>
 <li><strong>Syntax:</strong> list of strings</li>

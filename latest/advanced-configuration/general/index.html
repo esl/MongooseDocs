@@ -517,6 +517,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/4.0.1_4.x.x/" class="md-nav__link">
+        4.0.1 to 4.x.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         MAM MUC migration helper
       </a>
@@ -2587,17 +2599,15 @@ Enabling this option uses an alternative query instead of <code>SELECT COUNT</co
 <ul>
 <li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> TOML table, whose <strong>keys</strong> are the names of the access rules defined in the <a href="../access/"><code>access</code></a> config section and <strong>values</strong> specify allowed administration commands. Each value is a table with the following nested options:<ul>
-<li><code>commands</code>: mandatory, a list of strings representing the allowed commands, or the string <code>"all"</code></li>
-<li><code>argument_restrictions</code>: optional, a table whose keys are the argument names and the values are strings representing the allowed values</li>
+<li><code>commands</code>: optional, a list of strings representing the allowed commands. When not specified, all commands are allowed.</li>
+<li><code>argument_restrictions</code>: optional, a table whose keys are the argument names and the values are strings representing the allowed values. When not specified, there are no restrictions.</li>
 </ul>
 </li>
 <li><strong>Default:</strong> not set</li>
 </ul>
 <p>By default all admin operations are permitted with the <code>mongooseimctl</code> command without authentication. You can change that by setting this option for a specific access rule. When the rule returns the value <code>"allow"</code>, the user is permitted to use the specified commands with the optional restrictions.</p>
 <p><strong>Example 1.</strong> Allow administrators to execute all commands without any restrictions:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="k">[general.mongooseimctl_access_commands.admin]</span>
-    <span class="n">commands</span> <span class="o">=</span> <span class="s">&quot;all&quot;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="k">[general.mongooseimctl_access_commands.admin]</span>
 </code></pre></div>
 </td></tr></table>
 <p>The <code>admin</code> rule needs to be defined in the <code>access</code> section.</p>

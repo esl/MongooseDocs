@@ -517,6 +517,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/4.0.1_4.x.x/" class="md-nav__link">
+        4.0.1 to 4.x.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         MAM MUC migration helper
       </a>
@@ -2045,8 +2057,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#modulesmod_stream_managementbuffer" class="md-nav__link">
+    modules.mod_stream_management.buffer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_stream_managementbuffer_max" class="md-nav__link">
     modules.mod_stream_management.buffer_max
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_stream_managementack" class="md-nav__link">
+    modules.mod_stream_management.ack
   </a>
   
 </li>
@@ -2226,8 +2252,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#modulesmod_stream_managementbuffer" class="md-nav__link">
+    modules.mod_stream_management.buffer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_stream_managementbuffer_max" class="md-nav__link">
     modules.mod_stream_management.buffer_max
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_stream_managementack" class="md-nav__link">
+    modules.mod_stream_management.ack
   </a>
   
 </li>
@@ -2340,18 +2380,32 @@ Most of the logic regarding session resumption and acknowledgement is implemente
 while the management of the session tables and configuration is implemented in
 <code>mod_stream_management</code>.</p>
 <h2 id="options">Options</h2>
+<h3 id="modulesmod_stream_managementbuffer"><code>modules.mod_stream_management.buffer</code></h3>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> true</li>
+<li><strong>Example:</strong> <code>buffer = false</code></li>
+</ul>
+<p>Enables buffer for messages to be acknowledged.</p>
 <h3 id="modulesmod_stream_managementbuffer_max"><code>modules.mod_stream_management.buffer_max</code></h3>
 <ul>
-<li><strong>Syntax:</strong> positive integer or string <code>"infinity"</code> or string <code>"no_buffer"</code></li>
+<li><strong>Syntax:</strong> positive integer or string <code>"infinity"</code></li>
 <li><strong>Default:</strong> <code>100</code></li>
-<li><strong>Example:</strong> <code>buffer_max = "no_buffer"</code></li>
+<li><strong>Example:</strong> <code>buffer_max = 500</code></li>
 </ul>
 <p>Buffer size for messages yet to be acknowledged.</p>
+<h3 id="modulesmod_stream_managementack"><code>modules.mod_stream_management.ack</code></h3>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> true</li>
+<li><strong>Example:</strong> <code>ack = false</code></li>
+</ul>
+<p>Enables ack requests to be sent from the server to the client.</p>
 <h3 id="modulesmod_stream_managementack_freq"><code>modules.mod_stream_management.ack_freq</code></h3>
 <ul>
-<li><strong>Syntax:</strong> positive integer or string <code>"never"</code></li>
+<li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> <code>1</code></li>
-<li><strong>Example:</strong> <code>ack_freq = "never"</code></li>
+<li><strong>Example:</strong> <code>ack_freq = 3</code></li>
 </ul>
 <p>Frequency of ack requests sent from the server to the client, e.g. 1 means a request after each stanza, 3 means a request after each 3 stanzas.</p>
 <h3 id="modulesmod_stream_managementresume_timeout"><code>modules.mod_stream_management.resume_timeout</code></h3>

@@ -517,6 +517,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/4.0.1_4.x.x/" class="md-nav__link">
+        4.0.1 to 4.x.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         MAM MUC migration helper
       </a>
@@ -2237,9 +2249,9 @@ for each virtual XMPP domain to avoid sharing keys between domains!</strong></p>
 <p>Size to use when generating RAM-only keys (designated by type <code>ram</code>).</p>
 <h3 id="modulesmod_keystorekeys"><code>modules.mod_keystore.keys</code></h3>
 <ul>
-<li><strong>Syntax:</strong> Array of TOML tables with the following keys: <code>"name"</code>, <code>"type"</code>, <code>"file"</code>, and following values: {name = <code>string</code>, type = <code>values: "file", "ram"</code>, file = <code>string</code>}.</li>
+<li><strong>Syntax:</strong> Array of TOML tables with the following keys: <code>"name"</code>, <code>"type"</code>, <code>"path"</code>, and following values: {name = <code>string</code>, type = <code>values: "file", "ram"</code>, path = <code>string</code>}.</li>
 <li><strong>Default:</strong> <code>[]</code></li>
-<li><strong>Example:</strong> <code>modules.mod_keystore.keys = [name = "access_psk", type = "file", path = "priv/access_psk"]</code></li>
+<li><strong>Example:</strong> <code>modules.mod_keystore.keys = [{name = "access_psk", type = "file", path = "priv/access_psk"}]</code></li>
 </ul>
 <p>Names, types, and optional filepaths of the keys.</p>
 <h2 id="api">API</h2>
@@ -2254,9 +2266,9 @@ for each virtual XMPP domain to avoid sharing keys between domains!</strong></p>
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_keystore]</span>
-  <span class="n">keys</span> <span class="o">=</span> <span class="p">[{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;access_secret, type = &quot;</span><span class="n">ram</span><span class="s">&quot;},</span>
-<span class="s">          {name = &quot;</span><span class="n">access_psk</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;priv/access_psk&quot;</span><span class="p">},</span>
-          <span class="p">{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;provision_psk, type = &quot;</span><span class="n">file</span><span class="s">&quot;, path = &quot;</span><span class="n">priv</span><span class="err">/</span><span class="n">provision_psk</span><span class="err">&quot;</span><span class="p">}]</span>
+  <span class="n">keys</span> <span class="o">=</span> <span class="p">[{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;access_secret&quot;</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;ram&quot;</span><span class="p">},</span>
+          <span class="p">{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;access_psk&quot;</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;priv/access_psk&quot;</span><span class="p">},</span>
+          <span class="p">{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;provision_psk&quot;</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;priv/provision_psk&quot;</span><span class="p">}]</span>
 </code></pre></div>
 </td></tr></table>
 <p>Multi-tenant setup (<code>mod_keystore</code> configured differently
@@ -2279,17 +2291,17 @@ for each virtual XMPP domain):</p>
   <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;first.com&quot;</span>
 
   <span class="k">[host_config.modules.mod_keystore]</span>
-    <span class="n">keys</span> <span class="o">=</span> <span class="p">[{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;access_secret, type = &quot;</span><span class="n">ram</span><span class="s">&quot;},</span>
-<span class="s">            {name = &quot;</span><span class="n">access_psk</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;priv/first_access_psk&quot;</span><span class="p">},</span>
-            <span class="p">{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;provision_psk, type = &quot;</span><span class="n">file</span><span class="s">&quot;, path = &quot;</span><span class="n">priv</span><span class="err">/</span><span class="n">first_provision_psk</span><span class="s">&quot;}]</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">[{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;access_secret&quot;</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;ram&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;access_psk&quot;</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;priv/first_access_psk&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;provision_psk&quot;</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;priv/first_provision_psk&quot;</span><span class="p">}]</span>
 
-<span class="s">[[host_config]]</span>
-<span class="s">  host = &quot;</span><span class="n">second</span><span class="p">.</span><span class="n">com</span><span class="s">&quot;</span>
+<span class="k">[[host_config]]</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;second.com&quot;</span>
 
-<span class="s">  [host_config.modules.mod_keystore]</span>
-<span class="s">    keys = [{name = &quot;</span><span class="n">access_secret</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;ram&quot;</span><span class="p">},</span>
-            <span class="p">{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;access_psk, type = &quot;</span><span class="n">file</span><span class="s">&quot;, path = &quot;</span><span class="n">priv</span><span class="err">/</span><span class="n">second_access_psk</span><span class="s">&quot;},</span>
-<span class="s">            {name = &quot;</span><span class="n">provision_psk</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;priv/second_provision_psk&quot;</span><span class="p">}]</span>
+  <span class="k">[host_config.modules.mod_keystore]</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">[{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;access_secret&quot;</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;ram&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;access_psk&quot;</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;priv/second_access_psk&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;provision_psk&quot;</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;priv/second_provision_psk&quot;</span><span class="p">}]</span>
 </code></pre></div>
 </td></tr></table>
                 

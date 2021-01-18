@@ -517,6 +517,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/4.0.1_4.x.x/" class="md-nav__link">
+        4.0.1 to 4.x.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         MAM MUC migration helper
       </a>
@@ -2682,7 +2694,7 @@ The default option is <code>true</code> hence we will get only the last items fr
 <p>List of enabled pubsub plugins.</p>
 <h3 id="modulesmod_pubsubpep_mapping"><code>modules.mod_pubsub.pep_mapping</code></h3>
 <ul>
-<li><strong>Syntax:</strong> TOML table with the following keys: <code>"namespace"</code>, <code>"node"</code> and string values.</li>
+<li><strong>Syntax:</strong> Array of TOML tables with the following keys: <code>"namespace"</code>, <code>"node"</code> and string values.</li>
 <li><strong>Default:</strong> <code>[]</code></li>
 <li><strong>Example:</strong> <code>pep_mapping = [{namespace = "urn:xmpp:microblog:0", node = "mb"}]</code></li>
 </ul>
@@ -2691,10 +2703,10 @@ E.g. pair <code>{"urn:xmpp:microblog:0", "mb"}</code> will use module <code>node
 <h3 id="modulesmod_pubsubdefault_node_config"><code>modules.mod_pubsub.default_node_config</code></h3>
 <ul>
 <li><strong>Syntax:</strong> TOML table with the following values: string, boolean or non-negative integer.</li>
-<li><strong>Default:</strong> <code>[]</code></li>
-<li><strong>Example:</strong> <code>default_node_config = {deliver_payloads = true, max_payload_size, 10000, node_type = "leaf"}</code></li>
+<li><strong>Default:</strong> <code>{}</code></li>
+<li><strong>Example:</strong> <code>default_node_config = {deliver_payloads = true, max_payload_size = 10000, node_type = "leaf"}</code></li>
 </ul>
-<p>Overrides the default node configuration, regradless of the node plugin.
+<p>Overrides the default node configuration, regardless of the node plugin.
 Node configuration still uses the default configuration defined by the node plugin, and overrides any items by the value defined in this configurable list.</p>
 <h3 id="modulesmod_pubsubitem_publisher"><code>modules.mod_pubsub.item_publisher</code></h3>
 <ul>

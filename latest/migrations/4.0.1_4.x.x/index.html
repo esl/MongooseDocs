@@ -14,7 +14,7 @@
     
     
       
-        <title>4.0.1 4.x.x - MongooseIM</title>
+        <title>4.0.1 to 4.x.x - MongooseIM</title>
       
     
     
@@ -94,7 +94,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              4.0.1 4.x.x
+              4.0.1 to 4.x.x
             
           </span>
         </div>
@@ -421,12 +421,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
       
       <label class="md-nav__link" for="nav-4">
         Migration Guide
@@ -508,6 +510,66 @@
       <a href="../4.0.0_4.0.1/" class="md-nav__link">
         4.0.0 to 4.0.1
       </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          4.0.1 to 4.x.x
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        4.0.1 to 4.x.x
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#http-file-upload" class="md-nav__link">
+    HTTP File Upload
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retirement-of-the-old-cfg-format" class="md-nav__link">
+    Retirement of the old *.cfg format
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minor-changes-in-the-toml-config-format" class="md-nav__link">
+    Minor changes in the TOML config format
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2079,6 +2141,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#retirement-of-the-old-cfg-format" class="md-nav__link">
+    Retirement of the old *.cfg format
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minor-changes-in-the-toml-config-format" class="md-nav__link">
+    Minor changes in the TOML config format
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2092,13 +2168,51 @@
               
                 
                 
-                  <h1>4.0.1 4.x.x</h1>
+                  <h1>4.0.1 to 4.x.x</h1>
                 
                 <h2 id="http-file-upload">HTTP File Upload</h2>
 <p><a href="https://xmpp.org/extensions/xep-0363.html">HTTP File Upload</a> specification older than 0.3.0 is no longer supported, i.e. the one namespaced with <code>urn:xmpp:http:upload</code>.
 Currently, only the <code>urn:xmpp:http:upload:0</code> XMLNS is served.</p>
 <p>All major, modern client libraries and applications support the 0.3.0+ specification.
 If you experience any issues with making requests to the HTTP File Upload service, please update your client.</p>
+<h2 id="retirement-of-the-old-cfg-format">Retirement of the old <code>*.cfg</code> format</h2>
+<p>Since release 4.x.x, we are no longer supporting the <code>*.cfg</code> MongooseIM configuration format. Please use the <code>TOML</code> format instead.</p>
+<h2 id="minor-changes-in-the-toml-config-format">Minor changes in the <code>TOML</code> config format</h2>
+<ul>
+<li>
+<p><a href="../../modules/mod_bosh/#modulesmod_boshmax_pause"><code>mod_bosh.max_pause</code></a> instead of <code>maxpause</code></p>
+</li>
+<li>
+<p><a href="../../modules/mod_disco/#modulesmod_discoserver_info"><code>mod_disco.server_info.module</code></a>: the field is optional, no longer required</p>
+</li>
+<li>
+<p><a href="../../modules/mod_global_distrib/#modulesmod_global_distribconnectionsadvertised_endpoints"><code>mod_global_distrib.connections.advertised_endpoints</code></a>: default not set (<code>false</code> is no longer accepted)</p>
+</li>
+<li>
+<p><code>mod_global_distrib.connections.tls.enabled</code>: the flag was removed, TLS is enabled by providing the <a href="../../modules/mod_global_distrib/#modulesmod_global_distribconnectionstlscacertfile"><code>cacertfile</code></a> and <a href="../../modules/mod_global_distrib/#modulesmod_global_distribconnectionstlscertfile"><code>certfile</code></a> options</p>
+</li>
+<li>
+<p><a href="../../modules/mod_http_upload/#modulesmod_http_uploadmax_file_size"><code>mod_http_upload.max_file_size</code></a>: <code>undefined</code> is no longer allowed</p>
+</li>
+<li>
+<p><a href="../../modules/mod_mam/#modulesmod_mam_metauser_prefs_store"><code>mod_mam_meta.user_prefs_store</code></a>: <code>false</code> is no longer allowed</p>
+</li>
+<li>
+<p><a href="../../modules/mod_muc_light/#modulesmod_muc_lightconfig_schema"><code>mod_muc_light.config_schema</code></a>: the usage of <code>value</code> and <code>type</code> fields was replaced with one of the following fields: <code>string_value</code>, <code>integer_value</code> or <code>float_value</code></p>
+</li>
+<li>
+<p><a href="../../modules/mod_muc_log/#modulesmod_muc_logcss_file"><code>mod_muc_log.css_file</code></a>: the default value was changed from <code>"false"</code> to <code>not set</code></p>
+</li>
+<li>
+<p><code>mod_stream_management</code>: minor adjustments of <a href="../../modules/mod_stream_management/#modulesmod_stream_managementbuffer_max"><code>buffer_max</code></a> and <a href="../../modules/mod_stream_management/#modulesmod_stream_managementack_freq"><code>ack_freq</code></a> options, <a href="../../modules/mod_stream_management/#modulesmod_stream_managementbuffer"><code>buffer</code></a> and <a href="../../modules/mod_stream_management/#modulesmod_stream_managementack"><code>ack</code></a> booleans were added</p>
+</li>
+<li>
+<p><a href="../../advanced-configuration/listen/#listenc2stlsciphers"><code>listen.c2s.tls.ciphers</code></a>, <a href="../../advanced-configuration/listen/#listenhttptlsciphers"><code>listen.http.tls.ciphers</code></a> and <a href="../../advanced-configuration/outgoing-connections/#outgoing_poolsconnectiontlsciphers"><code>outgoing_pools.*.*.connection.tls.ciphers</code></a>: the ciphers should now be formatted as a specification string</p>
+</li>
+<li>
+<p><a href="../../advanced-configuration/listen/#listenhttphandlersmod_websocketsping_rate">listen.http.handlers.mod_websockets.ping_rate</a>: <code>none</code> is no longer allowed</p>
+</li>
+</ul>
                 
               
               
@@ -2113,6 +2227,41 @@ If you experience any issues with making requests to the HTTP File Upload servic
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../4.0.0_4.0.1/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                4.0.0 to 4.0.1
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../jid-from-mam-muc-script/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                MAM MUC migration helper
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

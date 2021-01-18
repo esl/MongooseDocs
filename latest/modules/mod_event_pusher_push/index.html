@@ -517,6 +517,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/4.0.1_4.x.x/" class="md-nav__link">
+        4.0.1 to 4.x.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         MAM MUC migration helper
       </a>
@@ -2362,12 +2374,11 @@ with 100 asynchronous workers that will handle all push notification related wor
 <p>Backend to use for storing the registrations.</p>
 <h3 id="modulesmod_event_pusher_pushwpool"><code>modules.mod_event_pusher_push.wpool</code></h3>
 <ul>
-<li><strong>Syntax:</strong> Array of TOML tables. See description.</li>
-<li><strong>Default:</strong> <code>[]</code></li>
-<li><strong>Example:</strong> <code>wpool = [workers = 200]</code></li>
+<li><strong>Syntax:</strong> TOML table with worker pool options</li>
+<li><strong>Default:</strong> <code>{}</code></li>
+<li><strong>Example:</strong> <code>wpool.workers = 200</code></li>
 </ul>
-<p>List of options that will be passed to the <code>worker_pool</code> library that handles all the requests.
-Please refer to the <a href="https://github.com/inaka/worker_pool">Project Site</a> for more details.</p>
+<p>Array of options that will be passed to the <code>worker_pool</code> library that handles all the requests. The options allowed here are the same as for the <a href="../../advanced-configuration/outgoing-connections#worker-pool-options">outgoing connection pools</a>.</p>
 <h3 id="modulesmod_event_pusher_pushplugin_module"><code>modules.mod_event_pusher_push.plugin_module</code></h3>
 <ul>
 <li><strong>Syntax:</strong> non-empty string</li>
@@ -2379,7 +2390,7 @@ See the <a href="#plugin-module">relevant section</a> for more details.</p>
 <h3 id="modulesmod_event_pusher_pushvirtual_pubsub_hosts"><code>modules.mod_event_pusher_push.virtual_pubsub_hosts</code></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings</li>
-<li><strong>Default:</strong> <code>["pubsub.@HOSTS@"]</code></li>
+<li><strong>Default:</strong> <code>[]</code></li>
 <li><strong>Example:</strong> <code>virtual_pubsub_hosts = ["host1", "host2"]</code></li>
 </ul>
 <p>The list of "simulated" Publish-Subscribe domains. You may use the <code>@HOSTS@</code> pattern in the domain name.

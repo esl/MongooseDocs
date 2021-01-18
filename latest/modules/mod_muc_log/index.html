@@ -517,6 +517,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/4.0.1_4.x.x/" class="md-nav__link">
+        4.0.1 to 4.x.x
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         MAM MUC migration helper
       </a>
@@ -2351,14 +2363,11 @@ It writes room-related information (configuration) and events (messages, presenc
 <h3 id="modulesmod_muc_logcss_file"><code>modules.mod_muc_log.css_file</code></h3>
 <ul>
 <li><strong>Syntax:</strong> non-empty string</li>
-<li><strong>Default:</strong> <code>"false"</code></li>
+<li><strong>Default:</strong> not set - the default styles for HTML logs are used</li>
 <li><strong>Example:</strong> <code>css_file = "path/to/css/file"</code></li>
 </ul>
-<p>Specifies the css file used for logs rendering:</p>
-<ul>
-<li><code>"false"</code>: Uses default styles for HTML logs.</li>
-<li><code>path to custom CSS file</code>: Links custom CSS inside HTML logs. Please note it won't be copied to the logs directory but the given path will be linked in HTML files instead.</li>
-</ul>
+<p>Specifies the css file used for logs rendering.
+Please note it won't be copied to the logs directory but the given path will be linked in HTML files instead.</p>
 <h3 id="modulesmod_muc_logtimezone"><code>modules.mod_muc_log.timezone</code></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"local"</code>, <code>"universal"</code></li>
@@ -2372,9 +2381,9 @@ It writes room-related information (configuration) and events (messages, presenc
 </ul>
 <h3 id="modulesmod_muc_logtop_link"><code>modules.mod_muc_log.top_link</code></h3>
 <ul>
-<li><strong>Syntax:</strong> TOML table with the following keys: <code>"target"</code>, <code>"text"</code> and string values.</li>
-<li><strong>Default:</strong> <code>[target = "", text = ""]</code></li>
-<li><strong>Example:</strong> <code>top_link = [target = "/", text = "Home"]</code></li>
+<li><strong>Syntax:</strong> TOML table with the following mandatory keys: <code>"target"</code>, <code>"text"</code> and string values.</li>
+<li><strong>Default:</strong> <code>{target = "/", text = "Home"}</code></li>
+<li><strong>Example:</strong> <code>top_link = {target = "/top", text = "Top page"}</code></li>
 </ul>
 <p>Allows setting a custom link at the top of the HTML log file. 
 First tuple element is the link target and the second one is the text to be displayed. 
