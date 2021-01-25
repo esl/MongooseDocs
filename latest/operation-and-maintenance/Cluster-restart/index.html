@@ -14,7 +14,7 @@
     
     
       
-        <title>Reloading configuration on a running system - MongooseIM</title>
+        <title>Cluster restart - MongooseIM</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#non-reloadable-options" class="md-skip">
+        <a href="#how-to-restart-a-cluster" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Reloading configuration on a running system
+              Cluster restart
             
           </span>
         </div>
@@ -1213,6 +1213,18 @@
             
   
   
+  
+    <li class="md-nav__item">
+      <a href="../Rolling-upgrade/" class="md-nav__link">
+        Rolling upgrade
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
     
   
   
@@ -1222,12 +1234,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Reloading configuration on a running system
+          Cluster restart
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Reloading configuration on a running system
+        Cluster restart
       </a>
       
         
@@ -1242,15 +1254,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#non-reloadable-options" class="md-nav__link">
-    Non-reloadable options
+  <a href="#how-to-restart-a-cluster" class="md-nav__link">
+    How to restart a cluster:
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#node-specific-options" class="md-nav__link">
-    Node-specific options
+  <a href="#how-not-to-restart-a-cluster" class="md-nav__link">
+    How NOT to restart a cluster:
   </a>
   
 </li>
@@ -2128,15 +2140,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#non-reloadable-options" class="md-nav__link">
-    Non-reloadable options
+  <a href="#how-to-restart-a-cluster" class="md-nav__link">
+    How to restart a cluster:
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#node-specific-options" class="md-nav__link">
-    Node-specific options
+  <a href="#how-not-to-restart-a-cluster" class="md-nav__link">
+    How NOT to restart a cluster:
   </a>
   
 </li>
@@ -2154,37 +2166,23 @@
               
                 
                 
-                  <h1>Reloading configuration on a running system</h1>
+                  <h1>Cluster restart</h1>
                 
-                <p><code>mongooseimctl</code> subcommands for configuration reloading are:</p>
-<p><code>mongooseimctl reload_local</code></p>
-<p><code>mongooseimctl reload_cluster</code></p>
-<p><code>mongooseimctl reload_cluster_dryrun</code></p>
-<p><code>reload_local</code> is unsafe as it reloads the configuration only on the local node.
-This might introduce inconsistencies between different nodes in the cluster.
-It's available as a safety mechanism for the rare case of a cluster-global reload failing.</p>
-<p><code>reload_cluster</code> applies the configuration on all nodes in the cluster.
-The prerequisite is that the same version of a config file must be available on
-all nodes. All nodes in a cluster must have the same config loaded into memory
-as well. There is a small exception from this rule, see "Node-specific options"
-below on this page.</p>
-<p><code>reload_cluster_dryrun</code> calculates and prints config changes,
-but does not apply them.
-Useful for debugging.</p>
-<h2 id="non-reloadable-options">Non-reloadable options</h2>
-<p>Some options require restarting the server in order to be reloaded.
-The following options' changes will be ignored when using <code>mongooseimctl</code> tool:</p>
-<ul>
-<li>s2s.*</li>
-<li>general.all_metrics_are_global</li>
-<li>*.rdbms.*</li>
-</ul>
-<h2 id="node-specific-options">Node-specific options</h2>
-<p>This option is deprecated and not available when using a config file in the TOML
-format.</p>
-<p>For the documentation of this option for the <code>cfg</code> config format please refer to the
-<a href="https://esl.github.io/MongooseDocs/3.7.1/operation-and-maintenance/Reloading-configuration-on-a-running-system/">MIM 3.7.1 documentation</a>
-or older.</p>
+                <p>When you are using a MongooseIM cluster that is using Mnesia backend for any extensions, there could occur an issue related to the distributed Mnesia nodes.</p>
+<h2 id="how-to-restart-a-cluster">How to restart a cluster:</h2>
+<p>Having Node A and Node B, the cluster restart procedure should occur in the following way:</p>
+<p><img alt="How to restart a cluster" src="../cluster_restart.png" /></p>
+<p>Start the nodes in the opposite order to the one in which they were stopped.
+The first node you restart should be the last one to go down.
+For cluster with 3 nodes, after stopping the nodes <code>ABC</code>, they should be started in <code>CBA</code> order.</p>
+<h2 id="how-not-to-restart-a-cluster">How NOT to restart a cluster:</h2>
+<p>Having Node A and Node B.</p>
+<p><img alt="How not to restart a cluster" src="../incorrect_cluster_restart.png" /></p>
+<p>When the nodes are stopped in <code>AB</code> order, starting the node <code>A</code> first can result in issues related to the distributed Mnesia nodes and not bring up a node that is fully operational.</p>
+<p>Changing the order of the restarted nodes can cause issues with distributed Mnesia.
+Make sure to follow the recommendations if you are using Mnesia backend for any of the extensions.
+Please note that for some of the extensions, the Mnesia backend is set by default without having that configured explicitly in the configuration file.</p>
+<p>For more information related to the cluster configuration and maintenance, please see <a href="../Cluster-configuration-and-node-management/">Cluster configuration and node management</a> section.</p>
                 
               
               
@@ -2203,7 +2201,7 @@ or older.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../Logging-fields/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../Rolling-upgrade/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -2212,7 +2210,7 @@ or older.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Logging fields
+                Rolling upgrade
               </div>
             </div>
           </a>
