@@ -1612,18 +1612,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../developers-guide/flat_options/" class="md-nav__link">
-        Flat options format
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../developers-guide/Moving-to-single-app-project-structure/" class="md-nav__link">
         Moving to single app project structure
       </a>
@@ -2717,22 +2705,6 @@ Type <code>Ctrl+C</code> to exit.</p>
   <span class="n">access_create</span> <span class="o">=</span> <span class="s">&quot;muc_create&quot;</span>
 </code></pre></div>
 </td></tr></table></p>
-<p>Verify with:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl print_flat_config <span class="p">|</span> grep muc
-<span class="o">{[</span>h,&lt;&lt;<span class="s2">&quot;localhost&quot;</span>&gt;&gt;,module,mod_muc_commands<span class="o">]</span>,<span class="s1">&#39;FLAT&#39;</span><span class="o">}</span>.
-<span class="o">{[</span>h,&lt;&lt;<span class="s2">&quot;localhost&quot;</span>&gt;&gt;,module,mod_muc_light_commands<span class="o">]</span>,<span class="s1">&#39;FLAT&#39;</span><span class="o">}</span>.
-<span class="o">{[</span>h,&lt;&lt;<span class="s2">&quot;localhost&quot;</span>&gt;&gt;,module,mod_muc<span class="o">]</span>,<span class="s1">&#39;FLAT&#39;</span><span class="o">}</span>.
-<span class="o">{[</span>h,&lt;&lt;<span class="s2">&quot;localhost&quot;</span>&gt;&gt;,module_opt,mod_muc,host<span class="o">]</span>,<span class="s2">&quot;muc.@HOST@&quot;</span><span class="o">}</span>.
-<span class="o">{[</span>h,&lt;&lt;<span class="s2">&quot;localhost&quot;</span>&gt;&gt;,module_opt,mod_muc,access<span class="o">]</span>,muc<span class="o">}</span>.
-<span class="o">{[</span>h,&lt;&lt;<span class="s2">&quot;localhost&quot;</span>&gt;&gt;,module_opt,mod_muc,access_create<span class="o">]</span>,muc_create<span class="o">}</span>.
-</code></pre></div>
-</td></tr></table></p>
 <h3 id="roster-versioning">Roster versioning</h3>
 <p>For faster contact list downloads at each client/app (re)connection, edit the configuration file:
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
@@ -2741,24 +2713,8 @@ Type <code>Ctrl+C</code> to exit.</p>
   <span class="n">versioning</span> <span class="o">=</span> <span class="kc">true</span>
   <span class="n">store_current_id</span> <span class="o">=</span> <span class="kc">true</span>
 </code></pre></div>
-</td></tr></table>
-Verify with:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl print_flat_config <span class="p">|</span> grep roster
- <span class="o">[{</span>service_admin_extra,<span class="o">[{</span>submods,<span class="o">[</span>node,accounts,sessions,vcard,gdpr,roster,
-<span class="o">{[</span>h,&lt;&lt;<span class="s2">&quot;localhost&quot;</span>&gt;&gt;,module,mod_roster<span class="o">]</span>,<span class="s1">&#39;FLAT&#39;</span><span class="o">}</span>.
-<span class="o">{[</span>h,&lt;&lt;<span class="s2">&quot;localhost&quot;</span>&gt;&gt;,module_opt,mod_roster,versioning<span class="o">]</span>,true<span class="o">}</span>.
-<span class="o">{[</span>h,&lt;&lt;<span class="s2">&quot;localhost&quot;</span>&gt;&gt;,module_opt,mod_roster,store_current_id<span class="o">]</span>,true<span class="o">}</span>.
-</code></pre></div>
 </td></tr></table></p>
 <h3 id="review-configuration">Review configuration</h3>
-<p>Read and double-check your configuration in a different way, after starting MongooseIM:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl print_flat_config
-</code></pre></div>
-</td></tr></table></p>
 <p>If MongooseIM does not start because the configuration file is broken in some way:
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl live
 </code></pre></div>
@@ -2830,7 +2786,6 @@ mongooseimctl get_roster carol localhost
 <li><code>get_loglevel</code></li>
 <li><code>register_identified</code>, <code>check_account</code>, <code>registered_users</code>, <code>unregister</code></li>
 <li><code>add_rosteritem</code>, <code>get_roster</code></li>
-<li><code>print_flat_config</code></li>
 </ul>
 <p>You can even run <code>mongooseimctl</code> without arguments for a list of available commands.</p>
 <h3 id="summary-files">Summary: files</h3>
