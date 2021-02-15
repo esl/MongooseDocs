@@ -2466,24 +2466,24 @@ The defined stanzas are: <code>&lt;message/&gt;</code>, <code>&lt;presence/&gt;<
 <h3 id="message"><code>&lt;message/&gt;</code></h3>
 <p>This is a basic <code>&lt;message/&gt;</code> stanza.
 Everytime you want to send a message to someone (a JID), you will have to send this stanza:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;message</span> <span class="na">from=</span><span class="s">&#39;andres@erlang-solutions.com/iphone&#39;</span> <span class="na">to=</span><span class="s">&#39;juana@erlang-solutions.com&#39;</span> <span class="na">type=</span><span class="s">&#39;chat&#39;</span><span class="nt">&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;message</span> <span class="na">from=</span><span class="s">&#39;andres@erlang-solutions.com/iphone&#39;</span> <span class="na">to=</span><span class="s">&#39;juana@erlang-solutions.com&#39;</span> <span class="na">type=</span><span class="s">&#39;chat&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;body&gt;</span>Hey there!<span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/message&gt;</span>
  ```
@@ -2504,13 +2504,13 @@ For example, we send an `iq` to the server to do something
 </code></pre></div>
 </td></tr></table>
 <p>And we get back another <code>iq</code> with the same id with the result of the previous query:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">from=</span><span class="s">&#39;erlang-solutions.com&#39;</span> <span class="na">to=</span><span class="s">&#39;ramabit@erlang-solutions.com/Andress-MacBook-Air&#39;</span> <span class="na">id=</span><span class="s">&#39;1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">from=</span><span class="s">&#39;erlang-solutions.com&#39;</span> <span class="na">to=</span><span class="s">&#39;ramabit@erlang-solutions.com/Andress-MacBook-Air&#39;</span> <span class="na">id=</span><span class="s">&#39;1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;http://jabber.org/protocol/disco#items&#39;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;item</span> <span class="na">jid=</span><span class="s">&#39;muc.erlang-solutions.com&#39;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;item</span> <span class="na">jid=</span><span class="s">&#39;muclight.erlang-solutions.com&#39;</span><span class="nt">/&gt;</span>
@@ -2523,19 +2523,19 @@ For example, we send an `iq` to the server to do something
 <p>Used to exchange presence information, as you could have imagined.
 Usually presences are sent from the client to the server and broadcasted by it.
 The most basic, yet valid presence, to indicate to the server that a user is avaiable is:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;presence/&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;presence/&gt;</span>
 </code></pre></div>
 </td></tr></table>
 <p>After a sucessfull connection,
 you are not going to receive any <code>&lt;message/&gt;</code> until you make yourself available sending the previous presence.</p>
 <p>If you want to make yourself unavailable, you just have to send:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;presence</span> <span class="na">type=</span><span class="s">&quot;unavailable&quot;</span><span class="nt">&gt;&lt;/presence&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;presence</span> <span class="na">type=</span><span class="s">&quot;unavailable&quot;</span><span class="nt">&gt;&lt;/presence&gt;</span>
 </code></pre></div>
 </td></tr></table>
 <p>If we want to make the presences more useful, we can send something like this:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;presence&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;presence&gt;</span>
       <span class="nt">&lt;status&gt;</span>On vacation<span class="nt">&lt;/status&gt;</span>
 <span class="nt">&lt;/presence&gt;</span>
 </code></pre></div>
@@ -2582,11 +2582,11 @@ The easiest way to integrate XMPPFramework to the project is using <a href="http
 <p>Let’s create our <code>Podfile</code> using the <code>pod init</code> command in the folder where our <code>.xcodeproj</code> lives.
 There are thousands of forks but the maintained one is the original: <code>robbiehanson/XMPPFramework</code>.</p>
 <p>So let’s add the <code>pod</code> to our <code>Podfile</code> and remember to uncomment the <code>use_frameworks!</code>.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>use_frameworks!
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>use_frameworks!
 
 target &#39;CrazyMessages&#39; do
     pod &#39;XMPPFramework&#39;, :git=&gt; &#39;git@github.com:robbiehanson/XMPPFramework.git&#39;, :branch =&gt; &#39;master&#39;
@@ -2599,17 +2599,17 @@ Now we just need to <code>import XMPPFramework</code> in the files we want to us
 <p>The most important thing in an XMPP application is the stream,
 that’s where we are going to “write” our stanzas, so we need an object that is going to hold it.
 We are going to create an <code>XMPPController</code> class with an <code>XMPPStream</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">import</span> <span class="nc">Foundation</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">import</span> <span class="nc">Foundation</span>
 <span class="kd">import</span> <span class="nc">XMPPFramework</span>
 
 <span class="kd">class</span> <span class="nc">XMPPController</span><span class="p">:</span> <span class="bp">NSObject</span> <span class="p">{</span>
@@ -2635,40 +2635,40 @@ what do we need to do now?
 Configure our stream with the <code>hostName</code>, <code>port</code> and <code>ourJID</code>.
 To provide all this info to the controller
 we are going to make some changes to the <code>init</code> to be able to receive all these parameters:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">enum</span> <span class="nc">XMPPControllerError</span><span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">enum</span> <span class="nc">XMPPControllerError</span><span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
     <span class="k">case</span> <span class="n">wrongUserJID</span>
 <span class="p">}</span>
 
@@ -2706,13 +2706,13 @@ we are going to make some changes to the <code>init</code> to be able to receive
 </td></tr></table>
 <p>Our next step is going to actually connect to a server and authenticate using our <code>userJID</code> and <code>password</code>,
 so we are adding a <code>connect</code> method to our <code>XMPPController</code>.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">func</span> <span class="nf">connect</span><span class="p">()</span> <span class="p">{</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">func</span> <span class="nf">connect</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="o">!</span><span class="kc">self</span><span class="p">.</span><span class="n">xmppStream</span><span class="p">.</span><span class="n">isDisconnected</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">return</span>
     <span class="p">}</span>
@@ -2724,18 +2724,18 @@ so we are adding a <code>connect</code> method to our <code>XMPPController</code
 <p>But how do we know we have successfully connected to the server?
 As I said earlier, we need to check for a suitable delegate method from <code>XMPPStreamDelegate</code>.
 After we connect to the server we need to authenticate so we are going to do the following:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">extension</span> <span class="nc">XMPPController</span><span class="p">:</span> <span class="n">XMPPStreamDelegate</span> <span class="p">{</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">extension</span> <span class="nc">XMPPController</span><span class="p">:</span> <span class="n">XMPPStreamDelegate</span> <span class="p">{</span>
 
     <span class="kd">func</span> <span class="nf">xmppStreamDidConnect</span><span class="p">(</span><span class="kc">_</span> <span class="n">stream</span><span class="p">:</span> <span class="n">XMPPStream</span><span class="p">!)</span> <span class="p">{</span>
         <span class="bp">print</span><span class="p">(</span><span class="s">&quot;Stream: Connected&quot;</span><span class="p">)</span>
@@ -2751,10 +2751,10 @@ After we connect to the server we need to authenticate so we are going to do the
 </td></tr></table>
 <p>We need to test this.
 Let’s just create an instance of <code>XMPPController</code> in the <code>AppDelegate</code> to test how it works:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">!</span> <span class="kc">self</span><span class="p">.</span><span class="n">xmppController</span> <span class="p">=</span> <span class="n">XMPPController</span><span class="p">(</span><span class="n">hostName</span><span class="p">:</span> <span class="s">&quot;host.com&quot;</span><span class="p">,</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">!</span> <span class="kc">self</span><span class="p">.</span><span class="n">xmppController</span> <span class="p">=</span> <span class="n">XMPPController</span><span class="p">(</span><span class="n">hostName</span><span class="p">:</span> <span class="s">&quot;host.com&quot;</span><span class="p">,</span>
                                      <span class="n">userJIDString</span><span class="p">:</span> <span class="s">&quot;user@host.com&quot;</span><span class="p">,</span>
                                           <span class="n">password</span><span class="p">:</span> <span class="s">&quot;password&quot;</span><span class="p">)</span>
 <span class="kc">self</span><span class="p">.</span><span class="n">xmppController</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
@@ -2764,18 +2764,18 @@ Let’s just create an instance of <code>XMPPController</code> in the <code>AppD
 we missed something.
 We never told to our <code>xmppStream</code> who was the delegate object!
 We need to add the following line after the <code>super.init()</code></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kc">self</span><span class="p">.</span><span class="n">xmppStream</span><span class="p">.</span><span class="n">addDelegate</span><span class="p">(</span><span class="kc">self</span><span class="p">,</span> <span class="n">delegateQueue</span><span class="p">:</span> <span class="n">DispatchQueue</span><span class="p">.</span><span class="n">main</span><span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kc">self</span><span class="p">.</span><span class="n">xmppStream</span><span class="p">.</span><span class="n">addDelegate</span><span class="p">(</span><span class="kc">self</span><span class="p">,</span> <span class="n">delegateQueue</span><span class="p">:</span> <span class="n">DispatchQueue</span><span class="p">.</span><span class="n">main</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 <p>If we run the app again:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Stream</span><span class="p">:</span> <span class="n">Connected</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Stream</span><span class="p">:</span> <span class="n">Connected</span>
 <span class="n">Stream</span><span class="p">:</span> <span class="n">Authenticated</span>
 </code></pre></div>
 </td></tr></table>
 <p>Success! We have our own <code>XMPPController</code> with a fully functional and authenticated stream!</p>
 <p>Something that may catch your attention is how we are setting our delegate, we are not doing:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kc">self</span><span class="p">.</span><span class="n">xmppStream</span><span class="p">.</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kc">self</span><span class="p">.</span><span class="n">xmppStream</span><span class="p">.</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
 </code></pre></div>
 </td></tr></table>
 <p>Why not?
@@ -2791,22 +2791,22 @@ that <code>ViewController</code> will have the neccesary fields/info to log in t
 <p>I’m going to create a <code>LogInViewControllerDelegate</code> that is going to tell to our <code>ViewController</code>
 that the <code>Log in</code> button was pressed and that’s it.
 In that delegate implementation we are going to create our <code>XMPPController</code>, add the <code>ViewControlleras</code> delegate of the <code>XMPPStream</code> and connect!</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">extension</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">LogInViewControllerDelegate</span> <span class="p">{</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">extension</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">LogInViewControllerDelegate</span> <span class="p">{</span>
 
     <span class="kd">func</span> <span class="nf">didTouchLogIn</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="n">LogInViewController</span><span class="p">,</span> <span class="n">userJID</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">userPassword</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">server</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">logInViewController</span> <span class="p">=</span> <span class="n">sender</span>
@@ -2829,17 +2829,17 @@ Because we need to know if this connection and authentication was successfull or
 so we are able to dismiss the <code>LogInViewController</code> or show an error message if something failed.
 This is why being able to add multiple delegates is so useful.</p>
 <p>So as I said I’m going to make <code>ViewController</code> to comform to the <code>XMPPStreamDelegate</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">extension</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">XMPPStreamDelegate</span> <span class="p">{</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">extension</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">XMPPStreamDelegate</span> <span class="p">{</span>
 
     <span class="kd">func</span> <span class="nf">xmppStreamDidAuthenticate</span><span class="p">(</span><span class="kc">_</span> <span class="n">sender</span><span class="p">:</span> <span class="n">XMPPStream</span><span class="p">!)</span> <span class="p">{</span>
         <span class="kc">self</span><span class="p">.</span><span class="n">logInViewController</span><span class="p">?.</span><span class="n">dismiss</span><span class="p">(</span><span class="n">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
@@ -2864,7 +2864,7 @@ Logs are going to start showing up!</p>
 <h3 id="configuring-cocoalumberjack">Configuring CocoaLumberjack</h3>
 <p>This is a really simple task,
 you just need to add to your <code>func application(application: UIApplication, didFinishLaunchingWithOptions ...</code> method the following line (remember to <code>import CocoaLumberjack</code>):</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">DDLog</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">DDTTYLogger</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">(),</span> <span class="n">with</span><span class="p">:</span> <span class="n">DDLogLevel</span><span class="p">.</span><span class="n">all</span><span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">DDLog</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">DDTTYLogger</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">(),</span> <span class="n">with</span><span class="p">:</span> <span class="n">DDLogLevel</span><span class="p">.</span><span class="n">all</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 <p>I’m not going to paste here all the connection process log
@@ -2872,33 +2872,33 @@ because it makes no sense to try to understand what’s going on at this stage o
 But I think showing what some stanzas look like is a good idea.
 To do this I’m going to be sending messages from <a href="https://adium.im/">Adium</a>.</p>
 <p>I’m going to send this <code>&lt;message/&gt;</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;message</span> <span class="na">to=</span><span class="s">&quot;test.user@erlang-solutions.com&quot;</span><span class="nt">&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;message</span> <span class="na">to=</span><span class="s">&quot;test.user@erlang-solutions.com&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;body&gt;</span>This is a message sent from Adium!<span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/message&gt;</span>
 </code></pre></div>
 </td></tr></table>
 <p>Let’s see how it looks like when it reaches our app:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;message</span> <span class="na">xmlns=</span><span class="s">&quot;jabber:client&quot;</span> <span class="na">from=</span><span class="s">&quot;iamadium@erlang-solutions.com/MacBook-Air&quot;</span> <span class="na">to=</span><span class="s">&quot;test.user@erlang-solutions.com&quot;</span><span class="nt">&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;message</span> <span class="na">xmlns=</span><span class="s">&quot;jabber:client&quot;</span> <span class="na">from=</span><span class="s">&quot;iamadium@erlang-solutions.com/MacBook-Air&quot;</span> <span class="na">to=</span><span class="s">&quot;test.user@erlang-solutions.com&quot;</span><span class="nt">&gt;</span>
    <span class="nt">&lt;body&gt;</span>This is a message sent from Adium!<span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/message&gt;</span>
 </code></pre></div>
 </td></tr></table>
 <p>Let’s send a <code>&lt;presence/&gt;</code> from Adium:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;presence&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;presence&gt;</span>
     <span class="nt">&lt;status&gt;</span>On vacation<span class="nt">&lt;/status&gt;</span>
 <span class="nt">&lt;/presence&gt;</span>
 </code></pre></div>
 </td></tr></table>
 <p>We are receiving:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;presence</span> <span class="na">xmlns=</span><span class="s">&quot;jabber:client&quot;</span> <span class="na">from=</span><span class="s">&quot;iamadium@erlang-solutions.com/MacBook-Air&quot;</span> <span class="na">to=</span><span class="s">&quot;test.user@erlang-solutions.com&quot;</span><span class="nt">&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;presence</span> <span class="na">xmlns=</span><span class="s">&quot;jabber:client&quot;</span> <span class="na">from=</span><span class="s">&quot;iamadium@erlang-solutions.com/MacBook-Air&quot;</span> <span class="na">to=</span><span class="s">&quot;test.user@erlang-solutions.com&quot;</span><span class="nt">&gt;</span>
    <span class="nt">&lt;status&gt;</span>On vacation<span class="nt">&lt;/status&gt;</span>
 <span class="nt">&lt;/presence&gt;</span>
 </code></pre></div>

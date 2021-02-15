@@ -2159,12 +2159,12 @@ their HTTP/2 API.</p>
 <p>To enable integration with MongoosePush, it is as simple as the next two steps.
 First, you need to define a pool of HTTPS connections to MongoosePush in the
 <code>outgoing_pools</code> section:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[outgoing_pools.http.mongoose_push_http]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[outgoing_pools.http.mongoose_push_http]</span>
   <span class="n">scope</span> <span class="o">=</span> <span class="s">&quot;global&quot;</span>
   <span class="n">strategy</span> <span class="o">=</span> <span class="s">&quot;available_worker&quot;</span>
 
@@ -2173,9 +2173,9 @@ First, you need to define a pool of HTTPS connections to MongoosePush in the
 </code></pre></div>
 </td></tr></table>
 <p>And second, you need to add <code>mod_push_service_mongoosepush</code> to the <code>modules</code> section in the config file:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_push_service_mongoosepush]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_push_service_mongoosepush]</span>
   <span class="n">pool_name</span> <span class="o">=</span> <span class="n">mongoose_push_http</span>
   <span class="n">api_version</span> <span class="o">=</span> <span class="s">&quot;v3&quot;</span>
 </code></pre></div>
@@ -2215,11 +2215,11 @@ Firstly, prepare the following files structure:</p>
 </ul>
 <p>If your <em>FCM</em> app token is <code>MY_FCM_SECRET_TOKEN</code> and you have the <code>priv</code> directory with all
 certificates in the current directory, start MongoosePush with the following command:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -v <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/priv:/opt/app/priv <span class="se">\</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -v <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/priv:/opt/app/priv <span class="se">\</span>
   -e <span class="nv">PUSH_FCM_APP_FILE</span><span class="o">=</span><span class="s2">&quot;MY_FCM_SECRET_TOKEN&quot;</span> <span class="se">\</span>
   -e <span class="nv">PUSH_HTTPS_CERTFILE</span><span class="o">=</span><span class="s2">&quot;/opt/app/priv/ssl/rest_cert.pem&quot;</span> <span class="se">\</span>
   -e <span class="nv">PUSH_HTTPS_KEYFILE</span><span class="o">=</span><span class="s2">&quot;/opt/app/priv/ssl/rest_key.pem&quot;</span> <span class="se">\</span>

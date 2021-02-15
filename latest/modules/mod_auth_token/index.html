@@ -2348,11 +2348,11 @@ Validity period configuration for provision tokens happens outside the module si
 <h2 id="token-serialization-format">Token serialization format</h2>
 <p>All tokens (access, refresh, provision) are to be exchanged as <em>Base64 encoded</em> binary data.
 Serialization format of the token before encoding with Base64 is dependent on its type:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>&#39;access&#39; \0 &lt;BARE_JID&gt; \0 &lt;EXPIRES_AT&gt; \0 &lt;MAC&gt;
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>&#39;access&#39; \0 &lt;BARE_JID&gt; \0 &lt;EXPIRES_AT&gt; \0 &lt;MAC&gt;
 
 &#39;refresh&#39; \0 &lt;BARE_JID&gt; \0 &lt;EXPIRES_AT&gt; \0 &lt;SEQUENCE_NO&gt; \0 &lt;MAC&gt;
 
@@ -2360,14 +2360,14 @@ Serialization format of the token before encoding with Base64 is dependent on it
 </code></pre></div>
 </td></tr></table>
 <p>For example (these tokens are randomly generated, hence field values don't make much sense - line breaks are inserted only for the sake of formatting,<code>&lt;vCard/&gt;</code> inner XML is snipped):</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>&#39;access&#39; \0 Q8@localhost \0 64875466454
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>&#39;access&#39; \0 Q8@localhost \0 64875466454
     \0 0acd0a66d06934791d046060cf9f1ad3c2abb3274cc7e7d7b2bc7e2ac4453ed774b6c6813b40ebec2bbc3774d59d4087
 
 &#39;refresh&#39; \0 qp@localhost \0 64875466457 \0 6
@@ -2378,9 +2378,9 @@ Serialization format of the token before encoding with Base64 is dependent on it
 </code></pre></div>
 </td></tr></table>
 <h3 id="requesting-access-or-refresh-tokens-when-logged-in">Requesting access or refresh tokens when logged in</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span> <span class="na">to=</span><span class="s">&#39;john@localhost&#39;</span> <span class="na">id=</span><span class="s">&#39;123&#39;</span><span class="nt">&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span> <span class="na">to=</span><span class="s">&#39;john@localhost&#39;</span> <span class="na">id=</span><span class="s">&#39;123&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:token-auth:0&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div>
@@ -2395,12 +2395,12 @@ Serialization format of the token before encoding with Base64 is dependent on it
 <li><code>to</code>: full user JID</li>
 </ul>
 <p>Example response (encoded tokens have been truncated in this example):</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span>  <span class="na">id=</span><span class="s">&#39;123&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span> <span class="na">from=</span><span class="s">&#39;john@localhost&#39;</span> <span class="na">to=</span><span class="s">&#39;john@localhost/res1&#39;</span><span class="nt">&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span>  <span class="na">id=</span><span class="s">&#39;123&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span> <span class="na">from=</span><span class="s">&#39;john@localhost&#39;</span> <span class="na">to=</span><span class="s">&#39;john@localhost/res1&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;items</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:token-auth:0&#39;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;access_token&gt;</span>cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw==<span class="nt">&lt;/access_token&gt;</span>
         <span class="nt">&lt;refresh_token&gt;</span>cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw==<span class="nt">&lt;/refresh_token&gt;</span>
@@ -2411,9 +2411,9 @@ Serialization format of the token before encoding with Base64 is dependent on it
 <p>Once a client has obtained a token, they may start authenticating using the <code>X-OAUTH</code> SASL mechanism when reaching the authentication phase of an XMPP connection initiation.</p>
 <h2 id="login-with-access-or-refresh-token">Login with access or refresh token</h2>
 <p>In order to log into the XMPP server using a previously requested token, a client should send the following stanza:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;auth</span> <span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span> <span class="na">mechanism=</span><span class="s">&quot;X-OAUTH&quot;</span><span class="nt">&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;auth</span> <span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span> <span class="na">mechanism=</span><span class="s">&quot;X-OAUTH&quot;</span><span class="nt">&gt;</span>
 cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw== 
 <span class="nt">&lt;/auth&gt;</span>
 </code></pre></div>
@@ -2421,9 +2421,9 @@ cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw==
 <p>The Base64 encoded content is a token obtained prior to authentication.
 Authentication will succeed unless the used tokens are expired, revoked, or the keys required for MAC verification could not be found by the server.</p>
 <p><strong>When using a refresh token to authenticate with the server</strong>, the server will respond with a new <em>access token</em>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;success</span> <span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span><span class="nt">&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;success</span> <span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span><span class="nt">&gt;</span>
 cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw==
 <span class="nt">&lt;/success&gt;</span>
 </code></pre></div>
@@ -2436,7 +2436,7 @@ cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw==
 <li>request <em>a new access token</em> with refreshed expiry date.</li>
 </ul>
 <p>An administrator may <em>revoke</em> a refresh token:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl revoke_token owner@xmpphost
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl revoke_token owner@xmpphost
 </code></pre></div>
 </td></tr></table>
 <p>A client can no longer use a revoked token either for authentication or requesting new access tokens.
@@ -2447,11 +2447,11 @@ Moreover, an access token still kept on a compromised device can be used to esta
 To alleviate rerequesting tokens by the user, an operator can use <code>mod_admin</code> extension allowing to terminate the user's connection.
 Access token validity can't be sidestepped right now.</p>
 <h2 id="example-configuration">Example configuration</h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_auth_token]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_auth_token]</span>
   <span class="n">validity_period</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">token</span> <span class="o">=</span> <span class="s">&quot;access&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s">&quot;minutes&quot;</span><span class="p">},</span>
     <span class="p">{</span><span class="n">token</span> <span class="o">=</span> <span class="s">&quot;refresh&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s">&quot;days&quot;</span><span class="p">}</span>

@@ -2299,18 +2299,18 @@ Its handlers can be replaced and customised, according to Logger's documentation
 <h3 id="syslog-integration">Syslog integration</h3>
 <p>MongooseIM uses <code>syslogger</code> as a Logger handler for syslog.
 To activate it you have to add <code>syslogger</code> to the applications section in <code>src/mongooseim/app.src</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>%% syslogger, % uncomment to enable a logger handler for syslog
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>%% syslogger, % uncomment to enable a logger handler for syslog
 </code></pre></div>
 </td></tr></table>
 <p>You also need to edit <code>rel/files/app.config</code> and uncomment the lines:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code> % Uncomment these lines to enable logging to syslog.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code> % Uncomment these lines to enable logging to syslog.
  % Remember to add syslogger as a dependency in mongooseim.app.src.
 %% {syslogger, [
 %%     {ident, &quot;mongooseim&quot;},
@@ -2330,12 +2330,12 @@ in the <code>syslogger's</code> <a href="https://github.com/NelsonVides/syslogge
 </ul>
 <p>Depending on the system you use, remember to also add the appropriate line in the syslog config file.
 For example, if the facility <code>local0</code> is set:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>local0.info                     /var/log/mongooseim.log
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>local0.info                     /var/log/mongooseim.log
 </code></pre></div>
 </td></tr></table>
 <p>All the logs of level <code>info</code> should be passed to the <code>/var/log/mongooseim.log</code> file.</p>
 <p>Example log (e.g <code>tail -f /var/log/mongooseim.log</code>):</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>Apr  1 12:36:49 User.local mongooseim[6068]: [info] &lt;0.7.0&gt; Application mnesia started on node mongooseim@localhost
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>Apr  1 12:36:49 User.local mongooseim[6068]: [info] &lt;0.7.0&gt; Application mnesia started on node mongooseim@localhost
 </code></pre></div>
 </td></tr></table>
 <h3 id="further-multiserver-integration">Further / multiserver integration</h3>
@@ -2365,22 +2365,22 @@ The file sits next to the <code>mongooseim.toml</code> file in the <code>rel/fil
 It shows setting up a reporter connecting to graphite running on localhost.</p>
 <p>You can see an additional option not listed in the Exometer docs - <code>mongooseim_report_interval</code>, which sets the metrics' resolution, i.e. how often Exometer gathers and sends metrics through reporters.
 By default, the resolution is set to 60 seconds.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">...</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">...</span>
 <span class="p">{</span><span class="n">exometer_core</span><span class="p">,</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">mongooseim_report_interval</span><span class="p">,</span> <span class="mi">60000</span><span class="p">},</span> <span class="c">%% 60 seconds</span>
     <span class="p">{</span><span class="n">report</span><span class="p">,</span> <span class="p">[</span>
@@ -2400,8 +2400,8 @@ By default, the resolution is set to 60 seconds.</p>
 </td></tr></table>
 <h3 id="run-graphite-grafana-in-docker-quick-start">Run Graphite &amp; Grafana in Docker - quick start</h3>
 <p>The following commands will download the latest version of <code>kamon/grafana_graphite</code> docker image that contains both Grafana and Graphite, and start them while mounting the local directory <code>./docker-grafana-graphite-master/data</code> for metric persistence:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -SL https://github.com/kamon-io/docker-grafana-graphite/archive/master.tar.gz <span class="p">|</span> tar -xzf -
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -SL https://github.com/kamon-io/docker-grafana-graphite/archive/master.tar.gz <span class="p">|</span> tar -xzf -
 make -C docker-grafana-graphite-master up
 </code></pre></div>
 </td></tr></table>
@@ -2409,19 +2409,19 @@ make -C docker-grafana-graphite-master up
 <h3 id="add-metrics-to-grafana-dashboard">Add metrics to Grafana dashboard</h3>
 <p>We recommend the following metrics as a baseline for tracking your MongooseIM installation.
 For time-based metrics, you can choose to display multiple calculated values for a reporting period - we recommend tracking at least <code>max</code>, <code>median</code> and <code>mean</code>.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>Session count:                   &lt;prefix&gt;.global.totalSessionCount.value
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>Session count:                   &lt;prefix&gt;.global.totalSessionCount.value
 XMPP messages received:          &lt;prefix&gt;.&lt;domain&gt;.xmppMessageReceived.one
 XMPP messages sent:              &lt;prefix&gt;.&lt;domain&gt;.xmppMessageSent.one
 Successful logins:               &lt;prefix&gt;.&lt;domain&gt;.sessionSuccessfulLogins.one

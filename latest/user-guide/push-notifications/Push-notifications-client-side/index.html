@@ -2303,26 +2303,26 @@ server. If you're running a PubSub-less configuration, skip to <a href="#enablin
 <h3 id="creating-a-new-push-node">Creating a new push node</h3>
 <p>In this example <code>mypubsub.com</code> is a domain of the MongooseIM server that has <a href="../../../modules/mod_pubsub/">mod_pubsub</a> enabled
 with the <code>push</code> node support. The client sends the following stanza to the server:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span>
     <span class="na">to=</span><span class="s">&#39;pubsub.mypubsub.com&#39;</span>
     <span class="na">id=</span><span class="s">&#39;create1&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;pubsub</span> <span class="na">xmlns=</span><span class="s">&#39;http://jabber.org/protocol/pubsub&#39;</span><span class="nt">&gt;</span>
@@ -2366,16 +2366,16 @@ If the push node was configured with the above recommended options, you need to 
 JID to publish notifications to that node.
 Considering your JID is <code>alice@mychat.com</code>, your server's JID is just <code>mychat.com</code>.
 The following stanza sent to the just created push node will allow your server JID to publish notifications:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">to=</span><span class="s">&#39;pubsub.mypubsub.com&#39;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">to=</span><span class="s">&#39;pubsub.mypubsub.com&#39;</span>
     <span class="na">type=</span><span class="s">&#39;set&#39;</span>
     <span class="na">id=</span><span class="s">&#39;wy6Hibg=&#39;</span>
     <span class="na">from=</span><span class="s">&#39;alice@mychat.com/resource&#39;</span><span class="nt">&gt;</span>
@@ -2392,18 +2392,18 @@ The following stanza sent to the just created push node will allow your server J
 (and has <a href="../../../modules/mod_event_pusher_push/">mod_event_pusher_push</a> enabled).
 Let's assume this server is available under the domain <code>mychat.com</code>.</p>
 <p>To enable push notifications in the simplest configuration, just send the following stanza:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span> <span class="na">id=</span><span class="s">&#39;x43&#39;</span><span class="nt">&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span> <span class="na">id=</span><span class="s">&#39;x43&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;enable</span> <span class="na">xmlns=</span><span class="s">&#39;urn:xmpp:push:0&#39;</span> <span class="na">jid=</span><span class="s">&#39;pubsub.mypubsub.com&#39;</span> <span class="na">node=</span><span class="s">&#39;punsub_node_for_my_private_iphone&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;x</span> <span class="na">xmlns=</span><span class="s">&#39;jabber:x:data&#39;</span> <span class="na">type=</span><span class="s">&#39;submit&#39;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;field</span> <span class="na">var=</span><span class="s">&#39;FORM_TYPE&#39;</span><span class="nt">&gt;&lt;value&gt;</span>http://jabber.org/protocol/pubsub#publish-options<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
@@ -2450,9 +2450,9 @@ for whatever unique node name we give here, for example any variation of the tok
 <p>Any other <code>publish-options</code> are ignored by <a href="../../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a></p>
 <h2 id="disabling-push-notifications">Disabling push notifications</h2>
 <p>Disabling push notifications is very simple. Just send the following stanza to your XMPP chat server:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span> <span class="na">id=</span><span class="s">&#39;x44&#39;</span><span class="nt">&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span> <span class="na">id=</span><span class="s">&#39;x44&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;disable</span> <span class="na">xmlns=</span><span class="s">&#39;urn:xmpp:push:0&#39;</span> <span class="na">jid=</span><span class="s">&#39;pubsub.mypubsub.com&#39;</span> <span class="na">node=</span><span class="s">&#39;punsub_node_for_my_private_iphone&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div>

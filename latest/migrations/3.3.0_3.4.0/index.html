@@ -2367,20 +2367,20 @@ MongooseIM 3.4.0 uses a modified schema for MAM MUC backends which enables a mor
 <h4 id="step-1">Step 1</h4>
 <p>Please execute the following SQL statements on your MIM database:</p>
 <p><strong>MySQL</strong></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">mam_muc_message</span> <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">sender_id</span> <span class="nb">INT</span> <span class="n">UNSIGNED</span><span class="p">;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">mam_muc_message</span> <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">sender_id</span> <span class="nb">INT</span> <span class="n">UNSIGNED</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">i_mam_muc_message_sender_id</span> <span class="k">USING</span> <span class="n">BTREE</span> <span class="k">ON</span> <span class="n">mam_muc_message</span><span class="p">(</span><span class="n">sender_id</span><span class="p">);</span>
 </code></pre></div>
 </td></tr></table>
 <p><strong>PostgreSQL</strong></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">mam_muc_message</span> <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">sender_id</span> <span class="nb">INT</span><span class="p">;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">mam_muc_message</span> <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">sender_id</span> <span class="nb">INT</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">i_mam_muc_message_sender_id</span> <span class="k">ON</span> <span class="n">mam_muc_message</span> <span class="k">USING</span> <span class="n">BTREE</span> <span class="p">(</span><span class="n">sender_id</span><span class="p">);</span>
 </code></pre></div>
 </td></tr></table>
 <p><strong>MSSQL</strong></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">mam_muc_message</span><span class="p">]</span> <span class="k">ADD</span> <span class="n">sender_id</span> <span class="nb">bigint</span><span class="p">;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">mam_muc_message</span><span class="p">]</span> <span class="k">ADD</span> <span class="n">sender_id</span> <span class="nb">bigint</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">i_mam_muc_message_sender_id</span> <span class="k">ON</span> <span class="n">mam_muc_message</span><span class="p">(</span><span class="n">sender_id</span><span class="p">);</span>
 </code></pre></div>
 </td></tr></table>
@@ -2397,10 +2397,10 @@ You'll need to iterate over the whole <code>mam_muc_message</code> table with th
 <h3 id="cassandra">Cassandra</h3>
 <h4 id="step-1_1">Step 1</h4>
 <p>Please execute the following CQL statements on your MIM database:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">USE</span> <span class="n">mongooseim</span><span class="p">;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">USE</span> <span class="n">mongooseim</span><span class="p">;</span>
 <span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">mam_muc_message</span> <span class="k">ADD</span> <span class="n">from_jid</span> <span class="nb">varchar</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">INDEX</span> <span class="k">ON</span> <span class="n">mam_muc_message</span> <span class="p">(</span><span class="n">from_jid</span><span class="p">);</span>
 <span class="k">DESC</span> <span class="n">mam_muc_message</span><span class="p">;</span>
@@ -2412,16 +2412,16 @@ You'll need to iterate over the whole <code>mam_muc_message</code> table with th
 You'll need to iterate over the whole <code>mam_muc_message</code> table with the following algorithm:</p>
 <ol>
 <li>Extract the whole <code>mam_muc_message</code> table. Please make sure to use the paging feature of your Cassandra client, as the MAM tables tend to be very large.
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">mam_muc_message</span><span class="p">;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">mam_muc_message</span><span class="p">;</span>
 </code></pre></div>
 </td></tr></table></li>
 <li>To make data extraction faster, MongooseIM stores 2 copies of the message in the table:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cqlsh:mongooseim&gt; SELECT * FROM mam_muc_message WHERE id = 399582233150625537 ALLOW FILTERING;
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cqlsh:mongooseim&gt; SELECT * FROM mam_muc_message WHERE id = 399582233150625537 ALLOW FILTERING;
 
  room_jid                      | with_nick | id                 | from_jid | message                        | nick_name
 -------------------------------+-----------+--------------------+----------+--------------------------------+-----------
@@ -2432,13 +2432,13 @@ You'll need to iterate over the whole <code>mam_muc_message</code> table with th
 <li>The copy with an empty <code>with_nick</code> column must be updated.</li>
 <li>Extract the <strong>sender's JID</strong> from the <code>message</code> column in the same way as described in the RDBMS migration section. By default cassandra backend uses the <code>eterm</code> format.</li>
 <li>Update the <code>from_jid</code> column with the value of the extracted <strong>sender's JID</strong>:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cqlsh:mongooseim&gt; UPDATE mam_muc_message SET from_jid = &#39;username@server&#39; WHERE id = 399582233150625537  AND with_nick = &#39;&#39; AND room_jid = &#39;room-ad1d999b9e@muc.localhost&#39;;
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cqlsh:mongooseim&gt; UPDATE mam_muc_message SET from_jid = &#39;username@server&#39; WHERE id = 399582233150625537  AND with_nick = &#39;&#39; AND room_jid = &#39;room-ad1d999b9e@muc.localhost&#39;;
 cqlsh:mongooseim&gt; SELECT * FROM mam_muc_message WHERE id = 399582233150625537 ALLOW FILTERING;
 
  room_jid                      | with_nick | id                 | from_jid        | message                        | nick_name
@@ -2453,12 +2453,12 @@ cqlsh:mongooseim&gt; SELECT * FROM mam_muc_message WHERE id = 399582233150625537
 This means that skipping the migration will cause only some of the new features (namely GDPR data retrival) to not work correctly.</p>
 <h4 id="step-1_2">Step 1</h4>
 <p>Please update the Riak schema:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Set the RIAK_HOST to your Riak HTTP endpoint</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Set the RIAK_HOST to your Riak HTTP endpoint</span>
 <span class="c1"># Set the RIAK_MAM_SCHEMA_PATH to point to new schema path, which</span>
 <span class="c1"># by default is: RIAK_MAM_SCHEMA_PATH=tools/mam_search_schema.xml</span>
 curl -v -XPUT <span class="nv">$RIAK_HOST</span>/search/schema/mam <span class="se">\</span>
@@ -2469,7 +2469,7 @@ curl -v -XPUT <span class="nv">$RIAK_HOST</span>/search/schema/mam <span class="
 <p>After that we need to either reload all Riak nodes (restart them) or manually reload the schema on live nodes.
 Reloading the schema on live nodes requires access to Erlang Shell of one of the Riak nodes (any of them).
 The instruction on how to get to Riak's Erlang shell is beyond this guide, but if you manage to get to it, just call:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">yz_index</span><span class="p">:</span><span class="nf">reload</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;mam&quot;</span><span class="o">&gt;&gt;</span><span class="p">).</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">yz_index</span><span class="p">:</span><span class="nf">reload</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;mam&quot;</span><span class="o">&gt;&gt;</span><span class="p">).</span>
 </code></pre></div>
 </td></tr></table>
 <h4 id="step-2_2">Step 2</h4>
@@ -2489,31 +2489,31 @@ In order to do that, we need to create a migration script (just pick your favour
 <h3 id="elasticsearch">ElasticSearch</h3>
 <h4 id="step-1_3">Step 1</h4>
 <p>Please update the mapping for <code>muc_messages</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>PUT muc_messages/_mapping/muc
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>PUT muc_messages/_mapping/muc
 {
   &quot;properties&quot;: {
     &quot;mam_id&quot;: {
@@ -2546,17 +2546,17 @@ In order to do that, we need to create a migration script (just pick your favour
 You'll need to iterate over the all <code>muc_messages</code> documents with the following algorithm:</p>
 <ol>
 <li>Extract some documents (notice the <code>size</code> parameter) for conversion:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>GET muc_messages/_search/?size=100&amp;q=!_exists_:from_jid
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>GET muc_messages/_search/?size=100&amp;q=!_exists_:from_jid
 </code></pre></div>
 </td></tr></table></li>
 <li>Extract the <strong>sender's JID</strong> from the <code>message</code> field in the same way as described in the RDBMS migration section. Elasticsearch backend uses exclusively the <code>xml</code> format.</li>
 <li>Update the <code>from_jid</code> column with the value of the extracted <strong>sender's JID</strong>:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>POST localhost:9200/muc_messages/muc/%_id%/_update
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>POST localhost:9200/muc_messages/muc/%_id%/_update
 {
   &quot;doc&quot;: {
     &quot;from_jid&quot; : &quot;%sender&#39;s jid%&quot;

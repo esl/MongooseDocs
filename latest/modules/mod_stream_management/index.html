@@ -2427,13 +2427,13 @@ while the management of the session tables and configuration is implemented in
 </ul>
 <p>The maximum lifespan of a record in memory. After this, they will be chased for cleanup.</p>
 <h2 id="example-configuration">Example Configuration</h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_stream_management]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_stream_management]</span>
   <span class="n">buffer_max</span> <span class="o">=</span> <span class="mi">30</span>
   <span class="n">ack_freq</span> <span class="o">=</span> <span class="mi">1</span>
   <span class="n">resume_timeout</span> <span class="o">=</span> <span class="mi">600</span>
@@ -2445,18 +2445,18 @@ while the management of the session tables and configuration is implemented in
 <h2 id="implementation-details">Implementation details</h2>
 <h3 id="in-ejabberd_c2s">In <code>ejabberd_c2s</code></h3>
 <p>The record <code>#smgc_state{}</code> in the <code>ejabberd_c2s</code> <code>gen_fsm</code> server keeps fields like:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">stream_mgmt</span> <span class="o">=</span> <span class="n">false</span><span class="p">,</span> <span class="c">%% whether SM is enabled, used in pattern matching inside `ejabberd_c2s`</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">stream_mgmt</span> <span class="o">=</span> <span class="n">false</span><span class="p">,</span> <span class="c">%% whether SM is enabled, used in pattern matching inside `ejabberd_c2s`</span>
 <span class="n">stream_mgmt_in</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="c">%% amount of msgs on the server and not acked by the user (server&#39;s &lt;h&gt;)</span>
 <span class="n">stream_mgmt_id</span><span class="p">,</span> <span class="c">%% the mod_stream_management:smid() unique identifier</span>
 <span class="n">stream_mgmt_out_acked</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="c">%% messages delivered to the user, and acked by the user (user&#39;s &lt;h&gt;)</span>
@@ -2475,10 +2475,10 @@ while the management of the session tables and configuration is implemented in
 also provides a basic session table API and adds a new stream feature.</p>
 <p>At a bare minimum, this module keeps the config values in its <code>gen_mod</code> records, and keeps a mnesia
 table defined as follows:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">-</span><span class="ni">record</span><span class="p">(</span><span class="nl">sm_session</span><span class="p">,</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">-</span><span class="ni">record</span><span class="p">(</span><span class="nl">sm_session</span><span class="p">,</span>
         <span class="p">{</span><span class="n">smid</span> <span class="p">::</span> <span class="n">smid</span><span class="p">(),</span>
          <span class="n">sid</span> <span class="p">::</span> <span class="nn">ejabberd_sm</span><span class="p">:</span><span class="nf">sid</span><span class="p">()</span>
         <span class="p">}).</span>
@@ -2492,11 +2492,11 @@ when a session is registered for resumption.</p>
 <p>XEP version 1.6 requires the server to attempt giving the user the value of the server's <code>&lt;h&gt;</code> when
 a session timed out and cannot be resumed anymore. To be compliant with it, there's a second
 optional table:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">-</span><span class="ni">record</span><span class="p">(</span><span class="nl">stream_mgmt_stale_h</span><span class="p">,</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">-</span><span class="ni">record</span><span class="p">(</span><span class="nl">stream_mgmt_stale_h</span><span class="p">,</span>
         <span class="p">{</span><span class="n">smid</span> <span class="p">::</span> <span class="n">smid</span><span class="p">(),</span>
          <span class="n">h</span> <span class="p">::</span> <span class="n">non_neg_integer</span><span class="p">(),</span>
          <span class="n">stamp</span> <span class="p">::</span> <span class="n">non_neg_integer</span><span class="p">()</span>
@@ -2510,7 +2510,7 @@ dropped), a new record is added to this new table with the <code>smid</code> and
 session, together with a timestamp. Next, when a new session attempting resumption queries
 <code>mod_stream_management</code> for the data behind a <code>smid</code>, <code>mod_stream_management</code> can answer with one of
 the following:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="n">sid</span><span class="p">,</span> <span class="nn">ejabberd_sm</span><span class="p">:</span><span class="nf">sid</span><span class="p">()}</span> <span class="p">|</span> <span class="p">{</span><span class="n">stale_h</span><span class="p">,</span> <span class="n">non_neg_integer</span><span class="p">()}</span> <span class="p">|</span> <span class="p">{</span><span class="n">error</span><span class="p">,</span> <span class="n">smid_not_found</span><span class="p">}.</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="n">sid</span><span class="p">,</span> <span class="nn">ejabberd_sm</span><span class="p">:</span><span class="nf">sid</span><span class="p">()}</span> <span class="p">|</span> <span class="p">{</span><span class="n">stale_h</span><span class="p">,</span> <span class="n">non_neg_integer</span><span class="p">()}</span> <span class="p">|</span> <span class="p">{</span><span class="n">error</span><span class="p">,</span> <span class="n">smid_not_found</span><span class="p">}.</span>
 </code></pre></div>
 </td></tr></table>
 <p>And <code>ejabberd_c2s</code> will pattern-match and act accordingly.</p>

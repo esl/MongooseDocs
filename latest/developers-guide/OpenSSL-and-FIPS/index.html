@@ -2282,16 +2282,16 @@
 <p>Make sure the option <code>--enable-fips</code> is specified for <code>configure</code> command.
 If you want to use a different OpenSSL than the default one, specify the option <code>--with-ssl=PATH_TO_YOUR_OPENSSL</code> as well.
 Here's an example of a command for building Erlang/OTP with kerl:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">KERL_CONFIGURE_OPTIONS</span><span class="o">=</span><span class="s2">&quot;--enable-fips&quot;</span> ./kerl build <span class="m">21</span>.3 <span class="m">21</span>.3-fips
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">KERL_CONFIGURE_OPTIONS</span><span class="o">=</span><span class="s2">&quot;--enable-fips&quot;</span> ./kerl build <span class="m">21</span>.3 <span class="m">21</span>.3-fips
 </code></pre></div>
 </td></tr></table>
 <h3 id="building-mongooseim-with-a-custom-openssl">Building MongooseIM with a custom OpenSSL</h3>
 <p>If you want to use a custom OpenSSL, please export the CFLAGS and LDFLAGS env vars pointing to a FIPS compliant OpenSSL before running <code>./rebar3 compile</code> or <code>make rel</code>.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">OPENSSL_LIB</span><span class="o">=</span>~/openssl/lib <span class="c1">#put your path here</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">OPENSSL_LIB</span><span class="o">=</span>~/openssl/lib <span class="c1">#put your path here</span>
 <span class="nv">OPENSSL_INC</span><span class="o">=</span>~/openssl/inc <span class="c1">#put your path here</span>
 
 <span class="nb">export</span> <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&quot;-Wl,-rpath=</span><span class="nv">$OPENSSL_LIB</span><span class="s2"> -L</span><span class="nv">$OPENSSL_LIB</span><span class="s2">&quot;</span>
@@ -2302,19 +2302,19 @@ Here's an example of a command for building Erlang/OTP with kerl:</p>
 <p>Find <code>etc/app.config</code> in the release directory. 
 FIPS mode is an option of the crypto application. 
 In order to enable/disable it, add the following section to <code>app.config</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="n">crypto</span><span class="p">,</span> <span class="p">[{</span><span class="n">fips_mode</span><span class="p">,</span> <span class="nv">Value</span><span class="p">}]},</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="n">crypto</span><span class="p">,</span> <span class="p">[{</span><span class="n">fips_mode</span><span class="p">,</span> <span class="nv">Value</span><span class="p">}]},</span>
 </code></pre></div>
 </td></tr></table>
 <p>where <code>Value</code> is either <code>true</code> or <code>false</code>.</p>
 <h2 id="how-to-check-if-the-fips-mode-is-enabled">How to check if the FIPS mode is enabled</h2>
 <h3 id="log-message">Log message</h3>
 <p>When MongooseIM starts, it prints the following log message if FIPS mode is enabled</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>2015-02-25 14:30:54.501 [warning] &lt;0.242.0&gt;@mongoose_fips:do_notify:37 FIPS mode enabled
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>2015-02-25 14:30:54.501 [warning] &lt;0.242.0&gt;@mongoose_fips:do_notify:37 FIPS mode enabled
 </code></pre></div>
 </td></tr></table>
 <h3 id="run-time-check">Run-time check</h3>
 <p>Run the following function in the MongooseIM console:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">mongoose_fips</span><span class="p">:</span><span class="nf">status</span><span class="p">().</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">mongoose_fips</span><span class="p">:</span><span class="nf">status</span><span class="p">().</span>
 </code></pre></div>
 </td></tr></table>
 <p>The function returns:</p>

@@ -2186,7 +2186,7 @@ In the future it may replace the current <code>mongooseimctl</code> implementati
 <h2 id="configuration">Configuration</h2>
 <p>This module contains command definitions loaded when the module is activated.
 There are no more configuration parameters, so the following entry in the config file is sufficient:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_commands]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_commands]</span>
 </code></pre></div>
 </td></tr></table>
 <h2 id="command-definition">Command definition</h2>
@@ -2204,17 +2204,17 @@ Each definition contains the following entries:</p>
 <li>result (what the command (and its underlying function) is supposed to return)</li>
 </ul>
 <p>A simple command definition may look like this:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">[</span>
     <span class="p">{</span><span class="n">name</span><span class="p">,</span> <span class="n">list_contacts</span><span class="p">},</span>
     <span class="p">{</span><span class="n">category</span><span class="p">,</span> <span class="o">&lt;&lt;</span><span class="s">&quot;contacts&quot;</span><span class="o">&gt;&gt;</span><span class="p">},</span>
     <span class="p">{</span><span class="n">desc</span><span class="p">,</span> <span class="o">&lt;&lt;</span><span class="s">&quot;Get roster&quot;</span><span class="o">&gt;&gt;</span><span class="p">},</span>
@@ -2230,20 +2230,20 @@ Each definition contains the following entries:</p>
 <h2 id="command-registration-and-interface">Command registration and interface</h2>
 <p>Command registry is managed by <code>mongoose_commands</code> module.
 To register a command simply call:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">mongoose_commands</span><span class="p">:</span><span class="nb">register</span><span class="p">(</span><span class="n">list_of_command_definitions</span><span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">mongoose_commands</span><span class="p">:</span><span class="nb">register</span><span class="p">(</span><span class="n">list_of_command_definitions</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 <p>The registry provides functions for listing commands, retrieving their signatures,
 and also calling. To call the above method you should do:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">mongoose_commands</span><span class="p">:</span><span class="nf">execute</span><span class="p">(</span><span class="n">admin</span><span class="p">,</span> <span class="n">list_contacts</span><span class="p">)</span> <span class="c">% if you want superuser privileges</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">mongoose_commands</span><span class="p">:</span><span class="nf">execute</span><span class="p">(</span><span class="n">admin</span><span class="p">,</span> <span class="n">list_contacts</span><span class="p">)</span> <span class="c">% if you want superuser privileges</span>
 </code></pre></div>
 </td></tr></table>
 <p>or</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">mongoose_commands</span><span class="p">:</span><span class="nf">execute</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;alice@wonderland.lit&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">list_contacts</span><span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">mongoose_commands</span><span class="p">:</span><span class="nf">execute</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;alice@wonderland.lit&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">list_contacts</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 <p>and it will return a list of JIDs. REST API would expose this command as</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>http://localhost/api/contacts % use GET, since it is &#39;read&#39;
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>http://localhost/api/contacts % use GET, since it is &#39;read&#39;
 </code></pre></div>
 </td></tr></table>
 <p>and return a JSON list of strings. Since this is a user command, REST would expose it on the "client"

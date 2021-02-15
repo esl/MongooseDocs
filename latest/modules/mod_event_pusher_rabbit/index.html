@@ -2639,15 +2639,15 @@ section before enabling the module.</p>
 </ul>
 <p>Defines RabbitMQ group chat message received topic name.</p>
 <h2 id="example-configuration">Example configuration</h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_event_pusher]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_event_pusher]</span>
   <span class="n">backend</span><span class="p">.</span><span class="n">rabbit</span><span class="p">.</span><span class="n">presence_exchange</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span><span class="s">&quot;presence&quot;</span>
   <span class="n">backend</span><span class="p">.</span><span class="n">rabbit</span><span class="p">.</span><span class="n">presence_exchange</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="s">&quot;topic&quot;</span>
   <span class="n">backend</span><span class="p">.</span><span class="n">rabbit</span><span class="p">.</span><span class="n">chat_msg_exchange</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;chat_msg&quot;</span>
@@ -2663,20 +2663,20 @@ section before enabling the module.</p>
 The messages are delivered in a JSON format.</p>
 <h3 id="presence-updates">Presence updates</h3>
 <p>The JSON format for an online presence update notification is:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nt">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;alice@localhost/res1&quot;</span><span class="p">,</span>
     <span class="nt">&quot;present&quot;</span><span class="p">:</span> <span class="kc">true</span>
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table></p>
 <p>For offline presence updates, the <code>present</code> boolean value is set to false:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nt">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;alice@localhost/res1&quot;</span><span class="p">,</span>
     <span class="nt">&quot;present&quot;</span><span class="p">:</span> <span class="kc">false</span>
 <span class="p">}</span>
@@ -2684,11 +2684,11 @@ The messages are delivered in a JSON format.</p>
 </td></tr></table>
 <h3 id="sentreceived-messages">Sent/received messages</h3>
 <p>The JSON format for a private message notification is:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nt">&quot;to_user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;bob@localhost/res1&quot;</span><span class="p">,</span>
     <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello, Bob&quot;</span><span class="p">,</span>
     <span class="nt">&quot;from_user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;alice@localhost/res1&quot;</span>
@@ -2696,11 +2696,11 @@ The messages are delivered in a JSON format.</p>
 </code></pre></div>
 </td></tr></table>
 <p>The notification is similar for group messages. For example for "sent" events:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nt">&quot;to_user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;muc_publish@muc.localhost&quot;</span><span class="p">,</span>
     <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hi, Everyone!&quot;</span><span class="p">,</span>
     <span class="nt">&quot;from_user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;bob@localhost/res1&quot;</span>
@@ -2708,11 +2708,11 @@ The messages are delivered in a JSON format.</p>
 </code></pre></div>
 </td></tr></table>
 <p>and for "received" events:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nt">&quot;to_user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;bob@localhost/res1&quot;</span><span class="p">,</span>
     <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hi, Everyone!&quot;</span><span class="p">,</span>
     <span class="nt">&quot;from_user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;muc_publish@muc.localhost/alice&quot;</span>

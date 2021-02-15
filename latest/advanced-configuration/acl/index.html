@@ -2293,9 +2293,9 @@
 <li><strong>Default:</strong> no default - each access class needs to be specified explicitly.</li>
 <li><strong>Example:</strong> the <code>local</code> access class is used for the regular users connecting to the <a href="../listen/#client-to-server-c2s-listenc2s">C2S listener</a>.</li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">local</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">local</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">user_regexp</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>
@@ -2310,9 +2310,9 @@
 <li><strong>Example:</strong> <code>match = "all"</code></li>
 </ul>
 <p>Matches either all users or none of them. The latter is useful for disabling access to some services.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">everyone</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">everyone</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">match</span> <span class="o">=</span> <span class="s">&quot;all&quot;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>
@@ -2324,10 +2324,10 @@
 </ul>
 <p>Matches all JIDs with the specified user name.
 The following class includes <code>alice@localhost</code>, but not <code>bob@localhost</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">admin</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">admin</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">user</span> <span class="o">=</span> <span class="s">&quot;alice&quot;</span><span class="p">},</span>
     <span class="p">{</span><span class="n">user</span> <span class="o">=</span> <span class="s">&quot;charlie&quot;</span><span class="p">}</span>
   <span class="p">]</span>
@@ -2340,17 +2340,17 @@ The following class includes <code>alice@localhost</code>, but not <code>bob@loc
 </ul>
 <p>Matches all JIDs with the specified domain name.
 The following class includes <code>alice@localhost</code>, but not <code>alice@xmpp.org</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">localhost_users</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">localhost_users</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">server</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>
 </td></tr></table>
 <p>This option can be combined with <code>user</code> - only <code>alice@localhost</code> belongs to the following class:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">admin</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">admin</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">user</span> <span class="o">=</span> <span class="s">&quot;alice&quot;</span><span class="p">,</span> <span class="n">server</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>
@@ -2362,9 +2362,9 @@ The following class includes <code>alice@localhost</code>, but not <code>alice@x
 </ul>
 <p>Matches all JIDs with the specified resource name.
 The following class includes <code>alice@localhost/mobile</code>, but not <code>alice@localhost/home</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">mobile_users</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">mobile_users</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">resource</span> <span class="o">=</span> <span class="s">&quot;mobile&quot;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>
@@ -2376,17 +2376,17 @@ The following class includes <code>alice@localhost/mobile</code>, but not <code>
 </ul>
 <p>Matches all JIDs with the user name matching the regular expression.
 The following class includes <code>alice@localhost</code> and <code>albert@jabber.org</code>, but not <code>bob@localhost</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">ae</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">ae</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">user_regexp</span> <span class="o">=</span> <span class="s">&quot;^a.*e&quot;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>
 </td></tr></table>
 <p>This option can be combined with <code>server</code> - here <code>albert@jabber.org</code> is excluded:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">localhost_ae</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">localhost_ae</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">user_regexp</span> <span class="o">=</span> <span class="s">&quot;^a.*e&quot;</span><span class="p">,</span> <span class="n">server</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>
@@ -2398,17 +2398,17 @@ The following class includes <code>alice@localhost</code> and <code>albert@jabbe
 </ul>
 <p>Matches all JIDs with the domain name matching the regular expression.
 The following class includes <code>alice@host1</code>, but not <code>alice@xmpp.org</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">host_users</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">host_users</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">server_regexp</span> <span class="o">=</span> <span class="s">&quot;host&quot;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>
 </td></tr></table>
 <p>This option can be combined with <code>user_regexp</code>, e.g. we can require the user name to contain 'a' and the domain name to start with 'a':</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">a</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">a</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">user_regexp</span> <span class="o">=</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="n">server_regexp</span> <span class="o">=</span> <span class="s">&quot;^a&quot;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>
@@ -2419,9 +2419,9 @@ The following class includes <code>alice@host1</code>, but not <code>alice@xmpp.
 <li><strong>Example:</strong> <code>resource_regexp = "^res"</code></li>
 </ul>
 <p>Matches all JIDs with the resource name matching the regular expression. This class includes <code>bob@xmpp.org/res123</code>, but not <code>bob@xmpp.org/home</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">digital_resources</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">digital_resources</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">resource_regexp</span> <span class="o">=</span> <span class="s">&#39;^res\d+$&#39;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>
@@ -2434,17 +2434,17 @@ The following class includes <code>alice@host1</code>, but not <code>alice@xmpp.
 </ul>
 <p>Matches all JIDs with the user name matching the pattern:
 The following class includes <code>alice@localhost</code> and <code>albert@jabber.org</code>, but not <code>bob@localhost</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">ae_users</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">ae_users</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">user_glob</span> <span class="o">=</span> <span class="s">&quot;a*e*&quot;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>
 </td></tr></table>
 <p>This option can be combined with <code>server</code> - here <code>albert@jabber.org</code> is excluded:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">localhost_ae_users</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">localhost_ae_users</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">user_glob</span> <span class="o">=</span> <span class="s">&quot;a*e*&quot;</span><span class="p">,</span> <span class="n">server</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>
@@ -2456,17 +2456,17 @@ The following class includes <code>alice@localhost</code> and <code>albert@jabbe
 </ul>
 <p>Matches all JIDs with the domain name matching the pattern.
 The following class includes <code>alice@host1</code>, but not <code>alice@xmpp.org</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">localhost_users</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">localhost_users</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">server_glob</span> <span class="o">=</span> <span class="s">&quot;host*&quot;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>
 </td></tr></table>
 <p>This option can be combined with <code>user_glob</code>, e.g. we can require the user name to contain 'a' and the domain name to start with 'a':</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">a</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">a</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">user_glob</span> <span class="o">=</span> <span class="s">&quot;*a*&quot;</span><span class="p">,</span> <span class="n">server_glob</span> <span class="o">=</span> <span class="s">&quot;a*&quot;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>
@@ -2477,9 +2477,9 @@ The following class includes <code>alice@host1</code>, but not <code>alice@xmpp.
 <li><strong>Example:</strong> <code>resource_glob = "^res"</code></li>
 </ul>
 <p>Matches all JIDs with the resource name matching the pattern. This class includes <code>bob@xmpp.org/res123</code>, but not <code>bob@xmpp.org/home</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">limited_resources</span> <span class="o">=</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">limited_resources</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="n">resource_glob</span> <span class="o">=</span> <span class="s">&quot;res???&quot;</span><span class="p">}</span>
   <span class="p">]</span>
 </code></pre></div>

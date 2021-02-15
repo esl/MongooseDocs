@@ -2247,16 +2247,16 @@ These options couldn't be re-added later by changing the room config via request
 <p>You have to iterate over all rooms in the DB (<code>muc_light_rooms</code> table) and add missing entries to the <code>muc_light_config</code> table.
 Every option is inserted as a separate row and is stored as plain text, so it should be straightforward.</p>
 <p>Let's say you were using the following config in <code>mongooseim.cfg</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="n">config_schema</span><span class="p">,</span> <span class="p">[</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="n">config_schema</span><span class="p">,</span> <span class="p">[</span>
                  <span class="s">&quot;roomname&quot;</span><span class="p">,</span>
                  <span class="s">&quot;subject&quot;</span><span class="p">,</span>
                  <span class="s">&quot;background&quot;</span><span class="p">,</span>
@@ -2270,7 +2270,7 @@ Every option is inserted as a separate row and is stored as plain text, so it sh
 </td></tr></table>
 <p>Your client application has created some rooms without the <code>background</code> option by mistake.</p>
 <p>For every <code>id</code> in the <code>muc_light_rooms</code> table, you need to execute:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">muc_light_config</span><span class="p">(</span><span class="n">room_id</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;put id here&#39;</span><span class="p">,</span> <span class="s1">&#39;background&#39;</span><span class="p">,</span> <span class="s1">&#39;new default value&#39;</span><span class="p">);</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">muc_light_config</span><span class="p">(</span><span class="n">room_id</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;put id here&#39;</span><span class="p">,</span> <span class="s1">&#39;background&#39;</span><span class="p">,</span> <span class="s1">&#39;new default value&#39;</span><span class="p">);</span>
 </code></pre></div>
 </td></tr></table>
 <h2 id="mssql-connectivity-via-odbc">MSSQL connectivity via ODBC</h2>

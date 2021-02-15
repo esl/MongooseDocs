@@ -2371,8 +2371,8 @@ Each MongooseIM connection consumes ~1 file descriptor, so the default value wil
 <p>To list all limits execute: <code>ulimit -a</code>.</p>
 <p>In the example below we set limits for a <code>mongooseim</code> user.
 To increase the limit the following entries should be added in <code>/etc/security/limits.conf</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseim   soft   nofile   1000000
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseim   soft   nofile   1000000
 mongooseim   hard   nofile   1000000
 </code></pre></div>
 </td></tr></table>
@@ -2386,7 +2386,7 @@ This value specifies how many ports (files, drivers, sockets etc) can be used by
 Be cautious - it preallocates some structures inside the VM and will have impact on the memory usage.
 We suggest 350000 for 100 k users when using an SSL/TLS connection or 250000 in other cases.</p>
 <p>To check how memory consumption changes depending on <code>ERL_MAX_PORTS</code>, use the following command:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>env <span class="nv">ERL_MAX_PORTS</span><span class="o">=[</span>given value<span class="o">]</span> erl -noinput -eval <span class="s1">&#39;io:format(&quot;~p~n&quot;,[erlang:memory(system)]).&#39;</span> -s erlang halt
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>env <span class="nv">ERL_MAX_PORTS</span><span class="o">=[</span>given value<span class="o">]</span> erl -noinput -eval <span class="s1">&#39;io:format(&quot;~p~n&quot;,[erlang:memory(system)]).&#39;</span> -s erlang halt
 </code></pre></div>
 </td></tr></table>
 <p>Another change you need to make when building a MongooseIM cluster is setting the <code>-sname</code>.
@@ -2395,7 +2395,7 @@ which <strong>must</strong> be resolvable on other nodes in the cluster.</p>
 <h3 id="port-range">Port range</h3>
 <p>To connect to other nodes, a freshly started node uses a port from the range <code>inet_dist_listen_min</code> to <code>inet_dist_listen_max</code>.</p>
 <p>To enable this, add the following line to the <code>vm.args</code> file:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>-kernel inet_dist_listen_min 50000 inet_dist_listen_max 50010
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>-kernel inet_dist_listen_min 50000 inet_dist_listen_max 50010
 </code></pre></div>
 </td></tr></table>
 <p>Make sure that the range you set provides enough ports for all the nodes in the cluster.</p>
@@ -2413,9 +2413,9 @@ Epmd keeps track of which Erlang node is using which ports on the local machine.
 <p>There is no action required on the initial node.</p>
 <p>Just start MongooseIM using <code>mongooseim start</code> or <code>mongooseim live</code>.</p>
 <h3 id="new-node-joining-cluster">New node - joining cluster</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl start
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl start
 mongooseimctl started <span class="c1">#waits until MongooseIM starts</span>
 mongooseimctl join_cluster ClusterMember
 </code></pre></div>
@@ -2423,52 +2423,52 @@ mongooseimctl join_cluster ClusterMember
 <p><code>ClusterMember</code> is the name of a running node set in <code>vm.args</code> file, for example <code>mongooseim@localhost</code>.
 This node has to be part of the cluster we'd like to join.</p>
 <p>First, MongooseIM will display a warning and a question if the operation should proceed:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>Warning. This will drop all current connections and will discard all persistent data from Mnesia. Do you want to continue? (yes/no)
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>Warning. This will drop all current connections and will discard all persistent data from Mnesia. Do you want to continue? (yes/no)
 </code></pre></div>
 </td></tr></table>
 <p>If you type <code>yes</code> MongooseIM will start joining the cluster.
 Successful output may look like the following:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>You have successfully joined the node mongooseim2@localhost to the cluster with node member mongooseim@localhost
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>You have successfully joined the node mongooseim2@localhost to the cluster with node member mongooseim@localhost
 </code></pre></div>
 </td></tr></table>
 <p>In order to skip the question you can add option <code>-f</code> which will perform the action
 without displaying the warning and waiting for the confirmation.</p>
 <h3 id="leaving-cluster">Leaving cluster</h3>
 <p>To leave a running node from the cluster, call:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl leave_cluster
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl leave_cluster
 </code></pre></div>
 </td></tr></table>
 <p>It only makes sense to use it if the node is the part of a cluster, e.g <code>join_cluster</code> was called from that node before.</p>
 <p>Similarly to <code>join_cluster</code> a warning and a question will be displayed unless the option <code>-f</code> is added to the command.</p>
 <p>The successful output from the above command may look like the following:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>The node mongooseim2@localhost has successfully left the cluster
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>The node mongooseim2@localhost has successfully left the cluster
 </code></pre></div>
 </td></tr></table>
 <h3 id="removing-a-node-from-the-cluster">Removing a node from the cluster</h3>
 <p>To remove another node from the cluster, call the following command from one of the cluster members:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl remove_from_cluster RemoteNodeName
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl remove_from_cluster RemoteNodeName
 </code></pre></div>
 </td></tr></table>
 <p>where <code>RemoteNodeName</code> is a name of the node that we'd like to remove from our cluster.
 This command could be useful when the node is dead and not responding and we'd like to remove it remotely.
 The successful output from the above command may look like the following:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>The node mongooseim2@localhost has been removed from the cluster
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>The node mongooseim2@localhost has been removed from the cluster
 </code></pre></div>
 </td></tr></table>
 <h3 id="cluster-status">Cluster status</h3>
 <p>You can use the following commands on any of the running nodes to examine the cluster
 or to see if a newly added node is properly clustered:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl mnesia info <span class="p">|</span> grep <span class="s2">&quot;running db nodes&quot;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl mnesia info <span class="p">|</span> grep <span class="s2">&quot;running db nodes&quot;</span>
 </code></pre></div>
 </td></tr></table>
 <p>This command shows all running nodes.
 A healthy cluster should contain all nodes here.
 For example:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>running db <span class="nv">nodes</span> <span class="o">=</span> <span class="o">[</span>mongooseim@node1, mongooseim@node2<span class="o">]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>running db <span class="nv">nodes</span> <span class="o">=</span> <span class="o">[</span>mongooseim@node1, mongooseim@node2<span class="o">]</span>
 </code></pre></div>
 </td></tr></table>
 To see stopped or misbehaving nodes following command can be useful:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl mnesia info <span class="p">|</span> grep <span class="s2">&quot;stopped db nodes&quot;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl mnesia info <span class="p">|</span> grep <span class="s2">&quot;stopped db nodes&quot;</span>
 </code></pre></div>
 </td></tr></table>
 <p>This command shows which nodes are considered stopped.

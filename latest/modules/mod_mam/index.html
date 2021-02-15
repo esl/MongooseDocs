@@ -2824,16 +2824,16 @@ This functionality is currently implemented only for the <code>rdbms</code> back
 <ul>
 <li>Specify <code>[mod_mam_meta.pm]</code> section</li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
 <span class="p">[</span><span class="n">modules</span><span class="p">.</span><span class="n">mod_mam_meta</span><span class="p">.</span><span class="n">pm</span><span class="p">]</span> <span class="c1"># defining this section enables PM support</span>
 </code></pre></div>
 </td></tr></table>
 <ul>
 <li>Define any PM related option</li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
   <span class="n">pm</span><span class="p">.</span><span class="n">backend</span> <span class="o">=</span> <span class="s">&quot;rdbms&quot;</span> <span class="c1"># enables PM support and overrides its backend</span>
 </code></pre></div>
 </td></tr></table>
@@ -2852,16 +2852,16 @@ This functionality is currently implemented only for the <code>rdbms</code> back
 <ul>
 <li>Specify <code>[mod_mam_meta.muc]</code> section</li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
 <span class="p">[</span><span class="n">modules</span><span class="p">.</span><span class="n">mod_mam_meta</span><span class="p">.</span><span class="n">muc</span><span class="p">]</span> <span class="c1"># defining this section enables MUC support</span>
 </code></pre></div>
 </td></tr></table>
 <ul>
 <li>Define any MUC related option</li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
   <span class="n">muc</span><span class="p">.</span><span class="n">backend</span> <span class="o">=</span> <span class="s">&quot;rdbms&quot;</span> <span class="c1"># enables MUC support and overrides its backend</span>
 </code></pre></div>
 </td></tr></table>
@@ -2879,10 +2879,10 @@ This functionality is currently implemented only for the <code>rdbms</code> back
 <h4 id="example">Example</h4>
 <p>The example below presents how to override common option for <code>muc</code> module specifically.
 Please note that you can override all common options in similar way.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
   <span class="n">backend</span> <span class="o">=</span> <span class="s">&quot;rdbms&quot;</span>
   <span class="n">async_writer</span> <span class="o">=</span> <span class="n">true</span> <span class="c1"># this option enables async writer for RDBMS backend</span>
   <span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span> <span class="o">=</span> <span class="n">false</span> <span class="c1"># disable async writer for MUC archive only</span>
@@ -2955,8 +2955,8 @@ Please note that the full text search is currently only implemented for <code>"r
 Also, full text search works only for messages archived while this option is enabled.</p>
 <h4 id="is_archivable_message3-callback"><a id="is_archivable_message"></a><code>is_archivable_message/3</code> callback</h4>
 <p><code>is_archivable_message</code> option has to name a module exporting <code>is_archivable_message/3</code> function conforming to the spec:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">-</span><span class="ni">spec</span> <span class="n">is_archivable_message</span><span class="p">(</span><span class="nv">Mod</span> <span class="p">::</span> <span class="n">module</span><span class="p">(),</span> <span class="nv">Dir</span> <span class="p">::</span> <span class="n">incoming</span> <span class="p">|</span> <span class="n">outgoing</span><span class="p">,</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">-</span><span class="ni">spec</span> <span class="n">is_archivable_message</span><span class="p">(</span><span class="nv">Mod</span> <span class="p">::</span> <span class="n">module</span><span class="p">(),</span> <span class="nv">Dir</span> <span class="p">::</span> <span class="n">incoming</span> <span class="p">|</span> <span class="n">outgoing</span><span class="p">,</span>
                           <span class="nv">Packet</span> <span class="p">::</span> <span class="nn">exml</span><span class="p">:</span><span class="nb">element</span><span class="p">())</span> <span class="o">-&gt;</span> <span class="n">boolean</span><span class="p">().</span>
 </code></pre></div>
 </td></tr></table>
@@ -2993,16 +2993,16 @@ By default, <code>mod_mam</code> Cassandra backend requires <code>global</code> 
 <p>First, make sure that your ElasticSearch cluster has expected indexes and mappings in place.
 Please consult <a href="../../advanced-configuration/outgoing-connections/#elasticsearch-options">Outgoing connections</a> page to learn how to properly configure ElasticSearch connection pool.</p>
 <h2 id="example-configuration">Example configuration</h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
   <span class="n">backend</span> <span class="o">=</span> <span class="s">&quot;rdbms&quot;</span>
   <span class="n">no_stanzaid_element</span> <span class="o">=</span> <span class="kc">true</span>
 

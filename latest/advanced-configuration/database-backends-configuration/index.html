@@ -2413,8 +2413,8 @@ Subsequent sections go into more depth on each database: what they are suitable 
 <p>The schema files can be found in the <code>priv</code> directory.
 The default schema is defined in the <code>mysql.sql</code> file.</p>
 <p>You can use the following command to apply it on localhost:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mysql -h localhost -u user -p -e <span class="s1">&#39;create database mongooseim&#39;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mysql -h localhost -u user -p -e <span class="s1">&#39;create database mongooseim&#39;</span>
 mysql -h localhost -u user -p mongooseim &lt; mysql.sql
 </code></pre></div>
 </td></tr></table>
@@ -2442,8 +2442,8 @@ Newer versions of MongooseIM works correctly with MySQL 8 and its default auth p
 <p>The schema files can be found in the <code>priv</code> directory.
 The default schema is defined in the <code>pg.sql</code> file.</p>
 <p>You can use the following command to apply it on localhost:</p>
-<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>psql -h localhost -U user -c <span class="s2">&quot;CREATE DATABASE mongooseim;&quot;</span>
+<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>psql -h localhost -U user -c <span class="s2">&quot;CREATE DATABASE mongooseim;&quot;</span>
 psql -h localhost -U user -q -d mongooseim -f pg.sql
 </code></pre></div>
 </td></tr></table>
@@ -2467,14 +2467,14 @@ for more information.</p>
 </ul>
 <p><strong>Setup</strong></p>
 <p>MSSQL can be used from MongooseIM through the ODBC layer with FreeTDS driver, so you need them installed on your system.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu</span>
 $ sudo apt install freetds-dev tdsodbc
 
 <span class="c1"># CentOS</span>
@@ -2486,21 +2486,21 @@ $ brew install freetds
 </td></tr></table>
 <p>Then you need to configure the connection.
 Add your database (<code>mongooseim</code> here) to the <code>/etc/odbc.ini</code> or <code>$HOME/.odbc.ini</code> file:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[mongoose-mssql]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[mongoose-mssql]</span>
 <span class="c1">; Ubuntu</span>
 <span class="na">Driver</span>      <span class="o">=</span> <span class="s">/usr/lib/x86_64-linux-gnu/odbc/libtdsodbc.so</span>
 <span class="na">Setup</span>       <span class="o">=</span> <span class="s">/usr/lib/x86_64-linux-gnu/odbc/libtdsS.so</span>
@@ -2527,31 +2527,31 @@ there may be some deadlocks due to the <code>READ_COMMITTED_SNAPSHOT</code> set 
 In this case we recommend to set this database property to <code>ON</code>, this will enable row level locking which significantly reduces
 deadlock chances around muc_light operations.</p>
 <p>This property can be set by the following <code>ALTER DATABASE</code> query:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">DATABASE</span> <span class="err">$</span><span class="n">name_of_your_db</span> <span class="k">SET</span> <span class="n">READ_COMMITTED_SNAPSHOT</span> <span class="k">ON</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">DATABASE</span> <span class="err">$</span><span class="n">name_of_your_db</span> <span class="k">SET</span> <span class="n">READ_COMMITTED_SNAPSHOT</span> <span class="k">ON</span>
 </code></pre></div>
 </td></tr></table>
 <p>The command above may take some time.</p>
 <p>Then you need to import the SQL schema from either <code>mssql2012.sql</code> or <code>azuresql.sql</code> file depending on which database you are using.
 You can use a Microsoft's GUI tool (the provided .sql files should work with it) or isql, but after a slight modification of the dump file:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cat azuresql.sql <span class="p">|</span> tr -d <span class="s1">&#39;\r&#39;</span> <span class="p">|</span> tr <span class="s1">&#39;\n&#39;</span> <span class="s1">&#39; &#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/GO/\n/g&#39;</span> <span class="p">|</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cat azuresql.sql <span class="p">|</span> tr -d <span class="s1">&#39;\r&#39;</span> <span class="p">|</span> tr <span class="s1">&#39;\n&#39;</span> <span class="s1">&#39; &#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/GO/\n/g&#39;</span> <span class="p">|</span>
 isql mongoose-mssql username password -b
 </code></pre></div>
 </td></tr></table>
 <p>The final step is to configure <code>mongooseim.toml</code> appropriately.
 Set the following option in the <code>general</code> section:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[general]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[general]</span>
   <span class="n">rdbms_server_type</span> <span class="o">=</span> <span class="s">&quot;mssql&quot;</span>
 </code></pre></div>
 </td></tr></table>
 <p>Configure the <code>outgoing_pools.rdbms</code> section as follows:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[outgoing_pools.rdbms.default]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[outgoing_pools.rdbms.default]</span>
   <span class="n">workers</span> <span class="o">=</span> <span class="mi">5</span>  
 
   <span class="k">[outgoing_pools.rdbms.default.connection]</span>
@@ -2575,66 +2575,66 @@ Set the following option in the <code>general</code> section:</p>
 <p><strong>Setup</strong></p>
 <p>We are using the Riak data types, so the minimal supported version is 2.0.
 To be able to store above persistent date one have to run the following command:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">RIAK_HOST</span><span class="o">=</span><span class="s2">&quot;http://localhost:8098&quot;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">RIAK_HOST</span><span class="o">=</span><span class="s2">&quot;http://localhost:8098&quot;</span>
 
 curl -XPUT <span class="nv">$RIAK_HOST</span>/search/schema/vcard <span class="se">\</span>
     -H <span class="s1">&#39;Content-Type:application/xml&#39;</span> <span class="se">\</span>
@@ -2703,8 +2703,8 @@ and <a href="../outgoing-connections/#riak-options">Riak options</a> for more in
 <h3 id="cassandra">Cassandra</h3>
 <p><strong>Setup</strong></p>
 <p>This will prepare Cassandra for connection from MongooseIM. Make sure Cassandra is running, open a new terminal window and enter the following commands:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ cqlsh
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ cqlsh
 $ cqlsh&gt; source &#39;$REPO/priv/casssandra.cql&#39;;
 </code></pre></div>
 </td></tr></table></p>
@@ -2717,8 +2717,8 @@ $ cqlsh&gt; source &#39;$REPO/priv/casssandra.cql&#39;;
 <p>Please note that MongooseIM has been tested to work properly with ElasticSearch version 5.6.9.</p>
 <p>In order to use ElasticSearch as a MAM backend, you'll need to create required indexes and mappings.
 From the root of MongooseIM's repository run:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -X PUT <span class="nv">$ELASTICSEARCH_URL</span>/messages -d <span class="s1">&#39;@priv/elasticsearch/pm.json&#39;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -X PUT <span class="nv">$ELASTICSEARCH_URL</span>/messages -d <span class="s1">&#39;@priv/elasticsearch/pm.json&#39;</span>
 curl -X PUT <span class="nv">$ELASTICSEARCH_URL</span>/muc_messages -d <span class="s1">&#39;@priv/elasticsearch/muc.json&#39;</span>
 </code></pre></div>
 </td></tr></table>

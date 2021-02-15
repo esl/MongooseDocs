@@ -2537,57 +2537,57 @@ The goal is to get to know MongooseIM, set it up, go through basic operations an
 <p>Go to the <a href="https://www.erlang-solutions.com/resources/download.html">downloads</a> section of the Erlang Solutions website, and choose the version of MongooseIM you want. The following sections describe the installation process for different operating systems.</p>
 <h3 id="ubuntu-and-debian">Ubuntu and Debian</h3>
 <p>Once the deb file is downloaded, open a terminal window and navigate to the directory containing the package. Use the following command to unpack and install MongooseIM:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>sudo dpkg -i mongooseim_<span class="o">[</span>version here<span class="o">]</span>.deb
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>sudo dpkg -i mongooseim_<span class="o">[</span>version here<span class="o">]</span>.deb
 </code></pre></div>
 </td></tr></table>
 <h3 id="centos">CentOS</h3>
 <p>An ODBC (RDBMS) driver must be installed on your machine to unpack and install from RPM packages. Enter the following command in a terminal window to install the latest unixODBC driver:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>sudo yum install unixODBC
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>sudo yum install unixODBC
 </code></pre></div>
 </td></tr></table>
 Once the RPM file is downloaded, open a terminal window and navigate to the directory containing the package. Use the following command to unpack and install MongooseIM:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>sudo rpm -i mongooseim_<span class="o">[</span>version here<span class="o">]</span>.rpm
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>sudo rpm -i mongooseim_<span class="o">[</span>version here<span class="o">]</span>.rpm
 </code></pre></div>
 </td></tr></table></p>
 <h2 id="running-mongooseim">Running MongooseIM</h2>
 <p>Warning: MongooseIM will use its default database - Mnesia, which is faster and simpler to setup, but not intended for production purposes when it comes to persistent data.</p>
 <p>Note: It is possible at anytime to use external databases. For more information see the end of this guide.</p>
 <p>The following command will start the MongooseIM server:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl start
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl start
 </code></pre></div>
 </td></tr></table></p>
 <p>When you change the config file and want to restart the MongooseIM server:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl restart
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl restart
 </code></pre></div>
 </td></tr></table></p>
 <p>Use the following command to stop the MongooseIM server:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl stop
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl stop
 </code></pre></div>
 </td></tr></table>
 This takes a few seconds.</p>
 <p>At any given time, the following command shows the status of a MongooseIM server:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl status
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl status
 </code></pre></div>
 </td></tr></table>
 If the command replies <code>nodedown</code> then MongooseIM is not running. Else it will show its status <code>starting</code>, <code>started</code>, or <code>stopping</code>, and its version.</p>
 <p>When needed, you can also launch the server in the interactive mode:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl live
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl live
 </code></pre></div>
 </td></tr></table>
 This will allow you to better detect and understand the errors in the configuration.
 When MongooseIM is properly running, the Erlang shell/console is then shown.
 Just type Control-C twice to exit, the server will then be shut down.</p>
 <p>For running MongooseIM in a non-interactive way within a supervision system (e.g. systemd), it is recommended to use the foreground mode:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl foreground
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl foreground
 </code></pre></div>
 </td></tr></table>
 Typing Control-C will stop the server.</p>
 <p>You can check server loglevel:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_loglevel
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_loglevel
 </code></pre></div>
 </td></tr></table></p>
 <p>Run bootstrap scripts for initial configuration:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl bootstrap
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl bootstrap
 </code></pre></div>
 </td></tr></table>
 <p>It executes scripts inside the <code>scripts/</code> directory with a <code>bootstrap</code> prefix in alphabetical order. <a href="../Bootstrap-Scripts/">More information</a></p>
@@ -2597,14 +2597,14 @@ Typing Control-C will stop the server.</p>
 <p>The default XMPP domain served by MongooseIM right after installation is <code>localhost</code>.</p>
 <p>You can register (create) users with the <code>mongooseimctl</code> utility.</p>
 <p>This command registers the user <code>user@domain</code> using password <code>password</code>.
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl register_identified user domain password
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl register_identified user domain password
 </code></pre></div>
 </td></tr></table>
 Examples:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl register_identified alice localhost qwerty
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl register_identified alice localhost qwerty
 mongooseimctl register_identified bob localhost <span class="m">12345678</span>
 mongooseimctl register_identified carol localhost abc123
 mongooseimctl register_identified dan localhost dan
@@ -2612,62 +2612,62 @@ mongooseimctl register_identified dan localhost dan
 </td></tr></table>
 Warning: The password is entered manually in the command line and history is accessible to the command line users. This method is not recommended for production use, you may prefer for example LDAP.</p>
 <p>You can check that it has correctly been created:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl check_account user host
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl check_account user host
 </code></pre></div>
 </td></tr></table>
 Example:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl check_account alice localhost
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl check_account alice localhost
 mongooseimctl check_account bob localhost
 mongooseimctl check_account carol localhost
 mongooseimctl check_account dan localhost
 </code></pre></div>
 </td></tr></table></p>
 <p>Now you can list all registered users in your host:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl registered_users host
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl registered_users host
 </code></pre></div>
 </td></tr></table>
 Example:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl registered_users localhost
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl registered_users localhost
 </code></pre></div>
 </td></tr></table></p>
 <p>If you want delete users in your host:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl  unregister user host
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl  unregister user host
 </code></pre></div>
 </td></tr></table>
 Example:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl  unregister dan localhost
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl  unregister dan localhost
 </code></pre></div>
 </td></tr></table></p>
 <h3 id="populate-the-contact-lists-rosters">Populate the contact lists (rosters)</h3>
 <p>For a given user (<code>localuser</code> and <code>localserver</code>), add a contact (<code>user</code> and <code>server</code>):
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl add_rosteritem localuser localserver user server nick group subs
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl add_rosteritem localuser localserver user server nick group subs
 </code></pre></div>
 </td></tr></table>
 Examples:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl add_rosteritem alice localhost bob localhost bob friends both
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl add_rosteritem alice localhost bob localhost bob friends both
 mongooseimctl add_rosteritem bob localhost alice localhost alice friends both
 </code></pre></div>
 </td></tr></table></p>
 <p>Note: The <code>subs</code>parameter is the "subscription" to a user's presence. Possible values are: <code>none</code>, <code>from</code>, <code>to</code>, or <code>both</code>. A subscription in <code>both</code> direction means each user will receive each other's presence.</p>
 <p>Verify the contact list:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_roster user host
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_roster user host
 </code></pre></div>
 </td></tr></table>
 Examples:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_roster alice localhost
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_roster alice localhost
 mongooseimctl get_roster bob localhost
 mongooseimctl get_roster carol localhost
 </code></pre></div>
 </td></tr></table></p>
 <h2 id="basic-mongooseim-configuration">Basic MongooseIM configuration</h2>
 <p>You can edit the <code>mongooseim.toml</code> file:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>/etc/mongooseim/mongooseim.toml
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>/etc/mongooseim/mongooseim.toml
 </code></pre></div>
 </td></tr></table></p>
 <p>Warning: We recommend you do not touch the advanced settings at this stage.</p>
@@ -2675,31 +2675,31 @@ mongooseimctl get_roster carol localhost
 Save (and optionally backup, archive, or version) the configuration file and restart the MongooseIM server.</p>
 <h3 id="logging">Logging</h3>
 <p>Set your own loglevel in the configuration file:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[general]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[general]</span>
   <span class="n">loglevel</span> <span class="o">=</span> <span class="s">&quot;notice&quot;</span>
 </code></pre></div>
 </td></tr></table></p>
 <p>Save and exit your editor, restart MongooseIM and check your loglevel from the command line:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_loglevel
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_loglevel
 </code></pre></div>
 </td></tr></table></p>
 <p>Read the <code>mongooseim.log</code> file:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>/var/log/mongooseim/mongooseim.log
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>/var/log/mongooseim/mongooseim.log
 </code></pre></div>
 </td></tr></table></p>
 <p>You can use commands such <code>cat</code>, <code>more</code> or <code>less</code>, even <code>head</code> or <code>tail</code>.
 In order to see live logs:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>tail -f /var/log/mongooseim/mongooseim.log
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>tail -f /var/log/mongooseim/mongooseim.log
 </code></pre></div>
 </td></tr></table>
 Type <code>Ctrl+C</code> to exit.</p>
 <h3 id="muc-multi-user-chat-for-groupchats">MUC (Multi-User Chat) for groupchats</h3>
 <p>Enable MUC, or Multi-User Chat, for groupchats/channels in the <code>mongooseim.toml</code> file:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_muc]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_muc]</span>
   <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;muc.@HOST@&quot;</span>
   <span class="n">access</span> <span class="o">=</span> <span class="s">&quot;muc&quot;</span>
   <span class="n">access_create</span> <span class="o">=</span> <span class="s">&quot;muc_create&quot;</span>
@@ -2707,16 +2707,16 @@ Type <code>Ctrl+C</code> to exit.</p>
 </td></tr></table></p>
 <h3 id="roster-versioning">Roster versioning</h3>
 <p>For faster contact list downloads at each client/app (re)connection, edit the configuration file:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_roster]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_roster]</span>
   <span class="n">versioning</span> <span class="o">=</span> <span class="kc">true</span>
   <span class="n">store_current_id</span> <span class="o">=</span> <span class="kc">true</span>
 </code></pre></div>
 </td></tr></table></p>
 <h3 id="review-configuration">Review configuration</h3>
 <p>If MongooseIM does not start because the configuration file is broken in some way:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl live
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl live
 </code></pre></div>
 </td></tr></table></p>
 <h2 id="using-an-xmppjabber-clientapp">Using an XMPP/Jabber client/app</h2>
@@ -2740,18 +2740,18 @@ This should be configurable in the account settings of every XMPP client.</p>
 </ol>
 <p>Add your three created users: <code>alice</code>, <code>bob</code>, and <code>carol</code>.</p>
 <p>Check what users are currently connected:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl connected_users_info
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl connected_users_info
 </code></pre></div>
 </td></tr></table></p>
 <h3 id="chat-with-another-person">Chat with another person</h3>
 <p>Use <code>alice</code>'s account to send messages directly to <code>bob</code> and use <code>bob</code>'s account to reply directly to <code>alice</code>.</p>
 <p>From the MongooseIM command line:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl send_message_chat from to body
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl send_message_chat from to body
 </code></pre></div>
 </td></tr></table>
 Examples:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl send_message_chat carol@localhost alice@localhost hello
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl send_message_chat carol@localhost alice@localhost hello
 mongooseimctl send_message_chat carol@localhost bob@localhost hi
 </code></pre></div>
 </td></tr></table></p>
@@ -2760,13 +2760,13 @@ mongooseimctl send_message_chat carol@localhost bob@localhost hi
 <h3 id="contact-lists">Contact lists</h3>
 <p>Use <code>carol</code>'s account to add <code>alice</code> and <code>bob</code> to her contact list. Use <code>alice</code>'s and <code>bob</code>'s accounts accept those additions.</p>
 <p>Verify on the MongooseIM server:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_roster user host
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_roster user host
 </code></pre></div>
 </td></tr></table>
 Examples:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_roster alice localhost
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_roster alice localhost
 mongooseimctl get_roster bob localhost
 mongooseimctl get_roster carol localhost
 </code></pre></div>
@@ -2774,7 +2774,7 @@ mongooseimctl get_roster carol localhost
 <h3 id="profile-vcard">Profile (vCard)</h3>
 <p>Edit <code>alice</code>'s profile (vCard) in Gajim: <strong>Modify Account...</strong>, then <strong>Profile</strong>, just set her <strong>Name</strong> to <code>Alice</code>.</p>
 <p>Verify on the MongooseIM server:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_vcard alice localhost FN
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_vcard alice localhost FN
 </code></pre></div>
 </td></tr></table></p>
 <h2 id="summary">Summary</h2>

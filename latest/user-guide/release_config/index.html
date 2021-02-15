@@ -2212,30 +2212,30 @@ dependencies should be included in the final release or to set the installation
 prefix and installation mode. More details can found in the tool's help.
 The help is printed when the script is run without any parameters
 <code>tools/configure</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>configure: OPTIONS
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>configure: OPTIONS
 
 Specifies which 3rd party deps will be included in the release.
 Writes configure.out file as output - this file can be sourced with:
@@ -2265,7 +2265,7 @@ Options:
 <h3 id="example">Example</h3>
 <p>If <code>mysql</code> and <code>redis</code> are the only drivers that should be included in the
 release, run the following command before <code>make rel</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ ./tools/configure with-mysql with-redis
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ ./tools/configure with-mysql with-redis
 </code></pre></div>
 </td></tr></table>
 <p>You only need to run the <code>./tools/configure</code> command once (unless changing the release's config is needed to
@@ -2275,9 +2275,9 @@ include some other dependencies).</p>
 This script is intended for careful inspection by a human user, not for automation.
 Results should be similar to those described below.</p>
 <p>On Mac:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./tools/configure with-all <span class="nv">user</span><span class="o">=</span>erszcz <span class="nv">prefix</span><span class="o">=</span>/tmp/mim-sandbox-system <span class="nv">system</span><span class="o">=</span>yes
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./tools/configure with-all <span class="nv">user</span><span class="o">=</span>erszcz <span class="nv">prefix</span><span class="o">=</span>/tmp/mim-sandbox-system <span class="nv">system</span><span class="o">=</span>yes
 cat configure.out rel/configure.vars.config
 <span class="nv">RUNNER_GROUP</span><span class="o">=</span>staff make install
 </code></pre></div>
@@ -2285,30 +2285,30 @@ cat configure.out rel/configure.vars.config
 <p>Overriding <code>RUNNER_GROUP</code> on a Mac is necessary, as users by default don't
 have private groups of the same name as their usernames.</p>
 <p>Generated build configs:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ cat configure.out rel/configure.vars.config
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ cat configure.out rel/configure.vars.config
 <span class="nb">export</span> <span class="nv">MONGOOSEIM_CONFIGURED</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span>
 <span class="nb">export</span> <span class="nv">APPS</span><span class="o">=</span><span class="s2">&quot;mysql eodbc epgsql eredis riakc nksip cqerl tirerl erlcloud&quot;</span>
 <span class="nb">export</span> <span class="nv">PREFIX</span><span class="o">=</span><span class="s2">&quot;/tmp/mim-sandbox-system&quot;</span>
@@ -2335,27 +2335,27 @@ have private groups of the same name as their usernames.</p>
 </code></pre></div>
 </td></tr></table>
 <p>Installed tree:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ tree mim-sandbox-system/ -L 3
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ tree mim-sandbox-system/ -L 3
 mim-sandbox-system/
 ├── etc
 │   └── mongooseim
@@ -2379,26 +2379,26 @@ mim-sandbox-system/
 </code></pre></div>
 </td></tr></table>
 <p>Files which change after starting and stopping such an installation:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>var/lib/mongooseim/DECISION_TAB.LOG
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>var/lib/mongooseim/DECISION_TAB.LOG
 var/lib/mongooseim/LATEST.LOG
 var/lib/mongooseim/last_activity.DCD
 var/lib/mongooseim/muc_registered.DCD
