@@ -1956,6 +1956,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modulesmod_offlinestore_groupchat_messages" class="md-nav__link">
+    modules.mod_offline.store_groupchat_messages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#riak-specific-options" class="md-nav__link">
     Riak-specific options
   </a>
@@ -2228,6 +2235,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modulesmod_offlinestore_groupchat_messages" class="md-nav__link">
+    modules.mod_offline.store_groupchat_messages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#riak-specific-options" class="md-nav__link">
     Riak-specific options
   </a>
@@ -2287,7 +2301,7 @@
                 
                 <h2 id="module-description">Module Description</h2>
 <p>This module implements an offline messages storage compliant with <a href="http://xmpp.org/extensions/xep-0160.html">XEP-0160: Best Practices for Handling Offline Messages</a>. 
-It stores one-to-one messages only when the recipient has no online resources. 
+It can store one-to-one and groupchat messages only when the recipient has no online resources. 
 It is not well suited for applications supporting multiple user devices, because anything saved in the DB can be retrieved only once, so the message history is not synchronised between devices. 
 Although <code>mod_offline</code> may be sufficient in some cases, it is preferable to use <a href="../mod_mam/">mod_mam</a>.</p>
 <h2 id="options">Options</h2>
@@ -2305,6 +2319,14 @@ Although <code>mod_offline</code> may be sufficient in some cases, it is prefera
 <li><strong>Example:</strong> <code>backend = "rdbms"</code></li>
 </ul>
 <p>Storage backend.</p>
+<h3 id="modulesmod_offlinestore_groupchat_messages"><code>modules.mod_offline.store_groupchat_messages</code></h3>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Example:</strong> <code>store_groupchat_messages = true</code></li>
+</ul>
+<p>Specifies whether or not we should store groupchat messages.
+ <strong>Warning:</strong> This option can work only with MUC-light and is not expected to work with MUC.</p>
 <h3 id="riak-specific-options">Riak-specific options</h3>
 <h4 id="modulesmod_offlineriakbucket_type"><code>modules.mod_offline.riak.bucket_type</code></h4>
 <ul>
