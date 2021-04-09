@@ -586,6 +586,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#db-migrations" class="md-nav__link">
+    DB migrations
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1069,6 +1076,18 @@
     <li class="md-nav__item">
       <a href="../../open-extensions/muc_light/" class="md-nav__link">
         MUC light
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../open-extensions/inbox/" class="md-nav__link">
+        Inbox
       </a>
     </li>
   
@@ -2156,6 +2175,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#db-migrations" class="md-nav__link">
+    DB migrations
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2179,6 +2205,24 @@
 <ul>
 <li>The <code>pgsql_users_number_estimate</code> option was moved to <a href="../../authentication-methods/rdbms#authrdbmsusers_number_estimate"><code>auth.rdbms.users_number_estimate</code></a>. The new option supports PostgreSQL and MySQL.</li>
 </ul>
+<h2 id="db-migrations">DB migrations</h2>
+<p>Inbox now implements new functionality (see <a href="../../open-extensions/inbox/">inbox</a>), but this required adding new columns to the DB. If you're using inbox, please update the tables as follows:</p>
+<p>For Postgres or MySQL:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">inbox</span>
+  <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">archive</span> <span class="nb">BOOLEAN</span> <span class="k">DEFAULT</span> <span class="k">false</span><span class="p">,</span>
+  <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">muted_until</span> <span class="nb">BIGINT</span> <span class="k">DEFAULT</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div>
+</td></tr></table>
+For MSSQL:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">inbox</span>
+  <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">archive</span> <span class="n">TINYINT</span> <span class="k">DEFAULT</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">muted_until</span> <span class="nb">BIGINT</span> <span class="k">DEFAULT</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div>
+</td></tr></table></p>
                 
               
               
