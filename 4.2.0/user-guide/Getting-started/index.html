@@ -1,0 +1,2970 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="MongooseIM is a mobile messaging platform with focus on performance and scalability">
+      
+      
+      
+        <meta name="author" content="Erlang Solutions">
+      
+      
+        <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/4.2.0/user-guide/Getting-started/">
+      
+      <link rel="icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.2">
+    
+    
+      
+        <title>Getting started - MongooseIM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f955dcd.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/custom.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#installation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="MongooseIM" class="md-header__button md-logo" aria-label="MongooseIM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MongooseIM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Getting started
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/esl/MongooseIM/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="MongooseIM" class="md-nav__button md-logo" aria-label="MongooseIM" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    MongooseIM
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/esl/MongooseIM/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        User guide
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="User guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          User guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ABCs-of-MongooseIM/" class="md-nav__link">
+        ABCs of MongooseIM
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MongooseIM-High-level-Architecture/" class="md-nav__link">
+        High-level Architecture
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Features-and-supported-standards/" class="md-nav__link">
+        Features and supported standards
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Getting started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Getting started
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-a-package" class="md-nav__link">
+    Download a package
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ubuntu-and-debian" class="md-nav__link">
+    Ubuntu and Debian
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centos" class="md-nav__link">
+    CentOS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-mongooseim" class="md-nav__link">
+    Running MongooseIM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chat-users" class="md-nav__link">
+    Chat users
+  </a>
+  
+    <nav class="md-nav" aria-label="Chat users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registering-creating-users" class="md-nav__link">
+    Registering (creating) users
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#populate-the-contact-lists-rosters" class="md-nav__link">
+    Populate the contact lists (rosters)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-mongooseim-configuration" class="md-nav__link">
+    Basic MongooseIM configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic MongooseIM configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logging" class="md-nav__link">
+    Logging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muc-multi-user-chat-for-groupchats" class="md-nav__link">
+    MUC (Multi-User Chat) for groupchats
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roster-versioning" class="md-nav__link">
+    Roster versioning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-configuration" class="md-nav__link">
+    Review configuration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-an-xmppjabber-clientapp" class="md-nav__link">
+    Using an XMPP/Jabber client/app
+  </a>
+  
+    <nav class="md-nav" aria-label="Using an XMPP/Jabber client/app">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#note-about-session-conflicts" class="md-nav__link">
+    Note about session conflicts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connect-gajim" class="md-nav__link">
+    Connect Gajim
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-with-another-person" class="md-nav__link">
+    Chat with another person
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-chats" class="md-nav__link">
+    Group chats
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contact-lists" class="md-nav__link">
+    Contact lists
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#profile-vcard" class="md-nav__link">
+    Profile (vCard)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary-command-line" class="md-nav__link">
+    Summary: command line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-files" class="md-nav__link">
+    Summary: files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-clientapp" class="md-nav__link">
+    Summary: client/app
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-further" class="md-nav__link">
+    Go further
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release_config/" class="md-nav__link">
+        Release/Installation configuration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Bootstrap-Scripts/" class="md-nav__link">
+        Bootstrap scripts
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../client-certificate/" class="md-nav__link">
+        Client certificate authentication
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Tutorials
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How-to-build/" class="md-nav__link">
+        How to Build MongooseIM from source code
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../push-notifications/Push-notifications/" class="md-nav__link">
+        How to Set up Push Notifications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../push-notifications/Push-notifications-client-side/" class="md-nav__link">
+        How to Set up Push Notifications on the client side
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../push-notifications/MongoosePush-setup/" class="md-nav__link">
+        How to Set up MongoosePush
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ICE_tutorial/" class="md-nav__link">
+        How to Set up MongooseICE
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iOS_tutorial/" class="md-nav__link">
+        How to Build an iOS messaging app
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Jingle-SIP-setup/" class="md-nav__link">
+        How to Set up Jingle/SIP
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Migration Guide
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Migration Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Migration Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migrations/3.1.1_3.2.0/" class="md-nav__link">
+        3.1.1 to 3.2.0
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migrations/3.3.0_3.4.0/" class="md-nav__link">
+        3.3.0 to 3.4.0
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migrations/3.5.0_3.6.0/" class="md-nav__link">
+        3.5.0 to 3.6.0
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migrations/3.6.0_3.7.0/" class="md-nav__link">
+        3.6.0 to 3.7.0
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migrations/3.7.0_4.0.0/" class="md-nav__link">
+        3.7.0 to 4.0.0
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migrations/4.0.0_4.0.1/" class="md-nav__link">
+        4.0.0 to 4.0.1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migrations/4.0.1_4.1.0/" class="md-nav__link">
+        4.0.1 to 4.1.0
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migrations/4.1.0_4.2.0/" class="md-nav__link">
+        4.1.0 to 4.2.0
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
+        MAM MUC migration helper
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Platform
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Platform" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Platform
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Contributions/" class="md-nav__link">
+        Contributions to ecosystem
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Differentiators/" class="md-nav__link">
+        Differentiators
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../History/" class="md-nav__link">
+        History
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        Configuration
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Configuration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/configuration-files/" class="md-nav__link">
+        Configuration files
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/general/" class="md-nav__link">
+        Options: General
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/listen/" class="md-nav__link">
+        Options: Listen
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/auth/" class="md-nav__link">
+        Options: Auth
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/outgoing-connections/" class="md-nav__link">
+        Options: Outgoing connections
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/Services/" class="md-nav__link">
+        Options: Services
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/Modules/" class="md-nav__link">
+        Options: Extension Modules
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/shaper/" class="md-nav__link">
+        Options: Shaper
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/acl/" class="md-nav__link">
+        Options: Acl
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/access/" class="md-nav__link">
+        Options: Access
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/s2s/" class="md-nav__link">
+        Options: S2S
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/host_config/" class="md-nav__link">
+        Options: Host config
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/release-options/" class="md-nav__link">
+        Release options
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/Erlang-cookie-security/" class="md-nav__link">
+        Erlang Cookie Security
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/TLS-hardening/" class="md-nav__link">
+        TLS hardening
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced-configuration/database-backends-configuration/" class="md-nav__link">
+        Database backends configuration
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      <label class="md-nav__link" for="__nav_7">
+        Authentication methods
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Authentication methods" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Authentication methods
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication-methods/rdbms/" class="md-nav__link">
+        RDBMS
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication-methods/external/" class="md-nav__link">
+        External
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication-methods/anonymous/" class="md-nav__link">
+        Anonymous
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication-methods/ldap/" class="md-nav__link">
+        LDAP
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication-methods/jwt/" class="md-nav__link">
+        JWT
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication-methods/riak/" class="md-nav__link">
+        Riak
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication-methods/http/" class="md-nav__link">
+        HTTP
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication-methods/pki/" class="md-nav__link">
+        PKI
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication-methods/dummy/" class="md-nav__link">
+        Dummy
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      <label class="md-nav__link" for="__nav_8">
+        MongooseIM open XMPP extensions
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="MongooseIM open XMPP extensions" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          MongooseIM open XMPP extensions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../open-extensions/muc_light/" class="md-nav__link">
+        MUC light
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../open-extensions/inbox/" class="md-nav__link">
+        Inbox
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../open-extensions/token-reconnection/" class="md-nav__link">
+        Token-based reconnection
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      <label class="md-nav__link" for="__nav_9">
+        REST API
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="REST API" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          REST API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rest-api/Client-frontend/" class="md-nav__link">
+        Client/frontend
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rest-api/Metrics-backend/" class="md-nav__link">
+        Metrics backend
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rest-api/Administration-backend/" class="md-nav__link">
+        Administration backend
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      <label class="md-nav__link" for="__nav_10">
+        Operation and maintenance
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Operation and maintenance" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Operation and maintenance
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operation-and-maintenance/gdpr-considerations/" class="md-nav__link">
+        GDPR considerations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operation-and-maintenance/Cluster-management-considerations/" class="md-nav__link">
+        Cluster management considerations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operation-and-maintenance/Cluster-configuration-and-node-management/" class="md-nav__link">
+        Cluster configuration and node management
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operation-and-maintenance/Logging-%26-monitoring/" class="md-nav__link">
+        Logging & monitoring
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operation-and-maintenance/Logging/" class="md-nav__link">
+        Logging configuration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operation-and-maintenance/Humio/" class="md-nav__link">
+        Logging with Humio
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operation-and-maintenance/Logging-fields/" class="md-nav__link">
+        Logging fields
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operation-and-maintenance/Rolling-upgrade/" class="md-nav__link">
+        Rolling upgrade
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operation-and-maintenance/Cluster-restart/" class="md-nav__link">
+        Cluster restart
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operation-and-maintenance/MongooseIM-metrics/" class="md-nav__link">
+        Metrics
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/" class="md-nav__link">
+        System Metrics Privacy Policy
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operation-and-maintenance/tls-distribution/" class="md-nav__link">
+        Distribution over TLS
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operation-and-maintenance/known-issues/" class="md-nav__link">
+        Known issues
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      <label class="md-nav__link" for="__nav_11">
+        Developer's guide
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Developer's guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          Developer's guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/Testing-MongooseIM/" class="md-nav__link">
+        Testing MongooseIM
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/logging/" class="md-nav__link">
+        Logging
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/Hooks-and-handlers/" class="md-nav__link">
+        Hooks and Handlers
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/hooks_description/" class="md-nav__link">
+        Hooks description
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/Stanza-routing/" class="md-nav__link">
+        Stanza routing
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/accumulators/" class="md-nav__link">
+        Accumulators
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/Moving-to-single-app-project-structure/" class="md-nav__link">
+        Moving to single app project structure
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/mod_amp_developers_guide/" class="md-nav__link">
+        mod_amp development
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/mod_muc_light_developers_guide/" class="md-nav__link">
+        mod_muc_light developers doc
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/SCRAM-serialization/" class="md-nav__link">
+        SCRAM serialization format
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/xep_tool/" class="md-nav__link">
+        xep-tool usage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/OpenSSL-and-FIPS/" class="md-nav__link">
+        FIPS mode
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/Basic-iq-handler/" class="md-nav__link">
+        Basic IQ Handler
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/mongoose_wpool/" class="md-nav__link">
+        mongoose_wpool
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      <label class="md-nav__link" for="__nav_12">
+        Module index
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Module index" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          Module index
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_adhoc/" class="md-nav__link">
+        mod_adhoc
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_amp/" class="md-nav__link">
+        mod_amp
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_auth_token/" class="md-nav__link">
+        mod_auth_token
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_blocking/" class="md-nav__link">
+        mod_blocking
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_bosh/" class="md-nav__link">
+        mod_bosh
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_caps/" class="md-nav__link">
+        mod_caps
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_carboncopy/" class="md-nav__link">
+        mod_carboncopy
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_commands/" class="md-nav__link">
+        mod_commands
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_csi/" class="md-nav__link">
+        mod_csi
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_disco/" class="md-nav__link">
+        mod_disco
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_domain_isolation/" class="md-nav__link">
+        mod_domain_isolation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_12" type="checkbox" id="__nav_12_12" >
+      
+      <label class="md-nav__link" for="__nav_12_12">
+        mod_event_pusher
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="mod_event_pusher" data-md-level="2">
+        <label class="md-nav__title" for="__nav_12_12">
+          <span class="md-nav__icon md-icon"></span>
+          mod_event_pusher
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_event_pusher/" class="md-nav__link">
+        mod_event_pusher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_event_pusher_http/" class="md-nav__link">
+        HTTP backend
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_event_pusher_push/" class="md-nav__link">
+        Push backend
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_event_pusher_sns/" class="md-nav__link">
+        SNS backend
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_event_pusher_rabbit/" class="md-nav__link">
+        RabbitMQ backend
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_extdisco/" class="md-nav__link">
+        mod_extdisco
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_global_distrib/" class="md-nav__link">
+        mod_global_distrib
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_http_upload/" class="md-nav__link">
+        mod_http_upload
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_inbox/" class="md-nav__link">
+        mod_inbox
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_jingle_sip/" class="md-nav__link">
+        mod_jingle_sip
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_keystore/" class="md-nav__link">
+        mod_keystore
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_last/" class="md-nav__link">
+        mod_last
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_mam/" class="md-nav__link">
+        mod_mam
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_muc/" class="md-nav__link">
+        mod_muc
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_muc_commands/" class="md-nav__link">
+        mod_muc_commands
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_muc_log/" class="md-nav__link">
+        mod_muc_log
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_muc_light/" class="md-nav__link">
+        mod_muc_light
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_muc_light_commands/" class="md-nav__link">
+        mod_muc_light_commands
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_offline/" class="md-nav__link">
+        mod_offline
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_offline_stub/" class="md-nav__link">
+        mod_offline_stub
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_ping/" class="md-nav__link">
+        mod_ping
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_privacy/" class="md-nav__link">
+        mod_privacy
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_private/" class="md-nav__link">
+        mod_private
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_pubsub/" class="md-nav__link">
+        mod_pubsub
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_push_service_mongoosepush/" class="md-nav__link">
+        mod_push_service_mongoosepush
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_register/" class="md-nav__link">
+        mod_register
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_roster/" class="md-nav__link">
+        mod_roster
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_shared_roster_ldap/" class="md-nav__link">
+        mod_shared_roster_ldap
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_sic/" class="md-nav__link">
+        mod_sic
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_stream_management/" class="md-nav__link">
+        mod_stream_management
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_time/" class="md-nav__link">
+        mod_time
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_vcard/" class="md-nav__link">
+        mod_vcard
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_version/" class="md-nav__link">
+        mod_version
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-a-package" class="md-nav__link">
+    Download a package
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ubuntu-and-debian" class="md-nav__link">
+    Ubuntu and Debian
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centos" class="md-nav__link">
+    CentOS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-mongooseim" class="md-nav__link">
+    Running MongooseIM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chat-users" class="md-nav__link">
+    Chat users
+  </a>
+  
+    <nav class="md-nav" aria-label="Chat users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registering-creating-users" class="md-nav__link">
+    Registering (creating) users
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#populate-the-contact-lists-rosters" class="md-nav__link">
+    Populate the contact lists (rosters)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-mongooseim-configuration" class="md-nav__link">
+    Basic MongooseIM configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic MongooseIM configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logging" class="md-nav__link">
+    Logging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muc-multi-user-chat-for-groupchats" class="md-nav__link">
+    MUC (Multi-User Chat) for groupchats
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roster-versioning" class="md-nav__link">
+    Roster versioning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-configuration" class="md-nav__link">
+    Review configuration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-an-xmppjabber-clientapp" class="md-nav__link">
+    Using an XMPP/Jabber client/app
+  </a>
+  
+    <nav class="md-nav" aria-label="Using an XMPP/Jabber client/app">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#note-about-session-conflicts" class="md-nav__link">
+    Note about session conflicts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connect-gajim" class="md-nav__link">
+    Connect Gajim
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-with-another-person" class="md-nav__link">
+    Chat with another person
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-chats" class="md-nav__link">
+    Group chats
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contact-lists" class="md-nav__link">
+    Contact lists
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#profile-vcard" class="md-nav__link">
+    Profile (vCard)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary-command-line" class="md-nav__link">
+    Summary: command line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-files" class="md-nav__link">
+    Summary: files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-clientapp" class="md-nav__link">
+    Summary: client/app
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-further" class="md-nav__link">
+    Go further
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/esl/MongooseIM/edit/master/doc/user-guide/Getting-started.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>Getting started</h1>
+                
+                <p>In this short guide we will set MongooseIM up and get users chatting right away.
+The goal is to get to know MongooseIM, set it up, go through basic operations and validation.</p>
+<p>Warning: This setup is not intended for production.</p>
+<p>Note: This procedure has been tested on an Ubuntu 18.04.x LTS.</p>
+<h2 id="installation">Installation</h2>
+<p>We recommend, you install mongooseIM binaries from a package Erlang Solutions delivers.</p>
+<p>Alternatively, check out our tutorial on <a href="../How-to-build/">How to build MongooseIM from source code</a> for an introduction to compiling, building and testing MongooseIM.</p>
+<h3 id="download-a-package">Download a package</h3>
+<p>Go to the <a href="https://www.erlang-solutions.com/resources/download.html">downloads</a> section of the Erlang Solutions website, and choose the version of MongooseIM you want. The following sections describe the installation process for different operating systems.</p>
+<h3 id="ubuntu-and-debian">Ubuntu and Debian</h3>
+<p>Once the deb file is downloaded, open a terminal window and navigate to the directory containing the package. Use the following command to unpack and install MongooseIM:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>sudo dpkg -i mongooseim_<span class="o">[</span>version here<span class="o">]</span>.deb
+</code></pre></div>
+</td></tr></table>
+<h3 id="centos">CentOS</h3>
+<p>An ODBC (RDBMS) driver must be installed on your machine to unpack and install from RPM packages. Enter the following command in a terminal window to install the latest unixODBC driver:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>sudo yum install unixODBC
+</code></pre></div>
+</td></tr></table>
+Once the RPM file is downloaded, open a terminal window and navigate to the directory containing the package. Use the following command to unpack and install MongooseIM:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>sudo rpm -i mongooseim_<span class="o">[</span>version here<span class="o">]</span>.rpm
+</code></pre></div>
+</td></tr></table></p>
+<h2 id="running-mongooseim">Running MongooseIM</h2>
+<p>Warning: MongooseIM will use its default database - Mnesia, which is faster and simpler to setup, but not intended for production purposes when it comes to persistent data.</p>
+<p>Note: It is possible at anytime to use external databases. For more information see the end of this guide.</p>
+<p>The following command will start the MongooseIM server:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl start
+</code></pre></div>
+</td></tr></table></p>
+<p>When you change the config file and want to restart the MongooseIM server:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl restart
+</code></pre></div>
+</td></tr></table></p>
+<p>Use the following command to stop the MongooseIM server:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl stop
+</code></pre></div>
+</td></tr></table>
+This takes a few seconds.</p>
+<p>At any given time, the following command shows the status of a MongooseIM server:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl status
+</code></pre></div>
+</td></tr></table>
+If the command replies <code>nodedown</code> then MongooseIM is not running. Else it will show its status <code>starting</code>, <code>started</code>, or <code>stopping</code>, and its version.</p>
+<p>When needed, you can also launch the server in the interactive mode:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl live
+</code></pre></div>
+</td></tr></table>
+This will allow you to better detect and understand the errors in the configuration.
+When MongooseIM is properly running, the Erlang shell/console is then shown.
+Just type Control-C twice to exit, the server will then be shut down.</p>
+<p>For running MongooseIM in a non-interactive way within a supervision system (e.g. systemd), it is recommended to use the foreground mode:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl foreground
+</code></pre></div>
+</td></tr></table>
+Typing Control-C will stop the server.</p>
+<p>You can check server loglevel:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_loglevel
+</code></pre></div>
+</td></tr></table></p>
+<p>Run bootstrap scripts for initial configuration:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl bootstrap
+</code></pre></div>
+</td></tr></table>
+<p>It executes scripts inside the <code>scripts/</code> directory with a <code>bootstrap</code> prefix in alphabetical order. <a href="../Bootstrap-Scripts/">More information</a></p>
+<p>Execute <code>Hello</code> from the <code>scripts/bootstrap01-hello.sh</code> script that you can find in the release directory <code>$REPO_DIR/_build/prod/rel/mongooseim</code>.</p>
+<h2 id="chat-users">Chat users</h2>
+<h3 id="registering-creating-users">Registering (creating) users</h3>
+<p>The default XMPP domain served by MongooseIM right after installation is <code>localhost</code>.</p>
+<p>You can register (create) users with the <code>mongooseimctl</code> utility.</p>
+<p>This command registers the user <code>user@domain</code> using password <code>password</code>.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl register_identified user domain password
+</code></pre></div>
+</td></tr></table>
+Examples:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl register_identified alice localhost qwerty
+mongooseimctl register_identified bob localhost <span class="m">12345678</span>
+mongooseimctl register_identified carol localhost abc123
+mongooseimctl register_identified dan localhost dan
+</code></pre></div>
+</td></tr></table>
+Warning: The password is entered manually in the command line and history is accessible to the command line users. This method is not recommended for production use, you may prefer for example LDAP.</p>
+<p>You can check that it has correctly been created:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl check_account user host
+</code></pre></div>
+</td></tr></table>
+Example:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl check_account alice localhost
+mongooseimctl check_account bob localhost
+mongooseimctl check_account carol localhost
+mongooseimctl check_account dan localhost
+</code></pre></div>
+</td></tr></table></p>
+<p>Now you can list all registered users in your host:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl registered_users host
+</code></pre></div>
+</td></tr></table>
+Example:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl registered_users localhost
+</code></pre></div>
+</td></tr></table></p>
+<p>If you want delete users in your host:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl  unregister user host
+</code></pre></div>
+</td></tr></table>
+Example:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl  unregister dan localhost
+</code></pre></div>
+</td></tr></table></p>
+<h3 id="populate-the-contact-lists-rosters">Populate the contact lists (rosters)</h3>
+<p>For a given user (<code>localuser</code> and <code>localserver</code>), add a contact (<code>user</code> and <code>server</code>):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl add_rosteritem localuser localserver user server nick group subs
+</code></pre></div>
+</td></tr></table>
+Examples:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl add_rosteritem alice localhost bob localhost bob friends both
+mongooseimctl add_rosteritem bob localhost alice localhost alice friends both
+</code></pre></div>
+</td></tr></table></p>
+<p>Note: The <code>subs</code>parameter is the "subscription" to a user's presence. Possible values are: <code>none</code>, <code>from</code>, <code>to</code>, or <code>both</code>. A subscription in <code>both</code> direction means each user will receive each other's presence.</p>
+<p>Verify the contact list:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_roster user host
+</code></pre></div>
+</td></tr></table>
+Examples:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_roster alice localhost
+mongooseimctl get_roster bob localhost
+mongooseimctl get_roster carol localhost
+</code></pre></div>
+</td></tr></table></p>
+<h2 id="basic-mongooseim-configuration">Basic MongooseIM configuration</h2>
+<p>You can edit the <code>mongooseim.toml</code> file:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>/etc/mongooseim/mongooseim.toml
+</code></pre></div>
+</td></tr></table></p>
+<p>Warning: We recommend you do not touch the advanced settings at this stage.</p>
+<p>For each change, edit the configuration file using the right Linux/Unix user.
+Save (and optionally backup, archive, or version) the configuration file and restart the MongooseIM server.</p>
+<h3 id="logging">Logging</h3>
+<p>Set your own loglevel in the configuration file:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[general]</span>
+  <span class="n">loglevel</span> <span class="o">=</span> <span class="s">&quot;notice&quot;</span>
+</code></pre></div>
+</td></tr></table></p>
+<p>Save and exit your editor, restart MongooseIM and check your loglevel from the command line:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_loglevel
+</code></pre></div>
+</td></tr></table></p>
+<p>Read the <code>mongooseim.log</code> file:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>/var/log/mongooseim/mongooseim.log
+</code></pre></div>
+</td></tr></table></p>
+<p>You can use commands such <code>cat</code>, <code>more</code> or <code>less</code>, even <code>head</code> or <code>tail</code>.
+In order to see live logs:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>tail -f /var/log/mongooseim/mongooseim.log
+</code></pre></div>
+</td></tr></table>
+Type <code>Ctrl+C</code> to exit.</p>
+<h3 id="muc-multi-user-chat-for-groupchats">MUC (Multi-User Chat) for groupchats</h3>
+<p>Enable MUC, or Multi-User Chat, for groupchats/channels in the <code>mongooseim.toml</code> file:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_muc]</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;muc.@HOST@&quot;</span>
+  <span class="n">access</span> <span class="o">=</span> <span class="s">&quot;muc&quot;</span>
+  <span class="n">access_create</span> <span class="o">=</span> <span class="s">&quot;muc_create&quot;</span>
+</code></pre></div>
+</td></tr></table></p>
+<h3 id="roster-versioning">Roster versioning</h3>
+<p>For faster contact list downloads at each client/app (re)connection, edit the configuration file:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_roster]</span>
+  <span class="n">versioning</span> <span class="o">=</span> <span class="kc">true</span>
+  <span class="n">store_current_id</span> <span class="o">=</span> <span class="kc">true</span>
+</code></pre></div>
+</td></tr></table></p>
+<h3 id="review-configuration">Review configuration</h3>
+<p>If MongooseIM does not start because the configuration file is broken in some way:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl live
+</code></pre></div>
+</td></tr></table></p>
+<h2 id="using-an-xmppjabber-clientapp">Using an XMPP/Jabber client/app</h2>
+<p>The following steps use the registered users on the MongooseIM server, done above.</p>
+<p>Users that are registered on your server can now add their accounts in a chat application like Gajim (specifying either the server’s IP address or domain name), and start chatting!</p>
+<h3 id="note-about-session-conflicts">Note about session conflicts</h3>
+<p>If you're going to connect several clients with the same username and domain (for example a phone and a laptop), please make sure they are using different resource names (a kind of device/client identifier).
+This should be configurable in the account settings of every XMPP client.</p>
+<p>Otherwise, the clients will keep disconnecting each other, because MongooseIM always terminates the older session in case of a conflict.</p>
+<h3 id="connect-gajim">Connect Gajim</h3>
+<p>Gajim is available on Ubuntu, CentOS &amp; Windows.</p>
+<p>Warning: Gajim has an obsolete UX. However, it is still well maintained, and has a console that is extremely useful for debugging and testing/validation purposes at the XMPP protocol level.</p>
+<ol>
+<li>Launch Gajim. Ignore the window with Plugin updates.</li>
+<li>Go to Edit -&gt; Accounts.</li>
+<li>Click <strong>Add</strong> in the left part of the window and select <strong>I already have an account I want to use</strong>, click <strong>Forward</strong></li>
+<li>Enter the <strong>user</strong>, <strong>domain</strong> and <strong>password</strong> for the accounts registered previously on the command line</li>
+<li>Click <strong>Forward</strong> and then <strong>Finish</strong></li>
+<li>Ignore the TLS/SSL error/warning and continue</li>
+<li>Close the Account window.</li>
+</ol>
+<p>Add your three created users: <code>alice</code>, <code>bob</code>, and <code>carol</code>.</p>
+<p>Check what users are currently connected:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl connected_users_info
+</code></pre></div>
+</td></tr></table></p>
+<h3 id="chat-with-another-person">Chat with another person</h3>
+<p>Use <code>alice</code>'s account to send messages directly to <code>bob</code> and use <code>bob</code>'s account to reply directly to <code>alice</code>.</p>
+<p>From the MongooseIM command line:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl send_message_chat from to body
+</code></pre></div>
+</td></tr></table>
+Examples:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl send_message_chat carol@localhost alice@localhost hello
+mongooseimctl send_message_chat carol@localhost bob@localhost hi
+</code></pre></div>
+</td></tr></table></p>
+<h3 id="group-chats">Group chats</h3>
+<p>Use <code>alice</code>'s account to create a groupchat <code>channel</code> on your <code>muc.localhost</code> service, and configure it by making it persistent. Invite <code>bob</code> and <code>carol</code>. From <code>bob</code>'s' and <code>carol</code>'s accounts, accept the invitation and join the <code>channel</code> groupchat. All three users exchange messages.</p>
+<h3 id="contact-lists">Contact lists</h3>
+<p>Use <code>carol</code>'s account to add <code>alice</code> and <code>bob</code> to her contact list. Use <code>alice</code>'s and <code>bob</code>'s accounts accept those additions.</p>
+<p>Verify on the MongooseIM server:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_roster user host
+</code></pre></div>
+</td></tr></table>
+Examples:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_roster alice localhost
+mongooseimctl get_roster bob localhost
+mongooseimctl get_roster carol localhost
+</code></pre></div>
+</td></tr></table></p>
+<h3 id="profile-vcard">Profile (vCard)</h3>
+<p>Edit <code>alice</code>'s profile (vCard) in Gajim: <strong>Modify Account...</strong>, then <strong>Profile</strong>, just set her <strong>Name</strong> to <code>Alice</code>.</p>
+<p>Verify on the MongooseIM server:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mongooseimctl get_vcard alice localhost FN
+</code></pre></div>
+</td></tr></table></p>
+<h2 id="summary">Summary</h2>
+<p>Now you have the minimum knowledge: you know how to deploy MongooseIM, configure some basic features, check/verify a few useful items, validate it both on the client and server side, and utilize a few good practices.</p>
+<h3 id="summary-command-line">Summary: command line</h3>
+<p>You know <code>mongooseimctl</code>, with commands such as:</p>
+<ul>
+<li><code>start</code>, <code>restart</code>, <code>stop</code>, <code>status</code>, <code>live</code>, <code>foreground</code></li>
+<li><code>get_loglevel</code></li>
+<li><code>register_identified</code>, <code>check_account</code>, <code>registered_users</code>, <code>unregister</code></li>
+<li><code>add_rosteritem</code>, <code>get_roster</code></li>
+</ul>
+<p>You can even run <code>mongooseimctl</code> without arguments for a list of available commands.</p>
+<h3 id="summary-files">Summary: files</h3>
+<p>You know basic entries in the files:
+<code>/etc/mongooseim/mongooseim.toml</code>
+<code>/var/log/mongooseim/mongooseim.log</code></p>
+<h3 id="summary-clientapp">Summary: client/app</h3>
+<p>In an app, you know how to:</p>
+<ul>
+<li>connect</li>
+<li>chat with another user</li>
+<li>create/join groupchats</li>
+<li>manage contact lists (roster)</li>
+<li>edit profile (vCard)</li>
+</ul>
+<h2 id="go-further">Go further</h2>
+<p>For the next steps, we now encourage you to:</p>
+<ol>
+<li>Deploy it as a single node, on a publicly accessible server, with a real routable domain name with its certificate</li>
+<li>Add an RDBMS for persistent data, and LDAP for user directory</li>
+<li>Enable message history with MAM (Message Archive Management)</li>
+<li>Enable file exchange with HTTP file upload, with an S3-compatible object storage server</li>
+<li>Use a mobile app for users to chat</li>
+</ol>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../Features-and-supported-standards/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Features and supported standards
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../release_config/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Release/Installation configuration
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://hub.docker.com/r/mongooseim/mongooseim/" target="_blank" rel="noopener" title="hub.docker.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/esl/MongooseIM" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.4ea5477f.min.js"></script>
+      
+    
+  </body>
+</html>
