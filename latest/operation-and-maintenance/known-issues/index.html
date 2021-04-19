@@ -16,7 +16,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/operation-and-maintenance/known-issues/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.1">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.2">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.9299cb39.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f955dcd.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
@@ -1315,6 +1315,7 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+      
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Known issues
           <span class="md-nav__icon md-icon"></span>
@@ -1326,6 +1327,7 @@
       
         
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
   
   
   
@@ -1360,19 +1362,6 @@
     MSSQL connectivity via ODBC
   </a>
   
-    <nav class="md-nav" aria-label="MSSQL connectivity via ODBC">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#proposed-workaround" class="md-nav__link">
-    Proposed workaround
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1384,7 +1373,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#proposed-workaround_1" class="md-nav__link">
+  <a href="#proposed-workaround" class="md-nav__link">
     Proposed workaround
   </a>
   
@@ -2208,6 +2197,7 @@
   
   
   
+  
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
@@ -2239,19 +2229,6 @@
     MSSQL connectivity via ODBC
   </a>
   
-    <nav class="md-nav" aria-label="MSSQL connectivity via ODBC">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#proposed-workaround" class="md-nav__link">
-    Proposed workaround
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2263,7 +2240,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#proposed-workaround_1" class="md-nav__link">
+  <a href="#proposed-workaround" class="md-nav__link">
     Proposed workaround
   </a>
   
@@ -2298,7 +2275,7 @@ You may also find proposed workarounds if any are available.</p>
 <h2 id="missing-muc-light-room-config-fields-with-rdbms-backend">Missing MUC Light room config fields with RDBMS backend</h2>
 <p>Before MongooseIM 3.5.x (incl.) new MUC Light rooms could be created with some config fields absent in the RDBMS table.
 These options couldn't be re-added later by changing the room config via requests from the clients.</p>
-<p>It happened when the default config was a subset of the schema and the client hasn't provided these values when a room was created.</p>
+<p>It happened when the default config was a subset of the schema, and the client hasn't provided these values when a room was created.</p>
 <p>Please note that this issue was resolved from MIM 3.6.0 onwards as the <code>default_config</code> option was deleted.</p>
 <h3 id="how-to-fix-this">How to fix this?</h3>
 <p>You have to iterate over all rooms in the DB (<code>muc_light_rooms</code> table) and add missing entries to the <code>muc_light_config</code> table.
@@ -2331,17 +2308,13 @@ Every option is inserted as a separate row and is stored as plain text, so it sh
 </code></pre></div>
 </td></tr></table>
 <h2 id="mssql-connectivity-via-odbc">MSSQL connectivity via ODBC</h2>
-<p>The ODBC driver currently used by MongooseIM is known to work only with Ubuntu Xenial x64 and FreeTDS 0.91-6.1build1.</p>
-<p>It does not currently work on Ubuntu Bionic, CentOS 7 and macOS Mojave with the latest FreeTDS version.</p>
-<p>The team is working on resolving this issue.
-Please watch for updates in MongooseIM release notes.</p>
-<h3 id="proposed-workaround">Proposed workaround</h3>
-<p>Use Ubuntu Xenial x64 for MongooseIM deployment. This OS version is still maintained.</p>
+<p>We have observed some issues with he ODBC driver used by MongooseIM in the past.
+The problems should now be resolved, and MSSQL is verified to work on Ubuntu 20.04.2 LTS.</p>
 <h2 id="gdpr-retrieval-for-mam-muc-limitation">GDPR retrieval for MAM MUC limitation</h2>
 <p>When the personal data retrieval is executed for a user in a specific domain, Message Archive Management for groupchats must be running for this particular domain.
-This is the case for most configurations but the problem manifests when a MongooseIM operator configures <code>mod_mam_muc</code>/<code>mod_mam_meta</code> to start only for a subset of domains supported by the cluster (<code>host_config</code> option).</p>
+This is the case for most configurations, but the problem manifests when a MongooseIM operator configures <code>mod_mam_muc</code>/<code>mod_mam_meta</code> to start only for a subset of domains supported by the cluster (<code>host_config</code> option).</p>
 <p>In such case, personal data stored by MAM MUC will not be retrieved for this user.</p>
-<h3 id="proposed-workaround_1">Proposed workaround</h3>
+<h3 id="proposed-workaround">Proposed workaround</h3>
 <p>Start a dedicated MongooseIM instance with a slightly different config, which enables Message Archive Management for the user's domain.
 This instance doesn't have to be clustered with other nodes and doesn't have to be accessible for actual users.</p>
 <p>After a successful retrieval, this instance may be terminated and deleted if necessary.</p>
@@ -2438,7 +2411,7 @@ This instance doesn't have to be clustered with other nodes and doesn't have to 
     <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.7353b375.min.js"></script>
+      <script src="../../assets/javascripts/bundle.4ea5477f.min.js"></script>
       
     
   </body>
