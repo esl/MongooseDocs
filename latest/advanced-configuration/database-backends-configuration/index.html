@@ -2591,10 +2591,10 @@ deadlock chances around muc_light operations.</p>
 </code></pre></div>
 </td></tr></table>
 <p>The command above may take some time.</p>
-<p>Then you need to import the SQL schema from either <code>mssql2012.sql</code> or <code>azuresql.sql</code> file depending on which database you are using.
+<p>Then you need to import the SQL schema from  <code>mssql2012.sql</code>.
 You can use a Microsoft's GUI tool (the provided .sql files should work with it) or isql, but after a slight modification of the dump file:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cat azuresql.sql <span class="p">|</span> tr -d <span class="s1">&#39;\r&#39;</span> <span class="p">|</span> tr <span class="s1">&#39;\n&#39;</span> <span class="s1">&#39; &#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/GO/\n/g&#39;</span> <span class="p">|</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cat mssql2012.sql <span class="p">|</span> tr -d <span class="s1">&#39;\r&#39;</span> <span class="p">|</span> tr <span class="s1">&#39;\n&#39;</span> <span class="s1">&#39; &#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/GO/\n/g&#39;</span> <span class="p">|</span>
 isql mongoose-mssql username password -b
 </code></pre></div>
 </td></tr></table>
@@ -2612,7 +2612,7 @@ Set the following option in the <code>general</code> section:</p>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[outgoing_pools.rdbms.default]</span>
-  <span class="n">workers</span> <span class="o">=</span> <span class="mi">5</span>  
+  <span class="n">workers</span> <span class="o">=</span> <span class="mi">5</span>
 
   <span class="k">[outgoing_pools.rdbms.default.connection]</span>
     <span class="n">driver</span> <span class="o">=</span> <span class="s">&quot;odbc&quot;</span>
