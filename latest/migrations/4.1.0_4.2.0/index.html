@@ -13,14 +13,14 @@
         <meta name="author" content="Erlang Solutions">
       
       
-        <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/migrations/4.1.0_4.x.x/">
+        <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/migrations/4.1.0_4.2.0/">
       
       <link rel="icon" href="../../favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.2">
     
     
       
-        <title>4.1.0 to 4.x.x - MongooseIM</title>
+        <title>4.1.0 to 4.2.0 - MongooseIM</title>
       
     
     
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4.1.0 to 4.x.x
+              4.1.0 to 4.2.0
             
           </span>
         </div>
@@ -561,12 +561,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          4.1.0 to 4.x.x
+          4.1.0 to 4.2.0
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        4.1.0 to 4.x.x
+        4.1.0 to 4.2.0
       </a>
       
         
@@ -592,6 +592,33 @@
   <a href="#db-migrations" class="md-nav__link">
     DB migrations
   </a>
+  
+    <nav class="md-nav" aria-label="DB migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-inbox-features" class="md-nav__link">
+    New inbox features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archived-groupchat-messages-in-mod_mam" class="md-nav__link">
+    Archived groupchat messages in mod_mam
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-mod_auth_token-with-mysql-and-ms-sql" class="md-nav__link">
+    Using mod_auth_token with MySQL and MS SQL
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2183,6 +2210,33 @@
     DB migrations
   </a>
   
+    <nav class="md-nav" aria-label="DB migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-inbox-features" class="md-nav__link">
+    New inbox features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archived-groupchat-messages-in-mod_mam" class="md-nav__link">
+    Archived groupchat messages in mod_mam
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-mod_auth_token-with-mysql-and-ms-sql" class="md-nav__link">
+    Using mod_auth_token with MySQL and MS SQL
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -2197,18 +2251,19 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/esl/MongooseIM/edit/master/doc/migrations/4.1.0_4.x.x.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/esl/MongooseIM/edit/master/doc/migrations/4.1.0_4.2.0.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                  <h1>4.1.0 to 4.x.x</h1>
+                  <h1>4.1.0 to 4.2.0</h1>
                 
                 <h2 id="minor-changes-in-the-toml-config-format">Minor changes in the <code>TOML</code> config format</h2>
 <ul>
 <li>The <code>pgsql_users_number_estimate</code> option was moved to <a href="../../authentication-methods/rdbms#authrdbmsusers_number_estimate"><code>auth.rdbms.users_number_estimate</code></a>. The new option supports PostgreSQL and MySQL.</li>
 </ul>
 <h2 id="db-migrations">DB migrations</h2>
+<h3 id="new-inbox-features">New inbox features</h3>
 <p>Inbox now implements new functionality (see <a href="../../open-extensions/inbox/">inbox</a>), but this required adding new columns to the DB. If you're using inbox, please update the tables as follows:</p>
 <p>For Postgres or MySQL:
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -2226,6 +2281,19 @@ For MSSQL:
   <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">muted_until</span> <span class="nb">BIGINT</span> <span class="k">DEFAULT</span> <span class="mi">0</span><span class="p">;</span>
 </code></pre></div>
 </td></tr></table></p>
+<h3 id="archived-groupchat-messages-in-mod_mam">Archived groupchat messages in <code>mod_mam</code></h3>
+<p>The <a href="../../modules/mod_mam#modulesmod_mam_metapmarchive_groupchats"><code>archive_groupchats</code></a> option is now set to <code>false</code> by default, as documented.
+Before the change, the private message (PM) archive stored incoming groupchat messages as well, contrary to the documentation.
+After the upgrade you can manually remove those messages from the database.
+For example, when the MUC domain is <code>muc.localhost</code> and <code>rdbms_message_format</code> has the default value <code>internal</code>, one can remove such messages with the following query:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">mam_message</span>
+  <span class="k">WHERE</span> <span class="n">direction</span> <span class="o">=</span> <span class="s1">&#39;I&#39;</span> <span class="k">AND</span> <span class="n">remote_bare_jid</span> <span class="k">LIKE</span> <span class="s1">&#39;muc.localhost:%&#39;</span><span class="p">;</span>
+</code></pre></div>
+</td></tr></table>
+<p>This can be a heavy operation and it needs to be done with caution.</p>
+<h3 id="using-mod_auth_token-with-mysql-and-ms-sql">Using <code>mod_auth_token</code> with MySQL and MS SQL</h3>
+<p>The <a href="../../modules/mod_auth_token"><code>mod_auth_token</code></a> module supports MySQL and MS SQL now. To use this functionality, you need to create the <code>auth_token</code> table with the query which you can find in <code>priv/mysql.sql</code> and <code>priv/mssql2012.sql</code>, respectively.</p>
                 
               
               
