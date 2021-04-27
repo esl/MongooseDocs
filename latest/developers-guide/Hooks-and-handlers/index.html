@@ -2503,7 +2503,7 @@ It is instantiated with an incoming stanza, passed along throughout the processi
 <h3 id="sidenote-something-deprecated">Sidenote: something deprecated</h3>
 <p>In the past you may have found some calls to <code>ejabberd_hooks:run/3</code> in the MongooseIM source code.
 Under the hood it called the same handlers with <code>ok</code> as the initial accumulator.
-This is deprecated and some day will be removed.</p>
+This is deprecated, and some day will be removed.</p>
 <h3 id="error-handling-in-hooks">Error handling in hooks</h3>
 <p>Hooks are meant to decouple modules; in other words, the caller signals that some event took place or that it intends to use a certain feature or a set of features, but how and if those features are implemented is beyond its interest.
 For that reason hooks don't use the "let it crash" approach. Instead it is rather like "fire-and-forget", more similar in principle to the <code>Pid ! signal</code> way.</p>
@@ -2552,7 +2552,7 @@ It's done in <code>mod_offline:stop/1</code> in a similar fashion to:</p>
 <h3 id="sidenote-metrics">Sidenote: Metrics</h3>
 <p>Every time a hook is run, a corresponding metric of the same name in the same host is incremented by one.
 There are some exceptions though as some metrics were implemented before the generic hook metrics.
-List of hooks not updating generic metrics can be found in the <code>mongoose_metrics:hook_to_name/1</code> function.
+List of hooks not updating generic metrics can be found in the <code>mongoose_metrics:filter_hook/1</code> function.
 Such skipped hooks update metrics defined in the <code>mongoose_metrics_hooks</code> module.</p>
 <h2 id="writing-handlers">Writing handlers</h2>
 <p>The signature of a handler has to follow three rules:</p>
