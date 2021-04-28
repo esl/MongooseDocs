@@ -20,7 +20,7 @@
     
     
       
-        <title>MongooseIM core component - MongooseIM</title>
+        <title>Domain management - MongooseIM</title>
       
     
     
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              MongooseIM core component
+              Domain management
             
           </span>
         </div>
@@ -1326,12 +1326,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" checked>
       
       <label class="md-nav__link" for="__nav_11">
         Developer's guide
@@ -1419,11 +1421,21 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../Moving-to-single-app-project-structure/" class="md-nav__link">
-        Moving to single app project structure
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Domain management
       </a>
+      
     </li>
   
 
@@ -2144,29 +2156,31 @@ This module is local for the node, it must not implement any sync across the
 nodes in a cluster.
 This component will be responsible for dynamic routing, it will always be
 started by MIM even if there is no support of dynamic domain names configured.</p>
-<p>It must provide the following interfaces:
-- Init - should accept the list of initial domain/host_type pairs provided in
+<p>It must provide the following interfaces:</p>
+<ul>
+<li>Init - should accept the list of initial domain/host_type pairs provided in
   config file and the list of host_types that can be used for dynamic insertion.
   Any of these lists can be empty, initial list of domain/host_type pairs can
   have some unique host_types not mentioned in the host_types list.
   The component must be initialised by the main MIM supervisor.
-  Implemented in <code>mongoose_domain_api:init()</code>.
-- Insert - adding new domain/host_type pair.
+  Implemented in <code>mongoose_domain_api:init()</code>.</li>
+<li>Insert - adding new domain/host_type pair.
   This function must be <strong>idempotent</strong>, it must return success on attempt to
   insert the existing data, but it must fail if ETS already has the domain
   name associated with another host type.
-  Implemented in <code>mongoose_domain_api:insert_domain(Domain, HostType)</code>.
-- Remove - This function must be idempotent. this function deletes existing
+  Implemented in <code>mongoose_domain_api:insert_domain(Domain, HostType)</code>.</li>
+<li>Remove - This function must be idempotent. this function deletes existing
   domain/host_type pairs.
   It must be impossible to delete domain/host_type pairs specified on init
   of the component.
-  Implemented in <code>mongoose_domain_api:delete_domain(Domain)</code>.
-- Get host type by domain.
-  Implemented in <code>mongoose_domain_api:get_host_type(Domain).</code>.
-- Get all domains configured for the host_type. 
-  Implemented in <code>mongoose_domain_api:get_domains_by_host_type(HostType).</code>.
-- Get the list of the host_types provided during initialisation.
-  Implemented in <code>mongoose_domain_api:get_all_static().</code>.</p>
+  Implemented in <code>mongoose_domain_api:delete_domain(Domain)</code>.</li>
+<li>Get host type by domain.
+  Implemented in <code>mongoose_domain_api:get_host_type(Domain).</code>.</li>
+<li>Get all domains configured for the host_type. 
+  Implemented in <code>mongoose_domain_api:get_domains_by_host_type(HostType).</code>.</li>
+<li>Get the list of the host_types provided during initialisation.
+  Implemented in <code>mongoose_domain_api:get_all_static().</code>.</li>
+</ul>
 <p><code>mongoose_domain_core</code> implementation:</p>
 <ul>
 <li>Has <code>mongoose_domain_core</code> table.</li>
@@ -2361,6 +2375,39 @@ Provide <code>{"enabled": false}</code> as a body to disable a domain.</p>
       
         
 <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../accumulators/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Accumulators
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../mod_amp_developers_guide/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              mod_amp development
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
