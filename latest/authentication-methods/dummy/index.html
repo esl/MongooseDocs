@@ -1064,6 +1064,40 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authdummybase_time" class="md-nav__link">
+    auth.dummy.base_time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authdummyvariance" class="md-nav__link">
+    auth.dummy.variance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2209,6 +2243,40 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authdummybase_time" class="md-nav__link">
+    auth.dummy.base_time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authdummyvariance" class="md-nav__link">
+    auth.dummy.variance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2231,13 +2299,38 @@
                 <h2 id="overview">Overview</h2>
 <p>The purpose of this method is to make it possible to authenticate a user without
 the need for real authentication. In other words, using this module allows to
-connect any user to the server without providing any password,
-certificate, etc.</p>
-<p>From a more detailed perspective, the backend just accepts every
-authentication attempt and introduces a random delay (50-500ms) to
-an authorization response.</p>
-<p>This kind of authorization sometimes really comes in handy, especially during
-development and testing.</p>
+connect any user to the server without providing any password, certificate, etc.</p>
+<p>This kind of authorization sometimes really comes in handy, especially during development and testing.</p>
+<p>The backend just accepts every authentication attempt and introduces a random delay (50-500ms) to an authorization response. The delay works like
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    <span class="nn">timer</span><span class="p">:</span><span class="nf">sleep</span><span class="p">(</span><span class="nv">Base</span> <span class="o">+</span> <span class="nn">rand</span><span class="p">:</span><span class="nf">uniform</span><span class="p">(</span><span class="nv">Variance</span><span class="p">)),</span>
+</code></pre></div>
+</td></tr></table>
+where <code>Base</code> is <code>base_time</code> and <code>Variance</code> is <code>variance</code>, as configured below.</p>
+<h2 id="configuration">Configuration</h2>
+<h3 id="authdummybase_time"><code>auth.dummy.base_time</code></h3>
+<ul>
+<li><strong>Scope:</strong> local</li>
+<li><strong>Syntax:</strong> integer</li>
+<li><strong>Default:</strong> 50</li>
+<li><strong>Example:</strong> <code>base_time = 5</code></li>
+</ul>
+<h3 id="authdummyvariance"><code>auth.dummy.variance</code></h3>
+<ul>
+<li><strong>Scope:</strong> local</li>
+<li><strong>Syntax:</strong> integer</li>
+<li><strong>Default:</strong> 450</li>
+<li><strong>Example:</strong> <code>variance = 10</code></li>
+</ul>
+<h3 id="example">Example</h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[auth]</span>
+  <span class="n">methods</span> <span class="o">=</span> <span class="k">[&quot;dummy&quot;]</span>
+  <span class="n">dummy</span><span class="p">.</span><span class="n">base</span> <span class="o">=</span> <span class="mi">5</span>
+  <span class="n">dummy</span><span class="p">.</span><span class="n">variance</span> <span class="o">=</span> <span class="mi">10</span>
+</code></pre></div>
+</td></tr></table>
                 
               
               
