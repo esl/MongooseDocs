@@ -16,7 +16,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/rest-api/Metrics-backend/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.5">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.6">
     
     
       
@@ -24,10 +24,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.bde7dde4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.875de78c.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
         
       
     
@@ -1234,15 +1234,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-apimetricshosthost" class="md-nav__link">
-    GET /api/metrics/host/:host
+  <a href="#get-apimetricshost_typehost_type" class="md-nav__link">
+    GET /api/metrics/host_type/:host_type
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-apimetricshosthostmetric" class="md-nav__link">
-    GET /api/metrics/host/:host/:metric
+  <a href="#get-apimetricshost_typehost_typemetric" class="md-nav__link">
+    GET /api/metrics/host_type/:host_type/:metric
   </a>
   
 </li>
@@ -2348,15 +2348,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-apimetricshosthost" class="md-nav__link">
-    GET /api/metrics/host/:host
+  <a href="#get-apimetricshost_typehost_type" class="md-nav__link">
+    GET /api/metrics/host_type/:host_type
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-apimetricshosthostmetric" class="md-nav__link">
-    GET /api/metrics/host/:host/:metric
+  <a href="#get-apimetricshost_typehost_typemetric" class="md-nav__link">
+    GET /api/metrics/host_type/:host_type/:metric
   </a>
   
 </li>
@@ -2408,11 +2408,11 @@
                 
                 <h2 id="introduction">Introduction</h2>
 <p><strong>Warning:</strong> This API is considered obsolete.
-Please use WombatOAM for monitoring or one of the <a href="../../operation-and-maintenance/Logging-%26-monitoring/#monitoring">exometer reporters</a> and your favourite statistics service.</p>
+Please use <a href="https://www.erlang-solutions.com/capabilities/wombatoam/">WombatOAM</a> for monitoring or one of the <a href="../../operation-and-maintenance/Logging-%26-monitoring/#monitoring">exometer reporters</a> and your favourite statistics service.</p>
 <p>To expose MongooseIM metrics, an adequate endpoint must be included in the <a href="../../advanced-configuration/listen/">listen</a>
 section of <code>mongooseim.toml</code>. The specific configuration options are described in
 the <a href="../../advanced-configuration/listen/#handler-types-metrics-api-obsolete-mongoose_api">metrics API handlers</a>
-section. </p>
+section.</p>
 <p>An example configuration:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -2480,33 +2480,33 @@ The above configuration starts the API only on a loopback interface.</p>
 <h3 id="get-apimetrics">GET /api/metrics</h3>
 <p>Returns <code>200 OK</code> and two elements:</p>
 <ul>
-<li><code>hosts</code> - A list of XMPP host names available on the server.</li>
+<li><code>host_types</code> - A list of host type names available on the server.</li>
 <li><code>metrics</code> - A list of per-host metrics.</li>
 <li><code>global</code> - A list of global metrics.</li>
 </ul>
 <h3 id="get-apimetricsall">GET /api/metrics/all</h3>
 <p>Returns <code>200 OK</code> and an element:</p>
 <ul>
-<li><code>metrics</code> - A list of aggregated (sum of all domains) per-host metrics with their values.</li>
+<li><code>metrics</code> - A list of aggregated (sum of all domains) per host type metrics with their values.</li>
 </ul>
 <h3 id="get-apimetricsallmetric">GET /api/metrics/all/:metric</h3>
 <p>On success returns <code>200 OK</code> and an element:</p>
 <ul>
-<li><code>metric</code> - An aggregated (sum of all domains) per-host metric.</li>
+<li><code>metric</code> - An aggregated (sum of all domains) per host type metric.</li>
 </ul>
 <p>Returns <code>404 Not Found</code> when metric <code>:metric</code> doesn't exist.</p>
-<h3 id="get-apimetricshosthost">GET /api/metrics/host/:host</h3>
+<h3 id="get-apimetricshost_typehost_type">GET /api/metrics/host_type/:host_type</h3>
 <p>On success returns <code>200 OK</code> and an element:</p>
 <ul>
-<li><code>metrics</code> - A list of per-host metrics and their values for host <code>:host</code>.</li>
+<li><code>metrics</code> - A list of per host type metrics and their values for host_type <code>:host_type</code>.</li>
 </ul>
-<p>Returns <code>404 Not Found</code> when host <code>:host</code> doesn't exist.</p>
-<h3 id="get-apimetricshosthostmetric">GET /api/metrics/host/:host/:metric</h3>
+<p>Returns <code>404 Not Found</code> when host_type <code>:host_type</code> doesn't exist.</p>
+<h3 id="get-apimetricshost_typehost_typemetric">GET /api/metrics/host_type/:host_type/:metric</h3>
 <p>On success returns <code>200 OK</code> and an element:</p>
 <ul>
-<li><code>metric</code> - A per-host metric <code>:metric</code> and its value for host <code>:host</code>.</li>
+<li><code>metric</code> - A per host type metric <code>:metric</code> and its value for host_type <code>:host_type</code>.</li>
 </ul>
-<p>Returns <code>404 Not Found</code> when the pair (host <code>:host</code>, metric <code>:metric</code>) doesn't exist.</p>
+<p>Returns <code>404 Not Found</code> when the pair (host_type <code>:host_type</code>, metric <code>:metric</code>) doesn't exist.</p>
 <h3 id="get-apimetricsglobal">GET /api/metrics/global</h3>
 <p>On success returns <code>200 OK</code> and an element:</p>
 <ul>
@@ -2648,7 +2648,7 @@ Data fetched by collectd may be later visualized by tools like Graphite.</p>
     <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.d351de03.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.a1609d9a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.34eae1b6.min.js"></script>
       
     
   </body>

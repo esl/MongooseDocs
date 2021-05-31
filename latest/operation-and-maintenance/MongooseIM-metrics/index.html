@@ -16,7 +16,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/operation-and-maintenance/MongooseIM-metrics/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.5">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.6">
     
     
       
@@ -24,10 +24,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.bde7dde4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.875de78c.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
         
       
     
@@ -1392,11 +1392,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#per-host-metrics" class="md-nav__link">
-    Per host metrics
+  <a href="#per-host-type-metrics" class="md-nav__link">
+    Per host type metrics
   </a>
   
-    <nav class="md-nav" aria-label="Per host metrics">
+    <nav class="md-nav" aria-label="Per host type metrics">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2380,11 +2380,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#per-host-metrics" class="md-nav__link">
-    Per host metrics
+  <a href="#per-host-type-metrics" class="md-nav__link">
+    Per host type metrics
   </a>
   
-    <nav class="md-nav" aria-label="Per host metrics">
+    <nav class="md-nav" aria-label="Per host type metrics">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2484,14 +2484,14 @@ They are managed by <a href="https://github.com/Feuerlabs/exometer">exometer</a>
 MongooseIM uses <a href="https://github.com/esl/exometer/tree/1.2.1-patched">ESL's fork of this project</a>.</p>
 <p>All metrics are divided into the following groups:</p>
 <ul>
-<li>Per host metrics: Gathered separately for every XMPP host supported by the cluster.
- <strong>Warning:</strong> If a cluster supports many (thousands or more) domains, performance issues might occur.
+<li>Per host type metrics: Gathered separately for every host type supported by the cluster.
+ <strong>Warning:</strong> If a cluster supports many (thousands or more) host types, performance issues might occur.
  To avoid this, use global equivalents of the metrics with <code>all_metrics_are_global</code> config option.<ul>
 <li>Hook metrics.
 They are created for every <a href="../../developers-guide/Hooks-and-handlers/">hook</a> and incremented on every call to it.</li>
 </ul>
 </li>
-<li>Global metrics: Metrics common for all XMPP hosts.<ul>
+<li>Global metrics: Metrics common for all host types.<ul>
 <li>Data metrics.
 These are misc. metrics related to data transfers (e.g. sent and received stanza size statistics).</li>
 <li>VM metrics. Basic Erlang VM statistics.</li>
@@ -2529,7 +2529,7 @@ You can find the lists of keys in metrics descriptions.</p>
 <li><code>median</code></li>
 <li><code>50</code>, <code>75</code>, <code>90</code>, <code>95</code>, <code>99</code>, <code>999</code> - 50th, 75th, 90th, 95th, 99th and 99.9th percentile</li>
 </ul>
-<h2 id="per-host-metrics">Per host metrics</h2>
+<h2 id="per-host-type-metrics">Per host type metrics</h2>
 <h3 id="hook-metrics">Hook metrics</h3>
 <p>There are more hook metrics than what is listed in this table, because they are automatically created for every new hook.
 As a result it makes more sense to maintain a list of the most relevant or useful items, rather than keeping this table fully in sync with the code.</p>
@@ -2543,97 +2543,97 @@ As a result it makes more sense to maintain a list of the most relevant or usefu
 </thead>
 <tbody>
 <tr>
-<td><code>[Host, anonymous_purge_hook]</code></td>
+<td><code>[HostType, anonymous_purge_hook]</code></td>
 <td>spiral</td>
 <td>An anonymous user disconnects.</td>
 </tr>
 <tr>
-<td><code>[Host, c2s_unauthenticated_iq]</code></td>
+<td><code>[HostType, c2s_unauthenticated_iq]</code></td>
 <td>spiral</td>
 <td>An IQ sent from a user to a server without authentication.</td>
 </tr>
 <tr>
-<td><code>[Host, disco_info]</code></td>
+<td><code>[HostType, disco_info]</code></td>
 <td>spiral</td>
 <td>An information about the server has been requested via Disco protocol.</td>
 </tr>
 <tr>
-<td><code>[Host, disco_local_features]</code></td>
+<td><code>[HostType, disco_local_features]</code></td>
 <td>spiral</td>
 <td>A list of server features is gathered.</td>
 </tr>
 <tr>
-<td><code>[Host, disco_local_identity]</code></td>
+<td><code>[HostType, disco_local_identity]</code></td>
 <td>spiral</td>
 <td>A list of server identities is gathered.</td>
 </tr>
 <tr>
-<td><code>[Host, disco_local_items]</code></td>
+<td><code>[HostType, disco_local_items]</code></td>
 <td>spiral</td>
 <td>A list of server's items (e.g. services) is gathered.</td>
 </tr>
 <tr>
-<td><code>[Host, disco_sm_features]</code></td>
+<td><code>[HostType, disco_sm_features]</code></td>
 <td>spiral</td>
 <td>A list of user's features is gathered.</td>
 </tr>
 <tr>
-<td><code>[Host, disco_sm_identity]</code></td>
+<td><code>[HostType, disco_sm_identity]</code></td>
 <td>spiral</td>
 <td>A list of user's identities is gathered.</td>
 </tr>
 <tr>
-<td><code>[Host, disco_sm_items]</code></td>
+<td><code>[HostType, disco_sm_items]</code></td>
 <td>spiral</td>
 <td>A list of user's items is gathered.</td>
 </tr>
 <tr>
-<td><code>[Host, mam_lookup_messages]</code></td>
+<td><code>[HostType, mam_lookup_messages]</code></td>
 <td>spiral</td>
 <td>An archive lookup is performed.</td>
 </tr>
 <tr>
-<td><code>[Host, offline_message_hook]</code></td>
+<td><code>[HostType, offline_message_hook]</code></td>
 <td>spiral</td>
 <td>A message was sent to an offline user. (Except for "error", "headline" and "groupchat" message types.)</td>
 </tr>
 <tr>
-<td><code>[Host, offline_groupchat_message_hook]</code></td>
+<td><code>[HostType, offline_groupchat_message_hook]</code></td>
 <td>spiral</td>
 <td>A groupchat message was sent to an offline user.</td>
 </tr>
 <tr>
-<td><code>[Host, privacy_updated_list]</code></td>
+<td><code>[HostType, privacy_updated_list]</code></td>
 <td>spiral</td>
 <td>User's privacy list is updated.</td>
 </tr>
 <tr>
-<td><code>[Host, resend_offline_messages_hook]</code></td>
+<td><code>[HostType, resend_offline_messages_hook]</code></td>
 <td>spiral</td>
 <td>A list of offline messages is gathered for delivery to a user's new connection.</td>
 </tr>
 <tr>
-<td><code>[Host, roster_get_subscription_lists]</code></td>
+<td><code>[HostType, roster_get_subscription_lists]</code></td>
 <td>spiral</td>
 <td>Presence subscription lists (based on which presence updates are broadcasted) are gathered.</td>
 </tr>
 <tr>
-<td><code>[Host, roster_in_subscription]</code></td>
+<td><code>[HostType, roster_in_subscription]</code></td>
 <td>spiral</td>
 <td>A presence with subscription update is processed.</td>
 </tr>
 <tr>
-<td><code>[Host, roster_out_subscription]</code></td>
+<td><code>[HostType, roster_out_subscription]</code></td>
 <td>spiral</td>
 <td>A presence with subscription update is received from a client.</td>
 </tr>
 <tr>
-<td><code>[Host, sm_broadcast]</code></td>
+<td><code>[HostType, sm_broadcast]</code></td>
 <td>spiral</td>
 <td>A stanza is broadcasted to all of user's resources.</td>
 </tr>
 <tr>
-<td><code>[Host, unset_presence_hook]</code></td>
+<td><code>[HostType, unset_presence_hook]</code></td>
 <td>spiral</td>
 <td>A user disconnects or sends an <code>unavailable</code> presence.</td>
 </tr>
@@ -2650,27 +2650,27 @@ As a result it makes more sense to maintain a list of the most relevant or usefu
 </thead>
 <tbody>
 <tr>
-<td><code>[Host, modPresenceSubscriptions]</code></td>
+<td><code>[HostType, modPresenceSubscriptions]</code></td>
 <td>spiral</td>
 <td>Presence subscription is processed.</td>
 </tr>
 <tr>
-<td><code>[Host, modPresenceUnsubscriptions]</code></td>
+<td><code>[HostType, modPresenceUnsubscriptions]</code></td>
 <td>spiral</td>
 <td>Presence unsubscription is processed.</td>
 </tr>
 <tr>
-<td><code>[Host, modRosterGets]</code></td>
+<td><code>[HostType, modRosterGets]</code></td>
 <td>spiral</td>
 <td>User's roster is fetched.</td>
 </tr>
 <tr>
-<td><code>[Host, modRosterPush]</code></td>
+<td><code>[HostType, modRosterPush]</code></td>
 <td>spiral</td>
 <td>A roster update is pushed to a single session.</td>
 </tr>
 <tr>
-<td><code>[Host, modRosterSets]</code></td>
+<td><code>[HostType, modRosterSets]</code></td>
 <td>spiral</td>
 <td>User's roster is updated.</td>
 </tr>
@@ -2687,42 +2687,42 @@ As a result it makes more sense to maintain a list of the most relevant or usefu
 </thead>
 <tbody>
 <tr>
-<td><code>[Host, modPrivacyGets]</code></td>
+<td><code>[HostType, modPrivacyGets]</code></td>
 <td>spiral</td>
 <td>IQ privacy <code>get</code> is processed.</td>
 </tr>
 <tr>
-<td><code>[Host, modPrivacyPush]</code></td>
+<td><code>[HostType, modPrivacyPush]</code></td>
 <td>spiral</td>
 <td>Privacy list update is sent to a single session.</td>
 </tr>
 <tr>
-<td><code>[Host, modPrivacySets]</code></td>
+<td><code>[HostType, modPrivacySets]</code></td>
 <td>spiral</td>
 <td>IQ privacy <code>set</code> is processed.</td>
 </tr>
 <tr>
-<td><code>[Host, modPrivacySetsActive]</code></td>
+<td><code>[HostType, modPrivacySetsActive]</code></td>
 <td>spiral</td>
 <td>Active privacy list is changed.</td>
 </tr>
 <tr>
-<td><code>[Host, modPrivacySetsDefault]</code></td>
+<td><code>[HostType, modPrivacySetsDefault]</code></td>
 <td>spiral</td>
 <td>Default privacy list is changed.</td>
 </tr>
 <tr>
-<td><code>[Host, modPrivacyStanzaAll]</code></td>
+<td><code>[HostType, modPrivacyStanzaAll]</code></td>
 <td>spiral</td>
 <td>A packet is checked against the privacy list.</td>
 </tr>
 <tr>
-<td><code>[Host, modPrivacyStanzaDenied]</code></td>
+<td><code>[HostType, modPrivacyStanzaDenied]</code></td>
 <td>spiral</td>
 <td>Privacy list check resulted in <code>deny</code>.</td>
 </tr>
 <tr>
-<td><code>[Host, modPrivacyStanzaBlocked]</code></td>
+<td><code>[HostType, modPrivacyStanzaBlocked]</code></td>
 <td>spiral</td>
 <td>Privacy list check resulted in <code>block</code>.</td>
 </tr>
@@ -2739,97 +2739,97 @@ As a result it makes more sense to maintain a list of the most relevant or usefu
 </thead>
 <tbody>
 <tr>
-<td><code>[Host, sessionAuthFails]</code></td>
+<td><code>[HostType, sessionAuthFails]</code></td>
 <td>spiral</td>
 <td>A client failed to authenticate.</td>
 </tr>
 <tr>
-<td><code>[Host, sessionCount]</code></td>
+<td><code>[HostType, sessionCount]</code></td>
 <td>counter</td>
 <td>Number of active sessions.</td>
 </tr>
 <tr>
-<td><code>[Host, sessionLogouts]</code></td>
+<td><code>[HostType, sessionLogouts]</code></td>
 <td>spiral</td>
 <td>A client session is closed.</td>
 </tr>
 <tr>
-<td><code>[Host, sessionSuccessfulLogins]</code></td>
+<td><code>[HostType, sessionSuccessfulLogins]</code></td>
 <td>spiral</td>
 <td>A client session is opened.</td>
 </tr>
 <tr>
-<td><code>[Host, xmppErrorIq]</code></td>
+<td><code>[HostType, xmppErrorIq]</code></td>
 <td>spiral</td>
 <td>An <code>error</code> IQ is sent to a client.</td>
 </tr>
 <tr>
-<td><code>[Host, xmppErrorMessage]</code></td>
+<td><code>[HostType, xmppErrorMessage]</code></td>
 <td>spiral</td>
 <td>An <code>error</code> message is sent to a client.</td>
 </tr>
 <tr>
-<td><code>[Host, xmppErrorPresence]</code></td>
+<td><code>[HostType, xmppErrorPresence]</code></td>
 <td>spiral</td>
 <td>An <code>error</code> presence is sent to a client.</td>
 </tr>
 <tr>
-<td><code>[Host, xmppErrorTotal]</code></td>
+<td><code>[HostType, xmppErrorTotal]</code></td>
 <td>spiral</td>
 <td>A stanza with <code>error</code> type is routed.</td>
 </tr>
 <tr>
-<td><code>[Host, xmppMessageBounced]</code></td>
+<td><code>[HostType, xmppMessageBounced]</code></td>
 <td>spiral</td>
 <td>A <code>service-unavailable</code> error is sent, because the message recipient if offline.</td>
 </tr>
 <tr>
-<td><code>[Host, xmppIqSent]</code></td>
+<td><code>[HostType, xmppIqSent]</code></td>
 <td>spiral</td>
 <td>An IQ is sent by a client.</td>
 </tr>
 <tr>
-<td><code>[Host, xmppMessageSent]</code></td>
+<td><code>[HostType, xmppMessageSent]</code></td>
 <td>spiral</td>
 <td>A message is sent by a client</td>
 </tr>
 <tr>
-<td><code>[Host, xmppPresenceSent]</code></td>
+<td><code>[HostType, xmppPresenceSent]</code></td>
 <td>spiral</td>
 <td>A presence is sent by a client.</td>
 </tr>
 <tr>
-<td><code>[Host, xmppStanzaSent]</code></td>
+<td><code>[HostType, xmppStanzaSent]</code></td>
 <td>spiral</td>
 <td>A stanza is sent by a client.</td>
 </tr>
 <tr>
-<td><code>[Host, xmppIqReceived]</code></td>
+<td><code>[HostType, xmppIqReceived]</code></td>
 <td>spiral</td>
 <td>An IQ is sent to a client.</td>
 </tr>
 <tr>
-<td><code>[Host, xmppMessageReceived]</code></td>
+<td><code>[HostType, xmppMessageReceived]</code></td>
 <td>spiral</td>
 <td>A message is sent to a client.</td>
 </tr>
 <tr>
-<td><code>[Host, xmppPresenceReceived]</code></td>
+<td><code>[HostType, xmppPresenceReceived]</code></td>
 <td>spiral</td>
 <td>A presence is sent to a client.</td>
 </tr>
 <tr>
-<td><code>[Host, xmppStanzaReceived]</code></td>
+<td><code>[HostType, xmppStanzaReceived]</code></td>
 <td>spiral</td>
 <td>A stanza is sent to a client.</td>
 </tr>
 <tr>
-<td><code>[Host, xmppStanzaCount]</code></td>
+<td><code>[HostType, xmppStanzaCount]</code></td>
 <td>spiral</td>
 <td>A stanza is sent to a client.</td>
 </tr>
 <tr>
-<td><code>[Host, xmppStanzaDropped]</code></td>
+<td><code>[HostType, xmppStanzaDropped]</code></td>
 <td>spiral</td>
 <td>A stanza is dropped due to an AMP rule or a <code>filter_packet</code> processing flow.</td>
 </tr>
@@ -2976,17 +2976,17 @@ The former is a histogram of operation times. However, the time is not recorded 
 The latter is a number of calls (spiral metric), incremented for <em>every</em> call (even a failed one).</p>
 <p>Besides these, following authentication metrics are always available:</p>
 <ul>
-<li><code>[Host, backends, auth, authorize]</code></li>
-<li><code>[Host, backends, auth, check_password]</code></li>
-<li><code>[Host, backends, auth, try_register]</code></li>
-<li><code>[Host, backends, auth, does_user_exist]</code></li>
+<li><code>[HostType, backends, auth, authorize]</code></li>
+<li><code>[HostType, backends, auth, check_password]</code></li>
+<li><code>[HostType, backends, auth, try_register]</code></li>
+<li><code>[HostType, backends, auth, does_user_exist]</code></li>
 </ul>
 <p>These are <strong>total</strong> times of respective operations.
 One operation usually requires only a single call to an auth backend but sometimes with e.g. 3 backends configured, the operation may fail for first 2 backends.
 In such case, these metrics will be updated with combined time of 2 failed and 1 successful request.</p>
 <p>Additionally, the RDBMS layer in MongooseIM exposes two more metrics, if RDBMS is configured:</p>
 <ul>
-<li><code>[global, backends, mongoose_rdbms, query]</code> - Execution time of a "simple"" (not prepared) query by a DB driver.</li>
+<li><code>[global, backends, mongoose_rdbms, query]</code> - Execution time of a "simple" (not prepared) query by a DB driver.</li>
 <li><code>[global, backends, mongoose_rdbms, execute]</code> - Execution time of a prepared query by a DB driver.</li>
 </ul>
                 
@@ -3082,7 +3082,7 @@ In such case, these metrics will be updated with combined time of 2 failed and 1
     <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.d351de03.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.a1609d9a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.34eae1b6.min.js"></script>
       
     
   </body>
