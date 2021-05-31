@@ -2572,6 +2572,30 @@
 </td></tr></table>
 <p>They can return <code>"allow"</code>, <code>"deny"</code> or <code>"default"</code>.
 The last value uses the default setting for the operation, which is to allow the operation when the sender and recipient JID's are the same.</p>
+<p>MAM for MUC permissions has <code>muc_</code> prefix:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="n">muc_mam_set_prefs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="n">acl</span> <span class="o">=</span> <span class="s">&quot;all&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">&quot;default&quot;</span><span class="p">}</span>
+  <span class="p">]</span>
+
+  <span class="n">muc_mam_get_prefs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="n">acl</span> <span class="o">=</span> <span class="s">&quot;all&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">&quot;default&quot;</span><span class="p">}</span>
+  <span class="p">]</span>
+
+  <span class="n">muc_mam_lookup_messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="n">acl</span> <span class="o">=</span> <span class="s">&quot;all&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">&quot;default&quot;</span><span class="p">}</span>
+  <span class="p">]</span>
+</code></pre></div>
+</td></tr></table>
 <h3 id="mam-shapers">MAM shapers</h3>
 <p>These rules limit the rate of MAM operations triggered by IQ stanzas.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -2627,6 +2651,7 @@ The last value uses the default setting for the operation, which is to allow the
 <li><code>*_global_shaper</code> - limits the number of operations per server node per second.</li>
 </ul>
 <p>The values returned by the rules (<code>mam_shaper</code>, <code>mam_global_shaper</code>) are shaper names, which need to be defined in the <a href="../shaper/#mam-shapers"><code>shaper</code> section</a>.</p>
+<p>MAM for MUC shapers has <code>muc_</code> prefix.</p>
 <h3 id="maximum-number-of-sessions">Maximum number of sessions</h3>
 <p>The <code>max_user_sessions</code> rule is used to determine the maximum number of sessions a user can open.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
