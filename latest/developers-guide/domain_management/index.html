@@ -2299,15 +2299,17 @@ Configure host-type first to delete such domains.</p>
 <p>Provides API for adding/removing and enabling/disabling domains over HTTP.</p>
 <p>Implemented by <code>mongoose_domain_handler</code> module.</p>
 <p>Configuration example:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.http]]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.http]]</span>
   <span class="n">ip_address</span> <span class="o">=</span> <span class="s">&quot;127.0.0.1&quot;</span>
   <span class="n">port</span> <span class="o">=</span> <span class="mi">8088</span>
   <span class="n">transport</span><span class="p">.</span><span class="n">num_acceptors</span> <span class="o">=</span> <span class="mi">10</span>
@@ -2316,12 +2318,30 @@ Configure host-type first to delete such domains.</p>
   <span class="k">[[listen.http.handlers.mongoose_domain_handler]]</span>
     <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span>
     <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/api&quot;</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="s">&quot;admin&quot;</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="s">&quot;secret&quot;</span>
 </code></pre></div>
 </td></tr></table>
+<h4 id="listenhttphandlersmongoose_domain_handlerusername"><code>listen.http.handlers.mongoose_domain_handler.username</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>username = "admin"</code></li>
+</ul>
+<p>When set, enables authentication to access this endpoint. Requires setting <code>password</code>.</p>
+<h4 id="listenhttphandlersmongoose_domain_handlerpassword"><code>listen.http.handlers.mongoose_domain_handler.password</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>password = "secret"</code></li>
+</ul>
+<p>Required to enable authentication for this endpoint.</p>
 <h2 id="add-domain">Add domain</h2>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -v -X PUT <span class="s2">&quot;http://localhost:8088/api/domains/example.db&quot;</span> <span class="se">\</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -v -X PUT <span class="s2">&quot;http://localhost:8088/api/domains/example.db&quot;</span> <span class="se">\</span>
+    --user admin:secret <span class="se">\</span>
     -H <span class="s1">&#39;content-type: application/json&#39;</span> <span class="se">\</span>
     -d <span class="s1">&#39;{&quot;host_type&quot;: &quot;type1&quot;}&#39;</span>
 </code></pre></div>
@@ -2343,7 +2363,9 @@ Configure host-type first to delete such domains.</p>
 <p>You must provide the domain's host type inside the body:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -v -X DELETE <span class="s2">&quot;http://localhost:8088/api/domains/example.db&quot;</span> <span class="se">\</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -v -X DELETE <span class="s2">&quot;http://localhost:8088/api/domains/example.db&quot;</span> <span class="se">\</span>
+    --user admin:secret <span class="se">\</span>
     -H <span class="s1">&#39;content-type: application/json&#39;</span> <span class="se">\</span>
     -d <span class="s1">&#39;{&quot;host_type&quot;: &quot;type1&quot;}&#39;</span>
 </code></pre></div>
@@ -2362,7 +2384,9 @@ Configure host-type first to delete such domains.</p>
 Provide <code>{"enabled": false}</code> as a body to disable a domain.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -v -X PATCH <span class="s2">&quot;http://localhost:8088/api/domains/example.db&quot;</span> <span class="se">\</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -v -X PATCH <span class="s2">&quot;http://localhost:8088/api/domains/example.db&quot;</span> <span class="se">\</span>
+    --user admin:secret <span class="se">\</span>
     -H <span class="s1">&#39;content-type: application/json&#39;</span> <span class="se">\</span>
     -d <span class="s1">&#39;{&quot;enabled&quot;: true}&#39;</span>
 </code></pre></div>
