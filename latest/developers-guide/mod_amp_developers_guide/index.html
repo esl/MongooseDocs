@@ -2338,10 +2338,10 @@
 </li>
 <li>
 <p><code>src/mod_amp.erl</code>
-    This module is responsible for plugging in all the other components. 
-    It's main driving function is <code>filter_packet</code>. 
+    This module is responsible for plugging in all the other components.
+    It's main driving function is <code>filter_packet</code>.
     After determining that a given message contains amp rules, the module proceeds by determining its strategy for the message and comparing it against the rules.
-    The server may return an error at multiple points in its work-flow. 
+    The server may return an error at multiple points in its work-flow.
     This is signaled by calling the function <code>send_error_and_drop/3</code> or <code>send_errors_and_drop/2</code>.</p>
 </li>
 <li>
@@ -2355,27 +2355,27 @@
 </li>
 <li>
 <p><code>src/amp_strategy.erl</code>
-    This module is where the server-side hook for determining a default action for a given message is performed. 
+    This module is where the server-side hook for determining a default action for a given message is performed.
     Calls to <code>ejabberd_sm</code> are made here.</p>
 </li>
 <li>
 <p><code>src/amp_resolver.erl</code>
-    This module models the resolution of amp rules, given a certain strategy. 
+    This module models the resolution of amp rules, given a certain strategy.
     Also, the function verify_rule_support is hard-coded here to return an <code>unsupported-</code> type error for unsupported rule actions and values.</p>
 </li>
 <li>
 <p><code>test/amp_resolver_SUITE.erl</code>
-    These tests verify that the <code>amp_resolver:check_condition/4</code> hook works as intended, i.e: that the rules which would be triggered given a particular server-side strategy actually do get triggered, and that all others get rejected.</p>
+    These tests verify that the <code>amp_resolver:check_condition/3</code> hook works as intended, i.e: that the rules which would be triggered given a particular server-side strategy actually do get triggered, and that all others get rejected.</p>
 </li>
 <li>
 <p><code>test/amp_gen.erl</code>
-    This module contains PropEr generators for server-side strategies, as well as valid and invalid amp rules. 
+    This module contains PropEr generators for server-side strategies, as well as valid and invalid amp rules.
     Used in both test suites.</p>
 </li>
 </ul>
 <h2 id="hooks-for-other-modules">Hooks for Other Modules</h2>
 <p>If your module would like to have some say in the amp decision making process, please refer to the hooks: <code>amp_determine_strategy</code> and <code>amp_check_condition</code>.
-Remember that the hook for check_condition is a fold on a boolean(), and should behave like a variadic <code>or</code>. 
+Remember that the hook for check_condition is a fold on a boolean(), and should behave like a variadic <code>or</code>.
 I.e: once a rule is deemed to apply, other hooks SHOULD NOT revert this value to false.</p>
 <p>Cf. this code from <code>amp_resolver</code>:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -2402,13 +2402,13 @@ I.e: once a rule is deemed to apply, other hooks SHOULD NOT revert this value to
 <h3 id="medium">Medium</h3>
 <ul>
 <li>
-<p>Implement the security policy described in the third bullet point of XEP-0079, Section 9 (Security Considerations). 
-  This will require that <code>amp_resolver:verify_support</code> also take the <code>{From, To, Packet} :: hook_data()</code> parameter and check that <code>From</code> is permitted to know about <code>To</code>'s presence. 
+<p>Implement the security policy described in the third bullet point of XEP-0079, Section 9 (Security Considerations).
+  This will require that <code>amp_resolver:verify_support</code> also take the <code>{From, To, Packet} :: hook_data()</code> parameter and check that <code>From</code> is permitted to know about <code>To</code>'s presence.
   If they are not, then the server should treat this as a <code>not-acceptable</code> amp request.</p>
 </li>
 <li>
 <p>Make support for various actions, conditions and values configurable.
-    This will require implementing an intelligent mechanism for matching the user-supplied rules with what's configured server-side. 
+    This will require implementing an intelligent mechanism for matching the user-supplied rules with what's configured server-side.
     Currently, server-side support is hard-coded in several places:</p>
 <ol>
 <li>Disco announcements are in <code>mod_amp:amp_features/0</code></li>
