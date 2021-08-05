@@ -1531,6 +1531,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#db_pool" class="md-nav__link">
+    db_pool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#event_cleaning_interval" class="md-nav__link">
     event_cleaning_interval
   </a>
@@ -2406,6 +2413,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#db_pool" class="md-nav__link">
+    db_pool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#event_cleaning_interval" class="md-nav__link">
     event_cleaning_interval
   </a>
@@ -2638,6 +2652,23 @@ host_type or host_type is not supported), they must be logged as errors.</p>
 <p>You are not allowed to delete domains with unknown host-type. 
 Configure host-type first to delete such domains.</p>
 <h2 id="service-options">Service options</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[services.service_domain_db]</span>
+  <span class="n">db_pool</span> <span class="o">=</span> <span class="s">&quot;global&quot;</span>
+  <span class="n">event_cleaning_interval</span> <span class="o">=</span> <span class="mi">1800</span>
+  <span class="n">event_max_age</span> <span class="o">=</span> <span class="mi">7200</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="db_pool"><code>db_pool</code></h3>
+<p>By default, this service uses the RDBMS connection pool configured with the scope <code>"global"</code>.
+You can put a specific host type there to use the pool with the <code>"host"</code> or <code>"single_host"</code> scope for that particular host type. See <a href="../../advanced-configuration/outgoing-connections/">outgoing connections docs</a> for more information about pool scopes.</p>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> <code>global</code></li>
+<li><strong>Example:</strong> <code>db_pool = "my_host_type"</code></li>
+</ul>
 <h3 id="event_cleaning_interval"><code>event_cleaning_interval</code></h3>
 <p>The number of seconds between cleaning attempts of the <code>domain_events</code> table.
 * <strong>Syntax:</strong> positive integer
