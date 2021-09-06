@@ -1172,6 +1172,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rest-api/Dynamic-domains/" class="md-nav__link">
+        Dynamic domains
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -2504,7 +2516,7 @@ To avoid that coupling and also to enable other (<a href="#sidenote-code-yet-to-
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">Acc1</span> <span class="o">=</span> <span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">run_fold</span><span class="p">(</span><span class="n">offline_message_hook</span><span class="p">,</span>
-                               <span class="nv">LServer</span><span class="p">,</span>
+                               <span class="nv">HostType</span><span class="p">,</span>
                                <span class="nv">Acc</span><span class="p">,</span>
                                <span class="p">[</span><span class="nv">From</span><span class="p">,</span> <span class="nv">To</span><span class="p">,</span> <span class="nv">Packet</span><span class="p">])</span>
 </code></pre></div>
@@ -2512,7 +2524,7 @@ To avoid that coupling and also to enable other (<a href="#sidenote-code-yet-to-
 <p>The extra level of indirection introduced by this call gives the flexibility to determine at runtime what code actually gets run at this point.
 <code>offline_message_hook</code> is just the name of the hook (in other words of the event that is being signalled);
 <code>From</code>, <code>To</code> and <code>Packet</code> are the arguments passed to the handler just as they would in case of the function being called directly;
-<code>LServer</code> is <a href="#sidenote-multiple-domains">the XMPP domain for which this hook is signalled</a>.</p>
+<code>HostType</code> is <a href="#sidenote-multiple-domains">the host type of the XMPP domain for which this hook is signalled</a>.</p>
 <p><strong>Notice:</strong> For the clarity of the explanation of the hooks mechanism, the provided code snippets are not exactly taken from the current code.
 The reasons for it will be described <a href="#creating-your-own-hooks">later</a>.</p>
 <h3 id="getting-results-from-handlers">Getting results from handlers</h3>
@@ -2581,12 +2593,14 @@ it's unloaded.
 That's usually done in, respectively, <code>start/2</code> and <code>stop/1</code> functions.
 Here is the relevant snippet from <code>mod_offline:start/2</code>:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">add</span><span class="p">(</span><span class="n">offline_message_hook</span><span class="p">,</span> <span class="nv">Host</span><span class="p">,</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">add</span><span class="p">(</span><span class="n">offline_message_hook</span><span class="p">,</span> <span class="nv">HostType</span><span class="p">,</span>
                    <span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">store_packet</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 <p>It is clearly visible that the handler is added to the <code>offline_message_hook</code>.</p>
-<p><code>Host</code> corresponds to the <code>LServer</code> used in the aforementioned call to the <code>ejabberd_hooks:run_fold</code>, i.e. it's the XMPP domain for which the handler is to be executed.</p>
+<p><code>HostType</code> corresponds to the one used in the aforementioned call to the <code>ejabberd_hooks:run_fold</code>.
+That is, it's the host type for which the handler is to be executed.
+In the case of statically defined domains, it is the same as the host, as configured in the <a href="../../advanced-configuration/general/#generalhosts"><code>general.hosts</code> section</a>.</p>
 <p>The handler itself is specified as a module-function pair;
 the arity of the function is not specified at the registration nor verified when calling the handler.
 This may change in the future, but for now we recommend calling the hooks through the <code>mongoose_hooks</code> module and checking the arity there when writing a handler.
@@ -2600,7 +2614,7 @@ It's reasonable to keep this number small (e.g. in the range 0-100), though ther
 For that purpose there's the option to unregister a hook handler.
 It's done in <code>mod_offline:stop/1</code> in a similar fashion to:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">delete</span><span class="p">(</span><span class="n">offline_message_hook</span><span class="p">,</span> <span class="nv">Host</span><span class="p">,</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">delete</span><span class="p">(</span><span class="n">offline_message_hook</span><span class="p">,</span> <span class="nv">HostType</span><span class="p">,</span>
                       <span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">store_packet</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>

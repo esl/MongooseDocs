@@ -1768,6 +1768,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rest-api/Dynamic-domains/" class="md-nav__link">
+        Dynamic domains
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -3393,10 +3405,12 @@ This allows you to create multiple dedicated pools of the same type.</p>
 <li><strong>Default:</strong> no default; required if <code>"single_host"</code> scope is specified</li>
 <li><strong>Example:</strong> <code>host = "anotherhost.com"</code></li>
 </ul>
-<p><code>scope</code> can be set to:
-* <code>global</code> - meaning that the pool will started once no matter how many XMPP hosts are served by MongooseIM
-* <code>host</code> - the pool will be started for each XMPP host served by MongooseIM
-* <code>single_host</code> - the pool will be started for the selected host only (you must provide a host name).</p>
+<p><code>scope</code> can be set to:</p>
+<ul>
+<li><code>global</code> - meaning that the pool will be started once no matter how many XMPP hosts are served by MongooseIM</li>
+<li><code>host</code> - the pool will be started for each XMPP host or host type served by MongooseIM</li>
+<li><code>single_host</code> - the pool will be started for the selected host or host type only (you must provide the name).</li>
+</ul>
 <h2 id="worker-pool-options">Worker pool options</h2>
 <p>All pools are managed by the <a href="https://github.com/inaka/worker_pool">inaka/worker_pool</a> library.</p>
 <p>Available options are:</p>
@@ -3406,7 +3420,7 @@ This allows you to create multiple dedicated pools of the same type.</p>
 <li><strong>Default:</strong> <code>"best_worker"</code></li>
 <li><strong>Example:</strong> <code>strategy = "available_worker"</code></li>
 </ul>
-<p>Defines worker seletion strategy. Consult worker_pool documentation for details.</p>
+<p>Defines worker selection strategy. Consult worker_pool documentation for details.</p>
 <h3 id="outgoing_poolsworkers"><code>outgoing_pools.*.*.workers</code></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
@@ -3443,7 +3457,7 @@ For example:</p>
 <li><strong>Syntax:</strong> string, one of <code>"pgsql"</code>, <code>"mysql"</code> or <code>"odbc"</code> (a supported driver)</li>
 <li><strong>Example:</strong> <code>driver = "psgql"</code></li>
 </ul>
-<p>Selects driver for RDBMS connection. The choice of driver impacts the set of available options.</p>
+<p>Selects the driver for RDBMS connection. The choice of a driver impacts the set of available options.</p>
 <h4 id="outgoing_poolsrdbmsconnectioncall_timeout"><code>outgoing_pools.rdbms.*.connection.call_timeout</code></h4>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>

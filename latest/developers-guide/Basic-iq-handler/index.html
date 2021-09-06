@@ -1172,6 +1172,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rest-api/Dynamic-domains/" class="md-nav__link">
+        Dynamic domains
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -2357,11 +2369,11 @@ detailed information on the topic.</p>
 <span class="c">%% IQ handlers</span>
 <span class="p">-</span><span class="ni">export</span><span class="p">([</span><span class="n">process_iq</span><span class="o">/</span><span class="mi">4</span><span class="p">]).</span>
 
-<span class="nf">start</span><span class="p">(</span><span class="nv">Host</span><span class="p">,</span> <span class="p">_</span><span class="nv">Opts</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nn">gen_iq_handler</span><span class="p">:</span><span class="nf">add_iq_handler</span><span class="p">(</span><span class="n">ejabberd_sm</span><span class="p">,</span> <span class="nv">Host</span><span class="p">,</span> <span class="o">&lt;&lt;</span><span class="s">&quot;erlang-solutions.com:example&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span>
-                                  <span class="o">?</span><span class="nv">MODULE</span><span class="p">,</span> <span class="n">process_iq</span><span class="p">,</span> <span class="n">no_queue</span><span class="p">).</span>
-<span class="nf">stop</span><span class="p">(</span><span class="nv">Host</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nn">gen_iq_handler</span><span class="p">:</span><span class="nf">remove_iq_handler</span><span class="p">(</span><span class="n">ejabberd_sm</span><span class="p">,</span> <span class="nv">Host</span><span class="p">,</span> <span class="o">&lt;&lt;</span><span class="s">&quot;erlang-solutions.com:example&quot;</span><span class="o">&gt;&gt;</span><span class="p">).</span>
+<span class="nf">start</span><span class="p">(</span><span class="nv">HostType</span><span class="p">,</span> <span class="p">_</span><span class="nv">Opts</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nn">gen_iq_handler</span><span class="p">:</span><span class="nf">add_iq_handler_for_domain</span><span class="p">(</span><span class="nv">HostType</span><span class="p">,</span> <span class="o">&lt;&lt;</span><span class="s">&quot;erlang-solutions.com:example&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+                                  <span class="n">ejabberd_sm</span><span class="p">,</span> <span class="n">process_iq</span><span class="p">,</span> <span class="p">#{},</span> <span class="n">no_queue</span><span class="p">).</span>
+<span class="nf">stop</span><span class="p">(</span><span class="nv">HostType</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nn">gen_iq_handler</span><span class="p">:</span><span class="nf">remove_iq_handler_for_domain</span><span class="p">(</span><span class="nv">HostType</span><span class="p">,</span> <span class="o">&lt;&lt;</span><span class="s">&quot;erlang-solutions.com:example&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">ejabberd_sm</span><span class="p">).</span>
 
 <span class="nf">process_iq</span><span class="p">(_</span><span class="nv">From</span><span class="p">,</span> <span class="p">_</span><span class="nv">To</span><span class="p">,</span> <span class="nv">Acc</span><span class="p">,</span> <span class="nv">IQ</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nv">IQRes</span> <span class="o">=</span> <span class="nv">IQ</span><span class="nl">#iq</span><span class="p">{</span><span class="n">type</span> <span class="o">=</span> <span class="n">result</span><span class="p">},</span>

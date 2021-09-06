@@ -867,6 +867,40 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#service_domain_db" class="md-nav__link">
+    service_domain_db
+  </a>
+  
+    <nav class="md-nav" aria-label="service_domain_db">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#servicesservice_domain_dbdb_pool" class="md-nav__link">
+    services.service_domain_db.db_pool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#servicesservice_domain_dbevent_cleaning_interval" class="md-nav__link">
+    services.service_domain_db.event_cleaning_interval
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#servicesservice_domain_dbevent_max_age" class="md-nav__link">
+    services.service_domain_db.event_max_age
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#example-configuration" class="md-nav__link">
     Example configuration
   </a>
@@ -1266,6 +1300,18 @@
     <li class="md-nav__item">
       <a href="../../rest-api/Administration-backend/" class="md-nav__link">
         Administration backend
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rest-api/Dynamic-domains/" class="md-nav__link">
+        Dynamic domains
       </a>
     </li>
   
@@ -2343,6 +2389,40 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#service_domain_db" class="md-nav__link">
+    service_domain_db
+  </a>
+  
+    <nav class="md-nav" aria-label="service_domain_db">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#servicesservice_domain_dbdb_pool" class="md-nav__link">
+    services.service_domain_db.db_pool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#servicesservice_domain_dbevent_cleaning_interval" class="md-nav__link">
+    services.service_domain_db.event_cleaning_interval
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#servicesservice_domain_dbevent_max_age" class="md-nav__link">
+    services.service_domain_db.event_max_age
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#example-configuration" class="md-nav__link">
     Example configuration
   </a>
@@ -2369,15 +2449,14 @@
                   <h1>Options: Services</h1>
                 
                 <p>Some functionalities in MongooseIM are provided by "services".
-A service is similar to a module, but while a module is started for every virtual 
-host and may have global or host-specific configuration, a service is started 
+A service is similar to a module, but while a module is started for every 
+host type and may have global or specific configuration, a service is started 
 only once with global configuration.
-Currently, only two modules are categorised as "service providers".
-Eventually the modules which are not host-specific will be refactored to be services.</p>
+Currently, three modules are categorised as "service providers".
+Eventually the modules which are not specific for a host type will be refactored to be services.</p>
 <ul>
 <li><strong>Scope:</strong> global</li>
-<li><strong>Syntax:</strong> Both services are specified in their own sections, either
-<code>[services.service_admin_extra]</code> or <code>[services.service_mongoose_system_metrics]</code>. </li>
+<li><strong>Syntax:</strong> Each service is specified in its own <code>services.*</code> section. </li>
 <li><strong>Default:</strong> None - each service needs to be enabled explicitly.
 Typical services are already specified in the example configuration file.</li>
 <li><strong>Example:</strong> A configuration of the <code>service_admin_extra</code> service.</li>
@@ -2394,7 +2473,7 @@ Typical services are already specified in the example configuration file.</li>
 <ul>
 <li><strong>Syntax:</strong> Array of strings representing function groups added by <code>service_admin_extra</code>.</li>
 <li><strong>Default:</strong> All submodules: <code>["node", "account", "sessions", "vcard", "gdpr",
- "upload", "roster", "last", "private", "stanza", "stats"]</code></li>
+ "upload", "roster", "last", "private", "stanza", "stats", "domain"]</code></li>
 <li><strong>Example:</strong> <code>submods = ["stats", "gdpr"]</code></li>
 </ul>
 <p>This service provides additional commands to the mongooseimctl script.
@@ -2417,6 +2496,7 @@ They are bundled in the following groups:</p>
  <code>set_vcard2</code>, <code>set_vcard2_multi</code></li>
 <li><code>gdpr</code>: Adds <code>retrieve_personal_data</code></li>
 <li><code>upload</code> : Adds <code>http_upload</code></li>
+<li><code>domain</code> : Adds <code>insert_domain</code>, <code>delete_domain</code>, <code>enable_domain</code>, <code>disable_domain</code></li>
 </ul>
 <h2 id="service_mongoose_system_metrics">service_mongoose_system_metrics</h2>
 <p>MongooseIM system metrics are being gathered to analyse the trends and needs of our users, improve MongooseIM, and get to know where to focus our efforts.
@@ -2427,8 +2507,8 @@ See <a href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/">Sys
 <li><strong>Default:</strong> not specified</li>
 <li><strong>Example:</strong> <code>report = true</code></li>
 </ul>
-<p>Explicit acknowledgement that the metrics are gathered and reported.
-When this option is not specified, the reports are gathered and a notification 
+<p>An explicit acknowledgement that the metrics are gathered and reported.
+When this option is not specified, the reports are gathered, and a notification 
 appears in logs on startup.
 Enabling this option silences the notification reminder that metrics are gathered.
 When this option is set to <code>false</code>, System Metrics Service is not started and metrics are not collected.</p>
@@ -2457,16 +2537,46 @@ When this option is set to <code>false</code>, System Metrics Service is not sta
 Metrics will not be collected and shared.
 It will generate a notification that the feature is not being used.
 The notification can be silenced by setting the <code>no_report</code> option explicitly.</p>
+<h2 id="service_domain_db">service_domain_db</h2>
+<p>This service is needed to use the dynamic domains API.
+It is used to synchronise dynamic domains between nodes after starting.</p>
+<h3 id="servicesservice_domain_dbdb_pool"><code>services.service_domain_db.db_pool</code></h3>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> <code>global</code></li>
+<li><strong>Example:</strong> <code>db_pool = "my_host_type"</code></li>
+</ul>
+<p>By default, this service uses the RDBMS connection pool configured with the scope <code>"global"</code>.
+You can put a specific host type there to use the pool with the <code>"host"</code> or <code>"single_host"</code> scope for that particular host type. See the <a href="../outgoing-connections/">outgoing connections docs</a> for more information about pool scopes.</p>
+<h3 id="servicesservice_domain_dbevent_cleaning_interval"><code>services.service_domain_db.event_cleaning_interval</code></h3>
+<ul>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> <code>1800</code> (seconds - 30 minutes)</li>
+<li><strong>Example:</strong> <code>event_cleaning_interval = 1800</code></li>
+</ul>
+<p>The number of seconds between cleaning attempts of the <code>domain_events</code> table.</p>
+<h3 id="servicesservice_domain_dbevent_max_age"><code>services.service_domain_db.event_max_age</code></h3>
+<ul>
+<li><strong>Syntax:</strong> positive integer</li>
+<li><strong>Default:</strong> <code>7200</code> (seconds - 2 hours)</li>
+<li><strong>Example:</strong> <code>event_max_age = 7200</code></li>
+</ul>
+<p>The number of seconds after an event must be deleted from the <code>domain_events</code> table.</p>
 <h2 id="example-configuration">Example configuration</h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[services.service_admin_extra]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[services.service_admin_extra]</span>
   <span class="n">submods</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;node&quot;</span><span class="p">,</span> <span class="s">&quot;account&quot;</span><span class="p">,</span> <span class="s">&quot;sessions&quot;</span><span class="p">,</span> <span class="s">&quot;vcard&quot;</span><span class="p">,</span> <span class="s">&quot;gdpr&quot;</span><span class="p">,</span> <span class="s">&quot;upload&quot;</span><span class="p">,</span> <span class="s">&quot;roster&quot;</span><span class="p">,</span>
              <span class="s">&quot;last&quot;</span><span class="p">,</span> <span class="s">&quot;private&quot;</span><span class="p">,</span> <span class="s">&quot;stanza&quot;</span><span class="p">,</span> <span class="s">&quot;stats&quot;</span><span class="p">]</span>
 
@@ -2475,6 +2585,11 @@ The notification can be silenced by setting the <code>no_report</code> option ex
   <span class="n">initial_report</span> <span class="o">=</span> <span class="mi">300</span><span class="n">_000</span>
   <span class="n">periodic_report</span> <span class="o">=</span> <span class="mi">108</span><span class="n">_000_000</span>
   <span class="n">tracking_id</span> <span class="o">=</span> <span class="s">&quot;UA-123456789&quot;</span>
+
+<span class="k">[services.service_domain_db]</span>
+  <span class="n">db_pool</span> <span class="o">=</span> <span class="s">&quot;global&quot;</span>
+  <span class="n">event_cleaning_interval</span> <span class="o">=</span> <span class="mi">1800</span>
+  <span class="n">event_max_age</span> <span class="o">=</span> <span class="mi">7200</span>
 </code></pre></div>
 </td></tr></table>
                 

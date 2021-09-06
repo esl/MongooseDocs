@@ -780,6 +780,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#generalhost_types" class="md-nav__link">
+    general.host_types
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generaldefault_server_domain" class="md-nav__link">
+    general.default_server_domain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#generallanguage" class="md-nav__link">
     general.language
   </a>
@@ -1394,6 +1408,18 @@
     <li class="md-nav__item">
       <a href="../../rest-api/Administration-backend/" class="md-nav__link">
         Administration backend
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rest-api/Dynamic-domains/" class="md-nav__link">
+        Dynamic domains
       </a>
     </li>
   
@@ -2432,6 +2458,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#generalhost_types" class="md-nav__link">
+    general.host_types
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generaldefault_server_domain" class="md-nav__link">
+    general.default_server_domain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#generallanguage" class="md-nav__link">
     general.language
   </a>
@@ -2625,13 +2665,15 @@
                   <h1>Options: General</h1>
                 
                 <p>The <code>general</code> section contains basic settings as well as some miscellaneous options.
-You can start with providing only the basic options, configuring the loglevel, a single host (XMPP domain) and setting the default server language:</p>
+You can start with providing only the basic options, for example configuring the loglevel, a single host (XMPP domain) as the default, and setting the server language:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[general]</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[general]</span>
   <span class="n">loglevel</span> <span class="o">=</span> <span class="s">&quot;warning&quot;</span>
   <span class="n">hosts</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;my-xmpp-domain.com&quot;</span><span class="p">]</span>
+  <span class="n">default_server_domain</span> <span class="o">=</span> <span class="s">&quot;my-xmpp-domain.com&quot;</span>
   <span class="n">language</span> <span class="o">=</span> <span class="s">&quot;en&quot;</span>
 </code></pre></div>
 </td></tr></table>
@@ -2650,11 +2692,39 @@ You can start with providing only the basic options, configuring the loglevel, a
 <ul>
 <li><strong>Scope:</strong> global</li>
 <li><strong>Syntax:</strong> array of strings representing the domain names.</li>
-<li><strong>Default:</strong> there is no default, you have to provide at least one host name.</li>
+<li><strong>Default:</strong> none. If omitted, at least one host type has to be defined in <code>general.host_types</code>.</li>
 <li><strong>Example:</strong> <code>hosts = ["localhost", "domain2"]</code></li>
 </ul>
-<p>Mandatory option, specifying the XMPP domains served by this cluster.</p>
-<p><strong>Warning:</strong> Extension modules and database backends will be started separately for every domain. When increasing the number of domains, please make sure you have enough resources available (e.g. connection limit set in the DBMS).</p>
+<p>This option specifies the statically defined XMPP domains served by this cluster.
+In order to configure these hosts independently, use the <a href="../host_config/"><code>host_config</code> section</a>.</p>
+<p><strong>Note:</strong> At least one of <code>general.hosts</code> or <code>general.host_types</code> have to be provided.</p>
+<p><strong>Warning:</strong> Extension modules and database backends will be started separately for every domain from this list.
+When increasing the number of domains, please make sure you have enough resources available (e.g. connection limit set in the DBMS).</p>
+<h3 id="generalhost_types"><code>general.host_types</code></h3>
+<ul>
+<li><strong>Scope:</strong> global</li>
+<li><strong>Syntax:</strong> array of strings the names for host types.</li>
+<li><strong>Default:</strong> none. If omitted, at least one hast has to be defined in <code>general.hosts</code>.</li>
+<li><strong>Example:</strong> <code>host_types = ["first type", "second type"]</code></li>
+</ul>
+<p>This is the list of names for the types of hosts that will serve dynamic XMPP domains.
+Each host type can be seen as a label for a group of independent domains that use the same server configuration.
+In order to configure these host types independently, use the <a href="../host_config/"><code>host_config</code> section</a>.
+The domains can be added or removed dynamically via the <a href="../../rest-api/Dynamic-domains/">dynamic domains REST API</a>.</p>
+<p>If you use the host type mechanism, make sure you only configure modules which support it in the <a href="../Modules/"><code>modules</code></a> or <a href="../host_config/#host_configmodules"><code>host_config.modules</code></a> sections.
+MongooseIM will not start otherwise.
+In order to see which modules support dynamic domains, please check the <a href="../Modules/#modules-supporting-dynamic-domains">modules list</a>.</p>
+<p><strong>Note:</strong> At least one of <code>general.hosts</code> or <code>general.host_types</code> have to be provided.</p>
+<p><strong>Warning:</strong> Extension modules and database backends will be started separately for every host type from this list.
+When increasing the number of host types, please make sure you have enough resources available (e.g. connection limit set in the DBMS).</p>
+<h3 id="generaldefault_server_domain"><code>general.default_server_domain</code></h3>
+<ul>
+<li><strong>Scope:</strong> global</li>
+<li><strong>Syntax:</strong> a string</li>
+<li><strong>Default:</strong> none, this option is mandatory.</li>
+<li><strong>Example:</strong> <code>default_server_domain = "my-xmpp-domain.com"</code></li>
+</ul>
+<p>This domain is used as a default when one cannot be determined, for example when sending XMPP stream errors to unauthenticated clients.</p>
 <h3 id="generallanguage"><code>general.language</code></h3>
 <ul>
 <li><strong>Scope:</strong> global</li>
@@ -2681,12 +2751,12 @@ There are some additional options that influence all database connections in the
 <li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> TOML table, whose <strong>keys</strong> are the names of the access rules defined in the <a href="../access/"><code>access</code></a> config section and <strong>values</strong> specify allowed administration commands. Each value is a table with the following nested options:<ul>
 <li><code>commands</code>: optional, a list of strings representing the allowed commands. When not specified, all commands are allowed.</li>
-<li><code>argument_restrictions</code>: optional, a table whose keys are the argument names and the values are strings representing the allowed values. When not specified, there are no restrictions.</li>
+<li><code>argument_restrictions</code>: optional, a table whose keys are the argument names, and the values are strings representing the allowed values. When not specified, there are no restrictions.</li>
 </ul>
 </li>
 <li><strong>Default:</strong> not set</li>
 </ul>
-<p>By default all admin operations are permitted with the <code>mongooseimctl</code> command without authentication. You can change that by setting this option for a specific access rule. When the rule returns the value <code>"allow"</code>, the user is permitted to use the specified commands with the optional restrictions.</p>
+<p>By default, all admin operations are permitted with the <code>mongooseimctl</code> command without authentication. You can change that by setting this option for a specific access rule. When the rule returns the value <code>"allow"</code>, the user is permitted to use the specified commands with the optional restrictions.</p>
 <p><strong>Example 1.</strong> Allow administrators to execute all commands without any restrictions:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="k">[general.mongooseimctl_access_commands.admin]</span>
 </code></pre></div>
@@ -2790,7 +2860,7 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>override = ["global", "local"]</code></li>
 </ul>
-<p>Will cause MongooseIM to erase all global/local/acl configuration options in database respectively. This ensures that ALL settings of a specific type will be reloaded on startup.</p>
+<p>Will cause MongooseIM to erase all global/local/acl configuration options in the database respectively. This ensures that ALL settings of a specific type will be reloaded on the startup.</p>
 <h3 id="generalmax_fsm_queue"><code>general.max_fsm_queue</code></h3>
 <ul>
 <li><strong>Scope:</strong> local</li>

@@ -892,6 +892,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#host_confighost_type" class="md-nav__link">
+    host_config.host_type
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1351,6 +1358,18 @@
     <li class="md-nav__item">
       <a href="../../rest-api/Administration-backend/" class="md-nav__link">
         Administration backend
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rest-api/Dynamic-domains/" class="md-nav__link">
+        Dynamic domains
       </a>
     </li>
   
@@ -2381,6 +2400,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#host_confighost_type" class="md-nav__link">
+    host_config.host_type
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2538,23 +2564,31 @@
                 
                   <h1>Options: Host config</h1>
                 
-                <p>The <code>host_config</code> section is used to configure options for specific XMPP domains.
-For each domain requiring such options, a <code>host_config</code> section needs to be created with the following format:</p>
+                <p>The <code>host_config</code> section is used to configure options for specific XMPP domains or for host types, which are used to group multiple domains.
+For each domain or host type requiring such options, a <code>host_config</code> section needs to be created with the following format:</p>
 <ul>
 <li><strong>Scope:</strong> for each option the scope is the same as for the corresponding top-level option.</li>
 <li><strong>Syntax:</strong> domain subsection starts with <code>[[host_config]]</code> and contains the options listed below.</li>
 <li><strong>Default:</strong> none - all domain-level options need to be specified explicitly.</li>
 <li><strong>Example:</strong> see the examples for each section below.</li>
 </ul>
-<p><strong>Note:</strong> Each hosted domain needs to be included in the list of <a href="../general/#generalhosts"><code>hosts</code></a> in the <code>general</code> section.</p>
+<p><strong>Note:</strong> Each hosted domain needs to be included in the list of <a href="../general/#generalhosts"><code>hosts</code></a> in the <code>general</code> section.
+Similarly, each host type needs to be included in <a href="../general/#generalhost_types"><code>general.host_types</code></a>.</p>
 <h2 id="general-options">General options</h2>
 <h3 id="host_confighost"><code>host_config.host</code></h3>
 <ul>
 <li><strong>Syntax:</strong> string, domain name</li>
-<li><strong>Default:</strong> no default, this option is mandatory</li>
+<li><strong>Default:</strong> no default, either this option or <code>host_config.host_type</code> is mandatory</li>
 <li><strong>Example:</strong> <code>host = "my-xmpp-server.com"</code></li>
 </ul>
 <p>This option specifies the XMPP domain that this section refers to.</p>
+<h3 id="host_confighost_type"><code>host_config.host_type</code></h3>
+<ul>
+<li><strong>Syntax:</strong> string, host type name</li>
+<li><strong>Default:</strong> no default, either this option or <code>host_config.host</code> is mandatory</li>
+<li><strong>Example:</strong> <code>host_type = "first type"</code></li>
+</ul>
+<p>This option specifies the host type that this section refers to.</p>
 <h2 id="configuration-sections">Configuration sections</h2>
 <p>The following sections are accepted in <code>host_config</code>:</p>
 <h3 id="host_configgeneral"><code>host_config.general</code></h3>
@@ -2653,7 +2687,9 @@ However, specifying <code>methods</code> is not necessary as this value will not
 </code></pre></div>
 </td></tr></table>
 <h3 id="host_configmodules"><code>host_config.modules</code></h3>
-<p>This section completely overrides the top-level <a href="../Modules"><code>modules</code></a> section. All options are allowed.</p>
+<p>This section completely overrides the top-level <a href="../Modules"><code>modules</code></a> section.
+Remember that only the modules supporting dynamic domains are allowed if you are specifying options for a host type.
+These can be found in the <a href="../Modules/#modules-supporting-dynamic-domains">modules list</a>.</p>
 <h4 id="example_2">Example</h4>
 <p>The modules enabled for <code>domain2.com</code> will be <code>mod_disco</code> and <code>mod_stream_management</code>.
 If we wanted to enable <code>mod_roster</code>, it would need to be repeated in <code>host_config</code>.</p>

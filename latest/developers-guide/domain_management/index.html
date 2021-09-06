@@ -1172,6 +1172,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rest-api/Dynamic-domains/" class="md-nav__link">
+        Dynamic domains
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -1527,33 +1539,6 @@
     Service options
   </a>
   
-    <nav class="md-nav" aria-label="Service options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#db_pool" class="md-nav__link">
-    db_pool
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#event_cleaning_interval" class="md-nav__link">
-    event_cleaning_interval
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#event_max_age" class="md-nav__link">
-    event_max_age
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1563,27 +1548,6 @@
   
     <nav class="md-nav" aria-label="REST API">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmongoose_domain_handlerusername" class="md-nav__link">
-    listen.http.handlers.mongoose_domain_handler.username
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmongoose_domain_handlerpassword" class="md-nav__link">
-    listen.http.handlers.mongoose_domain_handler.password
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-configuration" class="md-nav__link">
-    Example configuration
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#add-domain" class="md-nav__link">
@@ -2409,33 +2373,6 @@
     Service options
   </a>
   
-    <nav class="md-nav" aria-label="Service options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#db_pool" class="md-nav__link">
-    db_pool
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#event_cleaning_interval" class="md-nav__link">
-    event_cleaning_interval
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#event_max_age" class="md-nav__link">
-    event_max_age
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2445,27 +2382,6 @@
   
     <nav class="md-nav" aria-label="REST API">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmongoose_domain_handlerusername" class="md-nav__link">
-    listen.http.handlers.mongoose_domain_handler.username
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#listenhttphandlersmongoose_domain_handlerpassword" class="md-nav__link">
-    listen.http.handlers.mongoose_domain_handler.password
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-configuration" class="md-nav__link">
-    Example configuration
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#add-domain" class="md-nav__link">
@@ -2562,27 +2478,26 @@
                 
                 <h2 id="mongooseim-core-component">MongooseIM core component</h2>
 <p>Implemented by <code>mongoose_domain_core</code> module.</p>
-<p>It must be based on gen_server &amp; ETS table w. public read access.
-This module is local for the node, it must not implement any sync across the
+<p>It is based on gen_server &amp; ETS table w. public read access.
+This module is local for the node, it does not implement any sync across the
 nodes in a cluster.
-This component will be responsible for dynamic routing, it will always be
+This component is responsible for dynamic routing, it is always
 started by MIM even if there is no support of dynamic domain names configured.</p>
-<p>It must provide the following interfaces:</p>
+<p>It provides the following interfaces:</p>
 <ul>
-<li>Init - should accept the list of initial domain/host_type pairs provided in
-  config file and the list of host_types that can be used for dynamic insertion.
+<li>Init - accepts the list of initial domain/host_type pairs provided in
+  config file, and the list of host_types that can be used for dynamic insertion.
   Any of these lists can be empty, initial list of domain/host_type pairs can
   have some unique host_types not mentioned in the host_types list.
-  The component must be initialised by the main MIM supervisor.
+  The component is initialised by the main MIM supervisor.
   Implemented in <code>mongoose_domain_api:init()</code>.</li>
 <li>Insert - adding new domain/host_type pair.
-  This function must be <strong>idempotent</strong>, it must return success on attempt to
-  insert the existing data, but it must fail if ETS already has the domain
-  name associated with another host type.
+  This function is idempotent. It returns success on an attempt to insert the existing data,
+  but fails if ETS already has the domain name associated with another host type.
   Implemented in <code>mongoose_domain_api:insert_domain(Domain, HostType)</code>.</li>
-<li>Remove - This function must be idempotent. this function deletes existing
+<li>Remove - This function is idempotent. It deletes existing
   domain/host_type pairs.
-  It must be impossible to delete domain/host_type pairs specified on init
+  It is impossible to delete domain/host_type pairs specified on init
   of the component.
   Implemented in <code>mongoose_domain_api:delete_domain(Domain)</code>.</li>
 <li>Get host type by domain.
@@ -2602,37 +2517,38 @@ started by MIM even if there is no support of dynamic domain names configured.</
 <li>Static domains has priority above DB domains.</li>
 </ul>
 <h2 id="mongooseim-service">MongooseIM service</h2>
-<p>Implements the service behaviour.
+<p>As described in <a href="../../advanced-configuration/Services/#service_domain_db">Services</a>.
+Implements the service behaviour.
 Implemented by <code>service_domain_db</code> module.</p>
-<p>This service must provide an interface for dynamic management of domain names.
-It must have persistent storage (RDBMS) where it stores information about domain names.
-This service must ensure synchronization of dynamically managed domain names
+<p>This service provides an interface for dynamic management of domain names.
+It has persistent storage (RDBMS) where it stores information about domain names.
+This service ensures synchronization of dynamically managed domain names
 across different nodes in the cluster.</p>
 <p>The minimal set of information associated with domain name is this:</p>
 <ul>
 <li>Host type</li>
 <li>Status (enabled/disabled)</li>
 </ul>
-<p>This service must provide the following interfaces:</p>
+<p>This service provides the following interfaces:</p>
 <ul>
 <li>Init - on init all the “enabled” domain names from the persistent storage
-  must be added to the core MIM component described above.</li>
-<li>Add domain name (w/ host type) - This function must be idempotent.
-  Added domain is always “enabled” by default it must be added in the core MIM
+  is added to the core MIM component described above.</li>
+<li>Add domain name (w/ host type) - This function is idempotent.
+  An added domain is always “enabled” by default - it must be added in the core MIM
   component described in the previous section.
-  If it’s successfully enabled than Information about the domain name must be
+  If it’s successfully enabled than Information about the domain name is
   added into persistent storage and distributed across all the nodes in the cluster.</li>
-<li>Disabling/Enabling domain name - This function must be idempotent. the status
-  of the existing domain must be changed.
-  If domain name is enabled, then it must be added in the core MIM component.
-  On disabling domain name must be deleted from the core MIM component.
-  Change of the status must be distributed across all the nodes in the cluster.</li>
-<li>Remove the domain name - This function must be idempotent.
-  Domain name must be deleted from the core MIM component (if required) and from the DB.
-  This action must be distributed across all the nodes in the cluster.</li>
+<li>Disabling/Enabling domain name - This function is idempotent. The status
+  of the existing domain is always changed on successful call.
+  If domain name is enabled, then it is added in the core MIM component.
+  On disabling domain name is deleted from the core MIM component.
+  Change of the status is distributed across all the nodes in the cluster.</li>
+<li>Remove the domain name - This function is idempotent.
+  Domain name is deleted from the core MIM component (if required) and from the DB.
+  This action is distributed across all the nodes in the cluster.</li>
 </ul>
 <p>In case of any issues (domain name is already configured with another
-host_type or host_type is not supported), they must be logged as errors.</p>
+host_type or host_type is not supported), errors are logged.</p>
 <p>The database schema contains two tables:</p>
 <ul>
 <li><code>domain_settings</code> - one record per domain. Maps <code>domain</code> name to <code>host_type</code> and <code>enabled</code> status.</li>
@@ -2652,74 +2568,13 @@ host_type or host_type is not supported), they must be logged as errors.</p>
 <p>You are not allowed to delete domains with unknown host-type. 
 Configure host-type first to delete such domains.</p>
 <h2 id="service-options">Service options</h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[services.service_domain_db]</span>
-  <span class="n">db_pool</span> <span class="o">=</span> <span class="s">&quot;global&quot;</span>
-  <span class="n">event_cleaning_interval</span> <span class="o">=</span> <span class="mi">1800</span>
-  <span class="n">event_max_age</span> <span class="o">=</span> <span class="mi">7200</span>
-</code></pre></div>
-</td></tr></table>
-<h3 id="db_pool"><code>db_pool</code></h3>
-<p>By default, this service uses the RDBMS connection pool configured with the scope <code>"global"</code>.
-You can put a specific host type there to use the pool with the <code>"host"</code> or <code>"single_host"</code> scope for that particular host type. See <a href="../../advanced-configuration/outgoing-connections/">outgoing connections docs</a> for more information about pool scopes.</p>
-<ul>
-<li><strong>Syntax:</strong> string</li>
-<li><strong>Default:</strong> <code>global</code></li>
-<li><strong>Example:</strong> <code>db_pool = "my_host_type"</code></li>
-</ul>
-<h3 id="event_cleaning_interval"><code>event_cleaning_interval</code></h3>
-<p>The number of seconds between cleaning attempts of the <code>domain_events</code> table.
-* <strong>Syntax:</strong> positive integer
-* <strong>Default:</strong> <code>1800</code> (30 minutes)
-* <strong>Example:</strong> <code>event_cleaning_interval = 1800</code></p>
-<h3 id="event_max_age"><code>event_max_age</code></h3>
-<p>The number of seconds after an event must be deleted from the <code>domain_events</code> table.
-* <strong>Syntax:</strong> positive integer
-* <strong>Default:</strong> <code>7200</code> (2 hours)
-* <strong>Example:</strong> <code>event_max_age = 7200</code></p>
+<p>Described in the <a href="../../advanced-configuration/Services/#service_domain_db"><code>services</code> section</a>.</p>
 <h2 id="rest-api">REST API</h2>
 <p>Provides API for adding/removing and enabling/disabling domains over HTTP.
 Implemented by <code>mongoose_domain_handler</code> module.</p>
-<h3 id="listenhttphandlersmongoose_domain_handlerusername"><code>listen.http.handlers.mongoose_domain_handler.username</code></h3>
-<ul>
-<li><strong>Syntax:</strong> string</li>
-<li><strong>Default:</strong> not set</li>
-<li><strong>Example:</strong> <code>username = "admin"</code></li>
-</ul>
-<p>When set, enables authentication to access this endpoint. Requires setting <code>password</code>.</p>
-<h3 id="listenhttphandlersmongoose_domain_handlerpassword"><code>listen.http.handlers.mongoose_domain_handler.password</code></h3>
-<ul>
-<li><strong>Syntax:</strong> string</li>
-<li><strong>Default:</strong> not set</li>
-<li><strong>Example:</strong> <code>password = "secret"</code></li>
-</ul>
-<p>Required to enable authentication for this endpoint.</p>
-<h3 id="example-configuration">Example configuration</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.http]]</span>
-  <span class="n">ip_address</span> <span class="o">=</span> <span class="s">&quot;127.0.0.1&quot;</span>
-  <span class="n">port</span> <span class="o">=</span> <span class="mi">8088</span>
-  <span class="n">transport</span><span class="p">.</span><span class="n">num_acceptors</span> <span class="o">=</span> <span class="mi">10</span>
-  <span class="n">transport</span><span class="p">.</span><span class="n">max_connections</span> <span class="o">=</span> <span class="mi">1024</span>
-
-  <span class="k">[[listen.http.handlers.mongoose_domain_handler]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/api&quot;</span>
-    <span class="n">username</span> <span class="o">=</span> <span class="s">&quot;admin&quot;</span>
-    <span class="n">password</span> <span class="o">=</span> <span class="s">&quot;secret&quot;</span>
-</code></pre></div>
-</td></tr></table>
+<p>Configuration described in the <a href="../../advanced-configuration/listen/#handler-types-rest-api---domain-management---mongoose_domain_handler"><code>listen</code> section</a>.</p>
+<p>REST API is documented using Swagger in <a href="../../rest-api/Dynamic-domains/">REST API for dynamic domains management</a>.
+Below are examples of how to use this API with the help of <code>curl</code>:</p>
 <h3 id="add-domain">Add domain</h3>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
