@@ -2345,7 +2345,7 @@ You can achieve the same result of allowing the usage of SHA-1 with SCRAM authen
 <p>You can also specify a list of all supported SCRAM-SHA mechanisms with:</p>
 <p><code>{sasl_mechanisms, [cyrsasl_scram_sha1, cyrsasl_scram_sha224, cyrsasl_scram_sha256, cyrsasl_scram_sha384, cyrsasl_scram_sha512, cyrsasl_scram_sha1_plus, cyrsasl_scram_sha224_plus, cyrsasl_scram_sha256_plus, cyrsasl_scram_sha384_plus, cyrsasl_scram_sha512_plus]}</code></p>
 <p>Before setting up this configuration, please make sure that the client application is capable of authenticating with a selected set of authentication mechanisms.
-For more details please refer to the <a href="../../Advanced-configuration#authentication">authentication</a> section.</p>
+For more details please refer to the <a href="../../configuration/auth/">authentication</a> section.</p>
 <h3 id="scram-password-format">SCRAM password format</h3>
 <p>To complement the extensions of the authentication mechanisms, the SCRAM password format was also updated.
 Please note that SCRAM is now the default password format.
@@ -2372,7 +2372,7 @@ This allowed authenticating with PLAINTEXT and SCRAM-SHA-1.</p>
 </ol>
 <p>If you want to use the new password format with a full set of supported SHA hashes, a password change is required to calculate all the new SHA hashes.
 Otherwise, please make sure that you provide the right <code>sasl_mechanism</code> configuration, where the mechanism you authenticate with is compatible with the password format you store.</p>
-<p>For more details related to the new password format, please refer to <a href="../../Advanced-configuration#authentication">authentication</a> and <a href="../../developers-guide/SCRAM-serialization/">SCRAM serialization</a> sections.</p>
+<p>For more details related to the new password format, please refer to <a href="../../configuration/auth/">authentication</a> and <a href="../../developers-guide/SCRAM-serialization/">SCRAM serialization</a> sections.</p>
 <h2 id="message-retraction">Message retraction</h2>
 <p>If you are using MAM with RDBMS, please update your database schema with the following queries. This change is necessary as the support for <a href="http://xmpp.org/extensions/xep-0424.html">XEP-0424: Message Retraction</a> requires a new column for the <code>origin_id</code> attribute of MAM messages, which allows MAM to identify the messages to retract. Indexes for this column are required for efficient queries. Only the messages stored after this change can be retracted.</p>
 <p><strong>MySQL</strong>
