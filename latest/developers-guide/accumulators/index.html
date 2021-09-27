@@ -2144,20 +2144,6 @@
               
   
   
-  
-    <li class="md-nav__item">
-      <a href="../Stanza-routing/" class="md-nav__link">
-        Stanza routing
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
     
   
   
@@ -2299,6 +2285,20 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Stanza-routing/" class="md-nav__link">
+        Stanza routing
+      </a>
     </li>
   
 
@@ -2782,12 +2782,14 @@ The stanza is processed and eventually it and/or other messages are sent out, ei
 <li><code>origin_location</code> - <code>{Module, Function Line}</code> - A place in the code where the accumulator was created.</li>
 <li><code>origin_stanza</code> - Original stanza that triggered the processing (in a binary).</li>
 <li><code>lserver</code> - Nameprepped domain of the processing context.</li>
-<li><code>stanza</code> - A map with information about the stanza being routed. May be missing in some processing chains (when they are not triggered by a stanza)!</li>
+<li><code>stanza</code> - A map with information about the stanza being routed. May be missing in some processing chains (when they are not triggered by a stanza)!<ul>
 <li><code>element</code> - <code>exml:element()</code> with the current stanza being routed.</li>
 <li><code>from_jid</code>, <code>to_jid</code> - <code>jid:jid()</code> with the sender and the recipient.</li>
 <li><code>name</code> - A name of the top-level element in <code>element</code>.</li>
 <li><code>type</code> - A value of <code>type</code> attribute of the top-level element. If the attribute is missing, this field contains <code>undefined</code>.</li>
 <li><code>ref</code> - A reference of routed stanza.</li>
+</ul>
+</li>
 </ul>
 <p>It is then passed through all the stages until it reaches the end of its life.
 Throughout the process it is the very same accumulator; it is therefore possible to store a value in it on one stage of the processing and retrieve the same value later on.</p>
@@ -2818,6 +2820,9 @@ The call will fail with an exception if it's not possible.</p>
 <li><code>timestamp(t())</code></li>
 <li><code>lserver(t())</code></li>
 <li><code>element(t())</code></li>
+<li><code>to_jid(t())</code></li>
+<li><code>from_jid(t())</code></li>
+<li><code>packet(t())</code> - Returns an <code>ejabberd_c2s:packet()</code> if there is a stanza in the accumulator.</li>
 <li><code>stanza_name(t())</code> - Returns <code>name</code> value from <code>stanza</code> map.</li>
 <li><code>stanza_type(t())</code> - Returns <code>type</code> value from <code>stanza</code> map.</li>
 <li><code>stanza_ref(t())</code> - Returns <code>ref</code> value from <code>stanza</code> map. This is not the same as <code>ref(t())</code>!</li>
@@ -2850,7 +2855,8 @@ There is no scope protection, so every module may access all namespaces and keys
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">Acc2</span> <span class="o">=</span> <span class="nn">mongoose_acc</span><span class="p">:</span><span class="nf">set_permanent</span><span class="p">(</span><span class="n">myns</span><span class="p">,</span> <span class="n">myprop</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="nv">Acc1</span><span class="p">),</span>
 </code></pre></div>
 </td></tr></table>
-<p>Permanent fields may be retrieved with ordinary <code>get/3,4</code> functions.</p>
+<p>Permanent fields may be retrieved with ordinary <code>get/3,4</code> functions.
+There are also functions <code>get_permanent_keys/1</code> and <code>get_permanent_fields/1</code> for extracting all at once.</p>
 <p>The rationale behind stripping an accumulator is that some values stored in it are context-dependent.
 For example, at the beginning <code>lserver</code> refers to the host of the sender C2S.
 When an accumulator goes to the c2s of the recipient, the <code>lserver</code> attribute may change.
@@ -2871,11 +2877,8 @@ There are also many cached values which are not valid anymore when user changes 
 <p>Many of the MongooseIM functionalities are implemented in submodules which attach their handlers to hooks (this is covered in detail in <a href="../Hooks-and-handlers/">"Hooks and handlers"</a>).
 When it comes to the accumulators, the following rules apply:</p>
 <ul>
-<li>If a hook is related to stanza processing and is executed with <code>run_fold</code>, a Mongoose accumulator should be provided. A hook handler may modify an accumulator in every permitted way (i.e. shouldn't directly modify acc fields, bypassing <code>mongoose_acc</code> API) and should return the execution result in the <code>hook:result</code> field. This is not enforced but should be followed by convention.</li>
+<li>If a hook is related to stanza processing, a Mongoose accumulator should be provided. A hook handler may modify an accumulator in every permitted way (i.e. shouldn't directly modify acc fields, bypassing <code>mongoose_acc</code> API) and should return the execution result in the <code>hook:result</code> field. This is not enforced but should be followed by convention.</li>
 <li>Avoid passing superfluous arguments to handlers - e.g. an <code>LServer</code> in hook args is redundant since it is already present in the accumulator.</li>
-<li>Do not use <code>run</code> - it is still present in API but executes <code>run_fold</code> with <code>ok</code> as an initial accumulator anyway.
- Handlers have been rewritten so that they accept an acc as the first arg.
- Note that <code>run</code> is deprecated now and at some point will be removed.</li>
 </ul>
 <p>Most handlers have already been modified so that they accept an instance of <code>mongoose_acc:t()</code> as the first argument and return value by storing it inside it.
 How the accumulator is used within a module is up to the implementors of the module.</p>
@@ -2915,7 +2918,7 @@ There are many places in the server, where an accumulator may be created, so <co
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../Stanza-routing/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Stanza routing" rel="prev">
+        <a href="../hooks_description/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Hooks description" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -2924,20 +2927,20 @@ There are many places in the server, where an accumulator may be created, so <co
               <span class="md-footer__direction">
                 Previous
               </span>
-              Stanza routing
+              Hooks description
             </div>
           </div>
         </a>
       
       
         
-        <a href="../domain_management/" class="md-footer__link md-footer__link--next" aria-label="Next: Domain management" rel="next">
+        <a href="../Stanza-routing/" class="md-footer__link md-footer__link--next" aria-label="Next: Stanza routing" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Domain management
+              Stanza routing
             </div>
           </div>
           <div class="md-footer__button md-icon">
