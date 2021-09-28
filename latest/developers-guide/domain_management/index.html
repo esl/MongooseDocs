@@ -2252,8 +2252,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#delete-domain" class="md-nav__link">
-    Delete domain
+  <a href="#remove-domain" class="md-nav__link">
+    Remove domain
   </a>
   
 </li>
@@ -2293,7 +2293,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#delete-domain_1" class="md-nav__link">
+  <a href="#delete-domain" class="md-nav__link">
     Delete domain:
   </a>
   
@@ -2708,8 +2708,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#delete-domain" class="md-nav__link">
-    Delete domain
+  <a href="#remove-domain" class="md-nav__link">
+    Remove domain
   </a>
   
 </li>
@@ -2749,7 +2749,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#delete-domain_1" class="md-nav__link">
+  <a href="#delete-domain" class="md-nav__link">
     Delete domain:
   </a>
   
@@ -2909,18 +2909,18 @@ Below are examples of how to use this API with the help of <code>curl</code>:</p
 </td></tr></table>
 <p>Result codes:</p>
 <ul>
-<li>204 - inserted.</li>
-<li>409 - domain already exists with a different host type.</li>
-<li>403 - DB service disabled.</li>
-<li>403 - unknown host type.</li>
-<li>500 - other errors.</li>
+<li>204 - Domain was successfully inserted.</li>
+<li>400 - Bad request.</li>
+<li>403 - DB service disabled, or the host type is unknown.</li>
+<li>409 - Domain already exists with a different host type.</li>
+<li>500 - Other errors.</li>
 </ul>
 <p>Example of the result body with a failure reason:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>{&quot;what&quot;:&quot;unknown host type&quot;}
 </code></pre></div>
 </td></tr></table>
 <p>Check the <code>src/domain/mongoose_domain_handler.erl</code> file for the exact values of the <code>what</code> field if needed.</p>
-<h3 id="delete-domain">Delete domain</h3>
+<h3 id="remove-domain">Remove domain</h3>
 <p>You must provide the domain's host type inside the body:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -2933,12 +2933,15 @@ Below are examples of how to use this API with the help of <code>curl</code>:</p
 </td></tr></table>
 <p>Result codes:</p>
 <ul>
-<li>204 - the domain is removed or not found.</li>
-<li>403 - the domain is static.</li>
-<li>403 - the DB service is disabled.</li>
-<li>403 - the host type is wrong (does not match the host type in the database).</li>
-<li>403 - the host type is unknown.</li>
-<li>500 - other errors.</li>
+<li>204 - The domain is removed or not found.</li>
+<li>403 - One of:<ul>
+<li>the domain is static.</li>
+<li>the DB service is disabled.</li>
+<li>the host type is wrong (does not match the host type in the database).</li>
+<li>the host type is unknown.</li>
+</ul>
+</li>
+<li>500 - Other errors.</li>
 </ul>
 <h3 id="enabledisable-domain">Enable/disable domain</h3>
 <p>Provide <code>{"enabled": true}</code> as a body to enable a domain.
@@ -2954,10 +2957,10 @@ Provide <code>{"enabled": false}</code> as a body to disable a domain.</p>
 </td></tr></table>
 <p>Result codes:</p>
 <ul>
-<li>204 - updated.</li>
-<li>404 - domain not found;</li>
-<li>403 - domain is static;</li>
-<li>403 - service disabled.</li>
+<li>204 - Domain was successfully updated.</li>
+<li>403 - Domain is static, or the service is disabled.</li>
+<li>404 - Domain not found.</li>
+<li>500 - Other errors.</li>
 </ul>
 <h2 id="command-line-interface">Command Line Interface</h2>
 <p>Implemented by <code>service_admin_extra_domain</code> module.</p>
@@ -2973,7 +2976,7 @@ Provide <code>{"enabled": false}</code> as a body to disable a domain.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./mongooseimctl insert_domain domain host_type
 </code></pre></div>
 </td></tr></table>
-<h3 id="delete-domain_1">Delete domain:</h3>
+<h3 id="delete-domain">Delete domain:</h3>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./mongooseimctl delete_domain domain host_type
 </code></pre></div>
 </td></tr></table>

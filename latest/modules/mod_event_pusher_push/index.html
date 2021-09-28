@@ -2826,21 +2826,21 @@ See the <a href="#plugin-module">relevant section</a> for more details.</p>
 <li><strong>Default:</strong> <code>[]</code></li>
 <li><strong>Example:</strong> <code>virtual_pubsub_hosts = ["host1", "host2"]</code></li>
 </ul>
-<p>The list of "simulated" Publish-Subscribe domains. You may use the <code>@HOSTS@</code> pattern in the domain name.
+<p>The list of "simulated" Publish-Subscribe domains. You may use the <code>@HOST@</code> pattern in the domain name.
 It will automatically be replaced by a respective XMPP domain (e.g. <code>localhost</code>).
 See the <a href="#virtual-pubsub-hosts">relevant section</a> for more details.</p>
 <h2 id="virtual-pubsub-hosts">Virtual PubSub hosts</h2>
 <p>If a notification is published to one of the configured domains, the internal push notification hook
 is executed in MongooseIM instead of the XEP-0357 typical behaviour. If an existing PubSub domain
 is added to this list, it will be shadowed in the push notifications context. To ensure complete
-shadowing of all the PubSub subdomains we must use the <code>@HOSTS@</code> pattern, otherwise only the
+shadowing of all the PubSub subdomains we must use the <code>@HOST@</code> pattern, otherwise only the
 subdomain of the user is shadowed. It enables easy migration from PubSub-full deployments to
 PubSub-less variants.</p>
 <h3 id="migration-from-xep-0357-to-virtual-hosts">Migration from XEP-0357 to virtual hosts</h3>
 <p>This is an example of how you can migrate the existing setup to the new model. PubSub service still
 exists, just for the case of a user attempting to create a node. However, its domain is overridden
 for the purpose of sending push notifications. Please note the value of <code>virtual_pubsub_hosts</code>
-option. <code>"pubsub.@HOSTS@"</code> is the default domain for <code>mod_pubsub</code>.</p>
+option. <code>"pubsub.@HOST@"</code> is the default domain for <code>mod_pubsub</code>.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -2855,7 +2855,7 @@ option. <code>"pubsub.@HOSTS@"</code> is the default domain for <code>mod_pubsub
   <span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">backend</span> <span class="o">=</span> <span class="s">&quot;mnesia&quot;</span> <span class="c1"># optional</span>
   <span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">wpool</span><span class="p">.</span><span class="n">workers</span> <span class="o">=</span> <span class="mi">200</span> <span class="c1"># optional</span>
   <span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">plugin_module</span> <span class="o">=</span> <span class="s">&quot;mod_event_pusher_push_plugin_defaults&quot;</span> <span class="c1"># optional</span>
-  <span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">virtual_pubsub_hosts</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;pubsub.@HOSTS@&quot;</span><span class="p">]</span>
+  <span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">virtual_pubsub_hosts</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;pubsub.@HOST@&quot;</span><span class="p">]</span>
 </code></pre></div>
 </td></tr></table>
 <h4 id="advantages">Advantages</h4>
