@@ -2488,9 +2488,63 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#config-migrations" class="md-nav__link">
+    Config migrations
+  </a>
+  
+    <nav class="md-nav" aria-label="Config migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#section-general" class="md-nav__link">
+    Section general
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-host_config" class="md-nav__link">
+    Section host_config
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#hook-migrations" class="md-nav__link">
     Hook migrations
   </a>
+  
+    <nav class="md-nav" aria-label="Hook migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added" class="md-nav__link">
+    Added
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed" class="md-nav__link">
+    Removed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    Changed
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2618,9 +2672,63 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#config-migrations" class="md-nav__link">
+    Config migrations
+  </a>
+  
+    <nav class="md-nav" aria-label="Config migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#section-general" class="md-nav__link">
+    Section general
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-host_config" class="md-nav__link">
+    Section host_config
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#hook-migrations" class="md-nav__link">
     Hook migrations
   </a>
+  
+    <nav class="md-nav" aria-label="Hook migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added" class="md-nav__link">
+    Added
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed" class="md-nav__link">
+    Removed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    Changed
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2695,24 +2803,134 @@
 <li>Added <code>domain_settings</code> table.</li>
 <li>Added <code>domain_events</code> table.</li>
 </ul>
-<h2 id="hook-migrations">Hook migrations</h2>
+<h2 id="config-migrations">Config migrations</h2>
+<p>Most important changes without which a server might not run.</p>
+<h3 id="section-general">Section general</h3>
 <ul>
-<li><code>filter_room_packet</code> hook uses a map instead of a proplist for the event data information.</li>
-<li><code>room_send_packet</code> hook has been removed. Use <code>filter_room_packet</code> instead.</li>
-<li><code>filter_room_packet</code> is called for HostType (was for MucHost).</li>
-<li><code>forget_room</code> is called for HostType (was for MucHost).</li>
-<li><code>forget_room</code> takes an extra argument HostType.</li>
-<li><code>filter_room_packet</code> takes an extra argument HostType.</li>
-<li><code>is_muc_room_owner</code> is called for HostType (was for MucHost).</li>
-<li><code>is_muc_room_owner</code> takes an extra argument HostType.</li>
-<li><code>muc_room_pid</code> hook removed.</li>
-<li><code>load_permanent_rooms_at_startup</code> option is ignored now.</li>
-<li><code>gen_mod:get_module_opt_by_subhost</code> API removed.</li>
-<li><code>update_inbox_for_muc</code> is called for HostType.</li>
-<li><code>get_mam_muc_gdpr_data</code> is called for HostType.</li>
-<li><code>get_mam_pm_gdpr_data</code> is called for HostType.</li>
-<li><code>get_personal_data</code> handlers take an extra argument: <code>HostType</code> as the second parameter.</li>
-<li><code>get_mam_pm_gdpr_data</code> and <code>get_mam_muc_gdpr_data</code> take <code>HostType</code> argument.</li>
+<li>New mandatory option <code>default_server_domain</code> that must be set. This domain is used as a default when one cannot be determined, for example when sending XMPP stream errors to unauthenticated clients.</li>
+<li>Option <code>hosts</code> is no longer mandatory, but if omitted, at least one host type has to be defined.</li>
+<li>New option <code>host_types</code>. If omitted, at least one host has to be defined. This is the list of names for the types of hosts that will serve dynamic XMPP domains. </li>
+</ul>
+<p>Simply use <code>hosts</code> if you want to stay with static domains and use <code>host_types</code> for dynamic domains.</p>
+<h3 id="section-host_config">Section host_config</h3>
+<ul>
+<li>Option <code>host</code> specifies the XMPP domain that this section refers to.</li>
+<li>New option <code>host_type</code> specifies the host type that this section refers to. Either this option or <code>host</code> is mandatory.</li>
+</ul>
+<p>For every configured <code>host</code> the <code>host_type</code> of the same name is declared automatically. As <code>host_config</code> section is now used for changing configuration of the <code>host_type</code>, we don't need <code>host</code> option any more. But to stay compatible with an old config format we keep <code>host</code> option as well. Now it is just a synonym to host type.</p>
+<h2 id="hook-migrations">Hook migrations</h2>
+<p>The support for dynamic domains has resulted in changes in most Hooks. Mostly these changes concern calling hooks for a <code>host_type</code>.</p>
+<h3 id="added">Added</h3>
+<ul>
+<li><code>adhoc_local_commands/4</code></li>
+<li><code>adhoc_sm_commands/4</code></li>
+<li><code>does_user_exist/3</code></li>
+<li><code>get_room_affiliations/2</code></li>
+<li><code>mam_get_behaviour/4</code></li>
+<li><code>mam_set_prefs/6</code></li>
+<li><code>disco_muc_features/1</code></li>
+<li><code>remove_domain/2</code></li>
+<li><code>node_cleanup/1</code></li>
+<li><code>gen_mod:get_module_opt_by_subhost</code></li>
+</ul>
+<h3 id="removed">Removed</h3>
+<ul>
+<li><code>host_config_update/4</code></li>
+<li><code>local_send_to_resource_hook/5</code></li>
+<li><code>muc_room_pid/3</code></li>
+<li><code>amp_check_packet/4</code></li>
+<li><code>amp_error_action_triggered/2</code></li>
+<li><code>amp_notify_action_triggered/2</code></li>
+<li><code>room_send_packet/3</code></li>
+<li><code>caps_update/6</code> </li>
+<li><code>caps_add/6</code></li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li><code>auth_failed/2</code> -&gt; <code>auth_failed/3</code></li>
+<li><code>failed_to_store_message/2</code> -&gt; <code>failed_to_store_message/1</code></li>
+<li><code>filter_local_packet/2</code> -&gt; <code>filter_local_packet/1</code></li>
+<li><code>get_key/3</code> -&gt; <code>get_key/2</code></li>
+<li><code>register_command/2</code> -&gt; <code>register_command/1</code></li>
+<li><code>register_subhost/3</code> -&gt; <code>register_subhost/2</code></li>
+<li><code>resend_offline_messages_hook/3</code> -&gt; <code>resend_offline_messages_hook/2</code></li>
+<li><code>rest_user_send_packet/5</code> -&gt; <code>rest_user_send_packet/4</code></li>
+<li><code>set_vcard/4</code> -&gt; <code>set_vcard/3</code></li>
+<li><code>unregister_command/2</code> -&gt; <code>unregister_command/1</code></li>
+<li><code>unregister_subhost/2</code> -&gt; <code>unregister_subhost/1</code></li>
+<li><code>user_ping_timeout/3</code> -&gt; <code>user_ping_timeout/2</code></li>
+<li><code>user_send_packet/5</code> -&gt; <code>user_send_packet/4</code></li>
+<li><code>xmpp_stanza_dropped/5</code> -&gt; <code>xmpp_stanza_dropped/4</code></li>
+<li><code>c2s_broadcast_recipients/6</code> -&gt; <code>c2s_broadcast_recipients/4</code></li>
+<li><code>c2s_filter_packet/6</code> -&gt; <code>c2s_filter_packet/4</code></li>
+<li><code>c2s_presence_in/5</code> -&gt; <code>c2s_presence_in/4</code></li>
+<li><code>check_bl_c2s/2</code> -&gt; <code>check_bl_c2s/1</code></li>
+<li><code>session_opening_allowed_for_user/3</code> -&gt; <code>session_opening_allowed_for_user/2</code></li>
+<li><code>privacy_check_packet/6</code> -&gt; <code>privacy_check_packet/5</code></li>
+<li><code>privacy_get_user_list/3</code> -&gt; <code>privacy_get_user_list/2</code></li>
+<li><code>privacy_updated_list/4</code> -&gt; <code>privacy_updated_list/3</code></li>
+<li><code>offline_groupchat_message_hook/5</code> -&gt; <code>offline_groupchat_message_hook/4</code></li>
+<li><code>offline_message_hook/5</code> -&gt; <code>offline_message_hook/4</code></li>
+<li><code>set_presence_hook/5</code> -&gt; <code>set_presence_hook/3</code></li>
+<li><code>sm_broadcast/6</code> -&gt; <code>sm_broadcast/5</code></li>
+<li><code>sm_filter_offline_message/5</code> -&gt; <code>sm_filter_offline_message/4</code></li>
+<li><code>sm_remove_connection_hook/6</code> -&gt; <code>sm_remove_connection_hook/5</code></li>
+<li><code>unset_presence_hook/5</code> -&gt; <code>unset_presence_hook/3</code></li>
+<li><code>xmpp_bounce_message/2</code> -&gt; <code>xmpp_bounce_message/1</code></li>
+<li><code>roster_get/3</code> -&gt; <code>roster_get/2</code></li>
+<li><code>roster_get_jid_info/4</code> -&gt; <code>roster_get_jid_info/3</code></li>
+<li><code>roster_get_versioning_feature/2</code> -&gt; <code>roster_get_versioning_feature/1</code></li>
+<li><code>roster_groups/2</code> -&gt; <code>roster_groups/1</code></li>
+<li><code>roster_in_subscription/6</code> -&gt; <code>roster_in_subscription/5</code></li>
+<li><code>roster_out_subscription/5</code> -&gt; <code>roster_out_subscription/4</code></li>
+<li><code>roster_process_item/2</code> -&gt; <code>roster_process_item/3</code></li>
+<li><code>roster_push/4</code> -&gt; <code>roster_push/3</code></li>
+<li><code>roster_set/5</code> -&gt; <code>roster_set/4</code></li>
+<li><code>is_muc_room_owner/4</code> -&gt; <code>is_muc_room_owner/3</code></li>
+<li><code>can_access_identity/4</code> -&gt; <code>can_access_identity/3</code></li>
+<li><code>can_access_room/4</code> -&gt; <code>can_access_room/3</code></li>
+<li><code>mam_archive_id/3</code> -&gt; <code>mam_archive_id/2</code></li>
+<li><code>mam_archive_size/4</code> -&gt; <code>mam_archive_size/3</code></li>
+<li><code>mam_get_behaviour/5</code> -&gt; <code>mam_get_behaviour/4</code></li>
+<li><code>mam_set_prefs/7</code> -&gt; <code>mam_set_prefs/6</code></li>
+<li><code>mam_remove_archive/4</code> -&gt; <code>mam_remove_archive/3</code></li>
+<li><code>mam_lookup_messages/3</code> -&gt; <code>mam_lookup_messages/2</code></li>
+<li><code>mam_archive_message/3</code> -&gt; <code>mam_archive_message/2</code></li>
+<li><code>mam_muc_archive_id/3</code> -&gt; <code>mam_muc_archive_id/2</code></li>
+<li><code>mam_muc_archive_size/4</code> -&gt; <code>mam_muc_archive_size/3</code></li>
+<li><code>mam_muc_get_behaviour/5</code> -&gt; <code>mam_muc_get_behaviour/4</code></li>
+<li><code>mam_muc_set_prefs/7</code> -&gt; <code>mam_muc_set_prefs/6</code></li>
+<li><code>mam_muc_remove_archive/4</code> -&gt; <code>mam_muc_remove_archive/3</code></li>
+<li><code>mam_muc_lookup_messages/3</code> -&gt; <code>mam_muc_lookup_messages/2</code></li>
+<li><code>mam_muc_archive_message/3</code> -&gt; <code>mam_muc_archive_message/2</code></li>
+<li><code>mam_muc_flush_messages/3</code> -&gt; <code>mam_muc_flush_messages/2</code></li>
+<li><code>get_mam_pm_gdpr_data/3</code> -&gt; <code>get_mam_pm_gdpr_data/2</code></li>
+<li><code>get_mam_muc_gdpr_data/3</code> -&gt; <code>get_mam_muc_gdpr_data/2</code></li>
+<li><code>get_personal_data/3</code> -&gt; <code>get_personal_data/2</code></li>
+<li><code>find_s2s_bridge/3</code> -&gt; <code>find_s2s_bridge/2</code></li>
+<li><code>s2s_allow_host/3</code> -&gt; <code>s2s_allow_host/2</code></li>
+<li><code>s2s_connect_hook/3</code> -&gt; <code>s2s_connect_hook/2</code></li>
+<li><code>s2s_receive_packet/2</code> -&gt; <code>s2s_receive_packet/1</code></li>
+<li><code>disco_local_identity/6</code> -&gt; <code>disco_local_identity/1</code></li>
+<li><code>disco_sm_identity/6</code> -&gt; <code>disco_sm_identity/1</code></li>
+<li><code>disco_local_items/6</code> -&gt; <code>disco_local_items/1</code></li>
+<li><code>disco_sm_items/6</code> -&gt; <code>disco_sm_items/1</code></li>
+<li><code>disco_local_features/6</code> -&gt; <code>disco_local_features/1</code></li>
+<li><code>disco_sm_features/6</code> -&gt; <code>disco_sm_features/1</code></li>
+<li><code>disco_info/5</code> -&gt; <code>disco_info/1</code></li>
+<li><code>amp_check_condition/4</code> -&gt; <code>amp_check_condition/3</code> </li>
+<li><code>amp_determine_strategy/6</code> -&gt; <code>amp_determine_strategy/5</code></li>
+<li><code>amp_verify_support/3</code> -&gt; <code>amp_verify_support/2</code></li>
+<li><code>forget_room/4</code> -&gt; <code>forget_room/3</code></li>
+<li><code>invitation_sent/7</code> -&gt; <code>invitation_sent/6</code></li>
+<li><code>join_room/6</code> -&gt; <code>join_room/5</code></li>
+<li><code>leave_room/6</code> -&gt; <code>leave_room/5</code></li>
+<li><code>room_packet/6</code> -&gt; <code>room_packet/5</code></li>
+<li><code>caps_recognised/5</code> -&gt; <code>caps_recognised/4</code></li>
+<li><code>pubsub_create_node/6</code> -&gt; <code>pubsub_create_node/5</code></li>
+<li><code>pubsub_delete_node/5</code> -&gt; <code>pubsub_delete_node/4</code></li>
+<li><code>pubsub_publish_item/7</code> -&gt; <code>pubsub_publish_item/6</code></li>
+<li><code>mod_global_distrib_known_recipient/5</code> -&gt; <code>mod_global_distrib_known_recipient/4</code></li>
 </ul>
 <h2 id="metrics-rest-api-obsolete">Metrics REST API (obsolete)</h2>
 <p>The API is still considered obsolete so if you are using it,
