@@ -2870,7 +2870,7 @@ mysql -h localhost -u user -p mongooseim &lt; mysql.sql
 Please refer to the <a href="../outgoing-connections/#rdbms-options">RDBMS options</a> for more information.</p>
 <p><strong>Version notice</strong></p>
 <p>The required minimum version of MySQL is <code>5.7.9</code>.
-This is mainly to benefit from the JSON data type and the default settings which works out of the box with MongooseIM.</p>
+This is mainly to benefit from the JSON data type, and the default settings which work out of the box with MongooseIM.</p>
 <h4 id="mysql-8">MySQL 8</h4>
 <p>In case of using MySQL version 8 and MongooseIM <code>3.6.2</code> or older the <code>mysql_native_password</code> authentication plugin must be used as the default one.
 Newer versions of MongooseIM works correctly with MySQL 8 and its default auth plugins.</p>
@@ -2975,7 +2975,7 @@ Add your database (<code>mongooseim</code> here) to the <code>/etc/odbc.ini</cod
 <p><strong>Deadlocks notice</strong></p>
 <p>If muc_light's backend is set to ODBC and there are many rooms created in parallel in your system,
 there may be some deadlocks due to the <code>READ_COMMITTED_SNAPSHOT</code> set to <code>OFF</code> by default.
-In this case we recommend to set this database property to <code>ON</code>, this will enable row level locking which significantly reduces
+In this case we recommend setting this database property to <code>ON</code>, this will enable row level locking which significantly reduces
 deadlock chances around muc_light operations.</p>
 <p>This property can be set by the following <code>ALTER DATABASE</code> query:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">DATABASE</span> <span class="err">$</span><span class="n">name_of_your_db</span> <span class="k">SET</span> <span class="n">READ_COMMITTED_SNAPSHOT</span> <span class="k">ON</span>
