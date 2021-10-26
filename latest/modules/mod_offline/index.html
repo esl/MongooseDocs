@@ -2716,6 +2716,10 @@
 It can store one-to-one and groupchat messages only when the recipient has no online resources. 
 It is not well suited for applications supporting multiple user devices, because anything saved in the DB can be retrieved only once, so the message history is not synchronised between devices. 
 Although <code>mod_offline</code> may be sufficient in some cases, it is preferable to use <a href="../mod_mam/">mod_mam</a>.</p>
+<p>If this module is disabled, an error 503 with text "Bounce offline message"
+would be sent back to the sender,
+each time a message is sent to an offline user. Check <a href="../mod_offline_stub/">mod_offline_stub</a>
+to disable this error message.</p>
 <h2 id="options">Options</h2>
 <h3 id="modulesmod_offlineaccess_max_user_messages"><code>modules.mod_offline.access_max_user_messages</code></h3>
 <ul>
