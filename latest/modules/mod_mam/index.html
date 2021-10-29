@@ -1471,6 +1471,19 @@
     Message retraction
   </a>
   
+    <nav class="md-nav" aria-label="Message retraction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retraction-on-the-stanza-id" class="md-nav__link">
+    Retraction on the stanza-id
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2949,6 +2962,19 @@
     Message retraction
   </a>
   
+    <nav class="md-nav" aria-label="Message retraction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retraction-on-the-stanza-id" class="md-nav__link">
+    Retraction on the stanza-id
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -3360,13 +3386,31 @@ It is a highly customizable module, that requires some skill and knowledge to op
 </ul>
 <p><code>mod_mam_meta</code> is a meta-module that ensures all relevant <code>mod_mam_*</code> modules are loaded and properly configured.</p>
 <h3 id="message-retraction">Message retraction</h3>
-<p>This module supports <a href="http://xmpp.org/extensions/xep-0424.html">XEP-0424: Message Retraction</a> with RDBMS storage backends. When a <a href="https://xmpp.org/extensions/xep-0424.html#example-4">retraction message</a> is received, the MAM module finds the message to retract and replaces it with a tombstone. The following criteria are used to find the original message:</p>
-<ul>
-<li>The <code>id</code> attribute specified in the <code>apply-to</code> element of the retraction message has to be the same as the <code>id</code> attribute of the <code>origin-id</code> element of the original message.</li>
-<li>Both messages need to originate from the same user.</li>
-<li>Both messages need to be addressed to the same user.</li>
-</ul>
+<p>This module supports <a href="http://xmpp.org/extensions/xep-0424.html">XEP-0424: Message Retraction</a> with RDBMS storage backends. When a <a href="https://xmpp.org/extensions/xep-0424.html#example-4">retraction message</a> is received, the MAM module finds the message to retract and replaces it with a tombstone.</p>
+<p>The following criteria are used to find the original message:
+* The <code>id</code> attribute specified in the <code>apply-to</code> element of the retraction message has to be the same as the <code>id</code> attribute of the <code>origin-id</code> (or <code>stanza-id</code> when configured, see <a href="#retraction-on-the-stanza-id">below</a>) element of the original message.
+* Both messages need to originate from the same user.
+* Both messages need to be addressed to the same user.</p>
 <p>If more than one message matches the criteria, only the most recent one is retracted. To avoid this case, it is recommended to use a unique identifier (UUID) as the origin ID.</p>
+<h4 id="retraction-on-the-stanza-id">Retraction on the stanza-id</h4>
+<p>This module also implements an extension to the XEP, where it allows to specify the <a href="https://xmpp.org/extensions/xep-0359.html#stanza-id"><code>stanza-id</code></a> as <a href="https://xmpp.org/extensions/xep-0313.html#archives_id">created by</a> the server's MAM, instead of the <code>origin-id</code> that the original <a href="https://xmpp.org/extensions/xep-0424.html">XEP-0424</a> specifies. It announces this capability under the namespace <code>urn:esl:message-retract-by-stanza-id:0</code>. This is specially useful in groupchats where the <code>stanza-id</code> of a message is shared and known for all participants.</p>
+<p>In this case, to use such functionality,
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;apply-to</span> <span class="na">id=</span><span class="s">&quot;origin-id-1&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:xmpp:fasten:0&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;retract</span> <span class="na">xmlns=</span><span class="s">&#39;urn:xmpp:message-retract:0&#39;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/apply-to&gt;</span>
+</code></pre></div>
+</td></tr></table>
+turns into
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;apply-to</span> <span class="na">id=</span><span class="s">&quot;stanza-id-1&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:xmpp:fasten:0&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;retract</span> <span class="na">xmlns=</span><span class="s">&#39;urn:esl:message-retract:0&#39;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/apply-to&gt;</span>
+</code></pre></div>
+</td></tr></table>
+and likewise, the answer would be tagged by the mentioned <code>esl</code> namespace.</p>
 <h3 id="full-text-search">Full Text Search</h3>
 <p>This module allows message filtering by their text body (if enabled, see <em>Common backend options</em>).
 This means that an XMPP client, while requesting messages from the archive may not only specify standard form fields (<code>with</code>, <code>start</code>, <code>end</code>), but also <code>full-text-search</code> (of type <code>text-single</code>).
@@ -3464,7 +3508,7 @@ This functionality is currently implemented only for the <code>rdbms</code> back
 <li><strong>Default:</strong> <code>false</code></li>
 <li><strong>Example:</strong> <code>modules.mod_mam_meta.pm.same_mam_id_for_peers = true</code></li>
 </ul>
-<p>When enabled, MAM will set the same MAM ID for both sender and recipient. Note that this might not work with clients across federation, as the recipient might not implement the same retraction, nor the same IDs.</p>
+<p>When enabled, MAM will set the same MAM ID for both sender and recipient. This can be useful in combination with <a href="#retraction-on-the-stanza-id">retraction on the stanza-id</a>. Note that this might not work with clients across federation, as the recipient might not implement the same retraction, nor the same IDs.</p>
 <h3 id="enable-muc-message-archive">Enable MUC message archive</h3>
 <p>Archive for MUC messages can be enabled in one of two ways:</p>
 <ul>
