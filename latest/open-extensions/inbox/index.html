@@ -3220,10 +3220,12 @@ To which the server will reply, just like before, with:
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div>
 </td></tr></table>
-Where <code>Property</code> and <code>Value</code> are a list of key-value pairs as follows:
-- <code>archive</code>: <code>true</code> or <code>false</code>
-- <code>mute</code>: number of seconds to mute for. Choose <code>0</code> for unmuting.
-- <code>read</code> (adjective, not verb): <code>true</code> or <code>false</code>. Setting to true essentially sets the unread-count to <code>0</code>, <code>false</code> sets the unread-count to <code>1</code> (if it was equal to <code>0</code>, otherwise it lefts it unchanged). No other possibilities are offered, to reduce the risk of inconsistencies or problems induced by a faulty client.</p>
+where <code>Property</code> and <code>Value</code> are a list of key-value pairs as follows:</p>
+<ul>
+<li><code>archive</code>: <code>true</code> or <code>false</code></li>
+<li><code>mute</code>: number of <em>seconds</em> to mute for. Choose <code>0</code> for unmuting.</li>
+<li><code>read</code> (adjective, not verb): <code>true</code> or <code>false</code>. Setting to true essentially sets the unread-count to <code>0</code>, <code>false</code> sets the unread-count to <code>1</code> (if it was equal to <code>0</code>, otherwise it lefts it unchanged). No other possibilities are offered, to reduce the risk of inconsistencies or problems induced by a faulty client.</li>
+</ul>
 <p><em>Note</em> that resetting the inbox count will not be forwarded. While a chat marker will be forwarded to the interlocutor(s), (including the case of a big groupchat with thousands of participants), this reset stanza will not.  </p>
 <p>If the query was successful, the server will answer with two stanzas, following the classic pattern of broadcasting state changes. First, it would send a message with a <code>&lt;x&gt;</code> children containing all new configuration, to the bare-jid of the user: this facilitates broadcasting to all online resources to successfully synchronise their interfaces.
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
