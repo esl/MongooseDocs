@@ -1659,6 +1659,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modulesmod_mam_metacachemodule" class="md-nav__link">
+    modules.mod_mam_meta.cache.module
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_mam_metardbms_message_format" class="md-nav__link">
     modules.mod_mam_meta.rdbms_message_format
   </a>
@@ -3150,6 +3157,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modulesmod_mam_metacachemodule" class="md-nav__link">
+    modules.mod_mam_meta.cache.module
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_mam_metardbms_message_format" class="md-nav__link">
     modules.mod_mam_meta.rdbms_message_format
   </a>
@@ -3562,6 +3576,21 @@ Please note that you can override all common options in similar way.</p>
 <li><strong>Example:</strong> <code>modules.mod_mam_meta.cache_users = false</code></li>
 </ul>
 <p>Enables Archive ID to integer mappings cache.</p>
+<p>If caching is enabled, by default it will spawn its own <a href="https://github.com/esl/segmented_cache">segmented cache</a> cache, with defaults as in <a href="../mod_cache_users/"><code>mod_cache_users</code></a>. To change these defaults, the same config can be accessed within the <code>cache</code> key. To see details about the meaning of each flag, see <a href="../mod_cache_users/"><code>mod_cache_users</code></a>. To reuse the cache already created by <code>mod_cache_users</code>, see the option below.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">modules</span><span class="p">.</span><span class="n">mod_mam_meta</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="n">strategy</span>
+<span class="n">modules</span><span class="p">.</span><span class="n">mod_mam_meta</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="n">time_to_live</span>
+<span class="n">modules</span><span class="p">.</span><span class="n">mod_mam_meta</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="n">number_of_segments</span>
+</code></pre></div>
+</td></tr></table>
+<h4 id="modulesmod_mam_metacachemodule"><code>modules.mod_mam_meta.cache.module</code></h4>
+<ul>
+<li><strong>Syntax:</strong> string, one of <code>"mod_cache_users"</code> or <code>"internal"</code></li>
+<li><strong>Default:</strong> <code>internal</code></li>
+<li><strong>Example:</strong> <code>modules.mod_mam_meta.cache.module = "mod_cache_users</code></li>
+</ul>
+<p>Configures which cache to use, either start an internal instance, or reuse the cache created by <code>mod_cache_users</code>, if such module was enabled. Note that if reuse is desired – that is, <code>cache.module = "mod_cache_users"</code>, other cache configuration parameters are not allowed.</p>
 <h4 id="modulesmod_mam_metardbms_message_format"><code>modules.mod_mam_meta.rdbms_message_format</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"internal"</code> and <code>"simple"</code></li>
