@@ -3401,10 +3401,12 @@ It is a highly customizable module, that requires some skill and knowledge to op
 <p><code>mod_mam_meta</code> is a meta-module that ensures all relevant <code>mod_mam_*</code> modules are loaded and properly configured.</p>
 <h3 id="message-retraction">Message retraction</h3>
 <p>This module supports <a href="http://xmpp.org/extensions/xep-0424.html">XEP-0424: Message Retraction</a> with RDBMS storage backends. When a <a href="https://xmpp.org/extensions/xep-0424.html#example-4">retraction message</a> is received, the MAM module finds the message to retract and replaces it with a tombstone.</p>
-<p>The following criteria are used to find the original message:
-* The <code>id</code> attribute specified in the <code>apply-to</code> element of the retraction message has to be the same as the <code>id</code> attribute of the <code>origin-id</code> (or <code>stanza-id</code> when configured, see <a href="#retraction-on-the-stanza-id">below</a>) element of the original message.
-* Both messages need to originate from the same user.
-* Both messages need to be addressed to the same user.</p>
+<p>The following criteria are used to find the original message:</p>
+<ul>
+<li>The <code>id</code> attribute specified in the <code>apply-to</code> element of the retraction message has to be the same as the <code>id</code> attribute of the <code>origin-id</code> (or <code>stanza-id</code> when configured, see <a href="#retraction-on-the-stanza-id">below</a>) element of the original message.</li>
+<li>Both messages need to originate from the same user.</li>
+<li>Both messages need to be addressed to the same user.</li>
+</ul>
 <p>If more than one message matches the criteria, only the most recent one is retracted. To avoid this case, it is recommended to use a unique identifier (UUID) as the origin ID.</p>
 <h4 id="retraction-on-the-stanza-id">Retraction on the stanza-id</h4>
 <p>This module also implements an extension to the XEP, where it allows to specify the <a href="https://xmpp.org/extensions/xep-0359.html#stanza-id"><code>stanza-id</code></a> as <a href="https://xmpp.org/extensions/xep-0313.html#archives_id">created by</a> the server's MAM, instead of the <code>origin-id</code> that the original <a href="https://xmpp.org/extensions/xep-0424.html">XEP-0424</a> specifies. It announces this capability under the namespace <code>urn:esl:message-retract-by-stanza-id:0</code>. This is specially useful in groupchats where the <code>stanza-id</code> of a message is shared and known for all participants.</p>
