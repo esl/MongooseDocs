@@ -1673,29 +1673,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_mam_metaasync_writer" class="md-nav__link">
-    modules.mod_mam_meta.async_writer
+  <a href="#modulesmod_mam_metaasync_writerenabled" class="md-nav__link">
+    modules.mod_mam_meta.async_writer.enabled
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_mam_metaflush_interval" class="md-nav__link">
-    modules.mod_mam_meta.flush_interval
+  <a href="#modulesmod_mam_metaasync_writerflush_interval" class="md-nav__link">
+    modules.mod_mam_meta.async_writer.flush_interval
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_mam_metamax_batch_size" class="md-nav__link">
-    modules.mod_mam_meta.max_batch_size
+  <a href="#modulesmod_mam_metaasync_writerbatch_size" class="md-nav__link">
+    modules.mod_mam_meta.async_writer.batch_size
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_mam_metapool_size" class="md-nav__link">
-    modules.mod_mam_meta.pool_size
+  <a href="#modulesmod_mam_metaasync_writerpool_size" class="md-nav__link">
+    modules.mod_mam_meta.async_writer.pool_size
   </a>
   
 </li>
@@ -3191,29 +3191,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_mam_metaasync_writer" class="md-nav__link">
-    modules.mod_mam_meta.async_writer
+  <a href="#modulesmod_mam_metaasync_writerenabled" class="md-nav__link">
+    modules.mod_mam_meta.async_writer.enabled
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_mam_metaflush_interval" class="md-nav__link">
-    modules.mod_mam_meta.flush_interval
+  <a href="#modulesmod_mam_metaasync_writerflush_interval" class="md-nav__link">
+    modules.mod_mam_meta.async_writer.flush_interval
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_mam_metamax_batch_size" class="md-nav__link">
-    modules.mod_mam_meta.max_batch_size
+  <a href="#modulesmod_mam_metaasync_writerbatch_size" class="md-nav__link">
+    modules.mod_mam_meta.async_writer.batch_size
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_mam_metapool_size" class="md-nav__link">
-    modules.mod_mam_meta.pool_size
+  <a href="#modulesmod_mam_metaasync_writerpool_size" class="md-nav__link">
+    modules.mod_mam_meta.async_writer.pool_size
   </a>
   
 </li>
@@ -3592,8 +3592,8 @@ Please note that you can override all common options in similar way.</p>
 <span class="normal">3</span>
 <span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
   <span class="n">backend</span> <span class="o">=</span> <span class="s">&quot;rdbms&quot;</span>
-  <span class="n">async_writer</span> <span class="o">=</span> <span class="n">true</span> <span class="c1"># this option enables async writer for RDBMS backend</span>
-  <span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span> <span class="o">=</span> <span class="n">false</span> <span class="c1"># disable async writer for MUC archive only</span>
+  <span class="n">async_writer</span><span class="p">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="n">true</span> <span class="c1"># this option enables async writer for RDBMS backend</span>
+  <span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span><span class="p">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="n">false</span> <span class="c1"># disable async writer for MUC archive only</span>
 </code></pre></div>
 </td></tr></table>
 <h3 id="rdbms-backend-options">RDBMS backend options</h3>
@@ -3632,36 +3632,36 @@ Please note that you can override all common options in similar way.</p>
 </div>
 <p>When set to <code>simple</code>, stores messages in XML and full JIDs.
 When set to <code>internal</code>, stores messages and JIDs in internal format.</p>
-<h4 id="modulesmod_mam_metaasync_writer"><code>modules.mod_mam_meta.async_writer</code></h4>
+<h4 id="modulesmod_mam_metaasync_writerenabled"><code>modules.mod_mam_meta.async_writer.enabled</code></h4>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>true</code></li>
-<li><strong>Example:</strong> <code>modules.mod_mam_meta.async_writer = false</code></li>
+<li><strong>Example:</strong> <code>modules.mod_mam_meta.async_writer.enabled = false</code></li>
 </ul>
 <p>Enables an asynchronous writer that is faster than the synchronous one but harder to debug.
-The async writers store batches of messages with a certain delay (see <strong>flush_interval</strong>), so the results of the lookup operations executed right after message routing may be incomplete until the configured time passes.</p>
-<h4 id="modulesmod_mam_metaflush_interval"><code>modules.mod_mam_meta.flush_interval</code></h4>
+The async writers store batches of messages that will be flush on a timeout (see <strong>flush_interval</strong>) or when the batch reaches a size (see <strong>batch_size</strong>), so the results of the lookup operations executed right after message routing may be incomplete until the configured time passes or the queue is full.</p>
+<h4 id="modulesmod_mam_metaasync_writerflush_interval"><code>modules.mod_mam_meta.async_writer.flush_interval</code></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> <code>2000</code></li>
-<li><strong>Example:</strong> <code>modules.mod_mam_meta.flush_interval = 2000</code></li>
+<li><strong>Example:</strong> <code>modules.mod_mam_meta.async_writer.flush_interval = 2000</code></li>
 </ul>
-<p>How often (in milliseconds) the buffered messages are flushed to a DB.</p>
-<h4 id="modulesmod_mam_metamax_batch_size"><code>modules.mod_mam_meta.max_batch_size</code></h4>
+<p>How often (in milliseconds) the buffered messages are flushed to DB.</p>
+<h4 id="modulesmod_mam_metaasync_writerbatch_size"><code>modules.mod_mam_meta.async_writer.batch_size</code></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> <code>30</code></li>
-<li><strong>Example:</strong> <code>modules.mod_mam_meta.max_batch_size = 30</code></li>
+<li><strong>Example:</strong> <code>modules.mod_mam_meta.async_writer.batch_size = 30</code></li>
 </ul>
-<p>Max size of the batch insert query for an async writer.
+<p>Max size of the batch for an async writer before the queue is considered full and flushed.
 If the buffer is full, messages are flushed to a database immediately and the flush timer is reset.</p>
-<h4 id="modulesmod_mam_metapool_size"><code>modules.mod_mam_meta.pool_size</code></h4>
+<h4 id="modulesmod_mam_metaasync_writerpool_size"><code>modules.mod_mam_meta.async_writer.pool_size</code></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
-<li><strong>Default:</strong> <code>32</code></li>
-<li><strong>Example:</strong> <code>modules.mod_mam_meta.pool_size = 30</code></li>
+<li><strong>Default:</strong> <code>4 * erlang:system_info(schedulers_online)</code></li>
+<li><strong>Example:</strong> <code>modules.mod_mam_meta.async_writer.pool_size = 32</code></li>
 </ul>
-<p>Number of workers in the pool.</p>
+<p>Number of workers in the pool. More than the number of available schedulers is recommended, to minimise lock contention on the message queues, and more than the number of DB workers, to fully utilise the DB capacity. How much more than these two parameters is then a good fine-tuning for specific deployments.</p>
 <h3 id="common-backend-options">Common backend options</h3>
 <h4 id="modulesmod_mam_metauser_prefs_store"><code>modules.mod_mam_meta.user_prefs_store</code></h4>
 <ul>
@@ -3802,7 +3802,7 @@ It can be useful to be able to add information to a mam query, that doesn't belo
 
   <span class="n">muc</span><span class="p">.</span><span class="n">host</span> <span class="o">=</span> <span class="s">&quot;muc.example.com&quot;</span>
   <span class="n">muc</span><span class="p">.</span><span class="n">rdbms_message_format</span> <span class="o">=</span> <span class="s">&quot;simple&quot;</span>
-  <span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span> <span class="o">=</span> <span class="kc">false</span>
+  <span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span><span class="p">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">false</span>
   <span class="n">muc</span><span class="p">.</span><span class="n">user_prefs_store</span> <span class="o">=</span> <span class="s">&quot;mnesia&quot;</span>
 </code></pre></div>
 </td></tr></table>

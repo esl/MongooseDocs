@@ -2503,6 +2503,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#async-workers" class="md-nav__link">
+    Async workers
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2613,6 +2620,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#async-workers" class="md-nav__link">
+    Async workers
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2638,6 +2652,27 @@
 <p>Each authentication method needs a TOML section, e.g. if you have the <code>rdbms</code> method enabled, you need to have the <code>[auth.rdbms]</code> section in the configuration file, even if it is empty. The <code>methods</code> option is not required anymore and especially if you are using only one method, you can remove it. See the <a href="../../configuration/auth/">configuration</a> for details.</p>
 <h3 id="section-host_config">Section <code>host_config</code></h3>
 <p>The rules for overriding global options in the <code>host_config</code> section have been simplified. The <code>auth</code> section and the <code>s2s.address</code>, <code>s2s.domain_certfile</code> and <code>s2s.shared</code> options now completely override the corresponding general settings instead of being merged with them.</p>
+<h2 id="async-workers">Async workers</h2>
+<p>The <code>async_writer</code> flag of MAM is now a section on its own, that absorbs previous flags related to it: <code>flush_interval</code>, <code>max_batch_size</code> and <code>pool_size</code> now become subelements of the <code>async_writer</code> section, with one more parameter, <code>enabled</code>. Below an example:</p>
+<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
+  <span class="n">flush_interval</span> <span class="o">=</span> <span class="mi">1000</span>
+  <span class="n">max_batch_size</span> <span class="o">=</span> <span class="mi">100</span>
+  <span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span> <span class="o">=</span> <span class="kc">false</span>
+</code></pre></div>
+</td></tr></table>
+now becomes
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
+  <span class="n">async_writer</span><span class="p">.</span><span class="n">flush_interval</span> <span class="o">=</span> <span class="mi">1000</span>
+  <span class="n">async_writer</span><span class="p">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">100</span>
+  <span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span><span class="p">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">false</span>
+</code></pre></div>
+</td></tr></table></p>
 
               
             </article>
