@@ -776,6 +776,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scram-options" class="md-nav__link">
+    SCRAM options
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#authpasswordhash" class="md-nav__link">
     auth.password.hash
   </a>
@@ -783,8 +790,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#authscram_iterations" class="md-nav__link">
-    auth.scram_iterations
+  <a href="#authpasswordscram_iterations" class="md-nav__link">
+    auth.password.scram_iterations
   </a>
   
 </li>
@@ -2717,6 +2724,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scram-options" class="md-nav__link">
+    SCRAM options
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#authpasswordhash" class="md-nav__link">
     auth.password.hash
   </a>
@@ -2724,8 +2738,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#authscram_iterations" class="md-nav__link">
-    auth.scram_iterations
+  <a href="#authpasswordscram_iterations" class="md-nav__link">
+    auth.password.scram_iterations
   </a>
   
 </li>
@@ -2947,11 +2961,13 @@ The following methods are supported:</p>
 </ul>
 <p>Decide whether user passwords will be kept plain or hashed in the database.
 Currently, popular XMPP clients support the SCRAM method and it is strongly recommended to use the hashed version.
-The older XMPP clients can still use the <code>PLAIN</code> mechanism.</p>
+The older XMPP clients can still use the <code>PLAIN</code> mechanism even if the format is set to <code>scram</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The <code>DIGEST-MD5</code> mechanism is not available with the <code>scram</code> password format.</p>
 </div>
+<h3 id="scram-options">SCRAM options</h3>
+<p>For these options to take effect, <code>password.format</code> should be set to <code>scram</code>.</p>
 <h3 id="authpasswordhash"><code>auth.password.hash</code></h3>
 <ul>
 <li><strong>Syntax:</strong> list of strings, allowed values: <code>"sha"</code>, <code>"sha224"</code>, <code>"sha256"</code>, <code>"sha384"</code>, <code>"sha512"</code></li>
@@ -2965,11 +2981,11 @@ The value <code>"sha"</code> stands for the SHA-1 algorithm.</p>
 <p class="admonition-title">Warning</p>
 <p>This option limits the supported <code>SCRAM-SHA-*</code> SASL mechanisms to the ones compatible with the specified hash functions.</p>
 </div>
-<h3 id="authscram_iterations"><code>auth.scram_iterations</code></h3>
+<h3 id="authpasswordscram_iterations"><code>auth.password.scram_iterations</code></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> 10000, as recommended in this <a href="https://xmpp.org/extensions/xep-0438.html#pbkdf2">XEP</a> and this <a href="https://pages.nist.gov/800-63-3/sp800-63b.html#sec5">NIST Guidelines</a></li>
-<li><strong>Example:</strong> <code>scram_iterations = 20_000</code></li>
+<li><strong>Example:</strong> <code>password.scram_iterations = 20_000</code></li>
 </ul>
 <p>Hash function round count.
 This is a tradeoff between latency and security.
@@ -2989,7 +3005,7 @@ See more information in this <a href="https://csrc.nist.gov/publications/detail/
 <span class="normal">4</span>
 <span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[auth]</span>
   <span class="n">password</span><span class="p">.</span><span class="n">hash</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;sha512&quot;</span><span class="p">]</span>
-  <span class="n">scram_iterations</span> <span class="o">=</span> <span class="mi">20000</span>
+  <span class="n">password</span><span class="p">.</span><span class="n">scram_iterations</span> <span class="o">=</span> <span class="mi">20000</span>
 
   <span class="k">[auth.internal]</span>
 </code></pre></div>
