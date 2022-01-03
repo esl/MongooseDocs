@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/migrations/4.1.0_4.2.0/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.4">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bb3983ee.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
@@ -2670,17 +2670,17 @@
 <p>For Postgres or MySQL:
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">inbox</span>
-  <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">archive</span> <span class="nb">BOOLEAN</span> <span class="k">DEFAULT</span> <span class="k">false</span><span class="p">,</span>
-  <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">muted_until</span> <span class="nb">BIGINT</span> <span class="k">DEFAULT</span> <span class="mi">0</span><span class="p">;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">inbox</span><span class="w"></span>
+<span class="w">  </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">archive</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">muted_until</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 For MSSQL:
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">inbox</span>
-  <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">archive</span> <span class="n">TINYINT</span> <span class="k">DEFAULT</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">muted_until</span> <span class="nb">BIGINT</span> <span class="k">DEFAULT</span> <span class="mi">0</span><span class="p">;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">inbox</span><span class="w"></span>
+<span class="w">  </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">archive</span><span class="w"> </span><span class="n">TINYINT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">muted_until</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table></p>
 <h3 id="archived-groupchat-messages-in-mod_mam">Archived groupchat messages in <code>mod_mam</code></h3>
@@ -2689,8 +2689,8 @@ Before the change, the private message (PM) archive stored incoming groupchat me
 After the upgrade you can manually remove those messages from the database.
 For example, when the MUC domain is <code>muc.localhost</code> and <code>rdbms_message_format</code> has the default value <code>internal</code>, one can remove such messages with the following query:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">mam_message</span>
-  <span class="k">WHERE</span> <span class="n">direction</span> <span class="o">=</span> <span class="s1">&#39;I&#39;</span> <span class="k">AND</span> <span class="n">remote_bare_jid</span> <span class="k">LIKE</span> <span class="s1">&#39;muc.localhost:%&#39;</span><span class="p">;</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mam_message</span><span class="w"></span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;I&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">remote_bare_jid</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;muc.localhost:%&#39;</span><span class="p">;</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <p>This can be a heavy operation and it needs to be done with caution.</p>
@@ -2783,10 +2783,10 @@ For example, when the MUC domain is <code>muc.localhost</code> and <code>rdbms_m
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.361d90f1.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      <script src="../../assets/javascripts/bundle.289a2a4b.min.js"></script>
       
     
   </body>

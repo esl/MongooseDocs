@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/tutorials/client-certificate/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.4">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bb3983ee.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
@@ -2844,8 +2844,8 @@ In this case it's enabled by adding the following options to the <code>tls</code
 <p>A <code>SASL EXTERNAL</code> authentication mechanism is disabled by default.
 In order to enable it, please configure <a href="../../configuration/auth/#authsasl_mechanisms"><code>auth.sasl_mechanisms</code> option</a> in the MongooseIM config file.
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[auth]</span>
-  <span class="n">sasl_mechanisms</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;external&quot;</span><span class="p">]</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[auth]</span><span class="w"></span>
+<span class="w">  </span><span class="n">sasl_mechanisms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;external&quot;</span><span class="p">]</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table></p>
 <p>Obviously the list may be longer, if the system should support both the certificate and password based authentication.</p>
@@ -2869,9 +2869,9 @@ For development purposes, it is possible to tell MongooseIM to accept them.</p>
 <p>In order to tell MongooseIM to accept self-signed certs, the <code>listen.c2s.tls.verify_mode</code> option needs to be configured like below:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[listen.c2s]</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">verify_mode</span> <span class="o">=</span> <span class="s">&quot;selfsigned_peer&quot;</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">disconnect_on_failure</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[listen.c2s]</span><span class="w"></span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">verify_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;selfsigned_peer&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">disconnect_on_failure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <p>where the <code>tls.disconnect_on_failure</code> is a boolean with the following meaning only for <code>just_tls</code>:</p>
@@ -2884,8 +2884,8 @@ For development purposes, it is possible to tell MongooseIM to accept them.</p>
 <h4 id="self-signed-certificates-for-ws-or-bosh">Self-signed certificates for WS or BOSH</h4>
 <p>In order to accept self-signed certs for WS or BOSH connections, the <code>tls</code> options for <code>http</code> listener must have the following configured:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[listen.http]</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">verify_mode</span> <span class="o">=</span> <span class="s">&quot;selfsigned_peer&quot;</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[listen.http]</span><span class="w"></span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">verify_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;selfsigned_peer&quot;</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <h3 id="examples">Examples</h3>
@@ -2912,29 +2912,29 @@ For development purposes, it is possible to tell MongooseIM to accept them.</p>
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[listen.c2s]</span>
-  <span class="n">port</span> <span class="o">=</span> <span class="mi">5222</span>
-  <span class="p">(...)</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">cacertfile</span> <span class="o">=</span> <span class="s">&quot;ca.pem&quot;</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">verify_peer</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[listen.c2s]</span><span class="w"></span>
+<span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5222</span><span class="w"></span>
+<span class="w">  </span><span class="p">(...)</span><span class="w"></span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">cacertfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ca.pem&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">verify_peer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
 
-<span class="k">[listen.http]</span>
-  <span class="n">port</span> <span class="o">=</span> <span class="mi">5285</span>
-  <span class="p">(...)</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">cacertfile</span> <span class="o">=</span> <span class="s">&quot;ca.pem&quot;</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">verify_peer</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="k">[listen.http]</span><span class="w"></span>
+<span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5285</span><span class="w"></span>
+<span class="w">  </span><span class="p">(...)</span><span class="w"></span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">cacertfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ca.pem&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">verify_peer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
 
-  <span class="k">[[listen.http.handlers.mod_bosh]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/http-bind&quot;</span>
+<span class="w">  </span><span class="k">[[listen.http.handlers.mod_bosh]]</span><span class="w"></span>
+<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/http-bind&quot;</span><span class="w"></span>
 
-  <span class="k">[[listen.http.handlers.mod_websockets]]</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;_&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/ws-xmpp&quot;</span>
+<span class="w">  </span><span class="k">[[listen.http.handlers.mod_websockets]]</span><span class="w"></span>
+<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/ws-xmpp&quot;</span><span class="w"></span>
 
-<span class="k">[auth]</span>
-  <span class="n">method</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;pki&quot;</span><span class="p">]</span>
-  <span class="n">sasl_mechanisms</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;external&quot;</span><span class="p">]</span>
+<span class="k">[auth]</span><span class="w"></span>
+<span class="w">  </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;pki&quot;</span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="n">sasl_mechanisms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;external&quot;</span><span class="p">]</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <p>Authentication with a client certificate (validated with provided CA chain) or password (validated with data stored in RDBMS).</p>
@@ -2946,15 +2946,15 @@ For development purposes, it is possible to tell MongooseIM to accept them.</p>
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[listen.c2s]</span>
-  <span class="n">port</span> <span class="o">=</span> <span class="mi">5222</span>
-  <span class="p">(...)</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">cacertfile</span> <span class="o">=</span> <span class="s">&quot;ca.pem&quot;</span>
-  <span class="n">tls</span><span class="p">.</span><span class="n">verify_peer</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[listen.c2s]</span><span class="w"></span>
+<span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5222</span><span class="w"></span>
+<span class="w">  </span><span class="p">(...)</span><span class="w"></span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">cacertfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ca.pem&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">verify_peer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
 
-<span class="k">[auth]</span>
-  <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;rdbms&quot;</span><span class="p">,</span> <span class="s">&quot;pki&quot;</span><span class="p">]</span>
-  <span class="n">sasl_mechanisms</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;scram_sha1&quot;</span><span class="p">,</span> <span class="s">&quot;external&quot;</span><span class="p">]</span>
+<span class="k">[auth]</span><span class="w"></span>
+<span class="w">  </span><span class="n">methods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;rdbms&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pki&quot;</span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="n">sasl_mechanisms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;scram_sha1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;external&quot;</span><span class="p">]</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <h2 id="client-certificate-prerequisites">Client certificate prerequisites</h2>
@@ -3077,10 +3077,10 @@ Version 0.16.8 sometimes "forgets" to ask for the client certificate password.</
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.361d90f1.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      <script src="../../assets/javascripts/bundle.289a2a4b.min.js"></script>
       
     
   </body>

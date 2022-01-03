@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/migrations/3.3.0_3.4.0/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.4">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bb3983ee.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
@@ -2830,20 +2830,20 @@ MongooseIM 3.4.0 uses a modified schema for MAM MUC backends which enables a mor
 <p>Please execute the following SQL statements on your MIM database:</p>
 <p><strong>MySQL</strong></p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">mam_muc_message</span> <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">sender_id</span> <span class="nb">INT</span> <span class="n">UNSIGNED</span><span class="p">;</span>
-<span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">i_mam_muc_message_sender_id</span> <span class="k">USING</span> <span class="n">BTREE</span> <span class="k">ON</span> <span class="n">mam_muc_message</span><span class="p">(</span><span class="n">sender_id</span><span class="p">);</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">sender_id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">UNSIGNED</span><span class="p">;</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">i_mam_muc_message_sender_id</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">BTREE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="p">(</span><span class="n">sender_id</span><span class="p">);</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <p><strong>PostgreSQL</strong></p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">mam_muc_message</span> <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">sender_id</span> <span class="nb">INT</span><span class="p">;</span>
-<span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">i_mam_muc_message_sender_id</span> <span class="k">ON</span> <span class="n">mam_muc_message</span> <span class="k">USING</span> <span class="n">BTREE</span> <span class="p">(</span><span class="n">sender_id</span><span class="p">);</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">sender_id</span><span class="w"> </span><span class="nb">INT</span><span class="p">;</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">i_mam_muc_message_sender_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">BTREE</span><span class="w"> </span><span class="p">(</span><span class="n">sender_id</span><span class="p">);</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <p><strong>MSSQL</strong></p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">mam_muc_message</span><span class="p">]</span> <span class="k">ADD</span> <span class="n">sender_id</span> <span class="nb">bigint</span><span class="p">;</span>
-<span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">i_mam_muc_message_sender_id</span> <span class="k">ON</span> <span class="n">mam_muc_message</span><span class="p">(</span><span class="n">sender_id</span><span class="p">);</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">mam_muc_message</span><span class="p">]</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">sender_id</span><span class="w"> </span><span class="nb">bigint</span><span class="p">;</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">i_mam_muc_message_sender_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="p">(</span><span class="n">sender_id</span><span class="p">);</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <h4 id="step-2">Step 2</h4>
@@ -2862,10 +2862,10 @@ You'll need to iterate over the whole <code>mam_muc_message</code> table with th
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">USE</span> <span class="n">mongooseim</span><span class="p">;</span>
-<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">mam_muc_message</span> <span class="k">ADD</span> <span class="n">from_jid</span> <span class="nb">varchar</span><span class="p">;</span>
-<span class="k">CREATE</span> <span class="k">INDEX</span> <span class="k">ON</span> <span class="n">mam_muc_message</span> <span class="p">(</span><span class="n">from_jid</span><span class="p">);</span>
-<span class="k">DESC</span> <span class="n">mam_muc_message</span><span class="p">;</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">mongooseim</span><span class="p">;</span><span class="w"></span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">from_jid</span><span class="w"> </span><span class="nb">varchar</span><span class="p">;</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="w"> </span><span class="p">(</span><span class="n">from_jid</span><span class="p">);</span><span class="w"></span>
+<span class="k">DESC</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="p">;</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <h4 id="step-2_1">Step 2</h4>
@@ -2874,7 +2874,7 @@ You'll need to iterate over the whole <code>mam_muc_message</code> table with th
 You'll need to iterate over the whole <code>mam_muc_message</code> table with the following algorithm:</p>
 <ol>
 <li>Extract the whole <code>mam_muc_message</code> table. Please make sure to use the paging feature of your Cassandra client, as the MAM tables tend to be very large.
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">mam_muc_message</span><span class="p">;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="p">;</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table></li>
 <li>To make data extraction faster, MongooseIM stores 2 copies of the message in the table:
@@ -2931,7 +2931,7 @@ curl -v -XPUT <span class="nv">$RIAK_HOST</span>/search/schema/mam <span class="
 <p>After that we need to either reload all Riak nodes (restart them) or manually reload the schema on live nodes.
 Reloading the schema on live nodes requires access to Erlang Shell of one of the Riak nodes (any of them).
 The instruction on how to get to Riak's Erlang shell is beyond this guide, but if you manage to get to it, just call:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">yz_index</span><span class="p">:</span><span class="nf">reload</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;mam&quot;</span><span class="o">&gt;&gt;</span><span class="p">).</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">yz_index</span><span class="p">:</span><span class="nf">reload</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;mam&quot;</span><span class="o">&gt;&gt;</span><span class="p">).</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <h4 id="step-2_2">Step 2</h4>
@@ -3115,10 +3115,10 @@ You'll need to iterate over the all <code>muc_messages</code> documents with the
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.361d90f1.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      <script src="../../assets/javascripts/bundle.289a2a4b.min.js"></script>
       
     
   </body>
