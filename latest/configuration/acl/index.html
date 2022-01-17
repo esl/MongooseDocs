@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/configuration/acl/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.6">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.7">
     
     
       
@@ -2753,28 +2753,25 @@
 </ul>
 </li>
 <li><strong>Default:</strong> no default - each access class needs to be specified explicitly.</li>
-<li><strong>Example:</strong> the <code>local</code> access class is used for the regular users connecting to the <a href="../listen/#client-to-server-c2s-listenc2s">C2S listener</a>.</li>
+<li><strong>Example:</strong> the <code>local</code> access class is used for the regular users connecting to the <a href="../listen/#client-to-server-c2s-listenc2s">C2S listener</a>. The pattern <code>{}</code> matches all users from the current server, because it is equivalent to <code>{match = "current_domain}"</code> (see below).</li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">user_regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{}]</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <p>When there are multiple patterns listed, the resulting pattern will be the union of all of them.</p>
 <h2 id="patterns">Patterns</h2>
-<p>The options listed below are used to assign the users to the access class. There are no default values for any of them.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The options can NOT be combined with each other unless the description says otherwise.</p>
-</div>
+<p>Each pattern consists of one or more conditions, specified with the options listed below.
+All defined conditions need to be satisfied for the pattern to be matched successfully.</p>
 <h3 id="aclmatch"><code>acl.*.match</code></h3>
 <ul>
-<li><strong>Syntax:</strong> string, one of: <code>"all"</code>, <code>"none"</code></li>
+<li><strong>Syntax:</strong> string, one of: <code>"all"</code>, <code>"current_domain"</code>, <code>"none"</code></li>
+<li><strong>Default:</strong> <code>"current_domain"</code></li>
 <li><strong>Example:</strong> <code>match = "all"</code></li>
 </ul>
-<p>Matches either all users or none of them. The latter is useful for disabling access to some services.</p>
+<p>By default only users from the <em>current domain</em> (the one of the server) are matched.
+You can set this option to <code>"all"</code>, extending the pattern to users from other domains.
+This makes a difference for some <a href="../access/">access rules</a>, e.g. MAM, MUC and registration ones.
+Setting the option to <code>"none"</code> makes the pattern never match.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">everyone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
@@ -2827,10 +2824,18 @@ The following class includes <code>alice@localhost</code>, but not <code>alice@x
 </ul>
 <p>Matches all JIDs with the specified resource name.
 The following class includes <code>alice@localhost/mobile</code>, but not <code>alice@localhost/home</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">mobile_users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">resource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mobile&quot;</span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"></span>
+</code></pre></div>
+</td></tr></table>
+This option can be combined with <code>user</code> and <code>server</code> - only <code>alice@localhost/mobile</code> belongs to the following class:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">resource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mobile&quot;</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
@@ -3039,7 +3044,7 @@ The following class includes <code>alice@host1</code>, but not <code>alice@xmpp.
     <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.22074ed6.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.1514a9a0.min.js"></script>
+      <script src="../../assets/javascripts/bundle.01de222e.min.js"></script>
       
     
   </body>
