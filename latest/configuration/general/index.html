@@ -883,6 +883,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#generaldomain_certfile" class="md-nav__link">
+    general.domain_certfile
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2960,6 +2967,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#generaldomain_certfile" class="md-nav__link">
+    general.domain_certfile
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3195,6 +3209,34 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 </ul>
 <p>When specified, will terminate certain processes (e.g. client handlers) that have more messages accumulated in the queue than the specified limit, to prevent resource exhaustion.
 This option is set for C2S, outgoing S2S and component connections and can be overridden for particular <code>s2s</code> or <code>service</code> listeners in their configurations. <strong>Use with caution!</strong></p>
+<h3 id="generaldomain_certfile"><code>general.domain_certfile</code></h3>
+<ul>
+<li><strong>Scope:</strong> local</li>
+<li><strong>Syntax:</strong> array of TOML tables with the following mandatory content:<ul>
+<li><code>domain</code> - string, XMPP domain name. In case of dynamic domains it should be a host type instead.</li>
+<li><code>certfile</code> - string, path in the file system</li>
+</ul>
+</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong></li>
+</ul>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">domain_certfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="n">domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost1.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">certfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cert1.pem&quot;</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="n">domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost2.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">certfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cert2.pem&quot;</span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"></span>
+</code></pre></div>
+</td></tr></table>
+<p>This option overrides the configured certificate file for specific local XMPP domains.</p>
+<div class="admonition notes">
+<p class="admonition-title">Notes</p>
+<ul>
+<li>This option applies to <strong>S2S and C2S</strong> connections.</li>
+<li>Each domain (or host type) needs to be included in the list of <a href="#generalhosts"><code>hosts</code></a> or <a href="#generalhost_types"><code>host types</code></a>.</li>
+</ul>
+</div>
 
               
             </article>
