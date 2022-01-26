@@ -1287,6 +1287,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#outgoing_poolsconnectiontlsserver_name_indication_host" class="md-nav__link">
+    outgoing_pools.*.*.connection.tls.server_name_indication_host
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3684,6 +3691,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#outgoing_poolsconnectiontlsserver_name_indication_host" class="md-nav__link">
+    outgoing_pools.*.*.connection.tls.server_name_indication_host
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3910,7 +3924,7 @@ Global distribution (implemented in <code>mod_global_distrib</code>) requires Re
 <li><strong>Example:</strong> <code>password = "topsecret"</code></li>
 </ul>
 <h2 id="riak-options">Riak options</h2>
-<p>Currently only one Riak connection pool can exist for each supported XMPP host (the default pool).</p>
+<p>Currently, only one Riak connection pool can exist for each supported XMPP host (the default pool).</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><code>riak</code> backend is not compatible with <code>available_worker</code> strategy.</p>
@@ -3960,7 +3974,7 @@ Global distribution (implemented in <code>mod_global_distrib</code>) requires Re
 <p>Support for other authentication modules may be added in the future.</p>
 <p>Cassandra also supports all TLS-specific options described in the TLS section.</p>
 <h2 id="elasticsearch-options">Elasticsearch options</h2>
-<p>Currently only one pool tagged <code>default</code> can be used.</p>
+<p>Currently, only one pool tagged <code>default</code> can be used.</p>
 <h3 id="outgoing_poolselasticdefaultconnectionhost"><code>outgoing_pools.elastic.default.connection.host</code></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
@@ -4094,7 +4108,7 @@ Any other <code>Tag</code> can be used for other purposes.</p>
 <li><strong>Default:</strong> <code>"none"</code></li>
 <li><strong>Example:</strong> <code>encrypt = "tls"</code></li>
 </ul>
-<p>LDAP  also supports all TLS-specific options described in the TLS section (provided <code>encrypt</code> is set to <code>tls</code>).</p>
+<p>LDAP also supports all TLS-specific options described in the TLS section (provided <code>encrypt</code> is set to <code>tls</code>).</p>
 <h2 id="tls-options">TLS options</h2>
 <p>TLS options for a given pool type/tag pair are defined in a subsection starting with <code>[outgoing_pools.[pool_type].[pool_tag].connection.tls]</code>.</p>
 <h3 id="outgoing_poolsconnectiontlsrequired"><code>outgoing_pools.*.*.connection.tls.required</code></h3>
@@ -4164,10 +4178,17 @@ If the certificate is signed by an intermediate CA, you should specify here the 
 <h3 id="outgoing_poolsconnectiontlsserver_name_indication"><code>outgoing_pools.*.*.connection.tls.server_name_indication</code></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
-<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Default:</strong> <code>false</code>, but enabled if the <code>verify_peer</code> option is set to <code>true</code></li>
 <li><strong>Example:</strong> <code>tls.server_name_indication = false</code></li>
 </ul>
-<p>Enables SNI extension to TLS protocol.</p>
+<p>Enables SNI extension to TLS protocol. If set to <code>true</code>, the <code>server_name_indication_host</code> option should be provided.</p>
+<h3 id="outgoing_poolsconnectiontlsserver_name_indication_host"><code>outgoing_pools.*.*.connection.tls.server_name_indication_host</code></h3>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>tls.server_name_indication_host = "domain.com"</code></li>
+</ul>
+<p>Domain against which the certificates will be checked, using SNI. It can be specified only when <code>server_name_indication</code> is set to <code>true</code>.</p>
 
               
             </article>
