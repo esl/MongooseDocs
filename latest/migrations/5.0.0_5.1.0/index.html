@@ -2686,7 +2686,11 @@ See the description of <a href="../../configuration/acl/#aclmatch"><code>current
 </ul>
 <p>See the <a href="../../configuration/auth/">auth configuration</a> for details.</p>
 <h3 id="section-s2s">Section <code>s2s</code></h3>
-<p>The <code>domain_certfile</code> option has been moved to the <code>general</code> section because it affects <code>c2s</code> connections as well.</p>
+<ul>
+<li>All options can be set globally or inside <code>host_config</code>.</li>
+<li>The <code>host_config.s2s</code> section overrides the whole global section now. Previously only the specified options were overridden.</li>
+<li>The <code>domain_certfile</code> option has been moved to the <code>general</code> section because it affects <code>c2s</code> connections as well.</li>
+</ul>
 <h3 id="section-host_config">Section <code>host_config</code></h3>
 <p>The rules for overriding global options in the <code>host_config</code> section have been simplified. The <code>auth</code> section and the <code>s2s.address</code> and <code>s2s.host_policy</code> options now completely override the corresponding general settings instead of being merged with them.</p>
 <h2 id="async-workers">Async workers</h2>

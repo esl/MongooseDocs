@@ -3138,14 +3138,7 @@ However, the rule for <code>domain2.com</code> is extended to prevent the <code>
 <p>Some access rules are checked outside of the context of any domain, e.g. the <a href="../listen/#listenserviceaccess">access rule for external components</a> - defining them in <code>host_config</code> would have no effect.</p>
 </div>
 <h3 id="host_configs2s"><code>host_config.s2s</code></h3>
-<p>The options defined here override the ones defined in the top-level <a href="../s2s/"><code>s2s</code></a> section.
-The following options are allowed:</p>
-<ul>
-<li><a href="../s2s/#s2sdefault_policy"><code>default_policy</code></a></li>
-<li><a href="../s2s/#s2shost_policy"><code>host_policy</code></a></li>
-<li><a href="../s2s/#s2sshared"><code>shared</code></a></li>
-<li><a href="../s2s/#s2smax_retry_delay"><code>max_retry_delay</code></a></li>
-</ul>
+<p>This section completely overrides the top-level <a href="../s2s/"><code>s2s</code></a> section, all options are allowed.</p>
 <h4 id="example_5">Example</h4>
 <p>The <code>host_policy</code> option is changed for <code>domain2.com</code>:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -3187,7 +3180,7 @@ The following options are allowed:</p>
 <span class="w">    </span><span class="p">]</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
-<p>The <code>default_policy</code> is still <code>deny</code>.</p>
+<p>Note that <code>default_policy</code> for <code>domain2.com</code> has the default value <code>allow</code>, because <code>host_config.s2s</code> completely overrides the top-level <code>s2s</code> section, and all options are reset to the respective default values, unless they are explicitly changed.</p>
 
               
             </article>
