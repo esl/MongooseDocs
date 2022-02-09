@@ -2994,7 +2994,22 @@
 <p>The test runner script is used to compile MongooseIM and run tests.</p>
 <h2 id="requirements">Requirements</h2>
 <h3 id="docker">Docker</h3>
-<p>Docker must be installed on the local system, and the user executing the tests must have privileges to start new containers (usually achieved by adding the user to the <code>docker</code> group).</p>
+<p>Docker could be installed on the local system, and the user executing the tests must have privileges to start new containers (usually achieved by adding the user to the <code>docker</code> group).</p>
+<p>Alternatively, you can use Podman. Here is how to install it on Mac:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>brew install podman
+podman machine init
+podman machine start
+ln -s /usr/local/bin/podman /usr/local/bin/docker
+</code></pre></div>
+</td></tr></table>
+<p>You can also specify which container supervisor you want to use by defining
+an environment variable in your <code>~/.bashrc</code>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">export</span> <span class="nv">DOCKER</span><span class="o">=</span>podman
+</code></pre></div>
+</td></tr></table>
 <h3 id="freetds-for-mssql-connectivity">FreeTDS for MSSQL connectivity</h3>
 <p>MongooseIM requires FreeTDS in order to connect to MSSQL container.</p>
 <p>Please install the driver:</p>
