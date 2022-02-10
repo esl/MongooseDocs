@@ -1376,6 +1376,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#modulesmod_extdiscoiqdisctype" class="md-nav__link">
+    modules.mod_extdisco.iqdisc.type
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_extdiscoservice" class="md-nav__link">
+    modules.mod_extdisco.service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service-options" class="md-nav__link">
+    Service options
+  </a>
+  
+    <nav class="md-nav" aria-label="Service options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_extdiscoservicetype" class="md-nav__link">
     modules.mod_extdisco.service.type
   </a>
@@ -1414,6 +1436,11 @@
   <a href="#modulesmod_extdiscoservicepassword" class="md-nav__link">
     modules.mod_extdisco.service.password
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2644,6 +2671,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#modulesmod_extdiscoiqdisctype" class="md-nav__link">
+    modules.mod_extdisco.iqdisc.type
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_extdiscoservice" class="md-nav__link">
+    modules.mod_extdisco.service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service-options" class="md-nav__link">
+    Service options
+  </a>
+  
+    <nav class="md-nav" aria-label="Service options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_extdiscoservicetype" class="md-nav__link">
     modules.mod_extdisco.service.type
   </a>
@@ -2689,6 +2738,11 @@
     </nav>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#example-configuration" class="md-nav__link">
@@ -2719,47 +2773,57 @@
 <h2 id="module-description">Module Description</h2>
 <p>Implements <a href="http://xmpp.org/extensions/xep-0215.html">XEP-0215: External Service Discovery</a> for discovering information about services external to the XMPP network.
 The main use-case is to help discover STUN/TURN servers to allow for negotiating media exchanges.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This module does not support <a href="../../configuration/general/#generalhost_types">dynamic domains</a>.</p>
-</div>
 <h2 id="options">Options</h2>
-<h3 id="modulesmod_extdiscoservicetype"><code>modules.mod_extdisco.service.type</code></h3>
+<h3 id="modulesmod_extdiscoiqdisctype"><code>modules.mod_extdisco.iqdisc.type</code></h3>
+<ul>
+<li><strong>Syntax:</strong> string, one of <code>"one_queue"</code>, <code>"no_queue"</code>, <code>"queues"</code>, <code>"parallel"</code></li>
+<li><strong>Default:</strong> <code>"no_queue"</code></li>
+</ul>
+<p>Strategy to handle incoming IQ stanzas. For details, please refer to
+<a href="../../configuration/Modules/#iq-processing-policies">IQ processing policies</a>.</p>
+<h3 id="modulesmod_extdiscoservice"><code>modules.mod_extdisco.service</code></h3>
+<ul>
+<li><strong>Syntax:</strong> TOML array with one table for each advertised service - see below for details.</li>
+<li><strong>Default:</strong> <code>[]</code> - no services advertised</li>
+</ul>
+<h3 id="service-options">Service options</h3>
+<p>Each advertised service is specified as a TOML table containing the following options listed below.</p>
+<h4 id="modulesmod_extdiscoservicetype"><code>modules.mod_extdisco.service.type</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> none, this option is required</li>
 <li><strong>Example:</strong> <code>type = "stun"</code></li>
 </ul>
 <p>Service type, common values are <code>"stun"</code>, <code>"turn"</code>, <code>"ftp"</code>.</p>
-<h3 id="modulesmod_extdiscoservicehost"><code>modules.mod_extdisco.service.host</code></h3>
+<h4 id="modulesmod_extdiscoservicehost"><code>modules.mod_extdisco.service.host</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> none, this option is required</li>
 <li><strong>Example:</strong> <code>host = "192.168.0.2"</code></li>
 </ul>
 <p>Hostname or an IP address where the service is hosted.</p>
-<h3 id="modulesmod_extdiscoserviceport"><code>modules.mod_extdisco.service.port</code></h3>
+<h4 id="modulesmod_extdiscoserviceport"><code>modules.mod_extdisco.service.port</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> none, this option is recommended</li>
 <li><strong>Example:</strong> <code>port = "3478"</code></li>
 </ul>
 <p>The communications port to be used at the host.</p>
-<h3 id="modulesmod_extdiscoservicetransport"><code>modules.mod_extdisco.service.transport</code></h3>
+<h4 id="modulesmod_extdiscoservicetransport"><code>modules.mod_extdisco.service.transport</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"udp"</code>, <code>"tcp"</code></li>
 <li><strong>Default:</strong> none, this option is optional</li>
 <li><strong>Example:</strong> <code>transport = "udp"</code></li>
 </ul>
 <p>The underlying transport protocol to be used when communicating with the service.</p>
-<h3 id="modulesmod_extdiscoserviceusername"><code>modules.mod_extdisco.service.username</code></h3>
+<h4 id="modulesmod_extdiscoserviceusername"><code>modules.mod_extdisco.service.username</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> none, this option is optional</li>
 <li><strong>Example:</strong> <code>username = "username"</code></li>
 </ul>
 <p>A service-generated username for use at the service.</p>
-<h3 id="modulesmod_extdiscoservicepassword"><code>modules.mod_extdisco.service.password</code></h3>
+<h4 id="modulesmod_extdiscoservicepassword"><code>modules.mod_extdisco.service.password</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> none, this option is optional</li>
@@ -2784,7 +2848,11 @@ The main use-case is to help discover STUN/TURN servers to allow for negotiating
 <span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
-<span class="normal">18</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_extdisco]</span><span class="w"></span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_extdisco]</span><span class="w"></span>
+
 <span class="w">  </span><span class="k">[[modules.mod_extdisco.service]]</span><span class="w"></span>
 <span class="w">    </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;stun&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;127.0.0.1&quot;</span><span class="w"></span>
@@ -2792,6 +2860,7 @@ The main use-case is to help discover STUN/TURN servers to allow for negotiating
 <span class="w">    </span><span class="n">transport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;udp&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;username&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;password&quot;</span><span class="w"></span>
+
 <span class="w">  </span><span class="k">[[modules.mod_extdisco.service]]</span><span class="w"></span>
 <span class="w">    </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;stun&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;stun.host.com&quot;</span><span class="w"></span>
@@ -2799,6 +2868,7 @@ The main use-case is to help discover STUN/TURN servers to allow for negotiating
 <span class="w">    </span><span class="n">transport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tcp&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;username2&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;password2&quot;</span><span class="w"></span>
+
 <span class="w">  </span><span class="k">[[modules.mod_extdisco.service]]</span><span class="w"></span>
 <span class="w">    </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;turn&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;turn.host.com&quot;</span><span class="w"></span>
