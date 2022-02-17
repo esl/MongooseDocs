@@ -811,13 +811,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#outgoing_poolsrdbmsconnectioncall_timeout" class="md-nav__link">
-    outgoing_pools.rdbms.*.connection.call_timeout
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -3222,13 +3215,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#outgoing_poolsrdbmsconnectioncall_timeout" class="md-nav__link">
-    outgoing_pools.rdbms.*.connection.call_timeout
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -3736,8 +3722,8 @@
 
   <h1>Options: Outgoing connections</h1>
 
-<p>MongooseIM can be configured to talk to external services like databases or HTTP servers in order to get or set the required data.
-The interface for outgoing connections management was unified and is now available via the <code>outgoing_pools</code> config option for the following type of connections:</p>
+<p>MongooseIM can be configured to talk to external services like databases or HTTP servers.
+The interface for outgoing connections management is available via the <code>outgoing_pools</code> config option for the following types of connections:</p>
 <ul>
 <li><code>cassandra</code> - pool of connections to Cassandra cluster</li>
 <li><code>riak</code> - pool of connections to Riak cluster</li>
@@ -3786,15 +3772,15 @@ This allows you to create multiple dedicated pools of the same type.</p>
 <h3 id="outgoing_poolsworkers"><code>outgoing_pools.*.*.workers</code></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
-<li><strong>Default:</strong> 100</li>
-<li><strong>Example:</strong> <code>workers = 10</code></li>
+<li><strong>Default:</strong> 10 (20 for Cassandra pool)</li>
+<li><strong>Example:</strong> <code>workers = 100</code></li>
 </ul>
 <p>Number of workers to be started by the pool.</p>
 <h3 id="outgoing_poolscall_timeout"><code>outgoing_pools.*.*.call_timeout</code></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
-<li><strong>Default:</strong> 5000</li>
-<li><strong>Example:</strong> <code>call_timeout = 5000</code></li>
+<li><strong>Default:</strong> 5000 (60000 for RDBMS pool)</li>
+<li><strong>Example:</strong> <code>call_timeout = 3000</code></li>
 </ul>
 <p>Number of milliseconds after which a call to the pool will time out.</p>
 <h2 id="connection-options">Connection options</h2>
@@ -3820,13 +3806,6 @@ For example:</p>
 <li><strong>Example:</strong> <code>driver = "psgql"</code></li>
 </ul>
 <p>Selects the driver for RDBMS connection. The choice of a driver impacts the set of available options.</p>
-<h4 id="outgoing_poolsrdbmsconnectioncall_timeout"><code>outgoing_pools.rdbms.*.connection.call_timeout</code></h4>
-<ul>
-<li><strong>Syntax:</strong> positive integer</li>
-<li><strong>Default:</strong> 60000 (msec)</li>
-<li><strong>Example:</strong> <code>call_timeout = 60000</code></li>
-</ul>
-<p>RDBMS pool sets its own default value of this option.</p>
 <h3 id="odbc-options">ODBC options</h3>
 <h4 id="outgoing_poolsrdbmsconnectionsettings"><code>outgoing_pools.rdbms.*.connection.settings</code></h4>
 <ul>
