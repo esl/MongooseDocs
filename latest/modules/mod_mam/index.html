@@ -1666,13 +1666,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_mam_metardbms_message_format" class="md-nav__link">
-    modules.mod_mam_meta.rdbms_message_format
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#modulesmod_mam_metaasync_writerenabled" class="md-nav__link">
     modules.mod_mam_meta.async_writer.enabled
   </a>
@@ -1826,13 +1819,6 @@
           <li class="md-nav__item">
   <a href="#modulesmod_mam_metadb_message_format" class="md-nav__link">
     modules.mod_mam_meta.db_message_format
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_mam_metasimple" class="md-nav__link">
-    modules.mod_mam_meta.simple
   </a>
   
 </li>
@@ -3184,13 +3170,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_mam_metardbms_message_format" class="md-nav__link">
-    modules.mod_mam_meta.rdbms_message_format
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#modulesmod_mam_metaasync_writerenabled" class="md-nav__link">
     modules.mod_mam_meta.async_writer.enabled
   </a>
@@ -3344,13 +3323,6 @@
           <li class="md-nav__item">
   <a href="#modulesmod_mam_metadb_message_format" class="md-nav__link">
     modules.mod_mam_meta.db_message_format
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_mam_metasimple" class="md-nav__link">
-    modules.mod_mam_meta.simple
   </a>
   
 </li>
@@ -3587,7 +3559,7 @@ This functionality is currently implemented only for the <code>rdbms</code> back
 </div>
 <h4 id="example">Example</h4>
 <p>The example below presents how to override common option for <code>muc</code> module specifically.
-Please note that you can override all common options in similar way.</p>
+Please note that you can override all common options (except <code>cache</code>) in a similar way.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -3621,18 +3593,6 @@ Please note that you can override all common options in similar way.</p>
 <li><strong>Example:</strong> <code>modules.mod_mam_meta.cache.module = "mod_cache_users"</code></li>
 </ul>
 <p>Configures which cache to use, either start an internal instance, or reuse the cache created by <code>mod_cache_users</code>, if such module was enabled. Note that if reuse is desired – that is, <code>cache.module = "mod_cache_users"</code>, other cache configuration parameters are not allowed.</p>
-<h4 id="modulesmod_mam_metardbms_message_format"><code>modules.mod_mam_meta.rdbms_message_format</code></h4>
-<ul>
-<li><strong>Syntax:</strong> string, one of <code>"internal"</code> and <code>"simple"</code></li>
-<li><strong>Default:</strong> <code>"internal"</code></li>
-<li><strong>Example:</strong> <code>modules.mod_mam_meta.rdbms_message_format = "simple"</code></li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Archive MUST be empty to change this option</p>
-</div>
-<p>When set to <code>simple</code>, stores messages in XML and full JIDs.
-When set to <code>internal</code>, stores messages and JIDs in internal format.</p>
 <h4 id="modulesmod_mam_metaasync_writerenabled"><code>modules.mod_mam_meta.async_writer.enabled</code></h4>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
@@ -3745,31 +3705,25 @@ Please consult <a href="../../configuration/outgoing-connections/#elasticsearch-
 <h4 id="modulesmod_mam_metadb_jid_format"><code>modules.mod_mam_meta.db_jid_format</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"mam_jid_rfc"</code>, <code>"mam_jid_mini"</code> or a module implementing <code>mam_jid</code> behaviour</li>
-<li><strong>Default:</strong> <code>"mam_jid_rfc"</code> for <code>mod_mam_muc_rdbms_arch</code>, <code>"mam_jid_mini"</code> for <code>mod_mam_rdbms_arch</code></li>
+<li><strong>Default:</strong> <code>"mam_jid_rfc"</code> for MUC archive, <code>"mam_jid_mini"</code> for PM archive</li>
 <li><strong>Example:</strong> <code>modules.mod_mam_meta.db_jid_format = "mam_jid_mini"</code></li>
 </ul>
-<p>Sets the internal MAM jid encoder/decoder module for RDBMS.
-It is set to <code>"mam_jid_rfc"</code> when <a href="#modulesmod_mam_metardbms_message_format"><code>rdbms_message_format</code></a> is set to <code>"simple"</code>.</p>
+<p>Sets the internal MAM jid encoder/decoder module for RDBMS.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Archive MUST be empty to change this option</p>
+</div>
 <h4 id="modulesmod_mam_metadb_message_format"><code>modules.mod_mam_meta.db_message_format</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"mam_message_xml"</code>, <code>"mam_message_eterm"</code>, <code>"mam_message_compressed_eterm"</code> or a module implementing <code>mam_message</code> behaviour</li>
-<li><strong>Default:</strong> different values for different backends, described below.</li>
+<li><strong>Default:</strong> <code>"mam_message_compressed_eterm"</code> for RDBMS, <code>"mam_message_xml"</code> for Riak and Cassandra</li>
 <li><strong>Example:</strong> <code>modules.mod_mam_meta.db_message_format = "mam_message_compressed_eterm"</code></li>
 </ul>
-<p>Sets the internal MAM message encoder/decoder module.
-Default values for:</p>
-<ul>
-<li>RDBMS: <code>"mam_message_compressed_eterm"</code> by default, and <code>"mam_message_xml"</code> when <a href="#modulesmod_mam_metardbms_message_format"><code>rdbms_message_format</code></a> is set to <code>"simple"</code></li>
-<li>Riak: <code>"mam_message_xml"</code></li>
-<li>Cassandra: <code>"mam_message_compressed_eterm"</code>  by default, and <code>"mam_message_xml"</code> when <a href="#modulesmod_mam_metasimple"><code>simple</code></a> is set to <code>true</code></li>
-</ul>
-<h4 id="modulesmod_mam_metasimple"><code>modules.mod_mam_meta.simple</code></h4>
-<ul>
-<li><strong>Syntax:</strong> boolean</li>
-<li><strong>Default:</strong> <code>false</code></li>
-<li><strong>Example:</strong> <code>modules.mod_mam_meta.simple = true</code></li>
-</ul>
-<p>Sets <code>db_message_format</code> to <code>"mam_message_xml"</code> for Cassandra.</p>
+<p>Sets the internal MAM message encoder/decoder module.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Archive MUST be empty to change this option</p>
+</div>
 <h4 id="modulesmod_mam_metaextra_fin_element"><code>modules.mod_mam_meta.extra_fin_element</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, a module implementing the <code>extra_fin_element/3</code> callback</li>
@@ -3802,7 +3756,7 @@ It can be useful to be able to add information to a mam query, that doesn't belo
 <span class="w">  </span><span class="n">pm</span><span class="p">.</span><span class="n">user_prefs_store</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rdbms&quot;</span><span class="w"></span>
 
 <span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;muc.example.com&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">rdbms_message_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;simple&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">db_message_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mam_message_xml&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span><span class="p">.</span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
 <span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">user_prefs_store</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mnesia&quot;</span><span class="w"></span>
 </code></pre></div>
