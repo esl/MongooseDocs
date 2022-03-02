@@ -2865,10 +2865,10 @@ Come on, it’s not that bad!</p>
 On the one hand, a custom solution means building everything from scratch, that takes time.
 On the other hand, we have XMPP, a super tested technology broadly used by millions of people every day,
 so we can say that’s an advantage over a custom approach.</p>
-<p>Everytime I talk about XMPP, someone asks me 'Why not just REST?’.
+<p>Every time I talk about XMPP, someone asks me 'Why not just REST?’.
 Well, there is a misconception here.
 REST is not a protocol, it’s just a way of architecting a networked application;
-it’s just a standarized way of doing something (that I love btw).
+it’s just a standardized way of doing something (that I love btw).
 So let’s change the question to something that makes more sense:
 “Why not just build a custom REST chat application?”.
 The first thing that comes to my mind is what I already explained in the previous paragraph,
@@ -2886,7 +2886,7 @@ So, we will have to add a mechanism that allows us to receive the messages as so
 like SSE or WebSockets.</p>
 <p>There is one more XMPP advantage over a custom REST chat application.
 REST uses HTTP, an application level protocol that is built on top of a transport level protocol: TCP.
-So everytime you want to use your REST solution,
+So every time you want to use your REST solution,
 you will need HTTP,
 a protocol that is not always available everywhere (maybe you need to embed this in a cheap piece of hardware?).
 Besides, we have XMPP built on top of TCP that’s going to be always available.</p>
@@ -2898,7 +2898,7 @@ Besides, we have XMPP built on top of TCP that’s going to be always available.
 <li>Everything we send and receive is going to be XML and it’s called Stanza.</li>
 <li>We have three different types of stanzas: iq, message and presence.</li>
 <li>Every individual on the XMPP network is univocally identified by a JID (Jabber ID).</li>
-<li>All the stanzas are cointained in a Stream. Let’s imagine the Stream as a white canvas where you and the server write the stanzas.</li>
+<li>All the stanzas are contained in a Stream. Let’s imagine the Stream as a white canvas where you and the server write the stanzas.</li>
 <li>Stream, iq, message and presence are the core of XMPP. You can find everything perfectly detailed in RFC6120
 XMPP can be extended to accomplish different stuff. Each extension is called XEP (XMPP Extension Protocol).</li>
 </ul>
@@ -2928,7 +2928,7 @@ but don’t worry about this right now, just remember: you can have JIDs without
 The defined stanzas are: <code>&lt;message/&gt;</code>, <code>&lt;presence/&gt;</code> and <code>&lt;iq/&gt;</code>.</p>
 <h3 id="message"><code>&lt;message/&gt;</code></h3>
 <p>This is a basic <code>&lt;message/&gt;</code> stanza.
-Everytime you want to send a message to someone (a JID), you will have to send this stanza:</p>
+Every time you want to send a message to someone (a JID), you will have to send this stanza:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -2985,11 +2985,11 @@ For example, we send an `iq` to the server to do something
 <h3 id="presence"><code>&lt;presence/&gt;</code></h3>
 <p>Used to exchange presence information, as you could have imagined.
 Usually presences are sent from the client to the server and broadcasted by it.
-The most basic, yet valid presence, to indicate to the server that a user is avaiable is:</p>
+The most basic, yet valid presence, to indicate to the server that a user is available is:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;presence/&gt;</span>
 </code></pre></div>
 </td></tr></table>
-<p>After a sucessfull connection,
+<p>After a successful connection,
 you are not going to receive any <code>&lt;message/&gt;</code> until you make yourself available sending the previous presence.</p>
 <p>If you want to make yourself unavailable, you just have to send:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;presence</span> <span class="na">type=</span><span class="s">&quot;unavailable&quot;</span><span class="nt">&gt;&lt;/presence&gt;</span>
@@ -3014,11 +3014,11 @@ So the client is going to write to this file and server too.</p>
 <p>Ok, but how is a socket related to a Stream?
 Well, we are going to be connected to a server using a socket,
 therefore we are going to have a 'shared file’ between the client and the server.
-This shared file is a white canvas where we are going to start writting our XML stanzas.
+This shared file is a white canvas where we are going to start writing our XML stanzas.
 The first thing we are going to write to this file is an opening <code>&lt;stream&gt;</code> tag! 
 And there you go… that’s our stream.</p>
 <p>Perfect, I understand what a stream is, but I still don’t understand how to send a message to the server.
-Well, the only thing we need to do to send a message is writting a <message/> stanza in our shared file.
+Well, the only thing we need to do to send a message is writing a <message/> stanza in our shared file.
 But what happens when the server wants to send me a message?
 Simple: it will write the message in the 'shared file’.</p>
 <h2 id="are-we-ok-so-far">Are we ok so far?</h2>
@@ -3250,7 +3250,7 @@ in the previous example we want it in the main thread.</p>
 <p>Our app is super ugly, let’s put on some makeup!
 We have nothing but an <code>XMPPController</code> and a hardcoded call in the <code>AppDelegate</code>.
 I’m going to create a <code>ViewController</code> that is going to be presented modally as soon as the app starts,
-that <code>ViewController</code> will have the neccesary fields/info to log in to the server.</p>
+that <code>ViewController</code> will have the necessary fields/info to log in to the server.</p>
 <p>I’m going to create a <code>LogInViewControllerDelegate</code> that is going to tell to our <code>ViewController</code>
 that the <code>Log in</code> button was pressed and that’s it.
 In that delegate implementation we are going to create our <code>XMPPController</code>, add the <code>ViewControlleras</code> delegate of the <code>XMPPStream</code> and connect!</p>
@@ -3287,8 +3287,8 @@ In that delegate implementation we are going to create our <code>XMPPController<
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
-<p>Why are we adding <code>ViewController</code> as a delegate of <code>XMPPStream</code> if our <code>XMPPController</code> alreay has that delegate implemented?
-Because we need to know if this connection and authentication was successfull or notin our <code>ViewController</code>
+<p>Why are we adding <code>ViewController</code> as a delegate of <code>XMPPStream</code> if our <code>XMPPController</code> already has that delegate implemented?
+Because we need to know if this connection and authentication was successful or not in our <code>ViewController</code>
 so we are able to dismiss the <code>LogInViewController</code> or show an error message if something failed.
 This is why being able to add multiple delegates is so useful.</p>
 <p>So as I said I’m going to make <code>ViewController</code> to comform to the <code>XMPPStreamDelegate</code>:</p>

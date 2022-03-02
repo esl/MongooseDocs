@@ -2913,7 +2913,7 @@ cqlsh:mongooseim&gt; SELECT * FROM mam_muc_message WHERE id = 399582233150625537
 </ol>
 <h3 id="riak">Riak</h3>
 <p>Changes to Riak schema are backward compatible with the current MongooseIM release.
-This means that skipping the migration will cause only some of the new features (namely GDPR data retrival) to not work correctly.</p>
+This means that skipping the migration will cause only some of the new features (namely GDPR data retrieval) to not work correctly.</p>
 <h4 id="step-1_2">Step 1</h4>
 <p>Please update the Riak schema:
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -2937,7 +2937,7 @@ The instruction on how to get to Riak's Erlang shell is beyond this guide, but i
 </td></tr></table>
 <h4 id="step-2_2">Step 2</h4>
 <p>After the schema is posted and reloaded, all "new" objects will be indexed properly as long they contain 2 new fields: <code>msg_owner_jid</code> and <code>mam_type</code>.
-The new MongooseIM code will insert both of them for all new MAM entires, but for all existing ones need to have the fields added.
+The new MongooseIM code will insert both of them for all new MAM entries, but for all existing ones need to have the fields added.
 In order to do that, we need to create a migration script (just pick your favourite scripting/programming language) that will do the following for <em>each</em> object in <em>each</em> bucket of type <code>mam_yz</code> (the object will be referred as <code>obj</code>):</p>
 <ul>
 <li>Use <a href="../jid-from-mam-muc-script/">this dedicated script</a> to convert the <code>obj.packet_register</code> field value into a so called <code>$SENDER_JID</code>.</li>
