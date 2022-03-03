@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/modules/mod_inbox/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.3">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.4">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.e8d9bf0c.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2d9f7617.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
@@ -33,6 +33,7 @@
     
     
       
+        
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
@@ -1418,6 +1419,26 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#modulesmod_inboxbackend" class="md-nav__link">
+    modules.mod_inbox.backend
+  </a>
+  
+    <nav class="md-nav" aria-label="modules.mod_inbox.backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_inboxasync_writerpool_size" class="md-nav__link">
+    modules.mod_inbox.async_writer.pool_size
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_inboxreset_markers" class="md-nav__link">
     modules.mod_inbox.reset_markers
   </a>
@@ -2651,6 +2672,26 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#modulesmod_inboxbackend" class="md-nav__link">
+    modules.mod_inbox.backend
+  </a>
+  
+    <nav class="md-nav" aria-label="modules.mod_inbox.backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_inboxasync_writerpool_size" class="md-nav__link">
+    modules.mod_inbox.async_writer.pool_size
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_inboxreset_markers" class="md-nav__link">
     modules.mod_inbox.reset_markers
   </a>
@@ -2736,6 +2777,20 @@
 It is described in detail as our <a href="../../open-extensions/inbox/">Open XMPP Extension</a>.
 To use it, enable mod_inbox in the config file.</p>
 <h2 id="options">Options</h2>
+<h3 id="modulesmod_inboxbackend"><code>modules.mod_inbox.backend</code></h3>
+<ul>
+<li><strong>Syntax:</strong> string, one of <code>"rdbms"</code>, <code>"rdbms_async"</code></li>
+<li><strong>Default:</strong> <code>"rdbms"</code></li>
+<li><strong>Example:</strong> <code>backend = "rdbms_async"</code></li>
+</ul>
+<p>Only RDBMS storage is supported, but <code>rdbms</code> means flushes to inbox are synchronous with each message, while <code>rdbms_async</code> is instead asynchronous. For performance reasons, <code>rdbms_async</code> is almost always preferred, but, it doesn't ensure the same consistency characteristics, as different MongooseIM nodes might race on updates.</p>
+<h4 id="modulesmod_inboxasync_writerpool_size"><code>modules.mod_inbox.async_writer.pool_size</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> <code>2 * erlang:system_info(schedulers_online)</code></li>
+<li><strong>Example:</strong> <code>modules.mod_inbox.async_writer.pool_size = 32</code></li>
+</ul>
+<p>Number of workers in the pool. More than the number of available schedulers is recommended, to minimise lock contention on the message queues, and more than the number of DB workers, to fully utilise the DB capacity. How much more than these two parameters is then a good fine-tuning for specific deployments.</p>
 <h3 id="modulesmod_inboxreset_markers"><code>modules.mod_inbox.reset_markers</code></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings, out of <code>"displayed"</code>, <code>"received"</code>, <code>"acknowledged"</code></li>
@@ -2892,7 +2947,7 @@ or <a href="https://xmpp.org/extensions/xep-0045.html#affil">affiliation</a> cha
     <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.bd0b6b67.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.b88e97c5.min.js"></script>
+      <script src="../../assets/javascripts/bundle.5413a266.min.js"></script>
       
     
   </body>
