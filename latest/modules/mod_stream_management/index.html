@@ -2852,6 +2852,7 @@ while the management of the session tables and configuration is implemented in
 <li><strong>Default:</strong> "mnesia"</li>
 <li><strong>Example:</strong> <code>backend = "mnesia"</code></li>
 </ul>
+<p>Currently, only "mnesia" is supported.</p>
 <h3 id="modulesmod_stream_managementbuffer"><code>modules.mod_stream_management.buffer</code></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
@@ -2928,7 +2929,7 @@ while the management of the session tables and configuration is implemented in
 </td></tr></table>
 <h2 id="implementation-details">Implementation details</h2>
 <h3 id="in-ejabberd_c2s">In <code>ejabberd_c2s</code></h3>
-<p>The record <code>#smgc_state{}</code> in the <code>ejabberd_c2s</code> <code>gen_fsm</code> server keeps fields like:</p>
+<p>The <code>state</code> record in the <code>ejabberd_c2s</code> <code>gen_fsm</code> server keeps fields like:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -2946,9 +2947,9 @@ while the management of the session tables and configuration is implemented in
 <span class="n">stream_mgmt_out_acked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="c">%% messages delivered to the user, and acked by the user (user&#39;s &lt;h&gt;)</span><span class="w"></span>
 <span class="n">stream_mgmt_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="c">%% buffered stanzas not yet acked by the user</span><span class="w"></span>
 <span class="n">stream_mgmt_buffer_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="c">%% amount of messages buffered for the user</span><span class="w"></span>
-<span class="n">stream_mgmt_buffer_max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="nv">STREAM_MGMT_CACHE_MAX</span><span class="p">,</span><span class="w"> </span><span class="c">%% server&#39;s capacity for buffering</span><span class="w"></span>
-<span class="n">stream_mgmt_ack_freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="nv">STREAM_MGMT_ACK_FREQ</span><span class="p">,</span><span class="w"> </span><span class="c">%% how often the server requests acks</span><span class="w"></span>
-<span class="n">stream_mgmt_resume_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="nv">STREAM_MGMT_RESUME_TIMEOUT</span><span class="p">,</span><span class="w"> </span><span class="c">%% resumption timeout</span><span class="w"></span>
+<span class="n">stream_mgmt_buffer_max</span><span class="p">,</span><span class="w"> </span><span class="c">%% server&#39;s capacity for buffering</span><span class="w"></span>
+<span class="n">stream_mgmt_ack_freq</span><span class="p">,</span><span class="w"> </span><span class="c">%% how often the server requests acks</span><span class="w"></span>
+<span class="n">stream_mgmt_resume_timeout</span><span class="p">,</span><span class="w"> </span><span class="c">%% resumption timeout</span><span class="w"></span>
 <span class="n">stream_mgmt_resume_tref</span><span class="p">,</span><span class="w"> </span><span class="c">%% a ref() to pattern-match a given timeout</span><span class="w"></span>
 <span class="n">stream_mgmt_resumed_from</span><span class="p">,</span><span class="w"> </span><span class="c">%% a ejabberd_sm:sid() to keep identifiying the old session</span><span class="w"></span>
 <span class="n">stream_mgmt_constraint_check_tref</span><span class="p">,</span><span class="w"> </span><span class="c">%% another ref() for a timeout, this time for buffer_full check</span><span class="w"></span>
@@ -2957,7 +2958,7 @@ while the management of the session tables and configuration is implemented in
 <h3 id="in-mod_stream_management">In <code>mod_stream_management</code></h3>
 <p>This module is just a "starter", to provide the configuration values to new client connections. It
 also provides a basic session table API and adds a new stream feature.</p>
-<p>At a bare minimum, this module keeps the config values in its <code>gen_mod</code> records, and keeps a mnesia
+<p>This module keeps the config values in its <code>gen_mod</code> records, and its mnesia backend keeps a
 table defined as follows:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
