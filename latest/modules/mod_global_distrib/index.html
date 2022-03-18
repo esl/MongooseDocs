@@ -1711,13 +1711,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#overriding-remote-datacenter-endpoints" class="md-nav__link">
-    Overriding remote datacenter endpoints
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#example-configuration" class="md-nav__link">
     Example configuration
   </a>
@@ -1728,13 +1721,6 @@
           <li class="md-nav__item">
   <a href="#configuring-mod_global_distrib" class="md-nav__link">
     Configuring mod_global_distrib
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#overriding-endpoints-to-a-remote-datacenter" class="md-nav__link">
-    Overriding endpoints to a remote datacenter
   </a>
   
 </li>
@@ -3272,13 +3258,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#overriding-remote-datacenter-endpoints" class="md-nav__link">
-    Overriding remote datacenter endpoints
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#example-configuration" class="md-nav__link">
     Example configuration
   </a>
@@ -3289,13 +3268,6 @@
           <li class="md-nav__item">
   <a href="#configuring-mod_global_distrib" class="md-nav__link">
     Configuring mod_global_distrib
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#overriding-endpoints-to-a-remote-datacenter" class="md-nav__link">
-    Overriding endpoints to a remote datacenter
   </a>
   
 </li>
@@ -3475,10 +3447,10 @@ The endpoint list will be shared with other datacenters via the replicated backe
 <h4 id="modulesmod_global_distribconnectionsadvertised_endpoints"><code>modules.mod_global_distrib.connections.advertised_endpoints</code></h4>
 <ul>
 <li><strong>Syntax:</strong> Array of TOML tables with the following keys: <code>host</code> and <code>port</code>, and the following values: {host = <code>string</code>, port = <code>non_negative_integer</code>}</li>
-<li><strong>Default:</strong> not set</li>
+<li><strong>Default:</strong> not set, the value of <code>endpoints</code> is used (without resolution).</li>
 <li><strong>Example:</strong> <code>advertised_endpoints = [{host = "172.16.0.2", port = 5555}]</code></li>
 </ul>
-<p>A list of endpoints which will be advertised in Redis and therefore used to establish connection with this node by other nodes. If not specified, <code>endpoints</code> value (after resolution) is considered <code>advertised_endpoints</code>. The host may be either IP or domain, just like in case of endpoints. The difference is, the domain name won't be resolved but inserted directly to the mappings backend instead.</p>
+<p>A list of endpoints which will be advertised in Redis and therefore used to establish connection with this node by other nodes. The host may be either IP or domain, just like in case of endpoints. The difference is, the domain name won't be resolved but inserted directly to the mappings backend instead.</p>
 <h4 id="modulesmod_global_distribconnectionsconnections_per_endpoint"><code>modules.mod_global_distrib.connections.connections_per_endpoint</code></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
@@ -3531,7 +3503,7 @@ These options will be passed to the <code>fast_tls</code> driver.</p>
 <h4 id="modulesmod_global_distribconnectionstlsciphers"><code>modules.mod_global_distrib.connections.tls.ciphers</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
-<li><strong>Default:</strong> not set</li>
+<li><strong>Default:</strong> <code>"TLSv1.2:TLSv1.3"</code></li>
 <li><strong>Example:</strong> <code>ciphers = "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384"</code></li>
 </ul>
 <p>Cipher suites to use with StartTLS or TLS. Please refer to the <a href="https://www.openssl.org/docs/man1.0.2/man1/ciphers.html">OpenSSL documentation</a> for the cipher string format.</p>
@@ -3620,9 +3592,6 @@ Setting this option to <code>false</code> makes other <code>bounce</code> option
 <p>Number of times message delivery will be retried in case of errors.</p>
 <h3 id="global-distribution-and-service-discovery">Global Distribution and Service Discovery</h3>
 <p><code>mod_global_distrib</code> extension relies on <a href="../mod_disco/"><code>mod_disco</code></a>'s option <code>users_can_see_hidden_services</code>, when provided. If it is not configured, the default value is <code>true</code>. <code>mod_disco</code> does not have to be enabled for <code>mod_global_distrib</code> to work, as this parameter is used only for processing Disco requests by Global Distribution.</p>
-<h2 id="overriding-remote-datacenter-endpoints">Overriding remote datacenter endpoints</h2>
-<p>There may be cases when the endpoint list given via <strong>endpoints</strong> option does not accurately specify endpoints on which the node may be reached from other datacenters; e.g. in case the node is behind NAT, or in testing environment.
-The endpoints used for connection to a remote datacenter may be overridden by global option <code>{ {global_distrib_addr, Host}, [{IP, Port}] }</code>.</p>
 <h2 id="example-configuration">Example configuration</h2>
 <h3 id="configuring-mod_global_distrib">Configuring mod_global_distrib</h3>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -3648,10 +3617,6 @@ The endpoints used for connection to a remote datacenter may be overridden by gl
 <span class="w">  </span><span class="n">bounce</span><span class="p">.</span><span class="n">resend_after_ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">300</span><span class="w"></span>
 <span class="w">  </span><span class="n">bounce</span><span class="p">.</span><span class="n">max_retries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"></span>
 <span class="w">  </span><span class="n">redis</span><span class="p">.</span><span class="n">pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;global_distrib&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
-<h3 id="overriding-endpoints-to-a-remote-datacenter">Overriding endpoints to a remote datacenter</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="p">{</span><span class="n">global_distrib_addr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;datacenter2.example.com&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">[{</span><span class="s">&quot;124.12.4.3&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5556</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;182.172.23.55&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5555</span><span class="p">}]</span><span class="w"> </span><span class="p">}.</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <h3 id="configuring-dynomite">Configuring Dynomite</h3>
