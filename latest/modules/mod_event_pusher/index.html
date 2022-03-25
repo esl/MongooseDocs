@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/modules/mod_event_pusher/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.6">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.7">
     
     
       
@@ -1305,19 +1305,12 @@
     Module Description
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#options" class="md-nav__link">
-    Options
-  </a>
-  
-    <nav class="md-nav" aria-label="Options">
+    <nav class="md-nav" aria-label="Module Description">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusherbackend" class="md-nav__link">
-    modules.mod_event_pusher.backend
+  <a href="#how-it-works" class="md-nav__link">
+    How it works
   </a>
   
 </li>
@@ -1328,8 +1321,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-configuration" class="md-nav__link">
-    Example configuration
+  <a href="#configuration" class="md-nav__link">
+    Configuration
   </a>
   
 </li>
@@ -1377,8 +1370,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../mod_event_pusher_sns/" class="md-nav__link">
-        SNS backend
+      <a href="../mod_event_pusher_rabbit/" class="md-nav__link">
+        RabbitMQ backend
       </a>
     </li>
   
@@ -1391,8 +1384,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../mod_event_pusher_rabbit/" class="md-nav__link">
-        RabbitMQ backend
+      <a href="../mod_event_pusher_sns/" class="md-nav__link">
+        SNS backend
       </a>
     </li>
   
@@ -2629,19 +2622,12 @@
     Module Description
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#options" class="md-nav__link">
-    Options
-  </a>
-  
-    <nav class="md-nav" aria-label="Options">
+    <nav class="md-nav" aria-label="Module Description">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusherbackend" class="md-nav__link">
-    modules.mod_event_pusher.backend
+  <a href="#how-it-works" class="md-nav__link">
+    How it works
   </a>
   
 </li>
@@ -2652,8 +2638,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-configuration" class="md-nav__link">
-    Example configuration
+  <a href="#configuration" class="md-nav__link">
+    Configuration
   </a>
   
 </li>
@@ -2680,28 +2666,27 @@
 
 <h2 id="module-description">Module Description</h2>
 <p>This module is a generic interface for event-pushing backends.
-It defines a single callback, <code>push_event/3</code> that forwards the event to all registered backends.
+It defines a single callback, <code>push_event/2</code> that forwards the event to all registered backends.
 Each backend decides how and if to handle the event in its <code>push_event/2</code> implementation.</p>
+<p>Currently supported backends include <a href="../mod_event_pusher_http/">http</a>, <a href="../mod_event_pusher_push/">push</a>, <a href="../mod_event_pusher_rabbit/">rabbit</a> and <a href="../mod_event_pusher_sns/">sns</a>.
+Refer to their specific documentation to learn more about their functions and configuration options.</p>
+<h3 id="how-it-works">How it works</h3>
 <p>The events are standardized as records that can be found in the <code>mod_event_pusher_events.hrl</code> file.
 Common events like user presence changes (offline and online), chat and groupchat messages (incoming
-and outgoing) are already hooked up to the frontend via <code>mod_event_pusher_hook_translator</code>, a
-<code>mod_event_pusher</code> dependency, which is a proxy between various hooks and the <code>push_event/3</code> hook
-handler.</p>
+and outgoing) are already handled in the <code>mod_event_pusher_hook_translator</code> module, which is a proxy between various hooks and the <code>push_event/2</code> handler.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This module does not support <a href="../../configuration/general/#generalhost_types">dynamic domains</a>.</p>
 </div>
-<h2 id="options">Options</h2>
-<h3 id="modulesmod_event_pusherbackend"><code>modules.mod_event_pusher.backend</code></h3>
-<ul>
-<li><strong>Syntax:</strong> Array of TOML tables. See description.</li>
-<li><strong>Default:</strong> see description</li>
-<li><strong>Example:</strong> see description</li>
-</ul>
-<p>Specifies backends to register with the frontend, along with arguments that will be passed to the backend.
-Currently supported backends include <a href="../mod_event_pusher_sns/">sns</a>, <a href="../mod_event_pusher_push/">push</a>, <a href="../mod_event_pusher_http/">http_notification</a> and <a href="../mod_event_pusher_rabbit/">rabbit</a>.
-Refer to their specific documentation to learn more about their functions and configuration options.</p>
-<h2 id="example-configuration">Example configuration</h2>
+<h2 id="configuration">Configuration</h2>
+<p>Each backend is configured in a corresponding subsection.
+The example below enables all backends.
+The <code>[modules.mod_event_pusher]</code> section itself is omitted - this is allowed in TOML, because the presence of a subsection implies that the corresponding parent section is also present.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some backends require configuring connection pools in the <code>outgoing_pools</code> section.
+See the detailed documentation for each backend.</p>
+</div>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -2717,22 +2702,24 @@ Refer to their specific documentation to learn more about their functions and co
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_event_pusher]</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">sns</span><span class="p">.</span><span class="n">access_key_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;AKIAIOSFODNN7EXAMPLE&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">sns</span><span class="p">.</span><span class="n">secret_access_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&quot;</span><span class="w"></span>
-<span class="c1"># ...</span><span class="w"></span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_event_pusher.sns]</span><span class="w"></span>
+<span class="w">  </span><span class="n">presence_updates_topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;user_presence_updated&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="n">pm_messages_topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;user_message_sent&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="n">muc_messages_topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;user_messagegroup_sent&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="n">sns_host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;eu-west-1.amazonaws.com&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="n">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;eu-west-1&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="n">access_key_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;AKIAIOSFODNN7EXAMPLE&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="n">secret_access_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="n">account_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;123456789012&quot;</span><span class="w"></span>
 
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mnesia&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">wpool</span><span class="p">.</span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="w"></span>
-<span class="c1"># ...</span><span class="w"></span>
+<span class="k">[modules.mod_event_pusher.push]</span><span class="w"></span>
+<span class="w">  </span><span class="n">wpool</span><span class="p">.</span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="w"></span>
 
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">pool_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http_pool&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/notifications&quot;</span><span class="w"></span>
-<span class="c1"># ...</span><span class="w"></span>
+<span class="k">[modules.mod_event_pusher.http]</span><span class="w"></span>
+<span class="w">  </span><span class="n">handlers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/notifications&quot;</span><span class="p">}]</span><span class="w"></span>
 
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">rabbit</span><span class="p">.</span><span class="n">presence_exchange</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="s">&quot;presence&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">rabbit</span><span class="p">.</span><span class="n">presence_exchange</span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;topic&quot;</span><span class="w"></span>
-<span class="c1"># ...</span><span class="w"></span>
+<span class="k">[modules.mod_event_pusher.rabbit]</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 

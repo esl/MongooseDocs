@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/modules/mod_event_pusher_http/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.6">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.7">
     
     
       
@@ -1329,13 +1329,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#callback-module" class="md-nav__link">
-    Callback module
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1357,23 +1350,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusher_httppool_name" class="md-nav__link">
-    modules.mod_event_pusher_http.pool_name
+  <a href="#modulesmod_event_pusherhttphandlers" class="md-nav__link">
+    modules.mod_event_pusher.http.handlers
+  </a>
+  
+    <nav class="md-nav" aria-label="modules.mod_event_pusher.http.handlers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_event_pusherhttphandlerspool_name" class="md-nav__link">
+    modules.mod_event_pusher.http.handlers.pool_name
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusher_httppath" class="md-nav__link">
-    modules.mod_event_pusher_http.path
+  <a href="#modulesmod_event_pusherhttphandlerspath" class="md-nav__link">
+    modules.mod_event_pusher.http.handlers.path
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusher_httpcallback_module" class="md-nav__link">
-    modules.mod_event_pusher_http.callback_module
+  <a href="#modulesmod_event_pusherhttphandlerscallback_module" class="md-nav__link">
+    modules.mod_event_pusher.http.handlers.callback_module
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1445,8 +1451,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../mod_event_pusher_sns/" class="md-nav__link">
-        SNS backend
+      <a href="../mod_event_pusher_rabbit/" class="md-nav__link">
+        RabbitMQ backend
       </a>
     </li>
   
@@ -1459,8 +1465,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../mod_event_pusher_rabbit/" class="md-nav__link">
-        RabbitMQ backend
+      <a href="../mod_event_pusher_sns/" class="md-nav__link">
+        SNS backend
       </a>
     </li>
   
@@ -2707,13 +2713,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#callback-module" class="md-nav__link">
-    Callback module
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2735,23 +2734,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusher_httppool_name" class="md-nav__link">
-    modules.mod_event_pusher_http.pool_name
+  <a href="#modulesmod_event_pusherhttphandlers" class="md-nav__link">
+    modules.mod_event_pusher.http.handlers
+  </a>
+  
+    <nav class="md-nav" aria-label="modules.mod_event_pusher.http.handlers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_event_pusherhttphandlerspool_name" class="md-nav__link">
+    modules.mod_event_pusher.http.handlers.pool_name
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusher_httppath" class="md-nav__link">
-    modules.mod_event_pusher_http.path
+  <a href="#modulesmod_event_pusherhttphandlerspath" class="md-nav__link">
+    modules.mod_event_pusher.http.handlers.path
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusher_httpcallback_module" class="md-nav__link">
-    modules.mod_event_pusher_http.callback_module
+  <a href="#modulesmod_event_pusherhttphandlerscallback_module" class="md-nav__link">
+    modules.mod_event_pusher.http.handlers.callback_module
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2825,38 +2837,38 @@ When the hook is triggered, the module:</p>
 <li>runs a callback module's <code>prepare_body/7</code></li>
 <li>sends a POST request composed of <code>{Host::binary(), Sender::binary(), Receiver::binary(), Message::binary()}</code> to the http notification server</li>
 </ul>
-<p>You can make multiple configuration entries for this backend to handle more complicated pushing scenarios (e.g. sending various types of messages to different backends).</p>
-<h3 id="callback-module">Callback module</h3>
-<p>To find out what and how to send MongooseIM calls the following callback module's functions:
-<code>Mod:should_make_req(Acc::mongoose_acc:t(), Dir::in|out, Packet::xmlel(), From::jid(), To::jid(), Opts :: [{atom(), term()}])</code>.</p>
-<p><code>Mod:prepare_headers(Acc::mongoose_acc:t(), Dir::in|out, Host::jid:lserver(), Message::binary(), Sender::jid:luser(), Receiver::luser(), Opts :: [{atom(), term()}])</code>.</p>
-<p><code>Mod:prepare_body(Acc::mongoose_acc:t(), Dir::in|out, Host::jid:lserver(), Message::binary(), Sender::jid:luser(), Receiver::luser(), Opts :: [{atom(), term()}])</code>.</p>
-<p>By default it uses the function in <code>mod_event_pusher_http</code> itself, which ships all non-empty chat messages.</p>
+<p>You can configure multiple handlers e.g. for sending various types of messages to different HTTP servers.</p>
 <h2 id="prerequisites">Prerequisites</h2>
-<p>This module uses a connection pool created by mongoose_http_client.
+<p>This module uses a connection pool created by <code>mongoose_http_client</code>.
 It must be defined in the <a href="../../configuration/outgoing-connections/#http-options"><code>outgoing_pools</code> settings</a>.</p>
 <h2 id="options">Options</h2>
-<h3 id="modulesmod_event_pusher_httppool_name"><code>modules.mod_event_pusher_http.pool_name</code></h3>
+<h3 id="modulesmod_event_pusherhttphandlers"><code>modules.mod_event_pusher.http.handlers</code></h3>
+<ul>
+<li><strong>Syntax:</strong> array of TOML tables with the keys described below</li>
+<li><strong>Default:</strong> empty list</li>
+</ul>
+<p>A list of handler definitions. All handlers are applied for each event.</p>
+<h4 id="modulesmod_event_pusherhttphandlerspool_name"><code>modules.mod_event_pusher.http.handlers.pool_name</code></h4>
 <ul>
 <li><strong>Syntax:</strong> non-empty string</li>
 <li><strong>Default:</strong> <code>"http_pool"</code></li>
 <li><strong>Example:</strong> <code>pool_name = "http_pool"</code></li>
 </ul>
-<p>Name of the pool to use (as defined in outgoing_pools).</p>
-<h3 id="modulesmod_event_pusher_httppath"><code>modules.mod_event_pusher_http.path</code></h3>
+<p>Name of the pool to use to connect to the HTTP server (as defined in <code>outgoing_pools</code>).</p>
+<h4 id="modulesmod_event_pusherhttphandlerspath"><code>modules.mod_event_pusher.http.handlers.path</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> <code>""</code></li>
 <li><strong>Example:</strong> <code>path = "/notifications"</code></li>
 </ul>
 <p>Path part of an URL to which a request should be sent (will be appended to the pool's prefix path).</p>
-<h3 id="modulesmod_event_pusher_httpcallback_module"><code>modules.mod_event_pusher_http.callback_module</code></h3>
+<h4 id="modulesmod_event_pusherhttphandlerscallback_module"><code>modules.mod_event_pusher.http.handlers.callback_module</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> <code>"mod_event_pusher_http_defaults"</code></li>
 <li><strong>Example:</strong> <code>callback_module = "mod_event_pusher_http_notifications"</code></li>
 </ul>
-<p>Name of a module which should be used to check whether a notification should be sent.</p>
+<p>Name of a module which should be used to check whether a notification should be sent. The default callback module, <code>mod_event_pusher_http_defaults</code>, sends notifications for all non-empty chat messages. You can use this module as a starting point for developing a custom one.</p>
 <h2 id="example-configuration">Example configuration</h2>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -2868,22 +2880,29 @@ It must be defined in the <a href="../../configuration/outgoing-connections/#htt
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[outgoing_pools.http.http_pool]</span><span class="w"></span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[outgoing_pools.http.http_pool]</span><span class="w"></span>
 <span class="w">  </span><span class="n">scope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;global&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">[outgoing_pools.http.http_pool.connection]</span><span class="w"></span>
-<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://localhost:8000&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http://localhost:8000&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">path_prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/webservice&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">request_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2000</span><span class="w"></span>
 
-<span class="k">[modules.mod_event_pusher.backend.http]</span><span class="w"></span>
+<span class="k">[modules.mod_event_pusher.http]</span><span class="w"></span>
+<span class="w">  </span><span class="n">handlers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span><span class="n">pool_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http_pool&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/notifications&quot;</span><span class="p">}]</span><span class="w"></span>
+</code></pre></div>
+</td></tr></table>
+<p>Notifications will be POSTed to <code>http://localhost:8000/webservice/notifications</code>.
+TOML also allows to specify the handler in its own subsection.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[modules.mod_event_pusher.http.handlers]]</span><span class="w"></span>
 <span class="w">  </span><span class="n">pool_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http_pool&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/notifications&quot;</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
-<p>Notifications will be POSTed to <code>http://localhost:8000/webservice/notifications</code>.</p>
+<p>This alternative syntax is useful for specifying multiple handlers with options:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -2892,12 +2911,12 @@ It must be defined in the <a href="../../configuration/outgoing-connections/#htt
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[modules.mod_event_pusher.backend.http]]</span><span class="w"></span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[modules.mod_event_pusher.http.handlers]]</span><span class="w"></span>
 <span class="w">  </span><span class="n">pool_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http_pool&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/notifications&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">callback_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mod_event_pusher_http_notifications&quot;</span><span class="w"></span>
 
-<span class="k">[[modules.mod_event_pusher.backend.http]]</span><span class="w"></span>
+<span class="k">[[modules.mod_event_pusher.http.handlers]]</span><span class="w"></span>
 <span class="w">  </span><span class="n">pool_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http_pool&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/alerts&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">callback_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mod_event_pusher_http_alerts&quot;</span><span class="w"></span>
@@ -2907,9 +2926,9 @@ It must be defined in the <a href="../../configuration/outgoing-connections/#htt
 <h2 id="default-payload-format">Default payload format</h2>
 <p>The default HTTP event pusher sends a POST request with Content-Type <code>application/x-www-form-urlencoded</code>. The form has the following fields:</p>
 <ul>
-<li><code>author</code>: username of the user who authored the message</li>
+<li><code>author</code>: name of the user who authored the message</li>
 <li><code>server</code>: name of the server from where the message originates</li>
-<li><code>receiver</code>: username of the user who the message is for</li>
+<li><code>receiver</code>: name of the user who the message is for</li>
 <li><code>message</code>: content of <code>&lt;body&gt;</code> element of the message</li>
 </ul>
 <p>The contents of the author, server and receiver fields are processed by <code>stringprep</code>.

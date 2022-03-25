@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/modules/mod_event_pusher_push/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.6">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.7">
     
     
       
@@ -1344,29 +1344,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusher_pushbackend" class="md-nav__link">
-    modules.mod_event_pusher_push.backend
+  <a href="#modulesmod_event_pusherpushbackend" class="md-nav__link">
+    modules.mod_event_pusher.push.backend
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusher_pushwpool" class="md-nav__link">
-    modules.mod_event_pusher_push.wpool
+  <a href="#modulesmod_event_pusherpushwpool" class="md-nav__link">
+    modules.mod_event_pusher.push.wpool
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusher_pushplugin_module" class="md-nav__link">
-    modules.mod_event_pusher_push.plugin_module
+  <a href="#modulesmod_event_pusherpushplugin_module" class="md-nav__link">
+    modules.mod_event_pusher.push.plugin_module
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusher_pushvirtual_pubsub_hosts" class="md-nav__link">
-    modules.mod_event_pusher_push.virtual_pubsub_hosts
+  <a href="#modulesmod_event_pusherpushvirtual_pubsub_hosts" class="md-nav__link">
+    modules.mod_event_pusher.push.virtual_pubsub_hosts
   </a>
   
 </li>
@@ -1451,8 +1451,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../mod_event_pusher_sns/" class="md-nav__link">
-        SNS backend
+      <a href="../mod_event_pusher_rabbit/" class="md-nav__link">
+        RabbitMQ backend
       </a>
     </li>
   
@@ -1465,8 +1465,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../mod_event_pusher_rabbit/" class="md-nav__link">
-        RabbitMQ backend
+      <a href="../mod_event_pusher_sns/" class="md-nav__link">
+        SNS backend
       </a>
     </li>
   
@@ -2714,29 +2714,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusher_pushbackend" class="md-nav__link">
-    modules.mod_event_pusher_push.backend
+  <a href="#modulesmod_event_pusherpushbackend" class="md-nav__link">
+    modules.mod_event_pusher.push.backend
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusher_pushwpool" class="md-nav__link">
-    modules.mod_event_pusher_push.wpool
+  <a href="#modulesmod_event_pusherpushwpool" class="md-nav__link">
+    modules.mod_event_pusher.push.wpool
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusher_pushplugin_module" class="md-nav__link">
-    modules.mod_event_pusher_push.plugin_module
+  <a href="#modulesmod_event_pusherpushplugin_module" class="md-nav__link">
+    modules.mod_event_pusher.push.plugin_module
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_event_pusher_pushvirtual_pubsub_hosts" class="md-nav__link">
-    modules.mod_event_pusher_push.virtual_pubsub_hosts
+  <a href="#modulesmod_event_pusherpushvirtual_pubsub_hosts" class="md-nav__link">
+    modules.mod_event_pusher.push.virtual_pubsub_hosts
   </a>
   
 </li>
@@ -2839,27 +2839,27 @@ attempts to enable them again.</p>
 <p>This module is very easy to enable, just paste the following to your MongooseIM configuration file:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_event_pusher]</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">wpool</span><span class="p">.</span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w"></span>
+<span class="w">  </span><span class="n">push</span><span class="p">.</span><span class="n">wpool</span><span class="p">.</span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <p>And that's basically it. You have just enabled the push notification support
 with 100 asynchronous workers that will handle all push notification related work.</p>
 <h2 id="options">Options</h2>
-<h3 id="modulesmod_event_pusher_pushbackend"><code>modules.mod_event_pusher_push.backend</code></h3>
+<h3 id="modulesmod_event_pusherpushbackend"><code>modules.mod_event_pusher.push.backend</code></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"mnesia"</code>, <code>"rdbms"</code></li>
 <li><strong>Default:</strong> <code>"mnesia"</code></li>
 <li><strong>Example:</strong> <code>backend = "rdbms"</code></li>
 </ul>
 <p>Backend to use for storing the registrations.</p>
-<h3 id="modulesmod_event_pusher_pushwpool"><code>modules.mod_event_pusher_push.wpool</code></h3>
+<h3 id="modulesmod_event_pusherpushwpool"><code>modules.mod_event_pusher.push.wpool</code></h3>
 <ul>
 <li><strong>Syntax:</strong> TOML table with worker pool options</li>
-<li><strong>Default:</strong> <code>{}</code></li>
+<li><strong>Default:</strong> see description</li>
 <li><strong>Example:</strong> <code>wpool.workers = 200</code></li>
 </ul>
-<p>Array of options that will be passed to the <code>worker_pool</code> library that handles all the requests. The options allowed here are the same as for the <a href="../../configuration/outgoing-connections/#worker-pool-options">outgoing connection pools</a>.</p>
-<h3 id="modulesmod_event_pusher_pushplugin_module"><code>modules.mod_event_pusher_push.plugin_module</code></h3>
+<p>Pool options that will be passed to the <code>worker_pool</code> library that handles all the requests. The options allowed here are the same as for the <a href="../../configuration/outgoing-connections/#worker-pool-options">outgoing connection pools</a>. The only difference is that the default <code>strategy</code> is <code>"available_worker"</code>.</p>
+<h3 id="modulesmod_event_pusherpushplugin_module"><code>modules.mod_event_pusher.push.plugin_module</code></h3>
 <ul>
 <li><strong>Syntax:</strong> non-empty string</li>
 <li><strong>Default:</strong> <code>"mod_event_pusher_push_plugin_defaults"</code></li>
@@ -2867,7 +2867,7 @@ with 100 asynchronous workers that will handle all push notification related wor
 </ul>
 <p>The module implementing <code>mod_event_pusher_push_plugin</code> behaviour, used for dynamic configuration of push notifications.
 See the <a href="#plugin-module">relevant section</a> for more details.</p>
-<h3 id="modulesmod_event_pusher_pushvirtual_pubsub_hosts"><code>modules.mod_event_pusher_push.virtual_pubsub_hosts</code></h3>
+<h3 id="modulesmod_event_pusherpushvirtual_pubsub_hosts"><code>modules.mod_event_pusher.push.virtual_pubsub_hosts</code></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings</li>
 <li><strong>Default:</strong> <code>[]</code></li>
@@ -2880,7 +2880,7 @@ See the <a href="#virtual-pubsub-hosts">relevant section</a> for more details.</
 <p>If a notification is published to one of the configured domains, the internal push notification hook
 is executed in MongooseIM instead of the XEP-0357 typical behaviour. If an existing PubSub domain
 is added to this list, it will be shadowed in the push notifications context. To ensure complete
-shadowing of all the PubSub subdomains we must use the <code>@HOST@</code> pattern, otherwise only the
+shadowing of all the PubSub subdomains you must use the <code>@HOST@</code> pattern, otherwise only the
 subdomain of the user is shadowed. It enables easy migration from PubSub-full deployments to
 PubSub-less variants.</p>
 <h3 id="migration-from-xep-0357-to-virtual-hosts">Migration from XEP-0357 to virtual hosts</h3>
@@ -2898,11 +2898,11 @@ option. <code>"pubsub.@HOST@"</code> is the default domain for <code>mod_pubsub<
 <span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_pubsub]</span><span class="w"></span>
 <span class="w">  </span><span class="n">plugins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;push&quot;</span><span class="p">]</span><span class="w"> </span><span class="c1"># mandatory minimal config</span><span class="w"></span>
 
-<span class="k">[modules.mod_event_pusher]</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mnesia&quot;</span><span class="w"> </span><span class="c1"># optional</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">wpool</span><span class="p">.</span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="c1"># optional</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">plugin_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mod_event_pusher_push_plugin_defaults&quot;</span><span class="w"> </span><span class="c1"># optional</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">virtual_pubsub_hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;pubsub.@HOST@&quot;</span><span class="p">]</span><span class="w"></span>
+<span class="k">[modules.mod_event_pusher.push]</span><span class="w"></span>
+<span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mnesia&quot;</span><span class="w"> </span><span class="c1"># optional</span><span class="w"></span>
+<span class="w">  </span><span class="n">wpool</span><span class="p">.</span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="c1"># optional</span><span class="w"></span>
+<span class="w">  </span><span class="n">plugin_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mod_event_pusher_push_plugin_defaults&quot;</span><span class="w"> </span><span class="c1"># optional</span><span class="w"></span>
+<span class="w">  </span><span class="n">virtual_pubsub_hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;pubsub.@HOST@&quot;</span><span class="p">]</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <h4 id="advantages">Advantages</h4>
@@ -2974,13 +2974,13 @@ the defaults are used instead.</p>
       
       
         
-        <a href="../mod_event_pusher_sns/" class="md-footer__link md-footer__link--next" aria-label="Next: SNS backend" rel="next">
+        <a href="../mod_event_pusher_rabbit/" class="md-footer__link md-footer__link--next" aria-label="Next: RabbitMQ backend" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              SNS backend
+              RabbitMQ backend
             </div>
           </div>
           <div class="md-footer__button md-icon">

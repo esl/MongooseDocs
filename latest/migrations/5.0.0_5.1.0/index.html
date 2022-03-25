@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/migrations/5.0.0_5.1.0/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.6">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.7">
     
     
       
@@ -1309,8 +1309,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modules/mod_event_pusher_sns/" class="md-nav__link">
-        SNS backend
+      <a href="../../modules/mod_event_pusher_rabbit/" class="md-nav__link">
+        RabbitMQ backend
       </a>
     </li>
   
@@ -1323,8 +1323,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modules/mod_event_pusher_rabbit/" class="md-nav__link">
-        RabbitMQ backend
+      <a href="../../modules/mod_event_pusher_sns/" class="md-nav__link">
+        SNS backend
       </a>
     </li>
   
@@ -2754,9 +2754,10 @@ See the description of <a href="../../configuration/acl/#aclmatch"><code>current
 <h3 id="extension-modules">Extension modules</h3>
 <ul>
 <li><code>mod_auth_token</code> has a new configuration format - if you are using this module, amend the <a href="../../modules/mod_auth_token/#modulesmod_auth_tokenvalidity_period"><code>validity_period</code></a> option.</li>
+<li><code>mod_event_pusher</code> has an updated configuration format - the <code>backend</code> subsection is removed and the <code>http</code> backend has a new <code>handlers</code> option. Adjust your configuration according to <a href="../../modules/mod_event_pusher/"><code>mod_event_pusher</code></a> documentation.</li>
 <li><code>mod_mam_meta</code> does not have the <code>rdbms_message_format</code> and <code>simple</code> options anymore. Use <a href="../../modules/mod_mam/#modulesmod_mam_metadb_jid_format"><code>db_jid_format</code></a> and <a href="../../modules/mod_mam/#modulesmod_mam_metadb_message_format"><code>db_message_format</code></a> instead.</li>
-<li><code>mod_vcard</code> LDAP options are moved into an LDAP subsection.</li>
 <li><code>mod_shared_roster_ldap</code> all options have their <code>ldap_</code> prefix dropped.</li>
+<li><code>mod_vcard</code> LDAP options are moved into an LDAP subsection.</li>
 </ul>
 <h2 id="async-workers">Async workers</h2>
 <p>The <code>async_writer</code> flag of MAM is now a section on its own, that absorbs previous flags related to it: <code>flush_interval</code>, <code>max_batch_size</code> and <code>pool_size</code> now become subelements of the <code>async_writer</code> section, with one more parameter, <code>enabled</code>. Below an example:</p>

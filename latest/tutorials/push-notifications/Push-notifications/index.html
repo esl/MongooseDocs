@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/tutorials/push-notifications/Push-notifications/">
       
       <link rel="icon" href="../../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.6">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.7">
     
     
       
@@ -1447,8 +1447,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../modules/mod_event_pusher_sns/" class="md-nav__link">
-        SNS backend
+      <a href="../../../modules/mod_event_pusher_rabbit/" class="md-nav__link">
+        RabbitMQ backend
       </a>
     </li>
   
@@ -1461,8 +1461,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../modules/mod_event_pusher_rabbit/" class="md-nav__link">
-        RabbitMQ backend
+      <a href="../../../modules/mod_event_pusher_sns/" class="md-nav__link">
+        SNS backend
       </a>
     </li>
   
@@ -2859,10 +2859,10 @@ node. Check out <a href="../MongoosePush-setup/">this</a> tutorial on how to set
 <span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_pubsub]</span><span class="w"></span>
 <span class="w">  </span><span class="n">plugins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;push&quot;</span><span class="p">]</span><span class="w"> </span><span class="c1"># mandatory minimal config</span><span class="w"></span>
 
-<span class="k">[modules.mod_event_pusher]</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mnesia&quot;</span><span class="w"> </span><span class="c1"># optional</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">wpool</span><span class="p">.</span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="c1"># optional</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">plugin_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mod_event_pusher_push_plugin_defaults&quot;</span><span class="w"> </span><span class="c1"># optional</span><span class="w"></span>
+<span class="k">[modules.mod_event_pusher.push]</span><span class="w"></span>
+<span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mnesia&quot;</span><span class="w"> </span><span class="c1"># optional, default</span><span class="w"></span>
+<span class="w">  </span><span class="n">wpool</span><span class="p">.</span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="c1"># optional</span><span class="w"></span>
+<span class="w">  </span><span class="n">plugin_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mod_event_pusher_push_plugin_defaults&quot;</span><span class="w"> </span><span class="c1"># optional, default</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <h3 id="advantages">Advantages</h3>
@@ -2889,11 +2889,11 @@ node. Check out <a href="../MongoosePush-setup/">this</a> tutorial on how to set
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_event_pusher]</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mnesia&quot;</span><span class="w"> </span><span class="c1"># optional</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">wpool</span><span class="p">.</span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="c1"># optional</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">plugin_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mod_event_pusher_push_plugin_defaults&quot;</span><span class="w"> </span><span class="c1"># optional</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="p">.</span><span class="n">push</span><span class="p">.</span><span class="n">virtual_pubsub_hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;pubsub.@HOST@&quot;</span><span class="p">]</span><span class="w"></span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_event_pusher.push]</span><span class="w"></span>
+<span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mnesia&quot;</span><span class="w"> </span><span class="c1"># optional, default</span><span class="w"></span>
+<span class="w">  </span><span class="n">wpool</span><span class="p">.</span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="c1"># optional</span><span class="w"></span>
+<span class="w">  </span><span class="n">plugin_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mod_event_pusher_push_plugin_defaults&quot;</span><span class="w"> </span><span class="c1"># optional, default</span><span class="w"></span>
+<span class="w">  </span><span class="n">virtual_pubsub_hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;pubsub.@HOST@&quot;</span><span class="p">]</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <h3 id="advantages_1">Advantages</h3>
