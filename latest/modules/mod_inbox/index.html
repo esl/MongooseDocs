@@ -1453,6 +1453,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modulesmod_inboxboxes" class="md-nav__link">
+    modules.mod_inbox.boxes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_inboxreset_markers" class="md-nav__link">
     modules.mod_inbox.reset_markers
   </a>
@@ -2720,6 +2727,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modulesmod_inboxboxes" class="md-nav__link">
+    modules.mod_inbox.boxes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_inboxreset_markers" class="md-nav__link">
     modules.mod_inbox.reset_markers
   </a>
@@ -2819,6 +2833,17 @@ To use it, enable mod_inbox in the config file.</p>
 <li><strong>Example:</strong> <code>modules.mod_inbox.async_writer.pool_size = 32</code></li>
 </ul>
 <p>Number of workers in the pool. More than the number of available schedulers is recommended, to minimise lock contention on the message queues, and more than the number of DB workers, to fully utilise the DB capacity. How much more than these two parameters is then a good fine-tuning for specific deployments.</p>
+<h3 id="modulesmod_inboxboxes"><code>modules.mod_inbox.boxes</code></h3>
+<ul>
+<li><strong>Syntax:</strong> array of strings.</li>
+<li><strong>Default:</strong> <code>[]</code></li>
+<li><strong>Example:</strong> <code>["classified", "spam"]</code></li>
+</ul>
+<p>A list of supported inbox boxes by the server. This can be used by clients to classify their inbox entries in any way that fits the end-user. The strings provided here will be used verbatim in the IQ query as described in <a href="../../open-extensions/inbox/#filtering-and-ordering">Inbox – Filtering and Ordering</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>inbox</code> and <code>archive</code> are always enabled, and therefore don't need to be specified here.</p>
+</div>
 <h3 id="modulesmod_inboxreset_markers"><code>modules.mod_inbox.reset_markers</code></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings, out of <code>"displayed"</code>, <code>"received"</code>, <code>"acknowledged"</code></li>

@@ -707,8 +707,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#archived" class="md-nav__link">
-    Archived
+  <a href="#box" class="md-nav__link">
+    Box
   </a>
   
 </li>
@@ -2876,8 +2876,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#archived" class="md-nav__link">
-    Archived
+  <a href="#box" class="md-nav__link">
+    Box
   </a>
   
 </li>
@@ -2998,7 +2998,7 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
 <h3 id="inbox-entry">Inbox entry</h3>
 <p>It is a specific conversation, that the user can identify by the recipient jid, that is, the user jid in case of a one-to-one chat, or the room jid in case of a group-chat.</p>
 <h3 id="box-also-referred-to-as-folder">Box (also referred to as "folder")</h3>
-<p>A category where entries can be classified. The default box is the active box, simply called <em>inbox</em>. There is a second box, called <em>archive</em>, where entries can be thrown into and not displayed by default. No more boxes are expected.</p>
+<p>A category where entries can be classified. The default box is the active box, simply called <em>inbox</em>. There is a second box, called <em>archive</em>, where entries can be thrown into and not displayed by default. More boxes can be created through <a href="../../modules/mod_inbox/#modulesmod_inboxboxes">configuration</a>.</p>
 <h2 id="entity-use-cases">Entity Use Cases</h2>
 <h3 id="discovering-inbox-services">Discovering Inbox Services</h3>
 <p>An entity can discover the inbox service via a Features Discovery request:
@@ -3051,7 +3051,12 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
 <span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
-<span class="normal">22</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Client --&gt;</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Client --&gt;</span>
 <span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
@@ -3069,6 +3074,11 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
         <span class="nt">&lt;option</span> <span class="na">label=</span><span class="s">&#39;Descending by timestamp&#39;</span><span class="nt">&gt;&lt;value&gt;</span>desc<span class="nt">&lt;/value&gt;&lt;/option&gt;</span>
       <span class="nt">&lt;/field&gt;</span>
       <span class="nt">&lt;field</span> <span class="na">var=</span><span class="s">&#39;hidden_read&#39;</span> <span class="na">type=</span><span class="s">&#39;text-single&#39;</span> <span class="na">value=</span><span class="s">&#39;false&#39;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;field</span> <span class="na">var=</span><span class="s">&#39;box&#39;</span> <span class="na">type=</span><span class="s">&#39;list-simple&#39;</span> <span class="na">value=</span><span class="s">&#39;all&#39;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">label=</span><span class="s">&#39;all&#39;</span><span class="nt">&gt;&lt;value&gt;</span>all<span class="nt">&lt;/value&gt;&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">label=</span><span class="s">&#39;inbox&#39;</span><span class="nt">&gt;&lt;value&gt;</span>inbox<span class="nt">&lt;/value&gt;&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">label=</span><span class="s">&#39;archive&#39;</span><span class="nt">&gt;&lt;value&gt;</span>archive<span class="nt">&lt;/value&gt;&lt;/option&gt;</span>
+      <span class="nt">&lt;/field&gt;</span>
       <span class="nt">&lt;field</span> <span class="na">var=</span><span class="s">&#39;archive&#39;</span> <span class="na">type=</span><span class="s">&#39;boolean&#39;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/x&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
@@ -3103,7 +3113,8 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
-<span class="normal">20</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;message</span> <span class="na">from=</span><span class="s">&quot;alice@localhost&quot;</span> <span class="na">to=</span><span class="s">&quot;alice@localhost/res1&quot;</span> <span class="na">id=</span><span class="s">&quot;9b759&quot;</span><span class="nt">&gt;</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;message</span> <span class="na">from=</span><span class="s">&quot;alice@localhost&quot;</span> <span class="na">to=</span><span class="s">&quot;alice@localhost/res1&quot;</span> <span class="na">id=</span><span class="s">&quot;9b759&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;result</span> <span class="na">xmlns=</span><span class="s">&quot;erlang-solutions.com:xmpp:inbox:0&quot;</span> <span class="na">unread=</span><span class="s">&quot;0&quot;</span> <span class="na">queryid=</span><span class="s">&quot;b6&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;forwarded</span> <span class="na">xmlns=</span><span class="s">&quot;urn:xmpp:forward:0&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;delay</span> <span class="na">xmlns=</span><span class="s">&quot;urn:xmpp:delay&quot;</span> <span class="na">stamp=</span><span class="s">&quot;2018-07-10T23:08:25.123456Z&quot;</span><span class="nt">/&gt;</span>
@@ -3111,6 +3122,7 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
         <span class="nt">&lt;body&gt;</span>Hello<span class="nt">&lt;/body&gt;</span>
       <span class="nt">&lt;/message&gt;</span>
     <span class="nt">&lt;/forwarded&gt;</span>
+    <span class="nt">&lt;box&gt;</span>inbox<span class="nt">&lt;/box&gt;</span>
     <span class="nt">&lt;archive&gt;</span>false<span class="nt">&lt;/archive&gt;</span>
     <span class="nt">&lt;mute&gt;</span>0<span class="nt">&lt;/mute&gt;</span>
   <span class="nt">&lt;/result&gt;</span>
@@ -3145,7 +3157,8 @@ By default, <code>mod_inbox</code> returns all conversations, listing the ones u
 <li>variable <code>end</code>: End date for the result set (value: ISO timestamp)</li>
 <li>variable <code>order</code>: Order by timestamp (values: <code>asc</code>, <code>desc</code>)</li>
 <li>variable <code>hidden_read</code>: Show only conversations with unread messages (values: <code>true</code>, <code>false</code>)</li>
-<li>variable <code>archive</code>: whether to query the archive inbox. <code>true</code> means querying only the archive box, <code>false</code> means querying only the active box. If the flag is not set, it is assumed all entries are requested.</li>
+<li>variable <code>box</code>: Indicate which box is desired. Supported are <code>all</code>, <code>inbox</code>, and <code>archive</code>. More boxes can be implemented, see <a href="../../modules/mod_inbox/#modulesmod_inboxboxes">mod_inbox – Boxes</a></li>
+<li>variable <code>archive</code> [deprecated, prefer <code>box</code>]: whether to query the archive inbox. <code>true</code> means querying only the archive box, <code>false</code> means querying only the active box. If the flag is not set, it is assumed all entries are requested. This is kept for backwards compatibility reasons, use the <code>box</code> flag instead.</li>
 </ul>
 <p>They are encoded inside a standard XMPP <a href="https://xmpp.org/extensions/xep-0004.html">Data Forms</a> format.
 Dates must be formatted according to <a href="https://xmpp.org/extensions/xep-0082.html">XMPP Date and Time Profiles</a>.
@@ -3171,7 +3184,7 @@ However, the IQ type must be "set", even when the data form is missing.</p>
       <span class="nt">&lt;field</span> <span class="na">type=</span><span class="s">&#39;hidden&#39;</span> <span class="na">var=</span><span class="s">&#39;FORM_TYPE&#39;</span><span class="nt">&gt;&lt;value&gt;</span>erlang-solutions.com:xmpp:inbox:0<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
       <span class="nt">&lt;field</span> <span class="na">type=</span><span class="s">&#39;list-single&#39;</span> <span class="na">var=</span><span class="s">&#39;order&#39;</span><span class="nt">&gt;&lt;value&gt;</span>asc<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
       <span class="nt">&lt;field</span> <span class="na">type=</span><span class="s">&#39;text-single&#39;</span> <span class="na">var=</span><span class="s">&#39;hidden_read&#39;</span><span class="nt">&gt;&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
-      <span class="nt">&lt;field</span> <span class="na">type=</span><span class="s">&#39;boolean&#39;</span> <span class="na">var=</span><span class="s">&#39;archive&#39;</span><span class="nt">&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
+      <span class="nt">&lt;field</span> <span class="na">type=</span><span class="s">&#39;list-single&#39;</span> <span class="na">var=</span><span class="s">&#39;box&#39;</span><span class="nt">&gt;&lt;value&gt;</span>inbox<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
     <span class="nt">&lt;/x&gt;</span>
     <span class="nt">&lt;set</span> <span class="na">xmlns=</span><span class="s">&#39;http://jabber.org/protocol/rsm&#39;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;max&gt;</span>Max<span class="nt">&lt;/max&gt;</span>
@@ -3183,9 +3196,10 @@ However, the IQ type must be "set", even when the data form is missing.</p>
 where <code>Max</code> is a non-negative integer.</p>
 <h2 id="properties-of-an-entry">Properties of an entry</h2>
 <p>Given an entry, certain properties are defined for such an entry:</p>
-<h3 id="archived">Archived</h3>
+<h3 id="box">Box</h3>
 <p>Clients usually have two different boxes for the inbox: the regular one, simply called the inbox (or the active inbox), and an archive box, where clients can manually throw conversations they don't want displayed in the default UI.</p>
 <p>It is expected that entries will reside in the archive until they're either manually moved back to the active box, or they receive a new message: in such case the entry should jump back to the active box automatically.</p>
+<p>More boxes can be implemented, see <a href="../../modules/mod_inbox/#modulesmod_inboxboxes">mod_inbox#boxes</a>. Movement between boxes can be achieved through the right XMPP IQ, no automatic movements are developed as in the case of inbox-archive.</p>
 <h3 id="read">Read</h3>
 <p>Entries keep a count of unread messages that is incremented automatically upon receiving a new message, and (in the current implementation) set to zero upon receiving either a message by one-self, or an appropriate chat marker as defined in <a href="https://xmpp.org/extensions/xep-0333.html">XEP-0333</a> (which markers reset the count is a matter of configuration, see <a href="../../modules/mod_inbox/#modulesmod_inboxreset_markers">doc</a>).</p>
 <p>This property can also be manually set to zero or to one using the appropriate requests as explained below.</p>
@@ -3240,8 +3254,10 @@ To which the server will reply, just like before, with:
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;box&gt;</span>inbox<span class="nt">&lt;/box&gt;</span>
     <span class="nt">&lt;archive&gt;</span>false<span class="nt">&lt;/archive&gt;</span>
     <span class="nt">&lt;mute&gt;</span>0<span class="nt">&lt;/mute&gt;</span>
     <span class="nt">&lt;read&gt;</span>true<span class="nt">&lt;/read&gt;</span>
@@ -3302,6 +3318,7 @@ To which the server will reply, just like before, with:
 </td></tr></table>
 where <code>Property</code> and <code>Value</code> are a list of key-value pairs as follows:</p>
 <ul>
+<li><code>box</code>: <code>inbox</code>, <code>archive</code>, or a custom value if this has been extended.</li>
 <li><code>archive</code>: <code>true</code> or <code>false</code></li>
 <li><code>mute</code>: number of <em>seconds</em> to mute for. Choose <code>0</code> for unmuting.</li>
 <li><code>read</code> (adjective, not verb): <code>true</code> or <code>false</code>. Setting to true essentially sets the unread-count to <code>0</code>, <code>false</code> sets the unread-count to <code>1</code> (if it was equal to <code>0</code>, otherwise it lefts it unchanged). No other possibilities are offered, to reduce the risk of inconsistencies or problems induced by a faulty client.</li>
@@ -3314,8 +3331,10 @@ where <code>Property</code> and <code>Value</code> are a list of key-value pairs
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;message</span> <span class="na">from=</span><span class="s">&#39;alice@localhost&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost&#39;</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span><span class="nt">&gt;</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;message</span> <span class="na">from=</span><span class="s">&#39;alice@localhost&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost&#39;</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;x</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;box&gt;</span>inbox<span class="nt">&lt;/box&gt;</span>
     <span class="nt">&lt;archive&gt;</span>false<span class="nt">&lt;/archive&gt;</span>
     <span class="nt">&lt;mute&gt;</span>0<span class="nt">&lt;/mute&gt;</span>
     <span class="nt">&lt;read&gt;</span>true<span class="nt">&lt;/read&gt;</span>
@@ -3343,14 +3362,14 @@ where <code>&lt;mute&gt;</code> may contain either a zero, to denote unmuted, or
 Where <code>Type</code> will usually be <code>modify</code> or <code>cancel</code>, as explained in <a href="https://xmpp.org/rfcs/rfc6120.html#stanzas-error-syntax">https://xmpp.org/rfcs/rfc6120.html#stanzas-error-syntax</a>, and <code>Condition</code> is as explained in <a href="https://xmpp.org/rfcs/rfc6120.html#stanzas-error-conditions">https://xmpp.org/rfcs/rfc6120.html#stanzas-error-conditions</a>, <code>bad-request</code> being the most common.</p>
 <p>This final syntax for the protocol has been chosen as it allows for better pipelining of requests, and it remains consistent with how, for example, rooms are configured for MUC-Light.</p>
 <h3 id="examples-archiving-an-entry">Examples: archiving an entry</h3>
-<p>To archive an entry, the client can send:
+<p>To put an entry into the archived box, the client can send:
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;archive&gt;</span>true<span class="nt">&lt;/archive&gt;</span>
+    <span class="nt">&lt;box&gt;</span>archive<span class="nt">&lt;/box&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div>
@@ -3362,8 +3381,10 @@ On success, the server would return (considering the entry has no unread message
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;box&gt;</span>archive<span class="nt">&lt;/box&gt;</span>
     <span class="nt">&lt;archive&gt;</span>true<span class="nt">&lt;/archive&gt;</span>
     <span class="nt">&lt;mute&gt;</span>0<span class="nt">&lt;/mute&gt;</span>
     <span class="nt">&lt;read&gt;</span>true<span class="nt">&lt;/read&gt;</span>
@@ -3403,8 +3424,10 @@ On success, the server would return (considering the server receives the timesta
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;box&gt;</span>inbox<span class="nt">&lt;/box&gt;</span>
     <span class="nt">&lt;archive&gt;</span>false<span class="nt">&lt;/archive&gt;</span>
     <span class="nt">&lt;mute&gt;</span>2021-02-27T09:11:05.634232Z<span class="nt">&lt;/mute&gt;</span>
     <span class="nt">&lt;read&gt;</span>true<span class="nt">&lt;/read&gt;</span>
@@ -3457,8 +3480,10 @@ On success, the server would return (considering the entry is not archived and n
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;box&gt;</span>inbox<span class="nt">&lt;/box&gt;</span>
     <span class="nt">&lt;archive&gt;</span>false<span class="nt">&lt;/archive&gt;</span>
     <span class="nt">&lt;mute&gt;</span>0<span class="nt">&lt;/mute&gt;</span>
     <span class="nt">&lt;read&gt;</span>true<span class="nt">&lt;/read&gt;</span>
@@ -3546,7 +3571,8 @@ stanza nor anything given within will be stored; the only change is the inbox
 <span class="normal">40</span>
 <span class="normal">41</span>
 <span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Alice sends: --&gt;</span>
+<span class="normal">43</span>
+<span class="normal">44</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Alice sends: --&gt;</span>
 <span class="nt">&lt;message</span> <span class="na">type=</span><span class="s">&quot;chat&quot;</span> <span class="na">to=</span><span class="s">&quot;bob@localhost/res1&quot;</span> <span class="na">id=</span><span class="s">”123”</span><span class="nt">&gt;</span>
   <span class="nt">&lt;body&gt;</span>Hello<span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/message&gt;</span>
@@ -3577,6 +3603,7 @@ stanza nor anything given within will be stored; the only change is the inbox
         <span class="nt">&lt;body&gt;</span>Hello<span class="nt">&lt;/body&gt;</span>
       <span class="nt">&lt;/message&gt;</span>
     <span class="nt">&lt;/forwarded&gt;</span>
+    <span class="nt">&lt;box&gt;</span>inbox<span class="nt">&lt;/box&gt;</span>
     <span class="nt">&lt;archive&gt;</span>false<span class="nt">&lt;/archive&gt;</span>
     <span class="nt">&lt;mute&gt;</span>0<span class="nt">&lt;/mute&gt;</span>
   <span class="nt">&lt;/result&gt;</span>
