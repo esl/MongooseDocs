@@ -2825,7 +2825,8 @@ To use it, enable mod_inbox in the config file.</p>
 <li><strong>Default:</strong> <code>"rdbms"</code></li>
 <li><strong>Example:</strong> <code>backend = "rdbms_async"</code></li>
 </ul>
-<p>Only RDBMS storage is supported, but <code>rdbms</code> means flushes to inbox are synchronous with each message, while <code>rdbms_async</code> is instead asynchronous. For performance reasons, <code>rdbms_async</code> is almost always preferred, but, it doesn't ensure the same consistency characteristics, as different MongooseIM nodes might race on updates.</p>
+<p>Only RDBMS storage is supported, but <code>rdbms</code> means flushes to DB are synchronous with each message, while <code>rdbms_async</code> is instead asynchronous.</p>
+<p>Regular <code>rdbms</code> has worse performance characteristics, but it has better consistency properties, as events aren't lost nor reordered. <code>rdbms_async</code> processes events asynchronously and potentially unloading a lot of aggregation from the DB. Like the case of the asynchronous workers for MAM, it is the preferred method, with the risk messages being lost on an ungraceful shutdown.</p>
 <h4 id="modulesmod_inboxasync_writerpool_size"><code>modules.mod_inbox.async_writer.pool_size</code></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
