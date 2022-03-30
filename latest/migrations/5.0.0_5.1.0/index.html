@@ -2574,6 +2574,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#removal-of-deprecated-modules" class="md-nav__link">
+    Removal of deprecated modules
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2726,6 +2733,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#removal-of-deprecated-modules" class="md-nav__link">
+    Removal of deprecated modules
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2798,6 +2812,11 @@ now becomes
 <p>There's an experimental and undocumented module called <code>mod_smart_markers</code>, that had a default table in the RDBMS schema, which you probably never used (or shouldn't have, as it was undocumented). If you rely on this table, the column <code>from_jid</code> has been split in <code>from_luser</code> and <code>lserver</code>, in order to support the <code>remove_domain</code> callback for the dynamic domains functionality. You might need to migrate it, or simply drop the previously defined table and recreate the new one.</p>
 <h2 id="inbox">Inbox</h2>
 <p>The archive functionality recently introduced has been extended to support many more boxes. IQ queries can remain as they were, but, a new flag called <code>box</code> is now introduced, and if provided, it takes preference over the old <code>archive</code> flag. The database requires a migration, as the archive is now a column storing the proper name of the box, see the migrations for Postgres, MySQL and MSSQL in the <a href="https://github.com/esl/MongooseIM/tree/master/priv/migrations"><code>priv/migrations</code></a> directory.</p>
+<h2 id="removal-of-deprecated-modules">Removal of deprecated modules</h2>
+<ul>
+<li><code>mod_revproxy</code> - removed from the code base as it was unsupported since 4.2.0.</li>
+<li><code>mod_aws_sns</code> - its functionality is fully covered by <a href="../../modules/mod_event_pusher/"><code>mod_event_pusher</code></a>.</li>
+</ul>
 
               
             </article>
