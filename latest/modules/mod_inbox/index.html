@@ -1457,6 +1457,26 @@
     modules.mod_inbox.boxes
   </a>
   
+    <nav class="md-nav" aria-label="modules.mod_inbox.boxes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_inboxbin_ttl" class="md-nav__link">
+    modules.mod_inbox.bin_ttl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_inboxbin_clean_after" class="md-nav__link">
+    modules.mod_inbox.bin_clean_after
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1524,6 +1544,20 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mod_inbox_commands/" class="md-nav__link">
+        mod_inbox_commands
+      </a>
     </li>
   
 
@@ -2731,6 +2765,26 @@
     modules.mod_inbox.boxes
   </a>
   
+    <nav class="md-nav" aria-label="modules.mod_inbox.boxes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_inboxbin_ttl" class="md-nav__link">
+    modules.mod_inbox.bin_ttl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_inboxbin_clean_after" class="md-nav__link">
+    modules.mod_inbox.bin_clean_after
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2843,8 +2897,23 @@ To use it, enable mod_inbox in the config file.</p>
 <p>A list of supported inbox boxes by the server. This can be used by clients to classify their inbox entries in any way that fits the end-user. The strings provided here will be used verbatim in the IQ query as described in <a href="../../open-extensions/inbox/#filtering-and-ordering">Inbox – Filtering and Ordering</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code>inbox</code> and <code>archive</code> are always enabled, and therefore don't need to be specified here.</p>
+<p><code>inbox</code>, <code>archive</code>, and <code>bin</code> are reserved box names and are always enabled, therefore they don't need to –and must not– be specified in this section. <code>all</code> has a special meaning in the box query and therefore is also not allowed as a box name.</p>
+<p>If the asynchronous backend is configured, automatic removals become moves to the <code>bin</code> box, also called "Trash bin". This is to ensure eventual consistency. Then the bin can be emptied, either on a <a href="../../open-extensions/inbox/#examples-emptying-the-trash-bin">user request</a>, or through an <a href="../mod_inbox_commands#admin-endpoint">admin API endpoint</a>.</p>
 </div>
+<h4 id="modulesmod_inboxbin_ttl"><code>modules.mod_inbox.bin_ttl</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer, expressed in days.</li>
+<li><strong>Default:</strong> <code>30</code></li>
+<li><strong>Example:</strong> <code>modules.mod_inbox.bin_ttl = 7</code></li>
+</ul>
+<p>How old entries in the bin can be before the automatic bin cleaner collects them. A value of <code>7</code> would mean that entries that have been in the bin for more than 7 days will be cleaned on the next bin collection.</p>
+<h4 id="modulesmod_inboxbin_clean_after"><code>modules.mod_inbox.bin_clean_after</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer, expressed in hours</li>
+<li><strong>Default:</strong> <code>1</code></li>
+<li><strong>Example:</strong> <code>modules.mod_inbox.bin_clean_after = 24</code></li>
+</ul>
+<p>How often the automatic garbage collection runs over the bin.</p>
 <h3 id="modulesmod_inboxreset_markers"><code>modules.mod_inbox.reset_markers</code></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings, out of <code>"displayed"</code>, <code>"received"</code>, <code>"acknowledged"</code></li>
@@ -2904,7 +2973,9 @@ or <a href="https://xmpp.org/extensions/xep-0045.html#affil">affiliation</a> cha
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_inbox]</span><span class="w"></span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_inbox]</span><span class="w"></span>
+<span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rdbms_async&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">reset_markers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;displayed&quot;</span><span class="p">]</span><span class="w"></span>
 <span class="w">  </span><span class="n">aff_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
 <span class="w">  </span><span class="n">remove_on_kicked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
@@ -2940,13 +3011,13 @@ or <a href="https://xmpp.org/extensions/xep-0045.html#affil">affiliation</a> cha
       
       
         
-        <a href="../mod_jingle_sip/" class="md-footer__link md-footer__link--next" aria-label="Next: mod_jingle_sip" rel="next">
+        <a href="../mod_inbox_commands/" class="md-footer__link md-footer__link--next" aria-label="Next: mod_inbox_commands" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              mod_jingle_sip
+              mod_inbox_commands
             </div>
           </div>
           <div class="md-footer__button md-icon">

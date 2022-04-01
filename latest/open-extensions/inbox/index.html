@@ -762,6 +762,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#examples-emptying-the-trash-bin" class="md-nav__link">
+    Examples: emptying the trash bin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#examples-muting-an-entry" class="md-nav__link">
     Examples: muting an entry
   </a>
@@ -776,8 +783,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#deprecated-entry-stanza" class="md-nav__link">
-    Deprecated entry stanza:
+  <a href="#deprecated-reset-entry-stanza" class="md-nav__link">
+    Deprecated reset entry stanza:
   </a>
   
 </li>
@@ -1611,6 +1618,20 @@
     <li class="md-nav__item">
       <a href="../../modules/mod_inbox/" class="md-nav__link">
         mod_inbox
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/mod_inbox_commands/" class="md-nav__link">
+        mod_inbox_commands
       </a>
     </li>
   
@@ -2931,6 +2952,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#examples-emptying-the-trash-bin" class="md-nav__link">
+    Examples: emptying the trash bin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#examples-muting-an-entry" class="md-nav__link">
     Examples: muting an entry
   </a>
@@ -2945,8 +2973,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#deprecated-entry-stanza" class="md-nav__link">
-    Deprecated entry stanza:
+  <a href="#deprecated-reset-entry-stanza" class="md-nav__link">
+    Deprecated reset entry stanza:
   </a>
   
 </li>
@@ -3056,7 +3084,8 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
 <span class="normal">24</span>
 <span class="normal">25</span>
 <span class="normal">26</span>
-<span class="normal">27</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Client --&gt;</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Client --&gt;</span>
 <span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
@@ -3078,6 +3107,7 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
         <span class="nt">&lt;option</span> <span class="na">label=</span><span class="s">&#39;all&#39;</span><span class="nt">&gt;&lt;value&gt;</span>all<span class="nt">&lt;/value&gt;&lt;/option&gt;</span>
         <span class="nt">&lt;option</span> <span class="na">label=</span><span class="s">&#39;inbox&#39;</span><span class="nt">&gt;&lt;value&gt;</span>inbox<span class="nt">&lt;/value&gt;&lt;/option&gt;</span>
         <span class="nt">&lt;option</span> <span class="na">label=</span><span class="s">&#39;archive&#39;</span><span class="nt">&gt;&lt;value&gt;</span>archive<span class="nt">&lt;/value&gt;&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">label=</span><span class="s">&#39;bin&#39;</span><span class="nt">&gt;&lt;value&gt;</span>bin<span class="nt">&lt;/value&gt;&lt;/option&gt;</span>
       <span class="nt">&lt;/field&gt;</span>
       <span class="nt">&lt;field</span> <span class="na">var=</span><span class="s">&#39;archive&#39;</span> <span class="na">type=</span><span class="s">&#39;boolean&#39;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/x&gt;</span>
@@ -3157,7 +3187,7 @@ By default, <code>mod_inbox</code> returns all conversations, listing the ones u
 <li>variable <code>end</code>: End date for the result set (value: ISO timestamp)</li>
 <li>variable <code>order</code>: Order by timestamp (values: <code>asc</code>, <code>desc</code>)</li>
 <li>variable <code>hidden_read</code>: Show only conversations with unread messages (values: <code>true</code>, <code>false</code>)</li>
-<li>variable <code>box</code>: Indicate which box is desired. Supported are <code>all</code>, <code>inbox</code>, and <code>archive</code>. More boxes can be implemented, see <a href="../../modules/mod_inbox/#modulesmod_inboxboxes">mod_inbox – Boxes</a></li>
+<li>variable <code>box</code>: Indicate which box is desired. Supported are <code>all</code>, <code>inbox</code>, <code>archive</code> and <code>bin</code>. More boxes can be implemented, see <a href="../../modules/mod_inbox/#modulesmod_inboxboxes">mod_inbox – Boxes</a>. If not provided, all except the bin are returned.</li>
 <li>variable <code>archive</code> [deprecated, prefer <code>box</code>]: whether to query the archive inbox. <code>true</code> means querying only the archive box, <code>false</code> means querying only the active box. If the flag is not set, it is assumed all entries are requested. This is kept for backwards compatibility reasons, use the <code>box</code> flag instead.</li>
 </ul>
 <p>They are encoded inside a standard XMPP <a href="https://xmpp.org/extensions/xep-0004.html">Data Forms</a> format.
@@ -3197,9 +3227,9 @@ where <code>Max</code> is a non-negative integer.</p>
 <h2 id="properties-of-an-entry">Properties of an entry</h2>
 <p>Given an entry, certain properties are defined for such an entry:</p>
 <h3 id="box">Box</h3>
-<p>Clients usually have two different boxes for the inbox: the regular one, simply called the inbox (or the active inbox), and an archive box, where clients can manually throw conversations they don't want displayed in the default UI.</p>
+<p>Clients usually have two different boxes for the inbox: the regular one, simply called the inbox (or the active inbox), and an archive box, where clients can manually throw conversations they don't want displayed in the default UI. A third box is the trash bin, where deleted entries go and are cleaned up in regular intervals.</p>
 <p>It is expected that entries will reside in the archive until they're either manually moved back to the active box, or they receive a new message: in such case the entry should jump back to the active box automatically.</p>
-<p>More boxes can be implemented, see <a href="../../modules/mod_inbox/#modulesmod_inboxboxes">mod_inbox#boxes</a>. Movement between boxes can be achieved through the right XMPP IQ, no automatic movements are developed as in the case of inbox-archive.</p>
+<p>More boxes can be implemented, see <a href="../../modules/mod_inbox/#modulesmod_inboxboxes">mod_inbox#boxes</a>. Movement between boxes can be achieved through the right XMPP IQ, no more automatic movements are developed as in the case of inbox-archive.</p>
 <h3 id="read">Read</h3>
 <p>Entries keep a count of unread messages that is incremented automatically upon receiving a new message, and (in the current implementation) set to zero upon receiving either a message by one-self, or an appropriate chat marker as defined in <a href="https://xmpp.org/extensions/xep-0333.html">XEP-0333</a> (which markers reset the count is a matter of configuration, see <a href="../../modules/mod_inbox/#modulesmod_inboxreset_markers">doc</a>).</p>
 <p>This property can also be manually set to zero or to one using the appropriate requests as explained below.</p>
@@ -3227,13 +3257,25 @@ The server would respond with:
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">from=</span><span class="s">&#39;alice@localhost&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">from=</span><span class="s">&#39;alice@localhost&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;x</span> <span class="na">xmlns=</span><span class="s">&#39;jabber:x:data&#39;</span> <span class="na">type=</span><span class="s">&#39;form&#39;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;field</span> <span class="na">type=</span><span class="s">&#39;hidden&#39;</span> <span class="na">var=</span><span class="s">&#39;FORM_TYPE&#39;</span><span class="nt">&gt;&lt;value&gt;</span>erlang-solutions.com:xmpp:inbox:0<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
       <span class="nt">&lt;field</span> <span class="na">var=</span><span class="s">&#39;archive&#39;</span> <span class="na">type=</span><span class="s">&#39;boolean&#39;</span> <span class="na">value=</span><span class="s">&#39;false&#39;</span><span class="nt">/&gt;</span>
       <span class="nt">&lt;field</span> <span class="na">var=</span><span class="s">&#39;read&#39;</span> <span class="na">type=</span><span class="s">&#39;boolean&#39;</span> <span class="na">value=</span><span class="s">&#39;false&#39;</span><span class="nt">/&gt;</span>
       <span class="nt">&lt;field</span> <span class="na">var=</span><span class="s">&#39;mute&#39;</span> <span class="na">type=</span><span class="s">&#39;text-single&#39;</span> <span class="na">value=</span><span class="s">&#39;0&#39;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;field</span> <span class="na">var=</span><span class="s">&#39;box&#39;</span> <span class="na">type=</span><span class="s">&#39;list-simple&#39;</span> <span class="na">value=</span><span class="s">&#39;all&#39;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">label=</span><span class="s">&#39;all&#39;</span><span class="nt">&gt;&lt;value&gt;</span>all<span class="nt">&lt;/value&gt;&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">label=</span><span class="s">&#39;inbox&#39;</span><span class="nt">&gt;&lt;value&gt;</span>inbox<span class="nt">&lt;/value&gt;&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">label=</span><span class="s">&#39;archive&#39;</span><span class="nt">&gt;&lt;value&gt;</span>archive<span class="nt">&lt;/value&gt;&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">label=</span><span class="s">&#39;bin&#39;</span><span class="nt">&gt;&lt;value&gt;</span>bin<span class="nt">&lt;/value&gt;&lt;/option&gt;</span>
+      <span class="nt">&lt;/field&gt;</span>
     <span class="nt">&lt;/x&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
@@ -3404,6 +3446,28 @@ If the client had sent an invalid number (negative, or NaN), the server would an
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div>
 </td></tr></table></p>
+<h3 id="examples-emptying-the-trash-bin">Examples: emptying the trash bin</h3>
+<p>A user can empty his trash bin, through the following request:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;empty-bin</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0&#39;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/iq&gt;</span>
+</code></pre></div>
+</td></tr></table>
+On success, the server would return how many entries where dropped as in:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;empty-bin</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0&#39;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;num&gt;</span>2<span class="nt">&lt;/num&gt;</span>
+  <span class="nt">&lt;/empty-bin&gt;</span>
+<span class="nt">&lt;/iq&gt;</span>
+</code></pre></div>
+</td></tr></table>
+The server might answer with a corresponding error message, might anything go wrong.</p>
 <h3 id="examples-muting-an-entry">Examples: muting an entry</h3>
 <p>To mute an entry for a full day (86400 seconds in a day, 604800 in a week, for example), a client can send:
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -3515,7 +3579,7 @@ And similarly, to set a conversation as unread:
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div>
 </td></tr></table></p>
-<h3 id="deprecated-entry-stanza">Deprecated entry stanza:</h3>
+<h3 id="deprecated-reset-entry-stanza">Deprecated reset entry stanza:</h3>
 <p>You can reset the inbox with the following stanza:
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
