@@ -4085,11 +4085,11 @@
 <p>The IP address to which the listening socket is bound.</p>
 <h3 id="listenproto"><code>listen.*.proto</code></h3>
 <ul>
-<li><strong>Syntax:</strong> string, <code>"udp"</code> or <code>"tcp"</code></li>
+<li><strong>Syntax:</strong> string, only <code>"tcp"</code> is accepted</li>
 <li><strong>Default:</strong> <code>"tcp"</code></li>
-<li><strong>Example:</strong> <code>proto = "udp"</code></li>
+<li><strong>Example:</strong> <code>proto = "tcp"</code></li>
 </ul>
-<p>The protocol, which is TCP by default. There is no reason to change this for XMPP or HTTP listeners.</p>
+<p>The protocol, which is TCP by default. Currently this is the only valid option.</p>
 <h3 id="listenip_version"><code>listen.*.ip_version</code></h3>
 <ul>
 <li><strong>Syntax:</strong> integer, <code>4</code> or <code>6</code></li>
@@ -4124,11 +4124,11 @@ Hibernation greatly reduces memory consumption of client processes, but <em>may<
 The default, recommended value of 0 means that the client processes will hibernate at every opportunity.</p>
 <h3 id="listenmax_stanza_size"><code>listen.*.max_stanza_size</code></h3>
 <ul>
-<li><strong>Syntax:</strong> positive integer</li>
-<li><strong>Default:</strong> not set, unlimited size</li>
+<li><strong>Syntax:</strong> positive integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
 <li><strong>Example:</strong> <code>max_stanza_size = 10_000</code></li>
 </ul>
-<p>Maximum allowed incoming stanza size in bytes. </p>
+<p>Maximum allowed incoming stanza size in bytes.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This limit is checked <strong>after</strong> the input data parsing, so it does not apply to the input data size itself.</p>
