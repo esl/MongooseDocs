@@ -1203,9 +1203,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#handler-types-rest-api-client" class="md-nav__link">
-    Handler types: REST API - Client
+  <a href="#handler-types-rest-api-client-mongoose_client_api" class="md-nav__link">
+    Handler types: REST API - Client - mongoose_client_api
   </a>
+  
+    <nav class="md-nav" aria-label="Handler types: REST API - Client - mongoose_client_api">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listenhttphandlersmongoose_client_apihandlers" class="md-nav__link">
+    listen.http.handlers.mongoose_client_api.handlers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listenhttphandlersmongoose_client_apidocs" class="md-nav__link">
+    listen.http.handlers.mongoose_client_api.docs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3802,9 +3822,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#handler-types-rest-api-client" class="md-nav__link">
-    Handler types: REST API - Client
+  <a href="#handler-types-rest-api-client-mongoose_client_api" class="md-nav__link">
+    Handler types: REST API - Client - mongoose_client_api
   </a>
+  
+    <nav class="md-nav" aria-label="Handler types: REST API - Client - mongoose_client_api">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listenhttphandlersmongoose_client_apihandlers" class="md-nav__link">
+    listen.http.handlers.mongoose_client_api.handlers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listenhttphandlersmongoose_client_apidocs" class="md-nav__link">
+    listen.http.handlers.mongoose_client_api.docs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4471,17 +4511,17 @@ Recommended port number: 5280 for BOSH/WS.</p>
 <h3 id="listenhttphandlers"><code>listen.http.handlers</code></h3>
 <ul>
 <li>
-<p><strong>Syntax:</strong> each handler is specified in a subsection starting with <code>[[listen.http.handlers.type]]</code> where <code>type</code> is one of the allowed handler types, handling different connection types, e.g.</p>
+<p><strong>Syntax:</strong> each handler is specified in a subsection starting with <code>[[listen.http.handlers.type]]</code> where <code>type</code> is one of the allowed handler types, handling different connection types:</p>
 <ul>
 <li><code>mod_bosh</code> - for <a href="https://xmpp.org/extensions/xep-0124.html">BOSH</a> connections,</li>
 <li><code>mod_websockets</code> - for <a href="https://tools.ietf.org/html/rfc6455">WebSocket</a> connections,</li>
-<li><code>mongoose_api_*</code>, <code>mongoose_client_api_*</code>, ... - for REST API.</li>
+<li><code>mongoose_api_admin</code>, <code>mongoose_api_client</code>(obsolete), <code>mongoose_client_api</code>, <code>mongoose_domain_handler</code>, <code>mongoose_api</code> - for REST API.</li>
 </ul>
 <p>These types are described below in more detail.
 The double-bracket syntax is used because there can be multiple handlers of a given type, so for each type there is a TOML array of one or more tables (subsections).</p>
 </li>
 <li>
-<p><strong>Default:</strong> there is no default, all handlers need to be specified explicitly.</p>
+<p><strong>Default:</strong> <code>[]</code> - no handlers enabled, all of them need to be specified explicitly.</p>
 </li>
 <li><strong>Example:</strong> two handlers, one for BOSH and one for WebSockets
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -4516,9 +4556,11 @@ The double-bracket syntax is used because there can be multiple handlers of a gi
 </ul>
 <p>Path for this handler.</p>
 <h3 id="handler-types-bosh-mod_bosh">Handler types: BOSH - <code>mod_bosh</code></h3>
-<p>To handle incoming BOSH traffic you need to configure the <code>mod_bosh</code> module in the <code>modules</code> section as well.</p>
+<p>The recommended configuration is shown in <a href="#example-1-bosh-and-ws">Example 1</a> below.
+To handle incoming BOSH traffic you need to configure the <code>mod_bosh</code> module in the <code>modules</code> section as well.</p>
 <h3 id="handler-types-websockets-mod_websockets">Handler types: WebSockets - <code>mod_websockets</code></h3>
-<p>Websocket connections as defined in <a href="https://tools.ietf.org/html/rfc7395">RFC 7395</a>.
+<p>The recommended configuration is shown in <a href="#example-1-bosh-and-ws">Example 1</a> below.
+Websocket connections as defined in <a href="https://tools.ietf.org/html/rfc7395">RFC 7395</a>.
 You can pass the following optional parameters:</p>
 <h4 id="listenhttphandlersmod_websocketstimeout"><code>listen.http.handlers.mod_websockets.timeout</code></h4>
 <ul>
@@ -4547,7 +4589,7 @@ You can pass the following optional parameters:</p>
 </div>
 <h4 id="listenhttphandlersmod_websocketsservice"><code>listen.http.handlers.mod_websockets.service</code></h4>
 <ul>
-<li><strong>Syntax:</strong> an array of <code>listen.service.*</code> options</li>
+<li><strong>Syntax:</strong> a table of <code>listen.service.*</code> options</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong></li>
 </ul>
@@ -4563,7 +4605,8 @@ You can pass the following optional parameters:</p>
 <p>This subsection enables external component connections over WebSockets.
 See the <a href="#xmpp-components-listenservice">service</a> listener section for details.</p>
 <h3 id="handler-types-rest-api-admin-mongoose_api_admin">Handler types: REST API - Admin - <code>mongoose_api_admin</code></h3>
-<p>For more information about the API, see the <a href="../../rest-api/Administration-backend/">REST interface</a> documentation.
+<p>The recommended configuration is shown in <a href="#example-2-admin-api">Example 2</a> below.
+For more information about the API, see the <a href="../../rest-api/Administration-backend/">REST interface</a> documentation.
 The following options are supported for this handler:</p>
 <h4 id="listenhttphandlersmongoose_api_adminusername"><code>listen.http.handlers.mongoose_api_admin.username</code></h4>
 <ul>
@@ -4579,17 +4622,30 @@ The following options are supported for this handler:</p>
 <li><strong>Example:</strong> <code>password = "secret"</code></li>
 </ul>
 <p>Required to enable authentication for the admin API.</p>
-<h3 id="handler-types-rest-api-client">Handler types: REST API - Client</h3>
-<p>To enable the REST API for clients, several handlers need to be added:</p>
-<ul>
-<li><code>mongoose_client_api_*</code> - handles individual API endpoints. You can add and remove these to enable particular functionality.</li>
-<li><code>lasse_handler</code> - provides the <a href="https://github.com/inaka/lasse">SSE handler</a> which is required for the client HTTP API, should not be changed.</li>
-<li><code>cowboy_*</code> - hosts the Swagger web-based documentation, should not be changed, but can be removed to disable the API docs.</li>
-</ul>
+<h3 id="handler-types-rest-api-client-mongoose_client_api">Handler types: REST API - Client - <code>mongoose_client_api</code></h3>
 <p>The recommended configuration is shown in <a href="#example-3-client-api">Example 3</a> below.
-Please refer to <a href="../../rest-api/Client-frontend/">REST interface</a> documentation for more information.</p>
+Please refer to <a href="../../rest-api/Client-frontend/">REST interface</a> documentation for more information.
+The following options are supported for this handler:</p>
+<h4 id="listenhttphandlersmongoose_client_apihandlers"><code>listen.http.handlers.mongoose_client_api.handlers</code></h4>
+<ul>
+<li><strong>Syntax:</strong> array of strings - Erlang modules</li>
+<li><strong>Default:</strong> all API handler modules enabled</li>
+<li><strong>Example:</strong> <code>handlers = ["mongoose_client_api_messages", "mongoose_client_api_sse"]</code></li>
+</ul>
+<p>The client API consists of several modules, each of them implementing a subset of the functionality.
+By default all modules are enabled, so you don't need to change this option.
+For a list of allowed modules, you need to consult the <a href="https://github.com/esl/MongooseIM/blob/master/src/mongoose_client_api/mongoose_client_api.erl">source code</a>.</p>
+<h4 id="listenhttphandlersmongoose_client_apidocs"><code>listen.http.handlers.mongoose_client_api.docs</code></h4>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> <code>true</code></li>
+<li><strong>Example:</strong> <code>docs = "false"</code></li>
+</ul>
+<p>The Swagger documentation of the client API is hosted at the <code>/api-docs</code> path.
+You can disable the hosted documentation by setting this option to <code>false</code>.</p>
 <h3 id="handler-types-rest-api-domain-management-mongoose_domain_handler">Handler types: REST API - Domain management - <code>mongoose_domain_handler</code></h3>
-<p>This handler enables dynamic domain management for different host types.
+<p>The recommended configuration is shown in <a href="#example-4-domain-api">Example 4</a> below.
+This handler enables dynamic domain management for different host types.
 For more information about the API, see the <a href="../../rest-api/Dynamic-domains/">REST interface</a> documentation.
 The following options are supported for this handler:</p>
 <h4 id="listenhttphandlersmongoose_domain_handlerusername"><code>listen.http.handlers.mongoose_domain_handler.username</code></h4>
@@ -4613,7 +4669,7 @@ The following option is required:</p>
 <h4 id="listenhttphandlersmongoose_apihandlers"><code>listen.http.handlers.mongoose_api.handlers</code></h4>
 <ul>
 <li><strong>Syntax:</strong> array of strings - Erlang modules</li>
-<li><strong>Default:</strong> not set, this is a mandatory option for this handler</li>
+<li><strong>Default:</strong> all API handler modules enabled</li>
 <li><strong>Example:</strong> <code>handlers = ["mongoose_api_metrics"]</code></li>
 </ul>
 <h3 id="transport-options">Transport options</h3>
@@ -4770,101 +4826,21 @@ The number of acceptors and connections is specified (reduced).</p>
 </td></tr></table>
 <h4 id="example-3-client-api">Example 3. Client API</h4>
 <p>REST API for clients.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.http]]</span><span class="w"></span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.http]]</span><span class="w"></span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8089</span><span class="w"></span>
 <span class="w">  </span><span class="n">transport</span><span class="p">.</span><span class="n">max_connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w"></span>
 <span class="w">  </span><span class="n">protocol</span><span class="p">.</span><span class="n">compress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
 
-<span class="w">  </span><span class="k">[[listen.http.handlers.lasse_handler]]</span><span class="w"></span>
+<span class="w">  </span><span class="k">[[listen.http.handlers.mongoose_client_api]]</span><span class="w"></span>
 <span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/sse&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mongoose_client_api_sse&quot;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">[[listen.http.handlers.mongoose_client_api_messages]]</span><span class="w"></span>
-<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/messages/[:with]&quot;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">[[listen.http.handlers.mongoose_client_api_contacts]]</span><span class="w"></span>
-<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/contacts/[:jid]&quot;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">[[listen.http.handlers.mongoose_client_api_rooms]]</span><span class="w"></span>
-<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/rooms/[:id]&quot;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">[[listen.http.handlers.mongoose_client_api_rooms_config]]</span><span class="w"></span>
-<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/rooms/[:id]/config&quot;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">[[listen.http.handlers.mongoose_client_api_rooms_users]]</span><span class="w"></span>
-<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/rooms/:id/users/[:user]&quot;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">[[listen.http.handlers.mongoose_client_api_rooms_messages]]</span><span class="w"></span>
-<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/rooms/[:id]/messages&quot;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">[[listen.http.handlers.cowboy_swagger_redirect_handler]]</span><span class="w"></span>
-<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api-docs&quot;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">[[listen.http.handlers.cowboy_swagger_json_handler]]</span><span class="w"></span>
-<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api-docs/swagger.json&quot;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">[[listen.http.handlers.cowboy_static]]</span><span class="w"></span>
-<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api-docs/[...]&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;priv_dir&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cowboy_swagger&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">content_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;swagger&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api&quot;</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <h4 id="example-4-domain-api">Example 4. Domain API</h4>
