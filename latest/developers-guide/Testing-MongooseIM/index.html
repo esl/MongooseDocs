@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/developers-guide/Testing-MongooseIM/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -3040,31 +3040,29 @@
 <h3 id="docker">Docker</h3>
 <p>Docker could be installed on the local system, and the user executing the tests must have privileges to start new containers (usually achieved by adding the user to the <code>docker</code> group).</p>
 <p>Alternatively, you can use Podman. Here is how to install it on Mac:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>brew install podman
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>brew install podman
 podman machine init
 podman machine start
 ln -s /usr/local/bin/podman /usr/local/bin/docker
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>You can also specify which container supervisor you want to use by defining
 an environment variable in your <code>~/.bashrc</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">export</span> <span class="nv">DOCKER</span><span class="o">=</span>podman
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">export</span> <span class="nv">DOCKER</span><span class="o">=</span>podman
+</code></pre></div></td></tr></table></div>
 <h3 id="freetds-for-mssql-connectivity">FreeTDS for MSSQL connectivity</h3>
 <p>MongooseIM requires FreeTDS in order to connect to MSSQL container.</p>
 <p>Please install the driver:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Ubuntu</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Ubuntu</span>
 $ sudo apt install freetds-dev tdsodbc
 
 <span class="c1"># CentOS</span>
@@ -3072,75 +3070,63 @@ $ sudo yum install freetds
 
 <span class="c1"># macOS</span>
 $ brew install freetds
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>In case you are using an operating system different from Ubuntu or MacOS or have a custom FreeTDS installation,
 you may have to modify the <code>tools/setup-db.sh</code> script to use the proper paths.
 Find a configuration block starting with <code>[mongoose-mssql]</code> and change the <code>Driver</code> and <code>Setup</code>.
 For example, for CentOS change them to <code>/usr/lib64/libtdsodbc.so.0</code> and <code>/usr/lib64/libtdsS.so</code> respectively.</p>
 <h2 id="how-to-print-the-instructions">How to print the instructions</h2>
 <p>The help command prints a list of supported options.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./tools/test-runner.sh --help
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/test-runner.sh --help
+</code></pre></div></td></tr></table></div>
 <h2 id="test-runner-examples">Test runner examples</h2>
 <p>Usage example:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./tools/test-runner.sh --db redis --preset internal_mnesia
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/test-runner.sh --db redis --preset internal_mnesia
+</code></pre></div></td></tr></table></div>
 <p>The command runs both big (feature) and small (unit) tests.</p>
 <p>To view more examples, run:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./tools/test-runner.sh --examples
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/test-runner.sh --examples
+</code></pre></div></td></tr></table></div>
 <h2 id="test-runner-completion">Test runner completion</h2>
 <p>Test runner supports shell TAB completion.</p>
 <p>To enable completion in bash or zsh, run:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">source</span> tools/test-runner-complete.sh
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">source</span> tools/test-runner-complete.sh
+</code></pre></div></td></tr></table></div>
 <p>To view completion examples, run:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./tools/test-runner.sh --examples-complete
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/test-runner.sh --examples-complete
+</code></pre></div></td></tr></table></div>
 <h2 id="viewing-test-reports">Viewing test reports</h2>
 <p>To view test execution results, run:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./tools/test-runner.sh --show-big-reports
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/test-runner.sh --show-big-reports
 ./tools/test-runner.sh --show-small-reports
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h2 id="rerun-big-tests">Rerun big tests</h2>
 <p>Very often we want to restart a specific suite when some test failed.</p>
 <p>For example, some test has failed in <code>mam_SUITE</code>. The command was used to
 execute tests:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./tools/test-runner.sh --skip-small-tests --db pgqsl --preset pgsql_mnesia --skip-stop-nodes
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/test-runner.sh --skip-small-tests --db pgqsl --preset pgsql_mnesia --skip-stop-nodes
+</code></pre></div></td></tr></table></div>
 <p><code>--skip-stop-nodes</code> is optional here, because if any big test fails, then nodes
 would be still running.</p>
 <p>We can just execute the same command, but it would rebuild nodes and start
 them.</p>
 <p>The command can be used instead:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./tools/test-runner.sh --rerun-big-tests -- mam
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/test-runner.sh --rerun-big-tests -- mam
+</code></pre></div></td></tr></table></div>
 <p><code>--rerun-big-tests</code> expands into
 <code>--skip-small-tests --skip-setup-db --dev-nodes --test-hosts --skip-cover --skip-preset</code>.</p>
 <p>And <code>mam</code> is used to run <code>mam_SUITE</code> suite only.</p>
 <h2 id="debugging-big-tests-database">Debugging big tests database</h2>
 <p>This command opens MySQL shell interface:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./tools/open-test-database-shell.sh mysql
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/open-test-database-shell.sh mysql
+</code></pre></div></td></tr></table></div>
 <p>This command opens PgSQL shell interface:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./tools/open-test-database-shell.sh pgsql
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/open-test-database-shell.sh pgsql
+</code></pre></div></td></tr></table></div>
 <p>This command opens <a href="https://docs.microsoft.com/en-us/sql/tools/sqlcmd-utility">MSSQL shell interface</a>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./tools/open-test-database-shell.sh mssql
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/open-test-database-shell.sh mssql
+</code></pre></div></td></tr></table></div>
 <p>You can use this command to execute SQL queries directly. It's useful when designing
 new SQL queries.</p>
 <h2 id="unit-tests-aka-small-tests">Unit tests (a.k.a. "small tests")</h2>
@@ -3152,18 +3138,17 @@ Rebar recompiles all the code automatically, there is no need for a separate com
 <p>If all the tests pass, you will get no output and summary log will be available in <code>ct.log</code>.
 If any of the tests fail the summary log is printed to stdout.</p>
 <p>Detailed test results in a nice HTML format are saved in
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>_build/test/logs/ct_run.[something][datetime]/
-</code></pre></div>
-</td></tr></table></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>_build/test/logs/ct_run.[something][datetime]/
+</code></pre></div></td></tr></table></div></p>
 <p>Unit test running example using test runner:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Run all small tests, show progress</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Run all small tests, show progress</span>
 ./tools/test-runner.sh --skip-big-tests --verbose
 
 <span class="c1"># Run sha_SUITE without cover</span>
@@ -3171,75 +3156,66 @@ If any of the tests fail the summary log is printed to stdout.</p>
 
 <span class="c1"># Run the &#39;general&#39; group in config_parser_SUITE, show progress</span>
 ./tools/test-runner.sh --skip-big-tests --verbose -- config_parser:general
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h2 id="end-to-end-tests-aka-big-tests">End-to-end tests (a.k.a. "big tests")</h2>
 <h3 id="using-test-runner">Using test runner</h3>
 <p>Most important options are preset and database:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Runs privacy_SUITE and private_SUITE with PostgreSQL</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Runs privacy_SUITE and private_SUITE with PostgreSQL</span>
 ./tools/test-runner.sh --skip-small-tests --db pgsql --preset pgsql_mnesia -- privacy private
 
 <span class="c1"># Runs rdbms_SUITE with MSSQL</span>
 <span class="c1"># Initialises a single MongooseIM node (works for some tests only)</span>
 <span class="c1"># Disables cover</span>
 ./tools/test-runner.sh --skip-small-tests --db mssql --preset odbc_mssql_mnesia --test-hosts mim --dev-nodes mim1 --skip-cover -- rdbms
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h3 id="tldr">TL;DR</h3>
 <p>You can also run the tests "by hand", instead of using the test runner.</p>
 <p>In shell #1:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">cd</span> <span class="nv">$MONGOOSEIM</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">cd</span> <span class="nv">$MONGOOSEIM</span>
 ./rebar3 compile
 make devrel
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>In shell #2:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">cd</span> <span class="nv">$MONGOOSEIM</span>/_build/mim1/rel/mongooseim
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">cd</span> <span class="nv">$MONGOOSEIM</span>/_build/mim1/rel/mongooseim
 ./bin/mongooseimctl live
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>In shell #3:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">cd</span> <span class="nv">$MONGOOSEIM</span>/_build/mim2/rel/mongooseim
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">cd</span> <span class="nv">$MONGOOSEIM</span>/_build/mim2/rel/mongooseim
 ./bin/mongooseimctl live
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>In shell #4:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">cd</span> <span class="nv">$MONGOOSEIM</span>/_build/mim3/rel/mongooseim
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">cd</span> <span class="nv">$MONGOOSEIM</span>/_build/mim3/rel/mongooseim
 ./bin/mongooseimctl live
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>In shell #5:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">cd</span> <span class="nv">$MONGOOSEIM</span>/_build/fed1/rel/mongooseim
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">cd</span> <span class="nv">$MONGOOSEIM</span>/_build/fed1/rel/mongooseim
 ./bin/mongooseimctl live
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>In shell #6:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">cd</span> <span class="nv">$MONGOOSEIM</span>/_build/reg1/rel/mongooseim
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">cd</span> <span class="nv">$MONGOOSEIM</span>/_build/reg1/rel/mongooseim
 ./bin/mongooseimctl live
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Back to shell #1:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">cd</span> big_tests/
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">cd</span> big_tests/
 make quicktest
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Wait for the tests to finish and celebrate (or wallow in despair and grief)!</p>
 <p>One-liner alternative for tmux users:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3251,7 +3227,7 @@ make quicktest
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./rebar3 compile
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code>./rebar3 compile
 make devrel
 tmux new-window -n mim1 <span class="s1">&#39;_build/mim1/rel/mongooseim/bin/mongooseimctl live&#39;</span>
 tmux new-window -n mim2 <span class="s1">&#39;_build/mim2/rel/mongooseim/bin/mongooseimctl live&#39;</span>
@@ -3264,8 +3240,7 @@ _build/mim3/rel/mongooseim/bin/mongooseimctl started
 _build/fed1/rel/mongooseim/bin/mongooseimctl started
 _build/reg1/rel/mongooseim/bin/mongooseimctl started
 make -C big_tests quicktest
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Start a new tmux and paste the commands.</p>
 <h3 id="step-by-step-breakdown">Step-by-step breakdown</h3>
 <p><code>make devrel</code> builds four server nodes, preconfigured for a wide range of features covered by end-to-end tests.</p>
@@ -3286,14 +3261,14 @@ E.g. a message archive might store messages in MySQL/PostgreSQL or Riak KV - the
 <p>The whole suite takes a significant amount of time to complete.
 When you develop a new feature, the speed of iterating is crucial to maintain the flow (who doesn't like the feeling?!) and not lose focus.</p>
 <p>In  <code>$MONGOOSEIM/big_tests/</code> we have:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ tree big_tests/ -L 1 -F
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>$ tree big_tests/ -L 1 -F
 big_tests/
 ├── Makefile
 ├── README.md
@@ -3301,60 +3276,53 @@ big_tests/
 ├── test.config
 ├── tests/
 └── ...
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p><code>tests/</code> is where the test suites reside.</p>
 <p><code>*.config</code> files are the suite configuration files - they contain predefined XMPP client specifications, server addresses and XMPP domains to use, and options required by test support libraries (i.e. <a href="https://github.com/esl/escalus/">Escalus</a>).</p>
 <p><code>*.spec</code> files are the test specifications - they define the configuration file to use, the suites, test groups or individual test cases to run or skip, and some less important things.</p>
 <p><code>default.spec</code> is the default when running <code>make quicktest</code>, but it can be overridden with a <code>TESTSPEC</code> variable:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># make sure we&#39;re in $MONGOOSEIM/big_tests/</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># make sure we&#39;re in $MONGOOSEIM/big_tests/</span>
 <span class="nb">cd</span> <span class="nv">$MONGOOSEIM</span>/big_tests/
 make quicktest <span class="nv">TESTSPEC</span><span class="o">=</span>my-feature.spec
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>To speed up the development cycle, developers usually create a <code>.spec</code> file for each feature (or each project, if you're cloning away) and only enable the suites / test groups they are working on.
 The allows testing only the parts of the system that are actually being changed.
 It's worth running <code>default.spec</code> once in a while to check for regressions.</p>
 <p>Consult the <code>default.spec</code> file to see how to run only selected tests/groups/cases.</p>
 <p>If you're sure that none of the test dependencies have changed, and you only edited the test suites and/or MongooseIM code, it's possible to speed up the tests by skipping the Rebar dependency and compilation checks by providing <code>PREPARE=</code> (i.e. an empty value):</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>make quicktest <span class="nv">PREPARE</span><span class="o">=</span>
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make quicktest <span class="nv">PREPARE</span><span class="o">=</span>
+</code></pre></div></td></tr></table></div>
 <p>Consult the <code>big_tests/Makefile</code> to see how it works.</p>
 <h4 id="applying-code-changes">Applying code changes</h4>
 <p>When working on a feature or a bug fix you often modify the code and check if it works as expected.
 In order to change the code on dev nodes that are already generated (<code>mim*</code> and <code>fed*</code>) recompile the code for a specific node.
 For example, to update the code on <code>mim1</code> node all you have to do is:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./rebar3 as mim1 compile
-</code></pre></div>
-</td></tr></table></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./rebar3 as mim1 compile
+</code></pre></div></td></tr></table></div></p>
 <p>A similar command applies to other nodes, the important thing being rebar3's profile.</p>
 <p>When the above command finishes, the code can be reloaded on the server by either reloading changed module(s) in the node's shell, e.g. <code>l(mongoose_riak)</code>, or restarting the node.</p>
 <h4 id="reading-test-reports">Reading test reports</h4>
 <p>When finished, the test engine writes detailed html reports into a directory:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>big_tests/ct_report/ct_run.[gobbledygook][datetime]/
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>big_tests/ct_report/ct_run.[gobbledygook][datetime]/
+</code></pre></div></td></tr></table></div>
 <p>Each run is saved into a new directory. This snippet:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
 <span class="nv">lst</span><span class="o">=</span><span class="k">$(</span>ls -rt ct_report <span class="p">|</span> grep ct_run <span class="p">|</span> tail -n <span class="m">1</span><span class="k">)</span>
 rm ct_report/lastrun
 ln -s <span class="nv">$lst</span> ct_report/lastrun
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>can be of some help.</p>
 <h3 id="checking-coverage">Checking coverage</h3>
 <p>If you want to check how much of the code is covered by tests, run:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>make cover_quicktest
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make cover_quicktest
+</code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You need all the mim nodes (mim1, mim2 and mim3) up and running, even if you only run some of the tests. If any of the nodes is down, the test will crash.</p>
@@ -3477,7 +3445,7 @@ We use <a href="https://github.com/esl/amoc">amoc</a> and <a href="https://githu
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/tutorials/push-notifications/MongoosePush-setup/">
       
       <link rel="icon" href="../../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -2665,27 +2665,25 @@ their HTTP/2 API.</p>
 <p>To enable integration with MongoosePush, it is as simple as the next two steps.
 First, you need to define a pool of HTTPS connections to MongoosePush in the
 <code>outgoing_pools</code> section:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[outgoing_pools.http.mongoose_push_http]</span><span class="w"></span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[outgoing_pools.http.mongoose_push_http]</span><span class="w"></span>
 <span class="w">  </span><span class="n">scope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;global&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">strategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;available_worker&quot;</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">[outgoing_pools.http.mongoose_push_http.connection]</span><span class="w"></span>
 <span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://localhost:8443&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>And second, you need to add <code>mod_push_service_mongoosepush</code> to the <code>modules</code> section in the config file:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_push_service_mongoosepush]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_push_service_mongoosepush]</span><span class="w"></span>
 <span class="w">  </span><span class="n">pool_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mongoose_push_http</span><span class="w"></span>
 <span class="w">  </span><span class="n">api_version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;v3&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Here, we assume that <a href="https://github.com/esl/MongoosePush">MongoosePush</a> will be available on the localhost on port 8443, which is the
 default one — note the <code>server</code> option in the outgoing pool definition.
 Next we enable <a href="../../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>. The first option is the name of the HTTP pool to
@@ -2721,17 +2719,16 @@ Firstly, prepare the following files structure:</p>
 </ul>
 <p>If your <em>FCM</em> app token is <code>MY_FCM_SECRET_TOKEN</code> and you have the <code>priv</code> directory with all
 certificates in the current directory, start MongoosePush with the following command:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -v <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/priv:/opt/app/priv <span class="se">\</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>docker run -v <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/priv:/opt/app/priv <span class="se">\</span>
   -e <span class="nv">PUSH_FCM_APP_FILE</span><span class="o">=</span><span class="s2">&quot;MY_FCM_SECRET_TOKEN&quot;</span> <span class="se">\</span>
   -e <span class="nv">PUSH_HTTPS_CERTFILE</span><span class="o">=</span><span class="s2">&quot;/opt/app/priv/ssl/rest_cert.pem&quot;</span> <span class="se">\</span>
   -e <span class="nv">PUSH_HTTPS_KEYFILE</span><span class="o">=</span><span class="s2">&quot;/opt/app/priv/ssl/rest_key.pem&quot;</span> <span class="se">\</span>
   -it --rm mongooseim/mongoose-push:2.0.0
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>If you don't want to use either <em>APNS</em> or <em>FCM</em>, you simply need to pass <code>PUSH_APNS_ENABLED=0</code> or
 <code>PUSH_FCM_ENABLED=0</code> respectively as additional env variables in your <code>docker run</code> command.
 For more advanced options and configuration please refer to <em>"Quick start / Configuring"</em> in
@@ -2828,7 +2825,7 @@ MongooseIM instance.</p>
     <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

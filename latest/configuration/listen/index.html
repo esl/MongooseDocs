@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/configuration/listen/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -4102,11 +4102,10 @@
 <li><strong>Default:</strong> None - each listener needs to be enabled explicitly. Typical listeners are already specified in the example configuration file.</li>
 <li><strong>Example:</strong> The simplest XMPP listener configuration, handling only incoming XMPP client connections:</li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.c2s]]</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.c2s]]</span><span class="w"></span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5222</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h2 id="general-listener-options">General listener options</h2>
 <p>The options listed below are the same for all listener types. They set the basic listening socket options. Only <code>port</code> is required, the rest can be used to change the default settings.</p>
 <h3 id="listenport"><code>listen.*.port</code></h3>
@@ -4324,7 +4323,7 @@ They all have the <code>tls.</code> prefix.</p>
 <p>Specifies the paths to Certificate Revocation Lists.</p>
 <h3 id="c2s-example">C2S Example</h3>
 <p>The following section configures two C2S listeners.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -4339,7 +4338,7 @@ They all have the <code>tls.</code> prefix.</p>
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.c2s]]</span><span class="w"></span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.c2s]]</span><span class="w"></span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5222</span><span class="w"></span>
 <span class="w">  </span><span class="n">zlib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000</span><span class="w"></span>
 <span class="w">  </span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;c2s&quot;</span><span class="w"></span>
@@ -4355,8 +4354,7 @@ They all have the <code>tls.</code> prefix.</p>
 <span class="w">  </span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;c2s&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;c2s_shaper&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">max_stanza_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">65536</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <ul>
 <li>One at port 5222, which accepts a plain TCP connection and allows to use StartTLS for upgrading it to an encrypted one. The files containing the certificate and the DH parameter are also provided.</li>
 <li>One at port 5223, which accepts only encrypted TLS connections - this is the legacy method as StartTLS is preferred.</li>
@@ -4403,17 +4401,16 @@ Here you can specify some additional options of the TLS encryption.</p>
 <h3 id="s2s-example">S2S Example</h3>
 <p>The following section configures an S2S listener with some basic settings set up.
 The <code>s2s_shaper</code> access rule is used, which requires a definition in the <code>access</code> section.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.s2s]]</span><span class="w"></span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.s2s]]</span><span class="w"></span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5269</span><span class="w"></span>
 <span class="w">  </span><span class="n">shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;s2s_shaper&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">max_stanza_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">131072</span><span class="w"></span>
 <span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">dhfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dh_server.pem&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h2 id="xmpp-components-listenservice">XMPP Components: <code>[[listen.service]]</code></h2>
 <p>Interface for external services acting as XMPP components (<a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114: Jabber Component Protocol</a>), enabling communication between MongooseIM and external services over the XMPP network. The recommended port number for a component listener is 8888.</p>
 <p>According to <a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114: Jabber Component Protocol</a> the component's hostname should be given in the <stream:stream> element.</p>
@@ -4470,15 +4467,14 @@ Also, some deployments would like to avoid revealing some services; not because 
 <li><strong>Example:</strong> <code>conflict_behaviour = "kick_old"</code></li>
 </ul>
 <p>By default, when a component tries to connect and a registration conflict occurs, the connection is dropped with the following error:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;stream:error&gt;</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;stream:error&gt;</span>
   <span class="nt">&lt;conflict</span> <span class="na">xmlns=</span><span class="s">&#39;urn:ietf:params:xml:ns:xmpp-streams&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/stream:error&gt;</span>
 <span class="nt">&lt;/stream:stream&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>It makes implementing the reconnection logic difficult, because the old connection would not allow any other connections.
 By setting this option to <code>kick_old</code>, we drop any old connections registered at the same host before accepting new ones.</p>
 <h3 id="custom-extension-to-the-protocol">Custom extension to the protocol</h3>
@@ -4490,19 +4486,18 @@ The <code>is_subdomain</code> attribute is optional and the default behaviour is
 The IP address is limited to loopback to prevent connections from different hosts.
 All components are allowed to connect, but they need to provide the password.
 The shaper named <code>fast</code> needs to be defined in the <code>shaper</code> section.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.service]]</span><span class="w"></span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.service]]</span><span class="w"></span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8888</span><span class="w"></span>
 <span class="w">  </span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">shaper_rule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fast&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">ip_address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;127.0.0.1&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;secret&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h2 id="http-based-services-listenhttp">HTTP-based services: <code>[[listen.http]]</code></h2>
 <p>Manages all HTTP-based services, such as BOSH (HTTP long-polling), WebSocket and REST.
 It uses the <a href="https://ninenines.eu/docs/en/cowboy/2.6/manual">Cowboy</a> web server.
@@ -4524,21 +4519,20 @@ The double-bracket syntax is used because there can be multiple handlers of a gi
 <p><strong>Default:</strong> <code>[]</code> - no handlers enabled, all of them need to be specified explicitly.</p>
 </li>
 <li><strong>Example:</strong> two handlers, one for BOSH and one for WebSockets
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="k">[[listen.http.handlers.mod_bosh]]</span><span class="w"></span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="k">[[listen.http.handlers.mod_bosh]]</span><span class="w"></span>
 <span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/http-bind&quot;</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">[[listen.http.handlers.mod_websockets]]</span><span class="w"></span>
 <span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/ws-xmpp&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table></li>
+</code></pre></div></td></tr></table></div></li>
 </ul>
 <h3 id="common-handler-options">Common handler options</h3>
 <h4 id="listenhttphandlershost"><code>listen.http.handlers.*.host</code></h4>
@@ -4593,15 +4587,14 @@ You can pass the following optional parameters:</p>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong></li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[listen.http.handlers.mod_websockets.service]</span><span class="w"></span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[listen.http.handlers.mod_websockets.service]</span><span class="w"></span>
 <span class="w">  </span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">shaper_rule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fast&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;secret&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>This subsection enables external component connections over WebSockets.
 See the <a href="#xmpp-components-listenservice">service</a> listener section for details.</p>
 <h3 id="handler-types-rest-api-admin-mongoose_api_admin">Handler types: REST API - Admin - <code>mongoose_api_admin</code></h3>
@@ -4775,7 +4768,7 @@ The library used for HTTP is the Erlang TLS implementation provided by OTP - see
 <p>The examples shown below are included in the provided default configuration file.</p>
 <h4 id="example-1-bosh-and-ws">Example 1. BOSH and WS</h4>
 <p>The following listener accepts BOSH and WebSocket connections and has TLS configured.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -4787,7 +4780,7 @@ The library used for HTTP is the Erlang TLS implementation provided by OTP - see
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.http]]</span><span class="w"></span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.http]]</span><span class="w"></span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5285</span><span class="w"></span>
 <span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">certfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mycert.pem&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">keyfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mykey.pem&quot;</span><span class="w"></span>
@@ -4800,12 +4793,11 @@ The library used for HTTP is the Erlang TLS implementation provided by OTP - see
 <span class="w">  </span><span class="k">[[listen.http.handlers.mod_websockets]]</span><span class="w"></span>
 <span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/ws-xmpp&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h4 id="example-2-admin-api">Example 2. Admin API</h4>
 <p>REST API for administration, the listener is bound to <code>127.0.0.1</code> for increased security.
 The number of acceptors and connections is specified (reduced).</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
@@ -4813,7 +4805,7 @@ The number of acceptors and connections is specified (reduced).</p>
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.http]]</span><span class="w"></span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.http]]</span><span class="w"></span>
 <span class="w">  </span><span class="n">ip_address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;127.0.0.1&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8088</span><span class="w"></span>
 <span class="w">  </span><span class="n">transport</span><span class="p">.</span><span class="n">num_acceptors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
@@ -4822,18 +4814,17 @@ The number of acceptors and connections is specified (reduced).</p>
 <span class="w">  </span><span class="k">[[listen.http.handlers.mongoose_api_admin]]</span><span class="w"></span>
 <span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h4 id="example-3-client-api">Example 3. Client API</h4>
 <p>REST API for clients.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.http]]</span><span class="w"></span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.http]]</span><span class="w"></span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8089</span><span class="w"></span>
 <span class="w">  </span><span class="n">transport</span><span class="p">.</span><span class="n">max_connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w"></span>
 <span class="w">  </span><span class="n">protocol</span><span class="p">.</span><span class="n">compress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
@@ -4841,11 +4832,10 @@ The number of acceptors and connections is specified (reduced).</p>
 <span class="w">  </span><span class="k">[[listen.http.handlers.mongoose_client_api]]</span><span class="w"></span>
 <span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h4 id="example-4-domain-api">Example 4. Domain API</h4>
 <p>REST API for domain management.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -4855,7 +4845,7 @@ The number of acceptors and connections is specified (reduced).</p>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[listen.http]]</span><span class="w"></span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.http]]</span><span class="w"></span>
 <span class="w">  </span><span class="n">ip_address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;127.0.0.1&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8088</span><span class="w"></span>
 <span class="w">  </span><span class="n">transport</span><span class="p">.</span><span class="n">num_acceptors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
@@ -4866,8 +4856,7 @@ The number of acceptors and connections is specified (reduced).</p>
 <span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;secret&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 
               
             </article>
@@ -4958,7 +4947,7 @@ The number of acceptors and connections is specified (reduced).</p>
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

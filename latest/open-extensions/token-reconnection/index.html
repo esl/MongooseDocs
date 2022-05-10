@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/open-extensions/token-reconnection/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -2824,58 +2824,52 @@ None of such capability grants are a subject of this specification though.</p>
 <h3 id="obtaining-a-token">Obtaining a token</h3>
 <p>After authenticating with some other mechanism like SCRAM-SHA-1, a client may request a token from the server by sending the following iq get to its own bare JID:</p>
 <p><strong>Client requests tokens</strong></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@wonderland.com&#39;</span> <span class="na">id=</span><span class="s">&#39;123&#39;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@wonderland.com&#39;</span> <span class="na">id=</span><span class="s">&#39;123&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:token-auth:0&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p><strong>Server responds with a tokens</strong></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">from=</span><span class="s">&quot;alice@wonderland.com&quot;</span> <span class="na">type=</span><span class="s">&quot;result&quot;</span> <span class="na">to=</span><span class="s">&quot;alice@wonderland.com/resource&quot;</span> <span class="na">id=</span><span class="s">&quot;123&quot;</span><span class="nt">&gt;</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">from=</span><span class="s">&quot;alice@wonderland.com&quot;</span> <span class="na">type=</span><span class="s">&quot;result&quot;</span> <span class="na">to=</span><span class="s">&quot;alice@wonderland.com/resource&quot;</span> <span class="na">id=</span><span class="s">&quot;123&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;items</span> <span class="na">xmlns=</span><span class="s">&quot;erlang-solutions.com:xmpp:token-auth:0&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;access_token&gt;</span>YWNjZXNzAGFsaWNlQHdvbmRlcmxhbmQuY29tL01pY2hhbC1QaW90cm93c2tpcy1NYWNCb29rLVBybwA2MzYyMTg4Mzc2NAA4M2QwNzNiZjBkOGJlYzVjZmNkODgyY2ZlMzkyZWM5NGIzZjA4ODNlNDI4ZjQzYjc5MGYxOWViM2I2ZWJlNDc0ODc3MDkxZTIyN2RhOGMwYTk2ZTc5ODBhNjM5NjE1Zjk=<span class="nt">&lt;/access_token&gt;</span>
     <span class="nt">&lt;refresh_token&gt;</span>cmVmcmVzaABhbGljZUB3b25kZXJsYW5kLmNvbS9NaWNoYWwtUGlvdHJvd3NraXMtTWFjQm9vay1Qcm8ANjM2MjMwMDYxODQAMQAwZGQxOGJjODhkMGQ0N2MzNTBkYzAwYjcxZjMyZDVmOWIwOTljMmI1ODU5MmNhN2QxZGFmNWFkNGM0NDQ2ZGU2MWYxYzdhNTJjNDUyMGI5YmIxNGIxNTMwMTE4YTM1NTc=<span class="nt">&lt;/refresh_token&gt;</span>
   <span class="nt">&lt;/items&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h3 id="authentication-with-an-access-token">Authentication with an access token</h3>
 <p><strong>Client authenticates with an access token</strong></p>
-<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;auth</span> <span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span> <span class="na">mechanism=</span><span class="s">&quot;X-OAUTH&quot;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;auth</span> <span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span> <span class="na">mechanism=</span><span class="s">&quot;X-OAUTH&quot;</span><span class="nt">&gt;</span>
 YWNjZXNzAGFsaWNlQHdvbmRlcmxhbmQuY29tL01pY2hhbC1QaW90cm93c2tpcy1NYWNCb29rLVBybwA2MzYyMTg4Mzc2NAA4M2QwNzNiZjBkOGJlYzVjZmNkODgyY2ZlMzkyZWM5NGIzZjA4ODNlNDI4ZjQzYjc5MGYxOWViM2I2ZWJlNDc0ODc3MDkxZTIyN2RhOGMwYTk2ZTc5ODBhNjM5NjE1Zjk=
 <span class="nt">&lt;/auth&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <strong>Server responds with a success</strong></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;success</span> <span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span><span class="nt">/&gt;</span>
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;success</span> <span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span><span class="nt">/&gt;</span>
+</code></pre></div></td></tr></table></div>
 <h3 id="authentication-with-a-refresh-token">Authentication with a refresh token</h3>
 <p>In this situation server will respond with a new refresh token which SHOULD be used in future authentication.</p>
 <p><strong>Client authenticates with a refresh token</strong></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;auth</span> <span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span> <span class="na">mechanism=</span><span class="s">&quot;X-OAUTH&quot;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;auth</span> <span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span> <span class="na">mechanism=</span><span class="s">&quot;X-OAUTH&quot;</span><span class="nt">&gt;</span>
 cmVmcmVzaABhbGljZUB3b25kZXJsYW5kLmNvbS9NaWNoYWwtUGlvdHJvd3NraXMtTWFjQm9vay1Qcm8ANjM2MjMwMDYxODQAMQAwZGQxOGJjODhkMGQ0N2MzNTBkYzAwYjcxZjMyZDVmOWIwOTljMmI1ODU5MmNhN2QxZGFmNWFkNGM0NDQ2ZGU2MWYxYzdhNTJjNDUyMGI5YmIxNGIxNTMwMTE4YTM1NTc=
 <span class="nt">&lt;/auth&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p><strong>Server responds with a success and a new refresh token</strong></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;success</span> <span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;success</span> <span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span><span class="nt">&gt;</span>
 cmVmcmVzaABhbGljZUB3b25kZXJsYW5kLmNvbS9NaWNoYWwtUGlvdHJvd3NraXMtTWFjQm9vay1Qcm8ANjM2MjMwMDYxODQAMgAwZGQxOGJjODhkMGQ0N2MzNTBkYzAwYjcxZjMyZDVmOWIwOTljMmI1ODU5MmNhN2QxZGFmNWFkNGM0NDQ2ZGU2MWYxYzdhNTJjNDUyMGI5YmIxNGIxNTMwMTE4YTM1NTc=
 <span class="nt">&lt;/success&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h2 id="token-format">Token format</h2>
 <p>All tokens are exchanged as Base64 encoded binary data. 
 Serialization format of the token before encoding with Base64 is dependent on its type. 
@@ -2883,29 +2877,25 @@ Common parts in every token are <code>BARE_JID</code> and <code>EXPIRES_AT</code
 Text in single quotes ('example') is literal. 
 <code>ALL_CAPS</code> denote parameters.</p>
 <h3 id="access-token-format">Access token format</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>BASE64_encode
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>BASE64_encode
         (&#39;access&#39;, \0, BARE_JID, \0, EXPIRES_AT, \0, DATA)
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Example (please note the line break was added only for readability):</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>&#39;access&#39; \0 Q8@wonderland.com \0 64875466454
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>&#39;access&#39; \0 Q8@wonderland.com \0 64875466454
     \0 0acd0a66d06934791d046060cf9f1ad3c2abb3274cc7e7d7b2bc7e2ac4453ed774b6c6813b40ebec2bbc3774d59d4087
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h3 id="refresh-token-format">Refresh token format</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>BASE64_encode
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>BASE64_encode
         (&#39;refresh&#39;, \0, BARE_JID, \0, EXPIRES_AT, \0, SEQUENCE_NO, \0, DATA)
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Example (please note the line break was added only for readability):</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>&#39;refresh&#39; \0 qp@wonderland.com \0 64875466457 \0 6
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>&#39;refresh&#39; \0 qp@wonderland.com \0 64875466457 \0 6
     \0 8f57cb019cd6dc6e7779be165b9558611baf71ee4a40d03e77b78b069f482f96c9d23b1ac1ef69f64c1a1db3d36a96ad
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 
               
             </article>
@@ -2996,7 +2986,7 @@ Text in single quotes ('example') is literal.
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

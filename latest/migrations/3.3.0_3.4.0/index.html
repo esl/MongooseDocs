@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/migrations/3.3.0_3.4.0/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -2873,23 +2873,20 @@ MongooseIM 3.4.0 uses a modified schema for MAM MUC backends which enables a mor
 <h4 id="step-1">Step 1</h4>
 <p>Please execute the following SQL statements on your MIM database:</p>
 <p><strong>MySQL</strong></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">sender_id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">UNSIGNED</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">sender_id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">UNSIGNED</span><span class="p">;</span><span class="w"></span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">i_mam_muc_message_sender_id</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">BTREE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="p">(</span><span class="n">sender_id</span><span class="p">);</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p><strong>PostgreSQL</strong></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">sender_id</span><span class="w"> </span><span class="nb">INT</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">sender_id</span><span class="w"> </span><span class="nb">INT</span><span class="p">;</span><span class="w"></span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">i_mam_muc_message_sender_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">BTREE</span><span class="w"> </span><span class="p">(</span><span class="n">sender_id</span><span class="p">);</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p><strong>MSSQL</strong></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">mam_muc_message</span><span class="p">]</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">sender_id</span><span class="w"> </span><span class="nb">bigint</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">mam_muc_message</span><span class="p">]</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">sender_id</span><span class="w"> </span><span class="nb">bigint</span><span class="p">;</span><span class="w"></span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">i_mam_muc_message_sender_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="p">(</span><span class="n">sender_id</span><span class="p">);</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h4 id="step-2">Step 2</h4>
 <p>Now you have a schema that is compatible with MIM 3.4.0 but isn't GDPR-compliant yet because the new column has no meaningful data.</p>
 <p>Please pick your favourite scripting/programming language and populate the new column with the help of a <a href="../jid-from-mam-muc-script/">dedicated script</a>.
@@ -2903,81 +2900,75 @@ You'll need to iterate over the whole <code>mam_muc_message</code> table with th
 <h3 id="cassandra">Cassandra</h3>
 <h4 id="step-1_1">Step 1</h4>
 <p>Please execute the following CQL statements on your MIM database:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">mongooseim</span><span class="p">;</span><span class="w"></span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">mongooseim</span><span class="p">;</span><span class="w"></span>
 <span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">from_jid</span><span class="w"> </span><span class="nb">varchar</span><span class="p">;</span><span class="w"></span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="w"> </span><span class="p">(</span><span class="n">from_jid</span><span class="p">);</span><span class="w"></span>
 <span class="k">DESC</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="p">;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h4 id="step-2_1">Step 2</h4>
 <p>Now you have a schema that is compatible with MIM 3.4.0 but isn't GDPR-compliant yet because the new column has no meaningful data.</p>
 <p>Please pick your favourite scripting/programming language and populate the new column with the help of a <a href="../jid-from-mam-muc-script/">dedicated script</a>.
 You'll need to iterate over the whole <code>mam_muc_message</code> table with the following algorithm:</p>
 <ol>
 <li>Extract the whole <code>mam_muc_message</code> table. Please make sure to use the paging feature of your Cassandra client, as the MAM tables tend to be very large.
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="p">;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table></li>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="p">;</span><span class="w"></span>
+</code></pre></div></td></tr></table></div></li>
 <li>To make data extraction faster, MongooseIM stores 2 copies of the message in the table:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cqlsh:mongooseim&gt; SELECT * FROM mam_muc_message WHERE id = 399582233150625537 ALLOW FILTERING;
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>cqlsh:mongooseim&gt; SELECT * FROM mam_muc_message WHERE id = 399582233150625537 ALLOW FILTERING;
 
  room_jid                      | with_nick | id                 | from_jid | message                        | nick_name
 -------------------------------+-----------+--------------------+----------+--------------------------------+-----------
  room-ad1d999b9e@muc.localhost |           | 399582233150625537 |     null | 0x8350000001...998de2fa8426837 |       Sid
  room-ad1d999b9e@muc.localhost |       Sid | 399582233150625537 |     null | 0x8350000001...998de2fa8426837 |       Sid
-</code></pre></div>
-</td></tr></table></li>
+</code></pre></div></td></tr></table></div></li>
 <li>The copy with an empty <code>with_nick</code> column must be updated.</li>
 <li>Extract the <strong>sender's JID</strong> from the <code>message</code> column in the same way as described in the RDBMS migration section. By default cassandra backend uses the <code>eterm</code> format.</li>
 <li>Update the <code>from_jid</code> column with the value of the extracted <strong>sender's JID</strong>:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cqlsh:mongooseim&gt; UPDATE mam_muc_message SET from_jid = &#39;username@server&#39; WHERE id = 399582233150625537  AND with_nick = &#39;&#39; AND room_jid = &#39;room-ad1d999b9e@muc.localhost&#39;;
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>cqlsh:mongooseim&gt; UPDATE mam_muc_message SET from_jid = &#39;username@server&#39; WHERE id = 399582233150625537  AND with_nick = &#39;&#39; AND room_jid = &#39;room-ad1d999b9e@muc.localhost&#39;;
 cqlsh:mongooseim&gt; SELECT * FROM mam_muc_message WHERE id = 399582233150625537 ALLOW FILTERING;
 
  room_jid                      | with_nick | id                 | from_jid        | message                        | nick_name
 -------------------------------+-----------+--------------------+-----------------+--------------------------------+-----------
  room-ad1d999b9e@muc.localhost |           | 399582233150625537 | username@server | 0x8350000001...998de2fa8426837 |       Sid
  room-ad1d999b9e@muc.localhost |       Sid | 399582233150625537 |            null | 0x8350000001...998de2fa8426837 |       Sid
-</code></pre></div>
-</td></tr></table></li>
+</code></pre></div></td></tr></table></div></li>
 </ol>
 <h3 id="riak">Riak</h3>
 <p>Changes to Riak schema are backward compatible with the current MongooseIM release.
 This means that skipping the migration will cause only some of the new features (namely GDPR data retrieval) to not work correctly.</p>
 <h4 id="step-1_2">Step 1</h4>
 <p>Please update the Riak schema:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Set the RIAK_HOST to your Riak HTTP endpoint</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Set the RIAK_HOST to your Riak HTTP endpoint</span>
 <span class="c1"># Set the RIAK_MAM_SCHEMA_PATH to point to new schema path, which</span>
 <span class="c1"># by default is: RIAK_MAM_SCHEMA_PATH=tools/mam_search_schema.xml</span>
 curl -v -XPUT <span class="nv">$RIAK_HOST</span>/search/schema/mam <span class="se">\</span>
     -H <span class="s1">&#39;Content-Type:application/xml&#39;</span> <span class="se">\</span>
     --data-binary @<span class="si">${</span><span class="nv">RIAK_MAM_SCHEMA_PATH</span><span class="si">}</span>
-</code></pre></div>
-</td></tr></table></p>
+</code></pre></div></td></tr></table></div></p>
 <p>After that we need to either reload all Riak nodes (restart them) or manually reload the schema on live nodes.
 Reloading the schema on live nodes requires access to Erlang Shell of one of the Riak nodes (any of them).
 The instruction on how to get to Riak's Erlang shell is beyond this guide, but if you manage to get to it, just call:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">yz_index</span><span class="p">:</span><span class="nf">reload</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;mam&quot;</span><span class="o">&gt;&gt;</span><span class="p">).</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">yz_index</span><span class="p">:</span><span class="nf">reload</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;mam&quot;</span><span class="o">&gt;&gt;</span><span class="p">).</span><span class="w"></span>
+</code></pre></div></td></tr></table></div>
 <h4 id="step-2_2">Step 2</h4>
 <p>After the schema is posted and reloaded, all "new" objects will be indexed properly as long they contain 2 new fields: <code>msg_owner_jid</code> and <code>mam_type</code>.
 The new MongooseIM code will insert both of them for all new MAM entries, but for all existing ones need to have the fields added.
@@ -2995,7 +2986,7 @@ In order to do that, we need to create a migration script (just pick your favour
 <h3 id="elasticsearch">ElasticSearch</h3>
 <h4 id="step-1_3">Step 1</h4>
 <p>Please update the mapping for <code>muc_messages</code>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3019,7 +3010,7 @@ In order to do that, we need to create a migration script (just pick your favour
 <span class="normal">22</span>
 <span class="normal">23</span>
 <span class="normal">24</span>
-<span class="normal">25</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>PUT muc_messages/_mapping/muc
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code>PUT muc_messages/_mapping/muc
 {
   &quot;properties&quot;: {
     &quot;mam_id&quot;: {
@@ -3044,32 +3035,29 @@ In order to do that, we need to create a migration script (just pick your favour
     }
   }
 }
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h4 id="step-2_3">Step 2</h4>
 <p>Now you have a schema that is compatible with MIM 3.4.0 but isn't GDPR-compliant yet because the new field has no meaningful data.</p>
 <p>Please pick your favourite scripting/programming language and populate the new column with the help of a <a href="../jid-from-mam-muc-script/">dedicated script</a>.
 You'll need to iterate over the all <code>muc_messages</code> documents with the following algorithm:</p>
 <ol>
 <li>Extract some documents (notice the <code>size</code> parameter) for conversion:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>GET muc_messages/_search/?size=100&amp;q=!_exists_:from_jid
-</code></pre></div>
-</td></tr></table></li>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>GET muc_messages/_search/?size=100&amp;q=!_exists_:from_jid
+</code></pre></div></td></tr></table></div></li>
 <li>Extract the <strong>sender's JID</strong> from the <code>message</code> field in the same way as described in the RDBMS migration section. Elasticsearch backend uses exclusively the <code>xml</code> format.</li>
 <li>Update the <code>from_jid</code> column with the value of the extracted <strong>sender's JID</strong>:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>POST localhost:9200/muc_messages/muc/%_id%/_update
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>POST localhost:9200/muc_messages/muc/%_id%/_update
 {
   &quot;doc&quot;: {
     &quot;from_jid&quot; : &quot;%sender&#39;s jid%&quot;
   }
 }
-</code></pre></div>
-</td></tr></table></li>
+</code></pre></div></td></tr></table></div></li>
 <li>Repeat all the actions until the full conversion of the database is done.</li>
 </ol>
 
@@ -3162,7 +3150,7 @@ You'll need to iterate over the all <code>muc_messages</code> documents with the
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

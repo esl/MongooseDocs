@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/tutorials/client-certificate/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -2887,11 +2887,10 @@ In this case it's enabled by adding the following options to the <code>tls</code
 <h3 id="enable-sasl-external-mechanism">Enable <code>SASL EXTERNAL</code> mechanism</h3>
 <p>A <code>SASL EXTERNAL</code> authentication mechanism is disabled by default.
 In order to enable it, please configure <a href="../../configuration/auth/#authsasl_mechanisms"><code>auth.sasl_mechanisms</code> option</a> in the MongooseIM config file.
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[auth]</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[auth]</span><span class="w"></span>
 <span class="w">  </span><span class="n">sasl_mechanisms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;external&quot;</span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table></p>
+</code></pre></div></td></tr></table></div></p>
 <p>Obviously the list may be longer, if the system should support both the certificate and password based authentication.</p>
 <p>The <code>SASL EXTERNAL</code> authentication mechanism requires a digital client certificate.
 This digital certificate should contain <code>xmppAddr</code> field(s), which is always checked first.
@@ -2911,13 +2910,12 @@ If there is more than one JID specified in the <code>xmppAddr</code> fields, the
 For development purposes, it is possible to tell MongooseIM to accept them.</p>
 <h4 id="self-signed-certificates-for-regular-tcptls-connections">Self-signed certificates for regular TCP/TLS connections</h4>
 <p>In order to tell MongooseIM to accept self-signed certs, the <code>listen.c2s.tls.verify_mode</code> option needs to be configured like below:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[listen.c2s]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[listen.c2s]</span><span class="w"></span>
 <span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">verify_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;selfsigned_peer&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">disconnect_on_failure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>where the <code>tls.disconnect_on_failure</code> is a boolean with the following meaning only for <code>just_tls</code>:</p>
 <ul>
 <li><code>true</code> - the connection is closed if a certificate is invalid,</li>
@@ -2927,14 +2925,13 @@ For development purposes, it is possible to tell MongooseIM to accept them.</p>
 <p>For <code>fast_tls</code> backend, the configuration is the same, only the <code>disconnect_on_failure</code> is ignored.</p>
 <h4 id="self-signed-certificates-for-ws-or-bosh">Self-signed certificates for WS or BOSH</h4>
 <p>In order to accept self-signed certs for WS or BOSH connections, the <code>tls</code> options for <code>http</code> listener must have the following configured:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[listen.http]</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[listen.http]</span><span class="w"></span>
 <span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">verify_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;selfsigned_peer&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h3 id="examples">Examples</h3>
 <p>Certificate authentication only.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -2956,7 +2953,7 @@ For development purposes, it is possible to tell MongooseIM to accept them.</p>
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[listen.c2s]</span><span class="w"></span>
+<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[listen.c2s]</span><span class="w"></span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5222</span><span class="w"></span>
 <span class="w">  </span><span class="p">(...)</span><span class="w"></span>
 <span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">cacertfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ca.pem&quot;</span><span class="w"></span>
@@ -2979,10 +2976,9 @@ For development purposes, it is possible to tell MongooseIM to accept them.</p>
 <span class="k">[auth]</span><span class="w"></span>
 <span class="w">  </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;pki&quot;</span><span class="p">]</span><span class="w"></span>
 <span class="w">  </span><span class="n">sasl_mechanisms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;external&quot;</span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Authentication with a client certificate (validated with provided CA chain) or password (validated with data stored in RDBMS).</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
@@ -2990,7 +2986,7 @@ For development purposes, it is possible to tell MongooseIM to accept them.</p>
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[listen.c2s]</span><span class="w"></span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[listen.c2s]</span><span class="w"></span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5222</span><span class="w"></span>
 <span class="w">  </span><span class="p">(...)</span><span class="w"></span>
 <span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">cacertfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ca.pem&quot;</span><span class="w"></span>
@@ -2999,27 +2995,25 @@ For development purposes, it is possible to tell MongooseIM to accept them.</p>
 <span class="k">[auth]</span><span class="w"></span>
 <span class="w">  </span><span class="n">methods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;rdbms&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pki&quot;</span><span class="p">]</span><span class="w"></span>
 <span class="w">  </span><span class="n">sasl_mechanisms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;scram_sha1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;external&quot;</span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h2 id="client-certificate-prerequisites">Client certificate prerequisites</h2>
 <p><code>SASL EXTERNAL</code> will be offered by the server <strong>only when a client provides a valid certificate</strong>.</p>
 <p>Please check documentation of a specific authentication backend you're going to use.</p>
 <h2 id="usage-example-gajim">Usage example - Gajim</h2>
 <p>Verified with Gajim 0.16.8, installed from package <code>gajim-0.16.8-1.fc25.noarch</code>.</p>
 <h3 id="generate-client-certificate">Generate client certificate</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>openssl genrsa -des3 -out rootCA.key 4096
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>openssl genrsa -des3 -out rootCA.key 4096
 openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.crt
 openssl genrsa -out client.key 2048
 openssl req -new -key client.key -out client.csr # Remember to provide username as Common Name!
 openssl x509 -req -in client.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out client.crt -days 500 -sha256
 openssl pkcs12 -export -inkey client.key -in client.crt -out client.p12
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h3 id="configure-mongooseim">Configure MongooseIM</h3>
 <p>See examples in the section above. We recommend using the first snippet for simplicity.</p>
 <p>You don't need to pre-create a user account in order to log in with a certificate.</p>
@@ -3124,7 +3118,7 @@ Version 0.16.8 sometimes "forgets" to ask for the client certificate password.</
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

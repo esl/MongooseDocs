@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/modules/mod_jingle_sip/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -3149,13 +3149,12 @@ As a result, MongooseIM will resend the original <code>session-initiate</code> r
 <p>By default, MongooseIM is built without SIP support.
 In order to build the server with SIP support, please use <code>tools/configure</code> script before the release generation.
 You may either pick only certain drivers (with SIP included) or simply use <code>with-all</code> option. Examples:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>tools/configure with-mysql with-jingle-sip
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>tools/configure with-mysql with-jingle-sip
 tools/configure with-all without-odbc
 tools/configure with-all
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>MongooseIM packages are built with Jingle/SIP support.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -3212,9 +3211,8 @@ tools/configure with-all
 </ul>
 <p>Allows mapping JIDs to phone numbers and vice versa.</p>
 <p>The simplest configuration is the following:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_jingle_sip]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_jingle_sip]</span><span class="w"></span>
+</code></pre></div></td></tr></table></div>
 <p>With this configuration MongooseIM will try sending SIP messages to a SIP proxy listening on localhost and port 5600.</p>
 <h2 id="use-cases-covered-by-tests">Use cases covered by tests</h2>
 <p>Currently to test the functionality we use a SIP Proxy mock written in Erlang.
@@ -3229,7 +3227,7 @@ Below there are sequence diagrams showing the communication between XMPP users, 
 It's possible that the SIP Proxy or other SIP entity decides that the call needs to be forked
 and delivered to the user's phone number instead of generating a corresponding call back to MongooseIM.</p>
 <h4 id="11-signaling-session-initiate-to-other-xmpp-user-via-sip-proxy">1.1 Signaling session-initiate to other XMPP user via SIP Proxy</h4>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3264,7 +3262,7 @@ and delivered to the user's phone number instead of generating a corresponding c
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>+-------+                       +-------------+       +-----------+                   +-------+
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code>+-------+                       +-------------+       +-----------+                   +-------+
 | UserA |                       | MongooseIM  |       | SIPProxy  |                   | UserB |
 +-------+                       +-------------+       +-----------+                   +-------+
     |                                  |                    |                             |
@@ -3300,8 +3298,7 @@ and delivered to the user's phone number instead of generating a corresponding c
     |                                  | session-initiate to UserB                        |
     |                                  |-------------------------------------------------&gt;|
     |                                  |                    |                             |
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <!---
 object UserA MongooseIM SIPProxy UserB
 UserA->MongooseIM: session-initiate to UserB
@@ -3319,7 +3316,7 @@ MongooseIM->UserB: session-initiate to UserB
 <h4 id="12-signaling-session-accept-to-other-xmpp-user-via-sip-proxy">1.2 Signaling session-accept to other XMPP user via SIP Proxy</h4>
 <p>When the other user accepts the call invite sent by the first, the following sequence is executed.
 This is a continuation of the <a href="#11-signaling-session-initiate-to-other-xmpp-user-via-sip-proxy">previous example</a></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3348,7 +3345,7 @@ This is a continuation of the <a href="#11-signaling-session-initiate-to-other-x
 <span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
-<span class="normal">30</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>+-------+                       +-------------+        +-----------+                   +-------+
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code>+-------+                       +-------------+        +-----------+                   +-------+
 | UserA |                       | MongooseIM  |        | SIPProxy  |                   | UserB |
 +-------+                       +-------------+        +-----------+                   +-------+
     |                                  |                     |                             |
@@ -3378,8 +3375,7 @@ This is a continuation of the <a href="#11-signaling-session-initiate-to-other-x
     |        session-accept from UserB |     |-------------| |                             |
     |&lt;---------------------------------|                     |                             |
     |                                  |                     |                             |
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <!---
 object UserA MongooseIM SIPProxy UserB
 UserB->MongooseIM: session-accpet to UserA
@@ -3502,7 +3498,7 @@ Instead the SIP message sent by MongooseIM to SIP Proxy will be delivered direct
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

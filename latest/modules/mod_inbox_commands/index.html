@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/modules/mod_inbox_commands/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -2693,54 +2693,49 @@
 <h2 id="configuration">Configuration</h2>
 <p>This module contains command definitions which are loaded when the module is activated.
 There are no options to be provided, therefore the following entry in the config file is sufficient:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_inbox_commands]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_inbox_commands]</span><span class="w"></span>
+</code></pre></div></td></tr></table></div>
 <h2 id="admin-endpoint">Admin endpoint</h2>
 <h3 id="bin-flush-for-a-user">Bin flush for a user</h3>
 <p>To clean the bin for a given user, the following admin API request can be triggered:</p>
-<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="err">DELETE /api/inbox/&lt;domain&gt;/&lt;user&gt;/&lt;days&gt;/bin,</span>
-</code></pre></div>
-</td></tr></table>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="err">DELETE /api/inbox/&lt;domain&gt;/&lt;user&gt;/&lt;days&gt;/bin,</span>
+</code></pre></div></td></tr></table></div>
 where <code>&lt;domain&gt;</code> and <code>&lt;user&gt;</code> are the domain and name parts of the user's jid, respectively, and <code>&lt;days&gt;</code> is the required number of days for an entry to be considered old enough to be removed, zero allowed (which clears all).</p>
 <p>The result would be a <code>200</code> with the number of rows that were removed as the body, or a corresponding error. For example, if only one entry was cleaned:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">server</span><span class="o">:</span> <span class="l">Cowboy,</span>
 <span class="na">date</span><span class="o">:</span> <span class="l">Wed, 30 Mar 2022 14:06:20 GMT,</span>
 <span class="na">content-type</span><span class="o">:</span> <span class="l">application/json,</span>
 <span class="na">content-length</span><span class="o">:</span> <span class="l">1</span>
 
 1
-</code></pre></div>
-</td></tr></table></p>
+</code></pre></div></td></tr></table></div></p>
 <h3 id="global-bin-flush">Global bin flush</h3>
 <p>If all the bins were desired to be cleared, the following API can be used instead:</p>
-<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="err">DELETE /api/inbox/&lt;host_type&gt;/&lt;days&gt;/bin,</span>
-</code></pre></div>
-</td></tr></table>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="err">DELETE /api/inbox/&lt;host_type&gt;/&lt;days&gt;/bin,</span>
+</code></pre></div></td></tr></table></div>
 where as before, <code>&lt;days&gt;</code> is the required number of days for an entry to be considered old enough to be removed, and <code>&lt;host_type&gt;</code> is the host type where inbox is configured.</p>
 <p>The result would look analogously:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">server</span><span class="o">:</span> <span class="l">Cowboy,</span>
 <span class="na">date</span><span class="o">:</span> <span class="l">Wed, 30 Mar 2022 14:06:20 GMT,</span>
 <span class="na">content-type</span><span class="o">:</span> <span class="l">application/json,</span>
 <span class="na">content-length</span><span class="o">:</span> <span class="l">1</span>
 
 42
-</code></pre></div>
-</td></tr></table></p>
+</code></pre></div></td></tr></table></div></p>
 
               
             </article>
@@ -2831,7 +2826,7 @@ where as before, <code>&lt;days&gt;</code> is the required number of days for an
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

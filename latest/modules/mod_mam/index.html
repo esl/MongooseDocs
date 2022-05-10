@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/modules/mod_mam/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -3454,21 +3454,19 @@ It is a highly customizable module, that requires some skill and knowledge to op
 <h4 id="retraction-on-the-stanza-id">Retraction on the stanza-id</h4>
 <p>This module also implements an extension to the XEP, where it allows to specify the <a href="https://xmpp.org/extensions/xep-0359.html#stanza-id"><code>stanza-id</code></a> as <a href="https://xmpp.org/extensions/xep-0313.html#archives_id">created by</a> the server's MAM, instead of the <code>origin-id</code> that the original <a href="https://xmpp.org/extensions/xep-0424.html">XEP-0424</a> specifies. It announces this capability under the namespace <code>urn:esl:message-retract-by-stanza-id:0</code>. This is specially useful in groupchats where the <code>stanza-id</code> of a message is shared and known for all participants.</p>
 <p>In this case, to use such functionality,
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;apply-to</span> <span class="na">id=</span><span class="s">&quot;origin-id-1&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:xmpp:fasten:0&quot;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;apply-to</span> <span class="na">id=</span><span class="s">&quot;origin-id-1&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:xmpp:fasten:0&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;retract</span> <span class="na">xmlns=</span><span class="s">&#39;urn:xmpp:message-retract:0&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/apply-to&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 turns into
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;apply-to</span> <span class="na">id=</span><span class="s">&quot;stanza-id-1&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:xmpp:fasten:0&quot;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;apply-to</span> <span class="na">id=</span><span class="s">&quot;stanza-id-1&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:xmpp:fasten:0&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;retract</span> <span class="na">xmlns=</span><span class="s">&#39;urn:esl:message-retract-by-stanza-id:0&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/apply-to&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 and likewise, the answer would be tagged by the mentioned <code>esl</code> namespace.</p>
 <h3 id="full-text-search">Full Text Search</h3>
 <p>This module allows message filtering by their text body (if enabled, see <em>Common backend options</em>).
@@ -3538,19 +3536,17 @@ This functionality is currently implemented only for the <code>rdbms</code> back
 <ul>
 <li>Specify <code>[mod_mam_meta.pm]</code> section</li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span><span class="w"></span>
 <span class="p">[</span><span class="n">modules</span><span class="p">.</span><span class="n">mod_mam_meta</span><span class="p">.</span><span class="n">pm</span><span class="p">]</span><span class="w"> </span><span class="c1"># defining this section enables PM support</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <ul>
 <li>Define any PM related option</li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span><span class="w"></span>
 <span class="w">  </span><span class="n">pm</span><span class="p">.</span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rdbms&quot;</span><span class="w"> </span><span class="c1"># enables PM support and overrides its backend</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h3 id="disable-one-to-one-message-archive">Disable one-to-one message archive</h3>
 <p>To disable archive for one-to-one messages please remove PM section or any PM related option from the config file.</p>
 <h3 id="pm-specific-options">PM-specific options</h3>
@@ -3573,19 +3569,17 @@ This functionality is currently implemented only for the <code>rdbms</code> back
 <ul>
 <li>Specify <code>[mod_mam_meta.muc]</code> section</li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span><span class="w"></span>
 <span class="p">[</span><span class="n">modules</span><span class="p">.</span><span class="n">mod_mam_meta</span><span class="p">.</span><span class="n">muc</span><span class="p">]</span><span class="w"> </span><span class="c1"># defining this section enables MUC support</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <ul>
 <li>Define any MUC related option</li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span><span class="w"></span>
 <span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rdbms&quot;</span><span class="w"> </span><span class="c1"># enables MUC support and overrides its backend</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h3 id="disable-muc-message-archive">Disable MUC message archive</h3>
 <p>To disable archive for MUC messages please remove MUC section or any MUC related option from the config file.</p>
 <h3 id="muc-specific-options">MUC-specific options</h3>
@@ -3603,15 +3597,14 @@ This functionality is currently implemented only for the <code>rdbms</code> back
 <h4 id="example">Example</h4>
 <p>The example below presents how to override common option for <code>muc</code> module specifically.
 Please note that you can override all common options (except <code>cache</code>) in a similar way.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span><span class="w"></span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span><span class="w"></span>
 <span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rdbms&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">async_writer</span><span class="p">.</span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true</span><span class="w"> </span><span class="c1"># this option enables async writer for RDBMS backend</span><span class="w"></span>
 <span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span><span class="p">.</span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="c1"># disable async writer for MUC archive only</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h3 id="rdbms-backend-options">RDBMS backend options</h3>
 <p>These options will only have effect when the <code>rdbms</code> backend is used:</p>
 <h4 id="modulesmod_mam_metacache_users"><code>modules.mod_mam_meta.cache_users</code></h4>
@@ -3622,13 +3615,12 @@ Please note that you can override all common options (except <code>cache</code>)
 </ul>
 <p>Enables Archive ID to integer mappings cache.</p>
 <p>If caching is enabled, by default it will spawn its own <a href="https://github.com/esl/segmented_cache">segmented cache</a> cache, with defaults as in <a href="../mod_cache_users/"><code>mod_cache_users</code></a>. To change these defaults, the same config can be accessed within the <code>cache</code> key. To see details about the meaning of each flag, see <a href="../mod_cache_users/"><code>mod_cache_users</code></a>. To reuse the cache already created by <code>mod_cache_users</code>, see the option below.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">modules</span><span class="p">.</span><span class="n">mod_mam_meta</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="n">strategy</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">modules</span><span class="p">.</span><span class="n">mod_mam_meta</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="n">strategy</span><span class="w"></span>
 <span class="n">modules</span><span class="p">.</span><span class="n">mod_mam_meta</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="n">time_to_live</span><span class="w"></span>
 <span class="n">modules</span><span class="p">.</span><span class="n">mod_mam_meta</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="n">number_of_segments</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h4 id="modulesmod_mam_metacachemodule"><code>modules.mod_mam_meta.cache.module</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"mod_cache_users"</code> or <code>"internal"</code></li>
@@ -3692,11 +3684,10 @@ Please note that the full text search is currently only implemented for <code>"r
 Also, full text search works only for messages archived while this option is enabled.</p>
 <h4 id="is_archivable_message3-callback"><a id="is_archivable_message"></a><code>is_archivable_message/3</code> callback</h4>
 <p><code>is_archivable_message</code> option has to name a module exporting <code>is_archivable_message/3</code> function conforming to the spec:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">-</span><span class="ni">spec</span><span class="w"> </span><span class="n">is_archivable_message</span><span class="p">(</span><span class="nv">Mod</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">module</span><span class="p">(),</span><span class="w"> </span><span class="nv">Dir</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">incoming</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="n">outgoing</span><span class="p">,</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">-</span><span class="ni">spec</span><span class="w"> </span><span class="n">is_archivable_message</span><span class="p">(</span><span class="nv">Mod</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">module</span><span class="p">(),</span><span class="w"> </span><span class="nv">Dir</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">incoming</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="n">outgoing</span><span class="p">,</span><span class="w"></span>
 <span class="w">                          </span><span class="nv">Packet</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="nn">exml</span><span class="p">:</span><span class="nb">element</span><span class="p">())</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">boolean</span><span class="p">().</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Servers SHOULD NOT archive messages that do not have a <code>&lt;body/&gt;</code> child tag. Servers SHOULD NOT archive delayed messages.</p>
 <p>By default, all messages that hold meaningful content, rather than state changes such as Chat State Notifications, are archived.</p>
 <h4 id="archiving-chat-markers">Archiving chat markers</h4>
@@ -3783,7 +3774,7 @@ It can be useful to be able to add information to a mam query, that doesn't belo
 </ul>
 <p>This module can be used to add extra lookup parameters to MAM lookup queries.</p>
 <h2 id="example-configuration">Example configuration</h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3792,7 +3783,7 @@ It can be useful to be able to add information to a mam query, that doesn't belo
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span><span class="w"></span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span><span class="w"></span>
 <span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rdbms&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">no_stanzaid_element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
 
@@ -3802,8 +3793,7 @@ It can be useful to be able to add information to a mam query, that doesn't belo
 <span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">db_message_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mam_message_xml&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span><span class="p">.</span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
 <span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">user_prefs_store</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mnesia&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h2 id="metrics">Metrics</h2>
 <p>If you'd like to learn more about metrics in MongooseIM, please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">MongooseIM metrics</a> page.</p>
 <table>
@@ -4020,7 +4010,7 @@ It can be useful to be able to add information to a mam query, that doesn't belo
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

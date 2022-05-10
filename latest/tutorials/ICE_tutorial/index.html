@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/tutorials/ICE_tutorial/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -3009,25 +3009,22 @@ In order to enable signalling we need an instance of <a href="https://github.com
 <h3 id="configuration">Configuration</h3>
 <p>You can find MongooseIM installation instructions on <a href="../../getting-started/Quick-setup/">this page</a>.
 Once you have cloned the repository and compiled the project, you need to modify the <code>mongooseim.toml</code> config file (you can find this file at <code>$REPO/_build/prod/rel/mongooseim/etc/mongooseim.toml</code>, where <code>$REPO</code> is a top-level directory of the cloned repo).
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[general]</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[general]</span><span class="w"></span>
 <span class="w">  </span><span class="n">hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;localhost&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;myxmpp.com&quot;</span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 This sets the virtual hostname of the XMPP server, so that you can register users in this domain.
 After that, you can start MongooseIM with
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">$REPO</span>/_build/prod/rel/mongooseim/bin/mongooseimctl start
-</code></pre></div>
-</td></tr></table></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">$REPO</span>/_build/prod/rel/mongooseim/bin/mongooseimctl start
+</code></pre></div></td></tr></table></div></p>
 <h3 id="users">Users</h3>
 <p>After we finish setting up <a href="https://github.com/esl/MongooseIM">MongooseIM</a>, we need to register some users.
 For this demo we need two users: <em>movie@myxmpp.com</em> and <em>phone@myxmpp.com</em>, for RaspberryPi and the Android phone respectively.
 In order to do that, type:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">$REPO</span>/_build/prod/rel/mongooseim/bin/mongooseimctl register_identified phone myxmpp.com xmpp_password
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">$REPO</span>/_build/prod/rel/mongooseim/bin/mongooseimctl register_identified phone myxmpp.com xmpp_password
 <span class="nv">$REPO</span>/_build/prod/rel/mongooseim/bin/mongooseimctl register_identified movie myxmpp.com xmpp_password
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>on the machine that has <a href="https://github.com/esl/MongooseIM">MongooseIM</a> installed.</p>
 <p>As you can see here, we have created those two users, both with the password <em>xmpp_password</em> for simplicity.</p>
 <h2 id="setting-up-mongooseice-turnstun-server">Setting up MongooseICE (TURN/STUN server)</h2>
@@ -3036,9 +3033,8 @@ For that we are going to use the star of this tutorial - <a href="https://github
 <h3 id="how-to-get-and-configure">How to get and configure</h3>
 <p>The whole documentation that describes all options and deployment methods, can be found on the <a href="https://github.com/esl/MongooseICE">project's github page</a>.
 Let's get to it! (this command assumes that we are on the server for <a href="https://github.com/esl/MongooseICE">MongooseICE</a> and that it has Docker installed):
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker run -it --net<span class="o">=</span>host -e <span class="s2">&quot;MONGOOSEICE_UDP_RELAY_IP=1.1.1.1&quot;</span> -e <span class="s2">&quot;MONGOOSEICE_STUN_SECRET=secret&quot;</span> -e <span class="s2">&quot;MONGOOSEICE_UDP_REALM=myrelay&quot;</span> mongooseim/mongooseice:0.4.0
-</code></pre></div>
-</td></tr></table></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>docker run -it --net<span class="o">=</span>host -e <span class="s2">&quot;MONGOOSEICE_UDP_RELAY_IP=1.1.1.1&quot;</span> -e <span class="s2">&quot;MONGOOSEICE_STUN_SECRET=secret&quot;</span> -e <span class="s2">&quot;MONGOOSEICE_UDP_REALM=myrelay&quot;</span> mongooseim/mongooseice:0.4.0
+</code></pre></div></td></tr></table></div></p>
 <p>This command starts the <a href="https://github.com/esl/MongooseICE">MongooseICE</a> server in the Docker container, attaching its virtual network interface to the network interface of the host machine the Docker daemon is running on.
 There are three important configuration options we have to set via environment variables:</p>
 <ul>
@@ -3082,18 +3078,17 @@ This client is written in <a href="https://elixir-lang.org/install.html">Elixir<
 <h3 id="how-to-get-and-configure_1">How to get and configure</h3>
 <p>You can get the client's sources <a href="https://github.com/esl/ice_demo">here</a>.
 For now we only need to run it, so let's get to it (on our RaspberryPi):
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>git clone https://github.com/esl/ice_demo.git
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>git clone https://github.com/esl/ice_demo.git
 <span class="nb">cd</span> ice_demo
 mix deps.get
 iex -S mix
-</code></pre></div>
-</td></tr></table></p>
+</code></pre></div></td></tr></table></div></p>
 <p>After a while we should get into Elixir shell.
 In order to enable the streamer, we need to start it, providing some configuration options (in the Elixir shell):
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3102,7 +3097,7 @@ In order to enable the streamer, we need to start it, providing some configurati
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="ss">jid</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;movie@myxmpp.com&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="ss">password</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xmpp_password&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="ss">host</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;myxmpp.com&quot;</span><span class="p">,</span><span class="w"></span>
@@ -3112,8 +3107,7 @@ In order to enable the streamer, we need to start it, providing some configurati
 <span class="ss">video_file</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/home/pi/sintel.h264&quot;</span><span class="w"></span>
 <span class="p">]</span><span class="w"></span>
 <span class="nc">ICEDemo</span><span class="o">.</span><span class="n">start_movie</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table></p>
+</code></pre></div></td></tr></table></div></p>
 <p>The first 3 options are all about connecting to the XMPP server - we use "<em>movie@myxmpp.com</em>" user that we created earlier.
 Next 3 options are about connecting to the <a href="https://github.com/esl/MongooseICE">MongooseICE</a> server.
 Those are similar to ones we set in <a href="https://github.com/esl/mangosta-android">Mangosta-Android</a>.
@@ -3217,7 +3211,7 @@ In order to do that, we have to click the "<em>New video stream</em>" button as 
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

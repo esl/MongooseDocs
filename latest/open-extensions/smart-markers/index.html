@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/open-extensions/smart-markers/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -2694,18 +2694,16 @@
 <p>When a client enters a conversation after being offline for a while, such client might want to know what was the last message-id that was marked according to the rules defined in <a href="https://xmpp.org/extensions/xep-0333.html">XEP-0333 - Chat Markers</a>, in order to know where he left of, and build an enhanced UI.</p>
 <p>MongooseIM provides such functionality, using <a href="../../modules/mod_smart_markers/">mod_smart_markers</a></p>
 <h2 id="namespace">Namespace</h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>esl:xmpp:smart-markers:0
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>esl:xmpp:smart-markers:0
+</code></pre></div></td></tr></table></div>
 <h2 id="fetching-a-conversations-latest-markers">Fetching a conversation's latest markers</h2>
 <p>Given a peer, i.e., another user or a muc room, we can fetch the marker we last sent, to the main thread or any other sub-thread, with an IQ like the following:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;iq-unique-id&#39;</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;iq-unique-id&#39;</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;esl:xmpp:smart-markers:0&#39;</span> <span class="na">peer=</span><span class="s">&#39;&lt;peer-bare-jid&gt;&#39;</span> <span class="err">[</span><span class="na">thread=</span><span class="s">&#39;&lt;thread-id&gt;&#39;</span> <span class="na">after=</span><span class="s">&#39;&lt;RFC3339-timestamp&gt;&#39;</span><span class="err">]</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 where:</p>
 <ul>
 <li><code>&lt;peer-bare-jid&gt;</code> MUST be the bare jid of the peer whose last marker wants to be checked. It can be the bare jid of a user, or of MUC room.</li>
@@ -2713,17 +2711,16 @@ where:</p>
 <li><code>&lt;after&gt;</code> is an optional attribute indicating whether markers sent only after a certain timestamp are desired. This most often makes sense for big groupchats, as a potential filter to reduce the amount of markers that will be returned.</li>
 </ul>
 <p>Then the following would be received, was there to be any marker:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">from=</span><span class="s">&#39;user-bare-jid&#39;</span> <span class="na">to=</span><span class="s">&#39;user-jid&#39;</span> <span class="na">id=</span><span class="s">&#39;iq-unique-id&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">from=</span><span class="s">&#39;user-bare-jid&#39;</span> <span class="na">to=</span><span class="s">&#39;user-jid&#39;</span> <span class="na">id=</span><span class="s">&#39;iq-unique-id&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;esl:xmpp:smart-markers:0&#39;</span> <span class="na">peer=</span><span class="s">&#39;peer-bare-jid&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;marker</span> <span class="na">from=</span><span class="s">&#39;&lt;sender-bare-jid&gt;&#39;</span> <span class="na">id=</span><span class="s">&#39;&lt;message-id&gt;&#39;</span> <span class="na">type=</span><span class="s">&#39;&lt;type&gt;&#39;</span> <span class="na">timestamp=</span><span class="s">&#39;&lt;RFC3339&gt;&#39;</span> <span class="err">[</span><span class="na">thread=</span><span class="s">&#39;&lt;thread-id&gt;&#39;</span><span class="err">]</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 where <code>peer-bare-jid</code> matches the requested bare jid and the subelements are <code>marker</code> xml payloads with the following attributes:</p>
 <ul>
 <li><code>&lt;id&gt;</code> is the message id associated to this marker.</li>
@@ -2733,7 +2730,7 @@ where <code>peer-bare-jid</code> matches the requested bare jid and the subeleme
 <li><code>&lt;sender-bare-jid&gt;</code> is the bare jid of the peer who sent the marker, which can be the requester itself, or any peer in the conversation, for both 1:1 chats or groupchats.</li>
 </ul>
 <h3 id="example-11">Example: 1:1</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -2744,7 +2741,7 @@ where <code>peer-bare-jid</code> matches the requested bare jid and the subeleme
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Alice fetches markers in her conversation with Bob --&gt;</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">&lt;!-- Alice fetches markers in her conversation with Bob --&gt;</span>
 <span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;iq-unique-id&#39;</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;esl:xmpp:smart-markers:0&#39;</span> <span class="na">peer=</span><span class="s">&#39;bob@localhost&#39;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
@@ -2756,10 +2753,9 @@ where <code>peer-bare-jid</code> matches the requested bare jid and the subeleme
     <span class="nt">&lt;marker</span> <span class="na">from=</span><span class="s">&#39;bob@localhost&#39;</span> <span class="na">id=</span><span class="s">&#39;KLMNOPQRST&#39;</span> <span class="na">type=</span><span class="s">&#39;displayed&#39;</span> <span class="na">timestamp=</span><span class="s">&#39;2022-02-26T09:11:07.382923Z&#39;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h3 id="example-groupchats">Example: groupchats</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -2772,7 +2768,7 @@ where <code>peer-bare-jid</code> matches the requested bare jid and the subeleme
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Alice fetches markers in a groupchat --&gt;</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">&lt;!-- Alice fetches markers in a groupchat --&gt;</span>
 <span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;iq-unique-id&#39;</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;esl:xmpp:smart-markers:0&#39;</span> <span class="na">peer=</span><span class="s">&#39;room@muc.localhost&#39;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
@@ -2786,8 +2782,7 @@ where <code>peer-bare-jid</code> matches the requested bare jid and the subeleme
     <span class="nt">&lt;marker</span> <span class="na">from=</span><span class="s">&#39;kate@localhost&#39;</span> <span class="na">id=</span><span class="s">&#39;SNWMENSTUH&#39;</span> <span class="na">type=</span><span class="s">&#39;displayed&#39;</span> <span class="na">timestamp=</span><span class="s">&#39;2022-02-26T09:12:07.382923Z&#39;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 
               
             </article>
@@ -2878,7 +2873,7 @@ where <code>peer-bare-jid</code> matches the requested bare jid and the subeleme
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/tutorials/push-notifications/Push-notifications-client-side/">
       
       <link rel="icon" href="../../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -2809,7 +2809,7 @@ server. If you're running a PubSub-less configuration, skip to <a href="#enablin
 <h3 id="creating-a-new-push-node">Creating a new push node</h3>
 <p>In this example <code>mypubsub.com</code> is a domain of the MongooseIM server that has <a href="../../../modules/mod_pubsub/">mod_pubsub</a> enabled
 with the <code>push</code> node support. The client sends the following stanza to the server:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -2828,7 +2828,7 @@ with the <code>push</code> node support. The client sends the following stanza t
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
-<span class="normal">20</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span>
     <span class="na">to=</span><span class="s">&#39;pubsub.mypubsub.com&#39;</span>
     <span class="na">id=</span><span class="s">&#39;create1&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;pubsub</span> <span class="na">xmlns=</span><span class="s">&#39;http://jabber.org/protocol/pubsub&#39;</span><span class="nt">&gt;</span>
@@ -2848,8 +2848,7 @@ with the <code>push</code> node support. The client sends the following stanza t
     <span class="nt">&lt;/configure&gt;</span>
   <span class="nt">&lt;/pubsub&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>The <code>pubsub.mypubsub.com</code> will be used as a gateway for all notifications
 and will pass them through to the APNS and/or FCM.</p>
 <p>The most important and only difference from the standard node creation
@@ -2872,7 +2871,7 @@ If the push node was configured with the above recommended options, you need to 
 JID to publish notifications to that node.
 Considering your JID is <code>alice@mychat.com</code>, your server's JID is just <code>mychat.com</code>.
 The following stanza sent to the just created push node will allow your server JID to publish notifications:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -2881,7 +2880,7 @@ The following stanza sent to the just created push node will allow your server J
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">to=</span><span class="s">&#39;pubsub.mypubsub.com&#39;</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">to=</span><span class="s">&#39;pubsub.mypubsub.com&#39;</span>
     <span class="na">type=</span><span class="s">&#39;set&#39;</span>
     <span class="na">id=</span><span class="s">&#39;wy6Hibg=&#39;</span>
     <span class="na">from=</span><span class="s">&#39;alice@mychat.com/resource&#39;</span><span class="nt">&gt;</span>
@@ -2891,14 +2890,13 @@ The following stanza sent to the just created push node will allow your server J
         <span class="nt">&lt;/affiliations&gt;</span>
     <span class="nt">&lt;/pubsub&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h2 id="enabling-push-notifications">Enabling push notifications</h2>
 <p>The next and the last step is to enable push notifications on the server that handles your messages
 (and has <a href="../../../modules/mod_event_pusher_push/">mod_event_pusher_push</a> enabled).
 Let's assume this server is available under the domain <code>mychat.com</code>.</p>
 <p>To enable push notifications in the simplest configuration, just send the following stanza:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -2909,7 +2907,7 @@ Let's assume this server is available under the domain <code>mychat.com</code>.<
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span> <span class="na">id=</span><span class="s">&#39;x43&#39;</span><span class="nt">&gt;</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span> <span class="na">id=</span><span class="s">&#39;x43&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;enable</span> <span class="na">xmlns=</span><span class="s">&#39;urn:xmpp:push:0&#39;</span> <span class="na">jid=</span><span class="s">&#39;pubsub.mypubsub.com&#39;</span> <span class="na">node=</span><span class="s">&#39;punsub_node_for_my_private_iphone&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;x</span> <span class="na">xmlns=</span><span class="s">&#39;jabber:x:data&#39;</span> <span class="na">type=</span><span class="s">&#39;submit&#39;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;field</span> <span class="na">var=</span><span class="s">&#39;FORM_TYPE&#39;</span><span class="nt">&gt;&lt;value&gt;</span>http://jabber.org/protocol/pubsub#publish-options<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
@@ -2921,8 +2919,7 @@ Let's assume this server is available under the domain <code>mychat.com</code>.<
     <span class="nt">&lt;/x&gt;</span>
   <span class="nt">&lt;/enable&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>We have now enabled push notifications to be send to the <code>pubsub.mypubsub.com</code> domain
 on the node <code>punsub_node_for_my_private_iphone</code> created previously, or in the case of PubSub-less,
 for whatever unique node name we give here, for example any variation of the token obtained from
@@ -2956,13 +2953,12 @@ for whatever unique node name we give here, for example any variation of the tok
 <p>Any other <code>publish-options</code> are ignored by <a href="../../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a></p>
 <h2 id="disabling-push-notifications">Disabling push notifications</h2>
 <p>Disabling push notifications is very simple. Just send the following stanza to your XMPP chat server:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span> <span class="na">id=</span><span class="s">&#39;x44&#39;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span> <span class="na">id=</span><span class="s">&#39;x44&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;disable</span> <span class="na">xmlns=</span><span class="s">&#39;urn:xmpp:push:0&#39;</span> <span class="na">jid=</span><span class="s">&#39;pubsub.mypubsub.com&#39;</span> <span class="na">node=</span><span class="s">&#39;punsub_node_for_my_private_iphone&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>You may skip the <code>node='punsub_node_for_my_private_iphone'</code> to globally disable push notifications
 on all nodes that are registered with your <code>JID</code>.
 This may be used to disable push notifications on all your devices.</p>
@@ -3063,7 +3059,7 @@ showing the typical communication when using push notifications:</p>
     <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

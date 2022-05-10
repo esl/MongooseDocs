@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/developers-guide/Bootstrap-Scripts/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -2671,17 +2671,16 @@
 <h1 id="bootstrap-scripts">Bootstrap scripts</h1>
 <p>The scripts are located in the <code>rel/files/scripts/</code> directory in the MongooseIM repository.</p>
 <p>By default the <code>bootstrap</code> command executes <code>bootstrap01-hello.sh</code>, which just prints the information below:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./_build/prod/rel/mongooseim/bin/mongooseimctl bootstrap
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>./_build/prod/rel/mongooseim/bin/mongooseimctl bootstrap
 
 Execute /Users/mikhailuvarov/erlang/esl/MongooseIM/_build/prod/rel/mongooseim/scripts/bootstrap01-hello.sh
 Hello from /Users/mikhailuvarov/erlang/esl/MongooseIM/_build/prod/rel/mongooseim/scripts/bootstrap01-hello.sh script.
 MongooseIM is installed into /Users/mikhailuvarov/erlang/esl/MongooseIM/_build/prod/rel/mongooseim
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Execution of scripts stops with an error, if any of scripts fail.</p>
 <p>Environment variables, available from scripts:</p>
 <ul>
@@ -2694,18 +2693,16 @@ result files into the <code>etc/</code> directory. If you need the result files 
 create another script <code>bootstrap30-template.sh</code>, that moves files into a proper location.</p>
 <p>The <code>etc/templates.ini</code> file contains default template variables.</p>
 <p>A template config example:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[options]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[options]</span><span class="w"></span>
 <span class="w">  </span><span class="na">demo_session_lifetime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">600</span><span class="w"></span>
 <span class="w">  </span><span class="na">demo_tls_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;tlsv1.2&#39;, &#39;tlsv1.3&#39;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Only lowercase variables are allowed in <code>templates.ini</code>.</p>
 <p>You can redeclare options using environment variables when executing the bootstrap script:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">MIM_DEMO_SESSION_LIFETIME</span><span class="o">=</span><span class="m">700</span> mongooseimctl bootstrap
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">MIM_DEMO_SESSION_LIFETIME</span><span class="o">=</span><span class="m">700</span> mongooseimctl bootstrap
+</code></pre></div></td></tr></table></div>
 <p>Environment variables should have a <code>MIM_</code> prefix. The variable names are case-insensitive
 (but we suggest to use the uppercase variable names for consistency).</p>
 <h2 id="demo-template">Demo template</h2>
@@ -2714,15 +2711,13 @@ It is copied into the <code>/templates</code> directory inside your release dire
 <h2 id="testing-templating-scripts">Testing templating scripts</h2>
 <p>Templating script source code: <code>rel/files/scripts/bootstrap20-template.escript</code>.</p>
 <p>Testing script code:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>tools/pkg/scripts/smoke_test.sh
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>tools/pkg/scripts/smoke_test.sh
 tools/pkg/scripts/smoke_templates.escript
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Testing command:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nv">PRESET</span><span class="o">=</span>pkg <span class="nv">pkg_PLATFORM</span><span class="o">=</span>centos_7 <span class="nv">ESL_ERLANG_PKG_VER</span><span class="o">=</span><span class="m">23</span>.3.1-2 ./tools/test.sh
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">PRESET</span><span class="o">=</span>pkg <span class="nv">pkg_PLATFORM</span><span class="o">=</span>centos_7 <span class="nv">ESL_ERLANG_PKG_VER</span><span class="o">=</span><span class="m">23</span>.3.1-2 ./tools/test.sh
+</code></pre></div></td></tr></table></div>
 
               
             </article>
@@ -2813,7 +2808,7 @@ tools/pkg/scripts/smoke_templates.escript
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

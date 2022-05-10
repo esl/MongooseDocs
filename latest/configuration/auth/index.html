@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/configuration/auth/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -2854,21 +2854,20 @@ The following methods are supported:</p>
 <li><strong>Example:</strong> <code>methods = ["internal", "anonymous"]</code></li>
 </ul>
 <p>It is possible to enable more than one method - they are queried one by one in the alphabetical order until one of them succeeds or there are no more methods. You can change the default order by using this option. Make sure that all methods from the list have their corresponding sections included in the <code>auth</code> section, e.g.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[auth]</span><span class="w"></span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[auth]</span><span class="w"></span>
 <span class="w">  </span><span class="n">methods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;internal&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dummy&quot;</span><span class="p">]</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">[auth.internal]</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">[auth.dummy]</span><span class="w"></span>
 <span class="w">    </span><span class="n">variance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h3 id="authsasl_mechanisms"><code>auth.sasl_mechanisms</code></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings. Allowed values: <code>"scram_sha512_plus"</code>, <code>"scram_sha512"</code>, <code>"scram_sha384_plus"</code>, <code>"scram_sha384"</code>, <code>"scram_sha256_plus"</code>, <code>"scram_sha256"</code>, <code>"scram_sha224_plus"</code>, <code>"scram_sha224"</code>, <code>"scram_sha1_plus"</code>, <code>"scram_sha1"</code>, <code>"plain"</code>, <code>"anonymous"</code>, <code>"oauth"</code>, <code>"external"</code>, <code>"digest"</code></li>
@@ -3039,21 +3038,19 @@ Note that increasing the security of a password has a higher impact over the sec
 See more information in this <a href="https://csrc.nist.gov/publications/detail/sp/800-132/final">NIST guide, Appendix A.2.2</a></p>
 <h2 id="examples">Examples</h2>
 <p>Internal authentication method without any general options - you can skip the <code>auth</code> section in this case:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[auth.internal]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[auth.internal]</span><span class="w"></span>
+</code></pre></div></td></tr></table></div>
 <p>Internal authentication method with some general options:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[auth]</span><span class="w"></span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[auth]</span><span class="w"></span>
 <span class="w">  </span><span class="n">password</span><span class="p">.</span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;sha512&quot;</span><span class="p">]</span><span class="w"></span>
 <span class="w">  </span><span class="n">password</span><span class="p">.</span><span class="n">scram_iterations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20000</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">[auth.internal]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>For more specific examples, see the links below.</p>
 <h2 id="method-specific-options">Method-specific options</h2>
 <p>See the links below for options related to the particular methods:</p>
@@ -3156,7 +3153,7 @@ See more information in this <a href="https://csrc.nist.gov/publications/detail/
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

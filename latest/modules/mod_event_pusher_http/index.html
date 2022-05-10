@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/modules/mod_event_pusher_http/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -2884,7 +2884,7 @@ It must be defined in the <a href="../../configuration/outgoing-connections/#htt
 </ul>
 <p>Name of a module which should be used to check whether a notification should be sent. The default callback module, <code>mod_event_pusher_http_defaults</code>, sends notifications for all non-empty chat messages. You can use this module as a starting point for developing a custom one.</p>
 <h2 id="example-configuration">Example configuration</h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -2894,7 +2894,7 @@ It must be defined in the <a href="../../configuration/outgoing-connections/#htt
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[outgoing_pools.http.http_pool]</span><span class="w"></span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[outgoing_pools.http.http_pool]</span><span class="w"></span>
 <span class="w">  </span><span class="n">scope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;global&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="w"></span>
 
@@ -2905,19 +2905,17 @@ It must be defined in the <a href="../../configuration/outgoing-connections/#htt
 
 <span class="k">[modules.mod_event_pusher.http]</span><span class="w"></span>
 <span class="w">  </span><span class="n">handlers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span><span class="n">pool_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http_pool&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/notifications&quot;</span><span class="p">}]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Notifications will be POSTed to <code>http://localhost:8000/webservice/notifications</code>.
 TOML also allows to specify the handler in its own subsection.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[modules.mod_event_pusher.http.handlers]]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[modules.mod_event_pusher.http.handlers]]</span><span class="w"></span>
 <span class="w">  </span><span class="n">pool_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http_pool&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/notifications&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>This alternative syntax is useful for specifying multiple handlers with options:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
@@ -2925,7 +2923,7 @@ TOML also allows to specify the handler in its own subsection.</p>
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[[modules.mod_event_pusher.http.handlers]]</span><span class="w"></span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[modules.mod_event_pusher.http.handlers]]</span><span class="w"></span>
 <span class="w">  </span><span class="n">pool_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http_pool&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/notifications&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">callback_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mod_event_pusher_http_notifications&quot;</span><span class="w"></span>
@@ -2934,8 +2932,7 @@ TOML also allows to specify the handler in its own subsection.</p>
 <span class="w">  </span><span class="n">pool_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http_pool&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/alerts&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="n">callback_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mod_event_pusher_http_alerts&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Here, some notifications will be POSTed to <code>http://localhost:8000/webservice/notifications</code> and some to <code>http://localhost:8000/webservice/alerts</code>, depending on implementation of <code>should_make_req/6</code> in the two callback modules.</p>
 <h2 id="default-payload-format">Default payload format</h2>
 <p>The default HTTP event pusher sends a POST request with Content-Type <code>application/x-www-form-urlencoded</code>. The form has the following fields:</p>
@@ -2949,9 +2946,8 @@ TOML also allows to specify the handler in its own subsection.</p>
 As a result, these values are all lower case.</p>
 <h3 id="example">Example</h3>
 <p>Below is an example of what the body of an HTTP POST request can look like:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="s2">&quot;author=alice&amp;server=localhost&amp;receiver=bob&amp;message=Hi, Bob!&quot;</span>
-</code></pre></div>
-</td></tr></table></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="s2">&quot;author=alice&amp;server=localhost&amp;receiver=bob&amp;message=Hi, Bob!&quot;</span>
+</code></pre></div></td></tr></table></div></p>
 <h2 id="metrics">Metrics</h2>
 <p>If you'd like to learn more about metrics in MongooseIM, please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">MongooseIM metrics</a> page.</p>
 <table>
@@ -3070,7 +3066,7 @@ As a result, these values are all lower case.</p>
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

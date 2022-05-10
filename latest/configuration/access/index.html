@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/configuration/access/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -2872,15 +2872,14 @@
 <p>The following access rules are already defined in the example configuration file.</p>
 <h3 id="c2s-access">C2S Access</h3>
 <p>The <code>c2s</code> rule is used to allow/deny the users to establish C2S connections:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">c2s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">c2s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blocked&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;deny&quot;</span><span class="p">},</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;allow&quot;</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>It has the following logic:</p>
 <ul>
 <li>if the access class is <code>blocked</code>, the returned value is <code>"deny"</code>,</li>
@@ -2890,15 +2889,14 @@
 <p>For this rule to take effect, it needs to be referenced in the options of a <a href="../listen/#listenc2saccess">C2S listener</a>.</p>
 <h3 id="c2s-shaper">C2S Shaper</h3>
 <p>The <code>c2s_shaper</code> rule is used to determine the shaper used to limit the incoming traffic on C2S connections:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">c2s_shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">c2s_shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p">},</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;normal&quot;</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>It has the following logic:</p>
 <ul>
 <li>if the access class is <code>admin</code>, the returned value is <code>"none"</code>,</li>
@@ -2908,18 +2906,17 @@
 <p>For this rule to take effect, it needs to be referenced in the options of a <a href="../listen/#listenc2sshaper">C2S listener</a>.</p>
 <h3 id="s2s-shaper">S2S Shaper</h3>
 <p>The <code>s2s_shaper</code> rule is used to determine the shaper used to limit the incoming traffic on C2S connections:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">s2s_shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">s2s_shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;fast&quot;</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>It assigns the <code>fast</code> shaper to all S2S connections.</p>
 <p>For this rule to take effect, it needs to be referenced in the options of an <a href="../listen/#listens2sshaper">S2S listener</a>.</p>
 <h3 id="muc">MUC</h3>
 <p>The following rules manage the permissions of MUC operations:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -2929,7 +2926,7 @@
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">muc_admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">muc_admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;allow&quot;</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
 
@@ -2940,22 +2937,20 @@
 <span class="w">  </span><span class="n">muc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;allow&quot;</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>They are referenced in the options of the <a href="../../modules/mod_muc/"><code>mod_muc</code></a> module.</p>
 <h3 id="registration">Registration</h3>
 <p>This rule manages the permissions to create new users with <code>mod_register</code>.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">register</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">register</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;allow&quot;</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>It needs to be referenced in the options of the <a href="../../modules/mod_register/"><code>mod_register</code></a> module.</p>
 <h3 id="mam-permissions">MAM permissions</h3>
 <p>These rules set the permissions for MAM operations triggered by IQ stanzas and handled by the <a href="../../modules/mod_mam/"><code>mod_mam</code></a> module.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -2965,7 +2960,7 @@
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">mam_set_prefs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">mam_set_prefs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
 
@@ -2976,12 +2971,11 @@
 <span class="w">  </span><span class="n">mam_lookup_messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>They can return <code>"allow"</code>, <code>"deny"</code> or <code>"default"</code>.
 The last value uses the default setting for the operation, which is to allow the operation when the sender and recipient JID's are the same.</p>
 <p>MAM for MUC permissions has <code>muc_</code> prefix:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -2991,7 +2985,7 @@ The last value uses the default setting for the operation, which is to allow the
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">muc_mam_set_prefs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">muc_mam_set_prefs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
 
@@ -3002,11 +2996,10 @@ The last value uses the default setting for the operation, which is to allow the
 <span class="w">  </span><span class="n">muc_mam_lookup_messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h3 id="mam-shapers">MAM shapers</h3>
 <p>These rules limit the rate of MAM operations triggered by IQ stanzas.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3028,7 +3021,7 @@ The last value uses the default setting for the operation, which is to allow the
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">mam_set_prefs_shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">mam_set_prefs_shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mam_shaper&quot;</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
 
@@ -3051,8 +3044,7 @@ The last value uses the default setting for the operation, which is to allow the
 <span class="w">  </span><span class="n">mam_lookup_messages_global_shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mam_global_shaper&quot;</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>For each operation there are two rules:</p>
 <ul>
 <li><code>*_shaper</code> - limits the number of operations per user connection per second,</li>
@@ -3062,25 +3054,23 @@ The last value uses the default setting for the operation, which is to allow the
 <p>MAM for MUC shapers has <code>muc_</code> prefix.</p>
 <h3 id="maximum-number-of-sessions">Maximum number of sessions</h3>
 <p>The <code>max_user_sessions</code> rule is used to determine the maximum number of sessions a user can open.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">max_user_sessions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">max_user_sessions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>By default, all users can open at most 10 concurrent sessions.</p>
 <h3 id="maximum-number-of-offline-messages">Maximum number of offline messages</h3>
 <p>The <code>max_user_offline_messages</code> rule is used to determine the maximum number of messages that is stored for a user by the <a href="../../modules/mod_offline/"><code>mod_offline</code> module</a>.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">max_user_offline_messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">max_user_offline_messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span><span class="p">},</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>It has the following logic:</p>
 <ul>
 <li>if the access class is <code>admin</code>, the returned value is <code>5000</code>,</li>
@@ -3091,13 +3081,12 @@ The <code>admin</code> access class can be defined in the <a href="../acl/"><cod
 <h2 id="for-developers">For developers</h2>
 <p>To access the rule functionality, one has to use the <code>acl:match_rule/3</code> function.</p>
 <p>Given the following rule:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">register</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">register</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;deny&quot;</span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>One can call:</p>
 <p><code>acl:match_rule(&lt;&lt;"localhost"&gt;&gt;, register, jid:make(&lt;&lt;"p"&gt;&gt;, &lt;&lt;"localhost"&gt;&gt;, &lt;&lt;&gt;&gt;)).</code></p>
 <p>Which in our case will return <code>deny</code>.
@@ -3192,7 +3181,7 @@ If the rule is not host specific, one can use <code>global</code> instead of <co
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

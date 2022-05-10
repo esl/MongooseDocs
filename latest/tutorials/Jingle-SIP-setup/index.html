@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/tutorials/Jingle-SIP-setup/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -2834,23 +2834,22 @@
 <h2 id="configuring-routr">Configuring Routr</h2>
 <p>First the domain <code>sip.example</code> needs to be added to domains served by Routr.
 To do it, paste the following content to config/domains.yml in the directory where Routr was:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1beta1</span><span class="w"></span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1beta1</span><span class="w"></span>
 <span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Domain</span><span class="w"></span>
 <span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SIP domain</span><span class="w"></span>
 <span class="w">  </span><span class="nt">spec</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">context</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="nt">domainUri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sip.example</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Then the <code>sip.user@sip.example</code> needs to be added to <code>config/agents.yml</code> like below:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
@@ -2858,7 +2857,7 @@ To do it, paste the following content to config/domains.yml in the directory whe
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1beta1</span><span class="w"></span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1beta1</span><span class="w"></span>
 <span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Agent</span><span class="w"></span>
 <span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SIP User</span><span class="w"></span>
@@ -2867,82 +2866,71 @@ To do it, paste the following content to config/domains.yml in the directory whe
 <span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;sip.user&#39;</span><span class="w"></span>
 <span class="w">      </span><span class="nt">secret</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1234&#39;</span><span class="w"></span>
 <span class="w">    </span><span class="nt">domains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">sip.example</span><span class="p p-Indicator">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Now Routr can be started with</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>./routr
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./routr
+</code></pre></div></td></tr></table></div>
 <p>If all goes well we'll see the following output:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>[INFO ] Starting Routr
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>[INFO ] Starting Routr
 [INFO ] Listening  on 10.152.1.27:5060 [udp]
 [INFO ] Listening  on 10.152.1.27:5060 [tcp]
 [INFO ] Starting Location service
 [INFO ] Starting Registry service
 [INFO ] Starting Restful service (port: 4567, apiPath: &#39;/api/v1beta1&#39;)
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>It is important to remember the IP address as it'll be used in next point.</p>
 <h3 id="a-side-note">A side note</h3>
 <p>In Routr's logs you may see messages like</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>[WARN ] Unable to register with Gateway -&gt; sip.provider.net. (Verify your network status)
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>[WARN ] Unable to register with Gateway -&gt; sip.provider.net. (Verify your network status)
+</code></pre></div></td></tr></table></div>
 <p>or</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>[ERROR] java.lang.RuntimeException: javax.sip.header.TooManyHopsException: has already reached 0!
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>[ERROR] java.lang.RuntimeException: javax.sip.header.TooManyHopsException: has already reached 0!
+</code></pre></div></td></tr></table></div>
 <p>They can be ignored for the purpose of the tutorial.</p>
 <h2 id="configuring-etchosts">Configuring /etc/hosts</h2>
 <p>In my case the IP reported by Routr was <code>10.152.1.27</code>.
 Now we need to use this to update <code>/etc/hosts</code> file like below:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>10.152.1.27     sip.example xmpp.example
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>10.152.1.27     sip.example xmpp.example
+</code></pre></div></td></tr></table></div>
 <h2 id="configuring-mongooseim">Configuring MongooseIM</h2>
 <p>At this point I assume that MongooseIM was built with <code>make rel</code>, that it is running and the current working directory is <code>_build/prod/rel/mongooseim</code>.
 Similar to Routr, MongooseIM also needs to know which hosts to server.
 Please replace the default host defined in <code>etc/mongooseim.toml</code>; the line:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[general]</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[general]</span><span class="w"></span>
 <span class="w">  </span><span class="n">hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;localhost&quot;</span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>should be changed to:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[general]</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[general]</span><span class="w"></span>
 <span class="w">  </span><span class="n">hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;xmpp.example&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sip.example&quot;</span><span class="p">]</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Now we need to enable <code>mod_jingle_sip</code>, please add the following line in modules list (somewhere around line 740 in the same file)</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">[modules.mod_jingle_sip]</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_jingle_sip]</span><span class="w"></span>
 <span class="w">  </span><span class="n">proxy_host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sip.example&quot;</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>More details on MongooseIM configuration you can find in <a href="../../configuration/configuration-files/">Configuration</a>
 and in <a href="../../configuration/Modules/">Modules configuration</a></p>
 <p>Now we are registering both users in MongooseIM by calling the following commands:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>bin/mongooseimctl register_identified xmpp.user xmpp.example test_pass
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>bin/mongooseimctl register_identified xmpp.user xmpp.example test_pass
 bin/mongooseimctl register_identified sip.user sip.example test_pass
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Yes, we need to have the <code>sip.user@sip.example</code> registered in MongooseIM.
 This is needed because a Jingle call can be initiated by a regular XMPP client only when the app knows the other user's full JID.
 The easiest way to achieve that is to exchange presence information between these 2 users.
 This can happen automatically if 2 xmpp users have each other in the roster.</p>
 <p>The roster can be set by us with the following commands:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>bin/mongooseimctl add_rosteritem sip.user sip.example xmpp.user xmpp.example xmpp.user none both
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>bin/mongooseimctl add_rosteritem sip.user sip.example xmpp.user xmpp.example xmpp.user none both
 bin/mongooseimctl add_rosteritem xmpp.user xmpp.example sip.user sip.example sip.user none both
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h2 id="adding-users-to-jitsi">Adding users to Jitsi</h2>
 <p>Now the <code>sip.user@sip.example</code> has to be added to Jitsi app.
 When the app is opened for the first time it will display a window to configure the user.
@@ -2966,9 +2954,8 @@ We can click <code>Continue anyway</code> button in order to proceed.</p>
 <h2 id="adding-user-to-otalk">Adding user to Otalk</h2>
 <p>Please follow the instructions on <a href="https://github.com/otalk/otalk-im-client#installing">https://github.com/otalk/otalk-im-client#installing</a> in order to compile and run the app.
 If all goes well, you should see the following message printed in the console:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>demo.stanza.io running at: http://localhost:8000
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>demo.stanza.io running at: http://localhost:8000
+</code></pre></div></td></tr></table></div>
 <p>This means that the app is hosted on <code>http://localhost:8000</code>.</p>
 <blockquote>
 <p>At this point I also recommend opening <a href="wss://localhost:5285/ws-xmpp">wss://localhost:5285/ws-xmpp</a> in the same browser.
@@ -2979,9 +2966,8 @@ We need to add an exception for this certificate in order to successfully connec
 <p>Now let's open <a href="http://localhost:8000">http://localhost:8000</a> where the Otalk app is hosted.
 In the <code>Log in</code> section put <code>xmpp.user@xmpp.example</code> in the <code>JID</code> field and <code>test_pass</code> in the <code>Password</code> filed.
 The default WebSocket endpoint in the <code>WebSocket or BOSH URL</code> field needs to be changed to:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>wss://localhost:5285/ws-xmpp
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>wss://localhost:5285/ws-xmpp
+</code></pre></div></td></tr></table></div>
 <p>Mind the <code>wss</code> protocol, Otalk will not connect the user over WebSockets if for example <code>https</code> is put in the field.</p>
 <p><img alt="Otalk login page" src="../jingle-sip/otalk-log-in.png" /></p>
 <p>Now we can hit the <code>Go!</code> button and the <code>xmpp.user@xmpp.example</code> will connect to MongooseIM.</p>
@@ -2991,7 +2977,7 @@ When we click on the contact, the <code>Call</code> button should appear allowin
 <p>In Jitsi, the following window should pop up:
 <img alt="Jitsi call window" src="../jingle-sip/jitsi-call.png" /></p>
 <p>Behind the scene the following SIP request was send from MongooseIM to Routr.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3066,7 +3052,7 @@ When we click on the contact, the <code>Call</code> button should appear allowin
 <span class="normal">73</span>
 <span class="normal">74</span>
 <span class="normal">75</span>
-<span class="normal">76</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>INVITE sip:sip.user@sip.example:5060 SIP/2.0
+<span class="normal">76</span></pre></div></td><td class="code"><div><pre><span></span><code>INVITE sip:sip.user@sip.example:5060 SIP/2.0
 Via: SIP/2.0/TCP localhost:5600;rport;branch=z9hG4bK1HMB3o-3mbahM
 From: xmpp.user &lt;sip:xmpp.user@xmpp.example&gt;;tag=aVEBue
 To: sip.user &lt;sip:sip.user@sip.example&gt;
@@ -3142,10 +3128,9 @@ a=rtcp-fb:97 nack pli
 a=rtcp-fb:97 nack
 a=ssrc:823938224 cname:{ce7fa171-069e-db4f-ba41-cfa4455c1033}
 a=ssrc:823938224 msid:{788b64bb-c4fc-b644-89b0-89f69c78f8b0} {a7f87c8d-6002-fd4c-badb-13383c759e48}
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>And Routr sent the <code>Ringing</code> response code to MongooseIM as soon as the Jitsi app displayed the incoming call window:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
@@ -3153,7 +3138,7 @@ a=ssrc:823938224 msid:{788b64bb-c4fc-b644-89b0-89f69c78f8b0} {a7f87c8d-6002-fd4c
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>SIP/2.0 180 Ringing
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>SIP/2.0 180 Ringing
 CSeq: 159913767 INVITE
 Call-ID: ae602f16-d57d-4452-b83e-36e54bb6d325
 From: &quot;xmpp.user&quot; &lt;sip:xmpp.user@xmpp.example&gt;;tag=aVEBue
@@ -3162,8 +3147,7 @@ Via: SIP/2.0/TCP localhost:5600;rport=54071;branch=z9hG4bK1HMB3o-3mbahM;received
 Contact: &quot;sip.user&quot; &lt;sip:sip.user@10.152.1.27:53697;transport=tcp;registering_acc=sip_example&gt;
 User-Agent: Jitsi2.10.5550Mac OS X
 Content-Length: 0
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h2 id="summary">Summary</h2>
 <p>The example above showcases how you can use Jingle/SIP switch with the available open source software.
 Sonetel, who are this feature's sponsor, operate on a slightly different use case and utilize more of the functionality with their proprietary software.
@@ -3266,7 +3250,7 @@ Based on the current state it can be improved and extended if needed.</p>
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

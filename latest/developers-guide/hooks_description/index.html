@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/developers-guide/hooks_description/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -2743,9 +2743,8 @@
 Though hooks &amp; handlers differ in what they are there to do, it is not necessary to describe them all, because the mechanism is general.
 The following is meant to give you the idea of how the hooks work, what they are used for and the various purposes they can serve.</p>
 <h2 id="user_send_packet"><code>user_send_packet</code></h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">user_send_packet</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">FromJID</span><span class="p">,</span><span class="w"> </span><span class="nv">ToJID</span><span class="p">,</span><span class="w"> </span><span class="nv">El</span><span class="p">),</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">user_send_packet</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">FromJID</span><span class="p">,</span><span class="w"> </span><span class="nv">ToJID</span><span class="p">,</span><span class="w"> </span><span class="nv">El</span><span class="p">),</span><span class="w"></span>
+</code></pre></div></td></tr></table></div>
 <p>This hook is run in <code>ejabberd_c2s</code> after the user sends a packet.
 Some rudimentary verification of the stanza is done once it is received from the socket:</p>
 <ul>
@@ -2783,11 +2782,10 @@ The hook is not run for stanzas in the <code>jabber:iq:privacy</code> or <code>u
 </li>
 </ul>
 <h2 id="user_receive_packet"><code>user_receive_packet</code></h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">user_receive_packet</span><span class="p">(</span><span class="nv">StateData</span><span class="nl">#state.host_type</span><span class="p">,</span><span class="w"> </span><span class="nv">Acc</span><span class="p">,</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">user_receive_packet</span><span class="p">(</span><span class="nv">StateData</span><span class="nl">#state.host_type</span><span class="p">,</span><span class="w"> </span><span class="nv">Acc</span><span class="p">,</span><span class="w"></span>
 <span class="w">                                   </span><span class="nv">StateData</span><span class="nl">#state.jid</span><span class="p">,</span><span class="w"> </span><span class="nv">From</span><span class="p">,</span><span class="w"> </span><span class="nv">To</span><span class="p">,</span><span class="w"> </span><span class="nv">FixedEl</span><span class="p">),</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>The hook is run just before a packet received by the server is sent to the user.</p>
 <p>Prior to sending, the packet is verified against any relevant privacy lists (the mechanism is described in <a href="http://xmpp.org/extensions/xep-0016.html">XEP-0016: Privacy Lists</a>).
 The privacy list mechanism itself is not mandatory and requires <code>mod_privacy</code> to be configured; otherwise all stanzas are allowed to pass.</p>
@@ -2802,9 +2800,8 @@ The privacy list mechanism itself is not mandatory and requires <code>mod_privac
 </li>
 </ul>
 <h2 id="filter_packet"><code>filter_packet</code></h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">filter_packet</span><span class="p">({</span><span class="nv">OrigFrom</span><span class="p">,</span><span class="w"> </span><span class="nv">OrigTo</span><span class="p">,</span><span class="w"> </span><span class="nv">OrigAcc</span><span class="p">,</span><span class="w"> </span><span class="nv">OrigPacket</span><span class="p">})</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">filter_packet</span><span class="p">({</span><span class="nv">OrigFrom</span><span class="p">,</span><span class="w"> </span><span class="nv">OrigTo</span><span class="p">,</span><span class="w"> </span><span class="nv">OrigAcc</span><span class="p">,</span><span class="w"> </span><span class="nv">OrigPacket</span><span class="p">})</span><span class="w"></span>
+</code></pre></div></td></tr></table></div>
 <p>This hook is run by <code>mongoose_router_global</code> when the packet is being routed by <code>ejaberd_router:route/3</code>.
 It is in fact the first call made within the routing procedure.
 If a function hooked in to <code>filter_packet</code> returns <code>drop</code>, the packet is not processed.</p>
@@ -2814,17 +2811,15 @@ sending replies and errors.</p>
 <p>The handlers expect no arguments other than the accumulator, which is a packet.
 It may or may not be filtered out (in case the handler chain returns <code>drop</code>) or modified.</p>
 <p>Note the hook code inside <code>mongoose_hooks</code>:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nf">filter_packet</span><span class="p">(</span><span class="nv">Acc</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nf">filter_packet</span><span class="p">(</span><span class="nv">Acc</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="n">run_global_hook</span><span class="p">(</span><span class="n">filter_packet</span><span class="p">,</span><span class="w"> </span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="p">[]).</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 This hook is run not for a host type, but globally across the whole cluster.
 Keep that in mind when registering the handlers and appropriately use the atom <code>global</code> instead of a host type as the second argument.</p>
 <h2 id="offline_message_hook"><code>offline_message_hook</code></h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">offline_message_hook</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">From</span><span class="p">,</span><span class="w"> </span><span class="nv">To</span><span class="p">,</span><span class="w"> </span><span class="nv">Packet</span><span class="p">);</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">offline_message_hook</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">From</span><span class="p">,</span><span class="w"> </span><span class="nv">To</span><span class="p">,</span><span class="w"> </span><span class="nv">Packet</span><span class="p">);</span><span class="w"></span>
+</code></pre></div></td></tr></table></div>
 <p><code>ejabberd_sm</code> runs this hook once it determines that a routed stanza is a message and while it ordinarily could be delivered, no resource (i.e. device or desktop client application) of its recipient is available online for delivery.</p>
 <p>The following depends on configuration, but the hook is first handled by <code>mod_offline_chatmarkers</code>, which filters out and chat marker packets processed by <code>mod_smart_markers</code>.
 The handler stores such messages and returns <code>{stop, Acc}</code>, which terminates the call and no more hook handlers are called.
@@ -2836,9 +2831,8 @@ If <code>mod_offline</code> fails, <code>ejabberd_sm:bounce_offline_message</cod
 <p>In the case of using <code>mod_mam</code> the message is actually stored and no notification should be sent - that's why the module <code>mod_offline_stub</code> can be enabled.
 It can handle the hook before <code>ejabberd_sm</code>, preventing it from sending <code>&lt;service-unavailable/&gt;</code>.</p>
 <h2 id="remove_user"><code>remove_user</code></h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">remove_user</span><span class="p">(</span><span class="nv">LServer</span><span class="p">,</span><span class="w"> </span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">LUser</span><span class="p">)</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">remove_user</span><span class="p">(</span><span class="nv">LServer</span><span class="p">,</span><span class="w"> </span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">LUser</span><span class="p">)</span><span class="w"></span>
+</code></pre></div></td></tr></table></div>
 <p><code>remove_user</code> is run by <code>ejabberd_auth</code> - the authentication module - when a request is made to remove the user from the database of the server.
 This one is rather complex, since removing a user requires many cleanup operations:
 <code>mod_last</code> removes last activity information (<a href="https://xmpp.org/extensions/xep-0012.html">XEP-0012: Last Activity</a>);
@@ -2850,9 +2844,8 @@ This one is rather complex, since removing a user requires many cleanup operatio
 <code>mod_pubsub</code> unsubscribes from publish/subscribe channels;
 and <code>mod_roster</code> removes the user's roster from the database.</p>
 <h2 id="node_cleanup"><code>node_cleanup</code></h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">run</span><span class="p">(</span><span class="n">node_cleanup</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nv">Node</span><span class="p">])</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">ejabberd_hooks</span><span class="p">:</span><span class="nf">run</span><span class="p">(</span><span class="n">node_cleanup</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nv">Node</span><span class="p">])</span><span class="w"></span>
+</code></pre></div></td></tr></table></div>
 <p><code>node_cleanup</code> is run by a <code>mongooseim_cleaner</code> process which subscribes to <code>nodedown</code> messages.
 Currently, the hook is run inside a global transaction (via <code>global:trans/4</code>).</p>
 <p>The job of this hook is to remove all processes registered in Mnesia.
@@ -2861,9 +2854,8 @@ Those must obviously be removed when a node goes down, and to do this the module
 <p>Number of retries for this transaction is set to 1 which means that in some situations the hook may be run on more than one node in the cluster, especially when there is little garbage to clean after the dead node.
 Setting retries to 0 is not good decision as it was observed that in some setups it may abort the transaction on all nodes.</p>
 <h2 id="session_opening_allowed_for_user"><code>session_opening_allowed_for_user</code></h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">allow</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">session_opening_allowed_for_user</span><span class="p">(</span><span class="nv">HostType</span><span class="p">,</span><span class="w"> </span><span class="nv">JID</span><span class="p">).</span><span class="w"></span>
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">allow</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">session_opening_allowed_for_user</span><span class="p">(</span><span class="nv">HostType</span><span class="p">,</span><span class="w"> </span><span class="nv">JID</span><span class="p">).</span><span class="w"></span>
+</code></pre></div></td></tr></table></div>
 <p>This hook is run after authenticating when user sends the IQ opening a session.
 Handler function are expected to return:</p>
 <ul>
@@ -3092,7 +3084,7 @@ This is the perfect place to plug in custom security control.</p>
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>

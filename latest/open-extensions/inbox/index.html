@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/open-extensions/inbox/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3de6f41f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -3030,7 +3030,7 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
 <h2 id="entity-use-cases">Entity Use Cases</h2>
 <h3 id="discovering-inbox-services">Discovering Inbox Services</h3>
 <p>An entity can discover the inbox service via a Features Discovery request:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3041,7 +3041,7 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Client --&gt;</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">&lt;!-- Client --&gt;</span>
 <span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span> <span class="na">id=</span><span class="s">&#39;a96d4244760853af7b3ae84faa1a40fb&#39;</span> <span class="na">to=</span><span class="s">&#39;localhost&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;http://jabber.org/protocol/disco#info&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
@@ -3053,12 +3053,11 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
         <span class="nt">&lt;feature</span> <span class="na">var=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0&#39;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table></p>
+</code></pre></div></td></tr></table></div></p>
 <h2 id="fetching-the-inbox">Fetching the inbox</h2>
 <h3 id="querying">Querying</h3>
 <p>The inbox is fetched using regular XMPP <a href="https://xmpp.org/extensions/xep-0004.html">Data Forms</a>. To request the supported form, the client should send:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3085,7 +3084,7 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
 <span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
-<span class="normal">28</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Client --&gt;</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">&lt;!-- Client --&gt;</span>
 <span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
@@ -3113,18 +3112,16 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
     <span class="nt">&lt;/x&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table></p>
+</code></pre></div></td></tr></table></div></p>
 <p>To fetch the inbox, the client should send:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span> <span class="na">id=</span><span class="s">&#39;10bca&#39;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span> <span class="na">id=</span><span class="s">&#39;10bca&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;inbox</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0&#39;</span> <span class="na">queryid=</span><span class="s">&#39;b6&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table></p>
+</code></pre></div></td></tr></table></div></p>
 <p>Then the client should receive:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3144,7 +3141,7 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
-<span class="normal">21</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;message</span> <span class="na">from=</span><span class="s">&quot;alice@localhost&quot;</span> <span class="na">to=</span><span class="s">&quot;alice@localhost/res1&quot;</span> <span class="na">id=</span><span class="s">&quot;9b759&quot;</span><span class="nt">&gt;</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;message</span> <span class="na">from=</span><span class="s">&quot;alice@localhost&quot;</span> <span class="na">to=</span><span class="s">&quot;alice@localhost/res1&quot;</span> <span class="na">id=</span><span class="s">&quot;9b759&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;result</span> <span class="na">xmlns=</span><span class="s">&quot;erlang-solutions.com:xmpp:inbox:0&quot;</span> <span class="na">unread=</span><span class="s">&quot;0&quot;</span> <span class="na">queryid=</span><span class="s">&quot;b6&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;forwarded</span> <span class="na">xmlns=</span><span class="s">&quot;urn:xmpp:forward:0&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;delay</span> <span class="na">xmlns=</span><span class="s">&quot;urn:xmpp:delay&quot;</span> <span class="na">stamp=</span><span class="s">&quot;2018-07-10T23:08:25.123456Z&quot;</span><span class="nt">/&gt;</span>
@@ -3165,8 +3162,7 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
     <span class="nt">&lt;active-conversations&gt;</span>0<span class="nt">&lt;/active-conversations&gt;</span>
   <span class="nt">&lt;/fin&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 where none-or-many <code>message</code> stanzas are sent to the requesting resource describing each inbox entry, and a final <code>iq-fin</code> stanza marks the end of the inbox query,
 Inbox query result IQ stanza returns the following values:</p>
 <ul>
@@ -3196,7 +3192,7 @@ It is not mandatory to add an empty data form if a client prefers to use default
 However, the IQ type must be "set", even when the data form is missing.</p>
 <h3 id="limiting-the-query">Limiting the query</h3>
 <p>It can happen that the amount of inbox entries is too big for a given user, even after filtering by <code>start</code> and <code>end</code> as already available in <a href="../../modules/mod_inbox/">mod_inbox</a>. Hence, we need to set a fixed limit of the number of entries that are requested. For this, we can use a <code>&lt;max&gt;</code> attribute as defined in <a href="https://xmpp.org/extensions/xep-0059.html#limit">XEP-0059: #2.1 Limiting the Number of Items</a>:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3208,7 +3204,7 @@ However, the IQ type must be "set", even when the data form is missing.</p>
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span> <span class="na">id=</span><span class="s">&#39;10bca&#39;</span><span class="nt">&gt;</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span> <span class="na">id=</span><span class="s">&#39;10bca&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;inbox</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0&#39;</span> <span class="na">queryid=</span><span class="s">&#39;b6&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;x</span> <span class="na">xmlns=</span><span class="s">&#39;jabber:x:data&#39;</span> <span class="na">type=</span><span class="s">&#39;form&#39;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;field</span> <span class="na">type=</span><span class="s">&#39;hidden&#39;</span> <span class="na">var=</span><span class="s">&#39;FORM_TYPE&#39;</span><span class="nt">&gt;&lt;value&gt;</span>erlang-solutions.com:xmpp:inbox:0<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
@@ -3221,8 +3217,7 @@ However, the IQ type must be "set", even when the data form is missing.</p>
     <span class="nt">&lt;/set&gt;</span>
   <span class="nt">&lt;/inbox&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 where <code>Max</code> is a non-negative integer.</p>
 <h2 id="properties-of-an-entry">Properties of an entry</h2>
 <p>Given an entry, certain properties are defined for such an entry:</p>
@@ -3240,15 +3235,14 @@ where <code>Max</code> is a non-negative integer.</p>
 <p>No more properties are expected, but one could envisage notions of flagging conversations with different colours, for example according to their urgency, or a client-specific category (work, personal, fitness, and whatnot), or pins to denote an entry should be always displayed (possibly in a special format, like on top of the box). The design of the protocol, and the implementation, aims to leave room for future extensions.</p>
 <h2 id="getting-properties">Getting properties</h2>
 <p>To fetch all supported properties, a classic Data Form is used. Upon the client sending an iq-get without a jid:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 The server would respond with:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3263,7 +3257,7 @@ The server would respond with:
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">from=</span><span class="s">&#39;alice@localhost&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">from=</span><span class="s">&#39;alice@localhost&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;x</span> <span class="na">xmlns=</span><span class="s">&#39;jabber:x:data&#39;</span> <span class="na">type=</span><span class="s">&#39;form&#39;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;field</span> <span class="na">type=</span><span class="s">&#39;hidden&#39;</span> <span class="na">var=</span><span class="s">&#39;FORM_TYPE&#39;</span><span class="nt">&gt;&lt;value&gt;</span>erlang-solutions.com:xmpp:inbox:0<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
@@ -3279,25 +3273,23 @@ The server would respond with:
     <span class="nt">&lt;/x&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table></p>
+</code></pre></div></td></tr></table></div></p>
 <p>If the properties of a certain entry were to be fetched, it can easily be done with:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 To which the server will reply, just like before, with:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;box&gt;</span>inbox<span class="nt">&lt;/box&gt;</span>
     <span class="nt">&lt;archive&gt;</span>false<span class="nt">&lt;/archive&gt;</span>
@@ -3305,18 +3297,16 @@ To which the server will reply, just like before, with:
     <span class="nt">&lt;read&gt;</span>true<span class="nt">&lt;/read&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table></p>
+</code></pre></div></td></tr></table></div></p>
 <p>If an entire entry wanted to be queried, and not only its attributes, a <code>complete='true'</code> can be provided:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span> <span class="na">complete=</span><span class="s">&#39;true&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 To which the server will reply, just like before, with:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3328,7 +3318,7 @@ To which the server will reply, just like before, with:
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;forwarded</span> <span class="na">xmlns=</span><span class="s">&quot;urn:xmpp:forward:0&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;delay</span> <span class="na">xmlns=</span><span class="s">&quot;urn:xmpp:delay&quot;</span> <span class="na">stamp=</span><span class="s">&quot;2018-07-10T23:08:25.123456Z&quot;</span><span class="nt">/&gt;</span>
@@ -3341,23 +3331,21 @@ To which the server will reply, just like before, with:
     <span class="nt">&lt;read&gt;</span>true<span class="nt">&lt;/read&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table></p>
+</code></pre></div></td></tr></table></div></p>
 <h2 id="setting-properties">Setting properties</h2>
 <p>Setting properties is done using the standard XMPP pattern of <code>iq-query</code> and <code>iq-result</code>, as below:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;Property&gt;</span>Value<span class="nt">&lt;/Property&gt;</span>
     <span class="cm">&lt;!-- Possibly other properties --&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 where <code>Property</code> and <code>Value</code> are a list of key-value pairs as follows:</p>
 <ul>
 <li><code>box</code>: <code>inbox</code>, <code>archive</code>, or a custom value if this has been extended.</li>
@@ -3367,14 +3355,14 @@ where <code>Property</code> and <code>Value</code> are a list of key-value pairs
 </ul>
 <p><em>Note</em> that resetting the inbox count will not be forwarded. While a chat marker will be forwarded to the interlocutor(s), (including the case of a big groupchat with thousands of participants), this reset stanza will not.</p>
 <p>If the query was successful, the server will answer with two stanzas, following the classic pattern of broadcasting state changes. First, it would send a message with a <code>&lt;x&gt;</code> children containing all new configuration, to the bare-jid of the user: this facilitates broadcasting to all online resources to successfully synchronise their interfaces.
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;message</span> <span class="na">from=</span><span class="s">&#39;alice@localhost&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost&#39;</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span><span class="nt">&gt;</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;message</span> <span class="na">from=</span><span class="s">&#39;alice@localhost&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost&#39;</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;x</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;box&gt;</span>inbox<span class="nt">&lt;/box&gt;</span>
     <span class="nt">&lt;archive&gt;</span>false<span class="nt">&lt;/archive&gt;</span>
@@ -3382,49 +3370,45 @@ where <code>Property</code> and <code>Value</code> are a list of key-value pairs
     <span class="nt">&lt;read&gt;</span>true<span class="nt">&lt;/read&gt;</span>
   <span class="nt">&lt;/x&gt;</span>
 <span class="nt">&lt;/message&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 where <code>&lt;mute&gt;</code> may contain either a zero, to denote unmuted, or a RFC3339 timestamp, as in <code>2021-02-25T08:44:14.323836Z</code>.</p>
 <p>To the requesting resource, a simple iq-result would be then sent to notify of success, as required by the iq directives of the XMPP RFCs:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">/&gt;</span>
-</code></pre></div>
-</td></tr></table></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">/&gt;</span>
+</code></pre></div></td></tr></table></div></p>
 <p>If the request was not successful, the server would then answer as in:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;error&#39;</span><span class="nt">&gt;</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;error&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;error</span> <span class="na">type=</span><span class="s">&#39;Type&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;Condition</span> <span class="na">xmlns=</span><span class="s">&#39;urn:ietf:params:xml:ns:xmpp-stanzas&#39;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/error&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 Where <code>Type</code> will usually be <code>modify</code> or <code>cancel</code>, as explained in <a href="https://xmpp.org/rfcs/rfc6120.html#stanzas-error-syntax">https://xmpp.org/rfcs/rfc6120.html#stanzas-error-syntax</a>, and <code>Condition</code> is as explained in <a href="https://xmpp.org/rfcs/rfc6120.html#stanzas-error-conditions">https://xmpp.org/rfcs/rfc6120.html#stanzas-error-conditions</a>, <code>bad-request</code> being the most common.</p>
 <p>This final syntax for the protocol has been chosen as it allows for better pipelining of requests, and it remains consistent with how, for example, rooms are configured for MUC-Light.</p>
 <h3 id="examples-archiving-an-entry">Examples: archiving an entry</h3>
 <p>To put an entry into the archived box, the client can send:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;box&gt;</span>archive<span class="nt">&lt;/box&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 On success, the server would return (considering the entry has no unread messages and is not muted):
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;box&gt;</span>archive<span class="nt">&lt;/box&gt;</span>
     <span class="nt">&lt;archive&gt;</span>true<span class="nt">&lt;/archive&gt;</span>
@@ -3432,64 +3416,59 @@ On success, the server would return (considering the entry has no unread message
     <span class="nt">&lt;read&gt;</span>true<span class="nt">&lt;/read&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 If the client had sent an invalid number (negative, or NaN), the server would answer:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;error&#39;</span><span class="nt">&gt;</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;error&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;error</span> <span class="na">type=</span><span class="s">&#39;modify&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;bad-request</span> <span class="na">xmlns=</span><span class="s">&#39;urn:ietf:params:xml:ns:xmpp-stanzas&#39;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/error&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table></p>
+</code></pre></div></td></tr></table></div></p>
 <h3 id="examples-emptying-the-trash-bin">Examples: emptying the trash bin</h3>
 <p>A user can empty his trash bin, through the following request:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;empty-bin</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 On success, the server would return how many entries where dropped as in:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;empty-bin</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;num&gt;</span>2<span class="nt">&lt;/num&gt;</span>
   <span class="nt">&lt;/empty-bin&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 The server might answer with a corresponding error message, might anything go wrong.</p>
 <h3 id="examples-muting-an-entry">Examples: muting an entry</h3>
 <p>To mute an entry for a full day (86400 seconds in a day, 604800 in a week, for example), a client can send:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;mute&gt;</span>86400<span class="nt">&lt;/mute&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 On success, the server would return (considering the server receives the timestamp on "2021-02-26T09:11:05.634232Z", and the entry is on the active box and completely read):
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;box&gt;</span>inbox<span class="nt">&lt;/box&gt;</span>
     <span class="nt">&lt;archive&gt;</span>false<span class="nt">&lt;/archive&gt;</span>
@@ -3497,55 +3476,51 @@ On success, the server would return (considering the server receives the timesta
     <span class="nt">&lt;read&gt;</span>true<span class="nt">&lt;/read&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 If the client had sent an invalid number (negative, or NaN), the server would answer:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;error&#39;</span><span class="nt">&gt;</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;error&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;error</span> <span class="na">type=</span><span class="s">&#39;modify&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;bad-request</span> <span class="na">xmlns=</span><span class="s">&#39;urn:ietf:params:xml:ns:xmpp-stanzas&#39;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/error&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 To unmute, similarly, the client can send:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;mute&gt;</span>0<span class="nt">&lt;/mute&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 And server responses will be similar.</p>
 <h3 id="examples-reading-an-entry">Examples: reading an entry</h3>
 <p>To set an entry as read, the client can send:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;read&gt;</span>true<span class="nt">&lt;/read&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 On success, the server would return (considering the entry is not archived and not muted):
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;box&gt;</span>inbox<span class="nt">&lt;/box&gt;</span>
     <span class="nt">&lt;archive&gt;</span>false<span class="nt">&lt;/archive&gt;</span>
@@ -3553,47 +3528,43 @@ On success, the server would return (considering the entry is not archived and n
     <span class="nt">&lt;read&gt;</span>true<span class="nt">&lt;/read&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 On error, as usual, the client would get:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;error&#39;</span><span class="nt">&gt;</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">to=</span><span class="s">&#39;alice@localhost/res1&#39;</span> <span class="na">type=</span><span class="s">&#39;error&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;error</span> <span class="na">type=</span><span class="s">&#39;modify&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;bad-request</span> <span class="na">xmlns=</span><span class="s">&#39;urn:ietf:params:xml:ns:xmpp-stanzas&#39;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/error&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 And similarly, to set a conversation as unread:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">id=</span><span class="s">&#39;some_unique_id&#39;</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;bob@localhost&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;read&gt;</span>false<span class="nt">&lt;/read&gt;</span>
   <span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table></p>
+</code></pre></div></td></tr></table></div></p>
 <h3 id="deprecated-reset-entry-stanza">Deprecated reset entry stanza:</h3>
 <p>You can reset the inbox with the following stanza:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;reset</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0#conversation&#39;</span> <span class="na">jid=</span><span class="s">&#39;interlocutor_bare_jid&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 Here <code>jid</code> is the bare jid of the user whose inbox we want to reset. This action
 does not change the last message stored in inbox; meaning that neither this
 stanza nor anything given within will be stored; the only change is the inbox
 <code>unread_count</code> is set to zero.</p>
 <h2 id="example-request">Example request</h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3636,7 +3607,7 @@ stanza nor anything given within will be stored; the only change is the inbox
 <span class="normal">41</span>
 <span class="normal">42</span>
 <span class="normal">43</span>
-<span class="normal">44</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Alice sends: --&gt;</span>
+<span class="normal">44</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">&lt;!-- Alice sends: --&gt;</span>
 <span class="nt">&lt;message</span> <span class="na">type=</span><span class="s">&quot;chat&quot;</span> <span class="na">to=</span><span class="s">&quot;bob@localhost/res1&quot;</span> <span class="na">id=</span><span class="s">”123”</span><span class="nt">&gt;</span>
   <span class="nt">&lt;body&gt;</span>Hello<span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/message&gt;</span>
@@ -3680,10 +3651,9 @@ stanza nor anything given within will be stored; the only change is the inbox
     <span class="nt">&lt;active-conversations&gt;</span>0<span class="nt">&lt;/active-conversations&gt;</span>
   <span class="nt">&lt;/fin&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h2 id="example-error-response">Example error response</h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -3703,7 +3673,7 @@ stanza nor anything given within will be stored; the only change is the inbox
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
-<span class="normal">21</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">&lt;!--Alice sends request with invalid value of start field: --&gt;</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">&lt;!--Alice sends request with invalid value of start field: --&gt;</span>
 <span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;set&#39;</span> <span class="na">id=</span><span class="s">&#39;a78478f20103ff8354d7834d0ba2fdb2&#39;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;inbox</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:inbox:0&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;x</span> <span class="na">xmlns=</span><span class="s">&#39;jabber:x:data&#39;</span> <span class="na">type=</span><span class="s">&#39;submit&#39;</span><span class="nt">&gt;</span>
@@ -3724,8 +3694,7 @@ stanza nor anything given within will be stored; the only change is the inbox
     <span class="nt">&lt;/text&gt;</span>
   <span class="nt">&lt;/error&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 
               
             </article>
@@ -3816,7 +3785,7 @@ stanza nor anything given within will be stored; the only change is the inbox
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2e1ee47.min.js"></script>
       
     
   </body>
