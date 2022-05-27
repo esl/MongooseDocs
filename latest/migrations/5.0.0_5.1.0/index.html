@@ -2819,6 +2819,11 @@
 <h2 id="configuration-changes">Configuration changes</h2>
 <p>The configuration format has slightly changed and you might need to amend <code>mongooseim.toml</code>.</p>
 <h3 id="section-listen">Section <code>listen</code></h3>
+<p>The options <code>tls.verify_peer</code> and <code>tls.verify_mode</code> are replaced with just <a href="../../configuration/listen/#listenc2stlsverify_mode"><code>tls.verify_mode</code></a>. You need to amend the affected options for each listener:</p>
+<ul>
+<li><code>verify_peer = false</code> (the old default for C2S and HTTP listeners) should be replaced with <code>verify_mode = "none"</code>.</li>
+<li><code>verify_peer = true</code> should be replaced with <code>verify_mode = "peer"</code> or just removed, as this is the new default.</li>
+</ul>
 <p>There is a new, simplified configuration format for <code>mongoose_client_api</code>. You need to change the <code>listen</code> section unless you have disabled the client API in your configuration file. Consult the <a href="../../configuration/listen/#handler-types-rest-api-client-mongoose_client_api">option description</a> and the <a href="http://localhost:8000/configuration/listen/#example-3-client-api">example configuration</a> for details.</p>
 <h3 id="section-acl">Section <code>acl</code></h3>
 <p>The implicit check for user's domain in patterns is now configurable and the default behaviour (previously undocumented) is more consistent - the check is always performed unless disabled with <code>match = "all"</code>.
@@ -2830,6 +2835,11 @@ See the description of <a href="../../configuration/acl/#aclmatch"><code>current
 </ul>
 <p>See the <a href="../../configuration/auth/">auth configuration</a> for details.</p>
 <h3 id="section-outgoing_pools">Section <code>outgoing_pools</code></h3>
+<p>The option <code>tls.verify_peer</code> is replaced with <a href="../../configuration/outgoing-connections/#outgoing_poolsconnectiontlsverify_mode"><code>tls.verify_mode</code></a>. You need to change this option for each outgoing connection pool:</p>
+<ul>
+<li><code>verify_peer = false</code> (the old default for all pools except Riak) should be replaced with <code>verify_mode = "none"</code>.</li>
+<li><code>verify_peer = true</code> should be replaced with <code>verify_mode = "peer"</code> or just removed, as this is the new default.</li>
+</ul>
 <p>A few options of the outgoing connection pools were changed for consistency:</p>
 <ul>
 <li><a href="../../configuration/outgoing-connections/#outgoing_poolscassandraconnectionservers">Cassandra servers</a>: <code>ip_address</code> was renamed to <code>host</code>,</li>
