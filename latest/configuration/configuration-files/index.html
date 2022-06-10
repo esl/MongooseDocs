@@ -692,19 +692,6 @@
     mongooseim.toml
   </a>
   
-    <nav class="md-nav" aria-label="mongooseim.toml">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#option-scope" class="md-nav__link">
-    Option scope
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2662,19 +2649,6 @@
     mongooseim.toml
   </a>
   
-    <nav class="md-nav" aria-label="mongooseim.toml">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#option-scope" class="md-nav__link">
-    Option scope
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2760,13 +2734,14 @@
 <li><a href="../host_config/"><strong>host_config</strong></a> - Configuration options for different XMPP domains or host types (groups of domains).</li>
 </ul>
 <p>The section names above are links to the detailed documentation of each section.</p>
-<h3 id="option-scope">Option scope</h3>
-<p>Each configuration option has its <strong>scope</strong>, which is one of the following:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It is recommended to use the same configuration file for all nodes in the cluster, but there is no protection against using different option values for each node, because it can happen in two cases:</p>
 <ul>
-<li><strong>local</strong> - configured separately for each node in the cluster - each node can have a different value,</li>
-<li><strong>global</strong> - configured for the entire cluster - all nodes share the same value.</li>
+<li>During a <a href="../../operation-and-maintenance/Rolling-upgrade">rolling upgrade</a> procedure, when nodes are restarted one by one with new configuration.</li>
+<li>When you need different network-specific parameters (e.g. listening IP addresses) for each node.</li>
 </ul>
-<p>The scope of each option is defined in the documentation above - either at the top of the section page or for each option individually.</p>
+</div>
 <h2 id="vmargs">vm.args</h2>
 <p>This file contains parameters passed directly to the Erlang VM. To configure it, go to <code>[MongooseIM root]/rel/files/</code>.</p>
 <p>Let's explore the default options.</p>

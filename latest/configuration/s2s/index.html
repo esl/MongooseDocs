@@ -2867,7 +2867,6 @@ Do not use dynamic domains when using <code>s2s</code>.</p>
 <p>These options affect both incoming and outgoing S2S connections.</p>
 <h3 id="s2sdefault_policy"><code>s2s.default_policy</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> string, <code>"allow"</code> or <code>"deny"</code></li>
 <li><strong>Default:</strong> <code>"allow"</code></li>
 <li><strong>Example:</strong> <code>default_policy = "deny"</code></li>
@@ -2875,7 +2874,6 @@ Do not use dynamic domains when using <code>s2s</code>.</p>
 <p>Default policy for opening new S2S connections to/from remote servers.</p>
 <h3 id="s2shost_policy"><code>s2s.host_policy</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> array of TOML tables with the following mandatory content:<ul>
 <li><code>host</code> - string, host name</li>
 <li><code>policy</code> - string, <code>"allow"</code> or <code>"deny"</code></li>
@@ -2895,7 +2893,6 @@ Do not use dynamic domains when using <code>s2s</code>.</p>
 <p>Policy for opening new connections to/from specific remote servers.</p>
 <h3 id="s2suse_starttls"><code>s2s.use_starttls</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> string, one of <code>"false"</code>, <code>"optional"</code>, <code>"required"</code>, <code>"required_trusted"</code></li>
 <li><strong>Default:</strong> <code>"false"</code></li>
 <li><strong>Example:</strong> <code>use_starttls = "required"</code></li>
@@ -2909,7 +2906,6 @@ Do not use dynamic domains when using <code>s2s</code>.</p>
 </ul>
 <h3 id="s2scertfile"><code>s2s.certfile</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> string, path in the file system</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>certfile = "cert.pem"</code></li>
@@ -2917,7 +2913,6 @@ Do not use dynamic domains when using <code>s2s</code>.</p>
 <p>Path to the X509 PEM file with a certificate and a private key inside (not protected by any password). Required if <code>use_starttls</code> is not <code>false</code>.</p>
 <h3 id="s2sshared"><code>s2s.shared</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> 10 strong random bytes, hex-encoded</li>
 <li><strong>Example:</strong> <code>shared = "82gc8b23ct7824"</code></li>
@@ -2927,7 +2922,6 @@ Do not use dynamic domains when using <code>s2s</code>.</p>
 <p>The options listed below affect only the outgoing S2S connections.</p>
 <h3 id="s2saddress"><code>s2s.address</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> array of TOML tables with the following content:<ul>
 <li><code>host</code> - string, mandatory, host name</li>
 <li><code>ip_address</code> - string, mandatory, IP address</li>
@@ -2948,7 +2942,6 @@ Do not use dynamic domains when using <code>s2s</code>.</p>
 <p>This option defines IP addresses and port numbers for specific non-local XMPP domains, allowing to override the DNS lookup for outgoing S2S connections.</p>
 <h3 id="s2sciphers"><code>s2s.ciphers</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> <code>"TLSv1.2:TLSv1.3"</code></li>
 <li><strong>Example:</strong> <code>ciphers = "TLSv1.2"</code></li>
@@ -2957,7 +2950,6 @@ Do not use dynamic domains when using <code>s2s</code>.</p>
 Please refer to the <a href="http://www.openssl.org/docs/apps/ciphers.html">OpenSSL documentation</a> for the cipher string format.</p>
 <h3 id="s2smax_retry_delay"><code>s2s.max_retry_delay</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> <code>300</code></li>
 <li><strong>Example:</strong> <code>max_retry_delay = 300</code></li>
@@ -2965,7 +2957,6 @@ Please refer to the <a href="http://www.openssl.org/docs/apps/ciphers.html">Open
 <p>Specifies the maximum time in seconds that MongooseIM will wait until the next attempt to connect to a remote XMPP server. The delays between consecutive attempts will be doubled until this limit is reached.</p>
 <h3 id="s2soutgoingport"><code>s2s.outgoing.port</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> integer, port number</li>
 <li><strong>Default:</strong> <code>5269</code></li>
 <li><strong>Example:</strong> <code>outgoing.port = 5270</code></li>
@@ -2973,7 +2964,6 @@ Please refer to the <a href="http://www.openssl.org/docs/apps/ciphers.html">Open
 <p>Defines the port to be used for outgoing S2S connections.</p>
 <h3 id="s2soutgoingip_versions"><code>s2s.outgoing.ip_versions</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> array of integers (IP versions): <code>4</code> or <code>6</code></li>
 <li><strong>Default:</strong> <code>[4, 6]</code></li>
 <li><strong>Example:</strong> <code>outgoing.ip_versions = [6]</code></li>
@@ -2981,7 +2971,6 @@ Please refer to the <a href="http://www.openssl.org/docs/apps/ciphers.html">Open
 <p>Specifies the order of IP address families to try when establishing an outgoing S2S connection.</p>
 <h3 id="s2soutgoingconnection_timeout"><code>s2s.outgoing.connection_timeout</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> positive integer or the string <code>"infinity"</code></li>
 <li><strong>Default:</strong> <code>10_000</code></li>
 <li><strong>Example:</strong> <code>outgoing.connection_timeout = 5000</code></li>
@@ -2989,7 +2978,6 @@ Please refer to the <a href="http://www.openssl.org/docs/apps/ciphers.html">Open
 <p>Timeout (in milliseconds) for establishing an outgoing S2S connection.</p>
 <h3 id="s2sdnstimeout"><code>s2s.dns.timeout</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> <code>10</code></li>
 <li><strong>Example:</strong> <code>dns.timeout = 30</code></li>
@@ -2997,7 +2985,6 @@ Please refer to the <a href="http://www.openssl.org/docs/apps/ciphers.html">Open
 <p>Timeout (in seconds) for DNS lookups when opening an outgoing S2S connection.</p>
 <h3 id="s2sdnsretries"><code>s2s.dns.retries</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> <code>2</code></li>
 <li><strong>Example:</strong> <code>dns.retries = 1</code></li>

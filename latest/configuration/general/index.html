@@ -3060,7 +3060,6 @@ You can start with providing only the basic options, for example configuring the
 <p>These are the basic settings that you should configure before running your MongooseIM server.</p>
 <h3 id="generalloglevel"><code>general.loglevel</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> string, one of <code>"none"</code>, <code>"emergency"</code>, <code>"alert"</code>, <code>"critical"</code>, <code>"error"</code>, <code>"warning"</code>, <code>"notice"</code>, <code>"info"</code>, <code>"debug"</code>, <code>"all"</code>.</li>
 <li><strong>Default:</strong> <code>"warning"</code></li>
 <li><strong>Example:</strong> <code>loglevel = "error"</code></li>
@@ -3068,7 +3067,6 @@ You can start with providing only the basic options, for example configuring the
 <p>Verbosity level of the logger. Values recommended for production systems are <code>"error"</code> and <code>"warning"</code>. The <code>"debug"</code> level is good for development.</p>
 <h3 id="generalhosts"><code>general.hosts</code></h3>
 <ul>
-<li><strong>Scope:</strong> global</li>
 <li><strong>Syntax:</strong> array of strings representing the domain names.</li>
 <li><strong>Default:</strong> none. If omitted, at least one host type has to be defined in <code>general.host_types</code>.</li>
 <li><strong>Example:</strong> <code>hosts = ["localhost", "domain2"]</code></li>
@@ -3086,7 +3084,6 @@ When increasing the number of domains, please make sure you have enough resource
 </div>
 <h3 id="generalhost_types"><code>general.host_types</code></h3>
 <ul>
-<li><strong>Scope:</strong> global</li>
 <li><strong>Syntax:</strong> array of strings the names for host types.</li>
 <li><strong>Default:</strong> none. If omitted, at least one hast has to be defined in <code>general.hosts</code>.</li>
 <li><strong>Example:</strong> <code>host_types = ["first type", "second type"]</code></li>
@@ -3110,7 +3107,6 @@ When increasing the number of host types, please make sure you have enough resou
 </div>
 <h3 id="generaldefault_server_domain"><code>general.default_server_domain</code></h3>
 <ul>
-<li><strong>Scope:</strong> global</li>
 <li><strong>Syntax:</strong> a string</li>
 <li><strong>Default:</strong> none, this option is mandatory.</li>
 <li><strong>Example:</strong> <code>default_server_domain = "my-xmpp-domain.com"</code></li>
@@ -3118,7 +3114,6 @@ When increasing the number of host types, please make sure you have enough resou
 <p>This domain is used as a default when one cannot be determined, for example when sending XMPP stream errors to unauthenticated clients.</p>
 <h3 id="generallanguage"><code>general.language</code></h3>
 <ul>
-<li><strong>Scope:</strong> global</li>
 <li><strong>Syntax:</strong> string representing the two-letter language code.</li>
 <li><strong>Default:</strong> <code>"en"</code></li>
 <li><strong>Example:</strong> <code>language = "pl"</code></li>
@@ -3129,7 +3124,6 @@ When increasing the number of host types, please make sure you have enough resou
 There are some additional options that influence all database connections in the server:</p>
 <h3 id="generalrdbms_server_type"><code>general.rdbms_server_type</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> string, <code>"mssql"</code> or <code>"pgsql"</code></li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>rdbms_server_type = "mssql"</code></li>
@@ -3139,7 +3133,6 @@ There are some additional options that influence all database connections in the
 <p>User access rules are configured mainly in the <a href="../acl/"><code>acl</code></a> and <a href="../access/"><code>access</code></a> sections. Here you can find some additional options.</p>
 <h3 id="generalmongooseimctl_access_commands"><code>general.mongooseimctl_access_commands</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> TOML table, whose <strong>keys</strong> are the names of the access rules defined in the <a href="../access/"><code>access</code></a> config section and <strong>values</strong> specify allowed administration commands. Each value is a table with the following nested options:<ul>
 <li><code>commands</code>: optional, a list of strings representing the allowed commands. When not specified, all commands are allowed.</li>
 <li><code>argument_restrictions</code>: optional, a table whose keys are the argument names, and the values are strings representing the allowed values. When not specified, there are no restrictions.</li>
@@ -3164,7 +3157,6 @@ There are some additional options that influence all database connections in the
 <p>Here you can find some additional options related to system security.</p>
 <h3 id="generalregistration_timeout"><code>general.registration_timeout</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> the string <code>"infinity"</code> or a number of seconds (positive integer)</li>
 <li><strong>Default:</strong> <code>600</code></li>
 <li><strong>Example:</strong> <code>registration_timeout = "infinity"</code></li>
@@ -3172,7 +3164,6 @@ There are some additional options that influence all database connections in the
 <p>Limits the registration frequency from a single IP address. The special value <code>infinity</code> means no limit.</p>
 <h3 id="generalhide_service_name"><code>general.hide_service_name</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
 <li><strong>Example:</strong> <code>hide_service_name = true</code></li>
@@ -3182,7 +3173,6 @@ There are some additional options that influence all database connections in the
 <p>These options can be used to configure the way MongooseIM manages user sessions.</p>
 <h3 id="generalsm_backend"><code>general.sm_backend</code></h3>
 <ul>
-<li><strong>Scope:</strong> global</li>
 <li><strong>Syntax:</strong> string, <code>"mnesia"</code> or <code>"redis"</code></li>
 <li><strong>Default:</strong> <code>"mnesia"</code></li>
 <li><strong>Example:</strong> <code>sm_backend = "redis"</code></li>
@@ -3192,7 +3182,6 @@ Mnesia is sufficient in most cases, use Redis only in large deployments when you
 See the section about <a href="../outgoing-connections/#redis-specific-options">redis connection setup</a> for more information.</p>
 <h3 id="generalreplaced_wait_timeout"><code>general.replaced_wait_timeout</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> positive integer, representing time in milliseconds</li>
 <li><strong>Default:</strong> <code>2000</code></li>
 <li><strong>Example:</strong> <code>replaced_wait_timeout = 5000</code></li>
@@ -3202,7 +3191,6 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 <p>The following options influence the way MongooseIM routes incoming messages to their recipients.</p>
 <h3 id="generalroute_subdomains"><code>general.route_subdomains</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> string, the only accepted value is <code>"s2s"</code></li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>route_subdomains = "s2s"</code></li>
@@ -3210,7 +3198,6 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 <p>If a stanza is addressed to a subdomain of the served domain and this option is set to <code>s2s</code>, such a stanza will be transmitted over a server-to-server connection. Without it, MongooseIM will try to route the stanza to one of its internal services.</p>
 <h3 id="generalrouting_modules"><code>general.routing_modules</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> a list of strings representing the routing module names.</li>
 <li><strong>Default:</strong> <code>["mongoose_router_global", "mongoose_router_localdomain", "mongoose_router_external_localnode", "mongoose_router_external", "ejabberd_s2s"]</code></li>
 <li><strong>Example:</strong> <code>routing_modules = ["mongoose_router_global", "mongoose_router_localdomain"]</code></li>
@@ -3228,7 +3215,6 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 <p>The options listed below are used to configure more specific settings, that do not need to be changed in usual use cases.</p>
 <h3 id="generalall_metrics_are_global"><code>general.all_metrics_are_global</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
 <li><strong>Example:</strong> <code>all_metrics_are_global = true</code></li>
@@ -3236,7 +3222,6 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 <p>When enabled, all per-host metrics are merged into global equivalents. It means it is no longer possible to view individual host1, host2, host3, ... metrics, only sums are available. This option significantly reduces CPU and (especially) memory footprint in setups with exceptionally many domains (thousands, tens of thousands).</p>
 <h3 id="generalhttp_server_name"><code>general.http_server_name</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> <code>"Cowboy"</code></li>
 <li><strong>Example:</strong> <code>http_server_name = "Apache"</code></li>
@@ -3244,7 +3229,6 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 <p>Replaces <a href="https://github.com/ninenines/cowboy">Cowboy</a>'s default name returned in the <code>server</code> HTTP response header. It may be used for extra security, as it makes it harder for the malicious user to learn what HTTP software is running under a specific port. This option applies to <strong>all</strong> configured HTTP listeners.</p>
 <h3 id="generalmax_fsm_queue"><code>general.max_fsm_queue</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>max_fsm_queue = 5000</code></li>
@@ -3253,7 +3237,6 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 This option is set for C2S, outgoing S2S and component connections and can be overridden for particular <code>s2s</code> or <code>service</code> listeners in their configurations. <strong>Use with caution!</strong></p>
 <h3 id="generaldomain_certfile"><code>general.domain_certfile</code></h3>
 <ul>
-<li><strong>Scope:</strong> local</li>
 <li><strong>Syntax:</strong> array of TOML tables with the following mandatory content:<ul>
 <li><code>domain</code> - string, XMPP domain name. In case of dynamic domains it should be a host type instead.</li>
 <li><code>certfile</code> - string, path in the file system</li>
