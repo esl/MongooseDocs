@@ -3008,17 +3008,15 @@ Please replace the default host defined in <code>etc/mongooseim.toml</code>; the
 and in <a href="../../configuration/Modules/">Modules configuration</a></p>
 <p>Now we are registering both users in MongooseIM by calling the following commands:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>bin/mongooseimctl register_identified xmpp.user xmpp.example test_pass
-bin/mongooseimctl register_identified sip.user sip.example test_pass
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl account registerUser --username xmpp.user --domain xmpp.example --password test_pass
+mongooseimctl account registerUser --username sip.user --domain sip.example --password test_pass
 </code></pre></div></td></tr></table></div>
 <p>Yes, we need to have the <code>sip.user@sip.example</code> registered in MongooseIM.
 This is needed because a Jingle call can be initiated by a regular XMPP client only when the app knows the other user's full JID.
 The easiest way to achieve that is to exchange presence information between these 2 users.
 This can happen automatically if 2 xmpp users have each other in the roster.</p>
-<p>The roster can be set by us with the following commands:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>bin/mongooseimctl add_rosteritem sip.user sip.example xmpp.user xmpp.example xmpp.user none both
-bin/mongooseimctl add_rosteritem xmpp.user xmpp.example sip.user sip.example sip.user none both
+<p>The roster can be set up with the following command:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl roster setMutualSubscription --userA xmpp.user@xmpp.example --userB sip.user@sip.example --action CONNECT
 </code></pre></div></td></tr></table></div>
 <h2 id="adding-users-to-jitsi">Adding users to Jitsi</h2>
 <p>Now the <code>sip.user@sip.example</code> has to be added to Jitsi app.

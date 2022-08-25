@@ -2907,29 +2907,66 @@
 </ul>
 <h2 id="gdpr-cli-commands">GDPR CLI commands</h2>
 <p>All CLI commands are accessible via the <code>mongooseimctl</code> command, located in the <code>bin/</code> directory inside the MIM release.</p>
-<p>Personal data retrieval requires <code>service_admin_extra</code> with <code>gdpr</code> group enabled.</p>
 <h3 id="creating-a-gdpr-safe-user-account">Creating a GDPR-safe user account</h3>
-<p><code>mongooseimctl register &lt;domain&gt; &lt;password&gt;</code></p>
+<p><code>mongooseimctl account registerUser --domain &lt;domain&gt; --password &lt;password&gt;</code></p>
 <p>This command will create an anonymised JID with a random username part.
 It ensures that no personal information will be leaked via logs or database entries, which include the user's JID.</p>
 <h4 id="example">Example</h4>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>$ mongooseimctl register localhost abc123
-User <span class="m">1567</span>-420657-155810-C1CEC31F5C993258@localhost successfully registered
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code>$ mongooseimctl account registerUser --domain localhost --password secret
+<span class="o">{</span>
+  <span class="s2">&quot;data&quot;</span> : <span class="o">{</span>
+    <span class="s2">&quot;account&quot;</span> : <span class="o">{</span>
+      <span class="s2">&quot;registerUser&quot;</span> : <span class="o">{</span>
+        <span class="s2">&quot;message&quot;</span> : <span class="s2">&quot;User 1661-175924-881845-449bca06515e060a@localhost successfully registered&quot;</span>,
+        <span class="s2">&quot;jid&quot;</span> : <span class="s2">&quot;1661-175924-881845-449bca06515e060a@localhost&quot;</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="retrieval-of-personal-data">Retrieval of Personal Data</h3>
-<p><code>mongooseimctl retrieve_personal_data &lt;username&gt; &lt;domain&gt; &lt;filepath for the output as a zip&gt;</code></p>
+<p><code>mongooseimctl gdpr retrievePersonalData --username &lt;username&gt; --domain &lt;domain&gt; --resultFilepath &lt;filepath for the output as a zip&gt;</code></p>
 <p>It retrieves personal data accessible to the server (see "Technical limitations" section below).
 The directory where the zip file will be created must already exist.</p>
 <p>After the execution is complete, a zip file will appear in the specified folder with personal information in CSV files grouped by type.</p>
 <h4 id="example_1">Example</h4>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl retrieve_personal_data <span class="m">1567</span>-420657-155810-C1CEC31F5C993258 localhost /home/mongooseim/gdpr/1567-420657-155810-C1CEC31F5C993258.zip
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>$ mongooseimctl gdpr retrievePersonalData --username <span class="m">1661</span>-175924-881845-449bca06515e060a --domain localhost --resultFilepath /home/mongooseim/gdpr/1661-175924-881845-449bca06515e060a.zip
 </code></pre></div></td></tr></table></div>
 <h3 id="removal-of-personal-data">Removal of Personal Data</h3>
-<p><code>mongooseimctl unregister &lt;username&gt; &lt;domain&gt;</code></p>
+<p><code>mongooseimctl account removeUser --user &lt;jid&gt;</code></p>
 <p>It removes the user's account along with all associated personal data accessible to the server (see "Technical limitations" section below).</p>
 <h4 id="example_2">Example</h4>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl unregister <span class="m">1567</span>-420657-155810-C1CEC31F5C993258 localhost
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code>$ mongooseimctl account removeUser --user <span class="m">1661</span>-175924-881845-449bca06515e060a@localhost
+<span class="o">{</span>
+  <span class="s2">&quot;data&quot;</span> : <span class="o">{</span>
+    <span class="s2">&quot;account&quot;</span> : <span class="o">{</span>
+      <span class="s2">&quot;removeUser&quot;</span> : <span class="o">{</span>
+        <span class="s2">&quot;message&quot;</span> : <span class="s2">&quot;User 1661-175924-881845-449bca06515e060a@localhost successfully unregistered&quot;</span>,
+        <span class="s2">&quot;jid&quot;</span> : <span class="s2">&quot;1661-175924-881845-449bca06515e060a@localhost&quot;</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="technical-limitations-of-gdpr-retrieval-and-removal">Technical limitations of GDPR retrieval and removal</h2>
 <p>Both GDPR retrieval and removal will process the data available via configured extensions and database(s).

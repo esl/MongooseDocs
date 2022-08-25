@@ -3107,70 +3107,224 @@ Typing Control-C will stop the server.</p>
 <h3 id="registering-creating-users">Registering (creating) users</h3>
 <p>The default XMPP domain served by MongooseIM right after installation is <code>localhost</code>.</p>
 <p>You can register (create) users with the <code>mongooseimctl</code> utility.</p>
-<p>This command registers the user <code>user@domain</code> using password <code>password</code>.
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl register_identified user domain password
+<p>This command registers the user <code>user@localhost</code> using password <code>secret</code>.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl account registerUser --username user --domain localhost --password secret
 </code></pre></div></td></tr></table></div>
 Examples:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl register_identified alice localhost qwerty
-mongooseimctl register_identified bob localhost <span class="m">12345678</span>
-mongooseimctl register_identified carol localhost abc123
-mongooseimctl register_identified dan localhost dan
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl account registerUser --username alice --domain localhost --password qwerty
+mongooseimctl account registerUser --username bob --domain localhost --password <span class="m">12345678</span>
+mongooseimctl account registerUser --username carol --domain localhost --password abc123
+mongooseimctl account registerUser --username dan --domain localhost --password dan
 </code></pre></div></td></tr></table></div></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The password is entered manually in the command line and history is accessible to the command line users.
 This method is not recommended for production use, you may prefer for example <a href="../../authentication-methods/ldap/">LDAP</a>.</p>
 </div>
-<p>You can check that it has correctly been created:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl check_account user host
-</code></pre></div></td></tr></table></div>
-Example:
+<p>You can check that the user account has been created:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl account checkUser --user alice@localhost
+<span class="o">{</span>
+  <span class="s2">&quot;data&quot;</span> : <span class="o">{</span>
+    <span class="s2">&quot;account&quot;</span> : <span class="o">{</span>
+      <span class="s2">&quot;checkUser&quot;</span> : <span class="o">{</span>
+        <span class="s2">&quot;message&quot;</span> : <span class="s2">&quot;User alice@localhost exists&quot;</span>,
+        <span class="s2">&quot;exist&quot;</span> : <span class="nb">true</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Now you can list all registered users in your host:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl account listUsers --domain localhost
+<span class="o">{</span>
+  <span class="s2">&quot;data&quot;</span> : <span class="o">{</span>
+    <span class="s2">&quot;account&quot;</span> : <span class="o">{</span>
+      <span class="s2">&quot;listUsers&quot;</span> : <span class="o">[</span>
+        <span class="s2">&quot;alice@localhost&quot;</span>,
+        <span class="s2">&quot;bob@localhost&quot;</span>,
+        <span class="s2">&quot;carol@localhost&quot;</span>,
+        <span class="s2">&quot;dan@localhost&quot;</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>If you want to delete a user from your host:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl account removeUser --user dan@localhost
+<span class="o">{</span>
+  <span class="s2">&quot;data&quot;</span> : <span class="o">{</span>
+    <span class="s2">&quot;account&quot;</span> : <span class="o">{</span>
+      <span class="s2">&quot;removeUser&quot;</span> : <span class="o">{</span>
+        <span class="s2">&quot;message&quot;</span> : <span class="s2">&quot;User dan@localhost successfully unregistered&quot;</span>,
+        <span class="s2">&quot;jid&quot;</span> : <span class="s2">&quot;dan@localhost&quot;</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></td></tr></table></div></p>
+<h3 id="populate-the-contact-lists-rosters">Populate the contact lists (rosters)</h3>
+<p>As an example, let's add <code>bob@localhost</code> as a contact of <code>alice@localhost</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl check_account alice localhost
-mongooseimctl check_account bob localhost
-mongooseimctl check_account carol localhost
-mongooseimctl check_account dan localhost
-</code></pre></div></td></tr></table></div></p>
-<p>Now you can list all registered users in your host:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl registered_users host
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl roster addContact --user alice@localhost --contact bob@localhost --groups <span class="s1">&#39;[&quot;friends&quot;]&#39;</span> --name Bobby
+<span class="o">{</span>
+  <span class="s2">&quot;data&quot;</span> : <span class="o">{</span>
+    <span class="s2">&quot;roster&quot;</span> : <span class="o">{</span>
+      <span class="s2">&quot;addContact&quot;</span> : <span class="s2">&quot;Contact added successfully&quot;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-Example:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl registered_users localhost
-</code></pre></div></td></tr></table></div></p>
-<p>If you want delete users in your host:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl  unregister user host
-</code></pre></div></td></tr></table></div>
-Example:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl  unregister dan localhost
-</code></pre></div></td></tr></table></div></p>
-<h3 id="populate-the-contact-lists-rosters">Populate the contact lists (rosters)</h3>
-<p>For a given user (<code>localuser</code> and <code>localserver</code>), add a contact (<code>user</code> and <code>server</code>):
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl add_rosteritem localuser localserver user server nick group subs
-</code></pre></div></td></tr></table></div>
-Examples:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl add_rosteritem alice localhost bob localhost bob friends both
-mongooseimctl add_rosteritem bob localhost alice localhost alice friends both
-</code></pre></div></td></tr></table></div></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The <code>subs</code> parameter is the "subscription" to a user's presence. Possible values are: <code>none</code>, <code>from</code>, <code>to</code>, or <code>both</code>. A subscription in <code>both</code> direction means each user will receive each other's presence.</p>
-</div>
-<p>Verify the contact list:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl get_roster user host
-</code></pre></div></td></tr></table></div>
-Examples:
+<p>You need to quote <code>["friends"]</code> because it is a list of strings - JSON syntax is required for such complex types. The single quotes are there to prevent <code>bash</code> from interpreting special characters like <code>"</code>.
+If you want <code>alice@locahost</code> to receive presences from <code>bob@localhost</code>, you need to firstly request the subscription:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl get_roster alice localhost
-mongooseimctl get_roster bob localhost
-mongooseimctl get_roster carol localhost
-</code></pre></div></td></tr></table></div></p>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl roster subscription --user alice@localhost --contact bob@localhost --action INVITE
+<span class="o">{</span>
+  <span class="s2">&quot;data&quot;</span> : <span class="o">{</span>
+    <span class="s2">&quot;roster&quot;</span> : <span class="o">{</span>
+      <span class="s2">&quot;subscription&quot;</span> : <span class="s2">&quot;Subscription stanza with type subscribe sent successfully&quot;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Then, accept the subscription request:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl roster subscription --user bob@localhost --contact alice@localhost --action ACCEPT
+<span class="o">{</span>
+  <span class="s2">&quot;data&quot;</span> : <span class="o">{</span>
+    <span class="s2">&quot;roster&quot;</span> : <span class="o">{</span>
+      <span class="s2">&quot;subscription&quot;</span> : <span class="s2">&quot;Subscription stanza with type subscribed sent successfully&quot;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Verify the contact list:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl roster listContacts --user alice@localhost
+<span class="o">{</span>
+  <span class="s2">&quot;data&quot;</span> : <span class="o">{</span>
+    <span class="s2">&quot;roster&quot;</span> : <span class="o">{</span>
+      <span class="s2">&quot;listContacts&quot;</span> : <span class="o">[</span>
+        <span class="o">{</span>
+          <span class="s2">&quot;subscription&quot;</span> : <span class="s2">&quot;TO&quot;</span>,
+          <span class="s2">&quot;name&quot;</span> : <span class="s2">&quot;Bobby&quot;</span>,
+          <span class="s2">&quot;jid&quot;</span> : <span class="s2">&quot;bob@localhost&quot;</span>,
+          <span class="s2">&quot;groups&quot;</span> : <span class="o">[</span>
+            <span class="s2">&quot;friends&quot;</span>
+          <span class="o">]</span>,
+          <span class="s2">&quot;ask&quot;</span> : <span class="s2">&quot;NONE&quot;</span>
+        <span class="o">}</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Note that <code>bob@localhost</code> has <code>alice@localhost</code> in his contacts as well, but he is not subscribed to her presences - the subscriptions are unidirectional.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl roster listContacts --user bob@localhost
+<span class="o">{</span>
+  <span class="s2">&quot;data&quot;</span> : <span class="o">{</span>
+    <span class="s2">&quot;roster&quot;</span> : <span class="o">{</span>
+      <span class="s2">&quot;listContacts&quot;</span> : <span class="o">[</span>
+        <span class="o">{</span>
+          <span class="s2">&quot;subscription&quot;</span> : <span class="s2">&quot;FROM&quot;</span>,
+          <span class="s2">&quot;name&quot;</span> : <span class="s2">&quot;&quot;</span>,
+          <span class="s2">&quot;jid&quot;</span> : <span class="s2">&quot;alice@localhost&quot;</span>,
+          <span class="s2">&quot;groups&quot;</span> : <span class="o">[</span>
+
+          <span class="o">]</span>,
+          <span class="s2">&quot;ask&quot;</span> : <span class="s2">&quot;NONE&quot;</span>
+        <span class="o">}</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>To quickly set up mutual subscriptions between users, you can use <code>mongooseimctl roster setMutualSubscription</code>.</p>
 <h2 id="basic-mongooseim-configuration">Basic MongooseIM configuration</h2>
 <p>The main configuration file of MongooseIM is <code>mongooseim.toml</code>:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>/etc/mongooseim/mongooseim.toml
@@ -3241,49 +3395,124 @@ This should be configurable in the account settings of every XMPP client.</p>
 <li>Close the Account window.</li>
 </ol>
 <p>Add your three created users: <code>alice</code>, <code>bob</code>, and <code>carol</code>.</p>
-<p>Check what users are currently connected:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl connected_users_info
+<p>Check what users are currently connected.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl session listSessions
+<span class="o">{</span>
+  <span class="s2">&quot;data&quot;</span> : <span class="o">{</span>
+    <span class="s2">&quot;session&quot;</span> : <span class="o">{</span>
+      <span class="s2">&quot;listSessions&quot;</span> : <span class="o">[</span>
+        <span class="o">{</span>
+          <span class="s2">&quot;user&quot;</span> : <span class="s2">&quot;bob@localhost/BobsComputer,</span>
+<span class="s2">          &quot;</span>uptime<span class="s2">&quot; : 12,</span>
+<span class="s2">          &quot;</span>priority<span class="s2">&quot; : 50,</span>
+<span class="s2">          &quot;</span>port<span class="s2">&quot; : 56267,</span>
+<span class="s2">          &quot;</span>node<span class="s2">&quot; : &quot;</span>mongooseim@localhost<span class="s2">&quot;,</span>
+<span class="s2">          &quot;</span>ip<span class="s2">&quot; : &quot;</span><span class="m">127</span>.0.0.1<span class="s2">&quot;,</span>
+<span class="s2">          &quot;</span>connection<span class="s2">&quot; : &quot;</span>c2s_tls<span class="s2">&quot;</span>
+<span class="s2">        }</span>
+<span class="s2">      ]</span>
+<span class="s2">    }</span>
+<span class="s2">  }</span>
+<span class="s2">}</span>
 </code></pre></div></td></tr></table></div></p>
+<p>The result shows that Bob is currently connected.</p>
 <h3 id="chat-with-another-person">Chat with another person</h3>
 <p>Use <code>alice</code>'s account to send messages directly to <code>bob</code> and use <code>bob</code>'s account to reply directly to <code>alice</code>.</p>
-<p>From the MongooseIM command line:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl send_message_chat from to body
+<p>It is possible to send a message from the command line:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl stanza sendMessage --from alice@localhost --to bob@localhost --body <span class="s1">&#39;Hi Bob!&#39;</span>
 </code></pre></div></td></tr></table></div>
-Examples:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl send_message_chat carol@localhost alice@localhost hello
-mongooseimctl send_message_chat carol@localhost bob@localhost hi
-</code></pre></div></td></tr></table></div></p>
+<p>You need to quote <code>Hi Bob!</code>, because it contains a space.
+If you do it while Bob is connected, he should receive the message in the XMPP client.</p>
 <h3 id="group-chats">Group chats</h3>
 <p>Use <code>alice</code>'s account to create a groupchat <code>channel</code> on your <code>muc.localhost</code> service, and configure it by making it persistent. Invite <code>bob</code> and <code>carol</code>. From <code>bob</code>'s' and <code>carol</code>'s accounts, accept the invitation and join the <code>channel</code> groupchat. All three users exchange messages.</p>
 <h3 id="contact-lists">Contact lists</h3>
 <p>Use <code>carol</code>'s account to add <code>alice</code> and <code>bob</code> to her contact list. Use <code>alice</code>'s and <code>bob</code>'s accounts accept those additions.</p>
 <p>Verify on the MongooseIM server:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl get_roster user host
-</code></pre></div></td></tr></table></div>
-Examples:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl get_roster alice localhost
-mongooseimctl get_roster bob localhost
-mongooseimctl get_roster carol localhost
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl roster listContacts --user alice@localhost
+mongooseimctl roster listContacts --user bob@localhost
 </code></pre></div></td></tr></table></div></p>
 <h3 id="profile-vcard">Profile (vCard)</h3>
 <p>Edit <code>alice</code>'s profile (vCard) in Gajim: <strong>Modify Account...</strong>, then <strong>Profile</strong>, just set her <strong>Name</strong> to <code>Alice</code>.</p>
 <p>Verify on the MongooseIM server:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl get_vcard alice localhost FN
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl vcard getVcard --user alice@localhost
+<span class="o">{</span>
+  <span class="s2">&quot;data&quot;</span> : <span class="o">{</span>
+    <span class="s2">&quot;vcard&quot;</span> : <span class="o">{</span>
+      <span class="s2">&quot;getVcard&quot;</span> : <span class="o">{</span>
+        <span class="o">(</span>...<span class="o">)</span>
+        <span class="s2">&quot;telephone&quot;</span> : <span class="o">[</span>
+          <span class="o">{</span>
+            <span class="s2">&quot;tags&quot;</span> : <span class="o">[</span>
+              <span class="s2">&quot;HOME&quot;</span>,
+              <span class="s2">&quot;VOICE&quot;</span>
+            <span class="o">]</span>,
+            <span class="s2">&quot;number&quot;</span> : <span class="s2">&quot;123456789&quot;</span>
+          <span class="o">}</span>
+        <span class="o">]</span>,
+        <span class="o">(</span>...<span class="o">)</span>
+        <span class="s2">&quot;formattedName&quot;</span> : <span class="s2">&quot;Alice&quot;</span>,
+        <span class="o">(</span>...<span class="o">)</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div></td></tr></table></div></p>
 <h2 id="summary">Summary</h2>
 <p>Now you have the minimum knowledge: you know how to deploy MongooseIM, configure some basic features, check/verify a few useful items, validate it both on the client and server side, and utilize a few good practices.</p>
 <h3 id="summary-command-line">Summary: command line</h3>
-<p>You know <code>mongooseimctl</code>, with commands such as:</p>
+<p>You know <code>mongooseimctl</code>, with basic server management commands such as:</p>
 <ul>
 <li><code>start</code>, <code>restart</code>, <code>stop</code>, <code>status</code>, <code>live</code>, <code>foreground</code></li>
 <li><code>get_loglevel</code></li>
-<li><code>register_identified</code>, <code>check_account</code>, <code>registered_users</code>, <code>unregister</code></li>
-<li><code>add_rosteritem</code>, <code>get_roster</code></li>
 </ul>
-<p>You can even run <code>mongooseimctl</code> without arguments for a list of available commands.</p>
+<p>Other commands shown above correspond to the <a href="../../graphql-api/Admin-GraphQL/">GraphQL Admin API</a> operations, and they are grouped into the following categories:</p>
+<ul>
+<li><code>account</code> contains <code>registerUser</code>, <code>checkUser</code>, <code>listUsers</code>, <code>removeUser</code></li>
+<li><code>roster</code> contains <code>addContact</code>, <code>subscription</code>, <code>listContacts</code>, <code>setMutualSubscription</code></li>
+<li><code>session</code> contains <code>listSessions</code></li>
+<li><code>stanza</code> contains <code>sendMessage</code></li>
+<li><code>vcard</code> contains <code>getVcard</code></li>
+</ul>
+<p>There are more categories and commands. For a list of categories, use <code>mongooseimctl</code> without any arguments. To get a list of commands in a particular category, call <code>mongooseimctl</code><em><code>category</code></em>. You can also get more information about a particular command with <code>mongooseimctl</code><em><code>category command</code></em><code>--help</code>.</p>
 <h3 id="summary-files">Summary: files</h3>
 <p>You know basic entries in the files:
 <code>/etc/mongooseim/mongooseim.toml</code>

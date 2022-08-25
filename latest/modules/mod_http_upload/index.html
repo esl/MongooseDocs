@@ -3120,15 +3120,13 @@ This allows users to read the uploaded files even if the bucket is private. The 
 <h2 id="testing-s3-configuration">Testing <a href="https://aws.amazon.com/s3/">S3</a> configuration</h2>
 <p>Since there is no direct connection between MongooseIM and an <a href="https://aws.amazon.com/s3/">S3</a> bucket,
 it is not possible to verify the provided <a href="https://aws.amazon.com/s3/">S3</a> credentials during startup.
-However, the testing can be done manually. MongooseIM provides a dedicated
-<code>mongooseimctl http_upload</code> command for the manual URLs generation, it accepts
-the following parameters:</p>
+However, the testing can be done manually. MongooseIM provides a dedicated <code>mongooseimctl httpUpload getUrl</code> command for the manual URLs generation. It requires the following arguments:</p>
 <ul>
-<li><strong>Host</strong> - XMPP host name.</li>
-<li><strong>FileName</strong> - The name of the file.</li>
-<li><strong>FileSize</strong> - The size of the file (positive integer).</li>
-<li><strong>ContentType</strong> - <a href="https://www.rfc-editor.org/rfc/rfc7231.html#section-3.1.1.5">Content-Type</a>, optional parameter. If not provided, must be an empty string <code>""</code>.</li>
-<li><strong>ExpirationTime</strong> - Duration (in seconds, positive integer) after which the generated <code>PUT</code> URL will become invalid. This parameter shadows the <strong>expiration_time</strong> configuration.</li>
+<li><strong>domain</strong> - XMPP host name.</li>
+<li><strong>filename</strong> - Name of the file.</li>
+<li><strong>size</strong> - Size of the file in bytes (positive integer).</li>
+<li><strong>contentType</strong> - <a href="https://www.rfc-editor.org/rfc/rfc7231.html#section-3.1.1.5">Content-Type</a>.</li>
+<li><strong>timeout</strong> - Duration (in seconds, positive integer) after which the generated <code>PUT</code> URL will become invalid. This argument shadows the <strong>expiration_time</strong> configuration.</li>
 </ul>
 <p>The generated URLs can be used to upload/download a file using the <code>curl</code> utility:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -3161,7 +3159,7 @@ the following parameters:</p>
 <span class="nv">content_type</span><span class="o">=</span><span class="s2">&quot;text/plain&quot;</span>
 
 <span class="c1"># Generate upload/download URLs</span>
-<span class="nv">urls</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>./mongooseimctl http_upload localhost test.txt <span class="s2">&quot;</span><span class="nv">$filesize</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$content_type</span><span class="s2">&quot;</span> <span class="m">600</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nv">urls</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>./mongooseimctl httpUpload getUrl --domain localhost --filename test.txt --size <span class="s2">&quot;</span><span class="nv">$filesize</span><span class="s2">&quot;</span> --contentType <span class="s2">&quot;</span><span class="nv">$content_type</span><span class="s2">&quot;</span> --timeout <span class="m">600</span><span class="k">)</span><span class="s2">&quot;</span>
 <span class="nv">put_url</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$urls</span><span class="s2">&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;/PutURL:/ {print $2}&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
 <span class="nv">get_url</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$urls</span><span class="s2">&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;/GetURL:/ {print $2}&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
 

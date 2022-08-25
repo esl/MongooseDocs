@@ -2399,13 +2399,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuration-example" class="md-nav__link">
-    Configuration example:
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#add-domain_1" class="md-nav__link">
     Add domain:
   </a>
@@ -2884,13 +2877,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuration-example" class="md-nav__link">
-    Configuration example:
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#add-domain_1" class="md-nav__link">
     Add domain:
   </a>
@@ -3037,7 +3023,7 @@ host_type or host_type is not supported), errors are logged.</p>
 </ul>
 <p>We use <code>id</code> field to sort records when paginating.</p>
 <h3 id="domain-removal">Domain removal</h3>
-<p>You cannot delete domains with unknown host-type. 
+<p>You cannot delete domains with unknown host-type.
 Configure host-type first to delete such domains.</p>
 <p>Modules which store data in RDBMS and support dynamic domains will remove <strong>all</strong> persistent data associated with a domain when its removal is requested.
 This is not the case for NoSQL databases or Mnesia.
@@ -3113,25 +3099,18 @@ Provide <code>{"enabled": false}</code> as a body to disable a domain.</p>
 <li>500 - Other errors.</li>
 </ul>
 <h2 id="command-line-interface">Command Line Interface</h2>
-<p>Implemented by <code>service_admin_extra_domain</code> module.</p>
-<h3 id="configuration-example">Configuration example:</h3>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[services.service_admin_extra]</span><span class="w"></span>
-<span class="w">  </span><span class="n">submods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;node&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;accounts&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sessions&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;vcard&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gdpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;upload&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">             </span><span class="s">&quot;roster&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;last&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;private&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;stanza&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;stats&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;domain&quot;</span><span class="p">]</span><span class="w"></span>
-</code></pre></div></td></tr></table></div>
+<p>Domain management commands are grouped into the <code>domain</code> category.</p>
 <h3 id="add-domain_1">Add domain:</h3>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./mongooseimctl insert_domain domain host_type
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./mongooseimctl domain addDomain --domain example.com --hostType type1
 </code></pre></div></td></tr></table></div>
 <h3 id="delete-domain">Delete domain:</h3>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./mongooseimctl delete_domain domain host_type
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./mongooseimctl domain removeDomain --domain example.com --hostType type1
 </code></pre></div></td></tr></table></div>
 <h3 id="disable-domain">Disable domain:</h3>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./mongooseimctl disable_domain domain
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./mongooseimctl domain disableDomain --domain example.com
 </code></pre></div></td></tr></table></div>
 <h3 id="enable-domain">Enable domain:</h3>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./mongooseimctl enable_domain domain
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./mongooseimctl domain enableDomain --domain example.com
 </code></pre></div></td></tr></table></div>
 
 
