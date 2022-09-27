@@ -2638,6 +2638,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#dynamic-domains" class="md-nav__link">
+    Dynamic domains
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2749,6 +2756,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#dynamic-domains" class="md-nav__link">
+    Dynamic domains
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2780,6 +2794,9 @@
 <p>For some endpoints, the response messages may be slightly different because of the unification with other APIs.</p>
 <h2 id="ctl">CTL</h2>
 <p>For some commands, the response messages may be slightly different because of the unification with other APIs.</p>
+<h2 id="dynamic-domains">Dynamic domains</h2>
+<p>Removing a domain was a potentially troublesome operation: if the removal was to fail midway through the process, retrials wouldn't be accepted. This is fixed now, by first disabling and marking a domain for removal, then running all the handlers, and only on full success will the domain be removed. So if any failure is notified, the whole operation can be retried again.</p>
+<p>The database requires a migration, as the status of a domain takes now more than the two values a boolean allows, see the migrations for Postgres, MySQL and MSSQL in the <a href="https://github.com/esl/MongooseIM/tree/master/priv/migrations"><code>priv/migrations</code></a> directory.</p>
 
 
 
