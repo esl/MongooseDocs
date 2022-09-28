@@ -1861,6 +1861,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modulesmod_mamdelete_domain_limit" class="md-nav__link">
+    modules.mod_mam.delete_domain_limit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_mamdb_jid_format" class="md-nav__link">
     modules.mod_mam.db_jid_format
   </a>
@@ -3462,6 +3469,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modulesmod_mamdelete_domain_limit" class="md-nav__link">
+    modules.mod_mam.delete_domain_limit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_mamdb_jid_format" class="md-nav__link">
     modules.mod_mam.db_jid_format
   </a>
@@ -3851,6 +3865,13 @@ Please consult <a href="../../configuration/outgoing-connections/#elasticsearch-
 </ul>
 <p>This enforces all mam lookups to be "simple", i.e., they skip the RSM count.
 See <a href="../../open-extensions/mam/">Message Archive Management extensions</a>.</p>
+<h4 id="modulesmod_mamdelete_domain_limit"><code>modules.mod_mam.delete_domain_limit</code></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
+<li><strong>Example:</strong> <code>modules.mod_mam.delete_domain_limit = 10000</code></li>
+</ul>
+<p>Domain deletion can be an expensive operation, as it requires to delete potentially many thousands of records from the DB. By default, the delete operation deletes everything in a transaction, but it might be desired, to handle timeouts and table locks more gracefully, to delete the records in batches. This limit establishes the size of the batch.</p>
 <h4 id="modulesmod_mamdb_jid_format"><code>modules.mod_mam.db_jid_format</code></h4>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"mam_jid_rfc"</code>, <code>"mam_jid_rfc_trust"</code>, <code>"mam_jid_mini"</code> or a module implementing <code>mam_jid</code> behaviour</li>
