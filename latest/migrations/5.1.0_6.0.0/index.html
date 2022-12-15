@@ -2706,7 +2706,7 @@
 <h2 id="module-configuration">Module configuration</h2>
 <ul>
 <li>The <code>mod_mam_meta</code> module is now named <code>mod_mam</code> for simplicity, so if you are using this module, you need to update the module name in <code>mongooseim.toml</code>.</li>
-<li><code>mod_commands</code>, <code>mod_inbox_commands</code>, <code>mod_muc_commands</code> and <code>mod_commands</code> are removed. Their functionality is now fully covered by <a href="../../configuration/listen/#handler-types-rest-api-admin-mongoose_admin_api"><code>mongoose_admin_api</code></a>. You need to delete these modules from <code>mongooseim.toml</code>.</li>
+<li><code>mod_commands</code>, <code>mod_inbox_commands</code>, <code>mod_muc_commands</code> and <code>mod_muc_light_commands</code> are removed. Their functionality is now fully covered by <a href="../../configuration/listen/#handler-types-rest-api-admin-mongoose_admin_api"><code>mongoose_admin_api</code></a>. You need to delete these modules from <code>mongooseim.toml</code>.</li>
 </ul>
 <h2 id="metrics">Metrics</h2>
 <p>The <code>mod_mam</code> backend module is now named <code>mod_mam_pm</code> for consistency with <code>mod_mam_muc</code>. As a result, the backend metrics have updated names, i.e. each <code>[backends, mod_mam, Metric]</code> name is changed to <code>[backends, mod_mam_pm, Metric]</code>, where <code>Metric</code> can be <code>lookup</code> or <code>archive</code>.</p>
@@ -2723,7 +2723,7 @@
 <p>For some commands, the response messages may be slightly different because of the unification with other APIs.</p>
 <h2 id="dynamic-domains">Dynamic domains</h2>
 <p>Removing a domain was a potentially troublesome operation: if the removal was to fail midway through the process, retrials wouldn't be accepted. This is fixed now, by first disabling and marking a domain for removal, then running all the handlers, and only on full success will the domain be removed. So if any failure is notified, the whole operation can be retried again.</p>
-<p>The database requires a migration, as the status of a domain takes now more than the two values a boolean allows, see the migrations for Postgres, MySQL and MSSQL in the <a href="https://github.com/esl/MongooseIM/tree/master/priv/migrations"><code>priv/migrations</code></a> directory.</p>
+<p>The database requires a migration, as the status of a domain takes now more than the two values a boolean allows, moreover the table for data of the domain admin has been added. See the migrations for Postgres, MySQL and MSSQL in the <a href="https://github.com/esl/MongooseIM/tree/master/priv/migrations"><code>priv/migrations</code></a> directory.</p>
 
 
 
