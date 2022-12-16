@@ -2563,6 +2563,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#hooks" class="md-nav__link">
+    Hooks
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2681,6 +2688,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#hooks" class="md-nav__link">
+    Hooks
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2724,6 +2738,11 @@
 <h2 id="dynamic-domains">Dynamic domains</h2>
 <p>Removing a domain was a potentially troublesome operation: if the removal was to fail midway through the process, retrials wouldn't be accepted. This is fixed now, by first disabling and marking a domain for removal, then running all the handlers, and only on full success will the domain be removed. So if any failure is notified, the whole operation can be retried again.</p>
 <p>The database requires a migration, as the status of a domain takes now more than the two values a boolean allows, moreover the table for data of the domain admin has been added. See the migrations for Postgres, MySQL and MSSQL in the <a href="https://github.com/esl/MongooseIM/tree/master/priv/migrations"><code>priv/migrations</code></a> directory.</p>
+<h2 id="hooks">Hooks</h2>
+<p>Support for <code>ejabberd_hooks</code> has been removed.
+Now handlers should be compliant with <code>gen_hook</code>.
+If you have some custom modules (e.g. that implement some XMPP extensions) and use hooks mechanism, please refactor your handlers to be compliant with it.
+For more details refer to <a href="../../developers-guide/Hooks-and-handlers/"><code>Hooks and Handlers</code></a> chapter.</p>
 
 
 
