@@ -2792,9 +2792,9 @@ Results should be similar to those described below.</p>
 <p>On Mac:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/configure with-all <span class="nv">user</span><span class="o">=</span>erszcz <span class="nv">prefix</span><span class="o">=</span>/tmp/mim-sandbox-system <span class="nv">system</span><span class="o">=</span>yes
-cat configure.out rel/configure.vars.config
-<span class="nv">RUNNER_GROUP</span><span class="o">=</span>staff make install
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/configure<span class="w"> </span>with-all<span class="w"> </span><span class="nv">user</span><span class="o">=</span>erszcz<span class="w"> </span><span class="nv">prefix</span><span class="o">=</span>/tmp/mim-sandbox-system<span class="w"> </span><span class="nv">system</span><span class="o">=</span>yes
+cat<span class="w"> </span>configure.out<span class="w"> </span>rel/configure.vars.config
+<span class="nv">RUNNER_GROUP</span><span class="o">=</span>staff<span class="w"> </span>make<span class="w"> </span>install
 </code></pre></div></td></tr></table></div>
 <p>Overriding <code>RUNNER_GROUP</code> on a Mac is necessary, as users by default don't
 have private groups of the same name as their usernames.</p>
@@ -2822,30 +2822,30 @@ have private groups of the same name as their usernames.</p>
 <span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
-<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code>$ cat configure.out rel/configure.vars.config
-<span class="nb">export</span> <span class="nv">MONGOOSEIM_CONFIGURED</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span>
-<span class="nb">export</span> <span class="nv">APPS</span><span class="o">=</span><span class="s2">&quot;mysql eodbc epgsql eredis riakc nksip cqerl tirerl erlcloud&quot;</span>
-<span class="nb">export</span> <span class="nv">PREFIX</span><span class="o">=</span><span class="s2">&quot;/tmp/mim-sandbox-system&quot;</span>
-<span class="nb">export</span> <span class="nv">RELTOOL_VARS</span><span class="o">=</span><span class="s2">&quot;rel/configure.vars.config&quot;</span>
-<span class="nb">export</span> <span class="nv">SYSTEM</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span>
-<span class="nb">export</span> <span class="nv">RUNNER_USER</span><span class="o">=</span><span class="s2">&quot;erszcz&quot;</span>
-<span class="nb">export</span> <span class="nv">BIN_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/usr/bin&quot;</span>
-<span class="nb">export</span> <span class="nv">ETC_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/etc/mongooseim&quot;</span>
-<span class="nb">export</span> <span class="nv">LIB_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/usr/lib/mongooseim&quot;</span>
-<span class="nb">export</span> <span class="nv">LOG_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/var/log/mongooseim&quot;</span>
-<span class="nb">export</span> <span class="nv">MDB_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/var/lib/mongooseim&quot;</span>
-<span class="nb">export</span> <span class="nv">LOCK_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/var/lock/mongooseim&quot;</span>
-<span class="nb">export</span> <span class="nv">PID_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/var/lib/mongooseim&quot;</span>
-<span class="nb">export</span> <span class="nv">STATUS_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/var/lib/mongooseim&quot;</span>
-<span class="o">{</span>mongooseim_runner_user, <span class="s2">&quot;erszcz&quot;</span><span class="o">}</span>.
-<span class="o">{</span>mongooseim_script_dir, <span class="s2">&quot;/tmp/mim-sandbox-system/usr/lib/mongooseim/bin&quot;</span><span class="o">}</span>.
-<span class="o">{</span>mongooseim_etc_dir, <span class="s2">&quot;/tmp/mim-sandbox-system/etc/mongooseim&quot;</span><span class="o">}</span>.
-<span class="o">{</span>mongooseim_log_dir, <span class="s2">&quot;/tmp/mim-sandbox-system/var/log/mongooseim&quot;</span><span class="o">}</span>.
-<span class="o">{</span>mongooseim_mdb_dir, <span class="s2">&quot;/tmp/mim-sandbox-system/var/lib/mongooseim&quot;</span><span class="o">}</span>.
-<span class="o">{</span>mongooseim_pid_dir, <span class="s2">&quot;/tmp/mim-sandbox-system/var/lib/mongooseim&quot;</span><span class="o">}</span>.
-<span class="o">{</span>mongooseim_status_dir, <span class="s2">&quot;/tmp/mim-sandbox-system/var/lib/mongooseim&quot;</span><span class="o">}</span>.
-<span class="o">{</span>mongooseim_mdb_dir_toggle, <span class="o">[]}</span>.
-<span class="o">{</span>mongooseim_lock_dir, <span class="s2">&quot;/tmp/mim-sandbox-system/var/lock/mongooseim&quot;</span><span class="o">}</span>.
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code>$<span class="w"> </span>cat<span class="w"> </span>configure.out<span class="w"> </span>rel/configure.vars.config
+<span class="nb">export</span><span class="w"> </span><span class="nv">MONGOOSEIM_CONFIGURED</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">APPS</span><span class="o">=</span><span class="s2">&quot;mysql eodbc epgsql eredis riakc nksip cqerl tirerl erlcloud&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PREFIX</span><span class="o">=</span><span class="s2">&quot;/tmp/mim-sandbox-system&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">RELTOOL_VARS</span><span class="o">=</span><span class="s2">&quot;rel/configure.vars.config&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">SYSTEM</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">RUNNER_USER</span><span class="o">=</span><span class="s2">&quot;erszcz&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">BIN_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/usr/bin&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">ETC_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/etc/mongooseim&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LIB_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/usr/lib/mongooseim&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LOG_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/var/log/mongooseim&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">MDB_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/var/lib/mongooseim&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LOCK_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/var/lock/mongooseim&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PID_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/var/lib/mongooseim&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">STATUS_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PREFIX</span><span class="s2">/var/lib/mongooseim&quot;</span>
+<span class="o">{</span>mongooseim_runner_user,<span class="w"> </span><span class="s2">&quot;erszcz&quot;</span><span class="o">}</span>.
+<span class="o">{</span>mongooseim_script_dir,<span class="w"> </span><span class="s2">&quot;/tmp/mim-sandbox-system/usr/lib/mongooseim/bin&quot;</span><span class="o">}</span>.
+<span class="o">{</span>mongooseim_etc_dir,<span class="w"> </span><span class="s2">&quot;/tmp/mim-sandbox-system/etc/mongooseim&quot;</span><span class="o">}</span>.
+<span class="o">{</span>mongooseim_log_dir,<span class="w"> </span><span class="s2">&quot;/tmp/mim-sandbox-system/var/log/mongooseim&quot;</span><span class="o">}</span>.
+<span class="o">{</span>mongooseim_mdb_dir,<span class="w"> </span><span class="s2">&quot;/tmp/mim-sandbox-system/var/lib/mongooseim&quot;</span><span class="o">}</span>.
+<span class="o">{</span>mongooseim_pid_dir,<span class="w"> </span><span class="s2">&quot;/tmp/mim-sandbox-system/var/lib/mongooseim&quot;</span><span class="o">}</span>.
+<span class="o">{</span>mongooseim_status_dir,<span class="w"> </span><span class="s2">&quot;/tmp/mim-sandbox-system/var/lib/mongooseim&quot;</span><span class="o">}</span>.
+<span class="o">{</span>mongooseim_mdb_dir_toggle,<span class="w"> </span><span class="o">[]}</span>.
+<span class="o">{</span>mongooseim_lock_dir,<span class="w"> </span><span class="s2">&quot;/tmp/mim-sandbox-system/var/lock/mongooseim&quot;</span><span class="o">}</span>.
 </code></pre></div></td></tr></table></div>
 <p>Installed tree:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>

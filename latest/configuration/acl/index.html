@@ -2809,7 +2809,7 @@
 <li><strong>Default:</strong> no default - each access class needs to be specified explicitly.</li>
 <li><strong>Example:</strong> the <code>local</code> access class is used for the regular users connecting to the <a href="../listen/#client-to-server-c2s-listenc2s">C2S listener</a>. The pattern <code>{}</code> matches all users from the current server, because it is equivalent to <code>{match = "current_domain"}</code> (see below).</li>
 </ul>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{}]</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{}]</span>
 </code></pre></div></td></tr></table></div>
 <p>When there are multiple patterns listed, the resulting pattern will be the union of all of them.</p>
 <h2 id="patterns">Patterns</h2>
@@ -2828,9 +2828,9 @@ This option makes a difference for some <a href="../access/">access rules</a>, e
 Setting the option to <code>"none"</code> makes the pattern never match.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">everyone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">match</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">everyone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">match</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="acluser"><code>acl.*.user</code></h3>
 <ul>
@@ -2842,10 +2842,10 @@ The following class includes <code>alice@localhost</code>, but not <code>bob@loc
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;alice&quot;</span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;charlie&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;alice&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;charlie&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="aclserver"><code>acl.*.server</code></h3>
 <ul>
@@ -2856,16 +2856,16 @@ The following class includes <code>alice@localhost</code>, but not <code>bob@loc
 The following class includes <code>alice@localhost</code>, but not <code>alice@xmpp.org</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">localhost_users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">localhost_users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <p>This option can be combined with <code>user</code> - only <code>alice@localhost</code> belongs to the following class:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="aclresource"><code>acl.*.resource</code></h3>
 <ul>
@@ -2876,16 +2876,16 @@ The following class includes <code>alice@localhost</code>, but not <code>alice@x
 The following class includes <code>alice@localhost/mobile</code>, but not <code>alice@localhost/home</code>:</p>
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">mobile_users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">resource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mobile&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">mobile_users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">resource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mobile&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 This option can be combined with <code>user</code> and <code>server</code> - only <code>alice@localhost/mobile</code> belongs to the following class:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">resource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mobile&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">admin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">resource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mobile&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="acluser_regexp"><code>acl.*.user_regexp</code></h3>
 <ul>
@@ -2896,16 +2896,16 @@ This option can be combined with <code>user</code> and <code>server</code> - onl
 The following class includes <code>alice@localhost</code> and <code>albert@jabber.org</code>, but not <code>bob@localhost</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">ae</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">user_regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;^a.*e&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">ae</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">user_regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;^a.*e&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <p>This option can be combined with <code>server</code> - here <code>albert@jabber.org</code> is excluded:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">localhost_ae</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">user_regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;^a.*e&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">localhost_ae</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">user_regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;^a.*e&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="aclserver_regexp"><code>acl.*.server_regexp</code></h3>
 <ul>
@@ -2916,16 +2916,16 @@ The following class includes <code>alice@localhost</code> and <code>albert@jabbe
 The following class includes <code>alice@host1</code>, but not <code>alice@xmpp.org</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">host_users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">server_regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;host&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">host_users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">server_regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;host&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <p>This option can be combined with <code>user_regexp</code>, e.g. we can require the user name to contain 'a' and the domain name to start with 'a':</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">user_regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">server_regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;^a&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">user_regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">server_regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;^a&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="aclresource_regexp"><code>acl.*.resource_regexp</code></h3>
 <ul>
@@ -2935,9 +2935,9 @@ The following class includes <code>alice@host1</code>, but not <code>alice@xmpp.
 <p>Matches all JIDs with the resource name matching the regular expression. This class includes <code>bob@xmpp.org/res123</code>, but not <code>bob@xmpp.org/home</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">digital_resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">resource_regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;^res\d+$&#39;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">digital_resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">resource_regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;^res\d+$&#39;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <p>Note the use of a literal string (single quotes) to prevent <code>\d</code> from being escaped.</p>
 <h3 id="acluser_glob"><code>acl.*.user_glob</code></h3>
@@ -2949,16 +2949,16 @@ The following class includes <code>alice@host1</code>, but not <code>alice@xmpp.
 The following class includes <code>alice@localhost</code> and <code>albert@jabber.org</code>, but not <code>bob@localhost</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">ae_users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">user_glob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;a*e*&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">ae_users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">user_glob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;a*e*&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <p>This option can be combined with <code>server</code> - here <code>albert@jabber.org</code> is excluded:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">localhost_ae_users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">user_glob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;a*e*&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">localhost_ae_users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">user_glob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;a*e*&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="aclserver_glob"><code>acl.*.server_glob</code></h3>
 <ul>
@@ -2969,16 +2969,16 @@ The following class includes <code>alice@localhost</code> and <code>albert@jabbe
 The following class includes <code>alice@host1</code>, but not <code>alice@xmpp.org</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">localhost_users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">server_glob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;host*&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">localhost_users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">server_glob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;host*&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <p>This option can be combined with <code>user_glob</code>, e.g. we can require the user name to contain 'a' and the domain name to start with 'a':</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">user_glob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;*a*&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">server_glob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;a*&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">user_glob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;*a*&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">server_glob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;a*&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="aclresource_glob"><code>acl.*.resource_glob</code></h3>
 <ul>
@@ -2988,9 +2988,9 @@ The following class includes <code>alice@host1</code>, but not <code>alice@xmpp.
 <p>Matches all JIDs with the resource name matching the pattern. This class includes <code>bob@xmpp.org/res123</code>, but not <code>bob@xmpp.org/home</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">limited_resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">resource_glob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;res???&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">limited_resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">resource_glob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;res???&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 
 

@@ -3021,20 +3021,20 @@ In order to enable signalling we need an instance of <a href="https://github.com
 <p>You can find MongooseIM installation instructions on <a href="../../getting-started/Quick-setup/">this page</a>.
 Once you have it installed, you need to modify the <a href="../../configuration/configuration-files/#mongooseimtoml"><code>mongooseim.toml</code></a> config file:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[general]</span><span class="w"></span>
-<span class="w">  </span><span class="n">hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;localhost&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;myxmpp.com&quot;</span><span class="p">]</span><span class="w"></span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[general]</span>
+<span class="w">  </span><span class="n">hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;localhost&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;myxmpp.com&quot;</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 This sets the virtual hostname of the XMPP server, so that you can register users in this domain.
 After that, you can start MongooseIM with
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl start
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>start
 </code></pre></div></td></tr></table></div></p>
 <h3 id="users">Users</h3>
 <p>After we finish setting up <a href="https://github.com/esl/MongooseIM">MongooseIM</a>, we need to register some users.
 For this demo we need two users: <em>movie@myxmpp.com</em> and <em>phone@myxmpp.com</em>, for RaspberryPi and the Android phone respectively.
 In order to do that, type:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl account registerUser --username movie --domain myxmpp.com --password xmpp_password
-mongooseimctl account registerUser --username phone --domain myxmpp.com --password xmpp_password
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>account<span class="w"> </span>registerUser<span class="w"> </span>--username<span class="w"> </span>movie<span class="w"> </span>--domain<span class="w"> </span>myxmpp.com<span class="w"> </span>--password<span class="w"> </span>xmpp_password
+mongooseimctl<span class="w"> </span>account<span class="w"> </span>registerUser<span class="w"> </span>--username<span class="w"> </span>phone<span class="w"> </span>--domain<span class="w"> </span>myxmpp.com<span class="w"> </span>--password<span class="w"> </span>xmpp_password
 </code></pre></div></td></tr></table></div>
 <p>on the machine that has <a href="https://github.com/esl/MongooseIM">MongooseIM</a> installed.</p>
 <p>As you can see here, we have created those two users, both with the password <em>xmpp_password</em> for simplicity.</p>
@@ -3044,7 +3044,7 @@ For that we are going to use the star of this tutorial - <a href="https://github
 <h3 id="how-to-get-and-configure">How to get and configure</h3>
 <p>The whole documentation that describes all options and deployment methods, can be found on the <a href="https://github.com/esl/MongooseICE">project's github page</a>.
 Let's get to it! (this command assumes that we are on the server for <a href="https://github.com/esl/MongooseICE">MongooseICE</a> and that it has Docker installed):
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>docker run -it --net<span class="o">=</span>host -e <span class="s2">&quot;MONGOOSEICE_UDP_RELAY_IP=1.1.1.1&quot;</span> -e <span class="s2">&quot;MONGOOSEICE_STUN_SECRET=secret&quot;</span> -e <span class="s2">&quot;MONGOOSEICE_UDP_REALM=myrelay&quot;</span> mongooseim/mongooseice:0.4.0
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--net<span class="o">=</span>host<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;MONGOOSEICE_UDP_RELAY_IP=1.1.1.1&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;MONGOOSEICE_STUN_SECRET=secret&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;MONGOOSEICE_UDP_REALM=myrelay&quot;</span><span class="w"> </span>mongooseim/mongooseice:0.4.0
 </code></pre></div></td></tr></table></div></p>
 <p>This command starts the <a href="https://github.com/esl/MongooseICE">MongooseICE</a> server in the Docker container, attaching its virtual network interface to the network interface of the host machine the Docker daemon is running on.
 There are three important configuration options we have to set via environment variables:</p>
@@ -3092,10 +3092,10 @@ For now we only need to run it, so let's get to it (on our RaspberryPi):
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>git clone https://github.com/esl/ice_demo.git
-<span class="nb">cd</span> ice_demo
-mix deps.get
-iex -S mix
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/esl/ice_demo.git
+<span class="nb">cd</span><span class="w"> </span>ice_demo
+mix<span class="w"> </span>deps.get
+iex<span class="w"> </span>-S<span class="w"> </span>mix
 </code></pre></div></td></tr></table></div></p>
 <p>After a while we should get into Elixir shell.
 In order to enable the streamer, we need to start it, providing some configuration options (in the Elixir shell):
@@ -3108,16 +3108,16 @@ In order to enable the streamer, we need to start it, providing some configurati
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="ss">jid</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;movie@myxmpp.com&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="ss">password</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xmpp_password&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="ss">host</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;myxmpp.com&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="ss">turn_addr</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.1.1.1:3784&quot;</span><span class="w"></span>
-<span class="ss">turn_username</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;username&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="ss">turn_secret</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="ss">video_file</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/home/pi/sintel.h264&quot;</span><span class="w"></span>
-<span class="p">]</span><span class="w"></span>
-<span class="nc">ICEDemo</span><span class="o">.</span><span class="n">start_movie</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span><span class="w"></span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="ss">jid</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;movie@myxmpp.com&quot;</span><span class="p">,</span>
+<span class="ss">password</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xmpp_password&quot;</span><span class="p">,</span>
+<span class="ss">host</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;myxmpp.com&quot;</span><span class="p">,</span>
+<span class="ss">turn_addr</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.1.1.1:3784&quot;</span>
+<span class="ss">turn_username</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;username&quot;</span><span class="p">,</span>
+<span class="ss">turn_secret</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">,</span>
+<span class="ss">video_file</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/home/pi/sintel.h264&quot;</span>
+<span class="p">]</span>
+<span class="nc">ICEDemo</span><span class="o">.</span><span class="n">start_movie</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div></p>
 <p>The first 3 options are all about connecting to the XMPP server - we use "<em>movie@myxmpp.com</em>" user that we created earlier.
 Next 3 options are about connecting to the <a href="https://github.com/esl/MongooseICE">MongooseICE</a> server.

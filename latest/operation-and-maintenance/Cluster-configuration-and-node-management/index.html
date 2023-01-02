@@ -2902,7 +2902,7 @@ This value specifies how many ports (files, drivers, sockets etc) can be used by
 Be cautious - it preallocates some structures inside the VM and will have impact on the memory usage.
 We suggest 350000 for 100 k users when using an SSL/TLS connection or 250000 in other cases.</p>
 <p>To check how memory consumption changes depending on <code>ERL_MAX_PORTS</code>, use the following command:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>env <span class="nv">ERL_MAX_PORTS</span><span class="o">=[</span>given value<span class="o">]</span> erl -noinput -eval <span class="s1">&#39;io:format(&quot;~p~n&quot;,[erlang:memory(system)]).&#39;</span> -s erlang halt
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>env<span class="w"> </span><span class="nv">ERL_MAX_PORTS</span><span class="o">=[</span>given<span class="w"> </span>value<span class="o">]</span><span class="w"> </span>erl<span class="w"> </span>-noinput<span class="w"> </span>-eval<span class="w"> </span><span class="s1">&#39;io:format(&quot;~p~n&quot;,[erlang:memory(system)]).&#39;</span><span class="w"> </span>-s<span class="w"> </span>erlang<span class="w"> </span>halt
 </code></pre></div></td></tr></table></div>
 <p>Another change you need to make when building a MongooseIM cluster is setting the <code>-sname</code>.
 To do it, just set the <code>-sname</code> option in <code>vm.args</code> with node's hostname,
@@ -2929,9 +2929,9 @@ Epmd keeps track of which Erlang node is using which ports on the local machine.
 <h3 id="new-node-joining-cluster">New node - joining cluster</h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl start
-mongooseimctl started <span class="c1">#waits until MongooseIM starts</span>
-mongooseimctl join_cluster ClusterMember
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>start
+mongooseimctl<span class="w"> </span>started<span class="w"> </span><span class="c1">#waits until MongooseIM starts</span>
+mongooseimctl<span class="w"> </span>join_cluster<span class="w"> </span>ClusterMember
 </code></pre></div></td></tr></table></div>
 <p><code>ClusterMember</code> is the name of a running node set in <code>vm.args</code> file, for example <code>mongooseim@localhost</code>.
 This node has to be part of the cluster we'd like to join.</p>
@@ -2946,7 +2946,7 @@ Successful output may look like the following:</p>
 without displaying the warning and waiting for the confirmation.</p>
 <h3 id="leaving-cluster">Leaving cluster</h3>
 <p>To leave a running node from the cluster, call:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl leave_cluster
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>leave_cluster
 </code></pre></div></td></tr></table></div>
 <p>It only makes sense to use it if the node is the part of a cluster, e.g <code>join_cluster</code> was called from that node before.</p>
 <p>Similarly to <code>join_cluster</code> a warning and a question will be displayed unless the option <code>-f</code> is added to the command.</p>
@@ -2955,7 +2955,7 @@ without displaying the warning and waiting for the confirmation.</p>
 </code></pre></div></td></tr></table></div>
 <h3 id="removing-a-node-from-the-cluster">Removing a node from the cluster</h3>
 <p>To remove another node from the cluster, call the following command from one of the cluster members:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl remove_from_cluster RemoteNodeName
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>remove_from_cluster<span class="w"> </span>RemoteNodeName
 </code></pre></div></td></tr></table></div>
 <p>where <code>RemoteNodeName</code> is a name of the node that we'd like to remove from our cluster.
 This command could be useful when the node is dead and not responding and we'd like to remove it remotely.
@@ -2965,15 +2965,15 @@ The successful output from the above command may look like the following:</p>
 <h3 id="cluster-status">Cluster status</h3>
 <p>You can use the following commands on any of the running nodes to examine the cluster
 or to see if a newly added node is properly clustered:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl mnesia info <span class="p">|</span> grep <span class="s2">&quot;running db nodes&quot;</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>mnesia<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;running db nodes&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>This command shows all running nodes.
 A healthy cluster should contain all nodes here.
 For example:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>running db <span class="nv">nodes</span> <span class="o">=</span> <span class="o">[</span>mongooseim@node1, mongooseim@node2<span class="o">]</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>running<span class="w"> </span>db<span class="w"> </span><span class="nv">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>mongooseim@node1,<span class="w"> </span>mongooseim@node2<span class="o">]</span>
 </code></pre></div></td></tr></table></div>
 To see stopped or misbehaving nodes following command can be useful:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl mnesia info <span class="p">|</span> grep <span class="s2">&quot;stopped db nodes&quot;</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>mnesia<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;stopped db nodes&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>This command shows which nodes are considered stopped.
 This does not necessarily indicate that they are down but might be a symptom of a communication problem.</p>

@@ -3059,11 +3059,11 @@ You can start with providing only the basic options, for example configuring the
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[general]</span><span class="w"></span>
-<span class="w">  </span><span class="n">loglevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;warning&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="n">hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;my-xmpp-domain.com&quot;</span><span class="p">]</span><span class="w"></span>
-<span class="w">  </span><span class="n">default_server_domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;my-xmpp-domain.com&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="n">language</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="w"></span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[general]</span>
+<span class="w">  </span><span class="n">loglevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;warning&quot;</span>
+<span class="w">  </span><span class="n">hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;my-xmpp-domain.com&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="n">default_server_domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;my-xmpp-domain.com&quot;</span>
+<span class="w">  </span><span class="n">language</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>All options are described below.</p>
 <h2 id="general-options">General options</h2>
@@ -3156,15 +3156,15 @@ You should use the new GraphQL-based command line interface instead.</p>
 </ul>
 <p>By default, all admin operations are permitted with the <code>mongooseimctl</code> command without authentication. You can change that by setting this option for a specific access rule. When the rule returns the value <code>"allow"</code>, the user is permitted to use the specified commands with the optional restrictions.</p>
 <p><strong>Example 1.</strong> Allow administrators to execute all commands without any restrictions:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="k">[general.mongooseimctl_access_commands.admin]</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="k">[general.mongooseimctl_access_commands.admin]</span>
 </code></pre></div></td></tr></table></div>
 <p>The <code>admin</code> rule needs to be defined in the <code>access</code> section.</p>
 <p><strong>Example 2.</strong> Allow local users to execute the <code>join_cluster</code> command, but only if the <code>node</code> argument is equal to <code>mongooseim@prime</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="k">[general.mongooseimctl_access_commands.local]</span><span class="w"></span>
-<span class="w">    </span><span class="n">commands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;join_cluster&quot;</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">argument_restrictions</span><span class="p">.</span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mongooseim@prime&quot;</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="k">[general.mongooseimctl_access_commands.local]</span>
+<span class="w">    </span><span class="n">commands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;join_cluster&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="n">argument_restrictions</span><span class="p">.</span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mongooseim@prime&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>The <code>local</code> rule needs to be defined in the <code>access</code> section.</p>
 <h2 id="security">Security</h2>
@@ -3262,10 +3262,10 @@ This option is set for C2S, outgoing S2S and component connections and can be ov
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">domain_certfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost1.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">certfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cert1.pem&quot;</span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost2.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">certfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cert2.pem&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">domain_certfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost1.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">certfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cert1.pem&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="n">domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;localhost2.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">certfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cert2.pem&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <p>This option overrides the configured certificate file for specific local XMPP domains.</p>
 <div class="admonition notes">

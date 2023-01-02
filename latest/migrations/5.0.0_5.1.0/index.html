@@ -2879,19 +2879,19 @@ See the description of <a href="../../configuration/acl/#aclmatch"><code>current
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span><span class="w"></span>
-<span class="w">  </span><span class="n">flush_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="w"></span>
-<span class="w">  </span><span class="n">max_batch_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w"></span>
-<span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
+<span class="w">  </span><span class="n">flush_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span>
+<span class="w">  </span><span class="n">max_batch_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
 </code></pre></div></td></tr></table></div>
 now becomes
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span><span class="w"></span>
-<span class="w">  </span><span class="n">async_writer</span><span class="p">.</span><span class="n">flush_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="w"></span>
-<span class="w">  </span><span class="n">async_writer</span><span class="p">.</span><span class="n">batch_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w"></span>
-<span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span><span class="p">.</span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_mam_meta]</span>
+<span class="w">  </span><span class="n">async_writer</span><span class="p">.</span><span class="n">flush_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span>
+<span class="w">  </span><span class="n">async_writer</span><span class="p">.</span><span class="n">batch_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span><span class="p">.</span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
 </code></pre></div></td></tr></table></div></p>
 <h2 id="smart-markers">Smart markers</h2>
 <p>There's an experimental and undocumented module called <code>mod_smart_markers</code>, that had a default table in the RDBMS schema, which you probably never used (or shouldn't have, as it was undocumented). If you rely on this table, the column <code>from_jid</code> has been split in <code>from_luser</code> and <code>lserver</code>, in order to support the <code>remove_domain</code> callback for the dynamic domains functionality. You might need to migrate it, or simply drop the previously defined table and recreate the new one.</p>

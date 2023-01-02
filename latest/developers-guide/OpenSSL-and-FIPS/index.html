@@ -2799,7 +2799,7 @@
 <p>Make sure the option <code>--enable-fips</code> is specified for <code>configure</code> command.
 If you want to use a different OpenSSL than the default one, specify the option <code>--with-ssl=PATH_TO_YOUR_OPENSSL</code> as well.
 Here's an example of a command for building Erlang/OTP with kerl:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">KERL_CONFIGURE_OPTIONS</span><span class="o">=</span><span class="s2">&quot;--enable-fips&quot;</span> ./kerl build <span class="m">23</span>.3 <span class="m">23</span>.3-fips
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">KERL_CONFIGURE_OPTIONS</span><span class="o">=</span><span class="s2">&quot;--enable-fips&quot;</span><span class="w"> </span>./kerl<span class="w"> </span>build<span class="w"> </span><span class="m">23</span>.3<span class="w"> </span><span class="m">23</span>.3-fips
 </code></pre></div></td></tr></table></div>
 <h3 id="building-mongooseim-with-a-custom-openssl">Building MongooseIM with a custom OpenSSL</h3>
 <p>If you want to use a custom OpenSSL, please export the CFLAGS and LDFLAGS env vars pointing to a FIPS compliant OpenSSL before running <code>./rebar3 compile</code> or <code>make rel</code>.</p>
@@ -2807,17 +2807,17 @@ Here's an example of a command for building Erlang/OTP with kerl:</p>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">OPENSSL_LIB</span><span class="o">=</span>~/openssl/lib <span class="c1">#put your path here</span>
-<span class="nv">OPENSSL_INC</span><span class="o">=</span>~/openssl/inc <span class="c1">#put your path here</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">OPENSSL_LIB</span><span class="o">=</span>~/openssl/lib<span class="w"> </span><span class="c1">#put your path here</span>
+<span class="nv">OPENSSL_INC</span><span class="o">=</span>~/openssl/inc<span class="w"> </span><span class="c1">#put your path here</span>
 
-<span class="nb">export</span> <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&quot;-Wl,-rpath=</span><span class="nv">$OPENSSL_LIB</span><span class="s2"> -L</span><span class="nv">$OPENSSL_LIB</span><span class="s2">&quot;</span>
-<span class="nb">export</span> <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-I</span><span class="nv">$OPENSSL_INC</span><span class="s2">&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&quot;-Wl,-rpath=</span><span class="nv">$OPENSSL_LIB</span><span class="s2"> -L</span><span class="nv">$OPENSSL_LIB</span><span class="s2">&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-I</span><span class="nv">$OPENSSL_INC</span><span class="s2">&quot;</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="how-to-enabledisable-fips-mode">How to enable/disable FIPS mode</h3>
 <p>Find <code>etc/app.config</code> in the release directory.
 FIPS mode is an option of the crypto application.
 In order to enable/disable it, add the following section to <code>app.config</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="n">crypto</span><span class="p">,</span><span class="w"> </span><span class="p">[{</span><span class="n">fips_mode</span><span class="p">,</span><span class="w"> </span><span class="nv">Value</span><span class="p">}]},</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="n">crypto</span><span class="p">,</span><span class="w"> </span><span class="p">[{</span><span class="n">fips_mode</span><span class="p">,</span><span class="w"> </span><span class="nv">Value</span><span class="p">}]},</span>
 </code></pre></div></td></tr></table></div>
 <p>where <code>Value</code> is either <code>true</code> or <code>false</code>.</p>
 <h2 id="how-to-check-if-the-fips-mode-is-enabled">How to check if the FIPS mode is enabled</h2>
@@ -2827,7 +2827,7 @@ In order to enable/disable it, add the following section to <code>app.config</co
 </code></pre></div></td></tr></table></div>
 <h3 id="run-time-check">Run-time check</h3>
 <p>Run the following function in the MongooseIM console:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_fips</span><span class="p">:</span><span class="nf">status</span><span class="p">().</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_fips</span><span class="p">:</span><span class="nf">status</span><span class="p">().</span>
 </code></pre></div></td></tr></table></div>
 <p>The function returns:</p>
 <ul>

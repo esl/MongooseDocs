@@ -2747,20 +2747,20 @@ Every option is inserted as a separate row and is stored as plain text, so it sh
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="n">config_schema</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                 </span><span class="s">&quot;roomname&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                 </span><span class="s">&quot;subject&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                 </span><span class="s">&quot;background&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                 </span><span class="s">&quot;notification_sound&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">]},</span><span class="w"></span>
-<span class="p">{</span><span class="n">default_config</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                  </span><span class="p">{</span><span class="s">&quot;roomname&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;The room&quot;</span><span class="p">},</span><span class="w"></span>
-<span class="w">                  </span><span class="p">{</span><span class="s">&quot;subject&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Chit-chat&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">                 </span><span class="p">]}</span><span class="w"></span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="n">config_schema</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                 </span><span class="s">&quot;roomname&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="s">&quot;subject&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="s">&quot;background&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="s">&quot;notification_sound&quot;</span>
+<span class="w">                </span><span class="p">]},</span>
+<span class="p">{</span><span class="n">default_config</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span><span class="s">&quot;roomname&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;The room&quot;</span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span><span class="s">&quot;subject&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Chit-chat&quot;</span><span class="p">}</span>
+<span class="w">                 </span><span class="p">]}</span>
 </code></pre></div></td></tr></table></div>
 <p>Your client application has created some rooms without the <code>background</code> option by mistake.</p>
 <p>For every <code>id</code> in the <code>muc_light_rooms</code> table, you need to execute:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">muc_light_config</span><span class="p">(</span><span class="n">room_id</span><span class="p">,</span><span class="w"> </span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;put id here&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;background&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;new default value&#39;</span><span class="p">);</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">muc_light_config</span><span class="p">(</span><span class="n">room_id</span><span class="p">,</span><span class="w"> </span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;put id here&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;background&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;new default value&#39;</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="mssql-connectivity-via-odbc">MSSQL connectivity via ODBC</h2>
 <p>We have observed some issues with he ODBC driver used by MongooseIM in the past.

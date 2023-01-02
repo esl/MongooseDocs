@@ -2762,22 +2762,22 @@ section.</p>
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="nt">&lt;message</span> <span class="na">xml:lang=</span><span class="s">&#39;en&#39;</span> <span class="na">to=</span><span class="s">&#39;alice@localhost&#39;</span> <span class="na">id=</span><span class="s">&#39;123&#39;</span> <span class="na">type=</span><span class="s">&#39;chat&#39;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;body</span> <span class="na">xml:lang=</span><span class="s">&#39;en_US&#39;</span><span class="nt">&gt;</span>Hi!<span class="nt">&lt;/body&gt;</span>
-      <span class="nt">&lt;thread</span> <span class="na">parent=</span><span class="s">&#39;7edac73ab41e45c4aafa7b2d7b749080&#39;</span><span class="nt">&gt;</span>
-        e0ffe42b28561960c6b12b944a092794b9683a38
-      <span class="nt">&lt;/thread&gt;</span>
-      <span class="nt">&lt;properties</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.jivesoftware.com/xmlns/xmpp/properties&quot;</span><span class="nt">&gt;</span>
-          <span class="nt">&lt;property&gt;</span>
-              <span class="nt">&lt;name&gt;</span>some_number<span class="nt">&lt;/name&gt;</span>
-              <span class="nt">&lt;value</span> <span class="na">type=</span><span class="s">&#39;integer&#39;</span><span class="nt">&gt;</span>123<span class="nt">&lt;/value&gt;</span>
-          <span class="nt">&lt;property&gt;</span>
-          <span class="nt">&lt;property&gt;</span>
-              <span class="nt">&lt;name&gt;</span>some_string<span class="nt">&lt;/name&gt;</span>
-              <span class="nt">&lt;value</span> <span class="na">type=</span><span class="s">&#39;string&#39;</span><span class="nt">&gt;</span>abc<span class="nt">&lt;/value&gt;</span>
-          <span class="nt">&lt;property&gt;</span>
-      <span class="nt">&lt;/properties&gt;</span>
-    <span class="nt">&lt;/message&gt;</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nt">&lt;message</span><span class="w"> </span><span class="na">xml:lang=</span><span class="s">&#39;en&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;alice@localhost&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;123&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;chat&#39;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;body</span><span class="w"> </span><span class="na">xml:lang=</span><span class="s">&#39;en_US&#39;</span><span class="nt">&gt;</span>Hi!<span class="nt">&lt;/body&gt;</span>
+<span class="w">      </span><span class="nt">&lt;thread</span><span class="w"> </span><span class="na">parent=</span><span class="s">&#39;7edac73ab41e45c4aafa7b2d7b749080&#39;</span><span class="nt">&gt;</span>
+<span class="w">        </span>e0ffe42b28561960c6b12b944a092794b9683a38
+<span class="w">      </span><span class="nt">&lt;/thread&gt;</span>
+<span class="w">      </span><span class="nt">&lt;properties</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://www.jivesoftware.com/xmlns/xmpp/properties&quot;</span><span class="nt">&gt;</span>
+<span class="w">          </span><span class="nt">&lt;property&gt;</span>
+<span class="w">              </span><span class="nt">&lt;name&gt;</span>some_number<span class="nt">&lt;/name&gt;</span>
+<span class="w">              </span><span class="nt">&lt;value</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;integer&#39;</span><span class="nt">&gt;</span>123<span class="nt">&lt;/value&gt;</span>
+<span class="w">          </span><span class="nt">&lt;property&gt;</span>
+<span class="w">          </span><span class="nt">&lt;property&gt;</span>
+<span class="w">              </span><span class="nt">&lt;name&gt;</span>some_string<span class="nt">&lt;/name&gt;</span>
+<span class="w">              </span><span class="nt">&lt;value</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;string&#39;</span><span class="nt">&gt;</span>abc<span class="nt">&lt;/value&gt;</span>
+<span class="w">          </span><span class="nt">&lt;property&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/properties&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/message&gt;</span>
 </code></pre></div></td></tr></table></div>
 then in the final json message these properties will be converted to json map without tag names and all types will be taken as string:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -2791,18 +2791,18 @@ then in the final json message these properties will be converted to json map wi
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="p">{</span><span class="w">   </span><span class="nt">&quot;to&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alice@localhost&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1531329049949</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;from&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bob@localhost&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hi!&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;thread&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;e0ffe42b28561960c6b12b944a092794b9683a38&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7edac73ab41e45c4aafa7b2d7b749080&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;properties&quot;</span><span class="p">:{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;some_number&quot;</span><span class="p">:</span><span class="s2">&quot;123&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;some_string&quot;</span><span class="p">:</span><span class="s2">&quot;abc&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="p">{</span><span class="w">   </span><span class="nt">&quot;to&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alice@localhost&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1531329049949</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;from&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bob@localhost&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hi!&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;thread&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;e0ffe42b28561960c6b12b944a092794b9683a38&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7edac73ab41e45c4aafa7b2d7b749080&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;properties&quot;</span><span class="p">:{</span>
+<span class="w">            </span><span class="nt">&quot;some_number&quot;</span><span class="p">:</span><span class="s2">&quot;123&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;some_string&quot;</span><span class="p">:</span><span class="s2">&quot;abc&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 </code></pre></div></td></tr></table></div></p>
 <h2 id="openapi-specifications">OpenAPI specifications</h2>
 <p>See the <a href="https://esl.github.io/MongooseDocs/latest/swagger/index.html?client=true">Swagger documentation</a> for more information.</p>

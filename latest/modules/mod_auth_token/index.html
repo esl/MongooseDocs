@@ -2937,8 +2937,8 @@ Serialization format of the token before encoding with Base64 is dependent on it
 <h3 id="requesting-access-or-refresh-tokens-when-logged-in">Requesting access or refresh tokens when logged in</h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span> <span class="na">type=</span><span class="s">&#39;get&#39;</span> <span class="na">to=</span><span class="s">&#39;john@localhost&#39;</span> <span class="na">id=</span><span class="s">&#39;123&#39;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;query</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:token-auth:0&#39;</span><span class="nt">/&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;john@localhost&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;123&#39;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;query</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:token-auth:0&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
 <p>To request access and refresh tokens for the first time a client should send an IQ stanza after they have successfully authenticated for the first time using some other method.</p>
@@ -2956,11 +2956,11 @@ Serialization format of the token before encoding with Base64 is dependent on it
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span>  <span class="na">id=</span><span class="s">&#39;123&#39;</span> <span class="na">type=</span><span class="s">&#39;result&#39;</span> <span class="na">from=</span><span class="s">&#39;john@localhost&#39;</span> <span class="na">to=</span><span class="s">&#39;john@localhost/res1&#39;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;items</span> <span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:token-auth:0&#39;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;access_token&gt;</span>cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw==<span class="nt">&lt;/access_token&gt;</span>
-        <span class="nt">&lt;refresh_token&gt;</span>cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw==<span class="nt">&lt;/refresh_token&gt;</span>
-    <span class="nt">&lt;/items&gt;</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w">  </span><span class="na">id=</span><span class="s">&#39;123&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;john@localhost&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;john@localhost/res1&#39;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;items</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&#39;erlang-solutions.com:xmpp:token-auth:0&#39;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;access_token&gt;</span>cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw==<span class="nt">&lt;/access_token&gt;</span>
+<span class="w">        </span><span class="nt">&lt;refresh_token&gt;</span>cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw==<span class="nt">&lt;/refresh_token&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/items&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
 <p>Once a client has obtained a token, they may start authenticating using the <code>X-OAUTH</code> SASL mechanism when reaching the authentication phase of an XMPP connection initiation.</p>
@@ -2968,8 +2968,8 @@ Serialization format of the token before encoding with Base64 is dependent on it
 <p>In order to log into the XMPP server using a previously requested token, a client should send the following stanza:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;auth</span> <span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span> <span class="na">mechanism=</span><span class="s">&quot;X-OAUTH&quot;</span><span class="nt">&gt;</span>
-cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw== 
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;auth</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span><span class="w"> </span><span class="na">mechanism=</span><span class="s">&quot;X-OAUTH&quot;</span><span class="nt">&gt;</span>
+cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw==<span class="w"> </span>
 <span class="nt">&lt;/auth&gt;</span>
 </code></pre></div></td></tr></table></div>
 <p>The Base64 encoded content is a token obtained prior to authentication.
@@ -2977,7 +2977,7 @@ Authentication will succeed unless the used tokens are expired, revoked, or the 
 <p><strong>When using a refresh token to authenticate with the server</strong>, the server will respond with a new <em>access token</em>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;success</span> <span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span><span class="nt">&gt;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;success</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span><span class="nt">&gt;</span>
 cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw==
 <span class="nt">&lt;/success&gt;</span>
 </code></pre></div></td></tr></table></div>
@@ -2989,7 +2989,7 @@ cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw==
 <li>request <em>a new access token</em> with refreshed expiry date.</li>
 </ul>
 <p>An administrator may <em>revoke</em> a refresh token:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl token revokeToken --user owner@xmpphost
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>token<span class="w"> </span>revokeToken<span class="w"> </span>--user<span class="w"> </span>owner@xmpphost
 </code></pre></div></td></tr></table></div>
 <p>A client can no longer use a revoked token either for authentication or requesting new access tokens.
 After a client's token has been revoked, in order to obtain a new refresh token a client has to log in using some other method.</p>
@@ -3001,9 +3001,9 @@ Access token validity can't be sidestepped right now.</p>
 <h2 id="example-configuration">Example configuration</h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_auth_token]</span><span class="w"></span>
-<span class="w">  </span><span class="n">validity_period</span><span class="p">.</span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;minutes&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="n">validity_period</span><span class="p">.</span><span class="n">refresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;days&quot;</span><span class="p">}</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_auth_token]</span>
+<span class="w">  </span><span class="n">validity_period</span><span class="p">.</span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;minutes&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="n">validity_period</span><span class="p">.</span><span class="n">refresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;days&quot;</span><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 
 

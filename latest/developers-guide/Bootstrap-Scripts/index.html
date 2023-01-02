@@ -2706,13 +2706,13 @@ create another script <code>bootstrap30-template.sh</code>, that moves files int
 <p>A template config example:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[options]</span><span class="w"></span>
-<span class="w">  </span><span class="na">demo_session_lifetime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">600</span><span class="w"></span>
-<span class="w">  </span><span class="na">demo_tls_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;tlsv1.2&#39;, &#39;tlsv1.3&#39;</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[options]</span>
+<span class="w">  </span><span class="na">demo_session_lifetime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">600</span>
+<span class="w">  </span><span class="na">demo_tls_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;tlsv1.2&#39;, &#39;tlsv1.3&#39;</span>
 </code></pre></div></td></tr></table></div>
 <p>Only lowercase variables are allowed in <code>templates.ini</code>.</p>
 <p>You can redeclare options using environment variables when executing the bootstrap script:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">MIM_DEMO_SESSION_LIFETIME</span><span class="o">=</span><span class="m">700</span> mongooseimctl bootstrap
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">MIM_DEMO_SESSION_LIFETIME</span><span class="o">=</span><span class="m">700</span><span class="w"> </span>mongooseimctl<span class="w"> </span>bootstrap
 </code></pre></div></td></tr></table></div>
 <p>Environment variables should have a <code>MIM_</code> prefix. The variable names are case-insensitive
 (but we suggest to use the uppercase variable names for consistency).</p>
@@ -2727,7 +2727,7 @@ It is copied into the <code>/templates</code> directory inside your release dire
 tools/pkg/scripts/smoke_templates.escript
 </code></pre></div></td></tr></table></div>
 <p>Testing command:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">PRESET</span><span class="o">=</span>pkg <span class="nv">pkg_PLATFORM</span><span class="o">=</span>centos_7 <span class="nv">ESL_ERLANG_PKG_VER</span><span class="o">=</span><span class="m">23</span>.3.1-2 ./tools/test.sh
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">PRESET</span><span class="o">=</span>pkg<span class="w"> </span><span class="nv">pkg_PLATFORM</span><span class="o">=</span>centos_7<span class="w"> </span><span class="nv">ESL_ERLANG_PKG_VER</span><span class="o">=</span><span class="m">23</span>.3.1-2<span class="w"> </span>./tools/test.sh
 </code></pre></div></td></tr></table></div>
 
 

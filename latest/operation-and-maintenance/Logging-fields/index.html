@@ -3121,28 +3121,28 @@ We use macros to log such events (just because you would need them in each
 <span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c">%% We don&#39;t always handle unexpected calls.</span><span class="w"></span>
-<span class="nf">handle_call</span><span class="p">(</span><span class="nv">Request</span><span class="p">,</span><span class="w"> </span><span class="nv">From</span><span class="p">,</span><span class="w"> </span><span class="nv">State</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="o">?</span><span class="nv">UNEXPECTED_CALL</span><span class="p">(</span><span class="nv">Request</span><span class="p">,</span><span class="w"> </span><span class="nv">From</span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">reply</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="n">unexpected_call</span><span class="p">},</span><span class="w"> </span><span class="nv">State</span><span class="p">}.</span><span class="w"></span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c">%% We don&#39;t always handle unexpected calls.</span>
+<span class="nf">handle_call</span><span class="p">(</span><span class="nv">Request</span><span class="p">,</span><span class="w"> </span><span class="nv">From</span><span class="p">,</span><span class="w"> </span><span class="nv">State</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">    </span><span class="o">?</span><span class="nv">UNEXPECTED_CALL</span><span class="p">(</span><span class="nv">Request</span><span class="p">,</span><span class="w"> </span><span class="nv">From</span><span class="p">),</span>
+<span class="w">    </span><span class="p">{</span><span class="n">reply</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="n">unexpected_call</span><span class="p">},</span><span class="w"> </span><span class="nv">State</span><span class="p">}.</span>
 
-<span class="c">%% We don&#39;t always handle unexpected casts.</span><span class="w"></span>
-<span class="nf">handle_cast</span><span class="p">(</span><span class="nv">Msg</span><span class="p">,</span><span class="w"> </span><span class="nv">State</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="o">?</span><span class="nv">UNEXPECTED_CAST</span><span class="p">(</span><span class="nv">Msg</span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">noreply</span><span class="p">,</span><span class="w"> </span><span class="nv">State</span><span class="p">}.</span><span class="w"></span>
+<span class="c">%% We don&#39;t always handle unexpected casts.</span>
+<span class="nf">handle_cast</span><span class="p">(</span><span class="nv">Msg</span><span class="p">,</span><span class="w"> </span><span class="nv">State</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">    </span><span class="o">?</span><span class="nv">UNEXPECTED_CAST</span><span class="p">(</span><span class="nv">Msg</span><span class="p">),</span>
+<span class="w">    </span><span class="p">{</span><span class="n">noreply</span><span class="p">,</span><span class="w"> </span><span class="nv">State</span><span class="p">}.</span>
 
-<span class="c">%% We SHOULD ignore all unexpected messages, because they could arrive in case</span><span class="w"></span>
-<span class="c">%% of gen_server call timeouts.</span><span class="w"></span>
-<span class="nf">handle_info</span><span class="p">(</span><span class="nv">Msg</span><span class="p">,</span><span class="w"> </span><span class="nv">State</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="o">?</span><span class="nv">UNEXPECTED_INFO</span><span class="p">(</span><span class="nv">Msg</span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="n">noreply</span><span class="p">,</span><span class="w"> </span><span class="nv">State</span><span class="p">}.</span><span class="w"></span>
+<span class="c">%% We SHOULD ignore all unexpected messages, because they could arrive in case</span>
+<span class="c">%% of gen_server call timeouts.</span>
+<span class="nf">handle_info</span><span class="p">(</span><span class="nv">Msg</span><span class="p">,</span><span class="w"> </span><span class="nv">State</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">    </span><span class="o">?</span><span class="nv">UNEXPECTED_INFO</span><span class="p">(</span><span class="nv">Msg</span><span class="p">),</span>
+<span class="w">    </span><span class="p">{</span><span class="n">noreply</span><span class="p">,</span><span class="w"> </span><span class="nv">State</span><span class="p">}.</span>
 </code></pre></div></td></tr></table></div>
 <p>These macros translate into warning logs with the following keys, respectively:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">#{</span><span class="n">what</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">unexpected_cast</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nv">Msg</span><span class="p">}.</span><span class="w"></span>
-<span class="p">#{</span><span class="n">what</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">unexpected_info</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nv">Msg</span><span class="p">}.</span><span class="w"></span>
-<span class="p">#{</span><span class="n">what</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">unexpected_call</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nv">Msg</span><span class="p">,</span><span class="w"> </span><span class="n">call_from</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nv">From</span><span class="p">}.</span><span class="w"></span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">#{</span><span class="n">what</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">unexpected_cast</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nv">Msg</span><span class="p">}.</span>
+<span class="p">#{</span><span class="n">what</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">unexpected_info</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nv">Msg</span><span class="p">}.</span>
+<span class="p">#{</span><span class="n">what</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">unexpected_call</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nv">Msg</span><span class="p">,</span><span class="w"> </span><span class="n">call_from</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nv">From</span><span class="p">}.</span>
 </code></pre></div></td></tr></table></div>
 
 

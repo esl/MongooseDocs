@@ -2971,13 +2971,13 @@ while the management of the session tables and configuration is implemented in
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_stream_management]</span><span class="w"></span>
-<span class="w">  </span><span class="n">buffer_max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="w"></span>
-<span class="w">  </span><span class="n">ack_freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="w">  </span><span class="n">resume_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="w"></span>
-<span class="w">  </span><span class="n">stale_h</span><span class="p">.</span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
-<span class="w">  </span><span class="n">stale_h</span><span class="p">.</span><span class="n">repeat_after</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1800</span><span class="w"></span>
-<span class="w">  </span><span class="n">stale_h</span><span class="p">.</span><span class="n">geriatric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3600</span><span class="w"></span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_stream_management]</span>
+<span class="w">  </span><span class="n">buffer_max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">  </span><span class="n">ack_freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="n">resume_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span>
+<span class="w">  </span><span class="n">stale_h</span><span class="p">.</span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="n">stale_h</span><span class="p">.</span><span class="n">repeat_after</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1800</span>
+<span class="w">  </span><span class="n">stale_h</span><span class="p">.</span><span class="n">geriatric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3600</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="implementation-details">Implementation details</h2>
 <h3 id="in-ejabberd_c2s">In <code>ejabberd_c2s</code></h3>
@@ -2993,18 +2993,18 @@ while the management of the session tables and configuration is implemented in
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">stream_mgmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">false</span><span class="p">,</span><span class="w"> </span><span class="c">%% whether SM is enabled, used in pattern matching inside `ejabberd_c2s`</span><span class="w"></span>
-<span class="n">stream_mgmt_in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="c">%% amount of msgs on the server and not acked by the user (server&#39;s &lt;h&gt;)</span><span class="w"></span>
-<span class="n">stream_mgmt_id</span><span class="p">,</span><span class="w"> </span><span class="c">%% the mod_stream_management:smid() unique identifier</span><span class="w"></span>
-<span class="n">stream_mgmt_out_acked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="c">%% messages delivered to the user, and acked by the user (user&#39;s &lt;h&gt;)</span><span class="w"></span>
-<span class="n">stream_mgmt_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="c">%% buffered stanzas not yet acked by the user</span><span class="w"></span>
-<span class="n">stream_mgmt_buffer_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="c">%% amount of messages buffered for the user</span><span class="w"></span>
-<span class="n">stream_mgmt_buffer_max</span><span class="p">,</span><span class="w"> </span><span class="c">%% server&#39;s capacity for buffering</span><span class="w"></span>
-<span class="n">stream_mgmt_ack_freq</span><span class="p">,</span><span class="w"> </span><span class="c">%% how often the server requests acks</span><span class="w"></span>
-<span class="n">stream_mgmt_resume_timeout</span><span class="p">,</span><span class="w"> </span><span class="c">%% resumption timeout</span><span class="w"></span>
-<span class="n">stream_mgmt_resume_tref</span><span class="p">,</span><span class="w"> </span><span class="c">%% a ref() to pattern-match a given timeout</span><span class="w"></span>
-<span class="n">stream_mgmt_resumed_from</span><span class="p">,</span><span class="w"> </span><span class="c">%% a ejabberd_sm:sid() to keep identifiying the old session</span><span class="w"></span>
-<span class="n">stream_mgmt_constraint_check_tref</span><span class="p">,</span><span class="w"> </span><span class="c">%% another ref() for a timeout, this time for buffer_full check</span><span class="w"></span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">stream_mgmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">false</span><span class="p">,</span><span class="w"> </span><span class="c">%% whether SM is enabled, used in pattern matching inside `ejabberd_c2s`</span>
+<span class="n">stream_mgmt_in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="c">%% amount of msgs on the server and not acked by the user (server&#39;s &lt;h&gt;)</span>
+<span class="n">stream_mgmt_id</span><span class="p">,</span><span class="w"> </span><span class="c">%% the mod_stream_management:smid() unique identifier</span>
+<span class="n">stream_mgmt_out_acked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="c">%% messages delivered to the user, and acked by the user (user&#39;s &lt;h&gt;)</span>
+<span class="n">stream_mgmt_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="c">%% buffered stanzas not yet acked by the user</span>
+<span class="n">stream_mgmt_buffer_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="c">%% amount of messages buffered for the user</span>
+<span class="n">stream_mgmt_buffer_max</span><span class="p">,</span><span class="w"> </span><span class="c">%% server&#39;s capacity for buffering</span>
+<span class="n">stream_mgmt_ack_freq</span><span class="p">,</span><span class="w"> </span><span class="c">%% how often the server requests acks</span>
+<span class="n">stream_mgmt_resume_timeout</span><span class="p">,</span><span class="w"> </span><span class="c">%% resumption timeout</span>
+<span class="n">stream_mgmt_resume_tref</span><span class="p">,</span><span class="w"> </span><span class="c">%% a ref() to pattern-match a given timeout</span>
+<span class="n">stream_mgmt_resumed_from</span><span class="p">,</span><span class="w"> </span><span class="c">%% a ejabberd_sm:sid() to keep identifiying the old session</span>
+<span class="n">stream_mgmt_constraint_check_tref</span><span class="p">,</span><span class="w"> </span><span class="c">%% another ref() for a timeout, this time for buffer_full check</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="in-mod_stream_management">In <code>mod_stream_management</code></h3>
 <p>This module is just a "starter", to provide the configuration values to new client connections. It
@@ -3014,10 +3014,10 @@ table defined as follows:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">-</span><span class="ni">record</span><span class="p">(</span><span class="nl">sm_session</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="n">smid</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">smid</span><span class="p">(),</span><span class="w"></span>
-<span class="w">         </span><span class="n">sid</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="nn">ejabberd_sm</span><span class="p">:</span><span class="nf">sid</span><span class="p">()</span><span class="w"></span>
-<span class="w">        </span><span class="p">}).</span><span class="w"></span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">-</span><span class="ni">record</span><span class="p">(</span><span class="nl">sm_session</span><span class="p">,</span>
+<span class="w">        </span><span class="p">{</span><span class="n">smid</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">smid</span><span class="p">(),</span>
+<span class="w">         </span><span class="n">sid</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="nn">ejabberd_sm</span><span class="p">:</span><span class="nf">sid</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}).</span>
 </code></pre></div></td></tr></table></div>
 <p>where <code>smid</code> is a unique identifier — in this case a random binary, and <code>sid</code> is an opaque session
 identifier from <code>ejabberd_sm</code>, which is needed to find the previous session we want to resume from.
@@ -3031,11 +3031,11 @@ optional table:</p>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">-</span><span class="ni">record</span><span class="p">(</span><span class="nl">stream_mgmt_stale_h</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="n">smid</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">smid</span><span class="p">(),</span><span class="w"></span>
-<span class="w">         </span><span class="n">h</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">non_neg_integer</span><span class="p">(),</span><span class="w"></span>
-<span class="w">         </span><span class="n">stamp</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">non_neg_integer</span><span class="p">()</span><span class="w"></span>
-<span class="w">        </span><span class="p">}).</span><span class="w"></span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">-</span><span class="ni">record</span><span class="p">(</span><span class="nl">stream_mgmt_stale_h</span><span class="p">,</span>
+<span class="w">        </span><span class="p">{</span><span class="n">smid</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">smid</span><span class="p">(),</span>
+<span class="w">         </span><span class="n">h</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">non_neg_integer</span><span class="p">(),</span>
+<span class="w">         </span><span class="n">stamp</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">non_neg_integer</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}).</span>
 </code></pre></div></td></tr></table></div>
 <p>This table is created, together with a <code>gen_server</code> responsible for cleaning up the tables, when
 <code>stale_h</code> is set to true with the proper garbage collection configuration. Then, when removing a
@@ -3044,7 +3044,7 @@ dropped), a new record is added to this new table with the <code>smid</code> and
 session, together with a timestamp. Next, when a new session attempting resumption queries
 <code>mod_stream_management</code> for the data behind a <code>smid</code>, <code>mod_stream_management</code> can answer with one of
 the following:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="n">sid</span><span class="p">,</span><span class="w"> </span><span class="nn">ejabberd_sm</span><span class="p">:</span><span class="nf">sid</span><span class="p">()}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="p">{</span><span class="n">stale_h</span><span class="p">,</span><span class="w"> </span><span class="n">non_neg_integer</span><span class="p">()}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="p">{</span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="n">smid_not_found</span><span class="p">}.</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="n">sid</span><span class="p">,</span><span class="w"> </span><span class="nn">ejabberd_sm</span><span class="p">:</span><span class="nf">sid</span><span class="p">()}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="p">{</span><span class="n">stale_h</span><span class="p">,</span><span class="w"> </span><span class="n">non_neg_integer</span><span class="p">()}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="p">{</span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="n">smid_not_found</span><span class="p">}.</span>
 </code></pre></div></td></tr></table></div>
 <p>And <code>ejabberd_c2s</code> will pattern-match and act accordingly.</p>
 

@@ -3029,15 +3029,15 @@ This allows users to read the uploaded files even if the bucket is private. The 
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_http_upload]</span><span class="w"></span>
-<span class="w">  </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;upload.@HOST@&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;s3&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="n">expiration_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span><span class="w"></span>
-<span class="w">  </span><span class="n">s3</span><span class="p">.</span><span class="n">bucket_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://s3-eu-west-1.amazonaws.com/mybucket&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="n">s3</span><span class="p">.</span><span class="n">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;eu-west-1&quot;</span><span class="w"></span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_http_upload]</span>
+<span class="w">  </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;upload.@HOST@&quot;</span>
+<span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;s3&quot;</span>
+<span class="w">  </span><span class="n">expiration_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span>
+<span class="w">  </span><span class="n">s3</span><span class="p">.</span><span class="n">bucket_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://s3-eu-west-1.amazonaws.com/mybucket&quot;</span>
+<span class="w">  </span><span class="n">s3</span><span class="p">.</span><span class="n">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;eu-west-1&quot;</span>
 <span class="w">  </span><span class="n">s3</span><span class="p">.</span><span class="n">add_acl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true</span><span class="w">     </span>
-<span class="w">  </span><span class="n">s3</span><span class="p">.</span><span class="n">access_key_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;AKIAIOSFODNN7EXAMPLE&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="n">s3</span><span class="p">.</span><span class="n">secret_access_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="n">s3</span><span class="p">.</span><span class="n">access_key_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;AKIAIOSFODNN7EXAMPLE&quot;</span>
+<span class="w">  </span><span class="n">s3</span><span class="p">.</span><span class="n">secret_access_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&quot;</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="testing-s3-configuration">Testing <a href="https://aws.amazon.com/s3/">S3</a> configuration</h2>
 <p>Since there is no direct connection between MongooseIM and an <a href="https://aws.amazon.com/s3/">S3</a> bucket,
@@ -3072,26 +3072,26 @@ However, the testing can be done manually. MongooseIM provides a dedicated <code
 <span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Create some text file</span>
-<span class="nb">echo</span> qwerty &gt; tmp.txt
+<span class="nb">echo</span><span class="w"> </span>qwerty<span class="w"> </span>&gt;<span class="w"> </span>tmp.txt
 
 <span class="c1"># Get the size of the file</span>
-<span class="nv">filesize</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>wc -c tmp.txt <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nv">filesize</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>wc<span class="w"> </span>-c<span class="w"> </span>tmp.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
 
 <span class="c1"># Set the content type</span>
 <span class="nv">content_type</span><span class="o">=</span><span class="s2">&quot;text/plain&quot;</span>
 
 <span class="c1"># Generate upload/download URLs</span>
-<span class="nv">urls</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>./mongooseimctl httpUpload getUrl --domain localhost --filename test.txt --size <span class="s2">&quot;</span><span class="nv">$filesize</span><span class="s2">&quot;</span> --contentType <span class="s2">&quot;</span><span class="nv">$content_type</span><span class="s2">&quot;</span> --timeout <span class="m">600</span><span class="k">)</span><span class="s2">&quot;</span>
-<span class="nv">put_url</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$urls</span><span class="s2">&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;/PutURL:/ {print $2}&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
-<span class="nv">get_url</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$urls</span><span class="s2">&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;/GetURL:/ {print $2}&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nv">urls</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>./mongooseimctl<span class="w"> </span>httpUpload<span class="w"> </span>getUrl<span class="w"> </span>--domain<span class="w"> </span>localhost<span class="w"> </span>--filename<span class="w"> </span>test.txt<span class="w"> </span>--size<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filesize</span><span class="s2">&quot;</span><span class="w"> </span>--contentType<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$content_type</span><span class="s2">&quot;</span><span class="w"> </span>--timeout<span class="w"> </span><span class="m">600</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nv">put_url</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$urls</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;/PutURL:/ {print $2}&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nv">get_url</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$urls</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;/GetURL:/ {print $2}&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
 
 <span class="c1"># Try to upload a file. Note that if &#39;add_acl&#39; option is</span>
 <span class="c1"># enabled, then you must also add &#39;x-amz-acl&#39; header:</span>
 <span class="c1">#    -H &quot;x-amz-acl: public-read&quot;</span>
-curl -v -T <span class="s2">&quot;./tmp.txt&quot;</span> -H <span class="s2">&quot;Content-Type: </span><span class="nv">$content_type</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$put_url</span><span class="s2">&quot;</span>
+curl<span class="w"> </span>-v<span class="w"> </span>-T<span class="w"> </span><span class="s2">&quot;./tmp.txt&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: </span><span class="nv">$content_type</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$put_url</span><span class="s2">&quot;</span>
 
 <span class="c1"># Try to download a file</span>
-curl -i <span class="s2">&quot;</span><span class="nv">$get_url</span><span class="s2">&quot;</span>
+curl<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$get_url</span><span class="s2">&quot;</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="using-s3-backend-with-minio">Using S3 backend with <a href="https://min.io">min.io</a></h2>
 <p><a href="https://min.io">min.io</a> doesn't support <a href="https://docs.minio.io/docs/minio-server-limits-per-tenant.html">ObjectACL</a>, so enabling <code>add_acl</code>
