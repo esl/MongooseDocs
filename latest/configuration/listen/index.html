@@ -21,7 +21,7 @@
         <link rel="next" href="../auth/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.9">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
@@ -856,8 +856,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#listenc2szlib" class="md-nav__link">
-    listen.c2s.zlib
+  <a href="#listenc2sreuse_port" class="md-nav__link">
+    listen.c2s.reuse_port
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listenc2sbackwards_compatible_session" class="md-nav__link">
+    listen.c2s.backwards_compatible_session
   </a>
   
 </li>
@@ -3401,8 +3408,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#listenc2szlib" class="md-nav__link">
-    listen.c2s.zlib
+  <a href="#listenc2sreuse_port" class="md-nav__link">
+    listen.c2s.reuse_port
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listenc2sbackwards_compatible_session" class="md-nav__link">
+    listen.c2s.backwards_compatible_session
   </a>
   
 </li>
@@ -4016,7 +4030,7 @@
 <h3 id="listenbacklog"><code>listen.*.backlog</code></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
-<li><strong>Default:</strong> <code>100</code></li>
+<li><strong>Default:</strong> <code>1024</code></li>
 <li><strong>Example:</strong> <code>backlog = 1000</code></li>
 </ul>
 <p>Overrides the default TCP backlog value.</p>
@@ -4082,13 +4096,29 @@ The following options are supported for each C2S listener:</p>
 <p>The rule that determines what traffic shaper is used to limit the incoming XMPP traffic to prevent the server from being flooded with incoming data.
 The rule referenced here needs to be defined in the <code>access</code> configuration section.
 The value of the access rule needs to be either the shaper name or the string <code>"none"</code>, which means no shaper.</p>
-<h3 id="listenc2szlib"><code>listen.c2s.zlib</code></h3>
+<h3 id="listenc2sreuse_port"><code>listen.c2s.reuse_port</code></h3>
 <ul>
-<li><strong>Syntax:</strong> positive integer</li>
-<li><strong>Default:</strong> not set, disabled</li>
-<li><strong>Example:</strong> <code>zlib = 1024</code></li>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> false</li>
+<li><strong>Example:</strong> <code>reuse_port = true</code></li>
 </ul>
-<p>Enables ZLIB support, the integer value is a limit for a decompressed output size in bytes (to prevent a successful <a href="https://xmpp.org/community/security-notices/uncontrolled-resource-consumption-with-highly-compressed-xmpp-stanzas.html">ZLIB bomb attack</a>).</p>
+<p>Enables linux support for <code>SO_REUSEPORT</code>, see [https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ] for more details.</p>
+<h3 id="listenc2sbackwards_compatible_session"><code>listen.c2s.backwards_compatible_session</code></h3>
+<ul>
+<li><strong>Syntax:</strong> boolean</li>
+<li><strong>Default:</strong> true</li>
+<li><strong>Example:</strong> <code>backwards_compatible_session = false</code></li>
+</ul>
+<p>Enables backward-compatible session establishement IQs. See https://www.rfc-editor.org/rfc/rfc6121.html#section-1.4:</p>
+<blockquote>
+<p>[RFC3921] specified one additional
+      precondition: formal establishment of an instant messaging and
+      presence session.  Implementation and deployment experience has
+      shown that this additional step is unnecessary.  However, for
+      backward compatibility an implementation MAY still offer that
+      feature.  This enables older software to connect while letting
+      newer software save a round trip.</p>
+</blockquote>
 <h3 id="listenc2sallowed_auth_methods"><code>listen.c2s.allowed_auth_methods</code></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings. Allowed values: <code>"internal"</code>, <code>"rdbms"</code>, <code>"external"</code>, <code>"anonymous"</code>, <code>"ldap"</code>, <code>"jwt"</code>, <code>"riak"</code>, <code>"http"</code>, <code>"pki"</code>, <code>"dummy"</code></li>
@@ -4221,11 +4251,8 @@ You can set the following options in this section:</p>
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.c2s]]</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.c2s]]</span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5222</span>
-<span class="w">  </span><span class="n">zlib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000</span>
 <span class="w">  </span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;c2s&quot;</span>
 <span class="w">  </span><span class="n">shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;c2s_shaper&quot;</span>
 <span class="w">  </span><span class="n">max_stanza_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">65536</span>
@@ -4234,7 +4261,6 @@ You can set the following options in this section:</p>
 
 <span class="k">[[listen.c2s]]</span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5223</span>
-<span class="w">  </span><span class="n">zlib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4096</span>
 <span class="w">  </span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;c2s&quot;</span>
 <span class="w">  </span><span class="n">shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;c2s_shaper&quot;</span>
 <span class="w">  </span><span class="n">max_stanza_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">65536</span>
@@ -4753,6 +4779,8 @@ Basic HTTP authentication is used as well.</p>
   
     
     
+    
+    
       
       
     
@@ -4760,6 +4788,8 @@ Basic HTTP authentication is used as well.</p>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
     </a>
   
+    
+    
     
     
       
@@ -4783,7 +4813,7 @@ Basic HTTP authentication is used as well.</p>
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.a00a7c5e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6df46069.min.js"></script>
       
     
   </body>
