@@ -1552,6 +1552,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../modules/mod_presence/" class="md-nav__link">
+        mod_presence
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../modules/mod_privacy/" class="md-nav__link">
         mod_privacy
       </a>
@@ -2857,7 +2871,7 @@
 
 
 <h1 id="accumulators">Accumulators</h1>
-<p>XMPP stanza processing starts in the <code>ejabberd_c2s</code> module, which receives the stanza from a socket, or in <code>ejabberd_s2s_in</code> which receives stanzas from federated XMPP clusters.
+<p>XMPP stanza processing starts in the <code>mongoose_c2s</code> module, which receives the stanza from a socket, or in <code>ejabberd_s2s_in</code> which receives stanzas from federated XMPP clusters.
 The stanza is processed and eventually it and/or other messages are sent out, either to the original sender, to another c2s process within the same MongooseIM installation, or to another XMPP server.</p>
 <p>At the beginning of the main processing chain an accumulator is created containing following set of keys:</p>
 <ul>
@@ -2867,6 +2881,8 @@ The stanza is processed and eventually it and/or other messages are sent out, ei
 <li><code>origin_location</code> - <code>{Module, Function Line}</code> - A place in the code where the accumulator was created.</li>
 <li><code>origin_stanza</code> - Original stanza that triggered the processing (in a binary).</li>
 <li><code>lserver</code> - Nameprepped domain of the processing context.</li>
+<li><code>host_type</code> - Host type that the domain belongs to.</li>
+<li><code>statem_acc</code> - Data related to the C2S state machine.</li>
 <li><code>stanza</code> - A map with information about the stanza being routed. May be missing in some processing chains (when they are not triggered by a stanza)!<ul>
 <li><code>element</code> - <code>exml:element()</code> with the current stanza being routed.</li>
 <li><code>from_jid</code>, <code>to_jid</code> - <code>jid:jid()</code> with the sender and the recipient.</li>
@@ -2893,6 +2909,8 @@ The stanza should always be packed into an accumulator and passed on, so that in
 <ul>
 <li><code>location</code> - Should be a <code>{Module, Function, Line}</code> tuple (may be constructed with <code>?LOCATION</code> macro from <code>mongoose.hrl</code>). Its format is not enforced by the acc logic but Dialyzer will most probably complain about any other type.</li>
 <li><code>lserver</code> - Nameprepped domain of the processing context.</li>
+<li><code>host_type</code> (optional) - Host type that the domain belongs to.</li>
+<li><code>statem_acc</code> (optional) - Data related to the C2S state machine.</li>
 <li><code>element</code> (optional) - If present, it will be used as a source for the <code>stanza</code> map.</li>
 <li><code>from_jid</code>, <code>to_jid</code> (optional) - Values used to override <code>from</code> and <code>to</code> attributes of the <code>element</code>, respectively.</li>
 </ul>
@@ -2904,9 +2922,11 @@ The call will fail with an exception if it's not possible.</p>
 <li><code>ref(t())</code></li>
 <li><code>timestamp(t())</code></li>
 <li><code>lserver(t())</code></li>
+<li><code>host_type(t())</code></li>
 <li><code>element(t())</code></li>
 <li><code>to_jid(t())</code></li>
 <li><code>from_jid(t())</code></li>
+<li><code>get_statem_acc(t())</code></li>
 <li><code>packet(t())</code> - Returns an <code>mongoose_c2s:packet()</code> if there is a stanza in the accumulator.</li>
 <li><code>stanza_name(t())</code> - Returns <code>name</code> value from <code>stanza</code> map.</li>
 <li><code>stanza_type(t())</code> - Returns <code>type</code> value from <code>stanza</code> map.</li>
@@ -2927,15 +2947,15 @@ There is no scope protection, so every module may access all namespaces and keys
 <li><code>delete(Namespace :: any(), Key :: any(), t())</code> - Removes a specified field, no matter if it is permanent or not.</li>
 </ul>
 <h3 id="stripping">Stripping</h3>
-<p>Accumulator is used mostly to cache values for reuse within a c2s process; when it goes out to somewhere else, it is stripped of all unnecessary attributes except for:</p>
+<p>Accumulator is used mostly to cache values for reuse within a c2s process; when it goes out to somewhere else, it is stripped of all unnecessary attributes except for the non-strippable ones, e.g.</p>
 <ul>
 <li><code>ref</code></li>
 <li><code>timestamp</code></li>
 <li><code>origin_pid</code></li>
 <li><code>origin_location</code></li>
-<li><code>origin_stanza</code></li>
 <li><code>non_strippable</code> - A set of permanent <code>NS:Key</code> pairs.</li>
 </ul>
+<p>For a complete list, see <code>mongoose_acc:default_non_strippable/0</code></p>
 <p>If you want it to carry some additional values along with it, please use a dedicated api for setting "permanent" fields:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">Acc2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">mongoose_acc</span><span class="p">:</span><span class="nf">set_permanent</span><span class="p">(</span><span class="n">myns</span><span class="p">,</span><span class="w"> </span><span class="n">myprop</span><span class="p">,</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w"> </span><span class="nv">Acc1</span><span class="p">),</span>
 </code></pre></div></td></tr></table></div>
@@ -2947,7 +2967,8 @@ When an accumulator goes to the c2s of the recipient, the <code>lserver</code> a
 There are also many cached values which are not valid anymore when user changes (e.g. privacy checks).</p>
 <p>In order to strip an accumulator, please use <code>strip(strip_params(), t())</code>, where <code>strip_params()</code> is a map of:</p>
 <ul>
-<li><code>lserver</code> - New host context. Obviously, may be equal to the old value.</li>
+<li><code>lserver</code> - New domain. Obviously, may be equal to the old value.</li>
+<li><code>host_type</code> - Host type associated with the new domain, if there is one.</li>
 <li><code>element</code>, <code>from_jid</code>, <code>to_jid</code> - The same rules apply as in <code>update_stanza/2</code>.</li>
 </ul>
 <h2 id="main-principles-of-an-accumulator-processing">Main principles of an accumulator processing</h2>
@@ -2965,7 +2986,7 @@ When it comes to the accumulators, the following rules apply:</p>
 <li>Avoid passing superfluous arguments to handlers - e.g. an <code>LServer</code> in hook args is redundant since it is already present in the accumulator.</li>
 </ul>
 <p>Most handlers have already been modified so that they accept an instance of <code>mongoose_acc:t()</code> as the first argument and return value by storing it inside it.
-How the accumulator is used within a module is up to the implementors of the module.</p>
+How the accumulator is used within a module is up to the implementers of the module.</p>
 <h2 id="iqs-and-accumulators">IQs and accumulators</h2>
 <p><code>mongoose_iq</code> module exposes a dedicated API for accessing IQ-related accumulator fields. These are:</p>
 <ul>
@@ -2979,8 +3000,8 @@ How the accumulator is used within a module is up to the implementors of the mod
 <p>Stanzas are often checked against privacy lists.
 According to the current <code>mongoose_privacy:privacy_check_packet</code> implementation, the result is stored in an accumulator so if a check has to be repeated it is just one map read.</p>
 <h3 id="tracing">Tracing</h3>
-<p><code>origin_stanza</code> field is fully immutable for the lifespan of a single accumulator, so it's easier to correlate one of the stanzas sent by a client with some "unexpected" stanza routed from a completely different part of a server.
-There are many places in the server, where an accumulator may be created, so <code>origin_location</code> makes it much easier to find out what event has triggered the processing.</p>
+<p><code>origin_pid</code> and <code>origin_location</code> fields are immutable for the lifespan of a single accumulator.
+There are many places in the server, where an accumulator may be created, so <code>origin_location</code> makes it much easier to find out what event has triggered the processing, and <code>origin_pid</code> identifies the process in which it happened.</p>
 <h3 id="performance-measurement">Performance measurement</h3>
 <p>Given that each accumulator has a timestamp denoting its creation time, it is now very easy to implement a metric showing the stanza processing time, or even multiple metrics splitting it into stages.</p>
 

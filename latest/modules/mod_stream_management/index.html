@@ -1554,6 +1554,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../mod_presence/" class="md-nav__link">
+        mod_presence
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../mod_privacy/" class="md-nav__link">
         mod_privacy
       </a>
@@ -1816,26 +1830,6 @@
   <a href="#implementation-details" class="md-nav__link">
     Implementation details
   </a>
-  
-    <nav class="md-nav" aria-label="Implementation details">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#in-ejabberd_c2s" class="md-nav__link">
-    In ejabberd_c2s
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#in-mod_stream_management" class="md-nav__link">
-    In mod_stream_management
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2863,26 +2857,6 @@
     Implementation details
   </a>
   
-    <nav class="md-nav" aria-label="Implementation details">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#in-ejabberd_c2s" class="md-nav__link">
-    In ejabberd_c2s
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#in-mod_stream_management" class="md-nav__link">
-    In mod_stream_management
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -2908,9 +2882,8 @@
 
 <h2 id="module-description">Module Description</h2>
 <p>Enables <a href="http://xmpp.org/extensions/xep-0198.html">XEP-0198: Stream Management</a>.
-Most of the logic regarding session resumption and acknowledgement is implemented in <code>ejabberd_c2s</code>,
-while the management of the session tables and configuration is implemented in
-<code>mod_stream_management</code>.</p>
+Implements logic regarding session resumption and acknowledgement as well as
+the management of the session tables and configuration.</p>
 <h2 id="options">Options</h2>
 <h3 id="modulesmod_stream_managementbackend"><code>modules.mod_stream_management.backend</code></h3>
 <ul>
@@ -2993,37 +2966,20 @@ while the management of the session tables and configuration is implemented in
 <span class="w">  </span><span class="n">stale_h</span><span class="p">.</span><span class="n">geriatric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3600</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="implementation-details">Implementation details</h2>
-<h3 id="in-ejabberd_c2s">In <code>ejabberd_c2s</code></h3>
-<p>The <code>state</code> record in the <code>ejabberd_c2s</code> <code>gen_fsm</code> server keeps fields like:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">stream_mgmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">false</span><span class="p">,</span><span class="w"> </span><span class="c">%% whether SM is enabled, used in pattern matching inside `ejabberd_c2s`</span>
-<span class="n">stream_mgmt_in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="c">%% amount of msgs on the server and not acked by the user (server&#39;s &lt;h&gt;)</span>
-<span class="n">stream_mgmt_id</span><span class="p">,</span><span class="w"> </span><span class="c">%% the mod_stream_management:smid() unique identifier</span>
-<span class="n">stream_mgmt_out_acked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="c">%% messages delivered to the user, and acked by the user (user&#39;s &lt;h&gt;)</span>
-<span class="n">stream_mgmt_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="c">%% buffered stanzas not yet acked by the user</span>
-<span class="n">stream_mgmt_buffer_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="c">%% amount of messages buffered for the user</span>
-<span class="n">stream_mgmt_buffer_max</span><span class="p">,</span><span class="w"> </span><span class="c">%% server&#39;s capacity for buffering</span>
-<span class="n">stream_mgmt_ack_freq</span><span class="p">,</span><span class="w"> </span><span class="c">%% how often the server requests acks</span>
-<span class="n">stream_mgmt_resume_timeout</span><span class="p">,</span><span class="w"> </span><span class="c">%% resumption timeout</span>
-<span class="n">stream_mgmt_resume_tref</span><span class="p">,</span><span class="w"> </span><span class="c">%% a ref() to pattern-match a given timeout</span>
-<span class="n">stream_mgmt_resumed_from</span><span class="p">,</span><span class="w"> </span><span class="c">%% a ejabberd_sm:sid() to keep identifiying the old session</span>
-<span class="n">stream_mgmt_constraint_check_tref</span><span class="p">,</span><span class="w"> </span><span class="c">%% another ref() for a timeout, this time for buffer_full check</span>
-</code></pre></div></td></tr></table></div>
-<h3 id="in-mod_stream_management">In <code>mod_stream_management</code></h3>
-<p>This module is just a "starter", to provide the configuration values to new client connections. It
-also provides a basic session table API and adds a new stream feature.</p>
-<p>This module keeps the config values in its <code>gen_mod</code> records, and its mnesia backend keeps a
-table defined as follows:</p>
+<p>Stream management state data is stored under the <code>mod_stream_management</code> key in the <code>#c2s_data.state_mod</code> map.
+The state data record, <code>sm_state</code>, has the following fields:</p>
+<ul>
+<li><code>buffer</code> - buffered stanzas not yet acked by the user</li>
+<li><code>buffer_size</code> - number of stanzas buffered for the user</li>
+<li><code>counter_in</code> - number of stanzas received by the server (server's <code>&lt;h&gt;</code>)</li>
+<li><code>counter_out</code> - number of stanzas delivered to the user and acked by the user (user's <code>&lt;h&gt;</code>)</li>
+<li><code>buffer_max</code> - server's capacity for buffering</li>
+<li><code>ack_freq</code> - how often the server requests acks</li>
+<li><code>peer</code> - in case of stream resumption, the <code>ejabberd_sm:sid()</code> identifiying the old session, or <code>gen_statem:from()</code> identifying the new session.</li>
+</ul>
+<p><code>mod_stream_management</code> introduces a new <code>resume_session</code> state to the C2S state machine,
+that is used by a session being closed to allow stream resumption.</p>
+<p>This module also has a Mnesia backend keeping a table defined as follows:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -3035,8 +2991,8 @@ table defined as follows:</p>
 <p>where <code>smid</code> is a unique identifier — in this case a random binary, and <code>sid</code> is an opaque session
 identifier from <code>ejabberd_sm</code>, which is needed to find the previous session we want to resume from.
 This module implements hooks that run on connection removals and session cleanups, in order to clean
-records from a dying session; and it also implements registration callbacks, used in <code>ejabberd_c2s</code>
-when a session is registered for resumption.</p>
+records from a dying session; and it also implements registration callbacks,
+used when a session is registered for resumption.</p>
 <p>XEP version 1.6 requires the server to attempt giving the user the value of the server's <code>&lt;h&gt;</code> when
 a session timed out and cannot be resumed anymore. To be compliant with it, there's a second
 optional table:</p>
@@ -3059,7 +3015,7 @@ session, together with a timestamp. Next, when a new session attempting resumpti
 the following:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="n">sid</span><span class="p">,</span><span class="w"> </span><span class="nn">ejabberd_sm</span><span class="p">:</span><span class="nf">sid</span><span class="p">()}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="p">{</span><span class="n">stale_h</span><span class="p">,</span><span class="w"> </span><span class="n">non_neg_integer</span><span class="p">()}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="p">{</span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="n">smid_not_found</span><span class="p">}.</span>
 </code></pre></div></td></tr></table></div>
-<p>And <code>ejabberd_c2s</code> will pattern-match and act accordingly.</p>
+<p>And <code>mod_stream_management</code> will pattern-match and act accordingly.</p>
 
 
 

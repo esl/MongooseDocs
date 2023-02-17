@@ -1552,6 +1552,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../modules/mod_presence/" class="md-nav__link">
+        mod_presence
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../modules/mod_privacy/" class="md-nav__link">
         mod_privacy
       </a>
@@ -2941,8 +2955,8 @@ I.e. if <code>mod_offline</code> was not available, the code would simply crash;
 To avoid that coupling and also to enable other (<a href="#sidenote-code-yet-to-be-written">possibly yet to be written</a>) code to carry out some action at this particular moment, <code>ejabberd_sm</code> calls instead:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">offline_message_hook</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">From</span><span class="p">,</span><span class="w"> </span><span class="nv">To</span><span class="p">,</span><span class="w"> </span><span class="nv">Packet</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
-<p><code>mongoose_hooks</code> is a module which serves as an API for calling all hooks in the server.
-For every hook, there needs to be a function in this module written beforehand which accepts the correct arity of arguments and makes the call to actual low-level hooks mechanism.
+<p><code>mongoose_hooks</code> is a module which serves as an API for calling hooks in the server. All such modules are placed in <code>src/hooks</code>.</p>
+<p>For every hook, there needs to be a function in this module written beforehand which accepts the correct arity of arguments and makes the call to actual low-level hooks mechanism.
 This means that there is some degree of coupling still - but this time between the <code>ejabberd_sm</code> module and <code>mongoose_hooks</code>, and the latter is always available.</p>
 <p>The extra level of indirection introduced by this call gives the flexibility to determine at runtime what code actually gets run at this point.
 This depends on which handlers are registered to process the event.</p>
@@ -2955,9 +2969,11 @@ This depends on which handlers are registered to process the event.</p>
 Could we not just use the low-level hooks mechanism directly and avoid this module altogether?</p>
 <p>This was actually the case before this module was introduced, and hooks' names were just atoms provided as an argument to this low-level API.
 However, we discovered it was causing problems and producing bugs, due to the lack of static code analysis.
-Now we can have some guarantees thanks to Dialyzer, and each hook invocation has correct number of arguments.
+Now we can have some guarantees thanks to Dialyzer, and each hook invocation has a correct number of arguments.
 Thanks to this, writing handlers is easier - there is a single source of truth about how a hook is run.
 Remember that a given hook can be invoked from many places in many modules.</p>
+<p>With the new <code>mongoose_c2s</code> implementation we introduced a new hook API module, <code>mongoose_c2s_hooks</code>.
+All such API modules are placed in the <code>src/hooks</code> directory.</p>
 </div>
 <h3 id="getting-results-from-handlers">Getting results from handlers</h3>
 <p>Hook handlers are called by "folding".
@@ -2978,7 +2994,7 @@ This modified data that is processed by the series of handlers is called an accu
 </div>
 <h3 id="using-accumulators">Using accumulators</h3>
 <p>MongooseIM uses a dedicated data structure to accumulate data related to stanza processing (see <a href="../accumulators/">"Accumulators"</a>).
-It is instantiated with an incoming stanza, passed along throughout the processing chain, supplied to and returned from certain hook calls, and terminated when stanza is leaving MongooseIM.
+It is instantiated with an incoming stanza, passed along throughout the processing chain, supplied to and returned from certain hook calls, and terminated when the stanza is leaving MongooseIM.
 There are some hooks which don't use this data structure.</p>
 <p>If a Mongoose accumulator is passed to a hook, handlers should store their return values in one of 3 ways:</p>
 <ul>
@@ -2986,15 +3002,15 @@ There are some hooks which don't use this data structure.</p>
 <li>If the value is to be passed on to be reused within the current processing context, use <code>mongoose_acc:set(Namespace, Key, Value, Acc)</code>.</li>
 <li>If the value should be passed on to the recipient's session, pubsub node etc. use <code>mongoose_acc:set_permanent(Namespace, Key, Value, Acc)</code>.</li>
 </ul>
-<p>A real life example, then, with regard to <code>mod_offline</code> is the <code>resend_offline_messages_hook</code> run in <code>ejabberd_c2s</code>:</p>
+<p>A real life example, then, with regard to <code>mod_offline</code> is the <code>resend_offline_messages_hook</code> run in <code>mod_presence</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">Acc1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">resend_offline_messages_hook</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">StateData</span><span class="nl">#state.jid</span><span class="p">),</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">Acc1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">resend_offline_messages_hook</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">Jid</span><span class="p">),</span>
 <span class="nv">Rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">mongoose_acc</span><span class="p">:</span><span class="nb">get</span><span class="p">(</span><span class="n">offline</span><span class="p">,</span><span class="w"> </span><span class="n">messages</span><span class="p">,</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="nv">Acc1</span><span class="p">),</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="error-handling-in-hooks">Error handling in hooks</h3>
 <p>Hooks are meant to decouple modules; in other words, the caller signals that some event took place or that it intends to use a certain feature or a set of features, but how and if those features are implemented is beyond its interest.
 For that reason hooks don't use the "let it crash" approach. Instead, it is rather like "fire-and-forget", more similar in principle to the <code>Pid ! signal</code> way.</p>
-<p>In practical terms: if a handler throws an error the hook machine logs a message and proceeds to the next handler with an unmodified accumulator.
+<p>In practical terms: if a handler throws an error, the hook machine logs a message and proceeds to the next handler with an unmodified accumulator.
 If there are no handlers registered for a given hook, the call simply has no effect.</p>
 <h3 id="sidenote-code-yet-to-be-written">Sidenote: Code yet to be written</h3>
 <p>Let's imagine, that when building a <a href="http://en.wikipedia.org/wiki/Minimum_viable_product">minimum viable product</a> we settle on using <code>mod_offline</code> for delayed delivery of messages to unavailable clients.
@@ -3010,7 +3026,7 @@ If you are not using <a href="../../user-guide/Features/#multi-tenancy-dynamic-d
 Whether a hook is called globally or per host type is depends on its purpose.
 It is decided when creating a hook and can be checked in the <code>mongoose_hooks</code> module for existing hooks.</p>
 <h2 id="registering-hook-handlers">Registering hook handlers</h2>
-<p>In order to store a packet when <code>ejabberd_sm</code> runs <code>offline_message_hook</code> the relevant module must register a handler for this hook.
+<p>In order to store a packet when <code>ejabberd_sm</code> runs <code>offline_message_hook</code>, the relevant module must register a handler for this hook.
 To attain the runtime configurability the module should register the handlers when it's loaded and unregister them when
 it's unloaded.
 That's usually done in, respectively, <code>start/2</code> and <code>stop/1</code> functions.
@@ -3079,12 +3095,14 @@ that shall be passed to the next handler (or return value in case of last handle
 <span class="w">    </span><span class="k">end</span><span class="p">.</span>
 </code></pre></div></td></tr></table></div>
 <p>As seen in this example, a handler receives an accumulator, parameters and extra parameters (in this case - ignored).
-Then it matches to the result of <code>process_subscription/4</code> and can return 3 different values:
-* <code>{ok, Acc}</code> - it allows further processing and does not change the accumulator.
-* <code>{stop, mongoose_acc:set(hook, result, false, Acc)}</code> - it stops further processing and returns accumulator with a new value in it.
-* <code>{stop, Acc}</code> - it stops further processing and does not change the accumulator.</p>
+Then it matches to the result of <code>process_subscription/4</code> and can return 3 different values:</p>
+<ul>
+<li><code>{ok, Acc}</code> - it allows further processing and does not change the accumulator.</li>
+<li><code>{stop, mongoose_acc:set(hook, result, false, Acc)}</code> - it stops further processing and returns accumulator with a new value in it.</li>
+<li><code>{stop, Acc}</code> - it stops further processing and does not change the accumulator.</li>
+</ul>
 <p>This is an important feature to note: in some cases our handler returns a tuple  <code>{stop, Acc}</code>.
-This skips calling the latter actions in the handler sequence, while the hook call returns the <code>Acc</code>.
+This skips calling later actions in the handler sequence, while the hook call returns the <code>Acc</code>.
 Further processing is only performed if the first element of return tuple is <code>ok</code>.</p>
 <p>Watch out! Different handlers may be registered for the same hook - the priority mechanism orders their execution.
 If a handler returns <code>{stop, Acc}</code> but runs early in the handler chain, it may prevent some other handler from running at all!
@@ -3093,7 +3111,7 @@ It may be especially surprising in case of handlers from different modules regis
 Always ensure what handlers are registered for a given hook (<code>grep</code> is your friend) and that you understand their interdependencies.</p>
 <h2 id="hooks-list-and-how-to-extract-it">Hooks list and how to extract it</h2>
 <p>The following command should give you a list of all the hooks available in MongooseIM:</p>
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>awk<span class="w"> </span><span class="s1">&#39;/\-export\(\[/,/\]\)\./&#39;</span><span class="w"> </span>src/mongoose_hooks.erl<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-oh<span class="w"> </span><span class="s2">&quot;\w*\/&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/.$//&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>awk<span class="w"> </span><span class="s1">&#39;/\-export\(\[/,/\]\)\./&#39;</span><span class="w"> </span>src/hooks/*.erl<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-oh<span class="w"> </span><span class="s2">&quot;\w*/&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/.$//&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort
 </code></pre></div></td></tr></table></div>
 It returns:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -3108,7 +3126,7 @@ adhoc_sm_commands
 ...
 xmpp_stanza_dropped
 </code></pre></div></td></tr></table></div></p>
-<p>It just extracts the hooks exported from the <code>mongoose_hooks</code> module.
+<p>It just extracts the hooks exported from <code>mongoose_hooks</code> and other hook API modules.
 Refer to <code>grep</code>/<code>ack</code> to find where they're used.</p>
 <h2 id="creating-your-own-hooks">Creating your own hooks</h2>
 <p>You should put the new hook inside <code>mongoose_hooks</code> with a correct type specification, which provides some security in places where the hooks are run.
@@ -3252,7 +3270,7 @@ It's also possible to try out what happens when the same hook is run with differ
 
 <span class="nf">never_run_handler</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="p">#{</span><span class="n">number</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="nv">Number</span><span class="p">},</span><span class="w"> </span><span class="p">_)</span><span class="w"> </span><span class="o">-&gt;</span>
 <span class="w">    </span><span class="o">?</span><span class="nv">LOG_INFO</span><span class="p">(#{</span><span class="n">what</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">never_run_handler</span><span class="p">,</span>
-<span class="w">                </span><span class="n">text</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;This hook won&#39;t run as it&#39;s registered with a priority bigger &quot;</span>
+<span class="w">                </span><span class="n">text</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;This handler won&#39;t run as it&#39;s registered with a priority bigger &quot;</span>
 <span class="w">                          </span><span class="s">&quot;than that of stopping_handler/2 is. &quot;</span>
 <span class="w">                          </span><span class="s">&quot;This text should never get printed.&quot;</span><span class="o">&gt;&gt;</span><span class="p">}),</span>
 <span class="w">    </span><span class="p">{</span><span class="n">ok</span><span class="p">,</span><span class="w"> </span><span class="nv">Acc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">Number</span><span class="p">}.</span>
@@ -3272,8 +3290,8 @@ It's also possible to try out what happens when the same hook is run with differ
 <span class="normal">12</span>
 <span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">(</span><span class="n">mongooseim</span><span class="p">@</span><span class="n">localhost</span><span class="p">)</span><span class="mi">1</span><span class="o">&gt;</span><span class="w"> </span><span class="nn">gen_mod</span><span class="p">:</span><span class="nf">is_loaded</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;localhost&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">mod_hook_example</span><span class="p">).</span>
 <span class="nf">false</span>
-<span class="p">(</span><span class="n">mongooseim</span><span class="p">@</span><span class="n">localhost</span><span class="p">)</span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="nn">gen_mod</span><span class="p">:</span><span class="nf">start_module</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;localhost&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">mod_hook_example</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">no_opts</span><span class="p">]).</span>
-<span class="p">{</span><span class="n">ok</span><span class="p">,</span><span class="n">ok</span><span class="p">}</span>
+<span class="p">(</span><span class="n">mongooseim</span><span class="p">@</span><span class="n">localhost</span><span class="p">)</span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="nn">mongoose_modules</span><span class="p">:</span><span class="nf">ensure_started</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;localhost&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">mod_hook_example</span><span class="p">,</span><span class="w"> </span><span class="p">#{}).</span>
+<span class="p">{</span><span class="n">started</span><span class="p">,</span><span class="n">ok</span><span class="p">}</span>
 <span class="p">(</span><span class="n">mongooseim</span><span class="p">@</span><span class="n">localhost</span><span class="p">)</span><span class="mi">3</span><span class="o">&gt;</span><span class="w"> </span><span class="nn">gen_mod</span><span class="p">:</span><span class="nf">is_loaded</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;localhost&quot;</span><span class="o">&gt;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">mod_hook_example</span><span class="p">).</span>
 <span class="nf">true</span>
 <span class="p">(</span><span class="n">mongooseim</span><span class="p">@</span><span class="n">localhost</span><span class="p">)</span><span class="mi">4</span><span class="o">&gt;</span><span class="w"> </span><span class="nn">mongoose_logs</span><span class="p">:</span><span class="nf">set_module_loglevel</span><span class="p">(</span><span class="n">mod_hook_example</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">).</span>

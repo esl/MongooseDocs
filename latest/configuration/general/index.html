@@ -1794,6 +1794,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../modules/mod_presence/" class="md-nav__link">
+        mod_presence
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../modules/mod_privacy/" class="md-nav__link">
         mod_privacy
       </a>
@@ -3226,18 +3240,10 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 <h3 id="generalrouting_modules"><code>general.routing_modules</code></h3>
 <ul>
 <li><strong>Syntax:</strong> a list of strings representing the routing module names.</li>
-<li><strong>Default:</strong> <code>["mongoose_router_global", "mongoose_router_localdomain", "mongoose_router_external_localnode", "mongoose_router_external", "ejabberd_s2s"]</code></li>
+<li><strong>Default:</strong> <code>["mongoose_router_global", "mongoose_router_localdomain", "mongoose_router_external_localnode", "mongoose_router_external", "mongoose_router_dynamic_domains", "ejabberd_s2s"]</code></li>
 <li><strong>Example:</strong> <code>routing_modules = ["mongoose_router_global", "mongoose_router_localdomain"]</code></li>
 </ul>
-<p>Provides an ordered list of modules used for routing messages. If one of the modules accepts packet for processing, the remaining ones are not called.</p>
-<p>Allowed module names:</p>
-<ul>
-<li><code>mongoose_router_global</code> - calls the <code>filter_packet</code> hook.</li>
-<li><code>mongoose_router_localdomain</code> - routes packets addressed to a domain supported by the local cluster.</li>
-<li><code>mongoose_router_external_localnode</code> - delivers packets to an XMPP component connected to the node, which processes the request.</li>
-<li><code>mongoose_router_external</code> - delivers packets to an XMPP component connected to the local cluster.</li>
-<li><code>ejabberd_s2s</code> - forwards packets to another XMPP cluster over XMPP Federation.</li>
-</ul>
+<p>Provides an ordered list of modules used for routing messages. All available modules are enabled by default, and you can change their order or disable some of them by providing your own list. See the <a href="../../developers-guide/Stanza-routing/#3-message-routing">Message routing</a> section of the developer's guide for more information.</p>
 <h2 id="miscellaneous">Miscellaneous</h2>
 <p>The options listed below are used to configure more specific settings, that do not need to be changed in usual use cases.</p>
 <h3 id="generalall_metrics_are_global"><code>general.all_metrics_are_global</code></h3>
