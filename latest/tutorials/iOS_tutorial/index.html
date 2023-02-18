@@ -582,6 +582,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#iq" class="md-nav__link">
+    &lt;iq/&gt;
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#presence" class="md-nav__link">
     &lt;presence/&gt;
   </a>
@@ -2820,6 +2827,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#iq" class="md-nav__link">
+    &lt;iq/&gt;
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#presence" class="md-nav__link">
     &lt;presence/&gt;
   </a>
@@ -3010,39 +3024,21 @@ The defined stanzas are: <code>&lt;message/&gt;</code>, <code>&lt;presence/&gt;<
 <h3 id="message"><code>&lt;message/&gt;</code></h3>
 <p>This is a basic <code>&lt;message/&gt;</code> stanza.
 Every time you want to send a message to someone (a JID), you will have to send this stanza:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;message</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;andres@erlang-solutions.com/iphone&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;juana@erlang-solutions.com&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;chat&#39;</span><span class="nt">&gt;</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;message</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;andres@erlang-solutions.com/iphone&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;juana@erlang-solutions.com&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;chat&#39;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;body&gt;</span>Hey<span class="w"> </span>there!<span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/message&gt;</span>
-<span class="w"> </span>```
-
-###<span class="w"> </span>`<span class="nt">&lt;iq/&gt;</span>`
-
-It<span class="w"> </span>stands<span class="w"> </span>for<span class="w"> </span>Info/Query.
-It’s<span class="w"> </span>a<span class="w"> </span>query-action<span class="w"> </span>mechanism,<span class="w"> </span>you<span class="w"> </span>send<span class="w"> </span>an<span class="w"> </span>`iq`<span class="w"> </span>and<span class="w"> </span>you<span class="w"> </span>will<span class="w"> </span>get<span class="w"> </span>a<span class="w"> </span>response<span class="w"> </span>to<span class="w"> </span>that<span class="w"> </span>query.
-You<span class="w"> </span>can<span class="w"> </span>pair<span class="w"> </span>the<span class="w"> </span>`iq-query`<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>`iq-response`<span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>stanza<span class="w"> </span>id.
-
-For<span class="w"> </span>example,<span class="w"> </span>we<span class="w"> </span>send<span class="w"> </span>an<span class="w"> </span>`iq`<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>server<span class="w"> </span>to<span class="w"> </span>do<span class="w"> </span>something
-(don’t<span class="w"> </span>pay<span class="w"> </span>attention<span class="w"> </span>to<span class="w"> </span>what<span class="w"> </span>we<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>do…<span class="w"> </span>you<span class="w"> </span>just<span class="w"> </span>need<span class="w"> </span>to<span class="w"> </span>know<span class="w"> </span>there<span class="w"> </span>is<span class="w"> </span>an<span class="w"> </span>`iq`<span class="w"> </span>stanza<span class="w"> </span>and<span class="w"> </span>how<span class="w"> </span>the<span class="w"> </span>mechanism<span class="w"> </span>works):
-
-```xml
-<span class="nt">&lt;iq</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;erlang-solutions.com&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;1&#39;</span><span class="nt">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="iq"><code>&lt;iq/&gt;</code></h3>
+<p>It stands for Info/Query.
+It’s a query-action mechanism, you send an <code>iq</code> and you will get a response to that query.
+You can pair the <code>iq-query</code> with the <code>iq-response</code> using the stanza id.</p>
+<p>For example, we send an <code>iq</code> to the server to do something
+(don’t pay attention to what we want to do… you just need to know there is an <code>iq</code> stanza and how the mechanism works):</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;erlang-solutions.com&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;1&#39;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;query</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&#39;http://jabber.org/protocol/disco#items&#39;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
