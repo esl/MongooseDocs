@@ -3370,17 +3370,82 @@ As a result it makes more sense to maintain a list of the most relevant or usefu
 <tr>
 <td><code>[global, data, xmpp, received, xml_stanza_size]</code></td>
 <td>histogram</td>
-<td>A size (in bytes) of a received stanza after decompression and decryption.</td>
+<td>A size (in bytes) of a received stanza after decryption.</td>
 </tr>
 <tr>
 <td><code>[global, data, xmpp, sent, xml_stanza_size]</code></td>
 <td>histogram</td>
-<td>A size (in bytes) of a stanza sent to a client socket.</td>
+<td>A size (in bytes) of a sent stanza before encryption.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, received, c2s, tcp]</code></td>
+<td>spiral</td>
+<td>A size (in bytes) of unencrypted data received from a client via TCP channel.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, sent, c2s, tcp]</code></td>
+<td>spiral</td>
+<td>A size (in bytes) of unencrypted data sent to a client via TCP channel.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, received, c2s, tls]</code></td>
+<td>spiral</td>
+<td>A size (in bytes) of a data received from a client via TLS channel after decryption.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, sent, c2s, tls]</code></td>
+<td>spiral</td>
+<td>A size (in bytes) of a data sent to a client via TLS channel before encryption.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, received, c2s, bosh]</code></td>
+<td>spiral</td>
+<td>A size (in bytes) of a data received from a client via BOSH connection.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, sent, c2s, bosh]</code></td>
+<td>spiral</td>
+<td>A size (in bytes) of a data sent to a client via BOSH connection.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, received, c2s, websocket]</code></td>
+<td>spiral</td>
+<td>A size (in bytes) of a data received from a client via WebSocket connection.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, sent, c2s, websocket]</code></td>
+<td>spiral</td>
+<td>A size (in bytes) of a data sent to a client via WebSocket connection.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, received, s2s]</code></td>
+<td>spiral</td>
+<td>A size (in bytes) of a data received via TCP and TLS (after decryption) Server-to-Server connections.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, sent, s2s]</code></td>
+<td>spiral</td>
+<td>A size (in bytes) of a data sent via TCP and TLS (before encryption) Server-to-Server connections.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, received, component]</code></td>
+<td>spiral</td>
+<td>A size (in bytes) of a data received from XMPP component.</td>
+</tr>
+<tr>
+<td><code>[global, data, xmpp, sent, component]</code></td>
+<td>spiral</td>
+<td>A size (in bytes) of a data sent to XMPP component.</td>
+</tr>
+<tr>
+<td><code>[HostType, data, xmpp, c2s, message, processing_time</code>]</td>
+<td>histogram</td>
+<td>Processing time for incomming c2s stanzas.</td>
 </tr>
 <tr>
 <td><code>[global, data, dist]</code></td>
 <td>proplist</td>
-<td>Network stats for an Erlang distributed communication. A proplist with values: <code>recv_oct</code>, <code>recv_cnt</code>, <code>recv_max</code>, <code>send_oct</code>, <code>send_max</code>, <code>send_cnt</code>, <code>send_pend</code>, <code>connections</code></td>
+<td>Network stats for an Erlang distributed communication. A proplist with values: <code>recv_oct</code>, <code>recv_cnt</code>, <code>recv_max</code>, <code>send_oct</code>, <code>send_max</code>, <code>send_cnt</code>, <code>send_pend</code>, <code>connections</code>.</td>
 </tr>
 <tr>
 <td><code>[global, data, rdbms, PoolName]</code></td>
