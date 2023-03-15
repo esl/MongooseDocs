@@ -21,7 +21,7 @@
         <link rel="next" href="../../authentication-methods/rdbms/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7bf56d0a.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.c4a75a56.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -995,8 +995,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#riak-kv" class="md-nav__link">
-    Riak KV
+  <a href="#riak-kv-deprecated" class="md-nav__link">
+    Riak KV (deprecated)
   </a>
   
 </li>
@@ -1155,7 +1155,7 @@
   
     <li class="md-nav__item">
       <a href="../../authentication-methods/riak/" class="md-nav__link">
-        Riak
+        Riak (deprecated)
       </a>
     </li>
   
@@ -2840,8 +2840,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#riak-kv" class="md-nav__link">
-    Riak KV
+  <a href="#riak-kv-deprecated" class="md-nav__link">
+    Riak KV (deprecated)
   </a>
   
 </li>
@@ -2920,7 +2920,7 @@ Subsequent sections go into more depth on each database: what they are suitable 
  Being an Erlang-based database, it's the default persistence option for most modules in MongooseIM.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>We <strong>strongly recommend</strong> keeping <strong>persistent</strong> data in an external DB (RDBMS or Riak) for production.
+<p>We <strong>strongly recommend</strong> keeping <strong>persistent</strong> data in an external DB (RDBMS) for production.
 Mnesia is not suitable for the volumes of <strong>persistent</strong> data which some modules may require.
 Sooner or later a migration will be needed which may be painful.
 It is possible to store all data in Mnesia, but only for testing purposes, not for any serious deployments.</p>
@@ -2942,11 +2942,16 @@ It is possible to store all data in Mnesia, but only for testing purposes, not f
  Use MySQL, MariaDB, PostgreSQL, or MS SQL Server.</p>
 </li>
 <li>
-<p>Riak KV - If you're planning to deploy a massive cluster, consider Riak KV as a potential storage backend solution.
+<p>Riak KV (deprecated) - If you're planning to deploy a massive cluster, consider Riak KV as a potential storage backend solution.
  It offers high availability and fault tolerance which is exactly what you need for your distributed MongooseIM architecture.
- Use Riak KV with <code>privacy lists</code>, <code>vcards</code>, <code>roster</code>, <code>private storage</code>, <code>last activity</code> and <code>message archive</code>.
- Erlang Solutions commercially supports Riak KV.</p>
+ Use Riak KV with <code>privacy lists</code>, <code>vcards</code>, <code>roster</code>, <code>private storage</code>, <code>last activity</code> and <code>message archive</code>.</p>
 </li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
+</div>
+<ul>
 <li>
 <p>Cassandra - Only for MAM (Message Archive Management).</p>
 </li>
@@ -3117,7 +3122,11 @@ Set the following option in the <code>general</code> section:</p>
 <span class="w">    </span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;DSN=mongoose-mssql;UID=username;PWD=password&quot;</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="nosql">NoSQL</h2>
-<h3 id="riak-kv">Riak KV</h3>
+<h3 id="riak-kv-deprecated">Riak KV (deprecated)</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
+</div>
 <p>Riak KV, for Key-Value, is technically supported by MongooseIM for versions upper than Riak KV 2.0. Erlang Solutions commercially supports Riak KV.</p>
 <p><strong>Can be used for:</strong></p>
 <ul>
@@ -3360,7 +3369,7 @@ curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      <script src="../../assets/javascripts/bundle.efa0ade1.min.js"></script>
       
     
   </body>

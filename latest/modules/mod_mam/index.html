@@ -21,7 +21,7 @@
         <link rel="next" href="../mod_muc/">
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7bf56d0a.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.c4a75a56.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -1010,7 +1010,7 @@
   
     <li class="md-nav__item">
       <a href="../../authentication-methods/riak/" class="md-nav__link">
-        Riak
+        Riak (deprecated)
       </a>
     </li>
   
@@ -3518,10 +3518,14 @@ It is a highly customizable module, that requires some skill and knowledge to op
 <p>Configure MAM with different storage backends:</p>
 <ul>
 <li>RDBMS (databases like MySQL, PostgreSQL, MS SQL Server)</li>
-<li>Riak KV (NoSQL)</li>
+<li>Riak KV (deprecated) (NoSQL)</li>
 <li>Cassandra (NoSQL)</li>
 <li>ElasticSearch (NoSQL)</li>
 </ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
+</div>
 <p><code>mod_mam</code> is a meta-module that ensures all relevant <code>mod_mam_*</code> modules are loaded and properly configured.</p>
 <h3 id="message-retraction">Message retraction</h3>
 <p>This module supports <a href="http://xmpp.org/extensions/xep-0424.html">XEP-0424: Message Retraction</a> with RDBMS storage backends. When a <a href="https://xmpp.org/extensions/xep-0424.html#example-4">retraction message</a> is received, the MAM module finds the message to retract and replaces it with a tombstone.</p>
@@ -3555,7 +3559,7 @@ This means that an XMPP client, while requesting messages from the archive may n
 If this happens, the client will receive only messages that contain words specified in the request.</p>
 <p>The exact behaviour, like whether word ordering matters, may depend on the storage backend in use.
 For now <code>rdbms</code> backend has very limited support for this feature, while <code>cassandra</code> does not support it at all.
-<code>riak</code> and <code>elasticsearch</code> backends, on the other hand, should provide you with the best results when it comes to text filtering.</p>
+<code>riak</code> (deprecated) and <code>elasticsearch</code> backends, on the other hand, should provide you with the best results when it comes to text filtering.</p>
 <p><code>mod_mam_rdbms_arch</code> returns all messages that contain all search words, order
 of words does not matter. Messages are sorted by timestamp (not by relevance).</p>
 <h4 id="note-on-full-text-search-with-elasticsearch-backend">Note on full text search with ElasticSearch backend</h4>
@@ -3569,6 +3573,10 @@ Also note that the default separator for the search query is <code>AND</code> (w
 <li><strong>Default:</strong> <code>"rdbms"</code></li>
 <li><strong>Example:</strong> <code>backend = "riak"</code></li>
 </ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
+</div>
 <p>Database backend to use.</p>
 <h3 id="modulesmod_mamno_stanzaid_element"><code>modules.mod_mam.no_stanzaid_element</code></h3>
 <ul>
@@ -3761,7 +3769,7 @@ The possible values are:</p>
 <li><strong>Example:</strong> <code>modules.mod_mam.full_text_search = false</code></li>
 </ul>
 <p>Enables full text search in message archive (see <em>Full Text Search</em> paragraph).
-Please note that the full text search is currently only implemented for <code>"rdbms"</code> and <code>"riak"</code> backends.
+Please note that the full text search is currently only implemented for <code>"rdbms"</code> and <code>"riak(deprecated)"</code> backends.
 Also, full text search works only for messages archived while this option is enabled.</p>
 <h4 id="is_archivable_message3-callback"><a id="is_archivable_message"></a><code>is_archivable_message/3</code> callback</h4>
 <p><code>is_archivable_message</code> option has to name a module exporting <code>is_archivable_message/3</code> function conforming to the spec:</p>
@@ -3776,6 +3784,10 @@ Also, full text search works only for messages archived while this option is ena
 <code>is_archivable_message</code> callback module is set to <code>mod_mam_utils</code> or isn't set at all.</p>
 <p>When performing full text search chat markers are treated as if they had empty message body.</p>
 <h3 id="riak-backend">Riak backend</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
+</div>
 <p>The Riak KV backend for MAM stores messages in weekly buckets so it's easier to remove old buckets.
 Archive querying is done using Riak KV 2.0 <a href="http://docs.basho.com/riak/2.1.1/dev/using/search/">search mechanism</a> called Yokozuna.
 Your instance of Riak KV must be configured with Yokozuna enabled.</p>
@@ -4086,7 +4098,7 @@ It can be useful to be able to add information to a mam query, that doesn't belo
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      <script src="../../assets/javascripts/bundle.efa0ade1.min.js"></script>
       
     
   </body>
