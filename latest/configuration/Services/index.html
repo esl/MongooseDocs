@@ -837,8 +837,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#servicesservice_mongoose_system_metricstracking_id" class="md-nav__link">
-    services.service_mongoose_system_metrics.tracking_id:
+  <a href="#servicesservice_mongoose_system_metricstracking_idid" class="md-nav__link">
+    services.service_mongoose_system_metrics.tracking_id.id:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#servicesservice_mongoose_system_metricstracking_idsecret" class="md-nav__link">
+    services.service_mongoose_system_metrics.tracking_id.secret:
   </a>
   
 </li>
@@ -2813,8 +2820,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#servicesservice_mongoose_system_metricstracking_id" class="md-nav__link">
-    services.service_mongoose_system_metrics.tracking_id:
+  <a href="#servicesservice_mongoose_system_metricstracking_idid" class="md-nav__link">
+    services.service_mongoose_system_metrics.tracking_id.id:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#servicesservice_mongoose_system_metricstracking_idsecret" class="md-nav__link">
+    services.service_mongoose_system_metrics.tracking_id.secret:
   </a>
   
 </li>
@@ -2967,13 +2981,19 @@ When this option is set to <code>false</code>, System Metrics Service is not sta
 <li><strong>Example:</strong> <code>periodic_report = 108_000_000</code></li>
 </ul>
 <p>Time delay for a periodic update report to be created and sent.</p>
-<h3 id="servicesservice_mongoose_system_metricstracking_id"><code>services.service_mongoose_system_metrics.tracking_id</code>:</h3>
+<h3 id="servicesservice_mongoose_system_metricstracking_idid"><code>services.service_mongoose_system_metrics.tracking_id.id</code>:</h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> no default.</li>
-<li><strong>Example:</strong> <code>tracking_id = "UA-123456789"</code></li>
+<li><strong>Example:</strong> <code>tracking_id.id = "G-123456789"</code></li>
 </ul>
 <p>Tracking ID to forward the reported metrics so that they can be viewed in the Google Analytics dashboard.</p>
+<h3 id="servicesservice_mongoose_system_metricstracking_idsecret"><code>services.service_mongoose_system_metrics.tracking_id.secret</code>:</h3>
+<ul>
+<li><strong>Syntax:</strong> string</li>
+<li><strong>Default:</strong> no default.</li>
+<li><strong>Example:</strong> <code>tracking_id.secret = "Secret"</code></li>
+</ul>
 <p>Removing the <code>services.service_mongoose_system_metrics</code> entry will result in the service not being started.
 Metrics will not be collected and shared.
 It will generate a notification that the feature is not being used.
@@ -3017,7 +3037,8 @@ You can put a specific host type there to use the pool with the <code>"host"</co
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[services.service_admin_extra]</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[services.service_admin_extra]</span>
 <span class="w">  </span><span class="n">submods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;node&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;account&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sessions&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;vcard&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gdpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;upload&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;roster&quot;</span><span class="p">,</span>
 <span class="w">             </span><span class="s">&quot;last&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;private&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;stanza&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;stats&quot;</span><span class="p">]</span>
 
@@ -3025,7 +3046,8 @@ You can put a specific host type there to use the pool with the <code>"host"</co
 <span class="w">  </span><span class="n">report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">  </span><span class="n">initial_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">300</span><span class="n">_000</span>
 <span class="w">  </span><span class="n">periodic_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">108</span><span class="n">_000_000</span>
-<span class="w">  </span><span class="n">tracking_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UA-123456789&quot;</span>
+<span class="w">  </span><span class="n">tracking_id</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;G-123456789&quot;</span>
+<span class="w">  </span><span class="n">tracking_id</span><span class="p">.</span><span class="n">secret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Secret&quot;</span>
 
 <span class="k">[services.service_domain_db]</span>
 <span class="w">  </span><span class="n">db_pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;global&quot;</span>

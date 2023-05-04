@@ -2885,24 +2885,31 @@ For more details on how to create or sign in to the Google Analytics account, pl
 <p>Tracking ID is a property identification code that all collected data is associated with.
 It is determining the destination where the collected data is sent.
 To create a new Tracking ID, please follow the steps below:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>MongooseIM no longer supports Universal Analytics. To use metrics it is needed to create an instance of Google Analytics 4.</p>
+</div>
 <ul>
 <li>Go to the <code>Admin</code> tab of your user dashboard.</li>
 <li>Create a new account with <code>+ Create Account</code>.</li>
 <li>Add new property with <code>+ Create Property</code>.<ul>
-<li>Within the new property go to <code>Tracking Info &gt; Tracking Code</code>.</li>
-<li>Tracking ID can be found in the top left corner of the section and has following format UA-XXXX-Y.</li>
+<li>Within the new property go to <code>Data Streams &gt; Add stream &gt; Web</code>.</li>
+<li>After successful creation, the ID can be found in the top right corner of the section and has the following format G-XXXX and is named <code>Measurement ID</code>.</li>
 </ul>
 </li>
+<li>To create an API secret, in a <code>Data Stream</code> view go to <code>Event &gt; Measurement Protocol API secrets</code> and use the <code>Create</code> button in the top right corner to create a new secret. </li>
 </ul>
 <h3 id="example-configuration">Example configuration</h3>
 <p>New Tracking ID can be added to the list of options
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[services.service_mongoose_system_metrics]</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[services.service_mongoose_system_metrics]</span>
 <span class="w">  </span><span class="n">initial_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">300</span><span class="n">_000</span>
 <span class="w">  </span><span class="n">periodic_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="n">_800_000</span>
-<span class="w">  </span><span class="n">tracking_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UA-XXXX-Y&quot;</span>
+<span class="w">  </span><span class="n">tracking_id</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;G-XXXX&quot;</span>
+<span class="w">  </span><span class="n">tracking_id</span><span class="p">.</span><span class="n">secret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Secret&quot;</span>
 </code></pre></div></td></tr></table></div></p>
 <p>For more details regarding service configuration, please see <a href="../../configuration/Services/">Services</a> section.</p>
 <h2 id="data-sharing-policy">Data Sharing Policy</h2>
