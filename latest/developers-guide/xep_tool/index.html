@@ -2353,15 +2353,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#specific-url" class="md-nav__link">
-    Specific URL
+  <a href="#status" class="md-nav__link">
+    Status
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#comment" class="md-nav__link">
-    Comment
+  <a href="#legacy-versions" class="md-nav__link">
+    Legacy versions
   </a>
   
 </li>
@@ -2379,8 +2379,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#generated-file-example" class="md-nav__link">
-    Generated file example
+  <a href="#generated-markdown-file-example" class="md-nav__link">
+    Generated markdown file example
   </a>
   
 </li>
@@ -2731,15 +2731,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#specific-url" class="md-nav__link">
-    Specific URL
+  <a href="#status" class="md-nav__link">
+    Status
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#comment" class="md-nav__link">
-    Comment
+  <a href="#legacy-versions" class="md-nav__link">
+    Legacy versions
   </a>
   
 </li>
@@ -2757,8 +2757,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#generated-file-example" class="md-nav__link">
-    Generated file example
+  <a href="#generated-markdown-file-example" class="md-nav__link">
+    Generated markdown file example
   </a>
   
 </li>
@@ -2786,8 +2786,8 @@
 It's a fast and easy way to automatically produce documentation from raw, beam files.
 This is a quick guide on how to enjoy the usage of the XEP-tool.</p>
 <h2 id="sign-your-module-file-first">Sign your module file first</h2>
-<p>The architecture of MongooseIM determines that almost every XEP or feature implementation resides in its own file. 
-It is not strictly enforced but usually the file is named with a <code>mod_</code> prefix. 
+<p>The architecture of MongooseIM determines that almost every XEP or feature implementation resides in its own file.
+It is not strictly enforced but usually the file is named with a <code>mod_</code> prefix.
 For example <code>mod_privacy</code> file implements <a href="http://xmpp.org/extensions/xep-0016.html">XEP-0016: Privacy Lists</a>.</p>
 <h3 id="mandatory-xep-and-version">Mandatory <code>xep</code> and <code>version</code></h3>
 <p>In order to let the XEP-tool know about your module, we add a special attribute <code>xep</code> at the beginning of the <code>mod_privacy</code> module:</p>
@@ -2795,44 +2795,52 @@ For example <code>mod_privacy</code> file implements <a href="http://xmpp.org/ex
 </code></pre></div></td></tr></table></div>
 <p>Now we know that this module implements to <a href="http://xmpp.org/extensions/xep-0016.html">XEP-0016: Privacy Lists</a> with version 1.6.</p>
 <p>It gives the tool enough information to generate a URL to the XEP homepage.
-There are also some variations of the <code>xep</code> attribute like:</p>
-<p>You ought to remember to specify <code>xep</code> and <code>version</code> attributes every time.
+If the module implements a ProtoXEP, the <code>xep</code> property should be an atom:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">-</span><span class="ni">xep</span><span class="p">([{</span><span class="n">xep</span><span class="p">,</span><span class="w"> </span><span class="n">&#39;muc-light&#39;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0.0.1&quot;</span><span class="p">}]).</span>
+</code></pre></div></td></tr></table></div>
+<p>You ought to remember to specify <code>xep</code> and <code>version</code> properties every time.
 You can also put several <code>xep</code> attributes in one module.
-For example <code>mod_mam_muc</code> implements attributes of <a href="http://xmpp.org/extensions/xep-0313.html">XEP-0313: Message Archive Management</a> and also <a href="http://xmpp.org/extensions/xep-0045.html">XEP-0045: Multi-User Chat</a>.</p>
-<p>Just list them one after another:</p>
+For example <code>mod_roster</code> implements attributes of <a href="https://xmpp.org/extensions/xep-0083.html">XEP-0083: Nested Roster Groups</a>, <a href="https://xmpp.org/extensions/xep-0093.html">XEP-0093: Roster Item Exchange</a> and <a href="https://xmpp.org/extensions/xep-0237.html">XEP-0237: Roster Versioning</a>.
+Just list them one after another:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">-</span><span class="ni">xep</span><span class="p">([{</span><span class="n">xep</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1.25&quot;</span><span class="p">}]).</span>
-<span class="p">-</span><span class="ni">xep</span><span class="p">([{</span><span class="n">xep</span><span class="p">,</span><span class="w"> </span><span class="mi">313</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0.5.1&quot;</span><span class="p">}]).</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">-</span><span class="ni">xep</span><span class="p">([{</span><span class="n">xep</span><span class="p">,</span><span class="w"> </span><span class="mi">237</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1.3&quot;</span><span class="p">}]).</span>
+<span class="p">-</span><span class="ni">xep</span><span class="p">([{</span><span class="n">xep</span><span class="p">,</span><span class="w"> </span><span class="mi">83</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1.0&quot;</span><span class="p">}]).</span>
+<span class="p">-</span><span class="ni">xep</span><span class="p">([{</span><span class="n">xep</span><span class="p">,</span><span class="w"> </span><span class="mi">93</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1.2&quot;</span><span class="p">}]).</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="specific-url">Specific URL</h3>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">-</span><span class="ni">xep</span><span class="p">([{</span><span class="n">xep</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1.6&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;http://xmpp.org/extensions/xep-0016.html&quot;</span><span class="p">}]).</span>
+<h3 id="status">Status</h3>
+<p>By default the status is <code>complete</code>. You can also mark the implementation status as <code>partial</code>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">-</span><span class="ni">xep</span><span class="p">([{</span><span class="n">xep</span><span class="p">,</span><span class="w"> </span><span class="mi">79</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1.2&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">partial</span><span class="p">}]).</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="comment">Comment</h3>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">-</span><span class="ni">xep</span><span class="p">([{</span><span class="n">xep</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1.6&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">comment</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Example comment: Partial Implemented&quot;</span><span class="p">}]).</span>
+<h3 id="legacy-versions">Legacy versions</h3>
+<p>Sometimes the implementation is backwards-compatible, supporting legacy namespaces defined in a particular historical version. You can list such versions as below:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">-</span><span class="ni">xep</span><span class="p">([{</span><span class="n">xep</span><span class="p">,</span><span class="w"> </span><span class="mi">313</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0.6&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">legacy_versions</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;0.5&quot;</span><span class="p">]}]).</span>
 </code></pre></div></td></tr></table></div>
-<p>And the XEP-tool will do the work!</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Watch out for conflicts! Put the <code>xep</code> attribute in the main module implementing the extension to avoid conflicting declarations.
+If you need to specify the same XEP multiple times (e.g. because the implementation is split into two parts),
+make sure that the <code>version</code> properties are the same for all attributes - otherwise the XEP tool will report an error.
+The resulting status for a XEP is <code>complete</code> unless all implementing modules have the <code>partial</code> status.</p>
+</div>
 <h2 id="compile-and-run">Compile and run</h2>
-<p>You've just finished marking your modules. 
-The only thing left is to <code>make compile</code> MongooseIM in order to generate the .beam files.
-To run the XEP tool, you must issue an additional subcommand. 
-There are two choices:</p>
+<p>After annotating all modules with the <code>xep</code> attributes, you need to run <code>make</code> in order to generate the .beam files.
+Next, you can run the XEP tool. It has a mandatory argument, which specifies the output format:</p>
 <ul>
-<li><code>markdown</code>: to produce a markdown list of supported XEPs. 
- This option also needs an output file as an argument.</li>
-<li><code>list</code>: to print out supported XEPs to the console.</li>
+<li><code>markdown</code> - a Markdown table,</li>
+<li><code>list</code> - an Erlang list,</li>
+<li><code>doap</code> - <a href="https://xmpp.org/extensions/xep-0453.html">Description Of A Project</a>.</li>
 </ul>
-<p>For example, to run our XEP-tool with a <code>markdown</code> command, type:</p>
+<p>For example, to print out the DOAP, you can run the following from the MongooseIM project directory:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>tools/xep_tool/xep_tool.escript<span class="w"> </span>doap
+</code></pre></div></td></tr></table></div>
+<p>To save the output to a file, you can just provide the file name as the second argument.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>tools/xep_tool/xep_tool.escript<span class="w"> </span>doap<span class="w"> </span>doc/mongooseim.doap
+</code></pre></div></td></tr></table></div>
+<p>The last command has a shortcut in the Makefile:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>make<span class="w"> </span>xeplist
 </code></pre></div></td></tr></table></div>
-<p>Or do it manually:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">$MONGOOSEIM_ROOT</span>/tools/xep_tool/xep_tool.escript<span class="w"> </span>markdown<span class="w"> </span>&lt;PATH_TO_EBIN&gt;<span class="w"> </span>&lt;OPTIONAL_OUTPUT_FILE&gt;
-</code></pre></div></td></tr></table></div>
-<p>In our case, from MongooseIM root directory:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/xep_tool/xep_tool.escript<span class="w"> </span>markdown<span class="w"> </span>ebin<span class="w"> </span>list.md
-</code></pre></div></td></tr></table></div>
-<p>The Markdown list with unique XEP names and URLs is saved to file <code>list.md</code>
-You can copy-paste the content of this file to your main README file.</p>
-<h2 id="generated-file-example">Generated file example</h2>
+<h2 id="generated-markdown-file-example">Generated markdown file example</h2>
 <table>
 <thead>
 <tr>
