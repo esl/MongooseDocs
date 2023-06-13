@@ -948,11 +948,11 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#81-xep-0045-mappings" class="md-nav__link">
-    8.1. XEP-0045 mappings
+  <a href="#81-xep-0045-mappings-aka-legacy-mode" class="md-nav__link">
+    8.1. XEP-0045 mappings a.k.a. legacy mode
   </a>
   
-    <nav class="md-nav" aria-label="8.1. XEP-0045 mappings">
+    <nav class="md-nav" aria-label="8.1. XEP-0045 mappings a.k.a. legacy mode">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3474,11 +3474,11 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#81-xep-0045-mappings" class="md-nav__link">
-    8.1. XEP-0045 mappings
+  <a href="#81-xep-0045-mappings-aka-legacy-mode" class="md-nav__link">
+    8.1. XEP-0045 mappings a.k.a. legacy mode
   </a>
   
-    <nav class="md-nav" aria-label="8.1. XEP-0045 mappings">
+    <nav class="md-nav" aria-label="8.1. XEP-0045 mappings a.k.a. legacy mode">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3650,11 +3650,11 @@
   <h1>MUC light</h1>
 
 <h2 id="1-introduction">1. Introduction</h2>
-<p>Classic Multi-User chat, as described in XEP-0045, adds an IRC-like functionality to XMPP. 
-It distinguishes between the affiliation list and the occupant list, where the latter is based on presences routed to the room from the client resource. 
-While perfectly sufficient for desktop applications and relatively stable network connection, it does not exactly meet the challenges the mobile world it is facing. 
-Modern mobile applications do not rely on presence information, as it can frequently change. The expected user experience not only differs from the IRC model, but also uses only a small subset of XEP-0045 features. 
-The service described in this specification attempts to provide a complete solution for all common use cases of mobile groupchats.</p>
+<p>Classic Multi-User chat, as described in XEP-0045, adds an IRC-like functionality to XMPP.
+It distinguishes between the affiliation list and the occupant list, where the latter is based on presences routed to the room from the client resource.
+While perfectly sufficient for desktop applications and relatively stable network connection, it does not exactly meet the challenges the mobile world it is facing.
+Modern mobile applications do not rely on presence information, as it can frequently change. The expected user experience not only differs from the IRC model, but also uses only a small subset of XEP-0045 features.
+The service described in this specification attempts to provide a complete solution for all common use cases of mobile group chats.</p>
 <h2 id="2-requirements">2. Requirements</h2>
 <p>Here are some high-level features required from a new variant of MUC</p>
 <ol>
@@ -5246,12 +5246,13 @@ the service MUST reply with a 'not-allowed' error.</p>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="8-implementation-notes">8. Implementation Notes</h2>
-<h3 id="81-xep-0045-mappings">8.1. XEP-0045 mappings</h3>
+<h3 id="81-xep-0045-mappings-aka-legacy-mode">8.1. XEP-0045 mappings a.k.a. legacy mode</h3>
 <p>Some client-side developers might choose to use existing XEP-0045 Multi-User Chat implementations
 to interface with the new MUC Light.
 There may be various reasons to do so: using a familiar protocol,
 avoiding additional implementation, quick prototyping etc.
-This section provides suggestions of mappings between XEP-0045 stanzas and the new ones described in this document.</p>
+This section provides suggestions of mappings between XEP-0045 stanzas and the new ones described in this document.
+These mappings are ONLY available to use in the legacy mode, which allows using a subset of classic MUC stanzas but comes with the drawback that some of the functions are limited.</p>
 <p>Operations not described here SHOULD remain unmodified.</p>
 <h4 id="811-discovering-the-features-supported-by-a-muc-service">8.1.1. Discovering the Features Supported by a MUC Service</h4>
 <p>A Disco result MAY either include a new <code>&lt;feature/&gt;</code> element with an "http://jabber.org/protocol/muc" namespace
