@@ -1029,20 +1029,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../authentication-methods/riak/" class="md-nav__link">
-        Riak (deprecated)
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../authentication-methods/http/" class="md-nav__link">
         HTTP
       </a>
@@ -1638,40 +1624,6 @@
   <a href="#modulesmod_privacybackend" class="md-nav__link">
     modules.mod_privacy.backend
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#riak-specific-options" class="md-nav__link">
-    Riak-specific options
-  </a>
-  
-    <nav class="md-nav" aria-label="Riak-specific options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_privacyriakdefaults_bucket_type" class="md-nav__link">
-    modules.mod_privacy.riak.defaults_bucket_type
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_privacyriaknames_bucket_type" class="md-nav__link">
-    modules.mod_privacy.riak.names_bucket_type
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_privacyriakbucket_type" class="md-nav__link">
-    modules.mod_privacy.riak.bucket_type
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -2772,40 +2724,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#riak-specific-options" class="md-nav__link">
-    Riak-specific options
-  </a>
-  
-    <nav class="md-nav" aria-label="Riak-specific options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_privacyriakdefaults_bucket_type" class="md-nav__link">
-    modules.mod_privacy.riak.defaults_bucket_type
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_privacyriaknames_bucket_type" class="md-nav__link">
-    modules.mod_privacy.riak.names_bucket_type
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_privacyriakbucket_type" class="md-nav__link">
-    modules.mod_privacy.riak.bucket_type
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2851,42 +2769,14 @@ This extension allows user to block IQs, messages, presences, or all, based on J
 <h2 id="options">Options</h2>
 <h3 id="modulesmod_privacybackend"><code>modules.mod_privacy.backend</code></h3>
 <ul>
-<li><strong>Syntax:</strong> string, one of <code>"mnesia"</code>, <code>"rdbms"</code>, <code>"riak"</code>.</li>
+<li><strong>Syntax:</strong> string, one of <code>"mnesia"</code>, <code>"rdbms"</code>.</li>
 <li><strong>Default:</strong> <code>"mnesia"</code></li>
 <li><strong>Example:</strong> <code>backend = "mnesia"</code></li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
-</div>
-<h3 id="riak-specific-options">Riak-specific options</h3>
-<h4 id="modulesmod_privacyriakdefaults_bucket_type"><code>modules.mod_privacy.riak.defaults_bucket_type</code></h4>
-<ul>
-<li><strong>Syntax:</strong> string.</li>
-<li><strong>Default:</strong> <code>"privacy_defaults"</code></li>
-<li><strong>Example:</strong> <code>riak.defaults_bucket_type = "privacy_defaults"</code></li>
-</ul>
-<p>Riak bucket type for information about default list name.</p>
-<h4 id="modulesmod_privacyriaknames_bucket_type"><code>modules.mod_privacy.riak.names_bucket_type</code></h4>
-<ul>
-<li><strong>Syntax:</strong> string.</li>
-<li><strong>Default:</strong> <code>"privacy_lists_names"</code></li>
-<li><strong>Example:</strong> <code>riak.names_bucket_type = "privacy_lists_names"</code></li>
-</ul>
-<p>Riak bucket type for information about privacy list names.</p>
-<h4 id="modulesmod_privacyriakbucket_type"><code>modules.mod_privacy.riak.bucket_type</code></h4>
-<ul>
-<li><strong>Syntax:</strong> string.</li>
-<li><strong>Default:</strong> <code>"privacy_lists"</code></li>
-<li><strong>Example:</strong> <code>riak.bucket_type = "privacy_lists"</code></li>
-</ul>
-<p>Riak bucket type for privacy lists.</p>
 <h2 id="example-configuration">Example Configuration</h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_privacy]</span>
-<span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;riak&quot;</span>
-<span class="w">  </span><span class="n">riak</span><span class="p">.</span><span class="n">defaults_bucket_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;privacy_defaults&quot;</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_privacy]</span>
+<span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rdbms&quot;</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="metrics">Metrics</h2>
 <p>If you'd like to learn more about metrics in MongooseIM, please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">MongooseIM metrics</a> page.</p>

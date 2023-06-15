@@ -1073,40 +1073,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#riak-options" class="md-nav__link">
-    Riak options
-  </a>
-  
-    <nav class="md-nav" aria-label="Riak options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#outgoing_poolsriakconnectionaddress" class="md-nav__link">
-    outgoing_pools.riak.*.connection.address
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#outgoing_poolsriakconnectionport" class="md-nav__link">
-    outgoing_pools.riak.*.connection.port
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#outgoing_poolsriakconnectioncredentials" class="md-nav__link">
-    outgoing_pools.riak.*.connection.credentials
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#cassandra-options" class="md-nav__link">
     Cassandra options
   </a>
@@ -1622,20 +1588,6 @@
     <li class="md-nav__item">
       <a href="../../authentication-methods/jwt/" class="md-nav__link">
         JWT
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../authentication-methods/riak/" class="md-nav__link">
-        Riak (deprecated)
       </a>
     </li>
   
@@ -3534,40 +3486,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#riak-options" class="md-nav__link">
-    Riak options
-  </a>
-  
-    <nav class="md-nav" aria-label="Riak options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#outgoing_poolsriakconnectionaddress" class="md-nav__link">
-    outgoing_pools.riak.*.connection.address
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#outgoing_poolsriakconnectionport" class="md-nav__link">
-    outgoing_pools.riak.*.connection.port
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#outgoing_poolsriakconnectioncredentials" class="md-nav__link">
-    outgoing_pools.riak.*.connection.credentials
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#cassandra-options" class="md-nav__link">
     Cassandra options
   </a>
@@ -3845,21 +3763,18 @@
 The interface for outgoing connections management is available via the <code>outgoing_pools</code> config option for the following types of connections:</p>
 <ul>
 <li><code>cassandra</code> - pool of connections to Cassandra cluster</li>
-<li><code>riak (deprecated)</code> - pool of connections to Riak cluster</li>
 <li><code>redis</code> - pool of connections to Redis server</li>
 <li><code>http</code> - pool of connections to an HTTP(S) server MongooseIM can talk to, for example HTTP authentication backend or HTTP notifications</li>
 <li><code>elastic</code> - pool of connections to ElasticSearch server</li>
 <li><code>rdbms</code> - pool of connections to an RDBMS database</li>
 <li><code>rabbit</code> - pool of connections to a RabbitMQ server</li>
-<li><code>ldap</code> - pool of connections to an LDAP server</li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
-</div>
-<ul>
-<li><strong>Syntax:</strong> Each pool is specified in a subsection starting with <code>[outgoing_pools.type.tag]</code>, where <code>type</code> is one of available connection types and <code>tag</code> is an arbitrary value uniquely identifying the pool within its type.
-This allows you to create multiple dedicated pools of the same type.</li>
+<li>
+<p><code>ldap</code> - pool of connections to an LDAP server</p>
+</li>
+<li>
+<p><strong>Syntax:</strong> Each pool is specified in a subsection starting with <code>[outgoing_pools.type.tag]</code>, where <code>type</code> is one of available connection types and <code>tag</code> is an arbitrary value uniquely identifying the pool within its type.
+This allows you to create multiple dedicated pools of the same type.</p>
+</li>
 </ul>
 <h2 id="general-pool-options">General pool options</h2>
 <h3 id="outgoing_poolsscope"><code>outgoing_pools.*.*.scope</code></h3>
@@ -4069,35 +3984,6 @@ Global distribution (implemented in <code>mod_global_distrib</code>) requires Re
 <li><strong>Default:</strong> <code>""</code></li>
 <li><strong>Example:</strong> <code>password = "topsecret"</code></li>
 </ul>
-<h2 id="riak-options">Riak options</h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
-</div>
-<p>Currently, only one Riak connection pool can exist for each supported XMPP host (the default pool).</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p><code>riak</code> backend is not compatible with <code>available_worker</code> strategy.</p>
-</div>
-<h3 id="outgoing_poolsriakconnectionaddress"><code>outgoing_pools.riak.*.connection.address</code></h3>
-<ul>
-<li><strong>Syntax:</strong> string</li>
-<li><strong>Default:</strong> none, this option is mandatory</li>
-<li><strong>Example:</strong> <code>address = "127.0.0.1"</code></li>
-</ul>
-<h3 id="outgoing_poolsriakconnectionport"><code>outgoing_pools.riak.*.connection.port</code></h3>
-<ul>
-<li><strong>Syntax:</strong> integer</li>
-<li><strong>Default:</strong> none, this option is mandatory</li>
-<li><strong>Example:</strong> <code>port = 8087</code></li>
-</ul>
-<h3 id="outgoing_poolsriakconnectioncredentials"><code>outgoing_pools.riak.*.connection.credentials</code></h3>
-<ul>
-<li><strong>Syntax:</strong> <code>{user = "username", password = "pass"}</code></li>
-<li><strong>Default:</strong> none</li>
-<li><strong>Example:</strong> <code>credentials = {user = "myuser", password = "tisismepasswd"}</code></li>
-</ul>
-<p>To enable TLS, you need to include the <a href="#tls-options">TLS section</a> in the connection options. The <code>cacertfile</code> option is then mandatory and <code>verify_mode</code> cannot be set to <code>none</code>.</p>
 <h2 id="cassandra-options">Cassandra options</h2>
 <h3 id="outgoing_poolscassandraconnectionservers"><code>outgoing_pools.cassandra.*.connection.servers</code></h3>
 <ul>

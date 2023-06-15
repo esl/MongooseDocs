@@ -1029,20 +1029,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../authentication-methods/riak/" class="md-nav__link">
-        Riak (deprecated)
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../authentication-methods/http/" class="md-nav__link">
         HTTP
       </a>
@@ -3329,11 +3315,7 @@ To run the server in the background instead of the interactive mode, use <code>m
 <p>The <code>quicktest</code> configuration is a relatively comprehensive one, giving good overview of what does and what doesn't work in the system, without repeating tests.
 Why would we want to ever repeat the tests?
 In order to test different backends of the same parts of the system.
-E.g. a message archive might store messages in MySQL/PostgreSQL or Riak KV - the glue code between the XMPP logic module and database is different in each case, therefore repeating the same tests with different databases is necessary to guarantee a truthful code coverage measurement.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
-</div>
+E.g. a message archive might store messages in MySQL/PostgreSQL or Elasticsearch - the glue code between the XMPP logic module and database is different in each case, therefore repeating the same tests with different databases is necessary to guarantee a truthful code coverage measurement.</p>
 <h3 id="testing-a-feature-in-development-tdd">Testing a feature in development / TDD</h3>
 <p>The whole suite takes a significant amount of time to complete.
 When you develop a new feature, the speed of iterating is crucial to maintain the flow (who doesn't like the feeling?!) and not lose focus.</p>
@@ -3379,7 +3361,7 @@ For example, to update the code on <code>mim1</code> node all you have to do is:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./rebar3<span class="w"> </span>as<span class="w"> </span>mim1<span class="w"> </span>compile
 </code></pre></div></td></tr></table></div></p>
 <p>A similar command applies to other nodes, the important thing being rebar3's profile.</p>
-<p>When the above command finishes, the code can be reloaded on the server by either reloading changed module(s) in the node's shell, e.g. <code>l(mongoose_riak)</code>, or restarting the node.</p>
+<p>When the above command finishes, the code can be reloaded on the server by either reloading changed module(s) in the node's shell, e.g. <code>l(mongoose_rdbms)</code>, or restarting the node.</p>
 <h4 id="reading-test-reports">Reading test reports</h4>
 <p>When finished, the test engine writes detailed html reports into a directory:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>big_tests/ct_report/ct_run.[gobbledygook][datetime]/

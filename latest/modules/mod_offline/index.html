@@ -1029,20 +1029,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../authentication-methods/riak/" class="md-nav__link">
-        Riak (deprecated)
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../authentication-methods/http/" class="md-nav__link">
         HTTP
       </a>
@@ -1596,26 +1582,6 @@
   <a href="#modulesmod_offlinestore_groupchat_messages" class="md-nav__link">
     modules.mod_offline.store_groupchat_messages
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#riak-specific-options" class="md-nav__link">
-    Riak-specific options
-  </a>
-  
-    <nav class="md-nav" aria-label="Riak-specific options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_offlineriakbucket_type" class="md-nav__link">
-    modules.mod_offline.riak.bucket_type
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -2786,26 +2752,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#riak-specific-options" class="md-nav__link">
-    Riak-specific options
-  </a>
-  
-    <nav class="md-nav" aria-label="Riak-specific options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_offlineriakbucket_type" class="md-nav__link">
-    modules.mod_offline.riak.bucket_type
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2864,14 +2810,10 @@ to disable this error message.</p>
 <p>Access Rule to use for limiting the storage size per user.</p>
 <h3 id="modulesmod_offlinebackend"><code>modules.mod_offline.backend</code></h3>
 <ul>
-<li><strong>Syntax:</strong> string, one of <code>mnesia</code>, <code>rdbms</code>, <code>riak</code></li>
+<li><strong>Syntax:</strong> string, one of <code>mnesia</code>, <code>rdbms</code></li>
 <li><strong>Default:</strong> <code>"mnesia"</code></li>
 <li><strong>Example:</strong> <code>backend = "rdbms"</code></li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
-</div>
 <p>Storage backend.</p>
 <h3 id="modulesmod_offlinestore_groupchat_messages"><code>modules.mod_offline.store_groupchat_messages</code></h3>
 <ul>
@@ -2884,26 +2826,14 @@ to disable this error message.</p>
 <p class="admonition-title">Warning</p>
 <p>This option can work only with MUC-light and is not expected to work with MUC.</p>
 </div>
-<h3 id="riak-specific-options">Riak-specific options</h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
-</div>
-<h4 id="modulesmod_offlineriakbucket_type"><code>modules.mod_offline.riak.bucket_type</code></h4>
-<ul>
-<li><strong>Syntax:</strong> non-empty string</li>
-<li><strong>Default:</strong> <code>"offline"</code></li>
-<li><strong>Example:</strong> <code>bucket_type = "offline_bucket_type"</code></li>
-</ul>
-<p>Riak bucket type.</p>
 <h2 id="example-configuration">Example Configuration</h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_offline]</span>
 <span class="w">  </span><span class="n">access_max_user_messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;max_user_offline_messages&quot;</span>
-<span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;riak&quot;</span>
-<span class="w">  </span><span class="n">riak</span><span class="p">.</span><span class="n">bucket_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;offline&quot;</span>
+<span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rdbms&quot;</span>
+<span class="w">  </span><span class="n">store_groupchat_messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="metrics">Metrics</h2>
 <p>If you'd like to learn more about metrics in MongooseIM, please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">MongooseIM metrics</a> page.</p>

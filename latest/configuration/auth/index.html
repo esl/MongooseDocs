@@ -1163,20 +1163,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../authentication-methods/riak/" class="md-nav__link">
-        Riak (deprecated)
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../authentication-methods/http/" class="md-nav__link">
         HTTP
       </a>
@@ -2908,15 +2894,10 @@ The following methods are supported:</p>
 <li><a href="../../authentication-methods/anonymous/"><code>anonymous</code></a> - allows anonymous connections,</li>
 <li><a href="../../authentication-methods/ldap/"><code>ldap</code></a> - checks the user credentials in LDAP,</li>
 <li><a href="../../authentication-methods/jwt/"><code>jwt</code></a> - authenticates the users with JSON Web Tokens,</li>
-<li><a href="../../authentication-methods/riak/"><code>riak (deprecated)</code></a> - stores the user accounts in a Riak database,</li>
 <li><a href="../../authentication-methods/http/"><code>http</code></a> - uses an external HTTP service to authenticate the user,</li>
 <li><a href="../../authentication-methods/pki/"><code>pki</code></a> - uses the certificate provided by the user to authenticate them,</li>
 <li><a href="../../authentication-methods/dummy/"><code>dummy</code></a> - no authentication, only for development and testing.</li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
-</div>
 <p>To allow the users to connect, you need to choose the authentication method from the list above and enable it by adding a corresponding section. For example, the default configuration file has the <code>[auth.internal]</code> section, which enables the <code>internal</code> method, using the internal Mnesia database to store users and their passwords. However, for production systems other methods like <code>rdbms</code> are recommended, as using an external database offers easier maintenance, flexibility, scalability and configurability in a typical setup. Some methods have more complex setup procedures and have their own specific options - the method names above are links to their descriptions. There are some general authentication options as well, which are described below.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -2926,14 +2907,10 @@ The following methods are supported:</p>
 <p>The options listed here affect more than one configuration method.</p>
 <h3 id="authmethods"><code>auth.methods</code></h3>
 <ul>
-<li><strong>Syntax:</strong> array of strings. Allowed values: <code>"internal"</code>, <code>"rdbms"</code>, <code>"external"</code>, <code>"anonymous"</code>, <code>"ldap"</code>, <code>"jwt"</code>, <code>"riak"</code>, <code>"http"</code>, <code>"pki"</code>, <code>"dummy"</code></li>
+<li><strong>Syntax:</strong> array of strings. Allowed values: <code>"internal"</code>, <code>"rdbms"</code>, <code>"external"</code>, <code>"anonymous"</code>, <code>"ldap"</code>, <code>"jwt"</code>, <code>"http"</code>, <code>"pki"</code>, <code>"dummy"</code></li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>methods = ["internal", "anonymous"]</code></li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
-</div>
 <p>It is possible to enable more than one method - they are queried one by one in the alphabetical order until one of them succeeds or there are no more methods. You can change the default order by using this option. Make sure that all methods from the list have their corresponding sections included in the <code>auth</code> section, e.g.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -3029,14 +3006,6 @@ The following methods are supported:</p>
 <td align="center"></td>
 </tr>
 <tr>
-<td>riak (deprecated)</td>
-<td align="center">x</td>
-<td align="center">x</td>
-<td align="center">x</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
 <td>http</td>
 <td align="center">x</td>
 <td align="center">x</td>
@@ -3076,7 +3045,7 @@ The following methods are supported:</p>
 </ul>
 <p>This option allows you to list the enabled ones in the order of preference (they are tried until one succeeds or the list is exhausted).</p>
 <h2 id="password-related-options">Password-related options</h2>
-<p>These options are common to the <code>http</code>, <code>rdbms</code>, <code>internal</code> and <code>riak</code> (deprecated) methods.</p>
+<p>These options are common to the <code>http</code>, <code>rdbms</code> and <code>internal</code> methods.</p>
 <h3 id="authpasswordformat"><code>auth.password.format</code></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of: <code>"plain"</code>, <code>"scram"</code></li>
@@ -3141,7 +3110,6 @@ See more information in this <a href="https://csrc.nist.gov/publications/detail/
 <li><a href="../../authentication-methods/external/#configuration-options">External method options</a></li>
 <li><a href="../../authentication-methods/ldap/#configuration-options">LDAP method options</a></li>
 <li><a href="../../authentication-methods/jwt/#configuration-options">JWT method options</a></li>
-<li><a href="../../authentication-methods/riak/#configuration-options">Riak (deprecated) method options</a></li>
 <li><a href="../../authentication-methods/http/#configuration-options">HTTP method options</a></li>
 </ul>
 

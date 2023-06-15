@@ -1029,20 +1029,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../authentication-methods/riak/" class="md-nav__link">
-        Riak (deprecated)
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../authentication-methods/http/" class="md-nav__link">
         HTTP
       </a>
@@ -1659,26 +1645,6 @@
   <a href="#modulesmod_privatebackend" class="md-nav__link">
     modules.mod_private.backend
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#riak-specific-options" class="md-nav__link">
-    Riak-specific options
-  </a>
-  
-    <nav class="md-nav" aria-label="Riak-specific options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_privacyriakbucket_type" class="md-nav__link">
-    modules.mod_privacy.riak.bucket_type
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -2772,26 +2738,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#riak-specific-options" class="md-nav__link">
-    Riak-specific options
-  </a>
-  
-    <nav class="md-nav" aria-label="Riak-specific options">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_privacyriakbucket_type" class="md-nav__link">
-    modules.mod_privacy.riak.bucket_type
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2844,26 +2790,11 @@ It allows users to store custom XML data in the server's database. Used e.g. for
 <a href="../../configuration/Modules/#iq-processing-policies">IQ processing policies</a>.</p>
 <h3 id="modulesmod_privatebackend"><code>modules.mod_private.backend</code></h3>
 <ul>
-<li><strong>Syntax:</strong> string, one of <code>"mnesia"</code>, <code>"rdbms"</code>, <code>"riak"</code>.</li>
+<li><strong>Syntax:</strong> string, one of <code>"mnesia"</code>, <code>"rdbms"</code>.</li>
 <li><strong>Default:</strong> "mnesia"</li>
 <li><strong>Example:</strong> <code>backend = "mnesia"</code></li>
 </ul>
 <p>Database backend to use.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
-</div>
-<p><strong>CAUTION:</strong>  Riak KV backend doesn't support transactions (rollbacks), so please avoid inserting
-more than one value in a single set request, otherwise you may end up with partially saved data.
-Backend returns the first error.</p>
-<h3 id="riak-specific-options">Riak-specific options</h3>
-<h4 id="modulesmod_privacyriakbucket_type"><code>modules.mod_privacy.riak.bucket_type</code></h4>
-<ul>
-<li><strong>Syntax:</strong> string</li>
-<li><strong>Default:</strong> <code>"private"</code></li>
-<li><strong>Example:</strong> <code>bucket_type = "private"</code></li>
-</ul>
-<p>Riak bucket type.</p>
 <h2 id="example-configuration">Example Configuration</h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_private]</span>

@@ -1029,20 +1029,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../authentication-methods/riak/" class="md-nav__link">
-        Riak (deprecated)
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../authentication-methods/http/" class="md-nav__link">
         HTTP
       </a>
@@ -2813,8 +2799,7 @@ The help is printed when the script is run without any parameters
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code>configure: OPTIONS
+<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code>configure: OPTIONS
 
 Specifies which 3rd party deps will be included in the release.
 Writes configure.out file as output - this file can be sourced with:
@@ -2831,7 +2816,6 @@ Writes rel/configure.vars.config which can be used as Reltool input.
     with-odbc           include an ODBC driver (requires unixodbc to compile)
     with-pgsql          include pgsql driver
     with-redis          include redis driver
-    with-riak           include riak driver
 
 Options:
 
@@ -2839,10 +2823,6 @@ Options:
     system    Install files into $PREFIX/{bin, etc, ...} instead of a completely self contained release. Default: no
     user      System user to run the server as. Default:
 </code></pre></div></td></tr></table></div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Riak is deprecated and its support will be withdrawn in future versions of MongooseIM.</p>
-</div>
 <p>This script is also accessible via the make <code>configure</code> target.</p>
 <h3 id="example">Example</h3>
 <p>If <code>mysql</code> and <code>redis</code> are the only drivers that should be included in the
@@ -2890,7 +2870,7 @@ have private groups of the same name as their usernames.</p>
 <span class="normal">23</span>
 <span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code>$<span class="w"> </span>cat<span class="w"> </span>configure.out<span class="w"> </span>rel/configure.vars.config
 <span class="nb">export</span><span class="w"> </span><span class="nv">MONGOOSEIM_CONFIGURED</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">APPS</span><span class="o">=</span><span class="s2">&quot;mysql eodbc epgsql eredis riakc nksip cqerl tirerl erlcloud&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">APPS</span><span class="o">=</span><span class="s2">&quot;mysql eodbc epgsql eredis nksip cqerl tirerl erlcloud&quot;</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">PREFIX</span><span class="o">=</span><span class="s2">&quot;/tmp/mim-sandbox-system&quot;</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">RELTOOL_VARS</span><span class="o">=</span><span class="s2">&quot;rel/configure.vars.config&quot;</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">SYSTEM</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span>
