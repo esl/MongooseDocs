@@ -888,6 +888,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#xmpp-federation-s2s" class="md-nav__link">
+    XMPP federation (S2S)
+  </a>
+  
+    <nav class="md-nav" aria-label="XMPP federation (S2S)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generals2s_backend" class="md-nav__link">
+    general.s2s_backend
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#message-routing" class="md-nav__link">
     Message routing
   </a>
@@ -986,6 +1006,20 @@
     <li class="md-nav__item">
       <a href="../auth/" class="md-nav__link">
         Options: Auth
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internal-databases/" class="md-nav__link">
+        Options: Internal Databases
       </a>
     </li>
   
@@ -3014,6 +3048,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#xmpp-federation-s2s" class="md-nav__link">
+    XMPP federation (S2S)
+  </a>
+  
+    <nav class="md-nav" aria-label="XMPP federation (S2S)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generals2s_backend" class="md-nav__link">
+    general.s2s_backend
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#message-routing" class="md-nav__link">
     Message routing
   </a>
@@ -3235,7 +3289,7 @@ You should use the new GraphQL-based command line interface instead.</p>
 <p>These options can be used to configure the way MongooseIM manages user sessions.</p>
 <h3 id="generalsm_backend"><code>general.sm_backend</code></h3>
 <ul>
-<li><strong>Syntax:</strong> string, <code>"mnesia"</code> or <code>"redis"</code></li>
+<li><strong>Syntax:</strong> string, <code>"mnesia"</code>, <code>"cets"</code> or <code>"redis"</code></li>
 <li><strong>Default:</strong> <code>"mnesia"</code></li>
 <li><strong>Example:</strong> <code>sm_backend = "redis"</code></li>
 </ul>
@@ -3249,6 +3303,14 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 <li><strong>Example:</strong> <code>replaced_wait_timeout = 5000</code></li>
 </ul>
 <p>When a user's session is replaced (due to a full JID conflict) by a new one, this parameter specifies the time MongooseIM waits for the old sessions to close. The default value is sufficient in most cases. If you observe <code>replaced_wait_timeout</code> warning in logs, then most probably the old sessions are frozen for some reason and it should be investigated.</p>
+<h2 id="xmpp-federation-s2s">XMPP federation (S2S)</h2>
+<h3 id="generals2s_backend"><code>general.s2s_backend</code></h3>
+<ul>
+<li><strong>Syntax:</strong> string, <code>"mnesia"</code>, <code>"cets"</code></li>
+<li><strong>Default:</strong> <code>"mnesia"</code></li>
+<li><strong>Example:</strong> <code>s2s_backend = "cets"</code></li>
+</ul>
+<p>Backend for replicating the list of outgoing Server to Server (S2S) connections across the nodes of the local MongooseIM cluster.</p>
 <h2 id="message-routing">Message routing</h2>
 <p>The following options influence the way MongooseIM routes incoming messages to their recipients.</p>
 <h3 id="generalroute_subdomains"><code>general.route_subdomains</code></h3>

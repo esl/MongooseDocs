@@ -12,20 +12,20 @@
         <meta name="author" content="Erlang Solutions">
       
       
-        <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/configuration/Erlang-cookie-security/">
+        <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/configuration/internal-databases/">
       
       
-        <link rel="prev" href="../release-options/">
+        <link rel="prev" href="../auth/">
       
       
-        <link rel="next" href="../TLS-hardening/">
+        <link rel="next" href="../outgoing-connections/">
       
       <link rel="icon" href="../../favicon.ico">
       <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
-        <title>Erlang Cookie Security - MongooseIM</title>
+        <title>Options: Internal Databases - MongooseIM</title>
       
     
     
@@ -78,6 +78,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#cets-options" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -112,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Erlang Cookie Security
+              Options: Internal Databases
             
           </span>
         </div>
@@ -751,11 +756,66 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../internal-databases/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Options: Internal Databases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Options: Internal Databases
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#internal_databasescetsbackend" class="md-nav__link">
+    internal_databases.cets.backend
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal_databasescetscluster_name" class="md-nav__link">
+    internal_databases.cets.cluster_name
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal_databasescetsnode_list_file" class="md-nav__link">
+    internal_databases.cets.node_list_file
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -891,19 +951,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../Erlang-cookie-security/" class="md-nav__link">
         Erlang Cookie Security
       </a>
-      
     </li>
   
 
@@ -2641,6 +2693,37 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#internal_databasescetsbackend" class="md-nav__link">
+    internal_databases.cets.backend
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal_databasescetscluster_name" class="md-nav__link">
+    internal_databases.cets.cluster_name
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal_databasescetsnode_list_file" class="md-nav__link">
+    internal_databases.cets.node_list_file
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2658,17 +2741,68 @@
   
 
 
-  <h1>Erlang Cookie Security</h1>
+<p>Internal databases are used to cluster MongooseIM nodes, and to replicate session list data between them.</p>
+<p>Mnesia is a legacy way to cluster MongooseIM nodes. It is also could be used to store persistent data, but we recommend
+to use RDBMS databases instead because of scalability and stability reasons.</p>
+<p>CETS is a new way to cluster MongooseIM nodes.
+CETS needs to know a list of nodes for the node discovery. There are two ways to get a list of nodes:</p>
+<ul>
+<li>A text file with a list of nodes on each line. It is useful when there is an external script to make this file based on
+  some custom logic (for example, a bash script that uses AWS CLI to discover instances in the autoscaling group). This file
+  would be automatilly reread on change.</li>
+<li>RDBMS database. MongooseIM would write into RDBMS its nodename and read a list of other nodes. It is pretty simple, but
+  RDBMS database could be a single point of failure.</li>
+</ul>
+<p>Section example:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[internal_databases]</span>
+<span class="w">    </span><span class="k">[internal_databases.mnesia]</span>
 
-<p>In order for MongooseIM nodes to communicate with each other, they have to share a common secret - i.e. a cookie - which is a feature of the underlying Erlang VM.
-The cookie itself is an UTF-8 string that is up to 255 characters in size.
-Thanks to the cookie, MongooseIM nodes can determine if they are allowed to communicate with each other and with no cookie no communication would flow between the nodes - a feature especially useful when you are running more than one applications on a single machine. </p>
-<p>For ease of deployment and staging, each MongooseIM node is configured with a predefined erlang cookie.
-However, one should remember that for production environments this cookie should be reconfigured to a new secret cookie, as this will secure your system from intrusion.
-You can change the cookie by changing the parameters of the <code>-setcookie</code> parameter in the <code>vm.args</code> file.</p>
-<p>Nonetheless, one should remember that communication between Erlang nodes is unencrypted by default, hence, the cookie is vulnerable to sniffing.
-If one has access to a MongooseIM cookie and figures out the hostname of a node, one can execute shell commands remotely on that node.
-Therefore, one should either provide privacy at the network layer (strongly recommended) or disable port 4369 for ultimate security.</p>
+<span class="w">    </span><span class="k">[internal_databases.cets]</span>
+<span class="w">        </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rdbms&quot;</span>
+<span class="w">        </span><span class="n">cluster_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mongooseim&quot;</span>
+</code></pre></div></td></tr></table></div>
+<p>or</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[internal_databases]</span>
+<span class="w">    </span><span class="k">[internal_databases.cets]</span>
+<span class="w">        </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;file&quot;</span>
+<span class="w">        </span><span class="n">node_list_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cets_disco.txt&quot;</span>
+</code></pre></div></td></tr></table></div>
+<p>To enable just CETS, define only <code>internal_databases.cets</code> section:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[internal_databases]</span>
+<span class="w">    </span><span class="k">[internal_databases.cets]</span>
+</code></pre></div></td></tr></table></div>
+<h1 id="cets-options">CETS Options</h1>
+<h3 id="internal_databasescetsbackend"><code>internal_databases.cets.backend</code></h3>
+<p>Backend for CETS discovery.</p>
+<ul>
+<li><strong>Syntax:</strong> string, one of <code>"rdbms"</code>, <code>"file"</code>.</li>
+<li><strong>Default:</strong> <code>"rdbms"</code></li>
+<li><strong>Example:</strong> <code>backend = "rdbms"</code></li>
+</ul>
+<h3 id="internal_databasescetscluster_name"><code>internal_databases.cets.cluster_name</code></h3>
+<p>Namespace for the cluster. Only nodes with the same cluster name would be discoverd. This option is for RDBMS backend.</p>
+<ul>
+<li><strong>Syntax:</strong> string.</li>
+<li><strong>Default:</strong> <code>"mongooseim"</code></li>
+<li><strong>Example:</strong> <code>cluster_name = "mongooseim"</code></li>
+</ul>
+<h3 id="internal_databasescetsnode_list_file"><code>internal_databases.cets.node_list_file</code></h3>
+<p>File to read a list of nodes from. Relative to the MongooseIM's release directory. This option is for the file backend.
+Required, if <code>backend = "file"</code>.</p>
+<ul>
+<li><strong>Syntax:</strong> path.</li>
+<li><strong>Default:</strong> not specified.</li>
+<li><strong>Example:</strong> <code>node_list_file = "/etc/mim_nodes.txt"</code></li>
+</ul>
 
 
 
