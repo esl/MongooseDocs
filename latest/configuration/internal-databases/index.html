@@ -764,8 +764,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Options: Internal Databases
@@ -782,8 +780,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -792,23 +788,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#cets-options" class="md-nav__link">
+    CETS Options
+  </a>
+  
+    <nav class="md-nav" aria-label="CETS Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#internal_databasescetsbackend" class="md-nav__link">
     internal_databases.cets.backend
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#internal_databasescetscluster_name" class="md-nav__link">
     internal_databases.cets.cluster_name
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#internal_databasescetsnode_list_file" class="md-nav__link">
     internal_databases.cets.node_list_file
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2632,6 +2648,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/6.1.0_6.2.0/" class="md-nav__link">
+        6.1.0 to 6.2.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         MAM MUC migration helper
       </a>
@@ -2693,8 +2723,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -2703,23 +2731,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#cets-options" class="md-nav__link">
+    CETS Options
+  </a>
+  
+    <nav class="md-nav" aria-label="CETS Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#internal_databasescetsbackend" class="md-nav__link">
     internal_databases.cets.backend
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#internal_databasescetscluster_name" class="md-nav__link">
     internal_databases.cets.cluster_name
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#internal_databasescetsnode_list_file" class="md-nav__link">
     internal_databases.cets.node_list_file
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2741,46 +2789,42 @@
   
 
 
-<p>Internal databases are used to cluster MongooseIM nodes, and to replicate session list data between them.</p>
+  <h1>Options: Internal Databases</h1>
+
+<p>Internal databases are used to cluster MongooseIM nodes, and to replicate in-memory data (e.g. client sessions) between them.</p>
 <p>Mnesia is a legacy way to cluster MongooseIM nodes. It is also could be used to store persistent data, but we recommend
 to use RDBMS databases instead because of scalability and stability reasons.</p>
 <p>CETS is a new way to cluster MongooseIM nodes.
 CETS needs to know a list of nodes for the node discovery. There are two ways to get a list of nodes:</p>
 <ul>
+<li>RDBMS database. MongooseIM would write into RDBMS its nodename and read a list of other nodes.
+This is the best option if you are already using a relational database.</li>
 <li>A text file with a list of nodes on each line. It is useful when there is an external script to make this file based on
   some custom logic (for example, a bash script that uses AWS CLI to discover instances in the autoscaling group). This file
-  would be automatilly reread on change.</li>
-<li>RDBMS database. MongooseIM would write into RDBMS its nodename and read a list of other nodes. It is pretty simple, but
-  RDBMS database could be a single point of failure.</li>
+  would be automatically reread on change.</li>
 </ul>
-<p>Section example:</p>
+<p>Omitting this section entirely is equivalent to having only Mnesia enabled:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[internal_databases.mnesia]</span>
+</code></pre></div></td></tr></table></div>
+<p>The following example enables only CETS with the default RDBMS discovery backend:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[internal_databases.cets]</span>
+</code></pre></div></td></tr></table></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When switching to CETS, you need to configure particular backends to actually use it:</p>
+<ul>
+<li>general backends: <a href="../general/#generalsm_backend"><code>sm_backend</code></a>, <a href="../general/#generals2s_backend"><code>s2s_backend</code></a>, <a href="../general/#generalcomponent_backend"><code>component_backend</code></a></li>
+<li>module backends: <a href="../../modules/mod_bosh/#modulesmod_boshbackend"><code>mod_bosh</code></a>, <a href="../../modules/mod_stream_management/#modulesmod_stream_managementbackend"><code>mod_stream_management</code></a>, <a href="../../modules/mod_jingle_sip/#modulesmod_jingle_sipbackend"><code>mod_jingle_sip</code></a></li>
+</ul>
+</div>
+<p>Sometimes you might want to have both databases enabled and choose which backends use a particular DB:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[internal_databases]</span>
-<span class="w">    </span><span class="k">[internal_databases.mnesia]</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[internal_databases.mnesia]</span>
 
-<span class="w">    </span><span class="k">[internal_databases.cets]</span>
-<span class="w">        </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rdbms&quot;</span>
-<span class="w">        </span><span class="n">cluster_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mongooseim&quot;</span>
+<span class="k">[internal_databases.cets]</span>
 </code></pre></div></td></tr></table></div>
-<p>or</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[internal_databases]</span>
-<span class="w">    </span><span class="k">[internal_databases.cets]</span>
-<span class="w">        </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;file&quot;</span>
-<span class="w">        </span><span class="n">node_list_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cets_disco.txt&quot;</span>
-</code></pre></div></td></tr></table></div>
-<p>To enable just CETS, define only <code>internal_databases.cets</code> section:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[internal_databases]</span>
-<span class="w">    </span><span class="k">[internal_databases.cets]</span>
-</code></pre></div></td></tr></table></div>
-<h1 id="cets-options">CETS Options</h1>
+<h2 id="cets-options">CETS Options</h2>
 <h3 id="internal_databasescetsbackend"><code>internal_databases.cets.backend</code></h3>
 <p>Backend for CETS discovery.</p>
 <ul>
@@ -2803,6 +2847,14 @@ Required, if <code>backend = "file"</code>.</p>
 <li><strong>Default:</strong> not specified.</li>
 <li><strong>Example:</strong> <code>node_list_file = "/etc/mim_nodes.txt"</code></li>
 </ul>
+<h3 id="example">Example</h3>
+<p>The following example enables CETS with the file discovery backend:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[internal_databases.cets]</span>
+<span class="w">    </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;file&quot;</span>
+<span class="w">    </span><span class="n">node_list_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cets_disco.txt&quot;</span>
+</code></pre></div></td></tr></table></div>
 
 
 

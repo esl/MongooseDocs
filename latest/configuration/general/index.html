@@ -908,6 +908,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#external-xmpp-components" class="md-nav__link">
+    External XMPP components
+  </a>
+  
+    <nav class="md-nav" aria-label="External XMPP components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generalcomponent_backend" class="md-nav__link">
+    general.component_backend
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#message-routing" class="md-nav__link">
     Message routing
   </a>
@@ -2837,6 +2857,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/6.1.0_6.2.0/" class="md-nav__link">
+        6.1.0 to 6.2.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         MAM MUC migration helper
       </a>
@@ -3068,6 +3102,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#external-xmpp-components" class="md-nav__link">
+    External XMPP components
+  </a>
+  
+    <nav class="md-nav" aria-label="External XMPP components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generalcomponent_backend" class="md-nav__link">
+    general.component_backend
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#message-routing" class="md-nav__link">
     Message routing
   </a>
@@ -3289,13 +3343,17 @@ You should use the new GraphQL-based command line interface instead.</p>
 <p>These options can be used to configure the way MongooseIM manages user sessions.</p>
 <h3 id="generalsm_backend"><code>general.sm_backend</code></h3>
 <ul>
-<li><strong>Syntax:</strong> string, <code>"mnesia"</code>, <code>"cets"</code> or <code>"redis"</code></li>
+<li><strong>Syntax:</strong> string: <code>"mnesia"</code>, <code>"cets"</code> or <code>"redis"</code></li>
 <li><strong>Default:</strong> <code>"mnesia"</code></li>
 <li><strong>Example:</strong> <code>sm_backend = "redis"</code></li>
 </ul>
 <p>Backend for storing user session data. All nodes in a cluster must have access to a complete session database.
 Mnesia is sufficient in most cases, use Redis only in large deployments when you notice issues with the mnesia backend. Requires a redis pool with the <code>default</code> tag defined in the <code>outgoing_pools</code> section.
 See the section about <a href="../outgoing-connections/#redis-specific-options">redis connection setup</a> for more information.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When set to <code>mnesia</code> or <code>cets</code>, the corresponding <a href="../internal-databases/">internal database</a> has to be enabled.</p>
+</div>
 <h3 id="generalreplaced_wait_timeout"><code>general.replaced_wait_timeout</code></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer, representing time in milliseconds</li>
@@ -3306,11 +3364,27 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 <h2 id="xmpp-federation-s2s">XMPP federation (S2S)</h2>
 <h3 id="generals2s_backend"><code>general.s2s_backend</code></h3>
 <ul>
-<li><strong>Syntax:</strong> string, <code>"mnesia"</code>, <code>"cets"</code></li>
+<li><strong>Syntax:</strong> string: <code>"mnesia"</code> or <code>"cets"</code></li>
 <li><strong>Default:</strong> <code>"mnesia"</code></li>
 <li><strong>Example:</strong> <code>s2s_backend = "cets"</code></li>
 </ul>
 <p>Backend for replicating the list of outgoing Server to Server (S2S) connections across the nodes of the local MongooseIM cluster.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The corresponding <a href="../internal-databases/">internal database</a> has to be enabled.</p>
+</div>
+<h2 id="external-xmpp-components">External XMPP components</h2>
+<h3 id="generalcomponent_backend"><code>general.component_backend</code></h3>
+<ul>
+<li><strong>Syntax:</strong> string: <code>"mnesia"</code> or <code>"cets"</code></li>
+<li><strong>Default:</strong> <code>"mnesia"</code></li>
+<li><strong>Example:</strong> <code>component_backend = "cets"</code></li>
+</ul>
+<p>Backend for replicating the list of connected external components across the nodes of the local MongooseIM cluster.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The corresponding <a href="../internal-databases/">internal database</a> has to be enabled.</p>
+</div>
 <h2 id="message-routing">Message routing</h2>
 <p>The following options influence the way MongooseIM routes incoming messages to their recipients.</p>
 <h3 id="generalroute_subdomains"><code>general.route_subdomains</code></h3>
