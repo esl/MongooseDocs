@@ -541,6 +541,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/CETS-configure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to configure MongooseIM to use CETS instead of Mnesia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tutorials/push-notifications/Push-notifications/" class="md-nav__link">
         
   
@@ -2965,6 +2985,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#cets-system-metrics" class="md-nav__link">
+    CETS system metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#vm-metrics" class="md-nav__link">
     VM metrics
   </a>
@@ -3921,6 +3948,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#cets-system-metrics" class="md-nav__link">
+    CETS system metrics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#vm-metrics" class="md-nav__link">
     VM metrics
   </a>
@@ -4469,6 +4503,81 @@ As a result it makes more sense to maintain a list of the most relevant or usefu
 <td><code>[global, data, rdbms, PoolName]</code></td>
 <td>proplist</td>
 <td>For every RDBMS pool defined, an instance of this metric is available. It is a proplist with values <code>workers</code>, <code>recv_oct</code>, <code>recv_cnt</code>, <code>recv_max</code>, <code>send_oct</code>, <code>send_max</code>, <code>send_cnt</code>, <code>send_pend</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cets-system-metrics">CETS system metrics</h3>
+<table>
+<thead>
+<tr>
+<th>Metric name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[global, cets, system]</code></td>
+<td>proplist</td>
+<td>A proplist with a list of stats. Description is below.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Stat Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>available_nodes</code></td>
+<td>Available nodes (nodes that are connected to us and have the CETS disco process started).</td>
+</tr>
+<tr>
+<td><code>unavailable_nodes</code></td>
+<td>Unavailable nodes (nodes that do not respond to our pings).</td>
+</tr>
+<tr>
+<td><code>joined_nodes</code></td>
+<td>Joined nodes (nodes that have our local tables running).</td>
+</tr>
+<tr>
+<td><code>discovered_nodes</code></td>
+<td>Discovered nodes (nodes that are extracted from the discovery backend).</td>
+</tr>
+<tr>
+<td><code>remote_nodes_without_disco</code></td>
+<td>Nodes that have more tables registered than the local node.</td>
+</tr>
+<tr>
+<td><code>remote_nodes_with_unknown_tables</code></td>
+<td>Nodes with unknown tables.</td>
+</tr>
+<tr>
+<td><code>remote_unknown_tables</code></td>
+<td>Unknown remote tables.</td>
+</tr>
+<tr>
+<td><code>remote_nodes_with_missing_tables</code></td>
+<td>Nodes that are available, but do not host some of our local tables.</td>
+</tr>
+<tr>
+<td><code>remote_missing_tables</code></td>
+<td>Nodes that replicate at least one of our local tables to a different list of nodes.</td>
+</tr>
+<tr>
+<td><code>conflict_nodes</code></td>
+<td>Nodes that replicate at least one of our local tables to a different list of nodes.</td>
+</tr>
+<tr>
+<td><code>conflict_tables</code></td>
+<td>Tables that have conflicting replication destinations.</td>
+</tr>
+<tr>
+<td><code>discovery_works</code></td>
+<td>Returns 1 if the last discovery attempt is successful (otherwise returns 0).</td>
 </tr>
 </tbody>
 </table>

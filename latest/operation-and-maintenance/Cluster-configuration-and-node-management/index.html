@@ -541,6 +541,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/CETS-configure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to configure MongooseIM to use CETS instead of Mnesia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tutorials/push-notifications/Push-notifications/" class="md-nav__link">
         
   
@@ -3982,11 +4002,27 @@ Epmd keeps track of which Erlang node is using which ports on the local machine.
 <li>the same cookie across all nodes (<code>vm.args</code> <code>-setcookie</code> parameter)</li>
 <li>each node should be able to ping other nodes using its sname
    (ex. <code>net_adm:ping('mongoose@localhost')</code>)</li>
+<li>RDBMS backend is configured, so CETS could discover nodes</li>
 </ul>
 <h3 id="initial-node">Initial node</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">CETS</label><label for="__tabbed_1_2">Mnesia</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Clustering is automatic. There is no difference between nodes.</p>
+</div>
+<div class="tabbed-block">
 <p>There is no action required on the initial node.</p>
 <p>Just start MongooseIM using <code>mongooseim start</code> or <code>mongooseim live</code>.</p>
+</div>
+</div>
+</div>
 <h3 id="new-node-joining-cluster">New node - joining cluster</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">CETS</label><label for="__tabbed_2_2">Mnesia</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Clustering is automatic.</p>
+</div>
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>start
@@ -4004,25 +4040,131 @@ Successful output may look like the following:</p>
 </code></pre></div></td></tr></table></div>
 <p>In order to skip the question you can add option <code>-f</code> which will perform the action
 without displaying the warning and waiting for the confirmation.</p>
+</div>
+</div>
+</div>
 <h3 id="leaving-cluster">Leaving cluster</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">CETS</label><label for="__tabbed_3_2">Mnesia</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Stopping the node is enough to leave the cluster.
+If you want to avoid the node joining the cluster again, you have to specify a different <code>cluster_name</code>
+option in the CETS backend configuration. A different Erlang cookie is a good idea too.</p>
+</div>
+<div class="tabbed-block">
 <p>To leave a running node from the cluster, call:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>leave_cluster
 </code></pre></div></td></tr></table></div>
-<p>It only makes sense to use it if the node is the part of a cluster, e.g <code>join_cluster</code> was called from that node before.</p>
+<p>It only makes sense to use it if the node is part of a cluster, e.g <code>join_cluster</code> was called on that node before.</p>
 <p>Similarly to <code>join_cluster</code> a warning and a question will be displayed unless the option <code>-f</code> is added to the command.</p>
 <p>The successful output from the above command may look like the following:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>The node mongooseim2@localhost has successfully left the cluster
 </code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 <h3 id="removing-a-node-from-the-cluster">Removing a node from the cluster</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">CETS</label><label for="__tabbed_4_2">Mnesia</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>A stopped node would be automatically removed from the node discovery table in RDBMS database after some time.
+It is needed so other nodes would not try to connect to the stopped node.</p>
+</div>
+<div class="tabbed-block">
 <p>To remove another node from the cluster, call the following command from one of the cluster members:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>remove_from_cluster<span class="w"> </span>RemoteNodeName
 </code></pre></div></td></tr></table></div>
-<p>where <code>RemoteNodeName</code> is a name of the node that we'd like to remove from our cluster.
+<p>where <code>RemoteNodeName</code> is the name of the node that we'd like to remove from our cluster.
 This command could be useful when the node is dead and not responding and we'd like to remove it remotely.
 The successful output from the above command may look like the following:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>The node mongooseim2@localhost has been removed from the cluster
 </code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 <h3 id="cluster-status">Cluster status</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">CETS</label><label for="__tabbed_5_2">Mnesia</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Run the command:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>cets<span class="w"> </span>systemInfo
+</code></pre></div></td></tr></table></div>
+<p><code>joinedNodes</code> should contain a list of properly joined nodes:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&quot;joinedNodes&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="s2">&quot;mongooseim@node1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;mongooseim@node2&quot;</span>
+<span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+<p>It should generally be equal to the list of <code>discoveredNodes</code>.</p>
+<p>If it is not equal, you could have some configuration or networking issues.
+You can check the <code>unavailableNodes</code>, <code>remoteNodesWithUnknownTables</code>,
+and <code>remoteNodesWithMissingTables</code> lists for more information (generally, these lists should be empty).
+You can read the description for other fields of <code>systemInfo</code> in the
+<a href="../../graphql-api/admin-graphql-doc.html#definition-CETSSystemInfo">GraphQL API reference</a>.</p>
+<p>For a properly configured 2 nodes cluster the metrics would show something like that:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="err">mo</span><span class="kc">n</span><span class="err">gooseimc</span><span class="kc">tl</span><span class="w"> </span><span class="err">me</span><span class="kc">tr</span><span class="err">ic</span><span class="w"> </span><span class="err">ge</span><span class="kc">t</span><span class="err">Me</span><span class="kc">tr</span><span class="err">ics</span><span class="w"> </span><span class="mi">--</span><span class="kc">na</span><span class="err">me</span><span class="w"> </span><span class="err">&#39;</span><span class="p">[</span><span class="s2">&quot;global&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;cets&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;system&quot;</span><span class="p">]</span><span class="err">&#39;</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;metric&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;getMetrics&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;unavailable_nodes&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cets_system&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;remote_unknown_tables&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;remote_nodes_without_disco&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;remote_nodes_with_unknown_tables&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;remote_nodes_with_missing_tables&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;remote_missing_tables&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;global&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;cets&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;system&quot;</span>
+<span class="w">          </span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;joined_nodes&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;discovery_works&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;discovered_nodes&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;conflict_tables&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;conflict_nodes&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;available_nodes&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
 <p>You can use the following commands on any of the running nodes to examine the cluster
 or to see if a newly added node is properly clustered:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>mnesia<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;running db nodes&quot;</span>
@@ -4032,11 +4174,14 @@ A healthy cluster should contain all nodes here.
 For example:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>running<span class="w"> </span>db<span class="w"> </span><span class="nv">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>mongooseim@node1,<span class="w"> </span>mongooseim@node2<span class="o">]</span>
 </code></pre></div></td></tr></table></div>
-To see stopped or misbehaving nodes following command can be useful:</p>
+To see stopped or misbehaving nodes the following command can be useful:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>mnesia<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;stopped db nodes&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>This command shows which nodes are considered stopped.
 This does not necessarily indicate that they are down but might be a symptom of a communication problem.</p>
+</div>
+</div>
+</div>
 <h2 id="load-balancing">Load Balancing</h2>
 <h3 id="elastic-load-balancer-elb">Elastic Load Balancer (ELB)</h3>
 <p>When using ELB please be advised that some warm-up time may be needed before

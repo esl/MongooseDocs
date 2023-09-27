@@ -541,6 +541,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/CETS-configure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to configure MongooseIM to use CETS instead of Mnesia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tutorials/push-notifications/Push-notifications/" class="md-nav__link">
         
   
@@ -3894,15 +3914,17 @@ Subsequent sections go into more depth on each database: what they are suitable 
 <p>Transient data:</p>
 <ul>
 <li>
-<p>Mnesia - we highly recommend Mnesia (a highly available and distributed database) over Redis for storing <strong>transient</strong> data.
- Being an Erlang-based database, it's the default persistence option for most modules in MongooseIM.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>We <strong>strongly recommend</strong> keeping <strong>persistent</strong> data in an external DB (RDBMS) for production.
-Mnesia is not suitable for the volumes of <strong>persistent</strong> data which some modules may require.
-Sooner or later a migration will be needed which may be painful.
-It is possible to store all data in Mnesia, but only for testing purposes, not for any serious deployments.</p>
-</div>
+<p>CETS - a library to synchronise ETS tables between nodes.
+  A new choice to share live data across the MongooseIM cluster.
+  We recommend to use this backend for transient data.
+  This backend requires an RDBMS database configured because we use an external database to discover nodes in the cluster.
+  For a CETS config example, see <a href="../../tutorials/CETS-configure/">tutorials</a>.</p>
+</li>
+<li>
+<p>Mnesia - a built-in Erlang Database.
+  Mnesia is fine for a cluster of fixed size with reliable networking between nodes and with nodes rarely restarted.
+  There are some issues when nodes are restarting or new ones joining the cluster. For this case, we recommend to use CETS instead.
+  Mnesia is still the default backend for some modules for compatibility reasons with older config files.</p>
 </li>
 <li>
 <p>Redis - A fantastic choice for storing live data.
@@ -3924,6 +3946,17 @@ It is possible to store all data in Mnesia, but only for testing purposes, not f
 </li>
 <li>
 <p>ElasticSearch - Only for MAM (Message Archive Management).</p>
+</li>
+<li>
+<p>Mnesia - some backends support Mnesia to store data, but it is not recommended.
+  It is still the default option, when not specifying a backend for many modules, so be careful.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>We <strong>strongly recommend</strong> keeping <strong>persistent</strong> data in an external DB (RDBMS) for production.
+Mnesia is not suitable for the volumes of <strong>persistent</strong> data which some modules may require.
+Sooner or later a migration will be needed which may be painful.
+It is possible to store all data in Mnesia, but only for testing purposes, not for any serious deployments.</p>
+</div>
 </li>
 </ul>
 <p>User Data:</p>
