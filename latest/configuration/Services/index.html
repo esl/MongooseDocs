@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.10">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.12">
     
     
       
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#service_admin_extra" class="md-skip">
+        <a href="#service_mongoose_system_metrics" class="md-skip">
           Skip to content
         </a>
       
@@ -1049,30 +1049,6 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#service_admin_extra" class="md-nav__link">
-    <span class="md-ellipsis">
-      service_admin_extra
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="service_admin_extra">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#servicesservice_admin_extrasubmods" class="md-nav__link">
-    <span class="md-ellipsis">
-      services.service_admin_extra.submods
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#service_mongoose_system_metrics" class="md-nav__link">
@@ -3829,30 +3805,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#service_admin_extra" class="md-nav__link">
-    <span class="md-ellipsis">
-      service_admin_extra
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="service_admin_extra">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#servicesservice_admin_extrasubmods" class="md-nav__link">
-    <span class="md-ellipsis">
-      services.service_admin_extra.submods
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#service_mongoose_system_metrics" class="md-nav__link">
     <span class="md-ellipsis">
       service_mongoose_system_metrics
@@ -3984,59 +3936,23 @@
   <h1>Options: Services</h1>
 
 <p>Some functionalities in MongooseIM are provided by "services".
-A service is similar to a module, but while a module is started for every 
-host type and may have global or specific configuration, a service is started 
+A service is similar to a module, but while a module is started for every
+host type and may have global or specific configuration, a service is started
 only once with global configuration.
 Currently, three modules are categorised as "service providers".
 Eventually the modules which are not specific for a host type will be refactored to be services.</p>
 <ul>
-<li><strong>Syntax:</strong> Each service is specified in its own <code>services.*</code> section. </li>
+<li><strong>Syntax:</strong> Each service is specified in its own <code>services.*</code> section.</li>
 <li><strong>Default:</strong> None - each service needs to be enabled explicitly.
 Typical services are already specified in the example configuration file.</li>
-<li><strong>Example:</strong> A configuration of the <code>service_admin_extra</code> service.</li>
+<li><strong>Example:</strong> A configuration of the <code>service_domain_db</code> service.</li>
 </ul>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[services.service_admin_extra]</span>
-<span class="w">  </span><span class="n">submods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;node&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;account&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sessions&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;vcard&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;gdpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;upload&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;roster&quot;</span><span class="p">,</span>
-<span class="w">             </span><span class="s2">&quot;last&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;private&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;stanza&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;stats&quot;</span><span class="p">]</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[services.service_domain_db]</span>
+<span class="w">  </span><span class="n">event_cleaning_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span>
+<span class="w">  </span><span class="n">event_max_age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="service_admin_extra">service_admin_extra</h2>
-<p>This service provides additional commands to the mongooseimctl script.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This service is deprecated.
-The commands are still supported, but they <strong>will be removed</strong> soon.
-You should use the new GraphQL-based command line interface instead.</p>
-</div>
-<h3 id="servicesservice_admin_extrasubmods"><code>services.service_admin_extra.submods</code></h3>
-<ul>
-<li><strong>Syntax:</strong> Array of strings representing function groups added by <code>service_admin_extra</code>.</li>
-<li><strong>Default:</strong> All submodules: <code>["node", "account", "sessions", "vcard", "gdpr",
- "upload", "roster", "last", "private", "stanza", "stats", "domain"]</code></li>
-<li><strong>Example:</strong> <code>submods = ["stats", "gdpr"]</code></li>
-</ul>
-<p>The commands are bundled in the following groups:</p>
-<ul>
-<li><code>accounts</code>: Adds <code>change_password</code>, <code>check_password_hash</code>, <code>delete_old_users</code>,
- <code>delete_old_users_vhost</code>, <code>ban_account</code>, <code>num_active_users</code>, <code>check_account</code>,
-  <code>check_password</code></li>
-<li><code>last</code>: Adds <code>set_last</code></li>
-<li><code>node</code>: Adds <code>load_config</code>, <code>get_cookie</code>, <code>remove_node</code></li>
-<li><code>private</code>: Adds <code>private_get</code>, <code>private_set</code></li>
-<li><code>roster</code>: Adds <code>add_rosteritem</code>, <code>delete_rosteritem</code>, <code>process_rosteritems</code>,
- <code>get_roster</code>, <code>push_roster</code>, <code>push_roster_all</code>, <code>push_roster_alltoall</code></li>
-<li><code>sessions</code>: Adds <code>num_resources</code>, <code>resource_num</code>, <code>kick_session</code>, <code>status_num_host</code>,
- <code>status_num</code>, <code>status_list_host</code>, <code>status_list</code>, <code>connected_users_info</code>,
-  <code>connected_users_vhost</code>, <code>user_sessions_info</code>, <code>set_presence</code></li>
-<li><code>stanza</code>: Adds <code>send_message_chat</code>, <code>send_message_headline</code>, <code>send_stanza_c2s</code></li>
-<li><code>stats</code>: Adds <code>stats</code>, <code>stats_host</code></li>
-<li><code>vcard</code>: Adds <code>get_vcard</code>, <code>get_vcard2</code>, <code>get_vcard2_multi</code>, <code>set_vcard</code>,
- <code>set_vcard2</code>, <code>set_vcard2_multi</code></li>
-<li><code>gdpr</code>: Adds <code>retrieve_personal_data</code></li>
-<li><code>upload</code> : Adds <code>http_upload</code></li>
-<li><code>domain</code> : Adds <code>insert_domain</code>, <code>delete_domain</code>, <code>enable_domain</code>, <code>disable_domain</code></li>
-</ul>
 <h2 id="service_mongoose_system_metrics">service_mongoose_system_metrics</h2>
 <p>MongooseIM system metrics are being gathered to analyse the trends and needs of our users, improve MongooseIM, and get to know where to focus our efforts.
 See <a href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/">System Metrics Privacy Policy</a> for more details.</p>
@@ -4047,7 +3963,7 @@ See <a href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/">Sys
 <li><strong>Example:</strong> <code>report = true</code></li>
 </ul>
 <p>An explicit acknowledgement that the metrics are gathered and reported.
-When this option is not specified, the reports are gathered, and a notification 
+When this option is not specified, the reports are gathered, and a notification
 appears in logs on startup.
 Enabling this option silences the notification reminder that metrics are gathered.
 When this option is set to <code>false</code>, System Metrics Service is not started and metrics are not collected.</p>
@@ -4118,15 +4034,7 @@ You can put a specific host type there to use the pool with the <code>"host"</co
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[services.service_admin_extra]</span>
-<span class="w">  </span><span class="n">submods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;node&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;account&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sessions&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;vcard&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;gdpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;upload&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;roster&quot;</span><span class="p">,</span>
-<span class="w">             </span><span class="s2">&quot;last&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;private&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;stanza&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;stats&quot;</span><span class="p">]</span>
-
-<span class="k">[services.service_mongoose_system_metrics]</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[services.service_mongoose_system_metrics]</span>
 <span class="w">  </span><span class="n">report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">  </span><span class="n">initial_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">300_000</span>
 <span class="w">  </span><span class="n">periodic_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">108_000_000</span>
