@@ -3756,6 +3756,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#database-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database migration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#validation-of-tls-options" class="md-nav__link">
     <span class="md-ellipsis">
       Validation of TLS options
@@ -3768,6 +3777,15 @@
   <a href="#transition-to-new-cli-commands" class="md-nav__link">
     <span class="md-ellipsis">
       Transition to New CLI Commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#removed-support-for-riak" class="md-nav__link">
+    <span class="md-ellipsis">
+      Removed support for Riak
     </span>
   </a>
   
@@ -3884,6 +3902,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#database-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database migration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#validation-of-tls-options" class="md-nav__link">
     <span class="md-ellipsis">
       Validation of TLS options
@@ -3896,6 +3923,15 @@
   <a href="#transition-to-new-cli-commands" class="md-nav__link">
     <span class="md-ellipsis">
       Transition to New CLI Commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#removed-support-for-riak" class="md-nav__link">
+    <span class="md-ellipsis">
+      Removed support for Riak
     </span>
   </a>
   
@@ -3925,7 +3961,9 @@
 <p>So far MongooseIM has been using the internal Mnesia database to replicate the in-memory data between cluster nodes.
 Now there is an option to use <a href="https://github.com/esl/cets/">CETS</a> instead.
 Mnesia is still used by default, so you don't need to change your configuration file.
-If you want to switch to CETS, see <a href="../../configuration/internal-databases/"><code>internal_databases</code></a>.</p>
+If you want to switch to CETS, see the <a href="../../tutorials/CETS-configure/">tutorial</a> and the reference for <a href="../../configuration/internal-databases/"><code>internal_databases</code></a>.</p>
+<h2 id="database-migration">Database migration</h2>
+<p>There is a new table <code>discovery_nodes</code> in the database, which is used by CETS for dynamic discovery of cluster nodes. See the migrations for Postgres, MySQL and MSSQL in the <a href="https://github.com/esl/MongooseIM/tree/master/priv/migrations"><code>priv/migrations</code></a> directory. Although the new table is only needed by CETS, we recommend applying the migration anyway to keep the database in sync with the latest schema.</p>
 <h2 id="validation-of-tls-options">Validation of TLS options</h2>
 <p>Erlang/OTP 26 has more strict checking of the TLS options, as described in <a href="https://www.erlang.org/blog/otp-26-highlights/#ssl-improved-checking-of-options">release highlights</a>.
 MongooseIM follows the same rules now, preventing runtime crashes if TLS is misconfigured.</p>
@@ -3938,6 +3976,8 @@ MongooseIM follows the same rules now, preventing runtime crashes if TLS is misc
 <p>For each of the affected sections, if there is any <code>tls</code> option present, <strong>make sure</strong> that either <code>tls.cacertfile</code> is provided or <code>tls.verify_mode</code> is set to <code>"none"</code>.</p>
 <h2 id="transition-to-new-cli-commands">Transition to New CLI Commands</h2>
 <p>Legacy CLI commands previously marked as deprecated have now been removed. The users are encouraged to explore the new GraphQL-based CLI. It is recommended to transition to the new CLI commands <strong>prior to the next system upgrade</strong>. The configuration options <code>general.mongooseimctl_access_commands</code> and <code>services.service_admin_extra</code> related to the legacy CLI were also removed. <strong>You need to remove them</strong> from your configuration file unless you have already done so.</p>
+<h2 id="removed-support-for-riak">Removed support for Riak</h2>
+<p>The deprecated and obsolete Riak database is not supported anymore, and you cannot configure it in the <a href="../../configuration/outgoing-connections/"><code>outgoing_pools</code></a> section.</p>
 
 
 
