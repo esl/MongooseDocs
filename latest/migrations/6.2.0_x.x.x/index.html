@@ -15,14 +15,18 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/latest/migrations/6.2.0_x.x.x/">
       
       
+        <link rel="prev" href="../6.1.0_6.2.0/">
+      
+      
+        <link rel="next" href="../jid-from-mam-muc-script/">
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.10">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.11">
     
     
       
-        <title>6.2.0 x.x.x - MongooseIM</title>
+        <title>6.2.0 to 6.x.x - MongooseIM</title>
       
     
     
@@ -115,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              6.2.0 x.x.x
+              6.2.0 to 6.x.x
             
           </span>
         </div>
@@ -3383,17 +3387,19 @@
       
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" checked>
         
           
           <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
@@ -3407,7 +3413,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_13">
             <span class="md-nav__icon md-icon"></span>
             Migration Guide
@@ -3691,6 +3697,90 @@
                 
   
   
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    6.2.0 to 6.x.x
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    6.2.0 to 6.x.x
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#database-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database migration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#presences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Presences
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roster" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roster
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
   
   
     <li class="md-nav__item">
@@ -3788,6 +3878,24 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#presences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Presences
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roster" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roster
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3806,10 +3914,14 @@
   
 
 
-  <h1>6.2.0 x.x.x</h1>
+  <h1>6.2.0 to 6.x.x</h1>
 
 <h2 id="database-migration">Database migration</h2>
 <p>There is a new column in the <code>mam_message</code> table in the database, which is used to support including or excluding groupchat results in a user archive. See the migrations for Postgres, MySQL and MSSQL in the <a href="https://github.com/esl/MongooseIM/tree/master/priv/migrations"><code>priv/migrations</code></a> directory. Please be aware that the filtering process will only be effective for new messages and will not apply to those messages that have already been stored in the database.</p>
+<h2 id="presences">Presences</h2>
+<p><code>mod_presences</code> was internally refactored to modernise and improve the performance of the code, but as a side-effect, code for <a href="https://xmpp.org/extensions/xep-0018.html">XEP-0018</a> was removed. Note that this XEP was not advertised and as a matter of fact was deprecated already in 2003, so if your client was depending on it, it is high time to update.</p>
+<h2 id="roster">Roster</h2>
+<p><code>mod_roster</code> was internally refactored to modernise and improve the performance of the code, but as a side-effect, some database migrations need to be carried. See the migrations for Postgres, MySQL and MSSQL in the <a href="https://github.com/esl/MongooseIM/tree/master/priv/migrations"><code>priv/migrations</code></a> directory.</p>
 
 
 
