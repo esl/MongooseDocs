@@ -5234,7 +5234,14 @@ This allows you to create multiple dedicated pools of the same type.</p>
 <ul>
 <li><code>global</code> - meaning that the pool will be started once no matter how many XMPP hosts are served by MongooseIM</li>
 <li><code>host</code> - the pool will be started for each XMPP host or host type served by MongooseIM</li>
-<li><code>single_host</code> - the pool will be started for the selected host or host type only (you must provide the name).</li>
+<li>
+<p><code>single_host</code> - the pool will be started for the selected host or host type only (you must provide the name).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A pool with scope <code>global</code> and tag <code>default</code> is used by services that are not configured by host_type, like <code>service_domain_db</code> or <code>service_mongoose_system_metrics</code>, or by modules that don't support dynamic domains, like <code>mod_pubsub</code>.
+If a global default pool is not configured, these services will fail.</p>
+</div>
+</li>
 </ul>
 <h2 id="worker-pool-options">Worker pool options</h2>
 <p>All pools are managed by the <a href="https://github.com/inaka/worker_pool">inaka/worker_pool</a> library.</p>
