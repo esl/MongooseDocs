@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.12">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
     
     
       
@@ -1066,24 +1066,6 @@
   <a href="#outgoing_poolsscope" class="md-nav__link">
     <span class="md-ellipsis">
       outgoing_pools.*.*.scope
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#outgoing_poolshost_type" class="md-nav__link">
-    <span class="md-ellipsis">
-      outgoing_pools.*.*.host_type
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#outgoing_poolshost" class="md-nav__link">
-    <span class="md-ellipsis">
-      outgoing_pools.*.*.host
     </span>
   </a>
   
@@ -4539,24 +4521,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#outgoing_poolshost_type" class="md-nav__link">
-    <span class="md-ellipsis">
-      outgoing_pools.*.*.host_type
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#outgoing_poolshost" class="md-nav__link">
-    <span class="md-ellipsis">
-      outgoing_pools.*.*.host
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -5238,28 +5202,15 @@ This allows you to create multiple dedicated pools of the same type.</p>
 <h2 id="general-pool-options">General pool options</h2>
 <h3 id="outgoing_poolsscope"><code>outgoing_pools.*.*.scope</code></h3>
 <ul>
-<li><strong>Syntax:</strong> string, one of:<code>"global"</code>, <code>"host_type"</code>, <code>"single_host_type"</code></li>
+<li><strong>Syntax:</strong> string, one of:<code>"global"</code>, <code>"host_type"</code>.</li>
 <li><strong>Default:</strong> <code>"global"</code></li>
 <li><strong>Example:</strong> <code>scope = "host_type"</code></li>
 </ul>
-<h3 id="outgoing_poolshost_type"><code>outgoing_pools.*.*.host_type</code></h3>
-<ul>
-<li><strong>Syntax:</strong> string</li>
-<li><strong>Default:</strong> no default; required if <code>"single_host_type"</code> scope is specified</li>
-<li><strong>Example:</strong> <code>host_type = "basic_host_type"</code></li>
-</ul>
-<h3 id="outgoing_poolshost"><code>outgoing_pools.*.*.host</code></h3>
-<ul>
-<li><strong>Syntax:</strong> string</li>
-<li><strong>Default:</strong> no default; required if <code>"single_host"</code> scope is specified</li>
-<li><strong>Example:</strong> <code>host = "anotherhost.com"</code></li>
-</ul>
 <p><code>scope</code> can be set to:</p>
 <ul>
-<li><code>global</code> - meaning that the pool will be started once no matter how many XMPP hosts are served by MongooseIM</li>
-<li><code>host_type</code> - the pool will be started for each XMPP host or host type served by MongooseIM</li>
+<li><code>global</code> - meaning that the pool will be started once no matter how many XMPP hosts are served by MongooseIM.</li>
 <li>
-<p><code>single_host_type</code> - the pool will be started for the selected host or host type only (you must provide the name).</p>
+<p><code>host_type</code> - the pool will be started for each static XMPP host or host type served by MongooseIM.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>A pool with scope <code>global</code> and tag <code>default</code> is used by services that are not configured by host_type, like <code>service_domain_db</code> or <code>service_mongoose_system_metrics</code>, or by modules that don't support dynamic domains, like <code>mod_pubsub</code>.
@@ -5267,7 +5218,7 @@ If a global default pool is not configured, these services will fail.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code>host</code> and <code>single_host</code> are still supported and behave equivalent to <code>host_type</code> and <code>single_host_type</code> respectively; however, they are deprecated in favour of the latter.</p>
+<p>The option <code>host</code> is still supported and behaves equivalent to <code>host_type</code>; however, it is deprecated in favour of the latter.</p>
 </div>
 </li>
 </ul>
