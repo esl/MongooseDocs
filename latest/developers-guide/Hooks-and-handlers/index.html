@@ -3929,6 +3929,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/6.2.1_x.x.x/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.2.1 to x.x.x
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         
   
@@ -4219,14 +4240,14 @@ It is possible, but not recommended, to save a message in an offline storage by 
 <p>Note that in this example <code>ejabberd_sm</code> is coupled with <code>mod_offline</code>.
 I.e. if <code>mod_offline</code> was not available, the code would simply crash; if it was misconfigured or turned off, the behaviour would be undefined.
 To avoid that coupling and also to enable other (<a href="#sidenote-code-yet-to-be-written">possibly yet to be written</a>) code to carry out some action at this particular moment, <code>ejabberd_sm</code> calls instead:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">offline_message_hook</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">From</span><span class="p">,</span><span class="w"> </span><span class="nv">To</span><span class="p">,</span><span class="w"> </span><span class="nv">Packet</span><span class="p">);</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">offline_message</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">From</span><span class="p">,</span><span class="w"> </span><span class="nv">To</span><span class="p">,</span><span class="w"> </span><span class="nv">Packet</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 <p><code>mongoose_hooks</code> is a module which serves as an API for calling hooks in the server. All such modules are placed in <code>src/hooks</code>.</p>
 <p>For every hook, there needs to be a function in this module written beforehand which accepts the correct arity of arguments and makes the call to actual low-level hooks mechanism.
 This means that there is some degree of coupling still - but this time between the <code>ejabberd_sm</code> module and <code>mongoose_hooks</code>, and the latter is always available.</p>
 <p>The extra level of indirection introduced by this call gives the flexibility to determine at runtime what code actually gets run at this point.
 This depends on which handlers are registered to process the event.</p>
-<p><code>offline_message_hook</code> is the name of the hook (in other words of the event that is being signalled);
+<p><code>offline_message</code> is the name of the hook (in other words of the event that is being signalled);
 <code>Acc</code> is the <a href="#using-accumulators">Accumulator, described later</a>;
 <code>From</code>, <code>To</code> and <code>Packet</code> are the arguments passed to the handler, just as they would in case of the function being called directly.</p>
 <div class="admonition note">
@@ -4268,9 +4289,9 @@ There are some hooks which don't use this data structure.</p>
 <li>If the value is to be passed on to be reused within the current processing context, use <code>mongoose_acc:set(Namespace, Key, Value, Acc)</code>.</li>
 <li>If the value should be passed on to the recipient's session, pubsub node etc. use <code>mongoose_acc:set_permanent(Namespace, Key, Value, Acc)</code>.</li>
 </ul>
-<p>A real life example, then, with regard to <code>mod_offline</code> is the <code>resend_offline_messages_hook</code> run in <code>mod_presence</code>:</p>
+<p>A real life example, then, with regard to <code>mod_offline</code> is the <code>resend_offline_messages</code> hook run in <code>mod_presence</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">Acc1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">resend_offline_messages_hook</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">Jid</span><span class="p">),</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">Acc1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">resend_offline_messages</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">Jid</span><span class="p">),</span>
 <span class="nv">Rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">mongoose_acc</span><span class="p">:</span><span class="nb">get</span><span class="p">(</span><span class="n">offline</span><span class="p">,</span><span class="w"> </span><span class="n">messages</span><span class="p">,</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="nv">Acc1</span><span class="p">),</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="error-handling-in-hooks">Error handling in hooks</h3>
@@ -4292,7 +4313,7 @@ If you are not using <a href="../../user-guide/Features/#multi-tenancy-dynamic-d
 Whether a hook is called globally or per host type is depends on its purpose.
 It is decided when creating a hook and can be checked in the <code>mongoose_hooks</code> module for existing hooks.</p>
 <h2 id="registering-hook-handlers">Registering hook handlers</h2>
-<p>In order to store a packet when <code>ejabberd_sm</code> runs <code>offline_message_hook</code>, the relevant module must register a handler for this hook.
+<p>In order to store a packet when <code>ejabberd_sm</code> runs <code>offline_message</code>, the relevant module must register a handler for this hook.
 To attain the runtime configurability the module should register the handlers when it's loaded and unregister them when
 it's unloaded.
 That's usually done in, respectively, <code>start/2</code> and <code>stop/1</code> functions.
@@ -4300,9 +4321,9 @@ Here is the relevant snippet from <code>mod_offline:start/2</code>:</p>
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">gen_hook</span><span class="p">:</span><span class="nf">add_handlers</span><span class="p">(</span><span class="n">hooks</span><span class="p">(</span><span class="nv">HostType</span><span class="p">)),</span>
 </code></pre></div></td></tr></table></div>
 and the <code>hooks/1</code> function returns a list of tuples describing hook handlers, like:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="n">offline_message_hook</span><span class="p">,</span><span class="w"> </span><span class="nv">HostType</span><span class="p">,</span><span class="w"> </span><span class="k">fun</span><span class="w"> </span><span class="o">?</span><span class="nv">MODULE</span><span class="p">:</span><span class="n">inspect_packet</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="p">#{},</span><span class="w"> </span><span class="mi">50</span><span class="p">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="n">offline_message</span><span class="p">,</span><span class="w"> </span><span class="nv">HostType</span><span class="p">,</span><span class="w"> </span><span class="k">fun</span><span class="w"> </span><span class="o">?</span><span class="nv">MODULE</span><span class="p">:</span><span class="n">inspect_packet</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="p">#{},</span><span class="w"> </span><span class="mi">50</span><span class="p">}</span>
 </code></pre></div></td></tr></table></div></p>
-<p>It is clearly visible that the handler <code>inspect_packet</code> is added to the <code>offline_message_hook</code>.</p>
+<p>It is clearly visible that the handler <code>inspect_packet</code> is added to the <code>offline_message</code> hook.</p>
 <p><code>HostType</code> is the one for which the handler will be executed.
 In the case of statically defined domains, it is the same as the host, as configured in the <a href="../../configuration/general/#generalhosts"><code>general.hosts</code> section</a>.</p>
 <p>The handler itself is specified as a fun expression;
