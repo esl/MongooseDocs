@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.28">
     
     
       
@@ -3980,7 +3980,7 @@
 <h1 id="how-to-build-mongooseim">How to build MongooseIM</h1>
 <p>Instructions provided in this page are verified for:</p>
 <ul>
-<li>CentOS 7</li>
+<li>Rocky Linux 8</li>
 <li>Ubuntu 16.04 LTS (Xenial)</li>
 <li>Ubuntu 18.04 LTS (Bionic)</li>
 <li>macOS 13.3 (Ventura)</li>
@@ -3988,14 +3988,14 @@
 <p>For any other OS versions, the instructions should still work, however, some steps or file paths may be different.</p>
 <h2 id="requirements">Requirements</h2>
 <p>To compile MongooseIM you need:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">CentOS</label><label for="__tabbed_1_2">Ubuntu</label><label for="__tabbed_1_3">macOS</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Rocky/Alma</label><label for="__tabbed_1_2">Ubuntu</label><label for="__tabbed_1_3">macOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <ul>
 <li>Make: <code>make</code>,</li>
-<li>C and C++ compiler: <code>gcc</code>, <code>gcc-c++</code>,</li>
-<li>Erlang/OTP 24.0 or higher:<ul>
-<li><code>erlang</code> package, or,</li>
+<li>C and C++ compiler: <code>gcc</code>, <code>g++</code>,</li>
+<li>Erlang/OTP 26.0 or higher:<ul>
+<li><code>erlang</code> EPEL package, or,</li>
 <li><code>esl-erlang</code> from <a href="https://www.erlang-solutions.com/resources/download.html">Erlang Solutions website</a>, or,</li>
 <li>install using <a href="https://github.com/kerl/kerl">kerl</a>,</li>
 </ul>
@@ -4035,11 +4035,15 @@
 </div>
 </div>
 <h2 id="preparing-the-environment">Preparing the environment</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">centOS</label><label for="__tabbed_2_2">Ubuntu</label><label for="__tabbed_2_3">macOS</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Rocky/Alma</label><label for="__tabbed_2_2">Ubuntu</label><label for="__tabbed_2_3">macOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Please install the required dependencies:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>make<span class="w"> </span>zlib-devel<span class="w"> </span>openssl<span class="w"> </span>openssl-devel<span class="w"> </span>unixODBC-devel<span class="w"> </span>gcc<span class="w"> </span>gcc-c++<span class="w"> </span>erlang
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>make<span class="w"> </span>zlib-devel<span class="w"> </span>openssl<span class="w"> </span>openssl-devel<span class="w"> </span>unixODBC-devel<span class="w"> </span>gcc<span class="w"> </span>gcc-c++
+wget<span class="w"> </span>https://binaries2.erlang-solutions.com/rockylinux/8/esl-erlang_26.2.4_1~rockylinux~8_x86_64.rpm
+sudo<span class="w"> </span>dnf<span class="w"> </span>-Uvh<span class="w"> </span>esl-erlang_26.2.4_1~rockylinux~8_x86_64.rpm
 </code></pre></div></td></tr></table></div>
 <p>Now, please proceed to the "Building" section.</p>
 </div>
@@ -4199,7 +4203,7 @@ MongooseIM node mongooseim@localhost:
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.ad660dcc.min.js"></script>
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
       
     
   </body>
