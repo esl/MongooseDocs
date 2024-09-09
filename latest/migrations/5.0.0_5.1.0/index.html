@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4255,25 +4276,25 @@
 
   <h1>5.0.0 to 5.1.0</h1>
 
-<h2 id="configuration-changes">Configuration changes</h2>
+<h2 id="configuration-changes">Configuration changes<a class="headerlink" href="#configuration-changes" title="Permanent link">&para;</a></h2>
 <p>The configuration format has slightly changed and you might need to amend <code>mongooseim.toml</code>.</p>
-<h3 id="section-listen">Section <code>listen</code></h3>
+<h3 id="section-listen">Section <code>listen</code><a class="headerlink" href="#section-listen" title="Permanent link">&para;</a></h3>
 <p>The options <code>tls.verify_peer</code> and <code>tls.verify_mode</code> are replaced with just <a href="../../listeners/listen-c2s/#listenc2stlsverify_mode"><code>tls.verify_mode</code></a>. You need to amend the affected options for each listener:</p>
 <ul>
 <li><code>verify_peer = false</code> (the old default for C2S and HTTP listeners) should be replaced with <code>verify_mode = "none"</code>.</li>
 <li><code>verify_peer = true</code> should be replaced with <code>verify_mode = "peer"</code> or just removed, as this is the new default.</li>
 </ul>
 <p>There is a new, simplified configuration format for <code>mongoose_client_api</code>. You need to change the <code>listen</code> section unless you have disabled the client API in your configuration file. Consult the <a href="../../listeners/listen-http/#handler-types-rest-api-client-mongoose_client_api">option description</a> and the <a href="../../listeners/listen-http/#example-6-client-rest-api">example configuration</a> for details.</p>
-<h3 id="section-acl">Section <code>acl</code></h3>
+<h3 id="section-acl">Section <code>acl</code><a class="headerlink" href="#section-acl" title="Permanent link">&para;</a></h3>
 <p>The implicit check for user's domain in patterns is now configurable and the default behaviour (previously undocumented) is more consistent - the check is always performed unless disabled with <code>match = "all"</code>.
 See the description of <a href="../../configuration/acl/#aclmatch"><code>current_domain</code></a> for more details.</p>
-<h3 id="section-auth">Section <code>auth</code></h3>
+<h3 id="section-auth">Section <code>auth</code><a class="headerlink" href="#section-auth" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Each authentication method needs a TOML section, e.g. if you have the <code>rdbms</code> method enabled, you need to have the <code>[auth.rdbms]</code> section in the configuration file, even if it is empty. The <code>methods</code> option is not required anymore and especially if you are using only one method, you can remove it.</li>
 <li>The <code>auth.scram_iterations</code> option was moved to <a href="../../configuration/auth/#authpasswordscram_iterations"><code>auth.password.scram_iterations</code></a>.</li>
 </ul>
 <p>See the <a href="../../configuration/auth/">auth configuration</a> for details.</p>
-<h3 id="section-outgoing_pools">Section <code>outgoing_pools</code></h3>
+<h3 id="section-outgoing_pools">Section <code>outgoing_pools</code><a class="headerlink" href="#section-outgoing_pools" title="Permanent link">&para;</a></h3>
 <p>The option <code>tls.verify_peer</code> is replaced with <a href="../../configuration/outgoing-connections/#outgoing_poolsconnectiontlsverify_mode"><code>tls.verify_mode</code></a>. You need to change this option for each outgoing connection pool:</p>
 <ul>
 <li><code>verify_peer = false</code> (the old default for all pools except Riak) should be replaced with <code>verify_mode = "none"</code>.</li>
@@ -4286,15 +4307,15 @@ See the description of <a href="../../configuration/acl/#aclmatch"><code>current
 <li><a href="../../configuration/outgoing-connections/#ldap-options">LDAP</a>: <code>rootdn</code> was renamed to <code>root_dn</code>;
 <code>encrypt</code> was removed (the <code>tls</code> option should be used instead).</li>
 </ul>
-<h3 id="section-s2s">Section <code>s2s</code></h3>
+<h3 id="section-s2s">Section <code>s2s</code><a class="headerlink" href="#section-s2s" title="Permanent link">&para;</a></h3>
 <ul>
 <li>All options can be set globally or inside <code>host_config</code>.</li>
 <li>The <code>host_config.s2s</code> section overrides the whole global section now. Previously only the specified options were overridden.</li>
 <li>The <code>domain_certfile</code> option has been moved to the <code>general</code> section because it affects <code>c2s</code> connections as well.</li>
 </ul>
-<h3 id="section-host_config">Section <code>host_config</code></h3>
+<h3 id="section-host_config">Section <code>host_config</code><a class="headerlink" href="#section-host_config" title="Permanent link">&para;</a></h3>
 <p>The rules for overriding global options in the <code>host_config</code> section have been simplified. The <code>auth</code> section and the <code>s2s.address</code> and <code>s2s.host_policy</code> options now completely override the corresponding general settings instead of being merged with them.</p>
-<h3 id="extension-modules">Extension modules</h3>
+<h3 id="extension-modules">Extension modules<a class="headerlink" href="#extension-modules" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>mod_auth_token</code> has a new configuration format - if you are using this module, amend the <a href="../../modules/mod_auth_token/#modulesmod_auth_tokenvalidity_period"><code>validity_period</code></a> option.</li>
 <li><code>mod_event_pusher</code> has an updated configuration format - the <code>backend</code> subsection is removed and the <code>http</code> backend has a new <code>handlers</code> option. Adjust your configuration according to <a href="../../modules/mod_event_pusher/"><code>mod_event_pusher</code></a> documentation.</li>
@@ -4302,7 +4323,7 @@ See the description of <a href="../../configuration/acl/#aclmatch"><code>current
 <li><code>mod_shared_roster_ldap</code> all options have their <code>ldap_</code> prefix dropped.</li>
 <li><code>mod_vcard</code> LDAP options are moved into an LDAP subsection.</li>
 </ul>
-<h2 id="async-workers">Async workers</h2>
+<h2 id="async-workers">Async workers<a class="headerlink" href="#async-workers" title="Permanent link">&para;</a></h2>
 <p>The <code>async_writer</code> flag of MAM is now a section on its own, that absorbs previous flags related to it: <code>flush_interval</code>, <code>max_batch_size</code> and <code>pool_size</code> now become subelements of the <code>async_writer</code> section, with one more parameter, <code>enabled</code>. Below an example:</p>
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4321,16 +4342,16 @@ now becomes
 <span class="w">  </span><span class="n">async_writer</span><span class="p">.</span><span class="n">batch_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
 <span class="w">  </span><span class="n">muc</span><span class="p">.</span><span class="n">async_writer</span><span class="p">.</span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
 </code></pre></div></td></tr></table></div></p>
-<h2 id="smart-markers">Smart markers</h2>
+<h2 id="smart-markers">Smart markers<a class="headerlink" href="#smart-markers" title="Permanent link">&para;</a></h2>
 <p>There's an experimental and undocumented module called <code>mod_smart_markers</code>, that had a default table in the RDBMS schema, which you probably never used (or shouldn't have, as it was undocumented). If you rely on this table, the column <code>from_jid</code> has been split in <code>from_luser</code> and <code>lserver</code>, in order to support the <code>remove_domain</code> callback for the dynamic domains functionality. You might need to migrate it, or simply drop the previously defined table and recreate the new one.</p>
-<h2 id="inbox">Inbox</h2>
+<h2 id="inbox">Inbox<a class="headerlink" href="#inbox" title="Permanent link">&para;</a></h2>
 <p>The archive functionality recently introduced has been extended to support many more boxes. IQ queries can remain as they were, but, a new flag called <code>box</code> is now introduced, and if provided, it takes preference over the old <code>archive</code> flag. The database requires a migration, as the archive is now a column storing the proper name of the box, see the migrations for Postgres, MySQL and MSSQL in the <a href="https://github.com/esl/MongooseIM/tree/master/priv/migrations"><code>priv/migrations</code></a> directory.</p>
-<h2 id="removal-of-deprecated-modules">Removal of deprecated modules</h2>
+<h2 id="removal-of-deprecated-modules">Removal of deprecated modules<a class="headerlink" href="#removal-of-deprecated-modules" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>mod_revproxy</code> - removed from the code base as it was unsupported since 4.2.0.</li>
 <li><code>mod_aws_sns</code> - its functionality is fully covered by <a href="../../modules/mod_event_pusher/"><code>mod_event_pusher</code></a>.</li>
 </ul>
-<h2 id="internal-module-configuration-rework">Internal module configuration rework</h2>
+<h2 id="internal-module-configuration-rework">Internal module configuration rework<a class="headerlink" href="#internal-module-configuration-rework" title="Permanent link">&para;</a></h2>
 <p>If you are using your own extension modules (or services), you need to update the code. The most important change is that configuration options were stored in proplists before, and now they are stored in maps, so e.g. the <code>start/2</code> function of your module should expect a map as the second argument.</p>
 
 
@@ -4363,6 +4384,46 @@ now becomes
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../4.2.0_5.0.0/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 4.2.0 to 5.0.0">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                4.2.0 to 5.0.0
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../5.1.0_6.0.0/" class="md-footer__link md-footer__link--next" aria-label="Next: 5.1.0 to 6.0.0">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                5.1.0 to 6.0.0
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4414,7 +4475,7 @@ now becomes
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

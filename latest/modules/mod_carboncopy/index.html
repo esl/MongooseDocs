@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4285,29 +4306,29 @@
 
   <h1>mod_carboncopy</h1>
 
-<h2 id="module-description">Module Description</h2>
-<h3 id="discovering-support">Discovering Support</h3>
+<h2 id="module-description">Module Description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
+<h3 id="discovering-support">Discovering Support<a class="headerlink" href="#discovering-support" title="Permanent link">&para;</a></h3>
 <p>The server uses a disco query to inform if carbons are enabled.</p>
-<h3 id="enabling-and-disabling-carbons-from-the-client">Enabling and disabling Carbons from the client</h3>
+<h3 id="enabling-and-disabling-carbons-from-the-client">Enabling and disabling Carbons from the client<a class="headerlink" href="#enabling-and-disabling-carbons-from-the-client" title="Permanent link">&para;</a></h3>
 <p>Carbons are not enabled by default. 
 Every client app has to enable carbons to get messages sent to other clients of the user. 
 Carbons are enabled and disabled with an iq stanza with a child element -  <code>&lt;enable xmlns='urn:xmpp:carbons:2'/&gt;</code> or <code>&lt;disable xmlns='urn:xmpp:carbons:2'/&gt;</code>.</p>
-<h3 id="receiving-messages-to-a-bare-jid">Receiving messages to a bare JID</h3>
+<h3 id="receiving-messages-to-a-bare-jid">Receiving messages to a bare JID<a class="headerlink" href="#receiving-messages-to-a-bare-jid" title="Permanent link">&para;</a></h3>
 <p>Each message to a bare JID is forked and sent to all carbon enabled resources of the recipient, and not just to the highest priority resource. 
 Sending multiple copies to same resource is avoided.</p>
-<h3 id="receiving-messages-to-full-jid">Receiving messages to full JID</h3>
+<h3 id="receiving-messages-to-full-jid">Receiving messages to full JID<a class="headerlink" href="#receiving-messages-to-full-jid" title="Permanent link">&para;</a></h3>
 <p>Each directed message to a full JID is also forwarded to all carbon enabled resources of the recipient. 
 The message is wrapped in the <code>&lt;forwarded xmlns='urn:xmpp:forward:0'&gt;&lt;/forwarded&gt;</code> tag and directed towards each carbon enabled resource.</p>
-<h3 id="sending-messages">Sending Messages</h3>
+<h3 id="sending-messages">Sending Messages<a class="headerlink" href="#sending-messages" title="Permanent link">&para;</a></h3>
 <p>Just as when receiving messages to a full JID, each sent message is forwarded to all carbon enabled resources of recipient.
 The message is wrapped in the <code>&lt;forwarded xmlns='urn:xmpp:forward:0'&gt;&lt;/forwarded&gt;</code> tag and is directed towards each carbon enabled resource.</p>
-<h3 id="private-messages">Private Messages</h3>
+<h3 id="private-messages">Private Messages<a class="headerlink" href="#private-messages" title="Permanent link">&para;</a></h3>
 <p>Private messages are tagged <code>&lt;private/&gt;</code> and are not forwarded to any carbon enabled resource of the sender and recipient if the <code>to</code> attribute contains a full JID. 
 However, if the message is sent to a bare JID, it is forked to all highest priority resources. 
 This is not done through <code>mod_carboncopy</code> but is an expected outcome.</p>
-<h3 id="multiple-enabledisable-requests">Multiple enable/disable requests</h3>
+<h3 id="multiple-enabledisable-requests">Multiple enable/disable requests<a class="headerlink" href="#multiple-enabledisable-requests" title="Permanent link">&para;</a></h3>
 <p>Multiple enable/disable requests are not treated as an error even if they come from the same resource.</p>
-<h3 id="behavior-with-other-modules">Behavior with other modules</h3>
+<h3 id="behavior-with-other-modules">Behavior with other modules<a class="headerlink" href="#behavior-with-other-modules" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>mod_offline</strong>: Offline messages are delivered as they are. 
    Since, only one resource can connect at a time and there will be a finite time delay between login from two resources, <code>mod_carboncopy</code> has no role to play and only one resource can receive offline messages. 
@@ -4316,13 +4337,13 @@ This is not done through <code>mod_carboncopy</code> but is an expected outcome.
   All the forked messages for a message sent with a bare JID are ignored by <code>mod_mam</code>. 
   Similarly, all the carbon messages are also ignored by <code>mod_mam</code>.</li>
 </ul>
-<h3 id="retrieving-archive-from-multiple-resources">Retrieving archive from multiple resources</h3>
+<h3 id="retrieving-archive-from-multiple-resources">Retrieving archive from multiple resources<a class="headerlink" href="#retrieving-archive-from-multiple-resources" title="Permanent link">&para;</a></h3>
 <p>A resource can retrieve archives of messages sent to a specific resource of a friend which will not contain any carbon messages. 
 It will only contain messages directed towards that resource or messages sent with a bare jid when that resource was at the highest priority.
 A request to <code>mod_mam</code> with a bare JID of the chosen user will retrieve all messages to them from any resource. 
 There are no instances of copies of same messages being sent by <code>mod_mam</code>. 
 This is because <code>mod_mam</code> does not archive carbon messages.</p>
-<h3 id="testing-with-a-client">Testing with a client</h3>
+<h3 id="testing-with-a-client">Testing with a client<a class="headerlink" href="#testing-with-a-client" title="Permanent link">&para;</a></h3>
 <p>The module and its behavior have been tested with <code>mod_offline</code> and <code>mod_mam</code> using a desktop client made in Java using the Smack library. 
 The standard Smack library for carbons is able to unpack and read the carbon messages. 
 Also, the standard library supports checking for carbon support by the server using disco and sending enable and disable requests for carbon messages.
@@ -4331,15 +4352,15 @@ Once a client is online and enables carbons, it will not receive all the message
 <code>mod_mam</code> does not capture any carbon messages so it does not send any duplicates during any archive request. 
 Only the simple chat messages are archived and they can be accessed by using the bare JID of the user for whom the archive is requested.
 For an Erlang-based test suite, please see <a href="https://github.com/esl/ejabberd_tests/blob/master/tests/carboncopy_SUITE.erl">this</a>.</p>
-<h2 id="options">Options</h2>
-<h3 id="modulesmod_carboncopyiqdisctype"><code>modules.mod_carboncopy.iqdisc.type</code></h3>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<h3 id="modulesmod_carboncopyiqdisctype"><code>modules.mod_carboncopy.iqdisc.type</code><a class="headerlink" href="#modulesmod_carboncopyiqdisctype" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"one_queue"</code>, <code>"no_queue"</code>, <code>"queues"</code>, <code>"parallel"</code></li>
 <li><strong>Default:</strong> <code>no_queue</code></li>
 </ul>
 <p>Strategy to handle incoming stanzas. For details, please refer to
 <a href="../../configuration/Modules/#iq-processing-policies">IQ processing policies</a>.</p>
-<h2 id="example-configuration">Example Configuration</h2>
+<h2 id="example-configuration">Example Configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_carboncopy]</span>
 <span class="w">  </span><span class="n">iqdisc</span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;no_queue&quot;</span>
@@ -4375,6 +4396,46 @@ For an Erlang-based test suite, please see <a href="https://github.com/esl/ejabb
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../mod_cache_users/" class="md-footer__link md-footer__link--prev" aria-label="Previous: mod_cache_users">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                mod_cache_users
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mod_csi/" class="md-footer__link md-footer__link--next" aria-label="Next: mod_csi">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                mod_csi
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4426,7 +4487,7 @@ For an Erlang-based test suite, please see <a href="https://github.com/esl/ejabb
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

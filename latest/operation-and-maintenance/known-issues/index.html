@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4125,12 +4146,12 @@
 
 <p>This document provides a list of all known issues with MongooseIM operation and configuration.
 You may also find proposed workarounds if any are available.</p>
-<h2 id="missing-muc-light-room-config-fields-with-rdbms-backend">Missing MUC Light room config fields with RDBMS backend</h2>
+<h2 id="missing-muc-light-room-config-fields-with-rdbms-backend">Missing MUC Light room config fields with RDBMS backend<a class="headerlink" href="#missing-muc-light-room-config-fields-with-rdbms-backend" title="Permanent link">&para;</a></h2>
 <p>Before MongooseIM 3.5.x (incl.) new MUC Light rooms could be created with some config fields absent in the RDBMS table.
 These options couldn't be re-added later by changing the room config via requests from the clients.</p>
 <p>It happened when the default config was a subset of the schema, and the client hasn't provided these values when a room was created.</p>
 <p>Please note that this issue was resolved from MIM 3.6.0 onwards as the <code>default_config</code> option was deleted.</p>
-<h3 id="how-to-fix-this">How to fix this?</h3>
+<h3 id="how-to-fix-this">How to fix this?<a class="headerlink" href="#how-to-fix-this" title="Permanent link">&para;</a></h3>
 <p>You have to iterate over all rooms in the DB (<code>muc_light_rooms</code> table) and add missing entries to the <code>muc_light_config</code> table.
 Every option is inserted as a separate row and is stored as plain text, so it should be straightforward.</p>
 <p>Let's say you were using the following config in <code>mongooseim.cfg</code>:</p>
@@ -4158,14 +4179,14 @@ Every option is inserted as a separate row and is stored as plain text, so it sh
 <p>For every <code>id</code> in the <code>muc_light_rooms</code> table, you need to execute:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">muc_light_config</span><span class="p">(</span><span class="n">room_id</span><span class="p">,</span><span class="w"> </span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;put id here&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;background&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;new default value&#39;</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="mssql-connectivity-via-odbc">MSSQL connectivity via ODBC</h2>
+<h2 id="mssql-connectivity-via-odbc">MSSQL connectivity via ODBC<a class="headerlink" href="#mssql-connectivity-via-odbc" title="Permanent link">&para;</a></h2>
 <p>We have observed some issues with he ODBC driver used by MongooseIM in the past.
 The problems should now be resolved, and MSSQL is verified to work on Ubuntu 20.04.2 LTS.</p>
-<h2 id="gdpr-retrieval-for-mam-muc-limitation">GDPR retrieval for MAM MUC limitation</h2>
+<h2 id="gdpr-retrieval-for-mam-muc-limitation">GDPR retrieval for MAM MUC limitation<a class="headerlink" href="#gdpr-retrieval-for-mam-muc-limitation" title="Permanent link">&para;</a></h2>
 <p>When the personal data retrieval is executed for a user in a specific domain, Message Archive Management for groupchats must be running for this particular domain.
 This is the case for most configurations, but the problem manifests when a MongooseIM operator configures <code>mod_mam_muc</code>/<code>mod_mam</code> to start only for a subset of domains supported by the cluster (<code>host_config</code> option).</p>
 <p>In such case, personal data stored by MAM MUC will not be retrieved for this user.</p>
-<h3 id="proposed-workaround">Proposed workaround</h3>
+<h3 id="proposed-workaround">Proposed workaround<a class="headerlink" href="#proposed-workaround" title="Permanent link">&para;</a></h3>
 <p>Start a dedicated MongooseIM instance with a slightly different config, which enables Message Archive Management for the user's domain.
 This instance doesn't have to be clustered with other nodes and doesn't have to be accessible for actual users.</p>
 <p>After a successful retrieval, this instance may be terminated and deleted if necessary.</p>
@@ -4200,6 +4221,46 @@ This instance doesn't have to be clustered with other nodes and doesn't have to 
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../tls-distribution/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Distribution over TLS">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Distribution over TLS
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../developers-guide/release_config/" class="md-footer__link md-footer__link--next" aria-label="Next: Release/Installation configuration">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Release/Installation configuration
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4251,7 +4312,7 @@ This instance doesn't have to be clustered with other nodes and doesn't have to 
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

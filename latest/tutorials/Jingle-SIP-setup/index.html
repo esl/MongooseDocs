@@ -1330,6 +1330,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4235,9 +4256,9 @@
   
 
 
-<h1 id="jinglesip-setup-proof-of-concept">Jingle/SIP setup proof of concept</h1>
+<h1 id="jinglesip-setup-proof-of-concept">Jingle/SIP setup proof of concept<a class="headerlink" href="#jinglesip-setup-proof-of-concept" title="Permanent link">&para;</a></h1>
 <p>This tutorial will show you how to configure MongooseIM, Routr (a SIP server) and client applications to demonstrate how the Jingle/SIP integration works.</p>
-<h2 id="prerequisites">Prerequisites</h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <p>We are going to use the following open source software:</p>
 <ul>
 <li>
@@ -4262,7 +4283,7 @@
 </li>
 </ul>
 <p>We will use 2 users <code>xmpp.user@xmpp.example</code> and <code>sip.user@sip.example</code>.</p>
-<h2 id="configuring-routr">Configuring Routr</h2>
+<h2 id="configuring-routr">Configuring Routr<a class="headerlink" href="#configuring-routr" title="Permanent link">&para;</a></h2>
 <p>First the domain <code>sip.example</code> needs to be added to domains served by Routr.
 To do it, paste the following content to config/domains.yml in the directory where Routr was:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -4315,7 +4336,7 @@ To do it, paste the following content to config/domains.yml in the directory whe
 [INFO ] Starting Restful service (port: 4567, apiPath: &#39;/api/v1beta1&#39;)
 </code></pre></div></td></tr></table></div>
 <p>It is important to remember the IP address as it'll be used in next point.</p>
-<h3 id="a-side-note">A side note</h3>
+<h3 id="a-side-note">A side note<a class="headerlink" href="#a-side-note" title="Permanent link">&para;</a></h3>
 <p>In Routr's logs you may see messages like</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>[WARN ] Unable to register with Gateway -&gt; sip.provider.net. (Verify your network status)
 </code></pre></div></td></tr></table></div>
@@ -4323,12 +4344,12 @@ To do it, paste the following content to config/domains.yml in the directory whe
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>[ERROR] java.lang.RuntimeException: javax.sip.header.TooManyHopsException: has already reached 0!
 </code></pre></div></td></tr></table></div>
 <p>They can be ignored for the purpose of the tutorial.</p>
-<h2 id="configuring-etchosts">Configuring /etc/hosts</h2>
+<h2 id="configuring-etchosts">Configuring /etc/hosts<a class="headerlink" href="#configuring-etchosts" title="Permanent link">&para;</a></h2>
 <p>In my case the IP reported by Routr was <code>10.152.1.27</code>.
 Now we need to use this to update <code>/etc/hosts</code> file like below:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>10.152.1.27     sip.example xmpp.example
 </code></pre></div></td></tr></table></div>
-<h2 id="configuring-mongooseim">Configuring MongooseIM</h2>
+<h2 id="configuring-mongooseim">Configuring MongooseIM<a class="headerlink" href="#configuring-mongooseim" title="Permanent link">&para;</a></h2>
 <p>At this point I assume that MongooseIM was built with <code>make rel</code>, that it is running and the current working directory is <code>_build/prod/rel/mongooseim</code>.
 Similar to Routr, MongooseIM also needs to know which hosts to server.
 Please replace the default host defined in <code>etc/mongooseim.toml</code>; the line:</p>
@@ -4360,17 +4381,17 @@ This can happen automatically if 2 xmpp users have each other in the roster.</p>
 <p>The roster can be set up with the following command:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl roster setMutualSubscription --userA xmpp.user@xmpp.example --userB sip.user@sip.example --action CONNECT
 </code></pre></div></td></tr></table></div>
-<h2 id="adding-users-to-jitsi">Adding users to Jitsi</h2>
+<h2 id="adding-users-to-jitsi">Adding users to Jitsi<a class="headerlink" href="#adding-users-to-jitsi" title="Permanent link">&para;</a></h2>
 <p>Now the <code>sip.user@sip.example</code> has to be added to Jitsi app.
 When the app is opened for the first time it will display a window to configure the user.
 Later users can be configured from the <code>Preferences</code> page.</p>
-<h3 id="adding-a-sip-user">Adding a SIP user</h3>
+<h3 id="adding-a-sip-user">Adding a SIP user<a class="headerlink" href="#adding-a-sip-user" title="Permanent link">&para;</a></h3>
 <p>In order to add a user who connects to the SIP server we need to choose the <code>SIP</code> protocol from the available <code>networks</code> in Jitsi.
 In the <code>SIP id</code> field we put <code>sip.user@sip.example</code> and in the <code>Password</code> field we put <code>1234</code> as in the <code>agents.yml</code> file.
 Now we need to switch to <code>Advanced</code> options and go to the <code>Connection</code> tab.
 Here we need to unselect the <code>Configure proxy automatically</code> and put the IP of our <code>Routr</code> server, port number <code>5060</code> and <code>TCP</code> as the preferred transport.</p>
 <p><img alt="SIP setup in Jitsi" src="../jingle-sip/jitsi-sip-config.png" /></p>
-<h3 id="adding-an-xmpp-user">Adding an XMPP user</h3>
+<h3 id="adding-an-xmpp-user">Adding an XMPP user<a class="headerlink" href="#adding-an-xmpp-user" title="Permanent link">&para;</a></h3>
 <p>Now we have to add <code>sip.user@sip.example</code> to Jitsi's XMPP network in order to connect this user to MongooseIM over XMPP.
 It's very similar to adding a user to Jitsi's SIP network, the only difference is the password,
 for the XMPP connection it's <code>test_pass</code> as set when registering the user in MongooseIM.
@@ -4380,7 +4401,7 @@ Remember to check the <code>Override server default options</code> box.</p>
 When Jitsi connects this user, it will likely display a warning about the server's certificate.
 This is because by default MongooseIM is configured with a freshly generated, self-signed certificate.
 We can click <code>Continue anyway</code> button in order to proceed.</p>
-<h2 id="adding-user-to-otalk">Adding user to Otalk</h2>
+<h2 id="adding-user-to-otalk">Adding user to Otalk<a class="headerlink" href="#adding-user-to-otalk" title="Permanent link">&para;</a></h2>
 <p>Please follow the instructions on <a href="https://github.com/otalk/otalk-im-client#installing">https://github.com/otalk/otalk-im-client#installing</a> in order to compile and run the app.
 If all goes well, you should see the following message printed in the console:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>demo.stanza.io running at: http://localhost:8000
@@ -4400,7 +4421,7 @@ The default WebSocket endpoint in the <code>WebSocket or BOSH URL</code> field n
 <p>Mind the <code>wss</code> protocol, Otalk will not connect the user over WebSockets if for example <code>https</code> is put in the field.</p>
 <p><img alt="Otalk login page" src="../jingle-sip/otalk-log-in.png" /></p>
 <p>Now we can hit the <code>Go!</code> button and the <code>xmpp.user@xmpp.example</code> will connect to MongooseIM.</p>
-<h2 id="making-a-call">Making a call</h2>
+<h2 id="making-a-call">Making a call<a class="headerlink" href="#making-a-call" title="Permanent link">&para;</a></h2>
 <p>On the left side we can see that the user already has <code>sip.user@sip.example</code> in the roster and there should be a green dot indicating that the user is online.
 When we click on the contact, the <code>Call</code> button should appear allowing us to initiate the call.</p>
 <p>In Jitsi, the following window should pop up:
@@ -4577,7 +4598,7 @@ Contact: &quot;sip.user&quot; &lt;sip:sip.user@10.152.1.27:53697;transport=tcp;r
 User-Agent: Jitsi2.10.5550Mac OS X
 Content-Length: 0
 </code></pre></div></td></tr></table></div>
-<h2 id="summary">Summary</h2>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>The example above showcases how you can use Jingle/SIP switch with the available open source software.
 Sonetel, who are this feature's sponsor, operate on a slightly different use case and utilize more of the functionality with their proprietary software.
 Current implementation makes following assumptions:</p>
@@ -4620,6 +4641,46 @@ Based on the current state it can be improved and extended if needed.</p>
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../iOS_tutorial/" class="md-footer__link md-footer__link--prev" aria-label="Previous: How to Build an iOS messaging app">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                How to Build an iOS messaging app
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../client-certificate/" class="md-footer__link md-footer__link--next" aria-label="Next: How to Set up SASL client certificate authentication">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                How to Set up SASL client certificate authentication
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4671,7 +4732,7 @@ Based on the current state it can be improved and extended if needed.</p>
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

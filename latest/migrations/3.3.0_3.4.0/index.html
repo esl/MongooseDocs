@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4303,13 +4324,13 @@
 
   <h1>3.3.0 to 3.4.0</h1>
 
-<h2 id="new-field-in-message-archive-management-muc-entries-sender-id">New field in Message Archive Management MUC entries: Sender ID</h2>
+<h2 id="new-field-in-message-archive-management-muc-entries-sender-id">New field in Message Archive Management MUC entries: Sender ID<a class="headerlink" href="#new-field-in-message-archive-management-muc-entries-sender-id" title="Permanent link">&para;</a></h2>
 <p>As a part of ensuring GDPR compliance, it is essential to be able to efficiently query MAM MUC data via sender ID (to retrieve user's personal data).
 Originally, the sender JID could be found only as a part of an encoded XML message element, so finding all items sent by a certain user would be <strong>extremely</strong> inefficient (or rather: anti-efficient).
 MongooseIM 3.4.0 uses a modified schema for MAM MUC backends which enables a more efficient extraction.</p>
 <p>Below you may find migration instructions specific to your MAM backend.</p>
-<h3 id="rdbms">RDBMS</h3>
-<h4 id="step-1">Step 1</h4>
+<h3 id="rdbms">RDBMS<a class="headerlink" href="#rdbms" title="Permanent link">&para;</a></h3>
+<h4 id="step-1">Step 1<a class="headerlink" href="#step-1" title="Permanent link">&para;</a></h4>
 <p>Please execute the following SQL statements on your MIM database:</p>
 <p><strong>MySQL</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -4326,7 +4347,7 @@ MongooseIM 3.4.0 uses a modified schema for MAM MUC backends which enables a mor
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">mam_muc_message</span><span class="p">]</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">sender_id</span><span class="w"> </span><span class="nb">bigint</span><span class="p">;</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">i_mam_muc_message_sender_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="p">(</span><span class="n">sender_id</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="step-2">Step 2</h4>
+<h4 id="step-2">Step 2<a class="headerlink" href="#step-2" title="Permanent link">&para;</a></h4>
 <p>Now you have a schema that is compatible with MIM 3.4.0 but isn't GDPR-compliant yet because the new column has no meaningful data.</p>
 <p>Please pick your favourite scripting/programming language and populate the new column with the help of a <a href="../jid-from-mam-muc-script/">dedicated script</a>.
 You'll need to iterate over the whole <code>mam_muc_message</code> table with the following algorithm:</p>
@@ -4336,8 +4357,8 @@ You'll need to iterate over the whole <code>mam_muc_message</code> table with th
 <li>Select ID from <code>mam_server_user</code> by the username and server. If it doesn't exist, insert a new one (<code>id</code> column is automatically incremented).</li>
 <li>Update the <code>sender_id</code> column in <code>mam_muc_message</code> with the retrieved ID.</li>
 </ol>
-<h3 id="cassandra">Cassandra</h3>
-<h4 id="step-1_1">Step 1</h4>
+<h3 id="cassandra">Cassandra<a class="headerlink" href="#cassandra" title="Permanent link">&para;</a></h3>
+<h4 id="step-1_1">Step 1<a class="headerlink" href="#step-1_1" title="Permanent link">&para;</a></h4>
 <p>Please execute the following CQL statements on your MIM database:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4347,7 +4368,7 @@ You'll need to iterate over the whole <code>mam_muc_message</code> table with th
 <span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="w"> </span><span class="p">(</span><span class="n">from_jid</span><span class="p">);</span>
 <span class="k">DESC</span><span class="w"> </span><span class="n">mam_muc_message</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="step-2_1">Step 2</h4>
+<h4 id="step-2_1">Step 2<a class="headerlink" href="#step-2_1" title="Permanent link">&para;</a></h4>
 <p>Now you have a schema that is compatible with MIM 3.4.0 but isn't GDPR-compliant yet because the new column has no meaningful data.</p>
 <p>Please pick your favourite scripting/programming language and populate the new column with the help of a <a href="../jid-from-mam-muc-script/">dedicated script</a>.
 You'll need to iterate over the whole <code>mam_muc_message</code> table with the following algorithm:</p>
@@ -4386,10 +4407,10 @@ cqlsh:mongooseim&gt; SELECT * FROM mam_muc_message WHERE id = 399582233150625537
  room-ad1d999b9e@muc.localhost |       Sid | 399582233150625537 |            null | 0x8350000001...998de2fa8426837 |       Sid
 </code></pre></div></td></tr></table></div></li>
 </ol>
-<h3 id="riak">Riak</h3>
+<h3 id="riak">Riak<a class="headerlink" href="#riak" title="Permanent link">&para;</a></h3>
 <p>Changes to Riak schema are backward compatible with the current MongooseIM release.
 This means that skipping the migration will cause only some of the new features (namely GDPR data retrieval) to not work correctly.</p>
-<h4 id="step-1_2">Step 1</h4>
+<h4 id="step-1_2">Step 1<a class="headerlink" href="#step-1_2" title="Permanent link">&para;</a></h4>
 <p>Please update the Riak schema:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4408,7 +4429,7 @@ Reloading the schema on live nodes requires access to Erlang Shell of one of the
 The instruction on how to get to Riak's Erlang shell is beyond this guide, but if you manage to get to it, just call:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">yz_index</span><span class="p">:</span><span class="nf">reload</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;mam&quot;</span><span class="o">&gt;&gt;</span><span class="p">).</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="step-2_2">Step 2</h4>
+<h4 id="step-2_2">Step 2<a class="headerlink" href="#step-2_2" title="Permanent link">&para;</a></h4>
 <p>After the schema is posted and reloaded, all "new" objects will be indexed properly as long they contain 2 new fields: <code>msg_owner_jid</code> and <code>mam_type</code>.
 The new MongooseIM code will insert both of them for all new MAM entries, but for all existing ones need to have the fields added.
 In order to do that, we need to create a migration script (just pick your favourite scripting/programming language) that will do the following for <em>each</em> object in <em>each</em> bucket of type <code>mam_yz</code> (the object will be referred as <code>obj</code>):</p>
@@ -4422,8 +4443,8 @@ In order to do that, we need to create a migration script (just pick your favour
 <li>based on <code>obj_yz_rk</code> formatted as <code>$LOCAL_JID/$REMOTE_JID/$MSG_ID</code>, set <code>obj.msg_owner_jid = $LOCAL_JID</code></li>
 <li>Save the modified <code>obj</code></li>
 </ul>
-<h3 id="elasticsearch">ElasticSearch</h3>
-<h4 id="step-1_3">Step 1</h4>
+<h3 id="elasticsearch">ElasticSearch<a class="headerlink" href="#elasticsearch" title="Permanent link">&para;</a></h3>
+<h4 id="step-1_3">Step 1<a class="headerlink" href="#step-1_3" title="Permanent link">&para;</a></h4>
 <p>Please update the mapping for <code>muc_messages</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -4475,7 +4496,7 @@ In order to do that, we need to create a migration script (just pick your favour
   }
 }
 </code></pre></div></td></tr></table></div>
-<h4 id="step-2_3">Step 2</h4>
+<h4 id="step-2_3">Step 2<a class="headerlink" href="#step-2_3" title="Permanent link">&para;</a></h4>
 <p>Now you have a schema that is compatible with MIM 3.4.0 but isn't GDPR-compliant yet because the new field has no meaningful data.</p>
 <p>Please pick your favourite scripting/programming language and populate the new column with the help of a <a href="../jid-from-mam-muc-script/">dedicated script</a>.
 You'll need to iterate over the all <code>muc_messages</code> documents with the following algorithm:</p>
@@ -4531,6 +4552,46 @@ You'll need to iterate over the all <code>muc_messages</code> documents with the
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../3.1.1_3.2.0/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3.1.1 to 3.2.0">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                3.1.1 to 3.2.0
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../3.5.0_3.6.0/" class="md-footer__link md-footer__link--next" aria-label="Next: 3.5.0 to 3.6.0">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                3.5.0 to 3.6.0
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -4581,7 +4642,7 @@ You'll need to iterate over the all <code>muc_messages</code> documents with the
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

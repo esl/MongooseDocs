@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4147,7 +4168,7 @@
 
   <h1>mod_offline</h1>
 
-<h2 id="module-description">Module Description</h2>
+<h2 id="module-description">Module Description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
 <p>This module implements an offline messages storage compliant with <a href="http://xmpp.org/extensions/xep-0160.html">XEP-0160: Best Practices for Handling Offline Messages</a>. 
 It can store one-to-one and groupchat messages only when the recipient has no online resources. 
 It is not well suited for applications supporting multiple user devices, because anything saved in the DB can be retrieved only once, so the message history is not synchronised between devices. 
@@ -4156,22 +4177,22 @@ Although <code>mod_offline</code> may be sufficient in some cases, it is prefera
 would be sent back to the sender,
 each time a message is sent to an offline user. Check <a href="../mod_offline_stub/">mod_offline_stub</a>
 to disable this error message.</p>
-<h2 id="options">Options</h2>
-<h3 id="modulesmod_offlineaccess_max_user_messages"><code>modules.mod_offline.access_max_user_messages</code></h3>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<h3 id="modulesmod_offlineaccess_max_user_messages"><code>modules.mod_offline.access_max_user_messages</code><a class="headerlink" href="#modulesmod_offlineaccess_max_user_messages" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> non-empty string</li>
 <li><strong>Default:</strong> <code>"max_user_offline_messages"</code></li>
 <li><strong>Example:</strong> <code>access_max_user_messages = "custom_max_user_offline_messages"</code></li>
 </ul>
 <p>Access Rule to use for limiting the storage size per user.</p>
-<h3 id="modulesmod_offlinebackend"><code>modules.mod_offline.backend</code></h3>
+<h3 id="modulesmod_offlinebackend"><code>modules.mod_offline.backend</code><a class="headerlink" href="#modulesmod_offlinebackend" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>mnesia</code>, <code>rdbms</code></li>
 <li><strong>Default:</strong> <code>"mnesia"</code></li>
 <li><strong>Example:</strong> <code>backend = "rdbms"</code></li>
 </ul>
 <p>Storage backend.</p>
-<h3 id="modulesmod_offlinestore_groupchat_messages"><code>modules.mod_offline.store_groupchat_messages</code></h3>
+<h3 id="modulesmod_offlinestore_groupchat_messages"><code>modules.mod_offline.store_groupchat_messages</code><a class="headerlink" href="#modulesmod_offlinestore_groupchat_messages" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
@@ -4182,7 +4203,7 @@ to disable this error message.</p>
 <p class="admonition-title">Warning</p>
 <p>This option can work only with MUC-light and is not expected to work with MUC.</p>
 </div>
-<h2 id="example-configuration">Example Configuration</h2>
+<h2 id="example-configuration">Example Configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -4191,8 +4212,53 @@ to disable this error message.</p>
 <span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rdbms&quot;</span>
 <span class="w">  </span><span class="n">store_groupchat_messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="metrics">Metrics</h2>
-<p>If you'd like to learn more about metrics in MongooseIM, please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">MongooseIM metrics</a> page.</p>
+<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
+<p>This module provides <a href="../../operation-and-maintenance/MongooseIM-metrics/#backend-metrics">backend metrics</a>.
+If you'd like to learn more about metrics in MongooseIM, please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">MongooseIM metrics</a> page.</p>
+<p>Prometheus metrics have a <code>host_type</code> and <code>function</code> labels associated with these metrics.
+Since Exometer doesn't support labels, the function as well as the host types, or word <code>global</code>, are part of the metric names, depending on the <a href="../../configuration/instrumentation/#instrumentationexometerall_metrics_are_global"><code>instrumentation.exometer.all_metrics_are_global</code></a> option.</p>
+<p>Backend in the action name can be either <code>rdbms</code> or <code>mnesia</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="prometheus" name="__tabbed_1" type="radio" /><input id="exometer" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="prometheus">Prometheus</label><label for="exometer">Exometer</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Backend action</th>
+<th>Type</th>
+<th>Function</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mod_offline_Backend_count</code></td>
+<td>counter</td>
+<td><code>pop_messages</code></td>
+<td>Offline messages for a user are retrieved and deleted from a DB.</td>
+</tr>
+<tr>
+<td><code>mod_offline_Backend_time</code></td>
+<td>histogram</td>
+<td><code>pop_messages</code></td>
+<td>Time spent retrieving and deleting offline messages for a user from a DB.</td>
+</tr>
+<tr>
+<td><code>mod_offline_Backend_count</code></td>
+<td>counter</td>
+<td><code>write_messages</code></td>
+<td>New offline messages to a user are written in a DB.</td>
+</tr>
+<tr>
+<td><code>mod_offline_Backend_time</code></td>
+<td>histogram</td>
+<td><code>write_messages</code></td>
+<td>Time spent writing a new offline messages to a user in a DB.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
 <table>
 <thead>
 <tr>
@@ -4203,17 +4269,30 @@ to disable this error message.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>pop_messages</code></td>
-<td>histogram</td>
+<td><code>[HostType, mod_offline_Backend, pop_messages, count]</code></td>
+<td>spiral</td>
 <td>Offline messages for a user are retrieved and deleted from a DB.</td>
 </tr>
 <tr>
-<td><code>write_messages</code></td>
+<td><code>[HostType, mod_offline_Backend, pop_messages, time]</code></td>
 <td>histogram</td>
+<td>Time spent retrieving and deleting offline messages for a user from a DB.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_offline_Backend, write_messages, count]</code></td>
+<td>spiral</td>
 <td>New offline messages to a user are written in a DB.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_offline_Backend, write_messages, time]</code></td>
+<td>histogram</td>
+<td>Time spent writing a new offline messages to a user in a DB.</td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
 
 
 
@@ -4245,6 +4324,46 @@ to disable this error message.</p>
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../mod_muc_light/" class="md-footer__link md-footer__link--prev" aria-label="Previous: mod_muc_light">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                mod_muc_light
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mod_offline_stub/" class="md-footer__link md-footer__link--next" aria-label="Next: mod_offline_stub">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                mod_offline_stub
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4296,7 +4415,7 @@ to disable this error message.</p>
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

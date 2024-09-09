@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4275,9 +4296,9 @@
 
   <h1>HTTP backend</h1>
 
-<h2 id="module-description">Module description</h2>
+<h2 id="module-description">Module description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
 <p>This module is a backend of <a href="../mod_event_pusher/">mod_event_pusher</a> that enables forwarding certain events (messages, presence, etc.) via HTTP to external services such as push (by mobile, email or SMS), big data, or analytics services.</p>
-<h3 id="how-it-works">How it works</h3>
+<h3 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h3>
 <p>The module hooks on all packets sent by connected users.
 When the hook is triggered, the module:</p>
 <ul>
@@ -4287,38 +4308,38 @@ When the hook is triggered, the module:</p>
 <li>sends a POST request composed of <code>{Host::binary(), Sender::binary(), Receiver::binary(), Message::binary()}</code> to the http notification server</li>
 </ul>
 <p>You can configure multiple handlers e.g. for sending various types of messages to different HTTP servers.</p>
-<h2 id="prerequisites">Prerequisites</h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <p>This module uses a connection pool created by <code>mongoose_http_client</code>.
 It must be defined in the <a href="../../configuration/outgoing-connections/#http-options"><code>outgoing_pools</code> settings</a>.</p>
-<h2 id="options">Options</h2>
-<h3 id="modulesmod_event_pusherhttphandlers"><code>modules.mod_event_pusher.http.handlers</code></h3>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<h3 id="modulesmod_event_pusherhttphandlers"><code>modules.mod_event_pusher.http.handlers</code><a class="headerlink" href="#modulesmod_event_pusherhttphandlers" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of TOML tables with the keys described below</li>
 <li><strong>Default:</strong> empty list</li>
 </ul>
 <p>A list of handler definitions. All handlers are applied for each event.</p>
-<h4 id="modulesmod_event_pusherhttphandlerspool_name"><code>modules.mod_event_pusher.http.handlers.pool_name</code></h4>
+<h4 id="modulesmod_event_pusherhttphandlerspool_name"><code>modules.mod_event_pusher.http.handlers.pool_name</code><a class="headerlink" href="#modulesmod_event_pusherhttphandlerspool_name" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> non-empty string</li>
 <li><strong>Default:</strong> <code>"http_pool"</code></li>
 <li><strong>Example:</strong> <code>pool_name = "http_pool"</code></li>
 </ul>
 <p>Name of the pool to use to connect to the HTTP server (as defined in <code>outgoing_pools</code>).</p>
-<h4 id="modulesmod_event_pusherhttphandlerspath"><code>modules.mod_event_pusher.http.handlers.path</code></h4>
+<h4 id="modulesmod_event_pusherhttphandlerspath"><code>modules.mod_event_pusher.http.handlers.path</code><a class="headerlink" href="#modulesmod_event_pusherhttphandlerspath" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> <code>""</code></li>
 <li><strong>Example:</strong> <code>path = "/notifications"</code></li>
 </ul>
 <p>Path part of an URL to which a request should be sent (will be appended to the pool's prefix path).</p>
-<h4 id="modulesmod_event_pusherhttphandlerscallback_module"><code>modules.mod_event_pusher.http.handlers.callback_module</code></h4>
+<h4 id="modulesmod_event_pusherhttphandlerscallback_module"><code>modules.mod_event_pusher.http.handlers.callback_module</code><a class="headerlink" href="#modulesmod_event_pusherhttphandlerscallback_module" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> <code>"mod_event_pusher_http_defaults"</code></li>
 <li><strong>Example:</strong> <code>callback_module = "mod_event_pusher_http_notifications"</code></li>
 </ul>
 <p>Name of a module which should be used to check whether a notification should be sent. The default callback module, <code>mod_event_pusher_http_defaults</code>, sends notifications for all non-empty chat messages. You can use this module as a starting point for developing a custom one.</p>
-<h2 id="example-configuration">Example configuration</h2>
+<h2 id="example-configuration">Example configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -4369,7 +4390,7 @@ TOML also allows to specify the handler in its own subsection.</p>
 <span class="w">  </span><span class="n">callback_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;mod_event_pusher_http_alerts&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>Here, some notifications will be POSTed to <code>http://localhost:8000/webservice/notifications</code> and some to <code>http://localhost:8000/webservice/alerts</code>, depending on implementation of <code>should_make_req/6</code> in the two callback modules.</p>
-<h2 id="default-payload-format">Default payload format</h2>
+<h2 id="default-payload-format">Default payload format<a class="headerlink" href="#default-payload-format" title="Permanent link">&para;</a></h2>
 <p>The default HTTP event pusher sends a POST request with Content-Type <code>application/x-www-form-urlencoded</code>. The form has the following fields:</p>
 <ul>
 <li><code>author</code>: name of the user who authored the message</li>
@@ -4379,12 +4400,17 @@ TOML also allows to specify the handler in its own subsection.</p>
 </ul>
 <p>The contents of the author, server and receiver fields are processed by <code>stringprep</code>.
 As a result, these values are all lower case.</p>
-<h3 id="example">Example</h3>
+<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
 <p>Below is an example of what the body of an HTTP POST request can look like:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="s2">&quot;author=alice&amp;server=localhost&amp;receiver=bob&amp;message=Hi, Bob!&quot;</span>
 </code></pre></div></td></tr></table></div></p>
-<h2 id="metrics">Metrics</h2>
+<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
 <p>If you'd like to learn more about metrics in MongooseIM, please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">MongooseIM metrics</a> page.</p>
+<p>Prometheus metrics have a <code>host_type</code> label associated with these metrics.
+Since Exometer doesn't support labels, the host types, or word <code>global</code>, are part of the metric names, depending on the <a href="../../configuration/instrumentation/#instrumentationexometerall_metrics_are_global"><code>instrumentation.exometer.all_metrics_are_global</code></a> option.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="prometheus" name="__tabbed_1" type="radio" /><input id="exometer" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="prometheus">Prometheus</label><label for="exometer">Exometer</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <table>
 <thead>
 <tr>
@@ -4395,22 +4421,53 @@ As a result, these values are all lower case.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>[Host, mod_event_pusher_http, sent]</code></td>
+<td><code>mod_event_pusher_http_sent_count</code></td>
+<td>counter</td>
+<td>An HTTP notification is sent successfully.</td>
+</tr>
+<tr>
+<td><code>mod_event_pusher_http_sent_failure_count</code></td>
+<td>counter</td>
+<td>An HTTP notification failed.</td>
+</tr>
+<tr>
+<td><code>mod_event_pusher_http_sent_response_time</code></td>
+<td>histogram</td>
+<td>Time taken to send HTTP notification. Does not include timings of failed requests.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[Host, mod_event_pusher_http_sent, count]</code></td>
 <td>spiral</td>
 <td>An HTTP notification is sent successfully.</td>
 </tr>
 <tr>
-<td><code>[Host, mod_event_pusher_http, failed]</code></td>
+<td><code>[Host, mod_event_pusher_http_sent, failure_count]</code></td>
 <td>spiral</td>
 <td>An HTTP notification failed.</td>
 </tr>
 <tr>
-<td><code>[Host, mod_event_pusher_http, response_time]</code></td>
+<td><code>[Host, mod_event_pusher_http_sent, response_time]</code></td>
 <td>histogram</td>
-<td>Does not include timings of failed requests.</td>
+<td>Time taken to send HTTP notification. Does not include timings of failed requests.</td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
 
 
 
@@ -4442,6 +4499,46 @@ As a result, these values are all lower case.</p>
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../mod_event_pusher/" class="md-footer__link md-footer__link--prev" aria-label="Previous: mod_event_pusher">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                mod_event_pusher
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mod_event_pusher_push/" class="md-footer__link md-footer__link--next" aria-label="Next: Push backend">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Push backend
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4493,7 +4590,7 @@ As a result, these values are all lower case.</p>
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

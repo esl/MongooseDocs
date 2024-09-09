@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4111,12 +4132,12 @@
 
   <h1>4.1.0 to 4.2.0</h1>
 
-<h2 id="minor-changes-in-the-toml-config-format">Minor changes in the <code>TOML</code> config format</h2>
+<h2 id="minor-changes-in-the-toml-config-format">Minor changes in the <code>TOML</code> config format<a class="headerlink" href="#minor-changes-in-the-toml-config-format" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The <code>pgsql_users_number_estimate</code> option was moved to <a href="../../authentication-methods/rdbms/#authrdbmsusers_number_estimate"><code>auth.rdbms.users_number_estimate</code></a>. The new option supports PostgreSQL and MySQL.</li>
 </ul>
-<h2 id="db-migrations">DB migrations</h2>
-<h3 id="new-inbox-features">New inbox features</h3>
+<h2 id="db-migrations">DB migrations<a class="headerlink" href="#db-migrations" title="Permanent link">&para;</a></h2>
+<h3 id="new-inbox-features">New inbox features<a class="headerlink" href="#new-inbox-features" title="Permanent link">&para;</a></h3>
 <p>Inbox now implements new functionality (see <a href="../../open-extensions/inbox/">inbox</a>), but this required adding new columns to the DB. If you're using inbox, please update the tables as follows:</p>
 <p>For Postgres or MySQL:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -4132,7 +4153,7 @@ For MSSQL:
 <span class="w">  </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">archive</span><span class="w"> </span><span class="n">TINYINT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
 <span class="w">  </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">muted_until</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div></p>
-<h3 id="archived-groupchat-messages-in-mod_mam">Archived groupchat messages in <code>mod_mam</code></h3>
+<h3 id="archived-groupchat-messages-in-mod_mam">Archived groupchat messages in <code>mod_mam</code><a class="headerlink" href="#archived-groupchat-messages-in-mod_mam" title="Permanent link">&para;</a></h3>
 <p>The <a href="../../modules/mod_mam/#modulesmod_mam_metapmarchive_groupchats"><code>archive_groupchats</code></a> option is now set to <code>false</code> by default, as documented.
 Before the change, the private message (PM) archive stored incoming groupchat messages as well, contrary to the documentation.
 After the upgrade you can manually remove those messages from the database.
@@ -4142,7 +4163,7 @@ For example, when the MUC domain is <code>muc.localhost</code> and <code>rdbms_m
 <span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;I&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">remote_bare_jid</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;muc.localhost:%&#39;</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
 <p>This can be a heavy operation and it needs to be done with caution.</p>
-<h3 id="using-mod_auth_token-with-mysql-and-ms-sql">Using <code>mod_auth_token</code> with MySQL and MS SQL</h3>
+<h3 id="using-mod_auth_token-with-mysql-and-ms-sql">Using <code>mod_auth_token</code> with MySQL and MS SQL<a class="headerlink" href="#using-mod_auth_token-with-mysql-and-ms-sql" title="Permanent link">&para;</a></h3>
 <p>The <a href="../../modules/mod_auth_token/"><code>mod_auth_token</code></a> module supports MySQL and MS SQL now. To use this functionality, you need to create the <code>auth_token</code> table with the query which you can find in <code>priv/mysql.sql</code> and <code>priv/mssql2012.sql</code>, respectively.</p>
 
 
@@ -4175,6 +4196,46 @@ For example, when the MUC domain is <code>muc.localhost</code> and <code>rdbms_m
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../4.0.1_4.1.0/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 4.0.1 to 4.1.0">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                4.0.1 to 4.1.0
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../4.2.0_5.0.0/" class="md-footer__link md-footer__link--next" aria-label="Next: 4.2.0 to 5.0.0">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                4.2.0 to 5.0.0
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4226,7 +4287,7 @@ For example, when the MUC domain is <code>muc.localhost</code> and <code>rdbms_m
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

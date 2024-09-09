@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4363,12 +4384,12 @@
 
   <h1>mod_inbox</h1>
 
-<h2 id="module-description">Module Description</h2>
+<h2 id="module-description">Module Description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
 <p><code>Inbox</code> is an experimental feature implemented as a few separate modules.
 It is described in detail as our <a href="../../open-extensions/inbox/">Open XMPP Extension</a>.
 To use it, enable mod_inbox in the config file.</p>
-<h2 id="options">Options</h2>
-<h3 id="modulesmod_inboxbackend"><code>modules.mod_inbox.backend</code></h3>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<h3 id="modulesmod_inboxbackend"><code>modules.mod_inbox.backend</code><a class="headerlink" href="#modulesmod_inboxbackend" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"rdbms"</code>, <code>"rdbms_async"</code></li>
 <li><strong>Default:</strong> <code>"rdbms"</code></li>
@@ -4376,14 +4397,14 @@ To use it, enable mod_inbox in the config file.</p>
 </ul>
 <p>Only RDBMS storage is supported, but <code>rdbms</code> means flushes to DB are synchronous with each message, while <code>rdbms_async</code> is instead asynchronous.</p>
 <p>Regular <code>rdbms</code> has worse performance characteristics, but it has better consistency properties, as events aren't lost nor reordered. <code>rdbms_async</code> processes events asynchronously and potentially unloading a lot of aggregation from the DB. Like the case of the asynchronous workers for MAM, it is the preferred method, with the risk messages being lost on an ungraceful shutdown.</p>
-<h4 id="modulesmod_inboxasync_writerpool_size"><code>modules.mod_inbox.async_writer.pool_size</code></h4>
+<h4 id="modulesmod_inboxasync_writerpool_size"><code>modules.mod_inbox.async_writer.pool_size</code><a class="headerlink" href="#modulesmod_inboxasync_writerpool_size" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> <code>2 * erlang:system_info(schedulers_online)</code></li>
 <li><strong>Example:</strong> <code>modules.mod_inbox.async_writer.pool_size = 32</code></li>
 </ul>
 <p>Number of workers in the pool. More than the number of available schedulers is recommended, to minimise lock contention on the message queues, and more than the number of DB workers, to fully utilise the DB capacity. How much more than these two parameters is then a good fine-tuning for specific deployments.</p>
-<h3 id="modulesmod_inboxboxes"><code>modules.mod_inbox.boxes</code></h3>
+<h3 id="modulesmod_inboxboxes"><code>modules.mod_inbox.boxes</code><a class="headerlink" href="#modulesmod_inboxboxes" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings.</li>
 <li><strong>Default:</strong> <code>[]</code></li>
@@ -4395,21 +4416,21 @@ To use it, enable mod_inbox in the config file.</p>
 <p><code>inbox</code>, <code>archive</code>, and <code>bin</code> are reserved box names and are always enabled, therefore they don't need to –and must not– be specified in this section. <code>all</code> has a special meaning in the box query and therefore is also not allowed as a box name.</p>
 <p>If the asynchronous backend is configured, automatic removals become moves to the <code>bin</code> box, also called "Trash bin". This is to ensure eventual consistency. Then the bin can be emptied, either on a <a href="../../open-extensions/inbox/#examples-emptying-the-trash-bin">user request</a>, with the <code>mongooseimctl inbox</code> command, through the <a href="../../graphql-api/Admin-GraphQL">GraphQL API</a>, or through the <a href="../../rest-api/Administration-backend">REST API</a>.</p>
 </div>
-<h4 id="modulesmod_inboxbin_ttl"><code>modules.mod_inbox.bin_ttl</code></h4>
+<h4 id="modulesmod_inboxbin_ttl"><code>modules.mod_inbox.bin_ttl</code><a class="headerlink" href="#modulesmod_inboxbin_ttl" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer, expressed in days.</li>
 <li><strong>Default:</strong> <code>30</code></li>
 <li><strong>Example:</strong> <code>modules.mod_inbox.bin_ttl = 7</code></li>
 </ul>
 <p>How old entries in the bin can be before the automatic bin cleaner collects them. A value of <code>7</code> would mean that entries that have been in the bin for more than 7 days will be cleaned on the next bin collection.</p>
-<h4 id="modulesmod_inboxbin_clean_after"><code>modules.mod_inbox.bin_clean_after</code></h4>
+<h4 id="modulesmod_inboxbin_clean_after"><code>modules.mod_inbox.bin_clean_after</code><a class="headerlink" href="#modulesmod_inboxbin_clean_after" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer, expressed in hours</li>
 <li><strong>Default:</strong> <code>1</code></li>
 <li><strong>Example:</strong> <code>modules.mod_inbox.bin_clean_after = 24</code></li>
 </ul>
 <p>How often the automatic garbage collection runs over the bin.</p>
-<h4 id="modulesmod_inboxdelete_domain_limit"><code>modules.mod_inbox.delete_domain_limit</code></h4>
+<h4 id="modulesmod_inboxdelete_domain_limit"><code>modules.mod_inbox.delete_domain_limit</code><a class="headerlink" href="#modulesmod_inboxdelete_domain_limit" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
 <li><strong>Default:</strong> <code>"infinity"</code></li>
@@ -4420,7 +4441,7 @@ To use it, enable mod_inbox in the config file.</p>
 <p class="admonition-title">Note</p>
 <p>Not supported by MSSQL.</p>
 </div>
-<h3 id="modulesmod_inboxreset_markers"><code>modules.mod_inbox.reset_markers</code></h3>
+<h3 id="modulesmod_inboxreset_markers"><code>modules.mod_inbox.reset_markers</code><a class="headerlink" href="#modulesmod_inboxreset_markers" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings, out of <code>"displayed"</code>, <code>"received"</code>, <code>"acknowledged"</code></li>
 <li><strong>Default:</strong> <code>["displayed"]</code></li>
@@ -4429,7 +4450,7 @@ To use it, enable mod_inbox in the config file.</p>
 <p>List of chat markers that when sent, will reset the unread message counter for a conversation.
 This works when <a href="https://xmpp.org/extensions/xep-0333.html">Chat Markers</a> are enabled on the client side.
 Setting as empty list (not recommended) means that no chat marker can decrease the counter value.</p>
-<h3 id="modulesmod_inboxgroupchat"><code>modules.mod_inbox.groupchat</code></h3>
+<h3 id="modulesmod_inboxgroupchat"><code>modules.mod_inbox.groupchat</code><a class="headerlink" href="#modulesmod_inboxgroupchat" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings</li>
 <li><strong>Default:</strong> <code>["muclight"]</code></li>
@@ -4437,7 +4458,7 @@ Setting as empty list (not recommended) means that no chat marker can decrease t
 </ul>
 <p>The list indicating which groupchats will be included in inbox.
 Possible values are <code>muclight</code> <a href="https://xmpp.org/extensions/inbox/muc-light.html">Multi-User Chat Light</a> or <code>muc</code> <a href="https://xmpp.org/extensions/xep-0045.html">Multi-User Chat</a>.</p>
-<h3 id="modulesmod_inboxaff_changes"><code>modules.mod_inbox.aff_changes</code></h3>
+<h3 id="modulesmod_inboxaff_changes"><code>modules.mod_inbox.aff_changes</code><a class="headerlink" href="#modulesmod_inboxaff_changes" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>true</code></li>
@@ -4446,7 +4467,7 @@ Possible values are <code>muclight</code> <a href="https://xmpp.org/extensions/i
 <p>Use this option when <code>muclight</code> is enabled.
 Indicates if MUC Light affiliation change messages should be included in the conversation inbox.
 Only changes that affect the user directly will be stored in their inbox.</p>
-<h3 id="modulesmod_inboxremove_on_kicked"><code>modules.mod_inbox.remove_on_kicked</code></h3>
+<h3 id="modulesmod_inboxremove_on_kicked"><code>modules.mod_inbox.remove_on_kicked</code><a class="headerlink" href="#modulesmod_inboxremove_on_kicked" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>true</code></li>
@@ -4454,14 +4475,14 @@ Only changes that affect the user directly will be stored in their inbox.</p>
 </ul>
 <p>Use this option when <code>muclight</code> is enabled.
 If true, the inbox conversation is removed for a user when they are removed from the groupchat.</p>
-<h3 id="modulesmod_inboxiqdisctype"><code>modules.mod_inbox.iqdisc.type</code></h3>
+<h3 id="modulesmod_inboxiqdisctype"><code>modules.mod_inbox.iqdisc.type</code><a class="headerlink" href="#modulesmod_inboxiqdisctype" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"one_queue"</code>, <code>"no_queue"</code>, <code>"queues"</code>, <code>"parallel"</code></li>
 <li><strong>Default:</strong> <code>"no_queue"</code></li>
 </ul>
 <p>Strategy to handle incoming stanzas. For details, please refer to
 <a href="../../configuration/Modules/#iq-processing-policies">IQ processing policies</a>.</p>
-<h4 id="modulesmod_inboxmax_result_limit"><code>modules.mod_inbox.max_result_limit</code></h4>
+<h4 id="modulesmod_inboxmax_result_limit"><code>modules.mod_inbox.max_result_limit</code><a class="headerlink" href="#modulesmod_inboxmax_result_limit" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> the string <code>"infinity"</code> or a positive integer</li>
 <li><strong>Default:</strong> <code>"infinity"</code></li>
@@ -4470,7 +4491,7 @@ If true, the inbox conversation is removed for a user when they are removed from
 <p>This option sets the maximum size of returned results when quering inbox.
 It works in the same manner as <a href="../../open-extensions/inbox/#limiting-the-query">setting a limit in iq stanza</a>.
 The special value <code>infinity</code> means no limit.</p>
-<h2 id="note-about-supported-rdbms">Note about supported RDBMS</h2>
+<h2 id="note-about-supported-rdbms">Note about supported RDBMS<a class="headerlink" href="#note-about-supported-rdbms" title="Permanent link">&para;</a></h2>
 <p><code>mod_inbox</code> executes upsert queries, which have different syntax in every supported RDBMS.
 Inbox currently supports the following DBs:</p>
 <ul>
@@ -4478,12 +4499,12 @@ Inbox currently supports the following DBs:</p>
 <li>PgSQL via native driver</li>
 <li>MSSQL via ODBC driver</li>
 </ul>
-<h2 id="legacy-muc-support">Legacy MUC support</h2>
+<h2 id="legacy-muc-support">Legacy MUC support<a class="headerlink" href="#legacy-muc-support" title="Permanent link">&para;</a></h2>
 <p>Inbox comes with support for the legacy MUC as well. It stores all groupchat messages sent to
 room in each sender's and recipient's inboxes and private messages. Currently it is not possible to
 configure it to store system messages like <a href="https://xmpp.org/extensions/xep-0045.html#enter-subject">subject</a> 
 or <a href="https://xmpp.org/extensions/xep-0045.html#affil">affiliation</a> change.</p>
-<h2 id="example-configuration">Example configuration</h2>
+<h2 id="example-configuration">Example configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -4527,6 +4548,46 @@ or <a href="https://xmpp.org/extensions/xep-0045.html#affil">affiliation</a> cha
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../mod_http_upload/" class="md-footer__link md-footer__link--prev" aria-label="Previous: mod_http_upload">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                mod_http_upload
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mod_jingle_sip/" class="md-footer__link md-footer__link--next" aria-label="Next: mod_jingle_sip">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                mod_jingle_sip
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4578,7 +4639,7 @@ or <a href="https://xmpp.org/extensions/xep-0045.html#affil">affiliation</a> cha
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

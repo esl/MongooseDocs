@@ -1461,6 +1461,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4503,15 +4524,15 @@
 
 <p>When a messaging client starts, it typically builds a UI showing a list of recent chats, with metadata attached to them like, whether any chat has new messages and how many, or if it is fully read, or if they are for example muted and until when.
 In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox/">mod_inbox</a>.</p>
-<h2 id="terminology">Terminology:</h2>
-<h3 id="the-inbox">The Inbox</h3>
+<h2 id="terminology">Terminology:<a class="headerlink" href="#terminology" title="Permanent link">&para;</a></h2>
+<h3 id="the-inbox">The Inbox<a class="headerlink" href="#the-inbox" title="Permanent link">&para;</a></h3>
 <p>It is personal to a given user and represents the current status of the conversations of that user. It's the front-page of the chat feature.</p>
-<h3 id="inbox-entry">Inbox entry</h3>
+<h3 id="inbox-entry">Inbox entry<a class="headerlink" href="#inbox-entry" title="Permanent link">&para;</a></h3>
 <p>It is a specific conversation, that the user can identify by the recipient jid, that is, the user jid in case of a one-to-one chat, or the room jid in case of a group-chat.</p>
-<h3 id="box-also-referred-to-as-folder">Box (also referred to as "folder")</h3>
+<h3 id="box-also-referred-to-as-folder">Box (also referred to as "folder")<a class="headerlink" href="#box-also-referred-to-as-folder" title="Permanent link">&para;</a></h3>
 <p>A category where entries can be classified. The default box is the active box, simply called <em>inbox</em>. There is a second box, called <em>archive</em>, where entries can be thrown into and not displayed by default. More boxes can be created through <a href="../../modules/mod_inbox/#modulesmod_inboxboxes">configuration</a>.</p>
-<h2 id="entity-use-cases">Entity Use Cases</h2>
-<h3 id="discovering-inbox-services">Discovering Inbox Services</h3>
+<h2 id="entity-use-cases">Entity Use Cases<a class="headerlink" href="#entity-use-cases" title="Permanent link">&para;</a></h2>
+<h3 id="discovering-inbox-services">Discovering Inbox Services<a class="headerlink" href="#discovering-inbox-services" title="Permanent link">&para;</a></h3>
 <p>An entity can discover the inbox service via a Features Discovery request:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -4537,8 +4558,8 @@ In MongooseIM this functionality is provided by <a href="../../modules/mod_inbox
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div></p>
-<h2 id="fetching-the-inbox">Fetching the inbox</h2>
-<h3 id="querying">Querying</h3>
+<h2 id="fetching-the-inbox">Fetching the inbox<a class="headerlink" href="#fetching-the-inbox" title="Permanent link">&para;</a></h2>
+<h3 id="querying">Querying<a class="headerlink" href="#querying" title="Permanent link">&para;</a></h3>
 <p>The inbox is fetched using regular XMPP <a href="https://xmpp.org/extensions/xep-0004.html">Data Forms</a>. To request the supported form, the client should send:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -4657,7 +4678,7 @@ Inbox query result IQ stanza returns the following values:</p>
   message(s)</li>
 </ul>
 <p>Note that the <code>queryid</code> field is optional, and if not provided, the answers will fall back to the <code>id</code> field of the IQ query.</p>
-<h3 id="filtering-and-ordering">Filtering and ordering</h3>
+<h3 id="filtering-and-ordering">Filtering and ordering<a class="headerlink" href="#filtering-and-ordering" title="Permanent link">&para;</a></h3>
 <p>Inbox query results may be filtered by time range and box, and sorted by timestamp.
 By default, <code>mod_inbox</code> returns all conversations, listing the ones updated most recently first.</p>
 <p>A client may specify the following parameters:</p>
@@ -4673,7 +4694,7 @@ By default, <code>mod_inbox</code> returns all conversations, listing the ones u
 Dates must be formatted according to <a href="https://xmpp.org/extensions/xep-0082.html">XMPP Date and Time Profiles</a>.
 It is not mandatory to add an empty data form if a client prefers to use default values (<code>&lt;inbox/&gt;</code> element may be empty).
 However, the IQ type must be "set", even when the data form is missing.</p>
-<h3 id="limiting-the-query">Limiting the query</h3>
+<h3 id="limiting-the-query">Limiting the query<a class="headerlink" href="#limiting-the-query" title="Permanent link">&para;</a></h3>
 <p>It can happen that the amount of inbox entries is too big for a given user, even after filtering by <code>start</code> and <code>end</code> as already available in <a href="../../modules/mod_inbox/">mod_inbox</a>. Hence, we need to set a fixed limit of the number of entries that are requested. For this, we can use a <code>&lt;max&gt;</code> attribute as defined in <a href="https://xmpp.org/extensions/xep-0059.html#limit">XEP-0059: #2.1 Limiting the Number of Items</a>:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -4707,21 +4728,21 @@ where <code>Max</code> is a non-negative integer.</p>
 <p class="admonition-title">Note</p>
 <p>Inbox pagination does not support total count nor indexes as described in <a href="https://xmpp.org/extensions/xep-0059.html#jump">XEP-0059: #2.6 Retrieving a Page Out of Order</a>.</p>
 </div>
-<h2 id="properties-of-an-entry">Properties of an entry</h2>
+<h2 id="properties-of-an-entry">Properties of an entry<a class="headerlink" href="#properties-of-an-entry" title="Permanent link">&para;</a></h2>
 <p>Given an entry, certain properties are defined for such an entry:</p>
-<h3 id="box">Box</h3>
+<h3 id="box">Box<a class="headerlink" href="#box" title="Permanent link">&para;</a></h3>
 <p>Clients usually have two different boxes for the inbox: the regular one, simply called the inbox (or the active inbox), and an archive box, where clients can manually throw conversations they don't want displayed in the default UI. A third box is the trash bin, where deleted entries go and are cleaned up in regular intervals.</p>
 <p>It is expected that entries will reside in the archive until they're either manually moved back to the active box, or they receive a new message: in such case the entry should jump back to the active box automatically.</p>
 <p>More boxes can be implemented, see <a href="../../modules/mod_inbox/#modulesmod_inboxboxes">mod_inbox#boxes</a>. Movement between boxes can be achieved through the right XMPP IQ, no more automatic movements are developed as in the case of inbox-archive.</p>
-<h3 id="read">Read</h3>
+<h3 id="read">Read<a class="headerlink" href="#read" title="Permanent link">&para;</a></h3>
 <p>Entries keep a count of unread messages that is incremented automatically upon receiving a new message, and (in the current implementation) set to zero upon receiving either a message by one-self, or an appropriate chat marker as defined in <a href="https://xmpp.org/extensions/xep-0333.html">XEP-0333</a> (which markers reset the count is a matter of configuration, see <a href="../../modules/mod_inbox/#modulesmod_inboxreset_markers">doc</a>).</p>
 <p>This property can also be manually set to zero or to one using the appropriate requests as explained below.</p>
-<h3 id="muted">Muted</h3>
+<h3 id="muted">Muted<a class="headerlink" href="#muted" title="Permanent link">&para;</a></h3>
 <p>Entries can be muted for given periods of time, and likewise, unmuted. This changes the UI representation, and also, means that the user won't get PNs (Push Notifications) for this entry, until the time set expires, or the user sets otherwise. Knowledge of this is necessary to help build the UI.</p>
 <p>Expected times can be extended before the period has expired, without the need to first unmuting. When muting a conversation, the final timestamp will be calculated by the server as the current time plus the requested period, in seconds, to centralise knowledge of UTC clocks. When muting an already muted conversation, the timestamp is simply overridden following the previous specification.</p>
-<h3 id="other-properties">Other properties</h3>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>No more properties are expected, but one could envisage notions of flagging conversations with different colours, for example according to their urgency, or a client-specific category (work, personal, fitness, and whatnot), or pins to denote an entry should be always displayed (possibly in a special format, like on top of the box). The design of the protocol, and the implementation, aims to leave room for future extensions.</p>
-<h2 id="getting-properties">Getting properties</h2>
+<h2 id="getting-properties">Getting properties<a class="headerlink" href="#getting-properties" title="Permanent link">&para;</a></h2>
 <p>To fetch all supported properties, a classic Data Form is used. Upon the client sending an iq-get without a jid:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4820,7 +4841,7 @@ To which the server will reply, just like before, with:
 <span class="w">  </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div></p>
-<h2 id="setting-properties">Setting properties</h2>
+<h2 id="setting-properties">Setting properties<a class="headerlink" href="#setting-properties" title="Permanent link">&para;</a></h2>
 <p>Setting properties is done using the standard XMPP pattern of <code>iq-query</code> and <code>iq-result</code>, as below:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4876,7 +4897,7 @@ where <code>&lt;mute&gt;</code> may contain either a zero, to denote unmuted, or
 </code></pre></div></td></tr></table></div>
 Where <code>Type</code> will usually be <code>modify</code> or <code>cancel</code>, as explained in <a href="https://xmpp.org/rfcs/rfc6120.html#stanzas-error-syntax">https://xmpp.org/rfcs/rfc6120.html#stanzas-error-syntax</a>, and <code>Condition</code> is as explained in <a href="https://xmpp.org/rfcs/rfc6120.html#stanzas-error-conditions">https://xmpp.org/rfcs/rfc6120.html#stanzas-error-conditions</a>, <code>bad-request</code> being the most common.</p>
 <p>This final syntax for the protocol has been chosen as it allows for better pipelining of requests, and it remains consistent with how, for example, rooms are configured for MUC-Light.</p>
-<h3 id="examples-archiving-an-entry">Examples: archiving an entry</h3>
+<h3 id="examples-archiving-an-entry">Examples: archiving an entry<a class="headerlink" href="#examples-archiving-an-entry" title="Permanent link">&para;</a></h3>
 <p>To put an entry into the archived box, the client can send:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4916,7 +4937,7 @@ If the client had sent an invalid number (negative, or NaN), the server would an
 <span class="w">  </span><span class="nt">&lt;/error&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div></p>
-<h3 id="examples-emptying-the-trash-bin">Examples: emptying the trash bin</h3>
+<h3 id="examples-emptying-the-trash-bin">Examples: emptying the trash bin<a class="headerlink" href="#examples-emptying-the-trash-bin" title="Permanent link">&para;</a></h3>
 <p>A user can empty his trash bin, through the following request:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4936,7 +4957,7 @@ On success, the server would return how many entries where dropped as in:
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
 The server might answer with a corresponding error message, might anything go wrong.</p>
-<h3 id="examples-muting-an-entry">Examples: muting an entry</h3>
+<h3 id="examples-muting-an-entry">Examples: muting an entry<a class="headerlink" href="#examples-muting-an-entry" title="Permanent link">&para;</a></h3>
 <p>To mute an entry for a full day (86400 seconds in a day, 604800 in a week, for example), a client can send:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4988,7 +5009,7 @@ To unmute, similarly, the client can send:
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
 And server responses will be similar.</p>
-<h3 id="examples-reading-an-entry">Examples: reading an entry</h3>
+<h3 id="examples-reading-an-entry">Examples: reading an entry<a class="headerlink" href="#examples-reading-an-entry" title="Permanent link">&para;</a></h3>
 <p>To set an entry as read, the client can send:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -5039,7 +5060,7 @@ And similarly, to set a conversation as unread:
 <span class="w">  </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div></p>
-<h3 id="deprecated-reset-entry-stanza">Deprecated reset entry stanza:</h3>
+<h3 id="deprecated-reset-entry-stanza">Deprecated reset entry stanza:<a class="headerlink" href="#deprecated-reset-entry-stanza" title="Permanent link">&para;</a></h3>
 <p>You can reset the inbox with the following stanza:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -5051,7 +5072,7 @@ Here <code>jid</code> is the bare jid of the user whose inbox we want to reset. 
 does not change the last message stored in inbox; meaning that neither this
 stanza nor anything given within will be stored; the only change is the inbox
 <code>unread_count</code> is set to zero.</p>
-<h2 id="example-request">Example request</h2>
+<h2 id="example-request">Example request<a class="headerlink" href="#example-request" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -5140,7 +5161,7 @@ stanza nor anything given within will be stored; the only change is the inbox
 <span class="w">  </span><span class="nt">&lt;/fin&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="example-error-response">Example error response</h2>
+<h2 id="example-error-response">Example error response<a class="headerlink" href="#example-error-response" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -5215,6 +5236,46 @@ stanza nor anything given within will be stored; the only change is the inbox
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../muc_light/" class="md-footer__link md-footer__link--prev" aria-label="Previous: MUC light">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                MUC light
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../smart-markers/" class="md-footer__link md-footer__link--next" aria-label="Next: Smart Markers">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Smart Markers
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -5265,7 +5326,7 @@ stanza nor anything given within will be stored; the only change is the inbox
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

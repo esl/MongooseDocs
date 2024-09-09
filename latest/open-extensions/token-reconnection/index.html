@@ -1317,6 +1317,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4213,7 +4234,7 @@
 
   <h1>Token-based reconnection</h1>
 
-<h2 id="introduction">Introduction</h2>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>Automatic reconnection after spurious disconnection is a must-have feature in modern IM applications. 
 One way of providing this feature is storing the user login information on the disk. 
 Here you need to balance two values - security and convenience for the end-user. 
@@ -4221,11 +4242,11 @@ To put it simply: storing passwords in plaintext is inherently insecure while pr
 With a token-based authentication mechanism, the user has to provide login information only once, for the initial connection to the XMPP server, and can later rely on the application's automatic use of tokens for subsequent reconnections.</p>
 <p>Reconnecting to the XMPP server, usually means that the client has to go through the same long process of SASL challenge-response exchange which may cause noticeable lags, especially while using SCRAM-based mechanisms. 
 Providing a token to the XMPP server is secure and doesn't require multiple challenge-response roundtrips, therefore might significantly speed up reconnection times.</p>
-<h2 id="requirements">Requirements</h2>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
 <p>This extension requires the client application to authenticate to the XMPP server using a regular XMPP authentication mechanism like SCRAM-SHA-1 at least once.</p>
 <p>After that, the following authentications may be done using X-OAUTH SASL mechanism with a token obtained from the server.</p>
 <p>To enable the feature, modules <code>mod_auth_token</code> and <code>mod_keystore</code> have to be enabled on the server. For more details regarding the configuration see <a href="../../modules/mod_auth_token/">mod_auth_token documentation</a> and <a href="../../modules/mod_keystore/">mod_keystore</a>.</p>
-<h2 id="token-types">Token types</h2>
+<h2 id="token-types">Token types<a class="headerlink" href="#token-types" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -4247,8 +4268,8 @@ Providing a token to the XMPP server is secure and doesn't require multiple chal
 <p>While only two token types have been described above, implementations might use other token types for specific purposes. 
 For example, a particular token type could limit the access privileges of a user logged into the system or denote an affiliation with a Multi User Chat room. 
 None of such capability grants are a subject of this specification though.</p>
-<h2 id="use-cases">Use cases</h2>
-<h3 id="obtaining-a-token">Obtaining a token</h3>
+<h2 id="use-cases">Use cases<a class="headerlink" href="#use-cases" title="Permanent link">&para;</a></h2>
+<h3 id="obtaining-a-token">Obtaining a token<a class="headerlink" href="#obtaining-a-token" title="Permanent link">&para;</a></h3>
 <p>After authenticating with some other mechanism like SCRAM-SHA-1, a client may request a token from the server by sending the following iq get to its own bare JID:</p>
 <p><strong>Client requests tokens</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -4270,7 +4291,7 @@ None of such capability grants are a subject of this specification though.</p>
 <span class="w">  </span><span class="nt">&lt;/items&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="authentication-with-an-access-token">Authentication with an access token</h3>
+<h3 id="authentication-with-an-access-token">Authentication with an access token<a class="headerlink" href="#authentication-with-an-access-token" title="Permanent link">&para;</a></h3>
 <p><strong>Client authenticates with an access token</strong></p>
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4281,7 +4302,7 @@ YWNjZXNzAGFsaWNlQHdvbmRlcmxhbmQuY29tL01pY2hhbC1QaW90cm93c2tpcy1NYWNCb29rLVBybwA2
 <strong>Server responds with a success</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;success</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;urn:ietf:params:xml:ns:xmpp-sasl&quot;</span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="authentication-with-a-refresh-token">Authentication with a refresh token</h3>
+<h3 id="authentication-with-a-refresh-token">Authentication with a refresh token<a class="headerlink" href="#authentication-with-a-refresh-token" title="Permanent link">&para;</a></h3>
 <p>In this situation server will respond with a new refresh token which SHOULD be used in future authentication.</p>
 <p><strong>Client authenticates with a refresh token</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -4297,13 +4318,13 @@ cmVmcmVzaABhbGljZUB3b25kZXJsYW5kLmNvbS9NaWNoYWwtUGlvdHJvd3NraXMtTWFjQm9vay1Qcm8A
 cmVmcmVzaABhbGljZUB3b25kZXJsYW5kLmNvbS9NaWNoYWwtUGlvdHJvd3NraXMtTWFjQm9vay1Qcm8ANjM2MjMwMDYxODQAMgAwZGQxOGJjODhkMGQ0N2MzNTBkYzAwYjcxZjMyZDVmOWIwOTljMmI1ODU5MmNhN2QxZGFmNWFkNGM0NDQ2ZGU2MWYxYzdhNTJjNDUyMGI5YmIxNGIxNTMwMTE4YTM1NTc=
 <span class="nt">&lt;/success&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="token-format">Token format</h2>
+<h2 id="token-format">Token format<a class="headerlink" href="#token-format" title="Permanent link">&para;</a></h2>
 <p>All tokens are exchanged as Base64 encoded binary data. 
 Serialization format of the token before encoding with Base64 is dependent on its type. 
 Common parts in every token are <code>BARE_JID</code> and <code>EXPIRES_AT</code>. <code>EXPIRES_AT</code> is a timestamp saying when a given token will expire. <code>\0</code> stands for the ASCII null character (i.e. byte 0).
 Text in single quotes ('example') is literal. 
 <code>ALL_CAPS</code> denote parameters.</p>
-<h3 id="access-token-format">Access token format</h3>
+<h3 id="access-token-format">Access token format<a class="headerlink" href="#access-token-format" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>BASE64_encode
         (&#39;access&#39;, \0, BARE_JID, \0, EXPIRES_AT, \0, DATA)
@@ -4313,7 +4334,7 @@ Text in single quotes ('example') is literal.
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>&#39;access&#39; \0 Q8@wonderland.com \0 64875466454
     \0 0acd0a66d06934791d046060cf9f1ad3c2abb3274cc7e7d7b2bc7e2ac4453ed774b6c6813b40ebec2bbc3774d59d4087
 </code></pre></div></td></tr></table></div>
-<h3 id="refresh-token-format">Refresh token format</h3>
+<h3 id="refresh-token-format">Refresh token format<a class="headerlink" href="#refresh-token-format" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>BASE64_encode
         (&#39;refresh&#39;, \0, BARE_JID, \0, EXPIRES_AT, \0, SEQUENCE_NO, \0, DATA)
@@ -4354,6 +4375,46 @@ Text in single quotes ('example') is literal.
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../smart-markers/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Smart Markers">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Smart Markers
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mam/" class="md-footer__link md-footer__link--next" aria-label="Next: MAM">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                MAM
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4405,7 +4466,7 @@ Text in single quotes ('example') is literal.
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

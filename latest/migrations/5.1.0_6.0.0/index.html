@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4117,14 +4138,14 @@
 
   <h1>5.1.0 to 6.0.0</h1>
 
-<h2 id="module-configuration">Module configuration</h2>
+<h2 id="module-configuration">Module configuration<a class="headerlink" href="#module-configuration" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The <code>mod_mam_meta</code> module is now named <code>mod_mam</code> for simplicity, so if you are using this module, you need to update the module name in <code>mongooseim.toml</code>.</li>
 <li><code>mod_commands</code>, <code>mod_inbox_commands</code>, <code>mod_muc_commands</code> and <code>mod_muc_light_commands</code> are removed. Their functionality is now fully covered by <a href="../../listeners/listen-http/#handler-types-rest-api-admin-mongoose_admin_api"><code>mongoose_admin_api</code></a>. You need to delete these modules from <code>mongooseim.toml</code>.</li>
 </ul>
-<h2 id="metrics">Metrics</h2>
+<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
 <p>The <code>mod_mam</code> backend module is now named <code>mod_mam_pm</code> for consistency with <code>mod_mam_muc</code>. As a result, the backend metrics have updated names, i.e. each <code>[backends, mod_mam, Metric]</code> name is changed to <code>[backends, mod_mam_pm, Metric]</code>, where <code>Metric</code> can be <code>lookup</code> or <code>archive</code>.</p>
-<h2 id="rest-api">REST API</h2>
+<h2 id="rest-api">REST API<a class="headerlink" href="#rest-api" title="Permanent link">&para;</a></h2>
 <p>The whole REST API has been unified and simplified. There are now only two REST API handlers that you can configure in the <code>listen</code> section of <code>mongooseim.toml</code>:</p>
 <ul>
 <li><a href="../../listeners/listen-http/#handler-types-rest-api-admin-mongoose_admin_api"><code>mongoose_admin_api</code></a> handles the administrative API,</li>
@@ -4133,12 +4154,12 @@
 <p>You need to remove the references to the obsolete handlers (<code>mongoose_api_client</code>, <code>mongoose_api_admin</code>, <code>mongoose_api</code>, <code>mongoose_domain_handler</code>) from your configuration file.</p>
 <p>Additionally, all the backend administration endpoints for <code>mod_muc_light</code> require now <code>XMPPMUCHost</code> (MUC subdomain) instead of <code>XMPPHost</code> (domain) and <code>roomID</code> instead of <code>roomName</code>.</p>
 <p>For some endpoints, the response messages may be slightly different because of the unification with other APIs.</p>
-<h2 id="command-line-interface">Command Line Interface</h2>
+<h2 id="command-line-interface">Command Line Interface<a class="headerlink" href="#command-line-interface" title="Permanent link">&para;</a></h2>
 <p>For some commands, the response messages may be slightly different because of the unification with other APIs.</p>
-<h2 id="dynamic-domains">Dynamic domains</h2>
+<h2 id="dynamic-domains">Dynamic domains<a class="headerlink" href="#dynamic-domains" title="Permanent link">&para;</a></h2>
 <p>Removing a domain was a potentially troublesome operation: if the removal was to fail midway through the process, retrials wouldn't be accepted. This is fixed now, by first disabling and marking a domain for removal, then running all the handlers, and only on full success will the domain be removed. So if any failure is notified, the whole operation can be retried again.</p>
 <p>The database requires a migration, as the status of a domain takes now more than the two values a boolean allows, moreover the table for data of the domain admin has been added. See the migrations for Postgres, MySQL and MSSQL in the <a href="https://github.com/esl/MongooseIM/tree/master/priv/migrations"><code>priv/migrations</code></a> directory.</p>
-<h2 id="hooks">Hooks</h2>
+<h2 id="hooks">Hooks<a class="headerlink" href="#hooks" title="Permanent link">&para;</a></h2>
 <p>Support for <code>ejabberd_hooks</code> has been removed.
 Now handlers should be compliant with <code>gen_hook</code>.
 If you have some custom modules (e.g. that implement some XMPP extensions) and use hooks mechanism, please refactor your handlers to be compliant with it.
@@ -4174,6 +4195,46 @@ For more details refer to <a href="../../developers-guide/Hooks-and-handlers/"><
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../5.0.0_5.1.0/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5.0.0 to 5.1.0">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                5.0.0 to 5.1.0
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../6.0.0_6.1.0/" class="md-footer__link md-footer__link--next" aria-label="Next: 6.0.0 to 6.1.0">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                6.0.0 to 6.1.0
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4225,7 +4286,7 @@ For more details refer to <a href="../../developers-guide/Hooks-and-handlers/"><
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

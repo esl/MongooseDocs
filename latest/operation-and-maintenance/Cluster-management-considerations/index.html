@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4148,18 +4169,18 @@
   <h1>Cluster management considerations</h1>
 
 <p>These apply to bare metal, virtualization, hypervisor, containers and other technologies.</p>
-<h2 id="single-node-mongooseim">Single-node MongooseIM</h2>
+<h2 id="single-node-mongooseim">Single-node MongooseIM<a class="headerlink" href="#single-node-mongooseim" title="Permanent link">&para;</a></h2>
 <p>With a single-node MongooseIM, one can set up a vertically scalable system, that is a function of the server resources. MongooseIM can scale from hundreds to tens of thousands of concurrent users.</p>
 <p>Note that in a single-node MongooseIM, there is no load distribution, and no fallback or failover in case of a failure.</p>
 <p>This architecture is suitable for low-scale deployments, such as testing and development environments on embedded devices, personal computers, or servers.</p>
-<h2 id="dual-node-mongooseim">Dual-node MongooseIM</h2>
+<h2 id="dual-node-mongooseim">Dual-node MongooseIM<a class="headerlink" href="#dual-node-mongooseim" title="Permanent link">&para;</a></h2>
 <p>With a dual-node MongooseIM, one can set up a vertically scalable system, that is a function of the servers' resources. We recommend that servers with the same power are used. Both nodes can handle different sets of services, given that these non-MongooseIM services consume roughly the same resources on both servers. In this setup, MongooseIM can scale up to hundred of thousands of concurrent users.</p>
 <p>In a dual-node MongooseIM, there is a 50-50 load distribution - there is a possible fallback or failover in case of a node failure. Please keep in mind that to avoid degrading the service the remaining node should be able to handle the full load when necessary.</p>
 <p>This setup is applicable to low to mid-scale deployments used f.e. for functional and load testing.
 We recommend using real dedicated servers, although MongooseIM could run in a cluster mode with low-power machines, such as embedded devices.</p>
 <p>This setup provides better fault tolerance and robustness than the single-node but it's not recommended for production environments.
 The minimum recommended production setup is 3 nodes.</p>
-<h2 id="multi-node-mongooseim">Multi-node MongooseIM</h2>
+<h2 id="multi-node-mongooseim">Multi-node MongooseIM<a class="headerlink" href="#multi-node-mongooseim" title="Permanent link">&para;</a></h2>
 <p>With a multi-node MongooseIM, one can set up a system that is highly scalable both vertically and horizontally and that is still a function of the servers' resources.
 We recommend that servers with the same power are used.
 We also recommend that all the nodes handle the same set of services.
@@ -4167,11 +4188,11 @@ In this setup, MongooseIM can scale up to tens of millions of concurrent users.<
 <p>In a multi-node MongooseIM, with <code>n</code> nodes, there is a <code>1/n</code> load distribution - there is a possible fallback or failover in case of a node failure.
 To avoid degrading the service the remaining nodes should be able to handle  <code>1/(n-1)</code> load when necessary.</p>
 <p>This setup fits mid and large-scale deployments, such as production environments. We recommend using real dedicated, powerful servers.</p>
-<h2 id="multi-datacenter-mongooseim">Multi-datacenter MongooseIM</h2>
+<h2 id="multi-datacenter-mongooseim">Multi-datacenter MongooseIM<a class="headerlink" href="#multi-datacenter-mongooseim" title="Permanent link">&para;</a></h2>
 <p>With a multi-datacenter MongooseIM, one can set up a system that is highly scalable both vertically and horizontally. The MongooseIM clusters are simply distributed across continents for local, low-lag client connections, and the clusters are interconnected via high-speed links. In this setup, MongooseIM can scale up to hundreds of millions of concurrent users.</p>
 <p>This applies to large and very large-scale deployments.</p>
 <p>We advise <a href="https://www.erlang-solutions.com/contact.html">contacting us</a> in case of such a big deployment.</p>
-<h2 id="summary-table">Summary table</h2>
+<h2 id="summary-table">Summary table<a class="headerlink" href="#summary-table" title="Permanent link">&para;</a></h2>
 <p><strong>Setup</strong>: reflects the number of nodes in your cluster. <br/>
 <strong>Purpose</strong>: is the goal and use of this cluster. <br/>
 <strong>Low-end</strong>: number of concurrent users on low-power machines, such as laptops, embedded devices, entry-level cloud or bare metal.<br/>
@@ -4212,7 +4233,7 @@ To avoid degrading the service the remaining nodes should be able to handle  <co
 </tr>
 </tbody>
 </table>
-<h3 id="important-notes">Important notes</h3>
+<h3 id="important-notes">Important notes<a class="headerlink" href="#important-notes" title="Permanent link">&para;</a></h3>
 <p>Scalability highly depends on variables such as:</p>
 <ul>
 <li>machine's power, such as memory, CPU, I/O</li>
@@ -4234,7 +4255,7 @@ To avoid degrading the service the remaining nodes should be able to handle  <co
 </li>
 <li>latency of messaging, both real-time and archived messages</li>
 </ul>
-<h3 id="os-configuration">OS configuration</h3>
+<h3 id="os-configuration">OS configuration<a class="headerlink" href="#os-configuration" title="Permanent link">&para;</a></h3>
 <p>To achieve high scalability you have to adjust the configuration of your operating system.</p>
 <p>First, set some network related parameters - this is what we use for load testing:</p>
 <table>
@@ -4300,6 +4321,46 @@ Once you increase that one, you are good to go. </p>
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../gdpr-considerations/" class="md-footer__link md-footer__link--prev" aria-label="Previous: GDPR considerations">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                GDPR considerations
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Cluster-configuration-and-node-management/" class="md-footer__link md-footer__link--next" aria-label="Next: Cluster configuration and node management">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Cluster configuration and node management
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -4350,7 +4411,7 @@ Once you increase that one, you are good to go. </p>
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

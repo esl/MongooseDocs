@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -3906,6 +3927,84 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#metrics-and-instrumentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metrics and instrumentation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metrics and instrumentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-instrumentation-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      New [instrumentation] section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      general section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exometer-configuration-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exometer configuration changes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-prometheus-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Prometheus endpoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hook-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hook metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-metric-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other metric changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrade-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade procedure
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4025,6 +4124,84 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#metrics-and-instrumentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metrics and instrumentation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metrics and instrumentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-instrumentation-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      New [instrumentation] section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      general section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exometer-configuration-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exometer configuration changes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-prometheus-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Prometheus endpoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hook-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hook metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-metric-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other metric changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrade-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade procedure
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4045,11 +4222,110 @@
 
   <h1>6.2.1 to x.x.x</h1>
 
-<h2 id="hooks">Hooks</h2>
-<p>Hook names have been unified by removing the <code>_hook</code> prefix from the few hooks which used it,
+<h2 id="hooks">Hooks<a class="headerlink" href="#hooks" title="Permanent link">&para;</a></h2>
+<p>Hook names have been unified by removing the <code>_hook</code> suffix from the few hooks which used it,
 e.g. <code>offline_message_hook</code> is now called <code>offline_message</code>. This change affects the hook metric names as well.</p>
-<h2 id="listener-configuration">Listener configuration</h2>
+<p>Some hooks have been removed:</p>
+<ul>
+<li><code>xmpp_stanza_dropped</code>,</li>
+<li><code>privacy_list_push</code>,</li>
+<li><code>xmpp_bounce_message</code>,</li>
+<li><code>mam_flush_messages</code>,</li>
+<li><code>mam_muc_flush_messages</code>.</li>
+</ul>
+<h2 id="listener-configuration">Listener configuration<a class="headerlink" href="#listener-configuration" title="Permanent link">&para;</a></h2>
 <p><code>listen.c2s.c2s_state_timeout</code> option has been renamed to <a href="../../listeners/listen-c2s/#listenc2sstate_timeout">listen.c2s.state_timeout</a>.</p>
+<h2 id="metrics-and-instrumentation">Metrics and instrumentation<a class="headerlink" href="#metrics-and-instrumentation" title="Permanent link">&para;</a></h2>
+<p>Metrics implementation has been reworked, and now a Prometheus endpoint is available.
+For more details, see <a href="../../configuration/instrumentation/">the instrumentation documentation</a>.
+This requires some changes to the configuration file, which are described in the following sections.</p>
+<h3 id="new-instrumentation-section">New <code>[instrumentation]</code> section<a class="headerlink" href="#new-instrumentation-section" title="Permanent link">&para;</a></h3>
+<p>To have metrics available in MongooseIM, an <a href="../../configuration/instrumentation/"><code>[instrumentation]</code> section</a>  is now <strong>required</strong>.</p>
+<h3 id="general-section"><code>general</code> section<a class="headerlink" href="#general-section" title="Permanent link">&para;</a></h3>
+<p><code>general.all_metrics_are_global</code> has been replaced by <a href="../../configuration/instrumentation/#instrumentationexometerall_metrics_are_global"><code>instrumentation.exometer.all_metrics_are_global</code></a>.
+This option has no effect when using Prometheus, and should be removed from the config file in this case.</p>
+<h3 id="exometer-configuration-changes">Exometer configuration changes<a class="headerlink" href="#exometer-configuration-changes" title="Permanent link">&para;</a></h3>
+<p>Exometer is no longer configured through <a href="../../configuration/configuration-files/#appconfig"><code>app.config</code></a>, but through <a href="../../configuration/configuration-files/#mongooseimtoml"><code>mongooseim.toml</code></a>.</p>
+<p>Example configuration that is equivalent to the old example configuration provided in <code>app.config</code>:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[instrumentation]</span>
+<span class="w">  </span><span class="n">probe_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60000</span>
+
+<span class="k">[[instrumentation.exometer.report.graphite]]</span>
+<span class="w">  </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;127.0.0.1&quot;</span>
+<span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2003</span>
+<span class="w">  </span><span class="n">api_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">  </span><span class="n">interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60000</span>
+<span class="w">  </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;mongooseim&quot;</span>
+<span class="w">  </span><span class="n">connect_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span>
+</code></pre></div></td></tr></table></div></p>
+<p>See <a href="../../configuration/instrumentation/#exometer-options">Exometer configuration doc</a> for more information.</p>
+<h3 id="new-prometheus-endpoint">New Prometheus endpoint<a class="headerlink" href="#new-prometheus-endpoint" title="Permanent link">&para;</a></h3>
+<p>Alternatively to Exometer, MongooseIM can now expose an endpoint serving Prometheus metrics.
+The Prometheus metrics provide labels, for example <code>host_type</code>.
+Because of this, the names of the metrics are usually shorter than the Exometer ones.</p>
+<p>The simplest configuration to have it available on port <code>9090</code> on the <code>/metrcis</code> path is:</p>
+<ul>
+<li>Add <code>prometheus</code> handler to the <code>instrumentation</code> section:
+    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[instrumentation.prometheus]</span>
+</code></pre></div></td></tr></table></div></li>
+<li>Configure Prometheus HTTP handler in the <code>listen</code> section:
+    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.http]]</span>
+<span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9090</span>
+
+<span class="w">  </span><span class="k">[[listen.http.handlers.mongoose_prometheus_handler]]</span>
+<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;_&quot;</span>
+<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/metrics&quot;</span>
+</code></pre></div></td></tr></table></div></li>
+</ul>
+<p>See <a href="../../configuration/instrumentation/">instrumentation configuration doc</a> and <a href="../../listeners/listen-http/#handler-types-prometheus-mongoose_prometheus_handler">Prometheus endpoint configuration doc</a> for more information.</p>
+<h3 id="hook-metrics">Hook metrics<a class="headerlink" href="#hook-metrics" title="Permanent link">&para;</a></h3>
+<p>Hook metrics that have been removed:</p>
+<ul>
+<li><code>mam_flush_messages</code>,</li>
+<li><code>privacy_list_push</code>,</li>
+<li><code>xmpp_bounce_message</code>.</li>
+</ul>
+<p>All the remaining hook metrics now have the <code>hook_</code> prefix.</p>
+<h3 id="other-metric-changes">Other metric changes<a class="headerlink" href="#other-metric-changes" title="Permanent link">&para;</a></h3>
+<p>Several metrics have had their names changed. The new metric names have been documented in module documentation pages.</p>
+<h2 id="upgrade-procedure">Upgrade procedure<a class="headerlink" href="#upgrade-procedure" title="Permanent link">&para;</a></h2>
+<p>In order to have metrics available in MongooseIM, perform the following steps.
+Stop the cluster, or individual nodes, if performing a rolling upgrade, and execute the configuration changes, that were described above:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="keep-exometer-metrics" name="__tabbed_1" type="radio" /><input id="move-to-prometheus-metrics" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="keep-exometer-metrics">Keep Exometer metrics</label><label for="move-to-prometheus-metrics">Move to Prometheus metrics</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ol>
+<li>Add an <code>[instrumentation]</code> section.</li>
+<li>Replace the <code>general.all_metrics_are_global</code> option with <a href="../../configuration/instrumentation/#instrumentationexometerall_metrics_are_global"><code>instrumentation.exometer.all_metrics_are_global</code></a>.</li>
+<li>Configure <a href="../../configuration/instrumentation/#exometer-options">Exometer exporters</a> in the <code>instrumentation</code> section.</li>
+<li>Note that many metrics have new names, and <a href="#hook-metrics">some have been removed</a>.</li>
+</ol>
+</div>
+<div class="tabbed-block">
+<ol>
+<li>Add an <code>[instrumentation]</code> section.</li>
+<li>Remove the <code>general.all_metrics_are_global</code> option.</li>
+<li>Add Prometheus to the <a href="../../configuration/instrumentation/">instrumentation section</a>.</li>
+<li>Configure a <a href="../../listeners/listen-http/#handler-types-prometheus-mongoose_prometheus_handler">listener</a> for Prometheus.</li>
+</ol>
+</div>
+</div>
+</div>
+<p>Restart the node or cluster.</p>
 
 
 
@@ -4081,6 +4357,46 @@ e.g. <code>offline_message_hook</code> is now called <code>offline_message</code
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../6.2.0_6.2.1/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 6.2.0 to 6.2.1">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                6.2.0 to 6.2.1
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../jid-from-mam-muc-script/" class="md-footer__link md-footer__link--next" aria-label="Next: MAM MUC migration helper">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                MAM MUC migration helper
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4132,7 +4448,7 @@ e.g. <code>offline_message_hook</code> is now called <code>offline_message</code
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4099,14 +4120,14 @@
 
   <h1>6.1.0 to 6.2.0</h1>
 
-<h2 id="internal-databases">Internal databases</h2>
+<h2 id="internal-databases">Internal databases<a class="headerlink" href="#internal-databases" title="Permanent link">&para;</a></h2>
 <p>So far MongooseIM has been using the internal Mnesia database to replicate the in-memory data between cluster nodes.
 Now there is an option to use <a href="https://github.com/esl/cets/">CETS</a> instead.
 Mnesia is still used by default, so you don't need to change your configuration file.
 If you want to switch to CETS, see the <a href="../../tutorials/CETS-configure/">tutorial</a> and the reference for <a href="../../configuration/internal-databases/"><code>internal_databases</code></a>.</p>
-<h2 id="database-migration">Database migration</h2>
+<h2 id="database-migration">Database migration<a class="headerlink" href="#database-migration" title="Permanent link">&para;</a></h2>
 <p>There is a new table <code>discovery_nodes</code> in the database, which is used by CETS for dynamic discovery of cluster nodes. See the migrations for Postgres, MySQL and MSSQL in the <a href="https://github.com/esl/MongooseIM/tree/master/priv/migrations"><code>priv/migrations</code></a> directory. Although the new table is only needed by CETS, we recommend applying the migration anyway to keep the database in sync with the latest schema.</p>
-<h2 id="validation-of-tls-options">Validation of TLS options</h2>
+<h2 id="validation-of-tls-options">Validation of TLS options<a class="headerlink" href="#validation-of-tls-options" title="Permanent link">&para;</a></h2>
 <p>Erlang/OTP 26 has more strict checking of the TLS options, as described in <a href="https://www.erlang.org/blog/otp-26-highlights/#ssl-improved-checking-of-options">release highlights</a>.
 MongooseIM follows the same rules now, preventing runtime crashes if TLS is misconfigured.</p>
 <p>By default <code>verify_mode</code> is set to <code>"peer"</code> for each <code>tls</code> section in the configuration, and this requires <code>cacertfile</code> - otherwise the server will refuse to start. This was already documented, but not enforced. The option <code>"selfsigned_peer"</code> also requires <code>cacertfile</code> now.</p>
@@ -4116,9 +4137,9 @@ MongooseIM follows the same rules now, preventing runtime crashes if TLS is misc
 <li><a href="../../configuration/outgoing-connections/">Outgoing connections</a>.</li>
 </ul>
 <p>For each of the affected sections, if there is any <code>tls</code> option present, <strong>make sure</strong> that either <code>tls.cacertfile</code> is provided or <code>tls.verify_mode</code> is set to <code>"none"</code>.</p>
-<h2 id="transition-to-new-cli-commands">Transition to New CLI Commands</h2>
+<h2 id="transition-to-new-cli-commands">Transition to New CLI Commands<a class="headerlink" href="#transition-to-new-cli-commands" title="Permanent link">&para;</a></h2>
 <p>Legacy CLI commands previously marked as deprecated have now been removed. The users are encouraged to explore the new GraphQL-based CLI. It is recommended to transition to the new CLI commands <strong>prior to the next system upgrade</strong>. The configuration options <code>general.mongooseimctl_access_commands</code> and <code>services.service_admin_extra</code> related to the legacy CLI were also removed. <strong>You need to remove them</strong> from your configuration file unless you have already done so.</p>
-<h2 id="removed-support-for-riak">Removed support for Riak</h2>
+<h2 id="removed-support-for-riak">Removed support for Riak<a class="headerlink" href="#removed-support-for-riak" title="Permanent link">&para;</a></h2>
 <p>The deprecated and obsolete Riak database is not supported anymore, and you cannot configure it in the <a href="../../configuration/outgoing-connections/"><code>outgoing_pools</code></a> section.</p>
 
 
@@ -4151,6 +4172,46 @@ MongooseIM follows the same rules now, preventing runtime crashes if TLS is misc
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../6.0.0_6.1.0/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 6.0.0 to 6.1.0">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                6.0.0 to 6.1.0
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../6.2.0_6.2.1/" class="md-footer__link md-footer__link--next" aria-label="Next: 6.2.0 to 6.2.1">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                6.2.0 to 6.2.1
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4202,7 +4263,7 @@ MongooseIM follows the same rules now, preventing runtime crashes if TLS is misc
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

@@ -1368,6 +1368,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4315,14 +4336,14 @@
 
   <h1>How to Set up SASL client certificate authentication</h1>
 
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Clients connected to MongooseIM may authenticate with their TLS certificates.
 This method uses the <code>SASL EXTERNAL</code> mechanism.</p>
-<h2 id="server-side-prerequisites">Server-side prerequisites</h2>
-<h3 id="properly-configure-client-to-server-c2s-listener">Properly configure Client-to-server (C2S) listener</h3>
+<h2 id="server-side-prerequisites">Server-side prerequisites<a class="headerlink" href="#server-side-prerequisites" title="Permanent link">&para;</a></h2>
+<h3 id="properly-configure-client-to-server-c2s-listener">Properly configure Client-to-server (C2S) listener<a class="headerlink" href="#properly-configure-client-to-server-c2s-listener" title="Permanent link">&para;</a></h3>
 <p>A server must request the certificate from a client, so you'll need to set <a href="../../listeners/listen-c2s/#listenc2stlsverify_mode"><code>verify_mode</code></a> option to <code>"peer"</code> and provide a path to CA chain that may be used for client's certificate check (<a href="../../listeners/listen-c2s/#listenc2stlscacertfile"><code>cacertfile</code></a> option).</p>
 <p>Please check the <a href="../../listeners/listen-c2s/">Listener modules</a> page for more information or simply follow the examples at the end of this section.</p>
-<h3 id="properly-configure-http-listener">Properly configure <code>http</code> listener</h3>
+<h3 id="properly-configure-http-listener">Properly configure <code>http</code> listener<a class="headerlink" href="#properly-configure-http-listener" title="Permanent link">&para;</a></h3>
 <p>SASL EXTERNAL authentication is also possible for WebSocketSecure and BOSH connections over HTTPS.
 Similarly as in the <code>client-to-server</code> case, the server must request the certificate from the client.
 In this case it's enabled by adding the following options to the <code>tls</code> option of <code>listen.http</code> :</p>
@@ -4331,7 +4352,7 @@ In this case it's enabled by adding the following options to the <code>tls</code
 <li><a href="../../listeners/listen-http/#tls-https-options"><code>tls.cacertfile = "ca.pem"</code></a> - this is to tell Erlang's SSL where  the CA cert file is in order to check if the cert is correctly signed</li>
 </ul>
 <p>Please check <a href="../../listeners/listen-http/#http-based-services-listenhttp">HTTP-based services configuration</a> for more details regarding <code>http</code> listener configuration.</p>
-<h3 id="enable-sasl-external-mechanism">Enable <code>SASL EXTERNAL</code> mechanism</h3>
+<h3 id="enable-sasl-external-mechanism">Enable <code>SASL EXTERNAL</code> mechanism<a class="headerlink" href="#enable-sasl-external-mechanism" title="Permanent link">&para;</a></h3>
 <p>A <code>SASL EXTERNAL</code> authentication mechanism is disabled by default.
 In order to enable it, please configure <a href="../../configuration/auth/#authsasl_mechanisms"><code>auth.sasl_mechanisms</code> option</a> in the MongooseIM config file.
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -4345,17 +4366,17 @@ If there is more than one JID specified in the <code>xmppAddr</code> fields, the
 <p>When no <code>xmppAddr</code> is specified, the <code>cn</code> (common name) field might be used to provide the client's username, but it is optional and can be configured with the <a href="../../configuration/auth/#authsasl_external"><code>sasl_external</code></a> option in the <code>auth</code> section.</p>
 <p>If the client certificate does not contain a JID, the client must provide one in authorisation entity.</p>
 <p>For the details please refer to <a href="https://xmpp.org/extensions/xep-0178.html">XEP-0178: Best Practices for Use of SASL EXTERNAL with Certificates</a>.</p>
-<h3 id="enable-compatible-authentication-method">Enable compatible authentication method</h3>
+<h3 id="enable-compatible-authentication-method">Enable compatible authentication method<a class="headerlink" href="#enable-compatible-authentication-method" title="Permanent link">&para;</a></h3>
 <p>You need to enable one of the following authentication methods by using the <a href="../../configuration/auth/#authmethods"><code>auth.methods</code> option</a> in the MongooseIM configuration file.</p>
 <ul>
 <li><code>"pki"</code> - accepts user credentials,</li>
 <li><code>"http"</code> - accepts user credentials if the provided certificate is <a href="../../authentication-methods/http/#method-get_certs">known and valid</a></li>
 <li><code>"ldap"</code> - accepts user credentials if a corresponding user account exists in LDAP.</li>
 </ul>
-<h3 id="self-signed-certificates">Self-signed certificates</h3>
+<h3 id="self-signed-certificates">Self-signed certificates<a class="headerlink" href="#self-signed-certificates" title="Permanent link">&para;</a></h3>
 <p>By default MongooseIM doesn't accept self-signed certs for the SASL-EXTERNAL authentication.
 For development purposes, it is possible to tell MongooseIM to accept them.</p>
-<h4 id="self-signed-certificates-for-regular-tcptls-connections">Self-signed certificates for regular TCP/TLS connections</h4>
+<h4 id="self-signed-certificates-for-regular-tcptls-connections">Self-signed certificates for regular TCP/TLS connections<a class="headerlink" href="#self-signed-certificates-for-regular-tcptls-connections" title="Permanent link">&para;</a></h4>
 <p>In order to tell MongooseIM to accept self-signed certs, the <code>listen.c2s.tls.verify_mode</code> option needs to be configured like below:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4372,7 +4393,7 @@ For development purposes, it is possible to tell MongooseIM to accept them.</p>
   This leads to an authentication failure but allows the client to choose a different auth method if available.</li>
 </ul>
 <p>For <code>fast_tls</code> backend, the configuration is the same, only the <code>disconnect_on_failure</code> is ignored.</p>
-<h4 id="self-signed-certificates-for-ws-or-bosh">Self-signed certificates for WS or BOSH</h4>
+<h4 id="self-signed-certificates-for-ws-or-bosh">Self-signed certificates for WS or BOSH<a class="headerlink" href="#self-signed-certificates-for-ws-or-bosh" title="Permanent link">&para;</a></h4>
 <p>In order to accept self-signed certs for WS or BOSH connections, the <code>tls</code> options for <code>http</code> listener must have the following configured:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4380,7 +4401,7 @@ For development purposes, it is possible to tell MongooseIM to accept them.</p>
 <span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">verify_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;selfsigned_peer&quot;</span>
 <span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">cacertfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ca.pem&quot;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="examples">Examples</h3>
+<h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h3>
 <p>Certificate authentication only.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -4447,12 +4468,12 @@ For development purposes, it is possible to tell MongooseIM to accept them.</p>
 <span class="w">  </span><span class="n">methods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;rdbms&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;pki&quot;</span><span class="p">]</span>
 <span class="w">  </span><span class="n">sasl_mechanisms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;scram_sha1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;external&quot;</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="client-certificate-prerequisites">Client certificate prerequisites</h2>
+<h2 id="client-certificate-prerequisites">Client certificate prerequisites<a class="headerlink" href="#client-certificate-prerequisites" title="Permanent link">&para;</a></h2>
 <p><code>SASL EXTERNAL</code> will be offered by the server <strong>only when a client provides a valid certificate</strong>.</p>
 <p>Please check documentation of a specific authentication backend you're going to use.</p>
-<h2 id="usage-example-gajim">Usage example - Gajim</h2>
+<h2 id="usage-example-gajim">Usage example - Gajim<a class="headerlink" href="#usage-example-gajim" title="Permanent link">&para;</a></h2>
 <p>Verified with Gajim 0.16.8, installed from package <code>gajim-0.16.8-1.fc25.noarch</code>.</p>
-<h3 id="generate-client-certificate">Generate client certificate</h3>
+<h3 id="generate-client-certificate">Generate client certificate<a class="headerlink" href="#generate-client-certificate" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -4465,10 +4486,10 @@ openssl req -new -key client.key -out client.csr # Remember to provide username 
 openssl x509 -req -in client.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out client.crt -days 500 -sha256
 openssl pkcs12 -export -inkey client.key -in client.crt -out client.p12
 </code></pre></div></td></tr></table></div>
-<h3 id="configure-mongooseim">Configure MongooseIM</h3>
+<h3 id="configure-mongooseim">Configure MongooseIM<a class="headerlink" href="#configure-mongooseim" title="Permanent link">&para;</a></h3>
 <p>See examples in the section above. We recommend using the first snippet for simplicity.</p>
 <p>You don't need to pre-create a user account in order to log in with a certificate.</p>
-<h3 id="add-an-account-in-gajim">Add an account in Gajim</h3>
+<h3 id="add-an-account-in-gajim">Add an account in Gajim<a class="headerlink" href="#add-an-account-in-gajim" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Edit -&gt; Accounts -&gt; Add.</li>
 <li>Pick "I already have an account I want to use".</li>
@@ -4510,6 +4531,46 @@ Version 0.16.8 sometimes "forgets" to ask for the client certificate password.</
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../Jingle-SIP-setup/" class="md-footer__link md-footer__link--prev" aria-label="Previous: How to Set up Jingle/SIP">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                How to Set up Jingle/SIP
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../open-extensions/muc_light/" class="md-footer__link md-footer__link--next" aria-label="Next: MUC light">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                MUC light
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4561,7 +4622,7 @@ Version 0.16.8 sometimes "forgets" to ask for the client certificate password.</
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

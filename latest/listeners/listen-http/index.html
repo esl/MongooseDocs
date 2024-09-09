@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -1675,6 +1696,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#handler-types-prometheus-mongoose_prometheus_handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Handler types: Prometheus - mongoose_prometheus_handler
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#transport-options" class="md-nav__link">
     <span class="md-ellipsis">
       Transport options
@@ -1799,6 +1829,15 @@
   <a href="#example-6-client-rest-api" class="md-nav__link">
     <span class="md-ellipsis">
       Example 6. Client REST API
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-7-prometheus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 7. Prometheus
     </span>
   </a>
   
@@ -4653,6 +4692,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#handler-types-prometheus-mongoose_prometheus_handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Handler types: Prometheus - mongoose_prometheus_handler
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#transport-options" class="md-nav__link">
     <span class="md-ellipsis">
       Transport options
@@ -4782,6 +4830,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#example-7-prometheus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 7. Prometheus
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4805,19 +4862,20 @@
   
 
 
-<h1 id="http-based-services-listenhttp">HTTP-based services: <code>[[listen.http]]</code></h1>
+<h1 id="http-based-services-listenhttp">HTTP-based services: <code>[[listen.http]]</code><a class="headerlink" href="#http-based-services-listenhttp" title="Permanent link">&para;</a></h1>
 <p>Manages all HTTP-based services, such as BOSH (HTTP long-polling), WebSocket, GraphQL and REST.
 It uses the <a href="https://ninenines.eu/docs/en/cowboy/2.6/manual">Cowboy</a> web server.
 Recommended port number: 5280 for BOSH/WS.</p>
-<h2 id="configuration-options">Configuration options</h2>
+<h2 id="configuration-options">Configuration options<a class="headerlink" href="#configuration-options" title="Permanent link">&para;</a></h2>
 <p>Following configuration option is used to set up an HTTP handler:</p>
-<h3 id="listenhttphandlers"><code>listen.http.handlers</code></h3>
+<h3 id="listenhttphandlers"><code>listen.http.handlers</code><a class="headerlink" href="#listenhttphandlers" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>Syntax:</strong> each handler is specified in a subsection starting with <code>[[listen.http.handlers.type]]</code> where <code>type</code> is one of the allowed handler types, handling different connection types:</p>
 <ul>
 <li><code>mod_bosh</code> - for <a href="https://xmpp.org/extensions/xep-0124.html">BOSH</a> connections,</li>
 <li><code>mod_websockets</code> - for <a href="https://tools.ietf.org/html/rfc6455">WebSocket</a> connections,</li>
+<li><code>mongoose_prometheus_handler</code> - for [Prometheus]((https://prometheus.io/) metrics,</li>
 <li><code>mongoose_graphql_handler</code> - for GraphQL API,</li>
 <li><code>mongoose_admin_api</code>, <code>mongoose_client_api</code> - for REST API.</li>
 </ul>
@@ -4843,43 +4901,43 @@ The double-bracket syntax is used because there can be multiple handlers of a gi
 <span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/ws-xmpp&quot;</span>
 </code></pre></div></td></tr></table></div></li>
 </ul>
-<h2 id="common-handler-options">Common handler options</h2>
-<h3 id="listenhttphandlershost"><code>listen.http.handlers.*.host</code></h3>
+<h2 id="common-handler-options">Common handler options<a class="headerlink" href="#common-handler-options" title="Permanent link">&para;</a></h2>
+<h3 id="listenhttphandlershost"><code>listen.http.handlers.*.host</code><a class="headerlink" href="#listenhttphandlershost" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> no default, mandatory option</li>
 <li><strong>Example:</strong> <code>host = "localhost"</code></li>
 </ul>
 <p>Host name for this handler or <code>"_"</code> for any host.</p>
-<h3 id="listenhttphandlerspath"><code>listen.http.handlers.*.path</code></h3>
+<h3 id="listenhttphandlerspath"><code>listen.http.handlers.*.path</code><a class="headerlink" href="#listenhttphandlerspath" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> no default, mandatory option</li>
 <li><strong>Example:</strong> <code>path = "/ws-xmpp"</code></li>
 </ul>
 <p>Path for this handler.</p>
-<h2 id="handler-types-bosh-mod_bosh">Handler types: BOSH - <code>mod_bosh</code></h2>
+<h2 id="handler-types-bosh-mod_bosh">Handler types: BOSH - <code>mod_bosh</code><a class="headerlink" href="#handler-types-bosh-mod_bosh" title="Permanent link">&para;</a></h2>
 <p>The recommended configuration is shown in <a href="#example-1-bosh-and-ws">Example 1</a> below.
 To handle incoming BOSH traffic you need to configure the <code>mod_bosh</code> module in the <code>modules</code> section as well.</p>
-<h2 id="handler-types-websockets-mod_websockets">Handler types: WebSockets - <code>mod_websockets</code></h2>
+<h2 id="handler-types-websockets-mod_websockets">Handler types: WebSockets - <code>mod_websockets</code><a class="headerlink" href="#handler-types-websockets-mod_websockets" title="Permanent link">&para;</a></h2>
 <p>The recommended configuration is shown in <a href="#example-1-bosh-and-ws">Example 1</a> below.
 Websocket connections as defined in <a href="https://tools.ietf.org/html/rfc7395">RFC 7395</a>.
 You can pass the following optional parameters:</p>
-<h3 id="listenhttphandlersmod_websocketstimeout"><code>listen.http.handlers.mod_websockets.timeout</code></h3>
+<h3 id="listenhttphandlersmod_websocketstimeout"><code>listen.http.handlers.mod_websockets.timeout</code><a class="headerlink" href="#listenhttphandlersmod_websocketstimeout" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
 <li><strong>Default:</strong> <code>"infinity"</code></li>
 <li><strong>Example:</strong> <code>timeout = 60_000</code></li>
 </ul>
 <p>The time (in milliseconds) after which an inactive user is disconnected.</p>
-<h3 id="listenhttphandlersmod_websocketsping_rate"><code>listen.http.handlers.mod_websockets.ping_rate</code></h3>
+<h3 id="listenhttphandlersmod_websocketsping_rate"><code>listen.http.handlers.mod_websockets.ping_rate</code><a class="headerlink" href="#listenhttphandlersmod_websocketsping_rate" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> not set - pings disabled</li>
 <li><strong>Example:</strong> <code>ping_rate = 10_000</code></li>
 </ul>
 <p>The time (in milliseconds) between pings sent by server. By setting this option you enable server-side pinging.</p>
-<h3 id="listenhttphandlersmod_websocketsmax_stanza_size"><code>listen.http.handlers.mod_websockets.max_stanza_size</code></h3>
+<h3 id="listenhttphandlersmod_websocketsmax_stanza_size"><code>listen.http.handlers.mod_websockets.max_stanza_size</code><a class="headerlink" href="#listenhttphandlersmod_websocketsmax_stanza_size" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer or the string <code>"infinity"</code></li>
 <li><strong>Default:</strong> <code>"infinity"</code></li>
@@ -4890,14 +4948,14 @@ You can pass the following optional parameters:</p>
 <p class="admonition-title">Warning</p>
 <p>This limit is checked <strong>after</strong> the input data parsing, so it does not apply to the input data size itself.</p>
 </div>
-<h3 id="listenhttphandlersmod_websocketsc2s_state_timeout"><code>listen.http.handlers.mod_websockets.c2s_state_timeout</code></h3>
+<h3 id="listenhttphandlersmod_websocketsc2s_state_timeout"><code>listen.http.handlers.mod_websockets.c2s_state_timeout</code><a class="headerlink" href="#listenhttphandlersmod_websocketsc2s_state_timeout" title="Permanent link">&para;</a></h3>
 <p>Same as the <a href="../listen-c2s/#listenc2sstate_timeout">C2S option</a>.</p>
-<h3 id="listenhttphandlersmod_websocketsbackwards_compatible_session"><code>listen.http.handlers.mod_websockets.backwards_compatible_session</code></h3>
+<h3 id="listenhttphandlersmod_websocketsbackwards_compatible_session"><code>listen.http.handlers.mod_websockets.backwards_compatible_session</code><a class="headerlink" href="#listenhttphandlersmod_websocketsbackwards_compatible_session" title="Permanent link">&para;</a></h3>
 <p>Same as the <a href="../listen-c2s/#listenc2sbackwards_compatible_session">C2S option</a>.</p>
-<h2 id="handler-types-graphql-api-mongoose_graphql_handler">Handler types: GraphQL API - <code>mongoose_graphql_handler</code></h2>
+<h2 id="handler-types-graphql-api-mongoose_graphql_handler">Handler types: GraphQL API - <code>mongoose_graphql_handler</code><a class="headerlink" href="#handler-types-graphql-api-mongoose_graphql_handler" title="Permanent link">&para;</a></h2>
 <p>For more information about the API, see the <a href="../../graphql-api/Admin-GraphQL/">Admin interface</a> and <a href="../../graphql-api/User-GraphQL/">User interface</a> documentation.
 The following options are supported for this handler:</p>
-<h3 id="listenhttphandlersmongoose_graphql_handlerschema_endpoint"><code>listen.http.handlers.mongoose_graphql_handler.schema_endpoint</code></h3>
+<h3 id="listenhttphandlersmongoose_graphql_handlerschema_endpoint"><code>listen.http.handlers.mongoose_graphql_handler.schema_endpoint</code><a class="headerlink" href="#listenhttphandlersmongoose_graphql_handlerschema_endpoint" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"admin"</code>, <code>"domain_admin"</code>, <code>"user"</code></li>
 <li><strong>Default:</strong> no default, this option is mandatory</li>
@@ -4909,20 +4967,20 @@ The following options are supported for this handler:</p>
 <li><code>domain_admin</code> - Endpoint with the admin commands. A domain admin has permission to execute only commands with the owned domain. See the recommended configuration - <a href="#example-3-domain-admin-graphql-api">Example 3</a>.</li>
 <li><code>user</code> - Endpoint with the user commands. Used to manage the authorized user. See the recommended configuration - <a href="#example-4-user-graphql-api">Example 4</a>.</li>
 </ul>
-<h3 id="listenhttphandlersmongoose_graphql_handlerusername-only-for-admin"><code>listen.http.handlers.mongoose_graphql_handler.username</code> - only for <code>admin</code></h3>
+<h3 id="listenhttphandlersmongoose_graphql_handlerusername-only-for-admin"><code>listen.http.handlers.mongoose_graphql_handler.username</code> - only for <code>admin</code><a class="headerlink" href="#listenhttphandlersmongoose_graphql_handlerusername-only-for-admin" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>username = "admin"</code></li>
 </ul>
 <p>When set, enables authentication for the admin API, otherwise it is disabled. Requires setting <code>password</code>.</p>
-<h3 id="listenhttphandlersmongoose_graphql_handlerpassword-only-for-admin"><code>listen.http.handlers.mongoose_graphql_handler.password</code> - only for <code>admin</code></h3>
+<h3 id="listenhttphandlersmongoose_graphql_handlerpassword-only-for-admin"><code>listen.http.handlers.mongoose_graphql_handler.password</code> - only for <code>admin</code><a class="headerlink" href="#listenhttphandlersmongoose_graphql_handlerpassword-only-for-admin" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>password = "secret"</code></li>
 </ul>
-<h3 id="listenhttphandlersmongoose_graphql_handlerallowed_categories"><code>listen.http.handlers.mongoose_graphql_handler.allowed_categories</code></h3>
+<h3 id="listenhttphandlersmongoose_graphql_handlerallowed_categories"><code>listen.http.handlers.mongoose_graphql_handler.allowed_categories</code><a class="headerlink" href="#listenhttphandlersmongoose_graphql_handlerallowed_categories" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> non-empty array of strings. Allowed values: <code>"checkAuth", "account", "domain", "last", "muc", "muc_light", "session", "stanza", "roster", "vcard", "private", "metric", "stat", "gdpr", "mnesia", "server", "inbox", "http_upload", "offline", "token"</code></li>
 <li><strong>Default:</strong> all GraphQL categories enabled</li>
@@ -4930,7 +4988,7 @@ The following options are supported for this handler:</p>
 </ul>
 <p>By default, when the option is not included, all GraphQL categories are enabled, so you don't need to add this option.
 When this option is added, only listed GraphQL categories will be processed. For others, the error "category disabled" will be returned.</p>
-<h3 id="listenhttphandlersmongoose_graphql_handlersse_idle_timeout"><code>listen.http.handlers.mongoose_graphql_handler.sse_idle_timeout</code></h3>
+<h3 id="listenhttphandlersmongoose_graphql_handlersse_idle_timeout"><code>listen.http.handlers.mongoose_graphql_handler.sse_idle_timeout</code><a class="headerlink" href="#listenhttphandlersmongoose_graphql_handlersse_idle_timeout" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer or the string <code>"infinity"</code></li>
 <li><strong>Default:</strong> 3600000</li>
@@ -4938,25 +4996,25 @@ When this option is added, only listed GraphQL categories will be processed. For
 </ul>
 <p>This option specifies the time in milliseconds after which the SSE connection is closed when idle.
 The default value is 1 hour.</p>
-<h2 id="handler-types-rest-api-admin-mongoose_admin_api">Handler types: REST API - Admin - <code>mongoose_admin_api</code></h2>
+<h2 id="handler-types-rest-api-admin-mongoose_admin_api">Handler types: REST API - Admin - <code>mongoose_admin_api</code><a class="headerlink" href="#handler-types-rest-api-admin-mongoose_admin_api" title="Permanent link">&para;</a></h2>
 <p>The recommended configuration is shown in <a href="#example-5-admin-rest-api">Example 5</a> below.
 For more information about the API, see the <a href="../../rest-api/Administration-backend/">REST interface</a> documentation.
 The following options are supported for this handler:</p>
-<h3 id="listenhttphandlersmongoose_admin_apiusername"><code>listen.http.handlers.mongoose_admin_api.username</code></h3>
+<h3 id="listenhttphandlersmongoose_admin_apiusername"><code>listen.http.handlers.mongoose_admin_api.username</code><a class="headerlink" href="#listenhttphandlersmongoose_admin_apiusername" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>username = "admin"</code></li>
 </ul>
 <p>When set, enables authentication for the admin API, otherwise it is disabled. Requires setting <code>password</code>.</p>
-<h3 id="listenhttphandlersmongoose_admin_apipassword"><code>listen.http.handlers.mongoose_admin_api.password</code></h3>
+<h3 id="listenhttphandlersmongoose_admin_apipassword"><code>listen.http.handlers.mongoose_admin_api.password</code><a class="headerlink" href="#listenhttphandlersmongoose_admin_apipassword" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>password = "secret"</code></li>
 </ul>
 <p>Required to enable authentication for the admin API.</p>
-<h3 id="listenhttphandlersmongoose_admin_apihandlers"><code>listen.http.handlers.mongoose_admin_api.handlers</code></h3>
+<h3 id="listenhttphandlersmongoose_admin_apihandlers"><code>listen.http.handlers.mongoose_admin_api.handlers</code><a class="headerlink" href="#listenhttphandlersmongoose_admin_apihandlers" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings. Allowed values: <code>"contacts"</code>, <code>"users"</code>, <code>"sessions"</code>, <code>"messages"</code>, <code>"stanzas"</code>, <code>"muc_light"</code>, <code>"muc"</code>, <code>"inbox"</code>, <code>"domain"</code>, <code>"metrics"</code>.</li>
 <li><strong>Default:</strong> all API handler modules enabled</li>
@@ -4964,11 +5022,11 @@ The following options are supported for this handler:</p>
 </ul>
 <p>The admin API consists of several handler modules, each of them implementing a subset of the functionality.
 By default, all modules are enabled, so you don't need to change this option.</p>
-<h2 id="handler-types-rest-api-client-mongoose_client_api">Handler types: REST API - Client - <code>mongoose_client_api</code></h2>
+<h2 id="handler-types-rest-api-client-mongoose_client_api">Handler types: REST API - Client - <code>mongoose_client_api</code><a class="headerlink" href="#handler-types-rest-api-client-mongoose_client_api" title="Permanent link">&para;</a></h2>
 <p>The recommended configuration is shown in <a href="#example-6-client-rest-api">Example 6</a> below.
 Please refer to <a href="../../rest-api/Client-frontend/">REST interface</a> documentation for more information.
 The following options are supported for this handler:</p>
-<h3 id="listenhttphandlersmongoose_client_apihandlers"><code>listen.http.handlers.mongoose_client_api.handlers</code></h3>
+<h3 id="listenhttphandlersmongoose_client_apihandlers"><code>listen.http.handlers.mongoose_client_api.handlers</code><a class="headerlink" href="#listenhttphandlersmongoose_client_apihandlers" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings. Allowed values: <code>"sse"</code>, <code>"messages"</code>, <code>"contacts"</code>, <code>"rooms"</code>, <code>"rooms_config"</code>, <code>"rooms_users"</code>, <code>"rooms_messages"</code>.</li>
 <li><strong>Default:</strong> all API handler modules enabled</li>
@@ -4976,7 +5034,7 @@ The following options are supported for this handler:</p>
 </ul>
 <p>The client API consists of several handler modules, each of them implementing a subset of the functionality.
 By default, all modules are enabled, so you don't need to change this option.</p>
-<h3 id="listenhttphandlersmongoose_client_apidocs"><code>listen.http.handlers.mongoose_client_api.docs</code></h3>
+<h3 id="listenhttphandlersmongoose_client_apidocs"><code>listen.http.handlers.mongoose_client_api.docs</code><a class="headerlink" href="#listenhttphandlersmongoose_client_apidocs" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>true</code></li>
@@ -4984,41 +5042,45 @@ By default, all modules are enabled, so you don't need to change this option.</p
 </ul>
 <p>The Swagger documentation of the client API is hosted at the <code>/api-docs</code> path.
 You can disable the hosted documentation by setting this option to <code>false</code>.</p>
-<h2 id="transport-options">Transport options</h2>
+<h2 id="handler-types-prometheus-mongoose_prometheus_handler">Handler types: Prometheus - <code>mongoose_prometheus_handler</code><a class="headerlink" href="#handler-types-prometheus-mongoose_prometheus_handler" title="Permanent link">&para;</a></h2>
+<p>Requires no additional options other than the <a href="#common-handler-options">common handler options</a> in the listener section.
+In order to collect useful metrics, a <code>[prometheus]</code> section has to be added in <a href="../../configuration/instrumentation/">the instrumentation section</a>.
+The default configuration available with MongooseIM is shown in <a href="#example-7-prometheus">Example 7</a> below.</p>
+<h2 id="transport-options">Transport options<a class="headerlink" href="#transport-options" title="Permanent link">&para;</a></h2>
 <p>The options listed below are used to modify the HTTP transport settings.</p>
-<h3 id="listenhttptransportnum_acceptors"><code>listen.http.transport.num_acceptors</code></h3>
+<h3 id="listenhttptransportnum_acceptors"><code>listen.http.transport.num_acceptors</code><a class="headerlink" href="#listenhttptransportnum_acceptors" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> <code>100</code></li>
 <li><strong>Example:</strong> <code>transport.num_acceptors = 10</code></li>
 </ul>
 <p>Number of HTTP connection acceptors.</p>
-<h3 id="listenhttptransportmax_connections"><code>listen.http.transport.max_connections</code></h3>
+<h3 id="listenhttptransportmax_connections"><code>listen.http.transport.max_connections</code><a class="headerlink" href="#listenhttptransportmax_connections" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer or the string <code>"infinity"</code></li>
 <li><strong>Default:</strong> <code>1024</code></li>
 <li><strong>Example:</strong> <code>transport.max_connections = "infinity"</code></li>
 </ul>
 <p>Maximum number of open connections. The default value of 1024 is set by the <a href="https://ninenines.eu/docs/en/ranch/2.1/guide/">Ranch</a> library.</p>
-<h2 id="tls-https-options">TLS (HTTPS) options</h2>
+<h2 id="tls-https-options">TLS (HTTPS) options<a class="headerlink" href="#tls-https-options" title="Permanent link">&para;</a></h2>
 <p>By default, the HTTP listener does not use TLS.
 To use TLS (HTTPS), you need to add a TOML table (subsection) called <code>tls</code> to the config file with the <code>certfile</code> and <code>keyfile</code> options that specify the location of the certificate and private key files, respectively.
 If the keyfile is password-protected, <code>password</code> is required as well.
 If the certificate is signed by an intermediate CA, one will probably want to specify the CA chain with the <code>cacertfile</code> option.
 The library used for HTTP is the Erlang TLS implementation provided by OTP - see <a href="https://github.com/ninenines/ranch/blob/master/doc/src/manual/ranch_ssl.asciidoc">ranch_ssl</a> for details.</p>
 <p>The options accepted here are: <code>verify_mode</code>, <code>certfile</code>, <code>cacertfile</code>, <code>ciphers</code>, <code>keyfile</code>, <code>password</code>, <code>versions</code>, <code>dhfile</code>. They have the same semantics as the corresponding <a href="../listen-c2s/#tls-options-for-c2s">c2s options</a> for <code>just_tls</code>.</p>
-<h2 id="protocol-options">Protocol options</h2>
+<h2 id="protocol-options">Protocol options<a class="headerlink" href="#protocol-options" title="Permanent link">&para;</a></h2>
 <p>These are some additional options of the HTTP protocol.</p>
-<h3 id="listenhttpprotocolcompress"><code>listen.http.protocol.compress</code></h3>
+<h3 id="listenhttpprotocolcompress"><code>listen.http.protocol.compress</code><a class="headerlink" href="#listenhttpprotocolcompress" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> false</li>
 <li><strong>Example:</strong> <code>protocol.compress = "true"</code></li>
 </ul>
 <p>Compresses response bodies automatically when the client supports it.</p>
-<h2 id="http-listener-configuration-examples">HTTP listener configuration examples</h2>
+<h2 id="http-listener-configuration-examples">HTTP listener configuration examples<a class="headerlink" href="#http-listener-configuration-examples" title="Permanent link">&para;</a></h2>
 <p>The examples shown below are included in the provided default configuration file.</p>
-<h3 id="example-1-bosh-and-ws">Example 1. BOSH and WS</h3>
+<h3 id="example-1-bosh-and-ws">Example 1. BOSH and WS<a class="headerlink" href="#example-1-bosh-and-ws" title="Permanent link">&para;</a></h3>
 <p>The following listener accepts BOSH and WebSocket connections and has TLS configured.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -5046,7 +5108,7 @@ The library used for HTTP is the Erlang TLS implementation provided by OTP - see
 <span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;_&quot;</span>
 <span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/ws-xmpp&quot;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="example-2-admin-graphql-api">Example 2. Admin GraphQL API</h3>
+<h3 id="example-2-admin-graphql-api">Example 2. Admin GraphQL API<a class="headerlink" href="#example-2-admin-graphql-api" title="Permanent link">&para;</a></h3>
 <p>GraphQL API for administration, the listener is bound to 127.0.0.1 for increased security. The number of acceptors and connections is specified (reduced).</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -5074,7 +5136,7 @@ The library used for HTTP is the Erlang TLS implementation provided by OTP - see
 <span class="w">    </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span>
 <span class="w">    </span><span class="n">allowed_categories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;server&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;last&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;vcard&quot;</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="example-3-domain-admin-graphql-api">Example 3. Domain Admin GraphQL API</h3>
+<h3 id="example-3-domain-admin-graphql-api">Example 3. Domain Admin GraphQL API<a class="headerlink" href="#example-3-domain-admin-graphql-api" title="Permanent link">&para;</a></h3>
 <p>GraphQL API for the domain admin.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -5096,7 +5158,7 @@ The library used for HTTP is the Erlang TLS implementation provided by OTP - see
 <span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/api/graphql&quot;</span>
 <span class="w">    </span><span class="n">schema_endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;domain_admin&quot;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="example-4-user-graphql-api">Example 4. User GraphQL API</h3>
+<h3 id="example-4-user-graphql-api">Example 4. User GraphQL API<a class="headerlink" href="#example-4-user-graphql-api" title="Permanent link">&para;</a></h3>
 <p>GraphQL API for the user.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -5118,7 +5180,7 @@ The library used for HTTP is the Erlang TLS implementation provided by OTP - see
 <span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/api/graphql&quot;</span>
 <span class="w">    </span><span class="n">schema_endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;user&quot;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="example-5-admin-rest-api">Example 5. Admin REST API</h3>
+<h3 id="example-5-admin-rest-api">Example 5. Admin REST API<a class="headerlink" href="#example-5-admin-rest-api" title="Permanent link">&para;</a></h3>
 <p>REST API for administration, the listener is bound to <code>127.0.0.1</code> for increased security.
 The number of acceptors and connections is specified (reduced).
 Basic HTTP authentication is used as well.</p>
@@ -5144,7 +5206,7 @@ Basic HTTP authentication is used as well.</p>
 <span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;admin&quot;</span>
 <span class="w">    </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="example-6-client-rest-api">Example 6. Client REST API</h3>
+<h3 id="example-6-client-rest-api">Example 6. Client REST API<a class="headerlink" href="#example-6-client-rest-api" title="Permanent link">&para;</a></h3>
 <p>REST API for clients.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -5161,6 +5223,24 @@ Basic HTTP authentication is used as well.</p>
 <span class="w">  </span><span class="k">[[listen.http.handlers.mongoose_client_api]]</span>
 <span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;_&quot;</span>
 <span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/api&quot;</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="example-7-prometheus">Example 7. Prometheus<a class="headerlink" href="#example-7-prometheus" title="Permanent link">&para;</a></h3>
+<p>Prometheus metrics endpoint.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.http]]</span>
+<span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9091</span>
+
+<span class="w">  </span><span class="n">transport</span><span class="p">.</span><span class="n">num_acceptors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+
+<span class="w">  </span><span class="k">[[listen.http.handlers.mongoose_prometheus_handler]]</span>
+<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;_&quot;</span>
+<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/metrics&quot;</span>
 </code></pre></div></td></tr></table></div>
 
 
@@ -5193,6 +5273,46 @@ Basic HTTP authentication is used as well.</p>
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../listen-components/" class="md-footer__link md-footer__link--prev" aria-label="Previous: XMPP components (service)">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                XMPP components (service)
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../authentication-methods/rdbms/" class="md-footer__link md-footer__link--next" aria-label="Next: RDBMS">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                RDBMS
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -5244,7 +5364,7 @@ Basic HTTP authentication is used as well.</p>
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

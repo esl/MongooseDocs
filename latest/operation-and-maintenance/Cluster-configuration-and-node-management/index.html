@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4315,8 +4336,8 @@
 
   <h1>Cluster configuration and node management</h1>
 
-<h2 id="environment-configuration">Environment configuration</h2>
-<h3 id="file-descriptors">File descriptors</h3>
+<h2 id="environment-configuration">Environment configuration<a class="headerlink" href="#environment-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="file-descriptors">File descriptors<a class="headerlink" href="#file-descriptors" title="Permanent link">&para;</a></h3>
 <p>To handle large traffic, some of the system variables need to be tuned.
 Number one on that list is the maximum number of file descriptors which often is set to 1024.
 Each MongooseIM connection consumes ~1 file descriptor, so the default value will not suffice for larger installations - when it is exceeded, emfile errors will appear in logs.</p>
@@ -4329,7 +4350,7 @@ To increase the limit the following entries should be added in <code>/etc/securi
 mongooseim   hard   nofile   1000000
 </code></pre></div></td></tr></table></div>
 <p>If you are using <strong>Ubuntu</strong>, all <code>/etc/pam.d/common-session*</code> files should include <code>session required pam_limits.so</code>.</p>
-<h3 id="vmargs-file"><code>vm.args</code> file</h3>
+<h3 id="vmargs-file"><code>vm.args</code> file<a class="headerlink" href="#vmargs-file" title="Permanent link">&para;</a></h3>
 <p>This file contains Erlang options used when starting the VM.
 It is located in <code>REL_ROOT/etc/vm.args</code> where <code>REL_ROOT</code> is the path to a MongooseIM release
 (ie. <code>_build/prod/rel/mongooseim</code> if you build MongooseIM from source).</p>
@@ -4343,7 +4364,7 @@ We suggest 350000 for 100 k users when using an SSL/TLS connection or 250000 in
 <p>Another change you need to make when building a MongooseIM cluster is setting the <code>-sname</code>.
 To do it, just set the <code>-sname</code> option in <code>vm.args</code> with node's hostname,
 which <strong>must</strong> be resolvable on other nodes in the cluster.</p>
-<h3 id="port-range">Port range</h3>
+<h3 id="port-range">Port range<a class="headerlink" href="#port-range" title="Permanent link">&para;</a></h3>
 <p>To connect to other nodes, a freshly started node uses a port from the range <code>inet_dist_listen_min</code> to <code>inet_dist_listen_max</code>.</p>
 <p>To enable this, add the following line to the <code>vm.args</code> file:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>-kernel inet_dist_listen_min 50000 inet_dist_listen_max 50010
@@ -4351,7 +4372,7 @@ which <strong>must</strong> be resolvable on other nodes in the cluster.</p>
 <p>Make sure that the range you set provides enough ports for all the nodes in the cluster.</p>
 <p>Remember to keep an epmd port open (port 4369) if any firewall restrictions are required.
 Epmd keeps track of which Erlang node is using which ports on the local machine.</p>
-<h2 id="connecting-nodes">Connecting nodes</h2>
+<h2 id="connecting-nodes">Connecting nodes<a class="headerlink" href="#connecting-nodes" title="Permanent link">&para;</a></h2>
 <p>Checklist:</p>
 <ul>
 <li>working directory <code>rel/mongooseim</code> (root of a MongooseIM release or installation)</li>
@@ -4360,8 +4381,8 @@ Epmd keeps track of which Erlang node is using which ports on the local machine.
    (ex. <code>net_adm:ping('mongoose@localhost')</code>)</li>
 <li>RDBMS backend is configured, so CETS could discover nodes</li>
 </ul>
-<h3 id="initial-node">Initial node</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">CETS</label><label for="__tabbed_1_2">Mnesia</label></div>
+<h3 id="initial-node">Initial node<a class="headerlink" href="#initial-node" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="cets" name="__tabbed_1" type="radio" /><input id="mnesia" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="cets">CETS</label><label for="mnesia">Mnesia</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Clustering is automatic. There is no difference between nodes.</p>
@@ -4372,8 +4393,8 @@ Epmd keeps track of which Erlang node is using which ports on the local machine.
 </div>
 </div>
 </div>
-<h3 id="new-node-joining-cluster">New node - joining cluster</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">CETS</label><label for="__tabbed_2_2">Mnesia</label></div>
+<h3 id="new-node-joining-cluster">New node - joining cluster<a class="headerlink" href="#new-node-joining-cluster" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="cets_1" name="__tabbed_2" type="radio" /><input id="mnesia_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="cets_1">CETS</label><label for="mnesia_1">Mnesia</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Clustering is automatic.</p>
@@ -4399,8 +4420,8 @@ without displaying the warning and waiting for the confirmation.</p>
 </div>
 </div>
 </div>
-<h3 id="leaving-cluster">Leaving cluster</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">CETS</label><label for="__tabbed_3_2">Mnesia</label></div>
+<h3 id="leaving-cluster">Leaving cluster<a class="headerlink" href="#leaving-cluster" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="cets_2" name="__tabbed_3" type="radio" /><input id="mnesia_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="cets_2">CETS</label><label for="mnesia_2">Mnesia</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Stopping the node is enough to leave the cluster.
@@ -4419,8 +4440,8 @@ option in the CETS backend configuration. A different Erlang cookie is a good id
 </div>
 </div>
 </div>
-<h3 id="removing-a-node-from-the-cluster">Removing a node from the cluster</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">CETS</label><label for="__tabbed_4_2">Mnesia</label></div>
+<h3 id="removing-a-node-from-the-cluster">Removing a node from the cluster<a class="headerlink" href="#removing-a-node-from-the-cluster" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="cets_3" name="__tabbed_4" type="radio" /><input id="mnesia_3" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="cets_3">CETS</label><label for="mnesia_3">Mnesia</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>A stopped node would be automatically removed from the node discovery table in RDBMS database after some time.
@@ -4438,8 +4459,8 @@ The successful output from the above command may look like the following:</p>
 </div>
 </div>
 </div>
-<h3 id="cluster-status">Cluster status</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">CETS</label><label for="__tabbed_5_2">Mnesia</label></div>
+<h3 id="cluster-status">Cluster status<a class="headerlink" href="#cluster-status" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="cets_4" name="__tabbed_5" type="radio" /><input id="mnesia_4" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="cets_4">CETS</label><label for="mnesia_4">Mnesia</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Run the command:</p>
@@ -4538,18 +4559,18 @@ This does not necessarily indicate that they are down but might be a symptom of 
 </div>
 </div>
 </div>
-<h2 id="load-balancing">Load Balancing</h2>
-<h3 id="elastic-load-balancer-elb">Elastic Load Balancer (ELB)</h3>
+<h2 id="load-balancing">Load Balancing<a class="headerlink" href="#load-balancing" title="Permanent link">&para;</a></h2>
+<h3 id="elastic-load-balancer-elb">Elastic Load Balancer (ELB)<a class="headerlink" href="#elastic-load-balancer-elb" title="Permanent link">&para;</a></h3>
 <p>When using ELB please be advised that some warm-up time may be needed before
 the load balancer works efficiently for a big load.</p>
-<h3 id="software-load-balancer">Software load balancer</h3>
+<h3 id="software-load-balancer">Software load balancer<a class="headerlink" href="#software-load-balancer" title="Permanent link">&para;</a></h3>
 <p>A good example of load balancing on the application layer are HAProxy and Nginx.</p>
-<h3 id="dns-based-load-balancing">DNS-based load balancing</h3>
+<h3 id="dns-based-load-balancing">DNS-based load balancing<a class="headerlink" href="#dns-based-load-balancing" title="Permanent link">&para;</a></h3>
 <p>Load balancing can be performed on a DNS level.
 A DNS response can have a number of IP addresses that can be returned to the client side in a random order.</p>
 <p>On the AWS stack this type of balancing is provided by Route53.
 The description of their service can be found in the <a href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/WeightedResourceRecordSets.html">Route53 Developer's Guide</a>.</p>
-<h3 id="other">Other</h3>
+<h3 id="other">Other<a class="headerlink" href="#other" title="Permanent link">&para;</a></h3>
 <p>The approaches described above can be mixed - we can use DNS load balancing to pick a software load balancer which will select one of the nodes.</p>
 
 
@@ -4582,6 +4603,46 @@ The description of their service can be found in the <a href="http://docs.aws.am
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../Cluster-management-considerations/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Cluster management considerations">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Cluster management considerations
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Logging-%26-monitoring/" class="md-footer__link md-footer__link--next" aria-label="Next: Logging &amp; monitoring">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Logging & monitoring
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4633,7 +4694,7 @@ The description of their service can be found in the <a href="http://docs.aws.am
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

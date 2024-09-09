@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4343,11 +4364,11 @@
   
 
 
-<h1 id="selected-hooks-description">Selected hooks description</h1>
+<h1 id="selected-hooks-description">Selected hooks description<a class="headerlink" href="#selected-hooks-description" title="Permanent link">&para;</a></h1>
 <p>This is a brief documentation for a few selected hooks.
 Though hooks &amp; handlers differ in what they are there to do, it is not necessary to describe them all, because the mechanism is general.
 The following is meant to give you the idea of how the hooks work, what they are used for and the various purposes they can serve.</p>
-<h2 id="user_send_"><code>user_send_*</code></h2>
+<h2 id="user_send_"><code>user_send_*</code><a class="headerlink" href="#user_send_" title="Permanent link">&para;</a></h2>
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -4361,7 +4382,7 @@ The following is meant to give you the idea of how the hooks work, what they are
 These hooks are run in <code>mongoose_c2s</code> after the C2S process receives an XML element from the client.</p>
 <p>The hooks won't be called for stanzas arriving from a user served by a federated server (i.e. on a server-to-server connection handled by <code>ejabberd_s2s</code>).</p>
 <p>The logic depends on the C2S state, which changes during the connection, authentication and resource binding process:</p>
-<h3 id="hooks-called-for-session_established">Hooks called for <code>session_established</code></h3>
+<h3 id="hooks-called-for-session_established">Hooks called for <code>session_established</code><a class="headerlink" href="#hooks-called-for-session_established" title="Permanent link">&para;</a></h3>
 <p>Some rudimentary verification of the stanza is done once it is received from the socket:</p>
 <ul>
 <li>if present, the <code>from</code> attribute of the stanza is checked against the identity of the user whose session the process in question serves;
@@ -4376,9 +4397,9 @@ These hooks are run in <code>mongoose_c2s</code> after the C2S process receives 
 <li><code>user_send_xmlel</code> for other XML elements.</li>
 </ul>
 <p>These type-specific hooks should be used instead of <code>user_send_packet</code> when possible.</p>
-<h3 id="hooks-called-for-other-states">Hooks called for other states</h3>
+<h3 id="hooks-called-for-other-states">Hooks called for other states<a class="headerlink" href="#hooks-called-for-other-states" title="Permanent link">&para;</a></h3>
 <p>If the session is not established (e.g. the client hasn't authenticated or its resource is not bound yet), only the <code>user_send_xmlel</code> hook is called regardless of the XML element type. No other <code>user_send_*</code> hooks are called, and no stanza checks are performed.</p>
-<h3 id="handler-examples">Handler examples</h3>
+<h3 id="handler-examples">Handler examples<a class="headerlink" href="#handler-examples" title="Permanent link">&para;</a></h3>
 <p>These hooks are handled by the following modules:</p>
 <ul>
 <li><a href="../../modules/mod_blocking/"><code>mod_blocking</code></a> - handles IQ requests for blocking lists.</li>
@@ -4395,7 +4416,7 @@ These hooks are run in <code>mongoose_c2s</code> after the C2S process receives 
 <li><a href="../../modules/mod_smart_markers/"><code>mod_smart_markers</code></a> - checks if the stanza contains chat markers info and stores the update.</li>
 <li><a href="../../modules/mod_stream_management/"><code>mod_stream_management</code></a> - counts stanzas sent by the client and handles special XML elements like <code>&lt;a&gt;</code> and <code>&lt;enable&gt;</code>.</li>
 </ul>
-<h2 id="filter_packet-and-filter_local_packet"><code>filter_packet</code> and <code>filter_local_packet</code></h2>
+<h2 id="filter_packet-and-filter_local_packet"><code>filter_packet</code> and <code>filter_local_packet</code><a class="headerlink" href="#filter_packet-and-filter_local_packet" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">filter_packet</span><span class="p">({</span><span class="nv">From</span><span class="p">,</span><span class="w"> </span><span class="nv">To</span><span class="p">,</span><span class="w"> </span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">Packet</span><span class="p">})</span>
 <span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">filter_local_packet</span><span class="p">({</span><span class="nv">From</span><span class="p">,</span><span class="w"> </span><span class="nv">To</span><span class="p">,</span><span class="w"> </span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">Packet</span><span class="p">})</span>
@@ -4417,7 +4438,7 @@ The stanza can be filtered out (in case the handler returns <code>drop</code>), 
 This hook is run not for a host type, but globally across the whole cluster.
 Keep that in mind when registering the handlers and appropriately use the atom <code>global</code> instead of a host type as the second argument.</p>
 </div>
-<h3 id="handler-examples_1">Handler examples</h3>
+<h3 id="handler-examples_1">Handler examples<a class="headerlink" href="#handler-examples_1" title="Permanent link">&para;</a></h3>
 <p>These hooks are handled by the following modules:</p>
 <ul>
 <li><a href="../../modules/mod_domain_isolation/"><code>mod_domain_isolation</code></a> - filters out cross-domain stanzas.</li>
@@ -4427,7 +4448,7 @@ Keep that in mind when registering the handlers and appropriately use the atom <
 <li><a href="../../modules/mod_pubsub/"><code>mod_pubsub</code></a> - for each subscription authorization form sent by a node owner, the subscription state is updated, and the stanza is dropped.</li>
 <li><a href="../../modules/mod_smart_markers/"><code>mod_smart_markers</code></a> - filters out chat markers, because they are handled separately by <code>mod_offline_chatmarkers</code>.</li>
 </ul>
-<h2 id="user_receive_"><code>user_receive_*</code></h2>
+<h2 id="user_receive_"><code>user_receive_*</code><a class="headerlink" href="#user_receive_" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -4448,7 +4469,7 @@ Keep that in mind when registering the handlers and appropriately use the atom <
 <li><code>user_receive_xmlel</code> for other XML elements.</li>
 </ul>
 <p>These type-specific hooks should be used instead of <code>user_receive_packet</code> when possible.</p>
-<h3 id="handler-examples_2">Handler examples</h3>
+<h3 id="handler-examples_2">Handler examples<a class="headerlink" href="#handler-examples_2" title="Permanent link">&para;</a></h3>
 <p>These hooks are handled by the following modules:</p>
 <ul>
 <li><a href="../../modules/mod_caps/"><code>mod_caps</code></a> - detects and caches capability information sent with certain messages for later use.</li>
@@ -4458,11 +4479,11 @@ Keep that in mind when registering the handlers and appropriately use the atom <
 <li><a href="../../modules/mod_privacy/"><code>mod_privacy</code></a> - filters received stanzas according to privacy lists.</li>
 <li><a href="../../modules/mod_stream_management/"><code>mod_stream_management</code></a> - filters out stanzas with conflicting session ID's.</li>
 </ul>
-<h2 id="offline_message"><code>offline_message</code></h2>
+<h2 id="offline_message"><code>offline_message</code><a class="headerlink" href="#offline_message" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">offline_message</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">From</span><span class="p">,</span><span class="w"> </span><span class="nv">To</span><span class="p">,</span><span class="w"> </span><span class="nv">Packet</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p><code>ejabberd_sm</code> runs this hook for each message which cannot be delivered, because no resource (i.e. device or desktop client application) of its recipient is available online for delivery.</p>
-<h3 id="handler-examples_3">Handler examples</h3>
+<h3 id="handler-examples_3">Handler examples<a class="headerlink" href="#handler-examples_3" title="Permanent link">&para;</a></h3>
 <p>This hook is handled by the following modules, listed in the order of execution:</p>
 <ul>
 <li>
@@ -4478,11 +4499,11 @@ Keep that in mind when registering the handlers and appropriately use the atom <
 <p><code>ejabberd_sm</code> - calls <code>ejabberd_sm:bounce_offline_message</code>, which responds with the <code>&lt;service-unavailable/&gt;</code> stanza error. In the case of using <code>mod_mam</code> the message is actually stored, and no such error should be sent - that's why the module <code>mod_offline_stub</code> can be enabled.</p>
 </li>
 </ul>
-<h2 id="remove_user"><code>remove_user</code></h2>
+<h2 id="remove_user"><code>remove_user</code><a class="headerlink" href="#remove_user" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">remove_user</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">LServer</span><span class="p">,</span><span class="w"> </span><span class="nv">LUser</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p><code>remove_user</code> is run by <code>ejabberd_auth</code> - the authentication module - when a request is made to remove the user from the database of the server.</p>
-<h3 id="handler-examples_4">Handler examples</h3>
+<h3 id="handler-examples_4">Handler examples<a class="headerlink" href="#handler-examples_4" title="Permanent link">&para;</a></h3>
 <p>This hook is used by multiple modules, since removing a user requires many cleanup operations:</p>
 <ul>
 <li><a href="../../modules/mod_auth_token/"><code>mod_auth_token</code></a> removes user's authentication tokens;</li>
@@ -4499,7 +4520,7 @@ Keep that in mind when registering the handlers and appropriately use the atom <
 <li><a href="../../modules/mod_smart_markers/"><code>mod_smart_markers</code></a> removes chat markers stored for the user;</li>
 <li><a href="../../modules/mod_vcard/"><code>mod_vcard</code></a> removes user's vCard information.</li>
 </ul>
-<h2 id="node_cleanup"><code>node_cleanup</code></h2>
+<h2 id="node_cleanup"><code>node_cleanup</code><a class="headerlink" href="#node_cleanup" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">node_cleanup</span><span class="p">(</span><span class="nv">Node</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p><code>node_cleanup</code> is run by a <code>mongooseim_cleaner</code> process which subscribes to <code>nodedown</code> messages.
@@ -4509,7 +4530,7 @@ MongooseIM uses Mnesia to store processes through which messages are then routed
 Those must obviously be removed when a node goes down, and to do this the modules <code>ejabberd_local</code>, <code>ejabberd_router</code>, <code>ejabberd_s2s</code>, <code>ejabberd_sm</code> and <code>mod_bosh</code> register their handlers with this hook.</p>
 <p>Number of retries for this transaction is set to 1 which means that in some situations the hook may be run on more than one node in the cluster, especially when there is little garbage to clean after the dead node.
 Setting retries to 0 is not good decision as it was observed that in some setups it may abort the transaction on all nodes.</p>
-<h2 id="session_opening_allowed_for_user"><code>session_opening_allowed_for_user</code></h2>
+<h2 id="session_opening_allowed_for_user"><code>session_opening_allowed_for_user</code><a class="headerlink" href="#session_opening_allowed_for_user" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">allow</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">session_opening_allowed_for_user</span><span class="p">(</span><span class="nv">HostType</span><span class="p">,</span><span class="w"> </span><span class="nv">JID</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>This hook is run after authenticating when user sends the IQ opening a session.
@@ -4521,7 +4542,7 @@ Handler function are expected to return:</p>
 </ul>
 <p>In the default implementation the hook is not used, built-in user control methods are supported elsewhere.
 This is the perfect place to plug in custom security control.</p>
-<h2 id="other-hooks">Other hooks</h2>
+<h2 id="other-hooks">Other hooks<a class="headerlink" href="#other-hooks" title="Permanent link">&para;</a></h2>
 <ul>
 <li>acc_room_affiliations</li>
 <li>adhoc_local_commands</li>
@@ -4653,10 +4674,8 @@ This is the perfect place to plug in custom security control.</p>
 <li>user_stop_request</li>
 <li>user_terminate</li>
 <li>vcard_set</li>
-<li>xmpp_bounce_message</li>
 <li>xmpp_presend_element</li>
 <li>xmpp_send_element</li>
-<li>xmpp_stanza_dropped</li>
 </ul>
 
 
@@ -4689,6 +4708,46 @@ This is the perfect place to plug in custom security control.</p>
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../Hooks-and-handlers/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Hooks and Handlers">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Hooks and Handlers
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../accumulators/" class="md-footer__link md-footer__link--next" aria-label="Next: Accumulators">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Accumulators
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4740,7 +4799,7 @@ This is the perfect place to plug in custom security control.</p>
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

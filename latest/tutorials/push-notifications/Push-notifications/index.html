@@ -1345,6 +1345,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4265,7 +4286,7 @@
   
 
 
-<h1 id="how-to-set-up-push-notifications">How to set up Push Notifications</h1>
+<h1 id="how-to-set-up-push-notifications">How to set up Push Notifications<a class="headerlink" href="#how-to-set-up-push-notifications" title="Permanent link">&para;</a></h1>
 <p>Push notifications are the bread and butter of the modern mobile experience, and MongooseIM has
 support for them. When used together with <a href="https://github.com/esl/MongoosePush">MongoosePush</a>, you get out-of-the-box push
 notifications for FCM (<strong>F</strong>irebase <strong>C</strong>loud <strong>M</strong>essaging) and APNS (<strong>A</strong>pple <strong>P</strong>ush
@@ -4274,7 +4295,7 @@ choice.</p>
 <p>You might also want to read about the push notification's <a href="../Push-notifications-client-side/">client side configuration</a>.</p>
 <p>All push notification mechanisms use <a href="../../../modules/mod_event_pusher_push/">mod_event_pusher_push</a> as a backend implementation,
 read <a href="../../../modules/mod_event_pusher/">the relevant documentation</a> to know more about it.</p>
-<h2 id="xep-0357-push-notifications">XEP-0357: Push Notifications</h2>
+<h2 id="xep-0357-push-notifications">XEP-0357: Push Notifications<a class="headerlink" href="#xep-0357-push-notifications" title="Permanent link">&para;</a></h2>
 <p>Server side push notification support is fully compliant with <a href="https://xmpp.org/extensions/xep-0357.html">XEP-0357: Push Notifications</a>,
 which defines several components that need to work together in order to provide clients with working
 push notifications. However, there's just one non-optimal detail required by the aforementioned XEP:
@@ -4292,7 +4313,7 @@ the producing and processing of these stanzas.</p>
 node (the most common setup!). Or, for the best performance, you might just skip that PubSub node
 altogether. While the whole setup can be incredibly extensible, we see the following straightforward
 uses of it.</p>
-<h2 id="xep-0357-compliant-with-local-pubsub">XEP-0357 compliant with local PubSub</h2>
+<h2 id="xep-0357-compliant-with-local-pubsub">XEP-0357 compliant with local PubSub<a class="headerlink" href="#xep-0357-compliant-with-local-pubsub" title="Permanent link">&para;</a></h2>
 <p><img alt="" src="../PushNotifications-MIM_with_local_pubsub.png" /></p>
 <p>This is, historically, the most common setup.
 It allows your clients to enable push notifications via a local PubSub,
@@ -4313,18 +4334,18 @@ node. Check out <a href="../MongoosePush-setup/">this</a> tutorial on how to set
 <span class="w">  </span><span class="n">wpool</span><span class="p">.</span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="c1"># optional</span>
 <span class="w">  </span><span class="n">plugin_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;mod_event_pusher_push_plugin_defaults&quot;</span><span class="w"> </span><span class="c1"># optional, default</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="advantages">Advantages</h3>
+<h3 id="advantages">Advantages<a class="headerlink" href="#advantages" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Completely XEP-0357 compliant, and therefore compatible with any compliant 3rd party client library</li>
 <li>No need to have two different servers</li>
 </ul>
-<h3 id="drawbacks">Drawbacks</h3>
+<h3 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Less efficient (PubSub has a considerable impact on heavily loaded systems)</li>
 <li>More load within a single node</li>
 <li>Harder to customise</li>
 </ul>
-<h2 id="mongooseim-as-a-pubsub-less-xmpp-server">MongooseIM as a PubSub-less XMPP server</h2>
+<h2 id="mongooseim-as-a-pubsub-less-xmpp-server">MongooseIM as a PubSub-less XMPP server<a class="headerlink" href="#mongooseim-as-a-pubsub-less-xmpp-server" title="Permanent link">&para;</a></h2>
 <p><img alt="" src="../PushNotifications-no_pubsub.png" /></p>
 <p>PubSub is completely bypassed and clients don't need to create a push node — if they attempt to
 do so, and PubSub is not configured, the server would respond with an error stanza.
@@ -4343,24 +4364,24 @@ node. Check out <a href="../MongoosePush-setup/">this</a> tutorial on how to set
 <span class="w">  </span><span class="n">plugin_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;mod_event_pusher_push_plugin_defaults&quot;</span><span class="w"> </span><span class="c1"># optional, default</span>
 <span class="w">  </span><span class="n">virtual_pubsub_hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pubsub.@HOST@&quot;</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="advantages_1">Advantages</h3>
+<h3 id="advantages_1">Advantages<a class="headerlink" href="#advantages_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>No need to use PubSub at all</li>
 <li>More efficient (PubSub has a considerable impact on heavily loaded systems)</li>
 <li>Simpler client-side usage — Read about the <a href="../Push-notifications-client-side/">client side configuration here</a></li>
 </ul>
-<h3 id="drawbacks_1">Drawbacks</h3>
+<h3 id="drawbacks_1">Drawbacks<a class="headerlink" href="#drawbacks_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>If the client application is built to create the push PubSub node, this might require a migration
   for such client — as he attempts to create the node, the server will answer with an IQ error
   stanza. If migrating the client side is a problem, there's a solution for that
   <a href="../../../modules/mod_event_pusher_push/#plugin-module">in the module section</a></li>
 </ul>
-<h3 id="virtual-pubsub-hosts">Virtual PubSub hosts</h3>
+<h3 id="virtual-pubsub-hosts">Virtual PubSub hosts<a class="headerlink" href="#virtual-pubsub-hosts" title="Permanent link">&para;</a></h3>
 <p>These domains will shadow any identical domain configured for PubSub, stealing any notification
 published to it. It enables easy migration from PubSub-full deployments to PubSub-less variants.
 Read more in <a href="../../../modules/mod_event_pusher_push/#virtual-pubsub-hosts">the relevant section</a>.</p>
-<h2 id="overview-of-all-the-involved-mongooseim-components">Overview of all the involved MongooseIM components</h2>
+<h2 id="overview-of-all-the-involved-mongooseim-components">Overview of all the involved MongooseIM components<a class="headerlink" href="#overview-of-all-the-involved-mongooseim-components" title="Permanent link">&para;</a></h2>
 <p>The components that make push notifications possible in MongooseIM
 comprise the following architecture:</p>
 <table>
@@ -4377,11 +4398,11 @@ comprise the following architecture:</p>
 </tr>
 </tbody>
 </table>
-<h3 id="mod_event_pusher_push"><a href="../../../modules/mod_event_pusher_push/">mod_event_pusher_push</a></h3>
+<h3 id="mod_event_pusher_push"><a href="../../../modules/mod_event_pusher_push/">mod_event_pusher_push</a><a class="headerlink" href="#mod_event_pusher_push" title="Permanent link">&para;</a></h3>
 <p>The first component that we need to configure in MongooseIM is the <a href="../../../modules/mod_event_pusher_push/">mod_event_pusher_push</a> module.</p>
-<h3 id="mod_push_service_mongoosepush"><a href="../../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a></h3>
+<h3 id="mod_push_service_mongoosepush"><a href="../../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a><a class="headerlink" href="#mod_push_service_mongoosepush" title="Permanent link">&para;</a></h3>
 <p>A connector to <a href="https://github.com/esl/MongoosePush">MongoosePush</a> application. You can read more about it <a href="../MongoosePush-setup/">here</a>.</p>
-<h3 id="mod_pubsubs-push-node"><a href="../../../modules/mod_pubsub/">mod_pubsub</a>'s <code>push</code> node</h3>
+<h3 id="mod_pubsubs-push-node"><a href="../../../modules/mod_pubsub/">mod_pubsub</a>'s <code>push</code> node<a class="headerlink" href="#mod_pubsubs-push-node" title="Permanent link">&para;</a></h3>
 <p>According to the <a href="https://xmpp.org/extensions/xep-0357.html">XEP-0357: Push Notifications</a>, all
 notifications generated via the module we have just enabled (i.e. <a href="../../../modules/mod_event_pusher_push/">mod_event_pusher_push</a>) have to
 be send to a push enabled publish-subscribe node. In order to allow clients to allocate such a
@@ -4418,6 +4439,46 @@ the <em>XMPP Push Service</em>.</p>
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../CETS-configure/" class="md-footer__link md-footer__link--prev" aria-label="Previous: How to configure MongooseIM to use CETS instead of Mnesia">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                How to configure MongooseIM to use CETS instead of Mnesia
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Push-notifications-client-side/" class="md-footer__link md-footer__link--next" aria-label="Next: How to Set up Push Notifications on the client side">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                How to Set up Push Notifications on the client side
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4469,7 +4530,7 @@ the <em>XMPP Push Service</em>.</p>
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../../assets/javascripts/bundle.56dfad97.min.js"></script>

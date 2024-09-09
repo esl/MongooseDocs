@@ -1384,6 +1384,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4343,13 +4364,13 @@
   
 
 
-<h1 id="build-a-complete-ios-messaging-app-using-xmppframework">Build a complete iOS messaging app using XMPPFramework</h1>
+<h1 id="build-a-complete-ios-messaging-app-using-xmppframework">Build a complete iOS messaging app using XMPPFramework<a class="headerlink" href="#build-a-complete-ios-messaging-app-using-xmppframework" title="Permanent link">&para;</a></h1>
 <p>Read our blog posts:</p>
 <ul>
 <li><a href="https://www.erlang-solutions.com/blog/build-a-complete-ios-messaging-app-using-xmppframework-tutorial-part-1.html">Build a complete iOS messaging app using XMPPFramework - Tutorial Part 1</a></li>
 <li><a href="https://www.erlang-solutions.com/blog/build-a-complete-ios-messaging-app-using-xmppframework-part-2.html">Build a complete iOS messaging app using XMPPFramework - Part 2</a></li>
 </ul>
-<h2 id="yaxt-yet-another-xmpp-tutorial">YAXT??! Yet another XMPP tutorial?</h2>
+<h2 id="yaxt-yet-another-xmpp-tutorial">YAXT??! Yet another XMPP tutorial?<a class="headerlink" href="#yaxt-yet-another-xmpp-tutorial" title="Permanent link">&para;</a></h2>
 <p>Well, this is going to be another tutorial, but I’m going to try to make it a little bit different.
 This is an XMPP tutorial from an iOS developer’s perspective.
 I’ll try to answer all the questions I had when I started working in this area.
@@ -4357,7 +4378,7 @@ This journey is going to go from no XMPP knowldege at all
 to having a fully functional instant messaging iOS appusing this cool protocol.
 We are going to be using the super awesome (yet overwhelming at the beginning…) <a href="https://github.com/robbiehanson/XMPPFramework">XMPPFramework</a> library,
 and the idea is also to also mix in some iOS concepts that you are going to need for your app.</p>
-<h2 id="whats-xmpp">What’s XMPP?</h2>
+<h2 id="whats-xmpp">What’s XMPP?<a class="headerlink" href="#whats-xmpp" title="Permanent link">&para;</a></h2>
 <p>From <a href="https://en.wikipedia.org/wiki/XMPP">Wikipedia</a>:
 Extensible Messaging and Presence Protocol (XMPP) is a communications protocol for message-oriented middleware based on XML.</p>
 <p>This basically means XMPP is a protocol for exchanging stuff.
@@ -4372,7 +4393,7 @@ And last, but not least:
 every piece of information we are going to exchange under this protocol is going to be XML.
 I can heard you complaining but…
 Come on, it’s not that bad!</p>
-<h2 id="why-do-we-need-xmpp-why-not-just-rest">Why do we need XMPP? Why not just REST?</h2>
+<h2 id="why-do-we-need-xmpp-why-not-just-rest">Why do we need XMPP? Why not just REST?<a class="headerlink" href="#why-do-we-need-xmpp-why-not-just-rest" title="Permanent link">&para;</a></h2>
 <p>Well what other options do we have?
 On the one hand, a custom solution means building everything from scratch, that takes time.
 On the other hand, we have XMPP, a super tested technology broadly used by millions of people every day,
@@ -4402,7 +4423,7 @@ So every time you want to use your REST solution,
 you will need HTTP,
 a protocol that is not always available everywhere (maybe you need to embed this in a cheap piece of hardware?).
 Besides, we have XMPP built on top of TCP that’s going to be always available.</p>
-<h2 id="whats-the-basic-stuff-i-need-to-know-to-get-started">What’s the basic stuff I need to know to get started?</h2>
+<h2 id="whats-the-basic-stuff-i-need-to-know-to-get-started">What’s the basic stuff I need to know to get started?<a class="headerlink" href="#whats-the-basic-stuff-i-need-to-know-to-get-started" title="Permanent link">&para;</a></h2>
 <p>Well, you know a lot already but let’s make a list. Lists are always good:</p>
 <ul>
 <li>XMPP is built on top of TCP. It keeps an open connection all the time.</li>
@@ -4414,7 +4435,7 @@ Besides, we have XMPP built on top of TCP that’s going to be always available.
 <li>Stream, iq, message and presence are the core of XMPP. You can find everything perfectly detailed in RFC6120
 XMPP can be extended to accomplish different stuff. Each extension is called XEP (XMPP Extension Protocol).</li>
 </ul>
-<h2 id="whats-a-jid">What’s a JID?</h2>
+<h2 id="whats-a-jid">What’s a JID?<a class="headerlink" href="#whats-a-jid" title="Permanent link">&para;</a></h2>
 <p>Jabber ID (JID) is how we univocally identify each individual in XMPP.
 It is the address to where we are going to send our stanzas.</p>
 <p>This is how a JID looks like:</p>
@@ -4435,10 +4456,10 @@ A service?
 What’s a service?!
 Services are different pieces of an XMPP server that offer you some special functionality,
 but don’t worry about this right now, just remember: you can have JIDs without a localpart.</p>
-<h2 id="whats-a-stanza">What’s a Stanza?</h2>
+<h2 id="whats-a-stanza">What’s a Stanza?<a class="headerlink" href="#whats-a-stanza" title="Permanent link">&para;</a></h2>
 <p>Stanza is the name of the XML pieces that we are going to be sending and receiving.
 The defined stanzas are: <code>&lt;message/&gt;</code>, <code>&lt;presence/&gt;</code> and <code>&lt;iq/&gt;</code>.</p>
-<h3 id="message"><code>&lt;message/&gt;</code></h3>
+<h3 id="message"><code>&lt;message/&gt;</code><a class="headerlink" href="#message" title="Permanent link">&para;</a></h3>
 <p>This is a basic <code>&lt;message/&gt;</code> stanza.
 Every time you want to send a message to someone (a JID), you will have to send this stanza:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -4447,7 +4468,7 @@ Every time you want to send a message to someone (a JID), you will have to send 
 <span class="w">    </span><span class="nt">&lt;body&gt;</span>Hey<span class="w"> </span>there!<span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/message&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="iq"><code>&lt;iq/&gt;</code></h3>
+<h3 id="iq"><code>&lt;iq/&gt;</code><a class="headerlink" href="#iq" title="Permanent link">&para;</a></h3>
 <p>It stands for Info/Query.
 It’s a query-action mechanism, you send an <code>iq</code> and you will get a response to that query.
 You can pair the <code>iq-query</code> with the <code>iq-response</code> using the stanza id.</p>
@@ -4474,7 +4495,7 @@ You can pair the <code>iq-query</code> with the <code>iq-response</code> using t
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="presence"><code>&lt;presence/&gt;</code></h3>
+<h3 id="presence"><code>&lt;presence/&gt;</code><a class="headerlink" href="#presence" title="Permanent link">&para;</a></h3>
 <p>Used to exchange presence information, as you could have imagined.
 Usually presences are sent from the client to the server and broadcasted by it.
 The most basic, yet valid presence, to indicate to the server that a user is available is:</p>
@@ -4492,7 +4513,7 @@ you are not going to receive any <code>&lt;message/&gt;</code> until you make yo
 <span class="w">      </span><span class="nt">&lt;status&gt;</span>On<span class="w"> </span>vacation<span class="nt">&lt;/status&gt;</span>
 <span class="nt">&lt;/presence&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="whats-a-stream">What’s a Stream?</h2>
+<h2 id="whats-a-stream">What’s a Stream?<a class="headerlink" href="#whats-a-stream" title="Permanent link">&para;</a></h2>
 <p>Before answering this, let’s refresh our mind.
 What’s a Unix socket?
 From Wikipedia: A socket is a special file used for inter-process communication.
@@ -4510,7 +4531,7 @@ And there you go… that’s our stream.</p>
 Well, the only thing we need to do to send a message is writing a <message/> stanza in our shared file.
 But what happens when the server wants to send me a message?
 Simple: it will write the message in the 'shared file’.</p>
-<h2 id="are-we-ok-so-far">Are we ok so far?</h2>
+<h2 id="are-we-ok-so-far">Are we ok so far?<a class="headerlink" href="#are-we-ok-so-far" title="Permanent link">&para;</a></h2>
 <p>I’m sure at this point you have questions like:</p>
 <ul>
 <li>“What?! An active TCP connection open all the time? I’m used to REST! How am I going to do that?!” </li>
@@ -4527,7 +4548,7 @@ Simple: it will write the message in the 'shared file’.</p>
 “How do you ask something to the server?”,
 “What’s a Stream?”.
 If you can answer all that, you are WAY better than me when I started.</p>
-<h2 id="first-steps-installing-the-xmppframework-library">First steps: installing the XMPPFramework library</h2>
+<h2 id="first-steps-installing-the-xmppframework-library">First steps: installing the XMPPFramework library<a class="headerlink" href="#first-steps-installing-the-xmppframework-library" title="Permanent link">&para;</a></h2>
 <p>Let’s create a brand new Xcode project and install the library.
 In this tutorial we are going to be using <code>Swift 3</code>.
 The easiest way to integrate XMPPFramework to the project is using <a href="https://cocoapods.org/">CocoaPods</a>.</p>
@@ -4546,7 +4567,7 @@ end
 </code></pre></div></td></tr></table></div>
 <p>Then <code>pod install</code> and <code>CocoaPods</code> is going to do its magic and create a <code>.xcworkspace</code> with the library integrated.
 Now we just need to <code>import XMPPFramework</code> in the files we want to use the library and that’s it.</p>
-<h2 id="starting-to-build-our-instant-messaging-app">Starting to build our Instant Messaging app</h2>
+<h2 id="starting-to-build-our-instant-messaging-app">Starting to build our Instant Messaging app<a class="headerlink" href="#starting-to-build-our-instant-messaging-app" title="Permanent link">&para;</a></h2>
 <p>The most important thing in an XMPP application is the stream,
 that’s where we are going to “write” our stanzas, so we need an object that is going to hold it.
 We are going to create an <code>XMPPController</code> class with an <code>XMPPStream</code>:</p>
@@ -4726,7 +4747,7 @@ Because we can “broadcast” the events to multiple delegates,
 we can have 10 different objects implementing those methods.
 Also we can tell what’s the thread where we want to receive that call,
 in the previous example we want it in the main thread.</p>
-<h2 id="getting-a-log-in">Getting a Log In</h2>
+<h2 id="getting-a-log-in">Getting a Log In<a class="headerlink" href="#getting-a-log-in" title="Permanent link">&para;</a></h2>
 <p>Our app is super ugly, let’s put on some makeup!
 We have nothing but an <code>XMPPController</code> and a hardcoded call in the <code>AppDelegate</code>.
 I’m going to create a <code>ViewController</code> that is going to be presented modally as soon as the app starts,
@@ -4795,14 +4816,14 @@ This is why being able to add multiple delegates is so useful.</p>
 </code></pre></div></td></tr></table></div>
 <p>And that’s it! Our app can log in to our server as I’m showing here:</p>
 <p><img alt="App connecting and authenticating" src="../content_login.gif" /></p>
-<h2 id="logging">Logging!</h2>
+<h2 id="logging">Logging!<a class="headerlink" href="#logging" title="Permanent link">&para;</a></h2>
 <p>We’ve been talking a lot about XMPP, stanzas and streams… but is there a way I can see the stream?
 Yes SR! XMPPFramework got us covered!</p>
 <p>XMPPFramework ships with <a href="https://github.com/CocoaLumberjack/CocoaLumberjack">CocoaLumberJack</a>,
 a pretty well known logging framework.
 We just need to configure it, set the logging level we want and that’s it.
 Logs are going to start showing up!</p>
-<h3 id="configuring-cocoalumberjack">Configuring CocoaLumberjack</h3>
+<h3 id="configuring-cocoalumberjack">Configuring CocoaLumberjack<a class="headerlink" href="#configuring-cocoalumberjack" title="Permanent link">&para;</a></h3>
 <p>This is a really simple task,
 you just need to add to your <code>func application(application: UIApplication, didFinishLaunchingWithOptions ...</code> method the following line (remember to <code>import CocoaLumberjack</code>):</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">DDLog</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">DDTTYLogger</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">(),</span> <span class="n">with</span><span class="p">:</span> <span class="n">DDLogLevel</span><span class="p">.</span><span class="n">all</span><span class="p">)</span>
@@ -4840,7 +4861,7 @@ To do this I’m going to be sending messages from <a href="https://adium.im/">A
 <span class="nt">&lt;/presence&gt;</span>
 </code></pre></div></td></tr></table></div>
 <p>No doubts at all right? We send something and we receive it on the other end! That’s it!</p>
-<h2 id="test-time">Test Time!</h2>
+<h2 id="test-time">Test Time!<a class="headerlink" href="#test-time" title="Permanent link">&para;</a></h2>
 <p>I want to be sure that you are understanding and following everything
 and not just copy and pasting from a tutorial (as I usually do 🙊).
 So if you are able to answer these questions you are on a good track!</p>
@@ -4882,6 +4903,46 @@ So if you are able to answer these questions you are on a good track!</p>
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../ICE_tutorial/" class="md-footer__link md-footer__link--prev" aria-label="Previous: How to Set up MongooseICE">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                How to Set up MongooseICE
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Jingle-SIP-setup/" class="md-footer__link md-footer__link--next" aria-label="Next: How to Set up Jingle/SIP">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                How to Set up Jingle/SIP
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4933,7 +4994,7 @@ So if you are able to answer these questions you are on a good track!</p>
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

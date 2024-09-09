@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4147,7 +4168,7 @@
 
   <h1>6.0.0 to 6.1.0</h1>
 
-<h2 id="listener-configuration">Listener configuration</h2>
+<h2 id="listener-configuration">Listener configuration<a class="headerlink" href="#listener-configuration" title="Permanent link">&para;</a></h2>
 <p>With the new implementation of the client-to-server (C2S) state machine, <code>mongoose_c2s</code>, there are some changes in the listener options:</p>
 <ul>
 <li>The <code>zlib</code> option for supporting <a href="https://xmpp.org/extensions/xep-0138.html">stream compression</a>, which was present in the default configuration file, is removed, and <strong>you need to delete it</strong> from your listener configuration unless you have already done so. The extension is <a href="https://xmpp.org/extensions/xep-0138.html#revision-history-v2.1">obsolete due to security vulnerability</a>, and the <a href="https://en.wikipedia.org/wiki/CRIME">CRIME</a> vulnerability has been found <a href="https://blog.thijsalkema.de/blog/2014/08/07/https-attacks-and-xmpp-2-crime-and-breach/">a long time ago</a>.</li>
@@ -4156,16 +4177,16 @@
 <li>The default value of the <a href="../../configuration/listen/#listenbacklog"><code>backlog</code></a> option for all XMPP listeners has been increased from 100 to 1024 for performance reasons.</li>
 <li>You might be interested in the new C2S listener options: <a href="../../listeners/listen-c2s/#listenc2smax_connections"><code>max_connections</code></a>, <a href="../../listeners/listen-c2s/#listenc2sstate_timeout"><code>c2s_state_timeout</code></a>, <a href="../../listeners/listen-c2s/#listenc2sreuse_port"><code>reuse_port</code></a> and <a href="../../listeners/listen-c2s/#listenc2sbackwards_compatible_session"><code>backwards_compatible_session</code></a>. The first two options can be set for <a href="../../listeners/listen-http/#handler-types-websockets-mod_websockets">websockets</a> as well.</li>
 </ul>
-<h2 id="module-configuration">Module configuration</h2>
+<h2 id="module-configuration">Module configuration<a class="headerlink" href="#module-configuration" title="Permanent link">&para;</a></h2>
 <p>The <code>mongoose_c2s</code> module, which provides the core XMPP features, is now separated from modules which used to have their parts hardcoded into the old C2S implementation:</p>
 <ul>
 <li>Presence handling has been exported to a separate module <a href="../../modules/mod_presence"><code>mod_presence</code></a>, which is enabled in the default configuration file. <strong>Enable <code>mod_presence</code> in your configuration file</strong> unless you are sure that you don't need server-side presence handling, in which case you could gain some performance by not using this module.</li>
 <li>Stream management is now handled completely by <a href="../../modules/mod_stream_management"><code>mod_stream_management</code></a>, and if you don't need it, you can now gain more performance than before by disabling it.</li>
 <li>Client state indication is now handled completely by <a href="../../modules/mod_csi"><code>mod_csi</code></a>, and if you don't need it, you can now gain more performance than before by disabling it.</li>
 </ul>
-<h2 id="database-migration">Database migration</h2>
+<h2 id="database-migration">Database migration<a class="headerlink" href="#database-migration" title="Permanent link">&para;</a></h2>
 <p>There is no database migration required when upgrading from version <code>6.0.0</code> to <code>6.1.0</code>.</p>
-<h2 id="metrics">Metrics</h2>
+<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
 <p>The <code>c2s_unauthenticated_iq</code> metric has been removed.</p>
 <p>Since we don't know whether a compressed/encrypted packet contains a single stanza or a batch, calculation of histogram metrics for compressed and encrypted streams is inaccurate. The following histogram metrics have been removed:
     * <code>global.data.xmpp.received.compressed_size</code> - obsolete, <code>stream compression</code> support is removed.
@@ -4173,11 +4194,11 @@
     * <code>global.data.xmpp.received.encrypted_size</code> - impractical, has no value but consumes calculation resources.
     * <code>global.data.xmpp.sent.encrypted_size</code> - impractical, has no value but consumes calculation resources.</p>
 <p>A set of <code>global.data.xmpp.received.**</code> and <code>global.data.xmpp.sent.**</code> spiral <a href="../../operation-and-maintenance/MongooseIM-metrics#data-metrics">data metrics</a> has been introduced instead.</p>
-<h2 id="hooks">Hooks</h2>
+<h2 id="hooks">Hooks<a class="headerlink" href="#hooks" title="Permanent link">&para;</a></h2>
 <p>Multiple hooks have been added, removed or changed because of the introduction of <code>mongoose_c2s</code> - the most important change is the increased granularity of the <code>user_send_*</code> and <code>user_receive_*</code> hooks. If you have some custom modules (e.g. that implement some XMPP extensions) using the hooks mechanism, please refactor your handlers to be compliant with the new hooks. Refer to <a href="../../developers-guide/hooks_description">Hooks Description</a> and <a href="../../developers-guide/Stanza-routing">Message routing</a> for more details.</p>
-<h2 id="upgrade-procedure">Upgrade procedure</h2>
+<h2 id="upgrade-procedure">Upgrade procedure<a class="headerlink" href="#upgrade-procedure" title="Permanent link">&para;</a></h2>
 <p>As long as you are not using Mnesia for persistent storage (it is not recommended to do so), the safest option would be to prepare a new cluster with version 6.1.0, and switch the traffic to it on a load balancer. The only downside is that clients connected to different clusters would see each other as offline. If you are limited to one cluster, it is recommended to do a split-cluster rolling upgrade by <a href="../../operation-and-maintenance/Cluster-configuration-and-node-management/#leaving-cluster">removing</a> each node from the cluster before stopping and upgrading it, and gradually forming a <strong>new separate cluster</strong> from the upgraded nodes. This means that for each newly started node except the first one, you should <a href="../../operation-and-maintenance/Cluster-configuration-and-node-management/#new-node-joining-cluster">join</a> one of the previously started nodes.</p>
-<h3 id="rolling-upgrade-issues">Rolling upgrade issues</h3>
+<h3 id="rolling-upgrade-issues">Rolling upgrade issues<a class="headerlink" href="#rolling-upgrade-issues" title="Permanent link">&para;</a></h3>
 <p>If you want to perform a typical <a href="../../operation-and-maintenance/Rolling-upgrade">rolling upgrade</a> instead, there are a few potential issues caused by the introduction of <code>mongoose_c2s</code>. When a node is stopped, upgraded and started again, it reconnects to the cluster. When a stanza is routed between users connected to different nodes of the cluster, an internal message is sent between the nodes. In version 6.1.0 that message has a different format, and routing a stanza between nodes with versions 6.0.0 and 6.1.0 would fail, resulting in a warning message for each stanza. This means that after upgrading the first node you might get a huge amount of warning messages on all nodes, causing a performance drop. What is more, the sender's node would still assume that the recipient is online, and some actions (e.g. responding with the <code>service-unavailable</code> error) would be omitted.</p>
 <div class="admonition info">
 <p class="admonition-title">Changing the log level</p>
@@ -4220,6 +4241,46 @@ Change the values in the configuration files as well to make the setting permane
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../5.1.0_6.0.0/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5.1.0 to 6.0.0">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                5.1.0 to 6.0.0
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../6.1.0_6.2.0/" class="md-footer__link md-footer__link--next" aria-label="Next: 6.1.0 to 6.2.0">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                6.1.0 to 6.2.0
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4271,7 +4332,7 @@ Change the values in the configuration files as well to make the setting permane
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

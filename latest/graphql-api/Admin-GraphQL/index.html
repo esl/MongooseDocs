@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4163,22 +4184,22 @@
   
 
 
-<h1 id="mongooseims-graphql-api-for-the-administrator">MongooseIM's GraphQL API for the administrator</h1>
+<h1 id="mongooseims-graphql-api-for-the-administrator">MongooseIM's GraphQL API for the administrator<a class="headerlink" href="#mongooseims-graphql-api-for-the-administrator" title="Permanent link">&para;</a></h1>
 <p>The new GraphQL admin API contains all the commands available through the REST API, and the vast majority of the CLI (<code>mongooseimctl</code>) commands. Only commands that wouldn't have worked well with GraphQL style have been omitted.</p>
 <p>We can distinguish two levels of the administration. A global admin (has access to all commands), and the admin per domain (has access only to the own domain). Each of them is handled by a different endpoint. Please see the configuration <a href="../../listeners/listen-http/#handler-types-graphql-api-mongoose_graphql_handler">Listen</a> section for more details.</p>
 <p>There is only one schema for both admin types. Admin per domain simply has no permissions to execute global commands or commands with not owned domain. The API documentation clearly says which commands are global.</p>
 <p><strong>Queries</strong> and <strong>mutations</strong> can be executed with the POST or GET method, as specified in the <a href="https://graphql.org/learn/serving-over-http/">GraphQL documentation</a>. The endpoint URL is as configured in the Listen section, e.g. <code>http://localhost:5551/api/graphql</code> for the global admin.</p>
 <p><strong>Subscriptions</strong> can be executed with the GET method, and are handled with <a href="https://html.spec.whatwg.org/multipage/server-sent-events.html">Server-Sent Events (SSE)</a>. The endpoint URL is the same as for regular queries with the addition of <code>/sse</code>, e.g. <code>http://localhost:5551/api/graphql/sse</code> for the global admin.</p>
-<h2 id="domain-admin-configuration">Domain admin configuration</h2>
+<h2 id="domain-admin-configuration">Domain admin configuration<a class="headerlink" href="#domain-admin-configuration" title="Permanent link">&para;</a></h2>
 <p>Out of the box, domains are created with a disabled admin account. Admin per domain can be enabled only by the global admin with the command
 <a href="../admin-graphql-doc.html#definition-DomainAdminMutation" target="_blank" rel="noopener noreferrer">mutation.domains.setDomainPassword</a>. Afterward, the domain admin can change the password with the same command.</p>
 <p>The admin per domain can be disabled by the global admin with the command <a href="../admin-graphql-doc.html#definition-DomainAdminMutation" target="_blank" rel="noopener noreferrer">mutation.domains.removeDomainPassword</a>.</p>
-<h2 id="authentication">Authentication</h2>
+<h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h2>
 <p>MongooseIM uses <em>Basic Authentication</em> as an authentication method for the GraphQL API.</p>
 <p><em>Basic authentication</em> is a simple authentication scheme built into the HTTP protocol.
 Each HTTP request to the GraphQL API has to contain the Authorization header
 with the word <code>Basic</code> followed by a space and a base64-encoded string.</p>
-<h3 id="global-admin-endpoint">Global admin endpoint</h3>
+<h3 id="global-admin-endpoint">Global admin endpoint<a class="headerlink" href="#global-admin-endpoint" title="Permanent link">&para;</a></h3>
 <p>The authentication for global admin is optional because this endpoint shouldn't be exposed outside. The credentials set in the handler section in the config enables the authentication. Please see the <a href="../../listeners/listen-http/#handler-types-graphql-api-mongoose_graphql_handler">GraphQL handler</a> section for more details.</p>
 <p>The base64-encoded string should have the form
 <code>LOGIN:PASSWORD</code>, where:</p>
@@ -4186,18 +4207,18 @@ with the word <code>Basic</code> followed by a space and a base64-encoded string
 <li><code>LOGIN</code> is the login set in the config,</li>
 <li><code>PASSWORD</code> is the password set in the config.</li>
 </ul>
-<h3 id="domain-admin-endpoint">Domain admin endpoint</h3>
+<h3 id="domain-admin-endpoint">Domain admin endpoint<a class="headerlink" href="#domain-admin-endpoint" title="Permanent link">&para;</a></h3>
 <p>The authorization as a domain admin the base64-encoded string should have the form
 <code>admin@DOMAIN:PASSWORD</code>, where:</p>
 <ul>
 <li><code>DOMAIN</code> is the domain to authorize,</li>
 <li><code>PASSWORD</code> is the password for the given domain.</li>
 </ul>
-<h2 id="graphiql">GraphiQL</h2>
+<h2 id="graphiql">GraphiQL<a class="headerlink" href="#graphiql" title="Permanent link">&para;</a></h2>
 <p>GraphiQL is the GraphQL integrated development environment (IDE). It allows to experiment with API and run queries with ease. The GraphiQL page is automatically served with each GraphQL endpoint. For example:</p>
 <p><code>http://localhost:5551/api/graphql</code></p>
 <p>Open the above address in your browser and try to use it.</p>
-<h3 id="authorization">Authorization</h3>
+<h3 id="authorization">Authorization<a class="headerlink" href="#authorization" title="Permanent link">&para;</a></h3>
 <p>Executing some of the queries requires authorization. Just add the following JSON into the header tab. Remember to update the credentials.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4205,7 +4226,7 @@ with the word <code>Basic</code> followed by a space and a base64-encoded string
 <span class="w">   </span><span class="nt">&quot;Authorization&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Basic YWxpY2VAbG9jYWxob3N0OnNlY3JldA==&quot;</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="static-documentation">Static documentation</h2>
+<h2 id="static-documentation">Static documentation<a class="headerlink" href="#static-documentation" title="Permanent link">&para;</a></h2>
 <p><a style="float: right; padding: 5px" href="../admin-graphql-doc.html" target="_blank" rel="noopener noreferrer">Open GraphQL documentation as a full page</a></p>
 <iframe src="../admin-graphql-doc.html"
 height="800" width="800" style="border: 1px solid black;"></iframe>
@@ -4240,6 +4261,46 @@ height="800" width="800" style="border: 1px solid black;"></iframe>
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../User-GraphQL/" class="md-footer__link md-footer__link--prev" aria-label="Previous: User">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                User
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../operation-and-maintenance/gdpr-considerations/" class="md-footer__link md-footer__link--next" aria-label="Next: GDPR considerations">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                GDPR considerations
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4291,7 +4352,7 @@ height="800" width="800" style="border: 1px solid black;"></iframe>
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

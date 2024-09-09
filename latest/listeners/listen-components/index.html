@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4205,7 +4226,7 @@
   
 
 
-<h1 id="xmpp-components-listenservice">XMPP components: <code>[[listen.service]]</code></h1>
+<h1 id="xmpp-components-listenservice">XMPP components: <code>[[listen.service]]</code><a class="headerlink" href="#xmpp-components-listenservice" title="Permanent link">&para;</a></h1>
 <p>Interface for external services acting as XMPP components (<a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114: Jabber Component Protocol</a>), enabling communication between MongooseIM and external services over the XMPP network. The recommended port number for a component listener is 8888.</p>
 <p>According to <a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114: Jabber Component Protocol</a> the component's hostname should be given in the <stream:stream> element.</p>
 <div class="admonition warning">
@@ -4213,23 +4234,23 @@
 <p>This interface does not support <a href="../../configuration/general/#generalhost_types">dynamic domains</a>.
 Do not use them both at the same time.</p>
 </div>
-<h2 id="configuration-options">Configuration options</h2>
+<h2 id="configuration-options">Configuration options<a class="headerlink" href="#configuration-options" title="Permanent link">&para;</a></h2>
 <p>The following options are supported for each component listener under <code>listen.service</code> subsection:</p>
-<h3 id="listenserviceaccess"><code>listen.service.access</code></h3>
+<h3 id="listenserviceaccess"><code>listen.service.access</code><a class="headerlink" href="#listenserviceaccess" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, rule name or <code>"all"</code></li>
 <li><strong>Default:</strong> <code>"all"</code></li>
 <li><strong>Example:</strong> <code>access = "component"</code></li>
 </ul>
 <p>Determines who is allowed to send data to external components. By default, the rule is <code>all</code>, which means that anyone can communicate with the components.</p>
-<h3 id="listenservicepassword"><code>listen.service.password</code></h3>
+<h3 id="listenservicepassword"><code>listen.service.password</code><a class="headerlink" href="#listenservicepassword" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> no default, this option is mandatory</li>
 <li><strong>Example:</strong> <code>password = "secret"</code></li>
 </ul>
 <p>The external component needs to authenticate with this password to connect.</p>
-<h3 id="listenserviceshaper_rule"><code>listen.service.shaper_rule</code></h3>
+<h3 id="listenserviceshaper_rule"><code>listen.service.shaper_rule</code><a class="headerlink" href="#listenserviceshaper_rule" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, name of the shaper</li>
 <li><strong>Default:</strong> <code>"none"</code></li>
@@ -4237,14 +4258,14 @@ Do not use them both at the same time.</p>
 </ul>
 <p>The traffic shaper used to limit the XMPP traffic to prevent the server from being flooded with incoming data.
 Contrary to the C2S and S2S shapers, here the shaper name directly references the shaper that needs to be defined in the <a href="../../configuration/shaper/"><code>shaper</code></a> section.</p>
-<h3 id="listenservicecheck_from"><code>listen.service.check_from</code></h3>
+<h3 id="listenservicecheck_from"><code>listen.service.check_from</code><a class="headerlink" href="#listenservicecheck_from" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>true</code></li>
 <li><strong>Example:</strong> <code>check_from = false</code></li>
 </ul>
 <p>Specifies whether the server should verify the "from" field in stanzas from the component.</p>
-<h3 id="listenservicehidden_components"><code>listen.service.hidden_components</code></h3>
+<h3 id="listenservicehidden_components"><code>listen.service.hidden_components</code><a class="headerlink" href="#listenservicehidden_components" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
@@ -4256,7 +4277,7 @@ Alone, it doesn't change the server behaviour in any way, but it may be used by 
 An example would be <a href="../../modules/mod_disco/"><code>mod_disco</code></a>, which may be configured to filter out hidden components from disco results, so they won't be discoverable by clients.
 A reason to do so could be reduced traffic - systems with many components could return very long disco responses.
 Also, some deployments would like to avoid revealing some services; not because it is a security threat (this method does not prevent clients from communicating with hidden components), but rather because they are not meant to interact with clients directly (e.g. helper components for other components).</p>
-<h3 id="listenserviceconflict_behaviour"><code>listen.service.conflict_behaviour</code></h3>
+<h3 id="listenserviceconflict_behaviour"><code>listen.service.conflict_behaviour</code><a class="headerlink" href="#listenserviceconflict_behaviour" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of: <code>"disconnect"</code>, <code>"kick_old"</code></li>
 <li><strong>Default:</strong> <code>"disconnect"</code></li>
@@ -4273,18 +4294,18 @@ Also, some deployments would like to avoid revealing some services; not because 
 </code></pre></div></td></tr></table></div>
 <p>It makes implementing the reconnection logic difficult, because the old connection would not allow any other connections.
 By setting this option to <code>kick_old</code>, we drop any old connections registered at the same host before accepting new ones.</p>
-<h3 id="listenservicemax_fsm_queue"><code>listen.service.max_fsm_queue</code></h3>
+<h3 id="listenservicemax_fsm_queue"><code>listen.service.max_fsm_queue</code><a class="headerlink" href="#listenservicemax_fsm_queue" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> not set - no limit</li>
 <li><strong>Example:</strong> <code>max_fsm_queue = 1000</code></li>
 </ul>
 <p>Message queue limit to prevent resource exhaustion; overrides the value set in the <a href="../../configuration/general/#generalmax_fsm_queue"><code>general</code></a> section.</p>
-<h2 id="custom-extension-to-the-protocol">Custom extension to the protocol</h2>
+<h2 id="custom-extension-to-the-protocol">Custom extension to the protocol<a class="headerlink" href="#custom-extension-to-the-protocol" title="Permanent link">&para;</a></h2>
 <p>In order to register a component for all virtual hosts served by the server (see <a href="../../configuration/general/#generalhosts"><code>hosts</code></a> in the <a href="../../configuration/general/"><code>general</code></a> section), the component must add the attribute <code>is_subdomain="true"</code> to the opening stream element.
 This maybe helpful if someone wants to have a single instance of a component serving multiple virtual hosts.
 The <code>is_subdomain</code> attribute is optional and the default behaviour is as described in <a href="http://xmpp.org/extensions/xep-0114.html">XEP-0114: Jabber Component Protocol</a>.</p>
-<h2 id="service-listener-configuration-example">Service listener configuration example</h2>
+<h2 id="service-listener-configuration-example">Service listener configuration example<a class="headerlink" href="#service-listener-configuration-example" title="Permanent link">&para;</a></h2>
 <p>The following section configures a service listener, accepting connections from external components.
 The IP address is limited to loopback to prevent connections from different hosts.
 All components are allowed to connect, but they need to provide the password.
@@ -4332,6 +4353,46 @@ The shaper named <code>fast</code> needs to be defined in the <a href="../../con
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../listen-s2s/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Server to server (S2S)">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Server to server (S2S)
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../listen-http/" class="md-footer__link md-footer__link--next" aria-label="Next: HTTP-based services">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                HTTP-based services
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4383,7 +4444,7 @@ The shaper named <code>fast</code> needs to be defined in the <a href="../../con
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

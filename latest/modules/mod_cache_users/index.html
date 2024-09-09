@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4129,32 +4150,32 @@
 
   <h1>mod_cache_users</h1>
 
-<h2 id="module-description">Module Description</h2>
+<h2 id="module-description">Module Description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
 <p><code>mod_cache_users</code> is a module that caches whether a user exists, and possibly stores metadata assigned to them. This is useful for example to decide if a message should be stored in <a href="../mod_mam/">MAM</a> or <a href="../mod_inbox/">Inbox</a> — for example, the receiver might not exist, so no message should be stored in his archive nor his inbox.</p>
 <p>This cache uses <a href="https://github.com/esl/segmented_cache">segmented cache</a> under the hood, for more details, read the library documentation.</p>
-<h2 id="options">Options</h2>
-<h3 id="modulesmod_cache_usersstrategy"><code>modules.mod_cache_users.strategy</code></h3>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<h3 id="modulesmod_cache_usersstrategy"><code>modules.mod_cache_users.strategy</code><a class="headerlink" href="#modulesmod_cache_usersstrategy" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>fifo</code> or <code>lru</code></li>
 <li><strong>Default:</strong> <code>fifo</code></li>
 <li><strong>Example:</strong> <code>strategy = "lru"</code></li>
 </ul>
 <p>Eviction strategy for the cache. FIFO is simply a queue, that ensures records will eventually be evicted and require reloading; LRU ensures queried records keep moving to the front of the queue, possibly keeping them alive forever.</p>
-<h3 id="modulesmod_cache_userstime_to_live"><code>modules.mod_cache_users.time_to_live</code></h3>
+<h3 id="modulesmod_cache_userstime_to_live"><code>modules.mod_cache_users.time_to_live</code><a class="headerlink" href="#modulesmod_cache_userstime_to_live" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> integer, in minutes, or the string <code>"infinity"</code></li>
 <li><strong>Default:</strong> <code>8 * 60</code> (8h)</li>
 <li><strong>Example:</strong> <code>time_to_live = 480</code></li>
 </ul>
 <p>Time between rotations, that is, the time a single table will live. A record that is inserted in the first table will live as long as this ttl multiplied by the number of tables.</p>
-<h3 id="modulesmod_cache_usersnumber_of_segments"><code>modules.mod_cache_users.number_of_segments</code></h3>
+<h3 id="modulesmod_cache_usersnumber_of_segments"><code>modules.mod_cache_users.number_of_segments</code><a class="headerlink" href="#modulesmod_cache_usersnumber_of_segments" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> integer</li>
 <li><strong>Default:</strong> <code>3</code></li>
 <li><strong>Example:</strong> <code>number_of_segments = 3</code></li>
 </ul>
 <p>Number of segments the cache has. The more segments there are, the more fine-grained the cache can be, but the slower queries will be: query the cache checks the tables in order until a match is found.</p>
-<h2 id="example-configuration">Example configuration</h2>
+<h2 id="example-configuration">Example configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -4194,6 +4215,46 @@
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../mod_caps/" class="md-footer__link md-footer__link--prev" aria-label="Previous: mod_caps">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                mod_caps
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mod_carboncopy/" class="md-footer__link md-footer__link--next" aria-label="Next: mod_carboncopy">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                mod_carboncopy
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4245,7 +4306,7 @@
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

@@ -1326,6 +1326,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../release-options/" class="md-nav__link">
         
   
@@ -4252,53 +4273,53 @@
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.c2s]]</span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5222</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="general-listener-options">General listener options</h2>
+<h2 id="general-listener-options">General listener options<a class="headerlink" href="#general-listener-options" title="Permanent link">&para;</a></h2>
 <p>The options listed below are the same for all listener types. They set the basic listening socket options. Only <code>port</code> is required, the rest can be used to change the default settings.</p>
-<h3 id="listenport"><code>listen.*.port</code></h3>
+<h3 id="listenport"><code>listen.*.port</code><a class="headerlink" href="#listenport" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> integer, port number</li>
 <li><strong>Default:</strong> no default, this option is mandatory.</li>
 <li><strong>Example:</strong> <code>port = 5222</code></li>
 </ul>
 <p>The port number to which the listening socket is bound.</p>
-<h3 id="listenip_address"><code>listen.*.ip_address</code></h3>
+<h3 id="listenip_address"><code>listen.*.ip_address</code><a class="headerlink" href="#listenip_address" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string with the IP address</li>
 <li><strong>Default:</strong> all-zeros address (e.g. <code>"0.0.0.0"</code> for IPv4)</li>
 <li><strong>Example:</strong> <code>ip_address = "127.0.0.1"</code></li>
 </ul>
 <p>The IP address to which the listening socket is bound.</p>
-<h3 id="listenproto"><code>listen.*.proto</code></h3>
+<h3 id="listenproto"><code>listen.*.proto</code><a class="headerlink" href="#listenproto" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, only <code>"tcp"</code> is accepted</li>
 <li><strong>Default:</strong> <code>"tcp"</code></li>
 <li><strong>Example:</strong> <code>proto = "tcp"</code></li>
 </ul>
 <p>The protocol, which is TCP by default. Currently this is the only valid option.</p>
-<h3 id="listenip_version"><code>listen.*.ip_version</code></h3>
+<h3 id="listenip_version"><code>listen.*.ip_version</code><a class="headerlink" href="#listenip_version" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> integer, <code>4</code> or <code>6</code></li>
 <li><strong>Default:</strong> if <code>ip_address</code> is specified, the IP version is determined from that address, otherwise it is <code>4</code></li>
 <li><strong>Example:</strong> <code>ip_version = 6</code></li>
 </ul>
 <p>Allows to set the IP version to IPv6. Does not need to be set if <code>ip_address</code> is defined.</p>
-<h2 id="xmpp-listener-options">XMPP listener options</h2>
+<h2 id="xmpp-listener-options">XMPP listener options<a class="headerlink" href="#xmpp-listener-options" title="Permanent link">&para;</a></h2>
 <p>The options listed below can be set for the <code>c2s</code>, <code>s2s</code> and <code>service</code> listeners to adjust their parameters.</p>
-<h3 id="listenbacklog"><code>listen.*.backlog</code></h3>
+<h3 id="listenbacklog"><code>listen.*.backlog</code><a class="headerlink" href="#listenbacklog" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> <code>1024</code></li>
 <li><strong>Example:</strong> <code>backlog = 1000</code></li>
 </ul>
 <p>Overrides the default TCP backlog value.</p>
-<h3 id="listenproxy_protocol"><code>listen.*.proxy_protocol</code></h3>
+<h3 id="listenproxy_protocol"><code>listen.*.proxy_protocol</code><a class="headerlink" href="#listenproxy_protocol" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
 <li><strong>Example:</strong> <code>proxy_protocol = true</code></li>
 </ul>
 <p>When set to <code>true</code>, <a href="https://www.haproxy.com/blog/haproxy/proxy-protocol/">Proxy Protocol</a> is enabled and each connecting client has to provide a proxy header. Use only with a proxy (or a load balancer) to allow it to provide the connection details (including the source IP address) of the original client. Versions 1 and 2 of the protocol are supported.</p>
-<h3 id="listenhibernate_after"><code>listen.*.hibernate_after</code></h3>
+<h3 id="listenhibernate_after"><code>listen.*.hibernate_after</code><a class="headerlink" href="#listenhibernate_after" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
 <li><strong>Default:</strong> <code>0</code></li>
@@ -4307,7 +4328,7 @@
 <p>Time in milliseconds after which a client process spawned by this listener will hibernate.
 Hibernation greatly reduces memory consumption of client processes, but <em>may</em> result in increased CPU consumption if a client is used <em>very</em> frequently.
 The default, recommended value of 0 means that the client processes will hibernate at every opportunity.</p>
-<h3 id="listenmax_stanza_size"><code>listen.*.max_stanza_size</code></h3>
+<h3 id="listenmax_stanza_size"><code>listen.*.max_stanza_size</code><a class="headerlink" href="#listenmax_stanza_size" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer or the string <code>"infinity"</code></li>
 <li><strong>Default:</strong> <code>"infinity"</code></li>
@@ -4318,7 +4339,7 @@ The default, recommended value of 0 means that the client processes will hiberna
 <p class="admonition-title">Warning</p>
 <p>This limit is checked <strong>after</strong> the input data parsing, so it does not apply to the input data size itself.</p>
 </div>
-<h3 id="listennum_acceptors"><code>listen.*.num_acceptors</code></h3>
+<h3 id="listennum_acceptors"><code>listen.*.num_acceptors</code><a class="headerlink" href="#listennum_acceptors" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> <code>100</code></li>
@@ -4356,6 +4377,46 @@ The default, recommended value of 0 means that the client processes will hiberna
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../general/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Options: General">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Options: General
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../auth/" class="md-footer__link md-footer__link--next" aria-label="Next: Options: Auth">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Options: Auth
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4407,7 +4468,7 @@ The default, recommended value of 0 means that the client processes will hiberna
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

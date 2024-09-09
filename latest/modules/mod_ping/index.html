@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4183,45 +4204,45 @@
 
   <h1>mod_ping</h1>
 
-<h2 id="module-description">Module Description</h2>
+<h2 id="module-description">Module Description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
 <p>This module implements XMPP Ping functionality as described in <a href="http://www.xmpp.org/extensions/xep-0199.html">XEP-0199: XMPP Ping</a>.</p>
-<h2 id="options">Options</h2>
-<h3 id="modulesmod_pingsend_pings"><code>modules.mod_ping.send_pings</code></h3>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<h3 id="modulesmod_pingsend_pings"><code>modules.mod_ping.send_pings</code><a class="headerlink" href="#modulesmod_pingsend_pings" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
 <li><strong>Example:</strong> <code>send_pings = true</code></li>
 </ul>
 <p>If set to true, the server will send ping iqs to the client if they are not active for a <code>ping_interval</code>.</p>
-<h3 id="modulesmod_pingping_interval"><code>modules.mod_ping.ping_interval</code></h3>
+<h3 id="modulesmod_pingping_interval"><code>modules.mod_ping.ping_interval</code><a class="headerlink" href="#modulesmod_pingping_interval" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer (seconds)</li>
 <li><strong>Default:</strong> <code>60</code></li>
 <li><strong>Example:</strong> <code>ping_interval = 30</code></li>
 </ul>
 <p>Defines the client inactivity timeout after which the server will send a ping request if the above option is set to <code>true</code>.</p>
-<h3 id="modulesmod_pingtimeout_action"><code>modules.mod_ping.timeout_action</code></h3>
+<h3 id="modulesmod_pingtimeout_action"><code>modules.mod_ping.timeout_action</code><a class="headerlink" href="#modulesmod_pingtimeout_action" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"none"</code>, <code>"kill"</code></li>
 <li><strong>Default:</strong> <code>"none"</code></li>
 <li><strong>Example:</strong> <code>timeout_action = "kill"</code></li>
 </ul>
 <p>Defines if the client connection should be closed if it doesn't reply to a ping request in less than <code>ping_req_timeout</code>.</p>
-<h3 id="modulesmod_pingping_req_timeout"><code>modules.mod_ping.ping_req_timeout</code></h3>
+<h3 id="modulesmod_pingping_req_timeout"><code>modules.mod_ping.ping_req_timeout</code><a class="headerlink" href="#modulesmod_pingping_req_timeout" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer (seconds)</li>
 <li><strong>Default:</strong> <code>32</code></li>
 <li><strong>Example:</strong> <code>ping_req_timeout = 60</code></li>
 </ul>
 <p>Defines how long the server waits for the client to reply to the ping request.</p>
-<h3 id="modulesmod_pingiqdisctype"><code>modules.mod_ping.iqdisc.type</code></h3>
+<h3 id="modulesmod_pingiqdisctype"><code>modules.mod_ping.iqdisc.type</code><a class="headerlink" href="#modulesmod_pingiqdisctype" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"one_queue"</code>, <code>"no_queue"</code>, <code>"queues"</code>, <code>"parallel"</code></li>
 <li><strong>Default:</strong> <code>"no_queue"</code></li>
 </ul>
 <p>Strategy to handle incoming stanzas. For details, please refer to
 <a href="../../configuration/Modules/#iq-processing-policies">IQ processing policies</a>.</p>
-<h2 id="example-configuration">Example Configuration</h2>
+<h2 id="example-configuration">Example Configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -4232,8 +4253,13 @@
 <span class="w">  </span><span class="n">timeout_action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;none&quot;</span>
 <span class="w">  </span><span class="n">ping_req_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="metrics">Metrics</h2>
+<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
 <p>If you'd like to learn more about metrics in MongooseIM, please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">MongooseIM metrics</a> page.</p>
+<p>Prometheus metrics have a <code>host_type</code> label associated with these metrics.
+Since Exometer doesn't support labels, the host types, or word <code>global</code>, are part of the metric names, depending on the <a href="../../configuration/instrumentation/#instrumentationexometerall_metrics_are_global"><code>instrumentation.exometer.all_metrics_are_global</code></a> option.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="prometheus" name="__tabbed_1" type="radio" /><input id="exometer" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="prometheus">Prometheus</label><label for="exometer">Exometer</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <table>
 <thead>
 <tr>
@@ -4244,22 +4270,53 @@
 </thead>
 <tbody>
 <tr>
-<td><code>[HostType, mod_ping, ping_response]</code></td>
+<td><code>mod_ping_response_count</code></td>
+<td>counter</td>
+<td>Client responds to a ping.</td>
+</tr>
+<tr>
+<td><code>mod_ping_response_time</code></td>
+<td>histogram</td>
+<td>Response times (doesn't include timeouts).</td>
+</tr>
+<tr>
+<td><code>mod_ping_response_timeout_count</code></td>
+<td>counter</td>
+<td>Ping request timeouts without a response from client.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[HostType, mod_ping_response, count]</code></td>
 <td>spiral</td>
 <td>Client responds to a ping.</td>
 </tr>
 <tr>
-<td><code>[HostType, mod_ping, ping_response_timeout]</code></td>
-<td>spiral</td>
-<td>Ping request timeouts without a response from client.</td>
-</tr>
-<tr>
-<td><code>[HostType, mod_ping, ping_response_time]</code></td>
+<td><code>[HostType, mod_ping_response, time]</code></td>
 <td>histogram</td>
 <td>Response times (doesn't include timeouts).</td>
 </tr>
+<tr>
+<td><code>[HostType, mod_ping_response_timeout, count]</code></td>
+<td>spiral</td>
+<td>Ping request timeouts without a response from client.</td>
+</tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
 
 
 
@@ -4291,6 +4348,46 @@
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../mod_offline_stub/" class="md-footer__link md-footer__link--prev" aria-label="Previous: mod_offline_stub">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                mod_offline_stub
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mod_presence/" class="md-footer__link md-footer__link--next" aria-label="Next: mod_presence">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                mod_presence
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4342,7 +4439,7 @@
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

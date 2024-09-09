@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/configuration/release-options/">
       
       
-        <link rel="prev" href="../host_config/">
+        <link rel="prev" href="../instrumentation/">
       
       
         <link rel="next" href="../Erlang-cookie-security/">
@@ -1176,6 +1176,27 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1294,15 +1315,6 @@
   <a href="#auth_ldap" class="md-nav__link">
     <span class="md-ellipsis">
       auth_ldap
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#all_metrics_are_global" class="md-nav__link">
-    <span class="md-ellipsis">
-      all_metrics_are_global
     </span>
   </a>
   
@@ -4306,15 +4318,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#all_metrics_are_global" class="md-nav__link">
-    <span class="md-ellipsis">
-      all_metrics_are_global
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#s2s_addr" class="md-nav__link">
     <span class="md-ellipsis">
       s2s_addr
@@ -4499,23 +4502,23 @@ Parameters are mandatory - a valid value has to be provided.</li>
 <li>a <strong>block</strong> can be an empty string, one line or multiple lines, defining zero, one or more options.
 Blocks are optional - the default is an empty string.</li>
 </ul>
-<h2 id="vmargs-options">vm.args options</h2>
+<h2 id="vmargs-options">vm.args options<a class="headerlink" href="#vmargs-options" title="Permanent link">&para;</a></h2>
 <p>These options are inserted into the <code>rel/files/vm.args</code> template.</p>
-<h3 id="node_name">node_name</h3>
+<h3 id="node_name">node_name<a class="headerlink" href="#node_name" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> parameter</li>
 <li><strong>Option:</strong> value of <code>-sname</code> in <a href="../configuration-files/#vmargs">vm.args</a></li>
 <li><strong>Syntax:</strong> Erlang node name: <code>name@host</code></li>
 <li><strong>Example:</strong> <code>{node_name, "mongooseim@localhost"}.</code></li>
 </ul>
-<h3 id="highload_vm_args">highload_vm_args</h3>
+<h3 id="highload_vm_args">highload_vm_args<a class="headerlink" href="#highload_vm_args" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> block</li>
 <li><strong>Option:</strong> arguments in <a href="../configuration-files/#vmargs">vm.args</a>: <code>+K</code>, <code>+A</code>, <code>+P</code>, <code>-env ERL_MAX_PORTS</code></li>
 <li><strong>Syntax:</strong> command-line arguments</li>
 <li><strong>Example:</strong> <code>{highload_vm_args, "+P 10000000 -env ERL_MAX_PORTS 250000"}.</code></li>
 </ul>
-<h3 id="epmd_module">epmd_module</h3>
+<h3 id="epmd_module">epmd_module<a class="headerlink" href="#epmd_module" title="Permanent link">&para;</a></h3>
 <p>Allows to set EPMD module to <code>mongoose_epmd</code> in case CETS is used with RDBMS backend
 to enable getting IP addresses of the remote nodes using RDBMS instead of the default
 resolver.</p>
@@ -4525,16 +4528,16 @@ resolver.</p>
 <li><strong>Syntax:</strong> Erlang module name: <code>mongoose_epmd</code></li>
 <li><strong>Example:</strong> <code>{epmd_module, "mongoose_epmd"}.</code></li>
 </ul>
-<h2 id="toml-options">TOML Options</h2>
+<h2 id="toml-options">TOML Options<a class="headerlink" href="#toml-options" title="Permanent link">&para;</a></h2>
 <p>These options are inserted into the <code>rel/files/mongooseim.toml</code> template.</p>
-<h3 id="hosts">hosts</h3>
+<h3 id="hosts">hosts<a class="headerlink" href="#hosts" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> parameter</li>
 <li><strong>Option:</strong> <a href="../general/#generalhosts"><code>general.hosts</code></a></li>
 <li><strong>Syntax:</strong> comma-separated list of strings</li>
 <li><strong>Example:</strong> <code>{hosts, "\"localhost\", \"domain2\""}.</code></li>
 </ul>
-<h3 id="host_config">host_config</h3>
+<h3 id="host_config">host_config<a class="headerlink" href="#host_config" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> block</li>
 <li><strong>Option:</strong> <a href="../host_config/"><code>host_config</code></a></li>
@@ -4555,7 +4558,7 @@ resolver.</p>
     methods = [\&quot;anonymous\&quot;]
 &quot;}.
 </code></pre></div></td></tr></table></div>
-<h3 id="auth_ldap">auth_ldap</h3>
+<h3 id="auth_ldap">auth_ldap<a class="headerlink" href="#auth_ldap" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> block</li>
 <li><strong>Option:</strong> <a href="../../authentication-methods/ldap/"><code>auth.ldap</code></a></li>
@@ -4572,14 +4575,7 @@ resolver.</p>
     filter = \&quot;(objectClass=inetOrgPerson)\&quot;
 &quot;}.
 </code></pre></div></td></tr></table></div>
-<h3 id="all_metrics_are_global">all_metrics_are_global</h3>
-<ul>
-<li><strong>Type:</strong> parameter</li>
-<li><strong>Option:</strong> <a href="../general/#generalall_metrics_are_global"><code>general.all_metrics_are_global</code></a></li>
-<li><strong>Syntax:</strong> boolean</li>
-<li><strong>Example:</strong> <code>{all_metrics_are_global, "false"}.</code></li>
-</ul>
-<h3 id="s2s_addr">s2s_addr</h3>
+<h3 id="s2s_addr">s2s_addr<a class="headerlink" href="#s2s_addr" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> block</li>
 <li><strong>Option:</strong> <a href="../s2s/#s2saddress"><code>auth.s2s.address</code></a></li>
@@ -4598,49 +4594,49 @@ resolver.</p>
   ]
 &quot;}.
 </code></pre></div></td></tr></table></div>
-<h3 id="s2s_default_policy">s2s_default_policy</h3>
+<h3 id="s2s_default_policy">s2s_default_policy<a class="headerlink" href="#s2s_default_policy" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> parameter</li>
 <li><strong>Option:</strong> <a href="../s2s/#s2sdefault_policy"><code>s2s.default_policy</code></a></li>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Example:</strong> <code>{s2s_default_policy, "\"deny\""}.</code></li>
 </ul>
-<h3 id="outgoing_s2s_port">outgoing_s2s_port</h3>
+<h3 id="outgoing_s2s_port">outgoing_s2s_port<a class="headerlink" href="#outgoing_s2s_port" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> parameter</li>
 <li><strong>Option:</strong> <a href="../s2s/#s2soutgoingport"><code>s2s.outgoing.port</code></a></li>
 <li><strong>Syntax:</strong> integer</li>
 <li><strong>Example:</strong> <code>{outgoing_s2s_port, "5269"}.</code></li>
 </ul>
-<h3 id="c2s_port">c2s_port</h3>
+<h3 id="c2s_port">c2s_port<a class="headerlink" href="#c2s_port" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> parameter</li>
 <li><strong>Option:</strong> <a href="../listen/#listenport"><code>listen.c2s.port</code></a></li>
 <li><strong>Syntax:</strong> integer</li>
 <li><strong>Example:</strong> <code>{c2s_port, "5222"}.</code></li>
 </ul>
-<h3 id="s2s_port">s2s_port</h3>
+<h3 id="s2s_port">s2s_port<a class="headerlink" href="#s2s_port" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> parameter</li>
 <li><strong>Option:</strong> <a href="../listen/#listenport"><code>listen.s2s.port</code></a></li>
 <li><strong>Syntax:</strong> integer</li>
 <li><strong>Example:</strong> <code>{s2s_port, "5269"}.</code></li>
 </ul>
-<h3 id="cowboy_port">cowboy_port</h3>
+<h3 id="cowboy_port">cowboy_port<a class="headerlink" href="#cowboy_port" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> parameter</li>
 <li><strong>Option:</strong> <a href="../listen/#listenport"><code>listen.http.port</code></a></li>
 <li><strong>Syntax:</strong> integer</li>
 <li><strong>Example:</strong> <code>{http_port, "5280"}.</code></li>
 </ul>
-<h3 id="mod_last">mod_last</h3>
+<h3 id="mod_last">mod_last<a class="headerlink" href="#mod_last" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> block</li>
 <li><strong>Option:</strong> <a href="../../modules/mod_last/"><code>modules.mod_last</code></a></li>
 <li><strong>Syntax:</strong> TOML section: <code>[modules.mod_last]</code></li>
 <li><strong>Example:</strong> <code>{mod_last, "[modules.mod_last]"}.</code></li>
 </ul>
-<h3 id="mod_offline">mod_offline</h3>
+<h3 id="mod_offline">mod_offline<a class="headerlink" href="#mod_offline" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> block</li>
 <li><strong>Option:</strong> <a href="../../modules/mod_offline/"><code>modules.mod_offline</code></a></li>
@@ -4655,28 +4651,28 @@ resolver.</p>
   access_max_user_messages = \&quot;max_user_offline_messages\&quot;
 &quot;}.
 </code></pre></div></td></tr></table></div>
-<h3 id="mod_privacy">mod_privacy</h3>
+<h3 id="mod_privacy">mod_privacy<a class="headerlink" href="#mod_privacy" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> block</li>
 <li><strong>Option:</strong> <a href="../../modules/mod_privacy/"><code>modules.mod_privacy</code></a></li>
 <li><strong>Syntax:</strong> TOML section: <code>[modules.mod_privacy]</code></li>
 <li><strong>Example:</strong> <code>{mod_privacy, "[modules.mod_privacy]"}.</code></li>
 </ul>
-<h3 id="mod_private">mod_private</h3>
+<h3 id="mod_private">mod_private<a class="headerlink" href="#mod_private" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> block</li>
 <li><strong>Option:</strong> <a href="../../modules/mod_private/"><code>modules.mod_private</code></a></li>
 <li><strong>Syntax:</strong> TOML section: <code>[modules.mod_private]</code></li>
 <li><strong>Example:</strong> <code>{mod_private, "[modules.mod_private]"}.</code></li>
 </ul>
-<h3 id="mod_roster">mod_roster</h3>
+<h3 id="mod_roster">mod_roster<a class="headerlink" href="#mod_roster" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> block</li>
 <li><strong>Option:</strong> <a href="../../modules/mod_roster/"><code>modules.mod_roster</code></a></li>
 <li><strong>Syntax:</strong> TOML section: <code>[modules.mod_roster]</code></li>
 <li><strong>Example:</strong> <code>{mod_roster, "[modules.mod_roster]"}.</code></li>
 </ul>
-<h3 id="mod_vcard">mod_vcard</h3>
+<h3 id="mod_vcard">mod_vcard<a class="headerlink" href="#mod_vcard" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> block</li>
 <li><strong>Option:</strong> <a href="../../modules/mod_vcard/"><code>modules.mod_vcard</code></a></li>
@@ -4691,21 +4687,21 @@ resolver.</p>
   host = \&quot;vjud.@HOST@\&quot;
 &quot;}.
 </code></pre></div></td></tr></table></div>
-<h3 id="sm_backend">sm_backend</h3>
+<h3 id="sm_backend">sm_backend<a class="headerlink" href="#sm_backend" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> parameter</li>
 <li><strong>Option:</strong> <a href="../general/#generalsm_backend"><code>general.sm_backend</code></a></li>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Example:</strong> <code>{sm_backend, "\"redis\""}.</code></li>
 </ul>
-<h3 id="s2s_backend">s2s_backend</h3>
+<h3 id="s2s_backend">s2s_backend<a class="headerlink" href="#s2s_backend" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> parameter</li>
 <li><strong>Option:</strong> <a href="../general/#generals2s_backend"><code>general.s2s_backend</code></a></li>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Example:</strong> <code>{s2s_backend, "\"mnesia\""}.</code></li>
 </ul>
-<h3 id="tls_config">tls_config</h3>
+<h3 id="tls_config">tls_config<a class="headerlink" href="#tls_config" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> block</li>
 <li><strong>Option:</strong> <a href="../../listeners/listen-c2s/#tls-options-for-c2s"><code>listen.c2s.tls.*</code></a></li>
@@ -4720,7 +4716,7 @@ resolver.</p>
   tls.mode = \&quot;starttls\&quot;
 &quot;}.
 </code></pre></div></td></tr></table></div>
-<h3 id="auth_method">auth_method</h3>
+<h3 id="auth_method">auth_method<a class="headerlink" href="#auth_method" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Type:</strong> parameter</li>
 <li><strong>Option:</strong> <a href="../auth/#authmethods"><code>auth.methods</code></a></li>
@@ -4758,6 +4754,46 @@ resolver.</p>
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../instrumentation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Options: Instrumentation">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Options: Instrumentation
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Erlang-cookie-security/" class="md-footer__link md-footer__link--next" aria-label="Next: Erlang Cookie Security">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Erlang Cookie Security
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4809,7 +4845,7 @@ resolver.</p>
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

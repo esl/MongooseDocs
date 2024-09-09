@@ -1219,15 +1219,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#generalall_metrics_are_global" class="md-nav__link">
-    <span class="md-ellipsis">
-      general.all_metrics_are_global
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#generalhttp_server_name" class="md-nav__link">
     <span class="md-ellipsis">
       general.http_server_name
@@ -1490,6 +1481,27 @@
   
   <span class="md-ellipsis">
     Options: Host config
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
   </span>
   
 
@@ -4531,15 +4543,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#generalall_metrics_are_global" class="md-nav__link">
-    <span class="md-ellipsis">
-      general.all_metrics_are_global
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#generalhttp_server_name" class="md-nav__link">
     <span class="md-ellipsis">
       general.http_server_name
@@ -4604,16 +4607,16 @@ You can start with providing only the basic options, for example configuring the
 <span class="w">  </span><span class="n">language</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;en&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>All options are described below.</p>
-<h2 id="general-options">General options</h2>
+<h2 id="general-options">General options<a class="headerlink" href="#general-options" title="Permanent link">&para;</a></h2>
 <p>These are the basic settings that you should configure before running your MongooseIM server.</p>
-<h3 id="generalloglevel"><code>general.loglevel</code></h3>
+<h3 id="generalloglevel"><code>general.loglevel</code><a class="headerlink" href="#generalloglevel" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"none"</code>, <code>"emergency"</code>, <code>"alert"</code>, <code>"critical"</code>, <code>"error"</code>, <code>"warning"</code>, <code>"notice"</code>, <code>"info"</code>, <code>"debug"</code>, <code>"all"</code>.</li>
 <li><strong>Default:</strong> <code>"warning"</code></li>
 <li><strong>Example:</strong> <code>loglevel = "error"</code></li>
 </ul>
 <p>Verbosity level of the logger. Values recommended for production systems are <code>"error"</code> and <code>"warning"</code>. The <code>"debug"</code> level is good for development.</p>
-<h3 id="generalhosts"><code>general.hosts</code></h3>
+<h3 id="generalhosts"><code>general.hosts</code><a class="headerlink" href="#generalhosts" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings representing the domain names.</li>
 <li><strong>Default:</strong> none. If omitted, at least one host type has to be defined in <code>general.host_types</code>.</li>
@@ -4630,7 +4633,7 @@ In order to configure these hosts independently, use the <a href="../host_config
 <p>Extension modules and database backends will be started separately for every domain from this list.
 When increasing the number of domains, please make sure you have enough resources available (e.g. connection limit set in the DBMS).</p>
 </div>
-<h3 id="generalhost_types"><code>general.host_types</code></h3>
+<h3 id="generalhost_types"><code>general.host_types</code><a class="headerlink" href="#generalhost_types" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings the names for host types.</li>
 <li><strong>Default:</strong> none. If omitted, at least one hast has to be defined in <code>general.hosts</code>.</li>
@@ -4652,51 +4655,51 @@ Moreover, <a href="../s2s/"><code>s2s</code></a> as well as XMPP components (XEP
 <p>Extension modules and database backends will be started separately for every host type from this list.
 When increasing the number of host types, please make sure you have enough resources available (e.g. connection limit set in the DBMS).</p>
 </div>
-<h3 id="generaldefault_server_domain"><code>general.default_server_domain</code></h3>
+<h3 id="generaldefault_server_domain"><code>general.default_server_domain</code><a class="headerlink" href="#generaldefault_server_domain" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> a string</li>
 <li><strong>Default:</strong> none, this option is mandatory.</li>
 <li><strong>Example:</strong> <code>default_server_domain = "my-xmpp-domain.com"</code></li>
 </ul>
 <p>This domain is used as a default when one cannot be determined, for example when sending XMPP stream errors to unauthenticated clients.</p>
-<h3 id="generallanguage"><code>general.language</code></h3>
+<h3 id="generallanguage"><code>general.language</code><a class="headerlink" href="#generallanguage" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string representing the two-letter language code.</li>
 <li><strong>Default:</strong> <code>"en"</code></li>
 <li><strong>Example:</strong> <code>language = "pl"</code></li>
 </ul>
 <p>Default language for messages sent by the server to users. You can get a full list of supported codes by executing <code>cd [MongooseIM root] ; ls priv/*.msg | awk '{split($0,a,"/"); split(a[4],b,"."); print b[1]}'</code> (<code>en</code> is not listed there)</p>
-<h2 id="database-settings">Database settings</h2>
+<h2 id="database-settings">Database settings<a class="headerlink" href="#database-settings" title="Permanent link">&para;</a></h2>
 <p>RDBMS connection pools are set using <a href="../outgoing-connections/">outgoing connections configuration</a>.
 There are some additional options that influence all database connections in the server:</p>
-<h3 id="generalrdbms_server_type"><code>general.rdbms_server_type</code></h3>
+<h3 id="generalrdbms_server_type"><code>general.rdbms_server_type</code><a class="headerlink" href="#generalrdbms_server_type" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, <code>"mssql"</code> or <code>"pgsql"</code></li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>rdbms_server_type = "mssql"</code></li>
 </ul>
 <p>When using MSSQL or PostgreSQL databases, this option allows MongooseIM to optimize some queries for these DBs (e.g. <code>mod_mam_rdbms_user</code> uses different queries for <code>mssql</code>).</p>
-<h2 id="access-management">Access management</h2>
+<h2 id="access-management">Access management<a class="headerlink" href="#access-management" title="Permanent link">&para;</a></h2>
 <p>User access rules are configured mainly in the <a href="../acl/"><code>acl</code></a> and <a href="../access/"><code>access</code></a> sections.</p>
-<h2 id="security">Security</h2>
+<h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
 <p>Here you can find some additional options related to system security.</p>
-<h3 id="generalregistration_timeout"><code>general.registration_timeout</code></h3>
+<h3 id="generalregistration_timeout"><code>general.registration_timeout</code><a class="headerlink" href="#generalregistration_timeout" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> the string <code>"infinity"</code> or a number of seconds (positive integer)</li>
 <li><strong>Default:</strong> <code>600</code></li>
 <li><strong>Example:</strong> <code>registration_timeout = "infinity"</code></li>
 </ul>
 <p>Limits the registration frequency from a single IP address. The special value <code>infinity</code> means no limit.</p>
-<h3 id="generalhide_service_name"><code>general.hide_service_name</code></h3>
+<h3 id="generalhide_service_name"><code>general.hide_service_name</code><a class="headerlink" href="#generalhide_service_name" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
 <li><strong>Example:</strong> <code>hide_service_name = true</code></li>
 </ul>
 <p>According to RFC 6210, even when a client sends invalid data after opening a connection, the server must open an XML stream and return a stream error anyway. For extra security, this option may be enabled. It changes MIM behaviour to simply close the connection without any errors returned (effectively hiding the server's identity).</p>
-<h2 id="user-session-management">User session management</h2>
+<h2 id="user-session-management">User session management<a class="headerlink" href="#user-session-management" title="Permanent link">&para;</a></h2>
 <p>These options can be used to configure the way MongooseIM manages user sessions.</p>
-<h3 id="generalsm_backend"><code>general.sm_backend</code></h3>
+<h3 id="generalsm_backend"><code>general.sm_backend</code><a class="headerlink" href="#generalsm_backend" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string: <code>"mnesia"</code>, <code>"cets"</code> or <code>"redis"</code></li>
 <li><strong>Default:</strong> <code>"mnesia"</code></li>
@@ -4710,15 +4713,15 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 <p class="admonition-title">Warning</p>
 <p>When set to <code>mnesia</code> or <code>cets</code>, the corresponding <a href="../internal-databases/">internal database</a> has to be enabled.</p>
 </div>
-<h3 id="generalreplaced_wait_timeout"><code>general.replaced_wait_timeout</code></h3>
+<h3 id="generalreplaced_wait_timeout"><code>general.replaced_wait_timeout</code><a class="headerlink" href="#generalreplaced_wait_timeout" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer, representing time in milliseconds</li>
 <li><strong>Default:</strong> <code>2000</code></li>
 <li><strong>Example:</strong> <code>replaced_wait_timeout = 5000</code></li>
 </ul>
 <p>When a user's session is replaced (due to a full JID conflict) by a new one, this parameter specifies the time MongooseIM waits for the old sessions to close. The default value is sufficient in most cases. If you observe <code>replaced_wait_timeout</code> warning in logs, then most probably the old sessions are frozen for some reason and it should be investigated.</p>
-<h2 id="xmpp-federation-s2s">XMPP federation (S2S)</h2>
-<h3 id="generals2s_backend"><code>general.s2s_backend</code></h3>
+<h2 id="xmpp-federation-s2s">XMPP federation (S2S)<a class="headerlink" href="#xmpp-federation-s2s" title="Permanent link">&para;</a></h2>
+<h3 id="generals2s_backend"><code>general.s2s_backend</code><a class="headerlink" href="#generals2s_backend" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string: <code>"mnesia"</code> or <code>"cets"</code></li>
 <li><strong>Default:</strong> <code>"mnesia"</code></li>
@@ -4729,8 +4732,8 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 <p class="admonition-title">Warning</p>
 <p>The corresponding <a href="../internal-databases/">internal database</a> has to be enabled.</p>
 </div>
-<h2 id="external-xmpp-components">External XMPP components</h2>
-<h3 id="generalcomponent_backend"><code>general.component_backend</code></h3>
+<h2 id="external-xmpp-components">External XMPP components<a class="headerlink" href="#external-xmpp-components" title="Permanent link">&para;</a></h2>
+<h3 id="generalcomponent_backend"><code>general.component_backend</code><a class="headerlink" href="#generalcomponent_backend" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string: <code>"mnesia"</code> or <code>"cets"</code></li>
 <li><strong>Default:</strong> <code>"mnesia"</code></li>
@@ -4741,39 +4744,32 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 <p class="admonition-title">Warning</p>
 <p>The corresponding <a href="../internal-databases/">internal database</a> has to be enabled.</p>
 </div>
-<h2 id="message-routing">Message routing</h2>
+<h2 id="message-routing">Message routing<a class="headerlink" href="#message-routing" title="Permanent link">&para;</a></h2>
 <p>The following options influence the way MongooseIM routes incoming messages to their recipients.</p>
-<h3 id="generalroute_subdomains"><code>general.route_subdomains</code></h3>
+<h3 id="generalroute_subdomains"><code>general.route_subdomains</code><a class="headerlink" href="#generalroute_subdomains" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, the only accepted value is <code>"s2s"</code></li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>route_subdomains = "s2s"</code></li>
 </ul>
 <p>If a stanza is addressed to a subdomain of the served domain and this option is set to <code>s2s</code>, such a stanza will be transmitted over a server-to-server connection. Without it, MongooseIM will try to route the stanza to one of its internal services.</p>
-<h3 id="generalrouting_modules"><code>general.routing_modules</code></h3>
+<h3 id="generalrouting_modules"><code>general.routing_modules</code><a class="headerlink" href="#generalrouting_modules" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> a list of strings representing the routing module names.</li>
 <li><strong>Default:</strong> <code>["mongoose_router_global", "mongoose_router_localdomain", "mongoose_router_external_localnode", "mongoose_router_external", "mongoose_router_dynamic_domains", "ejabberd_s2s"]</code></li>
 <li><strong>Example:</strong> <code>routing_modules = ["mongoose_router_global", "mongoose_router_localdomain"]</code></li>
 </ul>
 <p>Provides an ordered list of modules used for routing messages. All available modules are enabled by default, and you can change their order or disable some of them by providing your own list. See the <a href="../../developers-guide/Stanza-routing/#3-message-routing">Message routing</a> section of the developer's guide for more information.</p>
-<h2 id="miscellaneous">Miscellaneous</h2>
+<h2 id="miscellaneous">Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permanent link">&para;</a></h2>
 <p>The options listed below are used to configure more specific settings, that do not need to be changed in usual use cases.</p>
-<h3 id="generalall_metrics_are_global"><code>general.all_metrics_are_global</code></h3>
-<ul>
-<li><strong>Syntax:</strong> boolean</li>
-<li><strong>Default:</strong> <code>false</code></li>
-<li><strong>Example:</strong> <code>all_metrics_are_global = true</code></li>
-</ul>
-<p>When enabled, all per-host metrics are merged into global equivalents. It means it is no longer possible to view individual host1, host2, host3, ... metrics, only sums are available. This option significantly reduces CPU and (especially) memory footprint in setups with exceptionally many domains (thousands, tens of thousands).</p>
-<h3 id="generalhttp_server_name"><code>general.http_server_name</code></h3>
+<h3 id="generalhttp_server_name"><code>general.http_server_name</code><a class="headerlink" href="#generalhttp_server_name" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> <code>"Cowboy"</code></li>
 <li><strong>Example:</strong> <code>http_server_name = "Apache"</code></li>
 </ul>
 <p>Replaces <a href="https://github.com/ninenines/cowboy">Cowboy</a>'s default name returned in the <code>server</code> HTTP response header. It may be used for extra security, as it makes it harder for the malicious user to learn what HTTP software is running under a specific port. This option applies to <strong>all</strong> configured HTTP listeners.</p>
-<h3 id="generalmax_fsm_queue"><code>general.max_fsm_queue</code></h3>
+<h3 id="generalmax_fsm_queue"><code>general.max_fsm_queue</code><a class="headerlink" href="#generalmax_fsm_queue" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> not set</li>
@@ -4781,7 +4777,7 @@ See the section about <a href="../outgoing-connections/#redis-specific-options">
 </ul>
 <p>When specified, will terminate certain processes (e.g. client handlers) that have more messages accumulated in the queue than the specified limit, to prevent resource exhaustion.
 This option is set for C2S, outgoing S2S and component connections and can be overridden for particular <code>s2s</code> or <code>service</code> listeners in their configurations. <strong>Use with caution!</strong></p>
-<h3 id="generaldomain_certfile"><code>general.domain_certfile</code></h3>
+<h3 id="generaldomain_certfile"><code>general.domain_certfile</code><a class="headerlink" href="#generaldomain_certfile" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of TOML tables with the following mandatory content:<ul>
 <li><code>domain</code> - string, XMPP domain name. In case of dynamic domains it should be a host type instead.</li>
@@ -4839,6 +4835,46 @@ This option is set for C2S, outgoing S2S and component connections and can be ov
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../configuration-files/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Configuration Files">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Configuration Files
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../listen/" class="md-footer__link md-footer__link--next" aria-label="Next: Options: Listen">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Options: Listen
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -4889,7 +4925,7 @@ This option is set for C2S, outgoing S2S and component connections and can be ov
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

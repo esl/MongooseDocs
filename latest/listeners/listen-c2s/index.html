@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4451,19 +4472,19 @@
   
 
 
-<h1 id="client-to-server-c2s-listenc2s">Client to server (C2S): <code>[[listen.c2s]]</code></h1>
+<h1 id="client-to-server-c2s-listenc2s">Client to server (C2S): <code>[[listen.c2s]]</code><a class="headerlink" href="#client-to-server-c2s-listenc2s" title="Permanent link">&para;</a></h1>
 <p>Handles XMPP client-to-server (C2S) connections.
 The recommended <a href="../../configuration/listen/#listenport">port number</a> for a C2S listener is 5222 <a href="https://tools.ietf.org/html/rfc6120#section-14.7">as registered in the XMPP protocol</a>.</p>
-<h2 id="configuration-options">Configuration options</h2>
+<h2 id="configuration-options">Configuration options<a class="headerlink" href="#configuration-options" title="Permanent link">&para;</a></h2>
 <p>The following options are supported for each C2S listener:</p>
-<h3 id="listenc2saccess"><code>listen.c2s.access</code></h3>
+<h3 id="listenc2saccess"><code>listen.c2s.access</code><a class="headerlink" href="#listenc2saccess" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, rule name or <code>"all"</code></li>
 <li><strong>Default:</strong> <code>"all"</code></li>
 <li><strong>Example:</strong> <code>access = "c2s"</code></li>
 </ul>
 <p>The rule that determines who is allowed to connect. By default, the rule is <code>"all"</code>, which means that anyone can connect. The rule referenced here needs to be defined in the <code>access</code> configuration section.</p>
-<h3 id="listenc2sshaper"><code>listen.c2s.shaper</code></h3>
+<h3 id="listenc2sshaper"><code>listen.c2s.shaper</code><a class="headerlink" href="#listenc2sshaper" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, rule name</li>
 <li><strong>Default:</strong> <code>"none"</code> (no shaper)</li>
@@ -4472,28 +4493,28 @@ The recommended <a href="../../configuration/listen/#listenport">port number</a>
 <p>The rule that determines what traffic shaper is used to limit the incoming XMPP traffic to prevent the server from being flooded with incoming data.
 The rule referenced here needs to be defined in the <a href="../../configuration/access/"><code>access</code></a> configuration section.
 The value of the access rule needs to be either the shaper name or the string <code>"none"</code>, which means no shaper.</p>
-<h3 id="listenc2smax_connections"><code>listen.c2s.max_connections</code></h3>
+<h3 id="listenc2smax_connections"><code>listen.c2s.max_connections</code><a class="headerlink" href="#listenc2smax_connections" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer or the string <code>"infinity"</code></li>
 <li><strong>Default:</strong> <code>"infinity"</code></li>
 <li><strong>Example:</strong> <code>max_connections = 10000</code></li>
 </ul>
 <p>Maximum number of open connections. This is a <em>soft limit</em> according to the <a href="https://ninenines.eu/docs/en/ranch/2.1/manual/ranch">Ranch</a> documentation.</p>
-<h3 id="listenc2sstate_timeout"><code>listen.c2s.state_timeout</code></h3>
+<h3 id="listenc2sstate_timeout"><code>listen.c2s.state_timeout</code><a class="headerlink" href="#listenc2sstate_timeout" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
 <li><strong>Default:</strong> <code>5000</code></li>
 <li><strong>Example:</strong> <code>state_timeout = 10_000</code></li>
 </ul>
 <p>Timeout value (in milliseconds) used by the C2S state machine when waiting for the connecting client to respond during stream negotiation and SASL authentication. After the timeout the server responds with the <code>connection-timeout</code> stream error and closes the connection.</p>
-<h3 id="listenc2sreuse_port"><code>listen.c2s.reuse_port</code></h3>
+<h3 id="listenc2sreuse_port"><code>listen.c2s.reuse_port</code><a class="headerlink" href="#listenc2sreuse_port" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
 <li><strong>Example:</strong> <code>reuse_port = true</code></li>
 </ul>
 <p>Enables linux support for <code>SO_REUSEPORT</code>, see <a href="https://stackoverflow.com/questions/14388706/how-do-so-reuseaddr-and-so-reuseport-differ">Stack Overflow</a> for more details.</p>
-<h3 id="listenc2sbackwards_compatible_session"><code>listen.c2s.backwards_compatible_session</code></h3>
+<h3 id="listenc2sbackwards_compatible_session"><code>listen.c2s.backwards_compatible_session</code><a class="headerlink" href="#listenc2sbackwards_compatible_session" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>true</code></li>
@@ -4509,7 +4530,7 @@ backward compatibility an implementation MAY still offer that
 feature.  This enables older software to connect while letting
 newer software save a round trip.</p>
 </blockquote>
-<h3 id="listenc2sallowed_auth_methods"><code>listen.c2s.allowed_auth_methods</code></h3>
+<h3 id="listenc2sallowed_auth_methods"><code>listen.c2s.allowed_auth_methods</code><a class="headerlink" href="#listenc2sallowed_auth_methods" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings. Allowed values: <code>"internal"</code>, <code>"rdbms"</code>, <code>"external"</code>, <code>"anonymous"</code>, <code>"ldap"</code>, <code>"jwt"</code>, <code>"http"</code>, <code>"pki"</code>, <code>"dummy"</code></li>
 <li><strong>Default:</strong> not set</li>
@@ -4519,11 +4540,11 @@ newer software save a round trip.</p>
 This option allows to enable only some backends.
 It is useful, if you want to have several listeners for different type of users (for example, some users use PKI while other users use LDAP auth).
 Same syntax as for <a href="../../configuration/auth/#authmethods"><code>auth.methods</code></a> option.</p>
-<h2 id="tls-options-for-c2s">TLS options for C2S</h2>
+<h2 id="tls-options-for-c2s">TLS options for C2S<a class="headerlink" href="#tls-options-for-c2s" title="Permanent link">&para;</a></h2>
 <p>To enable TLS, a TOML subsection called <code>tls</code> has to be present in the listener options.
 To disable TLS, make sure that the section is not present, and no TLS options are set.
 You can set the following options in this section:</p>
-<h3 id="listenc2stlsmode"><code>listen.c2s.tls.mode</code></h3>
+<h3 id="listenc2stlsmode"><code>listen.c2s.tls.mode</code><a class="headerlink" href="#listenc2stlsmode" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"tls"</code>, <code>"starttls"</code>, <code>"starttls_required"</code></li>
 <li><strong>Default:</strong> <code>"starttls"</code></li>
@@ -4535,14 +4556,14 @@ You can set the following options in this section:</p>
 <li><code>starttls</code> - enables StartTLS support; requires <code>certfile</code>,</li>
 <li><code>starttls_required</code> - enables and enforces StartTLS usage.</li>
 </ul>
-<h3 id="listenc2stlsmodule"><code>listen.c2s.tls.module</code></h3>
+<h3 id="listenc2stlsmodule"><code>listen.c2s.tls.module</code><a class="headerlink" href="#listenc2stlsmodule" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"just_tls"</code>, <code>"fast_tls"</code></li>
 <li><strong>Default:</strong> <code>"fast_tls"</code></li>
 <li><strong>Example:</strong> <code>tls.module = "just_tls"</code></li>
 </ul>
 <p>By default, the TLS library used for C2S connections is <code>fast_tls</code>, which uses OpenSSL-based NIFs. It is possible to change it to <code>just_tls</code> - Erlang TLS implementation provided by OTP. Some TLS-related options described here have different formats for these two libraries.</p>
-<h3 id="listenc2stlsverify_mode"><code>listen.c2s.tls.verify_mode</code></h3>
+<h3 id="listenc2stlsverify_mode"><code>listen.c2s.tls.verify_mode</code><a class="headerlink" href="#listenc2stlsverify_mode" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"peer"</code>, <code>"selfsigned_peer"</code>, <code>"none"</code></li>
 <li><strong>Default:</strong> <code>"peer"</code></li>
@@ -4554,7 +4575,7 @@ You can set the following options in this section:</p>
 <li><code>selfsigned_peer</code> - makes sure the client certificate is valid, but allows self-signed certificates; supported only by <code>just_tls</code>. Requires a valid <code>cacertfile</code>.</li>
 <li><code>none</code> - client certificate is not checked.</li>
 </ul>
-<h3 id="listenc2stlscertfile"><code>listen.c2s.tls.certfile</code></h3>
+<h3 id="listenc2stlscertfile"><code>listen.c2s.tls.certfile</code><a class="headerlink" href="#listenc2stlscertfile" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
 <li><strong>Default:</strong> not set</li>
@@ -4565,69 +4586,69 @@ You can set the following options in this section:</p>
 <p class="admonition-title">Note</p>
 <p>For <code>just_tls</code> this file should only contain the certificate and the path to the private key can be provided separately as <code>keyfile</code>.</p>
 </div>
-<h3 id="listenc2stlscacertfile"><code>listen.c2s.tls.cacertfile</code></h3>
+<h3 id="listenc2stlscacertfile"><code>listen.c2s.tls.cacertfile</code><a class="headerlink" href="#listenc2stlscacertfile" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>tls.cacertfile = "ca.pem"</code></li>
 </ul>
 <p>Path to the X509 PEM file with a CA chain that will be used to verify clients. It won't have any effect if <code>verify_mode</code> is <code>"none"</code>.</p>
-<h3 id="listenc2stlsdhfile"><code>listen.c2s.tls.dhfile</code></h3>
+<h3 id="listenc2stlsdhfile"><code>listen.c2s.tls.dhfile</code><a class="headerlink" href="#listenc2stlsdhfile" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>tls.dhfile = "dh.pem"</code></li>
 </ul>
 <p>Path to the Diffie-Hellman parameter file.</p>
-<h3 id="listenc2stlsciphers"><code>listen.c2s.tls.ciphers</code></h3>
+<h3 id="listenc2stlsciphers"><code>listen.c2s.tls.ciphers</code><a class="headerlink" href="#listenc2stlsciphers" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string with the OpenSSL cipher suite specification</li>
 <li><strong>Default:</strong> for <code>fast_tls</code> the default is<code>"TLSv1.2:TLSv1.3"</code>. For <code>just_tls</code> this option is not set by default - all supported suites are accepted.</li>
 <li><strong>Example:</strong> <code>tls.ciphers = "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384"</code></li>
 </ul>
 <p>Cipher suites to use with StartTLS or TLS. Please refer to the <a href="http://www.openssl.org/docs/man1.0.2/apps/ciphers.html">OpenSSL documentation</a> for the cipher string format. For <code>fast_tls</code>, this string can be used to specify versions as well. For <code>just_tls</code>, see the <a href="https://erlang.org/doc/man/ssl.html#type-ciphers">Erlang/OTP SSL documentation</a> for allowed values.</p>
-<h3 id="listenc2stlsprotocol_options-only-for-fast_tls"><code>listen.c2s.tls.protocol_options</code> - only for <code>fast_tls</code></h3>
+<h3 id="listenc2stlsprotocol_options-only-for-fast_tls"><code>listen.c2s.tls.protocol_options</code> - only for <code>fast_tls</code><a class="headerlink" href="#listenc2stlsprotocol_options-only-for-fast_tls" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings</li>
 <li><strong>Default:</strong> <code>["no_sslv2", "no_sslv3", "no_tlsv1", "no_tlsv1_1"]</code></li>
 <li><strong>Example:</strong> <code>tls.protocol_options = ["no_tlsv1", "no_tlsv1_1"]</code></li>
 </ul>
 <p>A list of OpenSSL options for FastTLS. You can find the mappings between supported options and actual OpenSSL flags in the <code>fast_tls</code> <a href="https://github.com/processone/fast_tls/blob/master/c_src/options.h">source code</a>.</p>
-<h3 id="listenc2stlskeyfile-only-for-just_tls"><code>listen.c2s.tls.keyfile</code> - only for <code>just_tls</code></h3>
+<h3 id="listenc2stlskeyfile-only-for-just_tls"><code>listen.c2s.tls.keyfile</code> - only for <code>just_tls</code><a class="headerlink" href="#listenc2stlskeyfile-only-for-just_tls" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>tls.keyfile = "key.pem"</code></li>
 </ul>
 <p>Path to the X509 PEM file with the private key.</p>
-<h3 id="listenc2stlspassword-only-for-just_tls"><code>listen.c2s.tls.password</code> - only for <code>just_tls</code></h3>
+<h3 id="listenc2stlspassword-only-for-just_tls"><code>listen.c2s.tls.password</code> - only for <code>just_tls</code><a class="headerlink" href="#listenc2stlspassword-only-for-just_tls" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>tls.password = "secret"</code></li>
 </ul>
 <p>Password to the X509 PEM file with the private key.</p>
-<h3 id="listenc2stlsdisconnect_on_failure-only-for-just_tls"><code>listen.c2s.tls.disconnect_on_failure</code> - only for <code>just_tls</code></h3>
+<h3 id="listenc2stlsdisconnect_on_failure-only-for-just_tls"><code>listen.c2s.tls.disconnect_on_failure</code> - only for <code>just_tls</code><a class="headerlink" href="#listenc2stlsdisconnect_on_failure-only-for-just_tls" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>true</code></li>
 <li><strong>Example:</strong> <code>tls.disconnect_on_failure = false</code></li>
 </ul>
-<h3 id="listenc2stlsversions-only-for-just_tls"><code>listen.c2s.tls.versions</code> - only for <code>just_tls</code></h3>
+<h3 id="listenc2stlsversions-only-for-just_tls"><code>listen.c2s.tls.versions</code> - only for <code>just_tls</code><a class="headerlink" href="#listenc2stlsversions-only-for-just_tls" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings</li>
 <li><strong>Default:</strong> not set, all supported versions are accepted</li>
 <li><strong>Example:</strong> <code>tls.versions = ["tlsv1.2", "tlsv1.3"]</code></li>
 </ul>
 <p>TLS versions to use with StartTLS or TLS. For allowed values, see the <a href="https://erlang.org/doc/man/ssl.html#type-protocol_version">Erlang/OTP SSL documentation</a></p>
-<h3 id="listenc2stlscrl_files-only-for-just_tls"><code>listen.c2s.tls.crl_files</code> - only for <code>just_tls</code></h3>
+<h3 id="listenc2stlscrl_files-only-for-just_tls"><code>listen.c2s.tls.crl_files</code> - only for <code>just_tls</code><a class="headerlink" href="#listenc2stlscrl_files-only-for-just_tls" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings, paths in the file system</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>tls.crl_files = ["certs.crl"]</code></li>
 </ul>
 <p>Specifies the paths to Certificate Revocation Lists.</p>
-<h2 id="c2s-listener-configuration-example">C2S listener configuration example</h2>
+<h2 id="c2s-listener-configuration-example">C2S listener configuration example<a class="headerlink" href="#c2s-listener-configuration-example" title="Permanent link">&para;</a></h2>
 <p>The following section configures two C2S listeners.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -4692,6 +4713,46 @@ You can set the following options in this section:</p>
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../configuration/database-backends-configuration/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Database Backends Configuration">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Database Backends Configuration
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../listen-s2s/" class="md-footer__link md-footer__link--next" aria-label="Next: Server to server (S2S)">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Server to server (S2S)
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -4742,7 +4803,7 @@ You can set the following options in this section:</p>
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4261,9 +4282,9 @@
 
   <h1>4.2.0 to 5.0.0</h1>
 
-<h2 id="db-migrations">DB migrations</h2>
+<h2 id="db-migrations">DB migrations<a class="headerlink" href="#db-migrations" title="Permanent link">&para;</a></h2>
 <p>The migrations scripts for Postgres, MySQL, MSSQL can be found in the <a href="https://github.com/esl/MongooseIM/tree/master/priv/migrations"><code>priv/migrations</code></a> directory. Please remember to provide the existing server domain for the <code>server</code> column instead of the localhost.</p>
-<h3 id="changes-in-xeps">Changes in XEPs:</h3>
+<h3 id="changes-in-xeps">Changes in XEPs:<a class="headerlink" href="#changes-in-xeps" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>mod_last</code><ul>
 <li>Table <code>last</code> - added server column, updated primary key and indexes.</li>
@@ -4293,30 +4314,30 @@
 </ul>
 </li>
 </ul>
-<h3 id="other-changes">Other changes:</h3>
+<h3 id="other-changes">Other changes:<a class="headerlink" href="#other-changes" title="Permanent link">&para;</a></h3>
 <ul>
 <li>RDBMS auth - modified <code>users</code> table.</li>
 <li>Added <code>domain_settings</code> table.</li>
 <li>Added <code>domain_events</code> table.</li>
 </ul>
-<h2 id="config-migrations">Config migrations</h2>
+<h2 id="config-migrations">Config migrations<a class="headerlink" href="#config-migrations" title="Permanent link">&para;</a></h2>
 <p>Most important changes without which a server might not run.</p>
-<h3 id="section-general">Section general</h3>
+<h3 id="section-general">Section general<a class="headerlink" href="#section-general" title="Permanent link">&para;</a></h3>
 <ul>
 <li>New mandatory option <code>default_server_domain</code> that must be set. This domain is used as a default when one cannot be determined, for example when sending XMPP stream errors to unauthenticated clients.</li>
 <li>Option <code>hosts</code> is no longer mandatory, but if omitted, at least one host type has to be defined.</li>
 <li>New option <code>host_types</code>. If omitted, at least one host has to be defined. This is the list of names for the types of hosts that will serve dynamic XMPP domains.</li>
 </ul>
 <p>Simply use <code>hosts</code> if you want to stay with static domains and use <code>host_types</code> for dynamic domains.</p>
-<h3 id="section-host_config">Section host_config</h3>
+<h3 id="section-host_config">Section host_config<a class="headerlink" href="#section-host_config" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Option <code>host</code> specifies the XMPP domain that this section refers to.</li>
 <li>New option <code>host_type</code> specifies the host type that this section refers to. Either this option or <code>host</code> is mandatory.</li>
 </ul>
 <p>For every configured <code>host</code> the <code>host_type</code> of the same name is declared automatically. As <code>host_config</code> section is now used for changing configuration of the <code>host_type</code>, we don't need <code>host</code> option any more. But to stay compatible with an old config format we keep <code>host</code> option as well. Now it is just a synonym to host type.</p>
-<h2 id="hook-migrations">Hook migrations</h2>
+<h2 id="hook-migrations">Hook migrations<a class="headerlink" href="#hook-migrations" title="Permanent link">&para;</a></h2>
 <p>The support for dynamic domains has resulted in changes in most Hooks. Mostly these changes concern calling hooks for a <code>host_type</code>.</p>
-<h3 id="added">Added</h3>
+<h3 id="added">Added<a class="headerlink" href="#added" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>adhoc_local_commands/4</code></li>
 <li><code>adhoc_sm_commands/4</code></li>
@@ -4329,7 +4350,7 @@
 <li><code>node_cleanup/1</code></li>
 <li><code>gen_mod:get_module_opt_by_subhost</code></li>
 </ul>
-<h3 id="removed">Removed</h3>
+<h3 id="removed">Removed<a class="headerlink" href="#removed" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>host_config_update/4</code></li>
 <li><code>local_send_to_resource_hook/5</code></li>
@@ -4341,7 +4362,7 @@
 <li><code>caps_update/6</code></li>
 <li><code>caps_add/6</code></li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>auth_failed/2</code> -&gt; <code>auth_failed/3</code></li>
 <li><code>failed_to_store_message/2</code> -&gt; <code>failed_to_store_message/1</code></li>
@@ -4428,13 +4449,13 @@
 <li><code>pubsub_publish_item/7</code> -&gt; <code>pubsub_publish_item/6</code></li>
 <li><code>mod_global_distrib_known_recipient/5</code> -&gt; <code>mod_global_distrib_known_recipient/4</code></li>
 </ul>
-<h2 id="metrics-rest-api-obsolete">Metrics REST API (obsolete)</h2>
+<h2 id="metrics-rest-api-obsolete">Metrics REST API (obsolete)<a class="headerlink" href="#metrics-rest-api-obsolete" title="Permanent link">&para;</a></h2>
 <p>The API is still considered obsolete so if you are using it,
 please consider using <a href="https://www.erlang-solutions.com/capabilities/wombatoam/">WombatOAM</a>
 or metrics reporters as described in <a href="../../operation-and-maintenance/Logging-%26-monitoring/">Logging and monitoring</a>.</p>
 <p>In each endpoint, <code>host</code> has been changed to <code>host_type</code>.
 This is because the metrics are now collected per host type rather than host.</p>
-<h2 id="users-cache">Users cache</h2>
+<h2 id="users-cache">Users cache<a class="headerlink" href="#users-cache" title="Permanent link">&para;</a></h2>
 <p>MongooseIM used to feature a cache to check whether a user exists, that was unavoidably enabled, and had no eviction policy, that is, the cache could continue growing forever. Now, MIM features a module called <a href="../../modules/mod_cache_users/"><code>mod_cache_users</code></a> that implements a configurable cache policy, that can be enabled, disabled, and parametrised, per <code>host_type</code>. This might not be enabled by default in your configuration, so we recommend you verify your configuration and enable it if needed.</p>
 
 
@@ -4467,6 +4488,46 @@ This is because the metrics are now collected per host type rather than host.</p
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../4.1.0_4.2.0/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 4.1.0 to 4.2.0">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                4.1.0 to 4.2.0
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../5.0.0_5.1.0/" class="md-footer__link md-footer__link--next" aria-label="Next: 5.0.0 to 5.1.0">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                5.0.0 to 5.1.0
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4518,7 +4579,7 @@ This is because the metrics are now collected per host type rather than host.</p
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

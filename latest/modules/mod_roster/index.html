@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4165,26 +4186,26 @@
 
   <h1>mod_roster</h1>
 
-<h2 id="module-description">Module Description</h2>
+<h2 id="module-description">Module Description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
 <p>The module implements roster support, specified in <a href="http://xmpp.org/rfcs/rfc6121.html">RFC 6121</a>.
 Includes support for <a href="http://xmpp.org/extensions/xep-0237.html">XEP-0237: Roster Versioning</a>.
 It can sometimes become quite a heavyweight feature, so there is an option to disable it.</p>
-<h2 id="options">Options</h2>
-<h3 id="modulesmod_rosteriqdisctype"><code>modules.mod_roster.iqdisc.type</code></h3>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<h3 id="modulesmod_rosteriqdisctype"><code>modules.mod_roster.iqdisc.type</code><a class="headerlink" href="#modulesmod_rosteriqdisctype" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"one_queue"</code>, <code>"no_queue"</code>, <code>"queues"</code>, <code>"parallel"</code></li>
 <li><strong>Default:</strong> "one_queue"</li>
 </ul>
 <p>Strategy to handle incoming stanzas. For details, please refer to
 <a href="../../configuration/Modules/#iq-processing-policies">IQ processing policies</a>.</p>
-<h3 id="modulesmod_rosterversioning"><code>modules.mod_roster.versioning</code></h3>
+<h3 id="modulesmod_rosterversioning"><code>modules.mod_roster.versioning</code><a class="headerlink" href="#modulesmod_rosterversioning" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
 <li><strong>Example:</strong> <code>versioning = true</code></li>
 </ul>
 <p>Turn on/off support for Roster Versioning.</p>
-<h3 id="modulesmod_rosterstore_current_id"><code>modules.mod_roster.store_current_id</code></h3>
+<h3 id="modulesmod_rosterstore_current_id"><code>modules.mod_roster.store_current_id</code><a class="headerlink" href="#modulesmod_rosterstore_current_id" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
@@ -4192,68 +4213,232 @@ It can sometimes become quite a heavyweight feature, so there is an option to di
 </ul>
 <p>Stores the last roster hash in DB (used in Roster Versioning).
 Improves performance but should be disabled, when shared rosters are used.</p>
-<h3 id="modulesmod_rosterbackend"><code>modules.mod_roster.backend</code></h3>
+<h3 id="modulesmod_rosterbackend"><code>modules.mod_roster.backend</code><a class="headerlink" href="#modulesmod_rosterbackend" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"mnesia"</code>, <code>"rdbms"</code></li>
 <li><strong>Default:</strong> <code>"mnesia"</code></li>
 <li><strong>Example:</strong> <code>backend = "mnesia"</code></li>
 </ul>
-<h2 id="example-configuration">Example configuration</h2>
+<h2 id="example-configuration">Example configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_roster]</span>
 <span class="w">  </span><span class="n">versioning</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">  </span><span class="n">store_current_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="metrics">Metrics</h2>
-<p>If you'd like to learn more about metrics in MongooseIM,
-please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">MongooseIM metrics</a> page.</p>
+<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
+<p>This module provides <a href="../../operation-and-maintenance/MongooseIM-metrics/#backend-metrics">backend metrics</a>.
+If you'd like to learn more about metrics in MongooseIM, please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">MongooseIM metrics</a> page.</p>
+<p>Prometheus metrics have a <code>host_type</code> and <code>function</code> labels associated with these metrics.
+Since Exometer doesn't support labels, the function as well as the host types, or word <code>global</code>, are part of the metric names, depending on the <a href="../../configuration/instrumentation/#instrumentationexometerall_metrics_are_global"><code>instrumentation.exometer.all_metrics_are_global</code></a> option.</p>
+<p>Backend in the action name can be either <code>rdbms</code> or <code>mnesia</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="prometheus" name="__tabbed_1" type="radio" /><input id="exometer" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="prometheus">Prometheus</label><label for="exometer">Exometer</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <table>
 <thead>
 <tr>
 <th>Backend action</th>
+<th>Type</th>
+<th>Function</th>
 <th>Description (when it gets incremented)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td><code>mod_roster_Backend_count</code></td>
+<td>counter</td>
 <td><code>read_roster_version</code></td>
 <td>Version of a user's roster is retrieved.</td>
 </tr>
 <tr>
-<td><code>write_roster_version</code></td>
-<td>Vversion of a user's roster is stored.</td>
+<td><code>mod_roster_Backend_time</code></td>
+<td>histogram</td>
+<td><code>read_roster_version</code></td>
+<td>Time to retrieve the version of a user's roster.</td>
 </tr>
 <tr>
+<td><code>mod_roster_Backend_count</code></td>
+<td>counter</td>
+<td><code>write_roster_version</code></td>
+<td>Version of a user's roster is stored.</td>
+</tr>
+<tr>
+<td><code>mod_roster_Backend_time</code></td>
+<td>histogram</td>
+<td><code>write_roster_version</code></td>
+<td>Time to store the version of a user's roster.</td>
+</tr>
+<tr>
+<td><code>mod_roster_Backend_count</code></td>
+<td>counter</td>
 <td><code>get_roster</code></td>
 <td>A user's roster is fetched.</td>
 </tr>
 <tr>
+<td><code>mod_roster_Backend_time</code></td>
+<td>histogram</td>
+<td><code>get_roster</code></td>
+<td>Time to fetch user's roster.</td>
+</tr>
+<tr>
+<td><code>mod_roster_Backend_count</code></td>
+<td>counter</td>
 <td><code>get_roster_entry</code></td>
 <td>A specific roster entry is fetched.</td>
 </tr>
 <tr>
-<td><code>get_roster_entry_t</code></td>
-<td>A specific roster entry is fetched inside a transaction.</td>
+<td><code>mod_roster_Backend_time</code></td>
+<td>histogram</td>
+<td><code>get_roster_entry</code></td>
+<td>Time to fetch a specific roster entry.</td>
 </tr>
 <tr>
+<td><code>mod_roster_Backend_count</code></td>
+<td>counter</td>
 <td><code>get_subscription_lists</code></td>
 <td>A subscription list of a user is retrieved.</td>
 </tr>
 <tr>
+<td><code>mod_roster_Backend_time</code></td>
+<td>histogram</td>
+<td><code>get_subscription_lists</code></td>
+<td>Time to retrieve a subscription list of a user.</td>
+</tr>
+<tr>
+<td><code>mod_roster_Backend_count</code></td>
+<td>counter</td>
 <td><code>roster_subscribe_t</code></td>
 <td>A subscription status between users is updated inside a transaction.</td>
 </tr>
 <tr>
+<td><code>mod_roster_Backend_time</code></td>
+<td>histogram</td>
+<td><code>roster_subscribe_t</code></td>
+<td>Time to update a subscription status between users inside a transaction.</td>
+</tr>
+<tr>
+<td><code>mod_roster_Backend_count</code></td>
+<td>counter</td>
 <td><code>update_roster_t</code></td>
 <td>A roster entry is updated in a transaction.</td>
 </tr>
 <tr>
+<td><code>mod_roster_Backend_time</code></td>
+<td>histogram</td>
+<td><code>update_roster_t</code></td>
+<td>Time to update a roster entry in a transaction.</td>
+</tr>
+<tr>
+<td><code>mod_roster_Backend_count</code></td>
+<td>counter</td>
 <td><code>del_roster_t</code></td>
 <td>A roster entry is removed inside a transaction.</td>
 </tr>
+<tr>
+<td><code>mod_roster_Backend_time</code></td>
+<td>histogram</td>
+<td><code>del_roster_t</code></td>
+<td>Time to remove a roster entry inside a transaction.</td>
+</tr>
 </tbody>
 </table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Backend action</th>
+<th>Type</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[HostType, mod_roster_Backend, read_roster_version, count]</code></td>
+<td>spiral</td>
+<td>Version of a user's roster is retrieved.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, read_roster_version, time]</code></td>
+<td>histogram</td>
+<td>Time to retrieve the version of a user's roster.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, write_roster_version, count]</code></td>
+<td>spiral</td>
+<td>Version of a user's roster is stored.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, write_roster_version, time]</code></td>
+<td>histogram</td>
+<td>Time to store the version of a user's roster.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, get_roster, count]</code></td>
+<td>spiral</td>
+<td>A user's roster is fetched.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, get_roster, time]</code></td>
+<td>histogram</td>
+<td>Time to fetch user's roster.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, get_roster_entry, count]</code></td>
+<td>spiral</td>
+<td>A specific roster entry is fetched.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, get_roster_entry, time]</code></td>
+<td>histogram</td>
+<td>Time to fetch a specific roster entry.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, get_subscription_lists, count]</code></td>
+<td>spiral</td>
+<td>A subscription list of a user is retrieved.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, get_subscription_lists, time]</code></td>
+<td>histogram</td>
+<td>Time to retrieve a subscription list of a user.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, roster_subscribe_t, count]</code></td>
+<td>spiral</td>
+<td>A subscription status between users is updated inside a transaction.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, roster_subscribe_t, time]</code></td>
+<td>histogram</td>
+<td>Time to update a subscription status between users inside a transaction.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, update_roster_t, count]</code></td>
+<td>spiral</td>
+<td>A roster entry is updated in a transaction.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, update_roster_t, time]</code></td>
+<td>histogram</td>
+<td>Time to update a roster entry in a transaction.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, del_roster_t, count]</code></td>
+<td>spiral</td>
+<td>A roster entry is removed inside a transaction.</td>
+</tr>
+<tr>
+<td><code>[HostType, mod_roster_Backend, del_roster_t, time]</code></td>
+<td>histogram</td>
+<td>Time to remove a roster entry inside a transaction.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 
 
 
@@ -4285,6 +4470,46 @@ please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">Mongo
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../mod_register/" class="md-footer__link md-footer__link--prev" aria-label="Previous: mod_register">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                mod_register
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mod_sasl2/" class="md-footer__link md-footer__link--next" aria-label="Next: mod_sasl2">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                mod_sasl2
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4336,7 +4561,7 @@ please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">Mongo
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

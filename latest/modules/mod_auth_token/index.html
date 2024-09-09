@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4267,7 +4288,7 @@
 
   <h1>mod_auth_token</h1>
 
-<h2 id="module-description">Module Description</h2>
+<h2 id="module-description">Module Description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
 <p>This module implements handling of tokens in an OAuth-like authentication scheme. 
 It provides services necessary to:</p>
 <ul>
@@ -4282,22 +4303,22 @@ It provides services necessary to:</p>
 </ul>
 <p>The module itself does not implement protocol related details - these are implemented in <code>cyrsasl.erl</code>.
 Generation of keys necessary to sign binary tokens is delegated to module <code>mod_keystore.erl</code>.</p>
-<h2 id="options">Options</h2>
-<h3 id="modulesmod_auth_tokenbackend"><code>modules.mod_auth_token.backend</code></h3>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<h3 id="modulesmod_auth_tokenbackend"><code>modules.mod_auth_token.backend</code><a class="headerlink" href="#modulesmod_auth_tokenbackend" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> non-empty string</li>
 <li><strong>Default:</strong> <code>"rdbms"</code></li>
 <li><strong>Example:</strong> <code>backend = "rdbms"</code></li>
 </ul>
 <p>Token storage backend. Currently only <code>"rdbms"</code> is supported.</p>
-<h3 id="modulesmod_auth_tokeniqdisctype"><code>modules.mod_auth_token.iqdisc.type</code></h3>
+<h3 id="modulesmod_auth_tokeniqdisctype"><code>modules.mod_auth_token.iqdisc.type</code><a class="headerlink" href="#modulesmod_auth_tokeniqdisctype" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"one_queue"</code>, <code>"no_queue"</code>, <code>"queues"</code>, <code>"parallel"</code></li>
 <li><strong>Default:</strong> <code>"no_queue"</code></li>
 </ul>
 <p>Strategy to handle incoming IQ stanzas. For details, please refer to
 <a href="../../configuration/Modules/#iq-processing-policies">IQ processing policies</a>.</p>
-<h3 id="modulesmod_auth_tokenvalidity_period"><code>modules.mod_auth_token.validity_period</code></h3>
+<h3 id="modulesmod_auth_tokenvalidity_period"><code>modules.mod_auth_token.validity_period</code><a class="headerlink" href="#modulesmod_auth_tokenvalidity_period" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> TOML table. Each key is either <code>access</code> or <code>refresh</code>. Each value is a nested TOML table with the following mandatory keys: <code>value</code> (non-negative integer) and <code>unit</code> (<code>"days"</code>, <code>"hours"</code>, <code>"minutes"</code> or <code>"seconds"</code>).</li>
 <li><strong>Default:</strong> <code>{access = {value = 1, unit = "hours"}, refresh = {value = 25, unit = "days"}}</code></li>
@@ -4305,9 +4326,9 @@ Generation of keys necessary to sign binary tokens is delegated to module <code>
 </ul>
 <p>Validity periods of access and refresh tokens can be defined independently - specifying one of them does not change the default value for the other one.
 Validity period configuration for provision tokens happens outside the module since the server does not generate provision tokens - it only validates them.</p>
-<h3 id="required-keys">Required keys</h3>
+<h3 id="required-keys">Required keys<a class="headerlink" href="#required-keys" title="Permanent link">&para;</a></h3>
 <p>To read more about the keys MongooseIM makes use of, please refer to <a href="../mod_keystore/">mod_keystore</a> documentation, where you can find an example configuration when using <code>mod_auth_token</code>.</p>
-<h2 id="token-types">Token types</h2>
+<h2 id="token-types">Token types<a class="headerlink" href="#token-types" title="Permanent link">&para;</a></h2>
 <p>Three token types are supported:</p>
 <ul>
 <li>
@@ -4335,7 +4356,7 @@ Validity period configuration for provision tokens happens outside the module si
   In mod_keystore, the keyname for this token type is <code>provision_pre_shared</code>. The usage of this token type is optional.</p>
 </li>
 </ul>
-<h2 id="token-serialization-format">Token serialization format</h2>
+<h2 id="token-serialization-format">Token serialization format<a class="headerlink" href="#token-serialization-format" title="Permanent link">&para;</a></h2>
 <p>All tokens (access, refresh, provision) are to be exchanged as <em>Base64 encoded</em> binary data.
 Serialization format of the token before encoding with Base64 is dependent on its type:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -4365,7 +4386,7 @@ Serialization format of the token before encoding with Base64 is dependent on it
 &#39;provision&#39; \0 Xmi4@localhost \0 64875466458 \0 &lt;vCard&gt;...&lt;/vCard&gt;
     \0 86cd344c98b345390c1961e12cd4005659b4b0b3c7ec475bde9acc9d47eec27e8ddc67003696af582747fb52e578a715
 </code></pre></div></td></tr></table></div>
-<h3 id="requesting-access-or-refresh-tokens-when-logged-in">Requesting access or refresh tokens when logged in</h3>
+<h3 id="requesting-access-or-refresh-tokens-when-logged-in">Requesting access or refresh tokens when logged in<a class="headerlink" href="#requesting-access-or-refresh-tokens-when-logged-in" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;john@localhost&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;123&#39;</span><span class="nt">&gt;</span>
@@ -4373,7 +4394,7 @@ Serialization format of the token before encoding with Base64 is dependent on it
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
 <p>To request access and refresh tokens for the first time a client should send an IQ stanza after they have successfully authenticated for the first time using some other method.</p>
-<h2 id="token-response-format">Token response format</h2>
+<h2 id="token-response-format">Token response format<a class="headerlink" href="#token-response-format" title="Permanent link">&para;</a></h2>
 <p>Requested tokens are being returned by the server wrapped in IQ stanza with the following fields:</p>
 <ul>
 <li><code>id</code>: value taken from the request IQ stanza</li>
@@ -4395,7 +4416,7 @@ Serialization format of the token before encoding with Base64 is dependent on it
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
 <p>Once a client has obtained a token, they may start authenticating using the <code>X-OAUTH</code> SASL mechanism when reaching the authentication phase of an XMPP connection initiation.</p>
-<h2 id="login-with-access-or-refresh-token">Login with access or refresh token</h2>
+<h2 id="login-with-access-or-refresh-token">Login with access or refresh token<a class="headerlink" href="#login-with-access-or-refresh-token" title="Permanent link">&para;</a></h2>
 <p>In order to log into the XMPP server using a previously requested token, a client should send the following stanza:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4413,7 +4434,7 @@ cmVmcmVzaAGQ1Mzk1MmZlYzhkYjhlOTQzM2UxMw==
 <span class="nt">&lt;/success&gt;</span>
 </code></pre></div></td></tr></table></div>
 <p>The above response is to be expected unless the refresh token used is expired or there were some problems processing the key on the server side.</p>
-<h2 id="token-revocation-using-command-line-tool">Token revocation using command line tool</h2>
+<h2 id="token-revocation-using-command-line-tool">Token revocation using command line tool<a class="headerlink" href="#token-revocation-using-command-line-tool" title="Permanent link">&para;</a></h2>
 <p>Refresh tokens issued by the server can be used to:</p>
 <ul>
 <li>log in a user: as an authentication valet,</li>
@@ -4429,7 +4450,7 @@ Therefore, the user might request a new set of tokens for as long as the session
 Moreover, an access token still kept on a compromised device can be used to establish a new session for as long as it's valid - access tokens can't be revoked.
 To alleviate rerequesting tokens by the user, an operator can use <code>mod_admin</code> extension allowing to terminate the user's connection.
 Access token validity can't be sidestepped right now.</p>
-<h2 id="example-configuration">Example configuration</h2>
+<h2 id="example-configuration">Example configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_auth_token]</span>
@@ -4467,6 +4488,46 @@ Access token validity can't be sidestepped right now.</p>
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../mod_amp/" class="md-footer__link md-footer__link--prev" aria-label="Previous: mod_amp">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                mod_amp
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mod_bind2/" class="md-footer__link md-footer__link--next" aria-label="Next: mod_bind2">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                mod_bind2
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4518,7 +4579,7 @@ Access token validity can't be sidestepped right now.</p>
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

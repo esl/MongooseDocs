@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4147,16 +4168,16 @@
 
   <h1>MAM MUC migration helper</h1>
 
-<h2 id="the-purpose-of-sender-jid-from-mam-messageescript">The purpose of sender-jid-from-mam-message.escript</h2>
+<h2 id="the-purpose-of-sender-jid-from-mam-messageescript">The purpose of sender-jid-from-mam-message.escript<a class="headerlink" href="#the-purpose-of-sender-jid-from-mam-messageescript" title="Permanent link">&para;</a></h2>
 <p>This script may be used as a part of migration from MongooseIM 3.3.0 (or older).
 It is able to extract a JID of a groupchat message sender from an XML payload.
 This piece of information is essential for GDPR commands (retrieve data and remove user) to work properly, as without it the operations on MAM MUC data in DB would be extremely inefficient.</p>
 <p>Please consult "3.3.0 to..." migration guide for details.
 DB-specific sections describe where the payloads are stored and what you should do with the extracted JID.</p>
-<h2 id="requirements">Requirements</h2>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
 <p>This script may be executed in every *nix environment which has OTP 19.0 (or newer) installed and <code>escript</code> executable is in <code>PATH</code>.</p>
 <p>It doesn't depend on any MongooseIM code or library, so it may be used as a standalone file.</p>
-<h2 id="how-to-use">How to use?</h2>
+<h2 id="how-to-use">How to use?<a class="headerlink" href="#how-to-use" title="Permanent link">&para;</a></h2>
 <p><code>sender-jid-from-mam-message.escript (eterm | xml)</code></p>
 <p>The only parameter required by the script is the input format.</p>
 <p>You should use <code>eterm</code> if (in MongooseIM config file):</p>
@@ -4171,7 +4192,7 @@ DB-specific sections describe where the payloads are stored and what you should 
 <p>Once started, the script will run in an infinite loop (until killed or interrupted), expecting a stream of inputs.
 For every provided payload, a JID will be returned immediately.
 All communication with the script is done via <code>stdio</code>.</p>
-<h3 id="input-format">Input format</h3>
+<h3 id="input-format">Input format<a class="headerlink" href="#input-format" title="Permanent link">&para;</a></h3>
 <p>For both <code>eterm</code> and <code>xml</code> mode, the script expects an input in a very similar format.
 The high-level overview is:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>LENGTH\nPAYLOAD
@@ -4181,7 +4202,7 @@ The high-level overview is:</p>
 <li><code>PAYLOAD</code> is a sequence of bytes; if a DBMS returns binary data encoded as hex, then it has to be decoded to raw bytes</li>
 <li><code>LENGTH</code> and <code>PAYLOAD</code> are separated with a newline character (ASCII code 10 / 0x0a)</li>
 </ul>
-<h3 id="output-format">Output format</h3>
+<h3 id="output-format">Output format<a class="headerlink" href="#output-format" title="Permanent link">&para;</a></h3>
 <p>The script output format is very similar to the input:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>LENGTH\nJID
 </code></pre></div></td></tr></table></div>
@@ -4195,7 +4216,7 @@ Technically it's <code>-N</code> for <code>LENGTH</code>, followed by a newline 
 The following error codes are supported:
 * <code>-1\n</code> - Unknown error. Something went wrong with the JID extraction (most likely malformed input).
 * <code>-2\n</code> - Invalid message type. The message / stanza has been decoded successfully, but it's not a groupchat message.</p>
-<h2 id="examples">Examples</h2>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <p><code>tools/migration</code> folder contains two files: <code>sender-jid-from-mam-message.example.eterm</code> and <code>sender-jid-from-mam-message.example.xml</code>.
 They are input samples for the script and may be used as a reference for the script usage.</p>
 <p>You can test them by running:</p>
@@ -4208,7 +4229,7 @@ They are input samples for the script and may be used as a reference for the scr
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>37
 gżegżółka@brzęczyszczykiewicz.pl
 </code></pre></div></td></tr></table></div>
-<h2 id="debug">Debug</h2>
+<h2 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h2>
 <p>If an environment variable <code>DEBUG</code> is set to <code>1</code>, the script will store error messages in a <code>/tmp/script-debug</code> file.</p>
 
 
@@ -4241,6 +4262,46 @@ gżegżółka@brzęczyszczykiewicz.pl
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../6.2.1_x.x.x/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 6.2.1 to x.x.x">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                6.2.1 to x.x.x
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../Contributions/" class="md-footer__link md-footer__link--next" aria-label="Next: Contributions to the Ecosystem">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Contributions to the Ecosystem
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4292,7 +4353,7 @@ gżegżółka@brzęczyszczykiewicz.pl
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

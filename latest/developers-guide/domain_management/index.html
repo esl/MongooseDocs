@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4218,7 +4239,7 @@
 <p>Some <a href="../../configuration/Modules/#modules-incompatible-with-dynamic-domains">modules</a> do not work with dynamic domains.
 This is also the case for <a href="../../configuration/s2s/"><code>s2s</code></a> and the XMPP components (XEP-0114) mechanism, as configured in the <a href="../../listeners/listen-components/#xmpp-components-listenservice"><code>listen.service</code> section</a>.</p>
 </div>
-<h2 id="mongooseim-core-component">MongooseIM core component</h2>
+<h2 id="mongooseim-core-component">MongooseIM core component<a class="headerlink" href="#mongooseim-core-component" title="Permanent link">&para;</a></h2>
 <p>Implemented by <code>mongoose_domain_core</code> module.</p>
 <p>It is based on gen_server &amp; ETS table w. public read access.
 This module is local for the node, it does not implement any sync across the
@@ -4258,7 +4279,7 @@ started by MIM even if there is no support of dynamic domain names configured.</
 <li>Static domains are not replicated.</li>
 <li>Static domains has priority above DB domains.</li>
 </ul>
-<h2 id="mongooseim-service">MongooseIM service</h2>
+<h2 id="mongooseim-service">MongooseIM service<a class="headerlink" href="#mongooseim-service" title="Permanent link">&para;</a></h2>
 <p>As described in <a href="../../configuration/Services/#service_domain_db">Services</a>.
 Implements the service behaviour.
 Implemented by <code>service_domain_db</code> module.</p>
@@ -4306,31 +4327,31 @@ host_type or host_type is not supported), errors are logged.</p>
   on records in the <code>domain_events</code> table.</li>
 </ul>
 <p>We use <code>id</code> field to sort records when paginating.</p>
-<h3 id="domain-removal">Domain removal</h3>
+<h3 id="domain-removal">Domain removal<a class="headerlink" href="#domain-removal" title="Permanent link">&para;</a></h3>
 <p>You cannot delete domains with unknown host-type.
 Configure host-type first to delete such domains.</p>
 <p>Modules which store data in RDBMS and support dynamic domains will remove <strong>all</strong> persistent data associated with a domain when its removal is requested.
 This is not the case for NoSQL databases or Mnesia.
 Because of that, we recommend using RDBMS with dynamic domains.
 Please note, that <a href="../../modules/mod_auth_token/"><code>mod_auth_token</code></a> is the only exception for now and does not remove data from RDBMS when removing a domain.</p>
-<h2 id="service-options">Service options</h2>
+<h2 id="service-options">Service options<a class="headerlink" href="#service-options" title="Permanent link">&para;</a></h2>
 <p>Described in the <a href="../../configuration/Services/#service_domain_db"><code>services</code> section</a>.</p>
-<h2 id="command-line-interface">Command Line Interface</h2>
+<h2 id="command-line-interface">Command Line Interface<a class="headerlink" href="#command-line-interface" title="Permanent link">&para;</a></h2>
 <p>You can manage the domains with the <code>mongooseimctl</code> command. Some examples are provided below:</p>
-<h3 id="add-domain">Add domain:</h3>
+<h3 id="add-domain">Add domain:<a class="headerlink" href="#add-domain" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./mongooseimctl domain addDomain --domain example.com --hostType type1
 </code></pre></div></td></tr></table></div>
-<h3 id="delete-domain">Delete domain:</h3>
+<h3 id="delete-domain">Delete domain:<a class="headerlink" href="#delete-domain" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./mongooseimctl domain removeDomain --domain example.com --hostType type1
 </code></pre></div></td></tr></table></div>
-<h3 id="disable-domain">Disable domain:</h3>
+<h3 id="disable-domain">Disable domain:<a class="headerlink" href="#disable-domain" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./mongooseimctl domain disableDomain --domain example.com
 </code></pre></div></td></tr></table></div>
-<h3 id="enable-domain">Enable domain:</h3>
+<h3 id="enable-domain">Enable domain:<a class="headerlink" href="#enable-domain" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>./mongooseimctl domain enableDomain --domain example.com
 </code></pre></div></td></tr></table></div>
 <p>Run <code>./mongooseimctl domain</code> to get more information about all supported operations.</p>
-<h2 id="api">API</h2>
+<h2 id="api">API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h2>
 <p>You can manage domains with one of our API's:</p>
 <ul>
 <li>The <a href="../../graphql-api/Admin-GraphQL">GraphQL API</a> has the same funtionality as the command line interface. The <a href="../../graphql-api/admin-graphql-doc.html#query-domain">queries</a> and <a href="../../graphql-api/admin-graphql-doc.html#mutation-domain">mutations</a> for domains are grouped under the <code>domain</code> category.</li>
@@ -4367,6 +4388,46 @@ Please note, that <a href="../../modules/mod_auth_token/"><code>mod_auth_token</
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../Stanza-routing/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Stanza routing">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Stanza routing
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mod_amp_developers_guide/" class="md-footer__link md-footer__link--next" aria-label="Next: mod_amp development">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                mod_amp development
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4418,7 +4479,7 @@ Please note, that <a href="../../modules/mod_auth_token/"><code>mod_auth_token</
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

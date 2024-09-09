@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4267,10 +4288,10 @@
 
   <h1>LDAP</h1>
 
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This authentication method provides a read-only abstraction over an LDAP directory.</p>
 <p>The following SASL mechanisms are supported:</p>
-<h3 id="sasl-external">SASL EXTERNAL</h3>
+<h3 id="sasl-external">SASL EXTERNAL<a class="headerlink" href="#sasl-external" title="Permanent link">&para;</a></h3>
 <p>User credentials are verified by performing an LDAP search with the user name provided by the client. This can be used to verify that the user is allowed to log in after the provided certificate has been verified.</p>
 <p>This method requires one connection pool with the <code>default</code> tag (unless you change it with the <code>pool_tag</code> option). You need to provide the root DN and password unless your LDAP password allows anonymous searches.</p>
 <p>Example:</p>
@@ -4285,7 +4306,7 @@
 <span class="w">  </span><span class="n">connection</span><span class="p">.</span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ldap-admin-password&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>For more details see <a href="../../configuration/outgoing-connections/">outgoing connections</a>.</p>
-<h3 id="sasl-plain">SASL PLAIN</h3>
+<h3 id="sasl-plain">SASL PLAIN<a class="headerlink" href="#sasl-plain" title="Permanent link">&para;</a></h3>
 <p>User credentials are verified by performing an LDAP search followed by a bind with the user name and password provided by the client.</p>
 <p>To use SASL PLAIN, you need to configure two connection pools:</p>
 <ul>
@@ -4310,29 +4331,29 @@
 <span class="w">  </span><span class="n">connection</span><span class="p">.</span><span class="n">servers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ldap-server.example.com&quot;</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <p>For more details see <a href="../../configuration/outgoing-connections/">outgoing connections</a>.</p>
-<h2 id="configuration-options">Configuration options</h2>
-<h3 id="authldappool_tag"><code>auth.ldap.pool_tag</code></h3>
+<h2 id="configuration-options">Configuration options<a class="headerlink" href="#configuration-options" title="Permanent link">&para;</a></h2>
+<h3 id="authldappool_tag"><code>auth.ldap.pool_tag</code><a class="headerlink" href="#authldappool_tag" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> <code>"default"</code></li>
 <li><strong>Example:</strong> <code>pool_tag = "my_pool"</code></li>
 </ul>
 <p>Specifies the tag for the primary outgoing connection pool for LDAP authentication.</p>
-<h3 id="authldapbind_pool_tag"><code>auth.ldap.bind_pool_tag</code></h3>
+<h3 id="authldapbind_pool_tag"><code>auth.ldap.bind_pool_tag</code><a class="headerlink" href="#authldapbind_pool_tag" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> <code>"bind"</code></li>
 <li><strong>Example:</strong> <code>bind_pool_tag = "my_bind_pool"</code></li>
 </ul>
 <p>Specifies the tag for the secondary outgoing connection pool for LDAP authentication, used for operations requiring the <code>bind</code> operations, such as checking passwords.</p>
-<h3 id="authldapbase"><code>auth.ldap.base</code></h3>
+<h3 id="authldapbase"><code>auth.ldap.base</code><a class="headerlink" href="#authldapbase" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> no default, this option is mandatory</li>
 <li><strong>Example:</strong> <code>base = "ou=Users,dc=example,dc=com"</code></li>
 </ul>
 <p>LDAP base directory which stores user accounts.</p>
-<h3 id="authldapuids"><code>auth.ldap.uids</code></h3>
+<h3 id="authldapuids"><code>auth.ldap.uids</code><a class="headerlink" href="#authldapuids" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of TOML tables with the following content:<ul>
 <li><code>attr</code> - string, mandatory, name of the attribute</li>
@@ -4347,7 +4368,7 @@ They are used as alternatives - it is enough if one of them contains the name.
 By default the whole value of the attribute is expected to be the user name.
 If this is not the case, use the <code>format</code> option.
 It must contain one and only one pattern variable <code>%u</code> which will be replaced by the user name.</p>
-<h3 id="authldapfilter"><code>auth.ldap.filter</code></h3>
+<h3 id="authldapfilter"><code>auth.ldap.filter</code><a class="headerlink" href="#authldapfilter" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> not set</li>
@@ -4355,7 +4376,7 @@ It must contain one and only one pattern variable <code>%u</code> which will be 
 </ul>
 <p>An additional LDAP filter used to narrow down the search for user accounts.
 Do not forget to close the brackets and do not use superfluous whitespaces as this expression is processed before sending to LDAP - the match for user name (see <code>ldap.uids</code>) is added automatically.</p>
-<h3 id="authldapdn_filter"><code>auth.ldap.dn_filter</code></h3>
+<h3 id="authldapdn_filter"><code>auth.ldap.dn_filter</code><a class="headerlink" href="#authldapdn_filter" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> TOML table with the following content:<ul>
 <li><code>filter</code> - string (LDAP filter), mandatory</li>
@@ -4376,7 +4397,7 @@ You can define <code>%u</code>, <code>%d</code>, <code>%s</code> and <code>%D</c
 <li><code>%D</code> is replaced by the Distinguished Name.</li>
 </ul>
 <p>Since this filter makes additional LDAP lookups, use it only as the last resort; try to define all filter rules in <code>ldap.filter</code> if possible.</p>
-<h3 id="authldaplocal_filter"><code>auth.ldap.local_filter</code></h3>
+<h3 id="authldaplocal_filter"><code>auth.ldap.local_filter</code><a class="headerlink" href="#authldaplocal_filter" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> TOML table with the following content:<ul>
 <li><code>operation</code> - string, mandatory, <code>"equal"</code> or <code>"notequal"</code></li>
@@ -4398,14 +4419,14 @@ It also shows the usage of TOML dotted keys, which is recommended when the inlin
 <span class="w">   </span><span class="n">local_filter</span><span class="p">.</span><span class="n">attribute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;accountStatus&quot;</span>
 <span class="w">   </span><span class="n">local_filter</span><span class="p">.</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;disabled&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;blacklisted&quot;</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="authldapderef"><code>auth.ldap.deref</code></h3>
+<h3 id="authldapderef"><code>auth.ldap.deref</code><a class="headerlink" href="#authldapderef" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of: <code>"never"</code>, <code>"always"</code>, <code>"finding"</code>, <code>"searching"</code></li>
 <li><strong>Default:</strong> <code>"never"</code></li>
 <li><strong>Example:</strong> <code>deref = "always"</code></li>
 </ul>
 <p>Specifies whether or not to dereference aliases: <code>finding</code> means to dereference only when finding the base and <code>searching</code> - only when performing the LDAP search. See the documentation on <a href="https://ldap.com/the-ldap-search-operation/">LDAP search operation</a> for more information.</p>
-<h3 id="example">Example</h3>
+<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[auth.ldap]</span>
@@ -4443,6 +4464,46 @@ It also shows the usage of TOML dotted keys, which is recommended when the inlin
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../anonymous/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Anonymous">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Anonymous
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../jwt/" class="md-footer__link md-footer__link--next" aria-label="Next: JWT">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                JWT
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4494,7 +4555,7 @@ It also shows the usage of TOML dotted keys, which is recommended when the inlin
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

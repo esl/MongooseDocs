@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4147,17 +4168,17 @@
 
   <h1>mod_smart_markers</h1>
 
-<h2 id="module-description">Module Description</h2>
+<h2 id="module-description">Module Description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
 <p>Smart markers are an experimental feature, described in detail as our <a href="../../open-extensions/smart-markers/">Open XMPP Extension for markers</a>.</p>
-<h2 id="options">Options</h2>
-<h3 id="modulesmod_smart_markersiqdisc"><code>modules.mod_smart_markers.iqdisc</code></h3>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<h3 id="modulesmod_smart_markersiqdisc"><code>modules.mod_smart_markers.iqdisc</code><a class="headerlink" href="#modulesmod_smart_markersiqdisc" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"one_queue"</code>, <code>"no_queue"</code>, <code>"queues"</code>, <code>"parallel"</code></li>
 <li><strong>Default:</strong> <code>"no_queue"</code></li>
 </ul>
 <p>Strategy to handle incoming IQ requests. For details, please refer to
 <a href="../../configuration/Modules/#iq-processing-policies">IQ processing policies</a>.</p>
-<h3 id="modulesmod_smart_markersbackend"><code>modules.mod_smart_markers.backend</code></h3>
+<h3 id="modulesmod_smart_markersbackend"><code>modules.mod_smart_markers.backend</code><a class="headerlink" href="#modulesmod_smart_markersbackend" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"rdbms"</code>, <code>"rdbms_async"</code></li>
 <li><strong>Default:</strong> <code>"rdbms"</code></li>
@@ -4165,7 +4186,7 @@
 </ul>
 <p>Only RDBMS storage is supported, but <code>rdbms</code> means flushes to DB are synchronous with each message, while <code>rdbms_async</code> is instead asynchronous.</p>
 <p>Regular <code>rdbms</code> has worse performance characteristics, but it has better consistency properties, as events aren't lost nor reordered. <code>rdbms_async</code> processes events asynchronously and potentially unloading a lot of aggregation from the DB. Like the case of the asynchronous workers for MAM, it is the preferred method, with the risk messages being lost on an ungraceful shutdown.</p>
-<h3 id="modulesmod_smart_markerskeep_private"><code>modules.mod_smart_markers.keep_private</code></h3>
+<h3 id="modulesmod_smart_markerskeep_private"><code>modules.mod_smart_markers.keep_private</code><a class="headerlink" href="#modulesmod_smart_markerskeep_private" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>false</code></li>
@@ -4173,14 +4194,14 @@
 </ul>
 <p>This indicates if markers are meant to be private to the sender of the marker (setting <code>keep_private</code> as <code>true</code>), or if they can be public.</p>
 <p>By default markers are public to the conversation where they are sent, so they'll be routed to all recipients, and anyone in the chat can see where its peers are at any time, i.e., the Facebook Messenger model; but they can be configured private, so markers won't be routed to anyone, and a user who fetches their status will only receive information for markers they have sent alone, i.e., the Slack model.</p>
-<h2 id="example-configuration">Example configuration</h2>
+<h2 id="example-configuration">Example configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_smart_markers]</span>
 <span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rdbms&quot;</span>
 <span class="w">  </span><span class="n">iqdisc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;parallel&quot;</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="implementation-details">Implementation details</h2>
+<h2 id="implementation-details">Implementation details<a class="headerlink" href="#implementation-details" title="Permanent link">&para;</a></h2>
 <p>The current implementation has some limitations:</p>
 <ul>
 <li>It does not verify that markers only move forwards, hence a user can, intentionally or accidentally, send a marker to an older message, and this would override newer ones.</li>
@@ -4217,6 +4238,46 @@
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../mod_shared_roster_ldap/" class="md-footer__link md-footer__link--prev" aria-label="Previous: mod_shared_roster_ldap">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                mod_shared_roster_ldap
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mod_sic/" class="md-footer__link md-footer__link--next" aria-label="Next: mod_sic">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                mod_sic
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4268,7 +4329,7 @@
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

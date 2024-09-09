@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -3017,20 +3038,53 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#graphite-collectd" class="md-nav__link">
+  <a href="#os-level-metrics-graphite-collectd" class="md-nav__link">
     <span class="md-ellipsis">
-      graphite-collectd
+      OS level metrics: graphite-collectd
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#plug-in-exometer-reporters" class="md-nav__link">
+  <a href="#application-metrics" class="md-nav__link">
     <span class="md-ellipsis">
-      Plug-in Exometer reporters
+      Application metrics
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Application metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prometheus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prometheus
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exometer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exometer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graphql-metrics-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      GraphQL metrics endpoint
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4150,20 +4204,53 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#graphite-collectd" class="md-nav__link">
+  <a href="#os-level-metrics-graphite-collectd" class="md-nav__link">
     <span class="md-ellipsis">
-      graphite-collectd
+      OS level metrics: graphite-collectd
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#plug-in-exometer-reporters" class="md-nav__link">
+  <a href="#application-metrics" class="md-nav__link">
     <span class="md-ellipsis">
-      Plug-in Exometer reporters
+      Application metrics
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Application metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prometheus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prometheus
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exometer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exometer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graphql-metrics-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      GraphQL metrics endpoint
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4225,11 +4312,11 @@
 
   <h1>Logging & monitoring</h1>
 
-<h2 id="logs">Logs</h2>
+<h2 id="logs">Logs<a class="headerlink" href="#logs" title="Permanent link">&para;</a></h2>
 <p>We strongly recommend storing logs in one centralized place when working in a clustered environment.
 MongooseIM uses the standard OTP logging framework: <a href="https://erlang.org/doc/apps/kernel/logger_chapter.html#handlers">Logger</a>.
 Its handlers can be replaced and customised, according to Logger's documentation.</p>
-<h3 id="syslog-integration">Syslog integration</h3>
+<h3 id="syslog-integration">Syslog integration<a class="headerlink" href="#syslog-integration" title="Permanent link">&para;</a></h3>
 <p>MongooseIM uses <code>syslogger</code> as a Logger handler for syslog.
 To activate it you have to add <code>syslogger</code> to the applications section in <code>src/mongooseim/app.src</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>%% syslogger, % uncomment to enable a logger handler for syslog
@@ -4267,73 +4354,46 @@ For example, if the facility <code>local0</code> is set:</p>
 <p>Example log (e.g <code>tail -f /var/log/mongooseim.log</code>):</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>Apr  1 12:36:49 User.local mongooseim[6068]: [info] &lt;0.7.0&gt; Application mnesia started on node mongooseim@localhost
 </code></pre></div></td></tr></table></div>
-<h3 id="further-multiserver-integration">Further / multiserver integration</h3>
+<h3 id="further-multiserver-integration">Further / multiserver integration<a class="headerlink" href="#further-multiserver-integration" title="Permanent link">&para;</a></h3>
 <p>For more advanced processing and analysis of logs, including gathering logs from multiple machines,
 you can use one of the many available systems (e.g. logstash/elasticsearch/kibana, graylog, splunk),
 by redirecting mongoose logs to such service with an appropriate <a href="https://erlang.org/doc/apps/kernel/logger_chapter.html#handlers">Logger</a>'s handler.</p>
 <p>Check <a href="../Logging/">Logging</a> for more information.</p>
-<h2 id="monitoring">Monitoring</h2>
-<h3 id="wombatoam">WombatOAM</h3>
+<h2 id="monitoring">Monitoring<a class="headerlink" href="#monitoring" title="Permanent link">&para;</a></h2>
+<h3 id="wombatoam">WombatOAM<a class="headerlink" href="#wombatoam" title="Permanent link">&para;</a></h3>
 <p>WombatOAM is an operations and maintenance framework for Erlang based systems.
 Its Web Dashboard displays this data in an aggregated manner.
 Additionally, WombatOAM provides interfaces to feed the data to other OAM tools such as Graphite, Nagios or Zabbix.</p>
 <p>For more information see: <a href="https://www.erlang-solutions.com/products/wombat-oam.html">WombatOAM</a>.</p>
-<h3 id="graphite-collectd">graphite-collectd</h3>
-<p>To monitor MongooseIM during load testing, we recommend the following open source applications:</p>
+<h3 id="os-level-metrics-graphite-collectd">OS level metrics: graphite-collectd<a class="headerlink" href="#os-level-metrics-graphite-collectd" title="Permanent link">&para;</a></h3>
+<p>To monitor MongooseIM node during load testing, we recommend the following open source applications:</p>
 <ul>
 <li><a href="https://grafana.com/">Grafana</a> is used for data presentation.</li>
-<li><a href="http://graphiteapp.org/">Graphite</a> is a server used for metrics storage.</li>
+<li><a href="https://prometheus.io">Prometheus</a> is a server used for metrics storage. Alternatively, MongooseIM also works with <a href="http://graphiteapp.org/">Graphite</a>.</li>
 <li><a href="http://collectd.org/">collectd</a> is a daemon running on the monitored nodes capturing data related to CPU and Memory usage, IO etc.</li>
 </ul>
-<h3 id="plug-in-exometer-reporters">Plug-in Exometer reporters</h3>
+<h3 id="application-metrics">Application metrics<a class="headerlink" href="#application-metrics" title="Permanent link">&para;</a></h3>
+<p>MongooseIM uses <a href="https://prometheus.io/">Prometheus</a> as the default metrics solution, but also supports Exometer with Graphite exporter.
+Enable the chosen one in the <a href="../../configuration/instrumentation/">instrumentation section</a>.</p>
+<h4 id="prometheus">Prometheus<a class="headerlink" href="#prometheus" title="Permanent link">&para;</a></h4>
+<p>MongooseIM exposes metrics in the Prometheus format by default.
+More information about configuration can be found in <a href="../../listeners/listen-http/#handler-types-prometheus-mongoose_prometheus_handler">the HTTP listeners section</a>.</p>
+<h4 id="exometer">Exometer<a class="headerlink" href="#exometer" title="Permanent link">&para;</a></h4>
 <p>MongooseIM uses <a href="https://github.com/esl/exometer_core">a fork of Exometer library</a> for collecting metrics.
-Exometer has many plug-in reporters that can send metrics to external services. We maintain <a href="https://github.com/esl/exometer_report_graphite">exometer_report_graphite</a> and <a href="https://github.com/esl/exometer_report_statsd">exometer_report_statsd</a> for Graphite and StatsD respectively.
-It is possible to enable them in MongooseIM via the <code>app.config</code> file.
-The file sits next to the <code>mongooseim.toml</code> file in the <code>rel/files</code> and <code>_REL_DIR_/etc</code> directories.</p>
-<p>Below you can find a sample configuration.
-It shows setting up a reporter connecting to graphite running on localhost.</p>
-<p>You can see an additional option not listed in the Exometer docs - <code>mongooseim_report_interval</code>, which sets the metrics' resolution, i.e. how often Exometer gathers and sends metrics through reporters.
-By default, the resolution is set to 60 seconds.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">...</span>
-<span class="p">{</span><span class="n">exometer_core</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="n">mongooseim_report_interval</span><span class="p">,</span><span class="w"> </span><span class="mi">60000</span><span class="p">},</span><span class="w"> </span><span class="c">%% 60 seconds</span>
-<span class="w">    </span><span class="p">{</span><span class="n">report</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="p">{</span><span class="n">reporters</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                     </span><span class="p">{</span><span class="n">exometer_report_graphite</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                                                 </span><span class="p">{</span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;mongooseim&quot;</span><span class="p">},</span>
-<span class="w">                                                 </span><span class="p">{</span><span class="n">connect_timeout</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="p">},</span>
-<span class="w">                                                 </span><span class="p">{</span><span class="n">host</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">},</span>
-<span class="w">                                                 </span><span class="p">{</span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="mi">2003</span><span class="p">},</span>
-<span class="w">                                                 </span><span class="p">{</span><span class="n">api_key</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">}</span>
-<span class="w">                                                </span><span class="p">]}</span>
-<span class="w">                    </span><span class="p">]}</span>
-<span class="w">    </span><span class="p">]}</span>
-<span class="w">  </span><span class="p">]}</span>
-<span class="p">...</span>
-</code></pre></div></td></tr></table></div>
-<h3 id="run-graphite-grafana-in-docker-quick-start">Run Graphite &amp; Grafana in Docker - quick start</h3>
+Exometer has many plug-in reporters that can send metrics to external services.
+We maintain <a href="https://github.com/esl/exometer_report_graphite">exometer_report_graphite</a>, which can be enabled in the <a href="../../configuration/instrumentation/#exometer-reporter-options">instrumentation section of the configuration file</a>.</p>
+<p>Moreover, Exometer metrics can be accessed through the GraphQL API.</p>
+<h4 id="graphql-metrics-endpoint">GraphQL metrics endpoint<a class="headerlink" href="#graphql-metrics-endpoint" title="Permanent link">&para;</a></h4>
+<p>When using Exometer, the metrics can be accessed through <a href="../admin-graphql-doc.html#query-metric" target="_blank" rel="noopener noreferrer">a GraphQL query</a>.
+With Prometheus, this query will not work, however, the metrics will be available in the Prometheus format from <a href="../../listeners/listen-http/#listenhttphandlerspath">the configured endpoint</a>.</p>
+<h3 id="run-graphite-grafana-in-docker-quick-start">Run Graphite &amp; Grafana in Docker - quick start<a class="headerlink" href="#run-graphite-grafana-in-docker-quick-start" title="Permanent link">&para;</a></h3>
 <p>The following commands will download the latest version of <code>kamon/grafana_graphite</code> docker image that contains both Grafana and Graphite, and start them while mounting the local directory <code>./docker-grafana-graphite-master/data</code> for metric persistence:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>curl<span class="w"> </span>-SL<span class="w"> </span>https://github.com/kamon-io/docker-grafana-graphite/archive/master.tar.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>-xzf<span class="w"> </span>-
 make<span class="w"> </span>-C<span class="w"> </span>docker-grafana-graphite-master<span class="w"> </span>up
 </code></pre></div></td></tr></table></div>
 <p>Go to <a href="http://localhost:80">http://localhost:80</a> to view the Grafana dashboard that's already set up to use metrics from Graphite.</p>
-<h3 id="add-metrics-to-grafana-dashboard">Add metrics to Grafana dashboard</h3>
+<h3 id="add-metrics-to-grafana-dashboard">Add metrics to Grafana dashboard<a class="headerlink" href="#add-metrics-to-grafana-dashboard" title="Permanent link">&para;</a></h3>
 <p>We recommend the following metrics as a baseline for tracking your MongooseIM installation.
 For time-based metrics, you can choose to display multiple calculated values for a reporting period - we recommend tracking at least <code>max</code>, <code>median</code> and <code>mean</code>.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -4348,11 +4408,11 @@ For time-based metrics, you can choose to display multiple calculated values for
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code>Session count:                   &lt;prefix&gt;.global.totalSessionCount.value
-XMPP messages received:          &lt;prefix&gt;.&lt;domain&gt;.xmppMessageReceived.one
-XMPP messages sent:              &lt;prefix&gt;.&lt;domain&gt;.xmppMessageSent.one
-Successful logins:               &lt;prefix&gt;.&lt;domain&gt;.sessionSuccessfulLogins.one
-Logouts:                         &lt;prefix&gt;.&lt;domain&gt;.sessionLogouts.one
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code>Session count:                   &lt;prefix&gt;.global.sm_total_sessions.count
+Outgoing XMPP messages:          &lt;prefix&gt;.&lt;domain&gt;.c2s_element_out.message_count.one
+Incoming XMPP messages:          &lt;prefix&gt;.&lt;domain&gt;.c2s_element_in.message_count.one
+Successful logins:               &lt;prefix&gt;.&lt;domain&gt;.sm_session.logins.one
+Logouts:                         &lt;prefix&gt;.&lt;domain&gt;.sm_session.logouts.one
 Authorization time:              &lt;prefix&gt;.&lt;domain&gt;.backends.auth.authorize.&lt;value-type&gt;
 RDBMS &quot;simple&quot; query time:       &lt;prefix&gt;.&lt;domain&gt;.backends.mongoose_rdbms.query.&lt;value-type&gt;
 RDBMS prepared query time:       &lt;prefix&gt;.&lt;domain&gt;.backends.mongoose_rdbms.execute.&lt;value-type&gt;
@@ -4363,7 +4423,7 @@ MAM private messages flush time: &lt;prefix&gt;.&lt;domain&gt;.mod_mam_rdbms_asy
 MAM MUC messages flush time:     &lt;prefix&gt;.&lt;domain&gt;.mod_mam_muc_rdbms_async_pool_writer.flush_time.&lt;value-type&gt;
 </code></pre></div></td></tr></table></div>
 <p>Note that RDBMS metrics are only relevant if MongooseIM is <a href="../../configuration/database-backends-configuration/">configured with an RDBMS backend</a>, MAM metrics when <a href="../../modules/mod_mam/">mod_mam is enabled</a> and MAM flush times when MAM is configured with an RDBMS backend with <code>async_writer</code> option (default).</p>
-<h4 id="example-graph-in-grafana">Example graph in Grafana</h4>
+<h4 id="example-graph-in-grafana">Example graph in Grafana<a class="headerlink" href="#example-graph-in-grafana" title="Permanent link">&para;</a></h4>
 <p><img alt="An example graph in Grafana" src="../example-grafana-graph.png" /></p>
 <p>This screenshot shows a graph plotting the RDBMS simple query time metric mentioned above.
 The graph is plotted for three nodes with each node having a different prefix: <code>mongoose.node1</code>, <code>mongoose.node2</code> and <code>mongoose.node3</code>.</p>
@@ -4401,6 +4461,46 @@ Parts of the names are indexed from <code>0</code>.</p>
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../Cluster-configuration-and-node-management/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Cluster configuration and node management">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Cluster configuration and node management
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Logging/" class="md-footer__link md-footer__link--next" aria-label="Next: Logging configuration">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Logging configuration
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4452,7 +4552,7 @@ Parts of the names are indexed from <code>0</code>.</p>
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

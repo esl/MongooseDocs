@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4873,16 +4894,16 @@
 
   <h1>mod_global_distrib</h1>
 
-<h2 id="module-description">Module Description</h2>
+<h2 id="module-description">Module Description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
 <p>This module enables global distribution of a single XMPP domain.
 With <code>mod_global_distrib</code>, multiple distinct MongooseIM clusters can share a single domain name and route messages to the specific datacenter where the recipient is available.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This module does not support <a href="../../configuration/general/#generalhost_types">dynamic domains</a>.</p>
 </div>
-<h2 id="how-it-works">How it works</h2>
+<h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
 <p>There are multiple subsystems that cooperate to enable global distribution:</p>
-<h3 id="metadata-sharing">Metadata sharing</h3>
+<h3 id="metadata-sharing">Metadata sharing<a class="headerlink" href="#metadata-sharing" title="Permanent link">&para;</a></h3>
 <p>Sharing of metadata is done by leveraging a database with cross-datacenter replication.
 Currently, only Redis is supported, with <a href="https://github.com/Netflix/dynomite">Dynomite</a> layer for replication.
 The most important metadata stored in the database is a <strong>session/routing table</strong>.
@@ -4892,7 +4913,7 @@ Because access to the session table is very frequent, its entries are additional
 Each node of each cluster is responsible for refreshing its own data.
 Thus, in an event of a netsplit, datacenters' information about unreachable datacenters' users will expire, as those users are now unreachable; but once the connection is reestablished, the data will be replicated again as datacenters refresh their entries.
 Additionally, to prevent edge cases where an incoming message is received and replied to before the datacenter learns about the sender's host, an incoming message also carries information about its origin which may be used to temporarily update the local routing table.</p>
-<h4 id="redis-entries">Redis entries</h4>
+<h4 id="redis-entries">Redis entries<a class="headerlink" href="#redis-entries" title="Permanent link">&para;</a></h4>
 <p>Following structures are stored in Redis:</p>
 <ul>
 <li>JID mappings are stored as normal key-value entries, where user's JID (full and bare) is the key, and the value is the local hostname where the user is logged in.
@@ -4907,7 +4928,7 @@ Example: <code>"dc2.example.com#{nodes}" -&gt; {"node1@dc2.example.com", "node3@
 <li>Hosts are stored in a set with key <code>hosts</code> and values being the individual local XMPP domains.
 Example: <code>"hosts" -&gt; {"dc1.example.com", "dc2.example.com"}</code>.</li>
 </ul>
-<h3 id="message-routing">Message routing</h3>
+<h3 id="message-routing">Message routing<a class="headerlink" href="#message-routing" title="Permanent link">&para;</a></h3>
 <p><code>mod_global_distrib</code> establishes its own listeners and dedicated TCP/TLS connections for message routing.
 Each node listens on preconfigured endpoints, where each node in a datacenter can have any number of endpoints, including none.
 The endpoints are shared between all datacenters.
@@ -4923,7 +4944,7 @@ This - along with the dedicated worker process on the receiver's side - ensures 
 Messages are given a TTL parameter by the source datacenter so that they cannot be rerouted indefinitely.
 The TTL is decreased on each reroute.
 Note that in the edge case of multi-datacenter routing, the messages may be received out-of-order at the destination datacenter.</p>
-<h3 id="bounce">Bounce</h3>
+<h3 id="bounce">Bounce<a class="headerlink" href="#bounce" title="Permanent link">&para;</a></h3>
 <p>Consider the following edge case: user <strong>U1</strong> logged into datacenter <strong>DC2</strong> and then quickly reconnected to datacenter <strong>DC3</strong>.
 Because session table has not yet been replicated, <strong>DC2</strong> does not see <strong>U1</strong> in the session table, while a different datacenter <strong>DC1</strong> still sees <strong>U1</strong> logged into <strong>DC2</strong>.
 When <strong>U2</strong> logged into <strong>DC1</strong> and sent a message to <strong>U1</strong>, it will now be rerouted to <strong>DC2</strong> even though the user is now available at <strong>DC3</strong>.</p>
@@ -4935,39 +4956,225 @@ In the example above, the message from <strong>U2</strong> would be temporarily 
 <p class="admonition-title">Note</p>
 <p>Bounce mechanism, similarly to multi-datacenter routing, may result in out-of-order messages being received at the destination datacenter.</p>
 </div>
-<h3 id="metrics">Metrics</h3>
-<p>Global distribution modules expose several per-datacenter metrics that can be used to monitor health of the system. All metrics begin with <strong>global.mod_global_distrib</strong> prefix:</p>
-<ul>
-<li><code>outgoing.messages.&lt;host&gt;</code>: number of cross-datacenter messages sent by this cluster to a given host.</li>
-<li><code>incoming.messages.&lt;host&gt;</code>: number of cross-datacenter messages received by this cluster from a given host.</li>
-<li><code>incoming.transfer_time.&lt;host&gt;</code> <em>[us]</em>: time elapsed between sending and receiving the message over the network from a given host.
-  The duration is calculated using wall clock times on sender and receiver node.</li>
-<li><code>outgoing.queue_time.&lt;host&gt;</code> <em>[us]</em>: time elapsed while message waits in a queue of a sender's connection to a given host.
-  High value of this metric may be remedied by increasing the number of connections to other hosts.</li>
-<li><code>incoming.queue_time</code> <em>[us]</em>: time elapsed while message waits in routing worker's queue.
-  This value is not reported per-host as routing workers are bound to the sender's JID.</li>
-<li><code>incoming.established</code>: incremented when a new connection is established from another cluster.
-  At this point the origin domain of the cluster is not known, so this metric is common for all of them.</li>
-<li><code>incoming.first_packet.&lt;host&gt;</code>: incremented when a receiver process gets the first packet from a remote cluster and learns its local domain.</li>
-<li><code>incoming.closed.&lt;host&gt;</code>: incremented when an incoming connection gets closed.</li>
-<li><code>incoming.errored.&lt;host&gt;</code>: incremented when an incoming connection gets closed with an error.</li>
-<li><code>outgoing.established.&lt;host&gt;</code>: incremented when an outgoing connection is established.</li>
-<li><code>outgoing.closed.&lt;host&gt;</code>: incremented when an outgoing connection gets closed.</li>
-<li><code>outgoing.errored.&lt;host&gt;</code>: incremented when an outgoing connection gets closed with an error.</li>
-<li><code>mapping_fetch_time</code> <em>[us]</em>: time spent on fetching an entry from the session table, cached or otherwise.</li>
-<li><code>mapping_fetches</code>: number of fetches of session table entries, cached or otherwise.</li>
-<li><code>mapping_cache_misses</code>: number of fetches of session table entries that hit the database.</li>
-<li><code>delivered_with_ttl</code>: A histogram of packets' TTL values recorded when the global routing layer decides to route them locally (but not due to TTL = 0).</li>
-<li><code>stop_ttl_zero</code>: A number of packets that weren't processed by global routing due to TTL=0.</li>
-<li><code>bounce_queue_size</code>: a number of messages enqueued for rerouting (the value of this metric is individual per MongooseIM node!).</li>
-</ul>
-<h2 id="notes">Notes</h2>
+<h3 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h3>
+<p>Global distribution modules expose several per-datacenter metrics that can be used to monitor health of the system.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="prometheus" name="__tabbed_1" type="radio" /><input id="exometer" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="prometheus">Prometheus</label><label for="exometer">Exometer</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mod_global_distrib_outgoing_messages_count</code></td>
+<td>counter</td>
+<td>Number of cross-datacenter messages sent by this cluster.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_incoming_messages_count</code></td>
+<td>counter</td>
+<td>Number of cross-datacenter messages received by this cluster.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_incoming_transfer_time</code></td>
+<td>histogram</td>
+<td>Time (<em>us</em>) elapsed between sending and receiving the message over the network. The duration is calculated using wall clock times on sender and receiver node.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_outgoing_queue_time</code></td>
+<td>histogram</td>
+<td>Time (<em>us</em>) elapsed while message waits in a queue of a sender's connection. High value of this metric may be remedied by increasing the number of connections to other hosts.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_incoming_queue_time</code></td>
+<td>histogram</td>
+<td>Time (<em>us</em>) elapsed while message waits in routing worker's queue. This value is not reported per-host as routing workers are bound to the sender's JID.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_incoming_established_count</code></td>
+<td>counter</td>
+<td>Incremented when a new connection is established from another cluster. At this point the origin domain of the cluster is not known, so this metric is common for all of them.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_incoming_first_packet_count</code></td>
+<td>counter</td>
+<td>Incremented when a receiver process gets the first packet from a remote cluster and learns its local domain.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_incoming_closed_count</code></td>
+<td>counter</td>
+<td>Incremented when an incoming connection gets closed.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_incoming_errored_count</code></td>
+<td>counter</td>
+<td>Incremented when an incoming connection gets closed with an error.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_outgoing_established_count</code></td>
+<td>counter</td>
+<td>Incremented when an outgoing connection is established.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_outgoing_closed_count</code></td>
+<td>counter</td>
+<td>Incremented when an outgoing connection gets closed.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_outgoing_errored_count</code></td>
+<td>counter</td>
+<td>Incremented when an outgoing connection gets closed with an error.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_mapping_fetches_time</code></td>
+<td>histogram</td>
+<td>Time (<em>us</em>) spent on fetching an entry from the session table, cached or otherwise.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_mapping_fetches_count</code></td>
+<td>counter</td>
+<td>Number of fetches of session table entries, cached or otherwise.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_mapping_cache_misses_count</code></td>
+<td>counter</td>
+<td>Number of fetches of session table entries that hit the database.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_delivered_with_ttl_value</code></td>
+<td>histogram</td>
+<td>A histogram of packets' TTL values recorded when the global routing layer decides to route them locally (but not due to TTL = 0).</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_stop_ttl_zero_count</code></td>
+<td>counter</td>
+<td>A number of packets that weren't processed by global routing due to TTL=0.</td>
+</tr>
+<tr>
+<td><code>mod_global_distrib_bounce_queue_size</code></td>
+<td>counter</td>
+<td>A number of messages enqueued for rerouting (the value of this metric is individual per MongooseIM node!). This metric is updated periodically, every <a href="../../configuration/instrumentation/#instrumentationprobe_interval"><code>instrumentation.probe_interval</code></a>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description (when it gets incremented)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[mod_global_distrib_outgoing_messages, count]</code></td>
+<td>spiral</td>
+<td>Number of cross-datacenter messages sent by this cluster.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_incoming_messages, count]</code></td>
+<td>spiral</td>
+<td>Number of cross-datacenter messages received by this cluster.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_incoming_transfer, time]</code></td>
+<td>histogram</td>
+<td>Time (<em>us</em>) elapsed between sending and receiving the message over the network. The duration is calculated using wall clock times on sender and receiver node.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_outgoing_queue, time]</code></td>
+<td>histogram</td>
+<td>Time (<em>us</em>) elapsed while message waits in a queue of a sender's connection. High value of this metric may be remedied by increasing the number of connections to other hosts.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_incoming_queue, time]</code></td>
+<td>histogram</td>
+<td>Time (<em>us</em>) elapsed while message waits in routing worker's queue. This value is not reported per-host as routing workers are bound to the sender's JID.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_incoming_established, count]</code></td>
+<td>spiral</td>
+<td>Incremented when a new connection is established from another cluster. At this point the origin domain of the cluster is not known, so this metric is common for all of them.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_incoming_first_packet, count]</code></td>
+<td>spiral</td>
+<td>Incremented when a receiver process gets the first packet from a remote cluster and learns its local domain.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_incoming_closed, count]</code></td>
+<td>spiral</td>
+<td>Incremented when an incoming connection gets closed.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_incoming_errored, count]</code></td>
+<td>spiral</td>
+<td>Incremented when an incoming connection gets closed with an error.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_outgoing_established, count]</code></td>
+<td>spiral</td>
+<td>Incremented when an outgoing connection is established.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_outgoing_closed, count]</code></td>
+<td>spiral</td>
+<td>Incremented when an outgoing connection gets closed.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_outgoing_errored, count]</code></td>
+<td>spiral</td>
+<td>Incremented when an outgoing connection gets closed with an error.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_mapping_fetches, time]</code></td>
+<td>histogram</td>
+<td>Time (<em>us</em>) spent on fetching an entry from the session table, cached or otherwise.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_mapping_fetches, count]</code></td>
+<td>spiral</td>
+<td>Number of fetches of session table entries, cached or otherwise.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_mapping_cache_misses, count]</code></td>
+<td>spiral</td>
+<td>Number of fetches of session table entries that hit the database.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_delivered_with_ttl_value]</code></td>
+<td>histogram</td>
+<td>A histogram of packets' TTL values recorded when the global routing layer decides to route them locally (but not due to TTL = 0).</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_stop_ttl_zero, count]</code></td>
+<td>spiral</td>
+<td>A number of packets that weren't processed by global routing due to TTL=0.</td>
+</tr>
+<tr>
+<td><code>[mod_global_distrib_bounce_queue, size]</code></td>
+<td>spiral</td>
+<td>A number of messages enqueued for rerouting (the value of this metric is individual per MongooseIM node!).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>You should only start <code>mod_global_distrib</code> by configuring it under <code>modules</code> option in <code>mongooseim.toml</code>. Do not add it as host-specific module via <code>host_config</code>.</li>
 <li>Do not use <code>mod_offline</code> on domains given via <code>global_host</code> or <code>local_host</code> options, as it will decrease messaging robustness; the users logged in other datacenters will not be registered as available by <code>mod_offline</code>, and so the messages will not be flushed.</li>
 </ul>
-<h2 id="options">Options</h2>
-<h3 id="modulesmod_global_distribglobal_host"><code>modules.mod_global_distrib.global_host</code></h3>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<h3 id="modulesmod_global_distribglobal_host"><code>modules.mod_global_distrib.global_host</code><a class="headerlink" href="#modulesmod_global_distribglobal_host" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> none, this option is mandatory</li>
@@ -4978,7 +5185,7 @@ In the example above, the message from <strong>U2</strong> would be temporarily 
 <p class="admonition-title">Note</p>
 <p>This needs to be one of the domains given in <code>general.hosts</code> option in <code>mongooseim.toml</code>.</p>
 </div>
-<h3 id="modulesmod_global_distriblocal_host"><code>modules.mod_global_distrib.local_host</code></h3>
+<h3 id="modulesmod_global_distriblocal_host"><code>modules.mod_global_distrib.local_host</code><a class="headerlink" href="#modulesmod_global_distriblocal_host" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> none, this option is mandatory</li>
@@ -4989,22 +5196,22 @@ In the example above, the message from <strong>U2</strong> would be temporarily 
 <p class="admonition-title">Note</p>
 <p>This needs to be one of the domains given in <code>general.hosts</code> option in <code>mongooseim.toml</code>.</p>
 </div>
-<h3 id="modulesmod_global_distribmessage_ttl"><code>modules.mod_global_distrib.message_ttl</code></h3>
+<h3 id="modulesmod_global_distribmessage_ttl"><code>modules.mod_global_distrib.message_ttl</code><a class="headerlink" href="#modulesmod_global_distribmessage_ttl" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> <code>4</code></li>
 <li><strong>Example:</strong> <code>message_ttl = 5</code></li>
 </ul>
 <p>Number of times a message can be rerouted between datacenters.</p>
-<h3 id="modulesmod_global_distribhosts_refresh_interval"><code>modules.mod_global_distrib.hosts_refresh_interval</code></h3>
+<h3 id="modulesmod_global_distribhosts_refresh_interval"><code>modules.mod_global_distrib.hosts_refresh_interval</code><a class="headerlink" href="#modulesmod_global_distribhosts_refresh_interval" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer, value given in milliseconds</li>
 <li><strong>Default:</strong> <code>3000</code></li>
 <li><strong>Example:</strong> <code>hosts_refresh_interval = 3000</code></li>
 </ul>
 <p>The interval telling how often Redis should be asked if new hosts appeared.</p>
-<h3 id="connections-options">Connections' options</h3>
-<h4 id="modulesmod_global_distribconnectionsendpoints"><code>modules.mod_global_distrib.connections.endpoints</code></h4>
+<h3 id="connections-options">Connections' options<a class="headerlink" href="#connections-options" title="Permanent link">&para;</a></h3>
+<h4 id="modulesmod_global_distribconnectionsendpoints"><code>modules.mod_global_distrib.connections.endpoints</code><a class="headerlink" href="#modulesmod_global_distribconnectionsendpoints" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> Array of TOML tables with the following keys: <code>host</code> and <code>port</code>, and the following values: {host = <code>string</code>, port = <code>non_negative_integer</code>}</li>
 <li><strong>Default:</strong> <code>[{host = "LocalHost", port = 5555}]</code></li>
@@ -5013,21 +5220,21 @@ In the example above, the message from <strong>U2</strong> would be temporarily 
 <p>A list of endpoints on which the server will listen for connections.
 <code>host</code> can be given as a hostname, in which case it will be resolved to an IP address on module start.
 The endpoint list will be shared with other datacenters via the replicated backend.</p>
-<h4 id="modulesmod_global_distribconnectionsadvertised_endpoints"><code>modules.mod_global_distrib.connections.advertised_endpoints</code></h4>
+<h4 id="modulesmod_global_distribconnectionsadvertised_endpoints"><code>modules.mod_global_distrib.connections.advertised_endpoints</code><a class="headerlink" href="#modulesmod_global_distribconnectionsadvertised_endpoints" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> Array of TOML tables with the following keys: <code>host</code> and <code>port</code>, and the following values: {host = <code>string</code>, port = <code>non_negative_integer</code>}</li>
 <li><strong>Default:</strong> not set, the value of <code>endpoints</code> is used (without resolution).</li>
 <li><strong>Example:</strong> <code>advertised_endpoints = [{host = "172.16.0.2", port = 5555}]</code></li>
 </ul>
 <p>A list of endpoints which will be advertised in Redis and therefore used to establish connection with this node by other nodes. The host may be either IP or domain, just like in case of endpoints. The difference is, the domain name won't be resolved but inserted directly to the mappings backend instead.</p>
-<h4 id="modulesmod_global_distribconnectionsconnections_per_endpoint"><code>modules.mod_global_distrib.connections.connections_per_endpoint</code></h4>
+<h4 id="modulesmod_global_distribconnectionsconnections_per_endpoint"><code>modules.mod_global_distrib.connections.connections_per_endpoint</code><a class="headerlink" href="#modulesmod_global_distribconnectionsconnections_per_endpoint" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> <code>1</code></li>
 <li><strong>Example:</strong> <code>connections_per_endpoint = 30</code></li>
 </ul>
 <p>Number of outgoing connections that will be established from the current node to each endpoint assigned to a remote domain.</p>
-<h4 id="modulesmod_global_distribconnectionsendpoint_refresh_interval"><code>modules.mod_global_distrib.connections.endpoint_refresh_interval</code></h4>
+<h4 id="modulesmod_global_distribconnectionsendpoint_refresh_interval"><code>modules.mod_global_distrib.connections.endpoint_refresh_interval</code><a class="headerlink" href="#modulesmod_global_distribconnectionsendpoint_refresh_interval" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> positive integer, value given in seconds</li>
 <li><strong>Default:</strong> <code>60</code></li>
@@ -5035,14 +5242,14 @@ The endpoint list will be shared with other datacenters via the replicated backe
 </ul>
 <p>An interval between remote endpoint list refresh (and connection rebalancing).
 A separate timer is maintained for every remote domain.</p>
-<h4 id="modulesmod_global_distribconnectionsendpoint_refresh_interval_when_empty"><code>modules.mod_global_distrib.connections.endpoint_refresh_interval_when_empty</code></h4>
+<h4 id="modulesmod_global_distribconnectionsendpoint_refresh_interval_when_empty"><code>modules.mod_global_distrib.connections.endpoint_refresh_interval_when_empty</code><a class="headerlink" href="#modulesmod_global_distribconnectionsendpoint_refresh_interval_when_empty" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> positive integer, value given in seconds</li>
 <li><strong>Default:</strong> <code>3</code></li>
 <li><strong>Example:</strong> <code>endpoint_refresh_interval_when_empty = 3</code></li>
 </ul>
 <p>Endpoint refresh interval, when array of endpoints is empty.</p>
-<h4 id="modulesmod_global_distribconnectionsdisabled_gc_interval"><code>modules.mod_global_distrib.connections.disabled_gc_interval</code></h4>
+<h4 id="modulesmod_global_distribconnectionsdisabled_gc_interval"><code>modules.mod_global_distrib.connections.disabled_gc_interval</code><a class="headerlink" href="#modulesmod_global_distribconnectionsdisabled_gc_interval" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> positive integer, value given in seconds</li>
 <li><strong>Default:</strong> <code>60</code></li>
@@ -5050,63 +5257,63 @@ A separate timer is maintained for every remote domain.</p>
 </ul>
 <p>An interval between disabled endpoints "garbage collection".
 It means that disabled endpoints are periodically verified and if Global Distribution detects that connections is no longer alive, the connection pool is closed completely.</p>
-<h3 id="tls-options">TLS options</h3>
+<h3 id="tls-options">TLS options<a class="headerlink" href="#tls-options" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>By default <code>tls</code> is disabled and all data will be sent via standard TCP connections.</p>
 </div>
 <p>To enable TLS support, the <code>cacertfile</code> and <code>certfile</code> options have to be present.
 These options will be passed to the <code>fast_tls</code> driver.</p>
-<h4 id="modulesmod_global_distribconnectionstlscertfile"><code>modules.mod_global_distrib.connections.tls.certfile</code></h4>
+<h4 id="modulesmod_global_distribconnectionstlscertfile"><code>modules.mod_global_distrib.connections.tls.certfile</code><a class="headerlink" href="#modulesmod_global_distribconnectionstlscertfile" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
 <li><strong>Default:</strong> none, this options is mandatory to enable TLS support</li>
 <li><strong>Example:</strong> <code>certfile = "priv/dc1.pem"</code></li>
 </ul>
-<h4 id="modulesmod_global_distribconnectionstlscacertfile"><code>modules.mod_global_distrib.connections.tls.cacertfile</code></h4>
+<h4 id="modulesmod_global_distribconnectionstlscacertfile"><code>modules.mod_global_distrib.connections.tls.cacertfile</code><a class="headerlink" href="#modulesmod_global_distribconnectionstlscacertfile" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
 <li><strong>Default:</strong> none, this options is mandatory to enable TLS support</li>
 <li><strong>Example:</strong> <code>cacertfile = "priv/ca.pem"</code></li>
 </ul>
-<h4 id="modulesmod_global_distribconnectionstlsciphers"><code>modules.mod_global_distrib.connections.tls.ciphers</code></h4>
+<h4 id="modulesmod_global_distribconnectionstlsciphers"><code>modules.mod_global_distrib.connections.tls.ciphers</code><a class="headerlink" href="#modulesmod_global_distribconnectionstlsciphers" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> <code>"TLSv1.2:TLSv1.3"</code></li>
 <li><strong>Example:</strong> <code>ciphers = "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384"</code></li>
 </ul>
 <p>Cipher suites to use with StartTLS or TLS. Please refer to the <a href="https://www.openssl.org/docs/man1.0.2/man1/ciphers.html">OpenSSL documentation</a> for the cipher string format.</p>
-<h4 id="modulesmod_global_distribconnectionstlsdhfile"><code>modules.mod_global_distrib.connections.tls.dhfile</code></h4>
+<h4 id="modulesmod_global_distribconnectionstlsdhfile"><code>modules.mod_global_distrib.connections.tls.dhfile</code><a class="headerlink" href="#modulesmod_global_distribconnectionstlsdhfile" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>dhfile = "dh.pem"</code></li>
 </ul>
-<h3 id="redis-session-storage-options">Redis session storage options</h3>
-<h4 id="modulesmod_global_distribredispool"><code>modules.mod_global_distrib.redis.pool</code></h4>
+<h3 id="redis-session-storage-options">Redis session storage options<a class="headerlink" href="#redis-session-storage-options" title="Permanent link">&para;</a></h3>
+<h4 id="modulesmod_global_distribredispool"><code>modules.mod_global_distrib.redis.pool</code><a class="headerlink" href="#modulesmod_global_distribredispool" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> <code>"global_distrib"</code></li>
 <li><strong>Example:</strong> <code>pool = "global_distrib"</code></li>
 </ul>
 <p>Name of the redis pool defined in <a href="../../configuration/outgoing-connections/">outgoing pools</a>.</p>
-<h4 id="modulesmod_global_distribredisexpire_after"><code>modules.mod_global_distrib.redis.expire_after</code></h4>
+<h4 id="modulesmod_global_distribredisexpire_after"><code>modules.mod_global_distrib.redis.expire_after</code><a class="headerlink" href="#modulesmod_global_distribredisexpire_after" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> <code>120</code></li>
 <li><strong>Example:</strong> <code>expire_after = 120</code></li>
 </ul>
 <p>Number of seconds after which a session entry written by this cluster will expire.</p>
-<h4 id="modulesmod_global_distribredisrefresh_after"><code>modules.mod_global_distrib.redis.refresh_after</code></h4>
+<h4 id="modulesmod_global_distribredisrefresh_after"><code>modules.mod_global_distrib.redis.refresh_after</code><a class="headerlink" href="#modulesmod_global_distribredisrefresh_after" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> <code>60</code></li>
 <li><strong>Example:</strong> <code>refresh_after = 60</code></li>
 </ul>
 <p>Number of seconds after which session's expiration timer will be refreshed.</p>
-<h3 id="database-cache-options">Database cache options</h3>
+<h3 id="database-cache-options">Database cache options<a class="headerlink" href="#database-cache-options" title="Permanent link">&para;</a></h3>
 <p>Options for caching database lookups, by default no options are passed.</p>
-<h4 id="modulesmod_global_distribcachecache_missed"><code>modules.mod_global_distrib.cache.cache_missed</code></h4>
+<h4 id="modulesmod_global_distribcachecache_missed"><code>modules.mod_global_distrib.cache.cache_missed</code><a class="headerlink" href="#modulesmod_global_distribcachecache_missed" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>true</code></li>
@@ -5115,29 +5322,29 @@ These options will be passed to the <code>fast_tls</code> driver.</p>
 <p>Determines whether an internal session cache should cache lookup failures.
 When <code>false</code>, only successful database lookups will result in the value being cached.
 Changing this option has great negative impact on performance.</p>
-<h4 id="modulesmod_global_distribcachedomain_lifetime_seconds"><code>modules.mod_global_distrib.cache.domain_lifetime_seconds</code></h4>
+<h4 id="modulesmod_global_distribcachedomain_lifetime_seconds"><code>modules.mod_global_distrib.cache.domain_lifetime_seconds</code><a class="headerlink" href="#modulesmod_global_distribcachedomain_lifetime_seconds" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer, value given in seconds</li>
 <li><strong>Default:</strong> <code>600</code></li>
 <li><strong>Example:</strong> <code>domain_lifetime_seconds = 600</code></li>
 </ul>
 <p>How long should subdomain mappings be cached (e.g. <code>muc.example.com -&gt; datacenter1.test</code>).</p>
-<h4 id="modulesmod_global_distribcachejid_lifetime_seconds"><code>modules.mod_global_distrib.cache.jid_lifetime_seconds</code></h4>
+<h4 id="modulesmod_global_distribcachejid_lifetime_seconds"><code>modules.mod_global_distrib.cache.jid_lifetime_seconds</code><a class="headerlink" href="#modulesmod_global_distribcachejid_lifetime_seconds" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer, value given in seconds</li>
 <li><strong>Default:</strong> <code>5</code></li>
 <li><strong>Example:</strong> <code>jid_lifetime_seconds = 5</code></li>
 </ul>
 <p>How long should full and bare JID mappings be cached (e.g. <code>user1@example.com/res1 -&gt; datacenter1.test</code>).</p>
-<h4 id="modulesmod_global_distribcachemax_jids"><code>modules.mod_global_distrib.cache.max_jids</code></h4>
+<h4 id="modulesmod_global_distribcachemax_jids"><code>modules.mod_global_distrib.cache.max_jids</code><a class="headerlink" href="#modulesmod_global_distribcachemax_jids" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> <code>10000</code></li>
 <li><strong>Example:</strong> <code>max_jids = 10000</code></li>
 </ul>
 <p>The maximum number of JID entries that can be stored in cache at any point in time.</p>
-<h3 id="message-bouncing-options">Message bouncing options</h3>
-<h4 id="modulesmod_global_distribbounceenabled"><code>modules.mod_global_distrib.bounce.enabled</code></h4>
+<h3 id="message-bouncing-options">Message bouncing options<a class="headerlink" href="#message-bouncing-options" title="Permanent link">&para;</a></h3>
+<h4 id="modulesmod_global_distribbounceenabled"><code>modules.mod_global_distrib.bounce.enabled</code><a class="headerlink" href="#modulesmod_global_distribbounceenabled" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> boolean</li>
 <li><strong>Default:</strong> <code>true</code></li>
@@ -5145,24 +5352,24 @@ Changing this option has great negative impact on performance.</p>
 </ul>
 <p>Whether message bouncing should be enabled or not.
 Setting this option to <code>false</code> makes other <code>bounce</code> options have no effect.</p>
-<h4 id="modulesmod_global_distribbounceresend_after_ms"><code>modules.mod_global_distrib.bounce.resend_after_ms</code></h4>
+<h4 id="modulesmod_global_distribbounceresend_after_ms"><code>modules.mod_global_distrib.bounce.resend_after_ms</code><a class="headerlink" href="#modulesmod_global_distribbounceresend_after_ms" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> <code>200</code></li>
 <li><strong>Example:</strong> <code>resend_after_ms = 200</code></li>
 </ul>
 <p>Time after which message will be resent in case of delivery error.</p>
-<h4 id="modulesmod_global_distribbouncemax_retries"><code>modules.mod_global_distrib.bounce.max_retries</code></h4>
+<h4 id="modulesmod_global_distribbouncemax_retries"><code>modules.mod_global_distrib.bounce.max_retries</code><a class="headerlink" href="#modulesmod_global_distribbouncemax_retries" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> <code>4</code></li>
 <li><strong>Example:</strong> <code>max_retries = 4</code></li>
 </ul>
 <p>Number of times message delivery will be retried in case of errors.</p>
-<h3 id="global-distribution-and-service-discovery">Global Distribution and Service Discovery</h3>
+<h3 id="global-distribution-and-service-discovery">Global Distribution and Service Discovery<a class="headerlink" href="#global-distribution-and-service-discovery" title="Permanent link">&para;</a></h3>
 <p><code>mod_global_distrib</code> extension relies on <a href="../mod_disco/"><code>mod_disco</code></a>'s option <code>users_can_see_hidden_services</code>, when provided. If it is not configured, the default value is <code>true</code>. <code>mod_disco</code> does not have to be enabled for <code>mod_global_distrib</code> to work, as this parameter is used only for processing Disco requests by Global Distribution.</p>
-<h2 id="example-configuration">Example configuration</h2>
-<h3 id="configuring-mod_global_distrib">Configuring mod_global_distrib</h3>
+<h2 id="example-configuration">Example configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="configuring-mod_global_distrib">Configuring mod_global_distrib<a class="headerlink" href="#configuring-mod_global_distrib" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -5187,7 +5394,7 @@ Setting this option to <code>false</code> makes other <code>bounce</code> option
 <span class="w">  </span><span class="n">bounce</span><span class="p">.</span><span class="n">max_retries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
 <span class="w">  </span><span class="n">redis</span><span class="p">.</span><span class="n">pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;global_distrib&quot;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="configuring-dynomite">Configuring Dynomite</h3>
+<h3 id="configuring-dynomite">Configuring Dynomite<a class="headerlink" href="#configuring-dynomite" title="Permanent link">&para;</a></h3>
 <p>For more information about Dynomite configuration, consult <a href="https://github.com/Netflix/dynomite/wiki">Dynomite wiki</a>.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -5277,6 +5484,46 @@ Setting this option to <code>false</code> makes other <code>bounce</code> option
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../mod_extdisco/" class="md-footer__link md-footer__link--prev" aria-label="Previous: mod_extdisco">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                mod_extdisco
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mod_http_upload/" class="md-footer__link md-footer__link--next" aria-label="Next: mod_http_upload">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                mod_http_upload
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -5327,7 +5574,7 @@ Setting this option to <code>false</code> makes other <code>bounce</code> option
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

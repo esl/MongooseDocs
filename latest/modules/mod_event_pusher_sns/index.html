@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4359,7 +4380,7 @@
 
   <h1>SNS backend</h1>
 
-<h2 id="module-description">Module Description</h2>
+<h2 id="module-description">Module Description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
 <p>This module is a backend of <a href="../mod_event_pusher/">mod_event_pusher</a> that enables support for the Amazon SNS service. Currently there are 3 available notifications:</p>
 <ul>
 <li><strong>user presence changed</strong> - Carries the user id (bare jid by default) and a boolean field corresponding to the current user online status.</li>
@@ -4368,92 +4389,92 @@
 </ul>
 <p>All these notifications are sent as a JSON string to Amazon SNS along with custom MessageAttributes (see http://docs.aws.amazon.com/sns/latest/api/API_Publish.html). MessageAttributes can be specified via a plugin module (more details in <em>Options</em> section).</p>
 <p>Full topics for notifications (ARN as defined in <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names</a>) are constructed as <code>arn:aws:sns:{region}:{account_id}:{topic}</code> where <code>{region}</code> and <code>{account_id}</code> are substituted with corresponding values from configuration options. <code>{topic}</code> is pulled from configuration option <code>presence_updates_topic</code>, <code>pm_messages_topic</code> or <code>muc_messages_topic</code> based on the notification type.</p>
-<h2 id="options">Options</h2>
-<h3 id="modulesmod_event_pushersnspresence_updates_topic"><code>modules.mod_event_pusher.sns.presence_updates_topic</code></h3>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<h3 id="modulesmod_event_pushersnspresence_updates_topic"><code>modules.mod_event_pusher.sns.presence_updates_topic</code><a class="headerlink" href="#modulesmod_event_pushersnspresence_updates_topic" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> no default is given</li>
 <li><strong>Example:</strong> <code>presence_updates_topic = "user_presence_updated"</code></li>
 </ul>
 <p>Defines Amazon SNS Topic for presence change notifications. Remove this option to disable these notifications.</p>
-<h3 id="modulesmod_event_pushersnspm_messages_topic"><code>modules.mod_event_pusher.sns.pm_messages_topic</code></h3>
+<h3 id="modulesmod_event_pushersnspm_messages_topic"><code>modules.mod_event_pusher.sns.pm_messages_topic</code><a class="headerlink" href="#modulesmod_event_pushersnspm_messages_topic" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> no default is given</li>
 <li><strong>Example:</strong> <code>pm_messages_topic = "user_message_sent"</code></li>
 </ul>
 <p>Defines Amazon SNS Topic for private message notifications. Remove this option to disable these notifications.</p>
-<h3 id="modulesmod_event_pushersnsmuc_messages_topic"><code>modules.mod_event_pusher.sns.muc_messages_topic</code></h3>
+<h3 id="modulesmod_event_pushersnsmuc_messages_topic"><code>modules.mod_event_pusher.sns.muc_messages_topic</code><a class="headerlink" href="#modulesmod_event_pushersnsmuc_messages_topic" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> no default is given</li>
 <li><strong>Example:</strong> <code>muc_messages_topic = "user_messagegroup_sent"</code></li>
 </ul>
 <p>Defines Amazon SNS Topic for group message notifications. Remove this option to disable these notifications.</p>
-<h3 id="modulesmod_event_pushersnsplugin_module"><code>modules.mod_event_pusher.sns.plugin_module</code></h3>
+<h3 id="modulesmod_event_pushersnsplugin_module"><code>modules.mod_event_pusher.sns.plugin_module</code><a class="headerlink" href="#modulesmod_event_pushersnsplugin_module" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> <code>"mod_event_pusher_sns_defaults"</code></li>
 <li><strong>Example:</strong> <code>plugin_module = "mod_event_pusher_sns_defaults"</code></li>
 </ul>
 <p>Sets a callback module used for creating user's GUID used in notifications (from user's JID) and for defining custom attributes attached to a published SNS message.</p>
-<h3 id="modulesmod_event_pushersnssns_host"><code>modules.mod_event_pusher.sns.sns_host</code></h3>
+<h3 id="modulesmod_event_pushersnssns_host"><code>modules.mod_event_pusher.sns.sns_host</code><a class="headerlink" href="#modulesmod_event_pushersnssns_host" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> none, this option is mandatory</li>
 <li><strong>Example:</strong> <code>sns_host = "sns.eu-west-1.amazonaws.com"</code></li>
 </ul>
 <p>URL to the Amazon SNS service. The URL may be in <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html">virtual host form</a>, and for AWS needs to point at a specific regional endpoint. The scheme, port and path specified in the URL will be used to publish notifications via HTTP POST method.</p>
-<h3 id="modulesmod_event_pushersnsregion"><code>modules.mod_event_pusher.sns.region</code></h3>
+<h3 id="modulesmod_event_pushersnsregion"><code>modules.mod_event_pusher.sns.region</code><a class="headerlink" href="#modulesmod_event_pushersnsregion" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> none, this option is mandatory</li>
 <li><strong>Example:</strong> <code>region = "eu-west-1"</code></li>
 </ul>
 <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints">AWS region</a> to use for requests.</p>
-<h3 id="modulesmod_event_pushersnsaccess_key_id"><code>modules.mod_event_pusher.sns.access_key_id</code></h3>
+<h3 id="modulesmod_event_pushersnsaccess_key_id"><code>modules.mod_event_pusher.sns.access_key_id</code><a class="headerlink" href="#modulesmod_event_pushersnsaccess_key_id" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> none, this option is mandatory</li>
 <li><strong>Example:</strong> <code>access_key_id = "AKIAIOSFODNN7EXAMPLE"</code></li>
 </ul>
 <p><a href="https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html?shortFooter=true#access-keys-and-secret-access-keys">ID of the access key</a> to use for authorization.</p>
-<h3 id="modulesmod_event_pushersnssecret_access_key"><code>modules.mod_event_pusher.sns.secret_access_key</code></h3>
+<h3 id="modulesmod_event_pushersnssecret_access_key"><code>modules.mod_event_pusher.sns.secret_access_key</code><a class="headerlink" href="#modulesmod_event_pushersnssecret_access_key" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> none, this option is mandatory</li>
 <li><strong>Example:</strong> <code>secret_access_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"</code></li>
 </ul>
 <p><a href="https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html?shortFooter=true#access-keys-and-secret-access-keys">Secret access key</a> to use for authorization.</p>
-<h3 id="modulesmod_event_pushersnsaccount_id"><code>modules.mod_event_pusher.sns.account_id</code></h3>
+<h3 id="modulesmod_event_pushersnsaccount_id"><code>modules.mod_event_pusher.sns.account_id</code><a class="headerlink" href="#modulesmod_event_pushersnsaccount_id" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Default:</strong> none, this option is mandatory</li>
 <li><strong>Example:</strong> <code>account_id = "123456789012"</code></li>
 </ul>
 <p>12 digit number as defined in <a href="http://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html">AWS Account Identifiers</a> to use for creating TopicArn for publishing notifications.</p>
-<h3 id="modulesmod_event_pushersnspool_size"><code>modules.mod_event_pusher.sns.pool_size</code></h3>
+<h3 id="modulesmod_event_pushersnspool_size"><code>modules.mod_event_pusher.sns.pool_size</code><a class="headerlink" href="#modulesmod_event_pushersnspool_size" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer</li>
 <li><strong>Default:</strong> <code>100</code></li>
 <li><strong>Example:</strong> <code>pool_size = 100</code></li>
 </ul>
 <p>Worker pool size for publishing notifications</p>
-<h3 id="modulesmod_event_pushersnspublish_retry_count"><code>modules.mod_event_pusher.sns.publish_retry_count</code></h3>
+<h3 id="modulesmod_event_pushersnspublish_retry_count"><code>modules.mod_event_pusher.sns.publish_retry_count</code><a class="headerlink" href="#modulesmod_event_pushersnspublish_retry_count" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> <code>2</code></li>
 <li><strong>Example:</strong> <code>publish_retry_count = 2</code></li>
 </ul>
 <p>Retry count in case of a publish error.</p>
-<h3 id="modulesmod_event_pushersnspublish_retry_time_ms"><code>modules.mod_event_pusher.sns.publish_retry_time_ms</code></h3>
+<h3 id="modulesmod_event_pushersnspublish_retry_time_ms"><code>modules.mod_event_pusher.sns.publish_retry_time_ms</code><a class="headerlink" href="#modulesmod_event_pushersnspublish_retry_time_ms" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> <code>50</code></li>
 <li><strong>Example:</strong> <code>publish_retry_time_ms = 50</code></li>
 </ul>
 <p>Base exponential backoff time (in ms) for publish errors.</p>
-<h2 id="example-configuration">Example configuration</h2>
+<h2 id="example-configuration">Example configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -4472,9 +4493,9 @@
 <span class="w">  </span><span class="n">secret_access_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&quot;</span>
 <span class="w">  </span><span class="n">account_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;123456789012&quot;</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="json-schema-examples">JSON Schema examples</h2>
+<h2 id="json-schema-examples">JSON Schema examples<a class="headerlink" href="#json-schema-examples" title="Permanent link">&para;</a></h2>
 <p>The different kinds of notifications deliver slightly different messages. The messages are delivered in a JSON format.</p>
-<h3 id="presence-updates">Presence updates</h3>
+<h3 id="presence-updates">Presence updates<a class="headerlink" href="#presence-updates" title="Permanent link">&para;</a></h3>
 <p>The JSON format for an online presence update notification is:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4493,7 +4514,7 @@
 <span class="w">    </span><span class="nt">&quot;present&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="sent-messages">Sent messages</h3>
+<h3 id="sent-messages">Sent messages<a class="headerlink" href="#sent-messages" title="Permanent link">&para;</a></h3>
 <p>The JSON format for a private message notification is:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4548,6 +4569,46 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../mod_event_pusher_rabbit/" class="md-footer__link md-footer__link--prev" aria-label="Previous: RabbitMQ backend">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                RabbitMQ backend
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mod_extdisco/" class="md-footer__link md-footer__link--next" aria-label="Next: mod_extdisco">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                mod_extdisco
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -4598,7 +4659,7 @@
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

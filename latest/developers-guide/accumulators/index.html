@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4271,7 +4292,7 @@
   
 
 
-<h1 id="accumulators">Accumulators</h1>
+<h1 id="accumulators">Accumulators<a class="headerlink" href="#accumulators" title="Permanent link">&para;</a></h1>
 <p>XMPP stanza processing starts in the <code>mongoose_c2s</code> module, which receives the stanza from a socket, or in <code>ejabberd_s2s_in</code> which receives stanzas from federated XMPP clusters.
 The stanza is processed and eventually it and/or other messages are sent out, either to the original sender, to another c2s process within the same MongooseIM installation, or to another XMPP server.</p>
 <p>At the beginning of the main processing chain an accumulator is created containing following set of keys:</p>
@@ -4303,9 +4324,9 @@ The stanza should always be packed into an accumulator and passed on, so that in
 <li>Debugging - it is now very easy to produce an exact track record of a stanza.</li>
 <li>Simplified implementation of modules which inherently involve multi-stage processing (e.g. <code>mod_amp</code>).</li>
 </ol>
-<h2 id="api">API</h2>
+<h2 id="api">API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h2>
 <p><code>mongoose_acc</code> module exports <code>t()</code> type which is the accumulator type.</p>
-<h3 id="newnew_acc_params"><code>new(new_acc_params())</code></h3>
+<h3 id="newnew_acc_params"><code>new(new_acc_params())</code><a class="headerlink" href="#newnew_acc_params" title="Permanent link">&para;</a></h3>
 <p>A constructor for accumulators. <code>new_acc_params()</code> is a map with following supported keys:</p>
 <ul>
 <li><code>location</code> - Should be a <code>{Module, Function, Line}</code> tuple (may be constructed with <code>?LOCATION</code> macro from <code>mongoose.hrl</code>). Its format is not enforced by the acc logic but Dialyzer will most probably complain about any other type.</li>
@@ -4318,7 +4339,7 @@ The stanza should always be packed into an accumulator and passed on, so that in
 <p>If <code>element</code> is provided, the sender and recipient JIDs are extracted, either from the element itself, or from <code>to_jid</code> and <code>from_jid</code> parameters.
 The call will fail with an exception if it's not possible.</p>
 <p>While allowed, stanza-less accumulators usage should be avoided.</p>
-<h3 id="getters-for-predefined-fields">Getters for predefined fields</h3>
+<h3 id="getters-for-predefined-fields">Getters for predefined fields<a class="headerlink" href="#getters-for-predefined-fields" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>ref(t())</code></li>
 <li><code>timestamp(t())</code></li>
@@ -4333,10 +4354,10 @@ The call will fail with an exception if it's not possible.</p>
 <li><code>stanza_type(t())</code> - Returns <code>type</code> value from <code>stanza</code> map.</li>
 <li><code>stanza_ref(t())</code> - Returns <code>ref</code> value from <code>stanza</code> map. This is not the same as <code>ref(t())</code>!</li>
 </ul>
-<h3 id="update_stanzastanza_params-t"><code>update_stanza(stanza_params(), t())</code></h3>
+<h3 id="update_stanzastanza_params-t"><code>update_stanza(stanza_params(), t())</code><a class="headerlink" href="#update_stanzastanza_params-t" title="Permanent link">&para;</a></h3>
 <p>Replaces the whole <code>stanza</code> field in the accumulator with params provided in <code>stanza_params()</code>, which is a map of 3 fields: <code>element</code>, <code>from_jid</code>, <code>to_jid</code>.
 The same rules apply as in the case of constructor (<code>new/1</code>) but this time <code>element</code> field is <strong>mandatory</strong>.</p>
-<h3 id="access-to-namespaced-fields">Access to namespaced fields</h3>
+<h3 id="access-to-namespaced-fields">Access to namespaced fields<a class="headerlink" href="#access-to-namespaced-fields" title="Permanent link">&para;</a></h3>
 <p>It is possible to store and retrieve any data in the accumulator, that is related to the processing.
 There is no scope protection, so every module may access all namespaces and keys inside them.</p>
 <ul>
@@ -4347,7 +4368,7 @@ There is no scope protection, so every module may access all namespaces and keys
 <li><code>get(Namespace :: any(), Key :: any(), Default :: any(), t())</code> - Returns a value of a specified field or <code>Default</code> if <code>NS:Key</code> is not found.</li>
 <li><code>delete(Namespace :: any(), Key :: any(), t())</code> - Removes a specified field, no matter if it is permanent or not.</li>
 </ul>
-<h3 id="stripping">Stripping</h3>
+<h3 id="stripping">Stripping<a class="headerlink" href="#stripping" title="Permanent link">&para;</a></h3>
 <p>Accumulator is used mostly to cache values for reuse within a c2s process; when it goes out to somewhere else, it is stripped of all unnecessary attributes except for the non-strippable ones, e.g.</p>
 <ul>
 <li><code>ref</code></li>
@@ -4372,14 +4393,14 @@ There are also many cached values which are not valid anymore when user changes 
 <li><code>host_type</code> - Host type associated with the new domain, if there is one.</li>
 <li><code>element</code>, <code>from_jid</code>, <code>to_jid</code> - The same rules apply as in <code>update_stanza/2</code>.</li>
 </ul>
-<h2 id="main-principles-of-an-accumulator-processing">Main principles of an accumulator processing</h2>
+<h2 id="main-principles-of-an-accumulator-processing">Main principles of an accumulator processing<a class="headerlink" href="#main-principles-of-an-accumulator-processing" title="Permanent link">&para;</a></h2>
 <ol>
 <li>An accumulator is created when a stanza enters the server.</li>
 <li>An XML stanza is never passed around as a pure <code>exml:element()</code>.</li>
 <li>An accumulator is stripped when it is passed to a different context (e.g. another c2s process).</li>
 <li>If a process produces more stanzas to be routed, they must reuse the original acc but with the stanza replaced with <code>update_stanza/2</code>.</li>
 </ol>
-<h2 id="hooks">Hooks</h2>
+<h2 id="hooks">Hooks<a class="headerlink" href="#hooks" title="Permanent link">&para;</a></h2>
 <p>Many of the MongooseIM functionalities are implemented in submodules which attach their handlers to hooks (this is covered in detail in <a href="../Hooks-and-handlers/">"Hooks and handlers"</a>).
 When it comes to the accumulators, the following rules apply:</p>
 <ul>
@@ -4388,7 +4409,7 @@ When it comes to the accumulators, the following rules apply:</p>
 </ul>
 <p>Most handlers have already been modified so that they accept an instance of <code>mongoose_acc:t()</code> as the first argument and return value by storing it inside it.
 How the accumulator is used within a module is up to the implementers of the module.</p>
-<h2 id="iqs-and-accumulators">IQs and accumulators</h2>
+<h2 id="iqs-and-accumulators">IQs and accumulators<a class="headerlink" href="#iqs-and-accumulators" title="Permanent link">&para;</a></h2>
 <p><code>mongoose_iq</code> module exposes a dedicated API for accessing IQ-related accumulator fields. These are:</p>
 <ul>
 <li><code>info(Acc)</code> - Returns a <code>#iq{}</code> record produced from a stanza stored in the accumulator. May be <code>invalid</code> or <code>not_iq</code> if the stanza is not a valid IQ.</li>
@@ -4396,14 +4417,14 @@ How the accumulator is used within a module is up to the implementers of the mod
 <li><code>command(Acc)</code> - Returns the name of a first subelement inside an IQ. May be <code>undefined</code>.</li>
 </ul>
 <p>These functions ensure that cached information matches the accumulator's stanza, so all of them return a tuple with a possibly updated acc as a second element.</p>
-<h2 id="sample-usage-actual-and-potential">Sample usage, actual and potential</h2>
-<h3 id="privacy-check">Privacy check</h3>
+<h2 id="sample-usage-actual-and-potential">Sample usage, actual and potential<a class="headerlink" href="#sample-usage-actual-and-potential" title="Permanent link">&para;</a></h2>
+<h3 id="privacy-check">Privacy check<a class="headerlink" href="#privacy-check" title="Permanent link">&para;</a></h3>
 <p>Stanzas are often checked against privacy lists.
 According to the current <code>mongoose_privacy:privacy_check_packet</code> implementation, the result is stored in an accumulator so if a check has to be repeated it is just one map read.</p>
-<h3 id="tracing">Tracing</h3>
+<h3 id="tracing">Tracing<a class="headerlink" href="#tracing" title="Permanent link">&para;</a></h3>
 <p><code>origin_pid</code> and <code>origin_location</code> fields are immutable for the lifespan of a single accumulator.
 There are many places in the server, where an accumulator may be created, so <code>origin_location</code> makes it much easier to find out what event has triggered the processing, and <code>origin_pid</code> identifies the process in which it happened.</p>
-<h3 id="performance-measurement">Performance measurement</h3>
+<h3 id="performance-measurement">Performance measurement<a class="headerlink" href="#performance-measurement" title="Permanent link">&para;</a></h3>
 <p>Given that each accumulator has a timestamp denoting its creation time, it is now very easy to implement a metric showing the stanza processing time, or even multiple metrics splitting it into stages.</p>
 
 
@@ -4436,6 +4457,46 @@ There are many places in the server, where an accumulator may be created, so <co
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../hooks_description/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Hooks description">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Hooks description
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Stanza-routing/" class="md-footer__link md-footer__link--next" aria-label="Next: Stanza routing">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Stanza routing
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4487,7 +4548,7 @@ There are many places in the server, where an accumulator may be created, so <co
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

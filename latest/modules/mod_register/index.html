@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4249,38 +4270,38 @@
 
   <h1>mod_register</h1>
 
-<h2 id="module-description">Module Description</h2>
+<h2 id="module-description">Module Description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
 <p>This module implements <a href="http://xmpp.org/extensions/xep-0077.html">XEP-0077: In-Band Registration</a>, allowing users to register accounts on the server via XMPP. Use of this module on Internet-facing servers is <strong>not recommended</strong>.</p>
-<h2 id="options">Options</h2>
-<h3 id="modulesmod_registeriqdisctype"><code>modules.mod_register.iqdisc.type</code></h3>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<h3 id="modulesmod_registeriqdisctype"><code>modules.mod_register.iqdisc.type</code><a class="headerlink" href="#modulesmod_registeriqdisctype" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"one_queue"</code>, <code>"no_queue"</code>, <code>"queues"</code>, <code>"parallel"</code></li>
 <li><strong>Default:</strong> <code>"one_queue"</code></li>
 </ul>
 <p>Strategy to handle incoming stanzas. For details, please refer to
 <a href="../../configuration/Modules/#iq-processing-policies">IQ processing policies</a>.</p>
-<h3 id="modulesmod_registeraccess"><code>modules.mod_register.access</code></h3>
+<h3 id="modulesmod_registeraccess"><code>modules.mod_register.access</code><a class="headerlink" href="#modulesmod_registeraccess" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, rule name or <code>"all"</code></li>
 <li><strong>Default:</strong> <code>"all"</code></li>
 <li><strong>Example:</strong> <code>access = "all"</code></li>
 </ul>
 <p>Defines which <a href="../../configuration/access/#registration">access rule</a> should be used for checking if a chosen username is allowed for registration.</p>
-<h3 id="modulesmod_registerwelcome_message"><code>modules.mod_register.welcome_message</code></h3>
+<h3 id="modulesmod_registerwelcome_message"><code>modules.mod_register.welcome_message</code><a class="headerlink" href="#modulesmod_registerwelcome_message" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> TOML table with the following keys: <code>"body"</code>, <code>"subject"</code> and string values.</li>
 <li><strong>Default:</strong> <code>{subject = "", body = ""}</code></li>
 <li><strong>Example:</strong> <code>welcome_message = {subject = "Hello from MIM!", body = "Message body."}</code></li>
 </ul>
 <p>Body and subject of a <code>&lt;message&gt;</code> stanza sent to new users. Only one of the fields (but non-empty) is mandatory for the message to be sent.</p>
-<h3 id="modulesmod_registerregistration_watchers"><code>modules.mod_register.registration_watchers</code></h3>
+<h3 id="modulesmod_registerregistration_watchers"><code>modules.mod_register.registration_watchers</code><a class="headerlink" href="#modulesmod_registerregistration_watchers" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> array of strings</li>
 <li><strong>Default:</strong> <code>[]</code></li>
 <li><strong>Example:</strong> <code>registration_watchers = ["JID1", "JID2"]</code></li>
 </ul>
 <p>List of JIDs, which should receive a <code>&lt;message&gt;</code> notification about every successful registration.</p>
-<h3 id="modulesmod_registerpassword_strength"><code>modules.mod_register.password_strength</code></h3>
+<h3 id="modulesmod_registerpassword_strength"><code>modules.mod_register.password_strength</code><a class="headerlink" href="#modulesmod_registerpassword_strength" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer</li>
 <li><strong>Default:</strong> <code>0</code></li>
@@ -4291,7 +4312,7 @@ Entropy is measured with <code>ejabberd_auth:entropy/1</code>.
 When set to <code>0</code>, the password strength is not checked.
 Recommended minimum is 32.
 The entropy calculation algorithm is described in a section below.</p>
-<h3 id="modulesmod_registerip_access"><code>modules.mod_register.ip_access</code></h3>
+<h3 id="modulesmod_registerip_access"><code>modules.mod_register.ip_access</code><a class="headerlink" href="#modulesmod_registerip_access" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>Syntax:</strong> Array of TOML tables with the following mandatory content:</p>
@@ -4310,7 +4331,7 @@ The entropy calculation algorithm is described in a section below.</p>
 </ul>
 <p>Access list for specified IPs or networks.
 Default value allows registration from every IP.</p>
-<h2 id="example-configuration">Example configuration</h2>
+<h2 id="example-configuration">Example configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
 <p>Allow registrations from localhost:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4333,30 +4354,9 @@ Default value allows registration from every IP.</p>
 <span class="w">    </span><span class="p">{</span><span class="n">address</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;10.20.0.0/16&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">policy</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;deny&quot;</span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div></p>
-<h2 id="metrics">Metrics</h2>
-<p>If you'd like to learn more about metrics in MongooseIM, please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">MongooseIM metrics</a> page.</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description (when it gets incremented)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>[Host, modRegisterCount]</code></td>
-<td>spiral</td>
-<td>A user registers via <code>mod_register</code> module.</td>
-</tr>
-<tr>
-<td><code>[Host, modUnregisterCount]</code></td>
-<td>spiral</td>
-<td>A user unregisters via <code>mod_register</code> module.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="entropy-calculation-algorithm">Entropy calculation algorithm</h2>
+<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
+<p>There are no metrics specific to this module.</p>
+<h2 id="entropy-calculation-algorithm">Entropy calculation algorithm<a class="headerlink" href="#entropy-calculation-algorithm" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>Entropy = length(Password) * log(X) / log(2)
 </code></pre></div></td></tr></table></div>
 <p>Where <code>X</code> is initially set to 0 and certain values are added if at least one of these bytes are present:</p>
@@ -4371,7 +4371,7 @@ Default value allows registration from every IP.</p>
 <p class="admonition-title">Note</p>
 <p>These values are added only once, no matter how many bytes of specific type are found.</p>
 </div>
-<h3 id="example-entropies">Example entropies</h3>
+<h3 id="example-entropies">Example entropies<a class="headerlink" href="#example-entropies" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>kotek</code>: ~23.5</li>
 <li><code>abc123</code>: ~30.8</li>
@@ -4411,6 +4411,46 @@ Default value allows registration from every IP.</p>
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../mod_push_service_mongoosepush/" class="md-footer__link md-footer__link--prev" aria-label="Previous: mod_push_service_mongoosepush">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                mod_push_service_mongoosepush
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mod_roster/" class="md-footer__link md-footer__link--next" aria-label="Next: mod_roster">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                mod_roster
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4462,7 +4502,7 @@ Default value allows registration from every IP.</p>
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

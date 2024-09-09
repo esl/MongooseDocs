@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4349,15 +4370,15 @@
   
 
 
-<h1 id="hooks-handlers-and-accumulators">Hooks, handlers and accumulators</h1>
+<h1 id="hooks-handlers-and-accumulators">Hooks, handlers and accumulators<a class="headerlink" href="#hooks-handlers-and-accumulators" title="Permanent link">&para;</a></h1>
 <p>The hooks and handlers mechanism is one of the core architectural features of MongooseIM.
 It allows for loose coupling between components of the system by calling only those which are available and configured to be used at runtime.</p>
 <p>It can be thought of as a simple eventing mechanism notifying about certain things happening in the server.
 That results in an extensible system with pluggable extra functionality.</p>
 <p>To focus our attention, we'll analyze <code>mod_offline</code> which is responsible for storing messages for delivery to users unavailable at the time of sending.
 <code>mod_offline</code> is an implementation of <a href="http://xmpp.org/extensions/xep-0203.html">XEP-0203: Delayed Delivery</a>.</p>
-<h2 id="running-a-hook">Running a hook</h2>
-<h3 id="basic-usage">Basic usage</h3>
+<h2 id="running-a-hook">Running a hook<a class="headerlink" href="#running-a-hook" title="Permanent link">&para;</a></h2>
+<h3 id="basic-usage">Basic usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h3>
 <p><code>ejabberd_sm</code> (ejabberd/MongooseIM session manager) is the module discovering whether the recipient of a message is available or not.
 That's where storing the message for later delivery takes place.
 It is possible, but not recommended, to save a message in an offline storage by calling <code>mod_offline</code> directly:</p>
@@ -4388,7 +4409,7 @@ Remember that a given hook can be invoked from many places in many modules.</p>
 <p>With the new <code>mongoose_c2s</code> implementation we introduced a new hook API module, <code>mongoose_c2s_hooks</code>.
 All such API modules are placed in the <code>src/hooks</code> directory.</p>
 </div>
-<h3 id="getting-results-from-handlers">Getting results from handlers</h3>
+<h3 id="getting-results-from-handlers">Getting results from handlers<a class="headerlink" href="#getting-results-from-handlers" title="Permanent link">&para;</a></h3>
 <p>Hook handlers are called by "folding".
 This means that each handler on a list is passed a set of arguments, and an initial value that it then modifies, returns and hands over to the next handler in line.
 This modified data that is processed by the series of handlers is called an accumulator - because it accumulates the results.</p>
@@ -4405,7 +4426,7 @@ This modified data that is processed by the series of handlers is called an accu
 <p>If you haven't encountered the term <em>fold</em> before, think of it as <em>reduce</em> (like <code>Array.reduce</code>) in Ruby-speak, roughly equivalent to the Reduce step in MapReduce, sometimes called <em>accumulate</em>, <em>aggregate</em> or <em>compress</em>.
 <a href="http://en.wikipedia.org/wiki/Fold_%28higher-order_function%29">See Wikipedia for more.</a></p>
 </div>
-<h3 id="using-accumulators">Using accumulators</h3>
+<h3 id="using-accumulators">Using accumulators<a class="headerlink" href="#using-accumulators" title="Permanent link">&para;</a></h3>
 <p>MongooseIM uses a dedicated data structure to accumulate data related to stanza processing (see <a href="../accumulators/">"Accumulators"</a>).
 It is instantiated with an incoming stanza, passed along throughout the processing chain, supplied to and returned from certain hook calls, and terminated when the stanza is leaving MongooseIM.
 There are some hooks which don't use this data structure.</p>
@@ -4420,25 +4441,25 @@ There are some hooks which don't use this data structure.</p>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">Acc1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">resend_offline_messages</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">Jid</span><span class="p">),</span>
 <span class="nv">Rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">mongoose_acc</span><span class="p">:</span><span class="nb">get</span><span class="p">(</span><span class="n">offline</span><span class="p">,</span><span class="w"> </span><span class="n">messages</span><span class="p">,</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="nv">Acc1</span><span class="p">),</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="error-handling-in-hooks">Error handling in hooks</h3>
+<h3 id="error-handling-in-hooks">Error handling in hooks<a class="headerlink" href="#error-handling-in-hooks" title="Permanent link">&para;</a></h3>
 <p>Hooks are meant to decouple modules; in other words, the caller signals that some event took place or that it intends to use a certain feature or a set of features, but how and if those features are implemented is beyond its interest.
 For that reason hooks don't use the "let it crash" approach. Instead, it is rather like "fire-and-forget", more similar in principle to the <code>Pid ! signal</code> way.</p>
 <p>In practical terms: if a handler throws an error, the hook machine logs a message and proceeds to the next handler with an unmodified accumulator.
 If there are no handlers registered for a given hook, the call simply has no effect.</p>
-<h3 id="sidenote-code-yet-to-be-written">Sidenote: Code yet to be written</h3>
+<h3 id="sidenote-code-yet-to-be-written">Sidenote: Code yet to be written<a class="headerlink" href="#sidenote-code-yet-to-be-written" title="Permanent link">&para;</a></h3>
 <p>Let's imagine, that when building a <a href="http://en.wikipedia.org/wiki/Minimum_viable_product">minimum viable product</a> we settle on using <code>mod_offline</code> for delayed delivery of messages to unavailable clients.
 However, while the product evolves (or the relevant client software catches up) we might drop <code>mod_offline</code> in favour of a more sophisticated solution like <a href="http://xmpp.org/extensions/xep-0313.html">Message Archive Management</a> which would require a different action to be taken at the same point.
 Thanks to loose coupling and <code>mongoose_hooks</code>, it's possible to turn off <code>mod_offline</code> and turn on <code>mod_mam</code> without changing
 a single line of code in <code>ejabberd_sm</code>.</p>
 <p>The only required change is to the configuration (apart from deploying the new module) which can even be performed at runtime - without restarting the server.</p>
-<h3 id="sidenote-multiple-domains">Sidenote: Multiple Domains</h3>
+<h3 id="sidenote-multiple-domains">Sidenote: Multiple Domains<a class="headerlink" href="#sidenote-multiple-domains" title="Permanent link">&para;</a></h3>
 <p>A MongooseIM cluster may serve more than one domain at the same time.
 E.g. it is quite common that services like Multi User Chat or Publish-Subscribe are available as subdomains of the main XMPP domain served by an installation.</p>
 <p>Moreover, each XMPP host is of a certain type, as defined in <a href="../../configuration/general/#generalhost_types"><code>general.host_types</code></a>, and hooks can be called either globally (across all hosts/host types) or for one host type.
 If you are not using <a href="../../user-guide/Features/#multi-tenancy-dynamic-domains">dynamic domains</a> or grouping hosts under host types, then each host has a corresponding host type implicitly, and the two terms are interchangeable.
 Whether a hook is called globally or per host type is depends on its purpose.
 It is decided when creating a hook and can be checked in the <code>mongoose_hooks</code> module for existing hooks.</p>
-<h2 id="registering-hook-handlers">Registering hook handlers</h2>
+<h2 id="registering-hook-handlers">Registering hook handlers<a class="headerlink" href="#registering-hook-handlers" title="Permanent link">&para;</a></h2>
 <p>In order to store a packet when <code>ejabberd_sm</code> runs <code>offline_message</code>, the relevant module must register a handler for this hook.
 To attain the runtime configurability the module should register the handlers when it's loaded and unregister them when
 it's unloaded.
@@ -4461,7 +4482,7 @@ It allows to specify additional handler config at the moment of its registering.
 The last argument, 50, is the sequence number of this handler in the handler chain.
 The higher the number, the later in the sequence the handler will be executed.
 It's reasonable to keep this number small (e.g. in the range 0-100), though there's no real limit other than the size of the integer type in the Erlang VM.</p>
-<h2 id="unregistering-handlers">Unregistering handlers</h2>
+<h2 id="unregistering-handlers">Unregistering handlers<a class="headerlink" href="#unregistering-handlers" title="Permanent link">&para;</a></h2>
 <p>Pluggability also requires the components to be unpluggable at will.
 For that purpose there's the option to unregister a hook handler.
 It's done in <code>mod_offline:stop/1</code> in a similar fashion to:</p>
@@ -4470,12 +4491,12 @@ It's done in <code>mod_offline:stop/1</code> in a similar fashion to:</p>
 <p>The function <code>hooks/1</code> function returns a list of hook tuples exactly the same as passed to <code>gen_hook:add_handlers/1</code>.
 Both these functions accept either a list of tuples.
 There also exist functions <code>gen_hook:add_handler/5</code> and <code>gen_hook:delete_handler/5</code> which register and unregister one handler at a time.</p>
-<h3 id="sidenote-metrics">Sidenote: Metrics</h3>
+<h3 id="sidenote-metrics">Sidenote: Metrics<a class="headerlink" href="#sidenote-metrics" title="Permanent link">&para;</a></h3>
 <p>Every time a hook is run, a corresponding metric of the same name in the same host is incremented by one.
 There are some exceptions though as some metrics were implemented before the generic hook metrics.
-List of hooks not updating generic metrics can be found in the <code>mongoose_metrics:filter_hook/1</code> function.
-Such skipped hooks update metrics are defined in the <code>mongoose_metrics_hooks</code> module.</p>
-<h2 id="writing-handlers">Writing handlers</h2>
+List of hooks not updating generic metrics can be found in the <code>mongoose_instrument_hooks:is_instrumented/1</code> function.
+Such skipped hooks update metrics are defined in the <code>mongoose_instrument_hooks</code> module.</p>
+<h2 id="writing-handlers">Writing handlers<a class="headerlink" href="#writing-handlers" title="Permanent link">&para;</a></h2>
 <p>The signature of a handler has to follow these rules:</p>
 <ul>
 <li>Accepts correct arguments:<ul>
@@ -4522,7 +4543,7 @@ If a handler returns <code>{stop, Acc}</code> but runs early in the handler chai
 That might or might not be intentional.
 It may be especially surprising in case of handlers from different modules registered for the same hook.
 Always ensure what handlers are registered for a given hook (<code>grep</code> is your friend) and that you understand their interdependencies.</p>
-<h2 id="hooks-list-and-how-to-extract-it">Hooks list and how to extract it</h2>
+<h2 id="hooks-list-and-how-to-extract-it">Hooks list and how to extract it<a class="headerlink" href="#hooks-list-and-how-to-extract-it" title="Permanent link">&para;</a></h2>
 <p>The following command should give you a list of all the hooks available in MongooseIM:</p>
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>awk<span class="w"> </span><span class="s1">&#39;/\-export\(\[/,/\]\)\./&#39;</span><span class="w"> </span>src/hooks/*.erl<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-oh<span class="w"> </span><span class="s2">&quot;\w*/&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/.$//&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort
 </code></pre></div></td></tr></table></div>
@@ -4537,25 +4558,25 @@ adhoc_sm_commands
 ...
 ...
 ...
-xmpp_stanza_dropped
+xmpp_send_element
 </code></pre></div></td></tr></table></div></p>
 <p>It just extracts the hooks exported from <code>mongoose_hooks</code> and other hook API modules.
 Refer to <code>grep</code>/<code>ack</code> to find where they're used.</p>
-<h2 id="creating-your-own-hooks">Creating your own hooks</h2>
+<h2 id="creating-your-own-hooks">Creating your own hooks<a class="headerlink" href="#creating-your-own-hooks" title="Permanent link">&para;</a></h2>
 <p>You should put the new hook inside <code>mongoose_hooks</code> with a correct type specification, which provides some security in places where the hooks are run.
 This is the way all hooks are called in MongooseIM (see the examples in the <a href="../hooks_description/">hooks description</a>).
 You could run <code>gen_hook:run_fold</code> directly, providing the hook name, but this is advised against.</p>
 <p>Of course, as long as no module registers handlers for a hook, calling it won't have any effects.</p>
 <p>This is similar to the case when a module registers handlers for some hook, but that hook is never run in the code.
 That won't have an effect either.</p>
-<h3 id="example-of-creating-a-new-hook">Example of creating a new hook</h3>
+<h3 id="example-of-creating-a-new-hook">Example of creating a new hook<a class="headerlink" href="#example-of-creating-a-new-hook" title="Permanent link">&para;</a></h3>
 <p>The following is an example of a module which both runs and registers a few handlers for a completely new hook.
 The handlers are run sequentially using disparate priorities and passing over an accumulator value.
 One of the handlers stops the handler execution chain prematurely by returning <code>{stop, NewVal}</code>.
 It's also possible to try out what happens when the same hook is run with different XMPP domains by passing an argument to <code>run_custom_hook/1</code> - we'll see that the handlers are registered for a particular domain only.</p>
 <p>At the end, you can see a printout of an accumulator with some debugging info.</p>
 <p>To cut the long story short:</p>
-<h4 id="1-add-the-hook-with-type-specification-to-mongoose_hooks">1. Add the hook with type specification to <code>mongoose_hooks</code></h4>
+<h4 id="1-add-the-hook-with-type-specification-to-mongoose_hooks">1. Add the hook with type specification to <code>mongoose_hooks</code><a class="headerlink" href="#1-add-the-hook-with-type-specification-to-mongoose_hooks" title="Permanent link">&para;</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -4575,7 +4596,7 @@ It's also possible to try out what happens when the same hook is run with differ
 <p>Don't forget about exporting the function:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">-</span><span class="ni">export</span><span class="p">([</span><span class="n">custom_new_hook</span><span class="o">/</span><span class="mi">3</span><span class="p">]).</span>
 </code></pre></div></td></tr></table></div></p>
-<h4 id="2-create-the-mod_hook_example-module">2. Create the <code>mod_hook_example</code> module</h4>
+<h4 id="2-create-the-mod_hook_example-module">2. Create the <code>mod_hook_example</code> module<a class="headerlink" href="#2-create-the-mod_hook_example-module" title="Permanent link">&para;</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -4710,9 +4731,9 @@ It's also possible to try out what happens when the same hook is run with differ
 <span class="p">(</span><span class="n">mongooseim</span><span class="p">@</span><span class="n">localhost</span><span class="p">)</span><span class="mi">4</span><span class="o">&gt;</span><span class="w"> </span><span class="nn">mongoose_logs</span><span class="p">:</span><span class="nf">set_module_loglevel</span><span class="p">(</span><span class="n">mod_hook_example</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">).</span>
 <span class="nf">ok</span>
 <span class="p">(</span><span class="n">mongooseim</span><span class="p">@</span><span class="n">localhost</span><span class="p">)</span><span class="mi">5</span><span class="o">&gt;</span><span class="w"> </span><span class="nn">mod_hook_example</span><span class="p">:</span><span class="nf">run_custom_hook</span><span class="p">(</span><span class="o">&lt;&lt;</span><span class="s">&quot;localhost&quot;</span><span class="o">&gt;&gt;</span><span class="p">).</span>
-<span class="k">when</span><span class="o">=</span><span class="mi">2022</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">15</span><span class="nv">T12</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">16</span><span class="p">.</span><span class="mi">109544</span><span class="o">+</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="w"> </span><span class="n">level</span><span class="o">=</span><span class="n">info</span><span class="w"> </span><span class="n">what</span><span class="o">=</span><span class="n">first_handler</span><span class="w"> </span><span class="n">pid</span><span class="o">=&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">1081</span><span class="p">.</span><span class="mi">0</span><span class="o">&gt;</span><span class="w"> </span><span class="n">at</span><span class="o">=</span><span class="nn">mod_hook_example</span><span class="p">:</span><span class="n">first_handler</span><span class="o">/</span><span class="mi">3</span><span class="p">:</span><span class="mi">41</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="mi">5</span><span class="w"> </span><span class="n">result</span><span class="o">=</span><span class="mi">7</span><span class="w"> </span><span class="n">extra</span><span class="o">=</span><span class="nv">ExtraParam</span><span class="w"> </span><span class="n">argument</span><span class="o">=</span><span class="mi">2</span><span class="w"> </span>
-<span class="k">when</span><span class="o">=</span><span class="mi">2022</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">15</span><span class="nv">T12</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">16</span><span class="p">.</span><span class="mi">109809</span><span class="o">+</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="w"> </span><span class="n">level</span><span class="o">=</span><span class="n">info</span><span class="w"> </span><span class="n">what</span><span class="o">=</span><span class="n">stopping_handler</span><span class="w"> </span><span class="n">pid</span><span class="o">=&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">1081</span><span class="p">.</span><span class="mi">0</span><span class="o">&gt;</span><span class="w"> </span><span class="n">at</span><span class="o">=</span><span class="nn">mod_hook_example</span><span class="p">:</span><span class="n">stopping_handler</span><span class="o">/</span><span class="mi">3</span><span class="p">:</span><span class="mi">48</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="mi">7</span><span class="w"> </span><span class="n">result</span><span class="o">=</span><span class="mi">9</span><span class="w"> </span><span class="n">argument</span><span class="o">=</span><span class="mi">2</span><span class="w"> </span>
-<span class="k">when</span><span class="o">=</span><span class="mi">2022</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">15</span><span class="nv">T12</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">16</span><span class="p">.</span><span class="mi">110028</span><span class="o">+</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="w"> </span><span class="n">level</span><span class="o">=</span><span class="n">info</span><span class="w"> </span><span class="n">what</span><span class="o">=</span><span class="n">hook_finished</span><span class="w"> </span><span class="n">pid</span><span class="o">=&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">1081</span><span class="p">.</span><span class="mi">0</span><span class="o">&gt;</span><span class="w"> </span><span class="n">at</span><span class="o">=</span><span class="nn">mod_hook_example</span><span class="p">:</span><span class="n">run_custom_hook</span><span class="o">/</span><span class="mi">1</span><span class="p">:</span><span class="mi">36</span><span class="w"> </span><span class="n">result_acc_</span><span class="p">{</span><span class="n">example</span><span class="p">,</span><span class="n">value</span><span class="p">}</span><span class="o">=</span><span class="mi">9</span><span class="w"> </span><span class="n">result_acc_timestamp</span><span class="o">=</span><span class="mi">1671107836109517</span><span class="w"> </span><span class="n">result_acc_stanza</span><span class="o">=</span><span class="n">undefined</span><span class="w"> </span><span class="n">result_acc_ref</span><span class="o">=</span><span class="err">#</span><span class="nv">Ref</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">4046106046</span><span class="p">.</span><span class="mi">1908670465</span><span class="p">.</span><span class="mi">111816</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result_acc_origin_pid</span><span class="o">=&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">1081</span><span class="p">.</span><span class="mi">0</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result_acc_origin_location_mfa</span><span class="o">=</span><span class="p">{</span><span class="n">mod_hook_example</span><span class="p">,</span><span class="n">run_custom_hook</span><span class="p">,</span><span class="mi">1</span><span class="p">}</span><span class="w"> </span><span class="n">result_acc_origin_location_line</span><span class="o">=</span><span class="mi">32</span><span class="w"> </span><span class="n">result_acc_origin_location_file</span><span class="o">=/</span><span class="nv">Users</span><span class="o">/</span><span class="n">paweldlugosz</span><span class="o">/</span><span class="nv">Dev</span><span class="o">/</span><span class="nv">Repos</span><span class="o">/</span><span class="nv">MongooseIM</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">mod_hook_example</span><span class="p">.</span><span class="n">erl</span><span class="w"> </span><span class="n">result_acc_non_strippable</span><span class="o">=</span><span class="w"> </span><span class="n">result_acc_mongoose_acc</span><span class="o">=</span><span class="n">true</span><span class="w"> </span><span class="n">result_acc_lserver</span><span class="o">=</span><span class="n">localhost</span><span class="w"> </span><span class="n">result_acc_host_type</span><span class="o">=</span><span class="n">localhost</span><span class="w"> </span><span class="n">result</span><span class="o">=</span><span class="mi">9</span><span class="w"> </span>
+<span class="k">when</span><span class="o">=</span><span class="mi">2022</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">15</span><span class="nv">T12</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">16</span><span class="p">.</span><span class="mi">109544</span><span class="o">+</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="w"> </span><span class="n">level</span><span class="o">=</span><span class="n">info</span><span class="w"> </span><span class="n">what</span><span class="o">=</span><span class="n">first_handler</span><span class="w"> </span><span class="n">pid</span><span class="o">=&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">1081</span><span class="p">.</span><span class="mi">0</span><span class="o">&gt;</span><span class="w"> </span><span class="n">at</span><span class="o">=</span><span class="nn">mod_hook_example</span><span class="p">:</span><span class="n">first_handler</span><span class="o">/</span><span class="mi">3</span><span class="p">:</span><span class="mi">41</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="mi">5</span><span class="w"> </span><span class="n">result</span><span class="o">=</span><span class="mi">7</span><span class="w"> </span><span class="n">extra</span><span class="o">=</span><span class="nv">ExtraParam</span><span class="w"> </span><span class="n">argument</span><span class="o">=</span><span class="mi">2</span>
+<span class="k">when</span><span class="o">=</span><span class="mi">2022</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">15</span><span class="nv">T12</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">16</span><span class="p">.</span><span class="mi">109809</span><span class="o">+</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="w"> </span><span class="n">level</span><span class="o">=</span><span class="n">info</span><span class="w"> </span><span class="n">what</span><span class="o">=</span><span class="n">stopping_handler</span><span class="w"> </span><span class="n">pid</span><span class="o">=&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">1081</span><span class="p">.</span><span class="mi">0</span><span class="o">&gt;</span><span class="w"> </span><span class="n">at</span><span class="o">=</span><span class="nn">mod_hook_example</span><span class="p">:</span><span class="n">stopping_handler</span><span class="o">/</span><span class="mi">3</span><span class="p">:</span><span class="mi">48</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="mi">7</span><span class="w"> </span><span class="n">result</span><span class="o">=</span><span class="mi">9</span><span class="w"> </span><span class="n">argument</span><span class="o">=</span><span class="mi">2</span>
+<span class="k">when</span><span class="o">=</span><span class="mi">2022</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">15</span><span class="nv">T12</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">16</span><span class="p">.</span><span class="mi">110028</span><span class="o">+</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="w"> </span><span class="n">level</span><span class="o">=</span><span class="n">info</span><span class="w"> </span><span class="n">what</span><span class="o">=</span><span class="n">hook_finished</span><span class="w"> </span><span class="n">pid</span><span class="o">=&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">1081</span><span class="p">.</span><span class="mi">0</span><span class="o">&gt;</span><span class="w"> </span><span class="n">at</span><span class="o">=</span><span class="nn">mod_hook_example</span><span class="p">:</span><span class="n">run_custom_hook</span><span class="o">/</span><span class="mi">1</span><span class="p">:</span><span class="mi">36</span><span class="w"> </span><span class="n">result_acc_</span><span class="p">{</span><span class="n">example</span><span class="p">,</span><span class="n">value</span><span class="p">}</span><span class="o">=</span><span class="mi">9</span><span class="w"> </span><span class="n">result_acc_timestamp</span><span class="o">=</span><span class="mi">1671107836109517</span><span class="w"> </span><span class="n">result_acc_stanza</span><span class="o">=</span><span class="n">undefined</span><span class="w"> </span><span class="n">result_acc_ref</span><span class="o">=</span><span class="err">#</span><span class="nv">Ref</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">4046106046</span><span class="p">.</span><span class="mi">1908670465</span><span class="p">.</span><span class="mi">111816</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result_acc_origin_pid</span><span class="o">=&lt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">1081</span><span class="p">.</span><span class="mi">0</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result_acc_origin_location_mfa</span><span class="o">=</span><span class="p">{</span><span class="n">mod_hook_example</span><span class="p">,</span><span class="n">run_custom_hook</span><span class="p">,</span><span class="mi">1</span><span class="p">}</span><span class="w"> </span><span class="n">result_acc_origin_location_line</span><span class="o">=</span><span class="mi">32</span><span class="w"> </span><span class="n">result_acc_origin_location_file</span><span class="o">=/</span><span class="nv">Users</span><span class="o">/</span><span class="n">paweldlugosz</span><span class="o">/</span><span class="nv">Dev</span><span class="o">/</span><span class="nv">Repos</span><span class="o">/</span><span class="nv">MongooseIM</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">mod_hook_example</span><span class="p">.</span><span class="n">erl</span><span class="w"> </span><span class="n">result_acc_non_strippable</span><span class="o">=</span><span class="w"> </span><span class="n">result_acc_mongoose_acc</span><span class="o">=</span><span class="n">true</span><span class="w"> </span><span class="n">result_acc_lserver</span><span class="o">=</span><span class="n">localhost</span><span class="w"> </span><span class="n">result_acc_host_type</span><span class="o">=</span><span class="n">localhost</span><span class="w"> </span><span class="n">result</span><span class="o">=</span><span class="mi">9</span>
 <span class="n">ok</span>
 </code></pre></div></td></tr></table></div>
 
@@ -4746,6 +4767,46 @@ It's also possible to try out what happens when the same hook is run with differ
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../logging/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Logging">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Logging
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../hooks_description/" class="md-footer__link md-footer__link--next" aria-label="Next: Hooks description">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Hooks description
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4797,7 +4858,7 @@ It's also possible to try out what happens when the same hook is run with differ
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

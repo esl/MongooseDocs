@@ -1806,6 +1806,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -5191,13 +5212,13 @@
 
   <h1>MUC light</h1>
 
-<h2 id="1-introduction">1. Introduction</h2>
+<h2 id="1-introduction">1. Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
 <p>Classic Multi-User chat, as described in XEP-0045, adds an IRC-like functionality to XMPP.
 It distinguishes between the affiliation list and the occupant list, where the latter is based on presences routed to the room from the client resource.
 While perfectly sufficient for desktop applications and relatively stable network connection, it does not exactly meet the challenges the mobile world it is facing.
 Modern mobile applications do not rely on presence information, as it can frequently change. The expected user experience not only differs from the IRC model, but also uses only a small subset of XEP-0045 features.
 The service described in this specification attempts to provide a complete solution for all common use cases of mobile group chats.</p>
-<h2 id="2-requirements">2. Requirements</h2>
+<h2 id="2-requirements">2. Requirements<a class="headerlink" href="#2-requirements" title="Permanent link">&para;</a></h2>
 <p>Here are some high-level features required from a new variant of MUC</p>
 <ol>
 <li>The service allows any user to create a room for group communication.</li>
@@ -5218,8 +5239,8 @@ The service described in this specification attempts to provide a complete solut
 <li>All occupants can get the full room configuration at any time.</li>
 <li>Room history is available only in Message Archive Management.</li>
 </ol>
-<h2 id="3-entity-use-cases">3. Entity Use Cases</h2>
-<h3 id="31-discovering-a-muc-light-service">3.1. Discovering a MUC Light Service</h3>
+<h2 id="3-entity-use-cases">3. Entity Use Cases<a class="headerlink" href="#3-entity-use-cases" title="Permanent link">&para;</a></h2>
+<h3 id="31-discovering-a-muc-light-service">3.1. Discovering a MUC Light Service<a class="headerlink" href="#31-discovering-a-muc-light-service" title="Permanent link">&para;</a></h3>
 <p>An entity often discovers a MUC service by sending a Service Discovery items ("disco#items") request to its own server.</p>
 <p><strong>Entity Queries the Server for Associated Services</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -5252,7 +5273,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="32-discovering-the-features-supported-by-a-muc-light-service">3.2. Discovering the Features Supported by a MUC Light Service</h3>
+<h3 id="32-discovering-the-features-supported-by-a-muc-light-service">3.2. Discovering the Features Supported by a MUC Light Service<a class="headerlink" href="#32-discovering-the-features-supported-by-a-muc-light-service" title="Permanent link">&para;</a></h3>
 <p>An entity may wish to discover if a service implements the Multi-User Chat protocol; in order to do so, it sends a service discovery information ("disco#info") query to the MUC service's JID.</p>
 <p><strong>Entity Queries Chat Service for MUC Light Support via Disco</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -5285,7 +5306,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="33-discovering-occupied-rooms">3.3. Discovering Occupied Rooms</h3>
+<h3 id="33-discovering-occupied-rooms">3.3. Discovering Occupied Rooms<a class="headerlink" href="#33-discovering-occupied-rooms" title="Permanent link">&para;</a></h3>
 <p>The service discovery items ("disco#items") protocol enables an entity to query a service for a list of associated items, which in the case of a chat service would consist of the specific chat rooms the entity occupies.</p>
 <p><strong>Entity Queries Chat Service for Rooms</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -5406,8 +5427,8 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="4-occupant-use-cases">4. Occupant Use Cases</h2>
-<h3 id="41-sending-a-message-to-a-room">4.1. Sending a message to a room</h3>
+<h2 id="4-occupant-use-cases">4. Occupant Use Cases<a class="headerlink" href="#4-occupant-use-cases" title="Permanent link">&para;</a></h2>
+<h3 id="41-sending-a-message-to-a-room">4.1. Sending a message to a room<a class="headerlink" href="#41-sending-a-message-to-a-room" title="Permanent link">&para;</a></h3>
 <p>Every occupant in the room MAY broadcast messages to other occupants. In order to do so, the client MUST send a groupchat message to the room bare JID.</p>
 <p>The room automatically assumes that occupants' nicks are equal to their bare JIDs. MUC light is designed for applications where it is not important to hide behind nicknames. On the contrary - it is up to the client to replace pure JIDs with user-friendly names like phone numbers or full names if necessary.</p>
 <p>The room MUST route all messages of the 'groupchat' type.</p>
@@ -5456,7 +5477,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="nt">&lt;body&gt;</span>Harpier<span class="w"> </span>cries:<span class="w"> </span>&#39;tis<span class="w"> </span>time,<span class="w"> </span>&#39;tis<span class="w"> </span>time.<span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/message&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="42-changing-a-room-subject">4.2. Changing a room subject</h3>
+<h3 id="42-changing-a-room-subject">4.2. Changing a room subject<a class="headerlink" href="#42-changing-a-room-subject" title="Permanent link">&para;</a></h3>
 <p>The service MAY allow room occupants to set the room subject by changing the "subject" configuration field. A standard configuration stanza is used in this case. Subject change is announced like an ordinary configuration change.</p>
 <p><strong>Client sends a message to the room</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -5527,7 +5548,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="na">from=</span><span class="s">&#39;coven@muclight.shakespeare.lit&#39;</span>
 <span class="w">    </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="43-requesting-room-information">4.3. Requesting room information</h3>
+<h3 id="43-requesting-room-information">4.3. Requesting room information<a class="headerlink" href="#43-requesting-room-information" title="Permanent link">&para;</a></h3>
 <p>Room occupants may request room information (configuration and/or occupants list) by an information version. It is up to the service to define the version string, the only requirement for it, is to be unique per room. Please note there are no separate versions for configuration and occupant list alone.</p>
 <p>If the server side version does not match the one provided by the client (or if the client does not provide one, i.e. the 'version' element is empty), the service MUST respond with a current version string and full configuration and/or occupant list.</p>
 <p>If the version strings match, server MUST reply with an empty result.</p>
@@ -5557,7 +5578,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span>
 <span class="w">    </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="431-getting-the-room-configuration">4.3.1. Getting the room configuration</h4>
+<h4 id="431-getting-the-room-configuration">4.3.1. Getting the room configuration<a class="headerlink" href="#431-getting-the-room-configuration" title="Permanent link">&para;</a></h4>
 <p><strong>Client gets configuration from the server</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -5593,7 +5614,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="432-requesting-a-user-list">4.3.2. Requesting a user list</h4>
+<h4 id="432-requesting-a-user-list">4.3.2. Requesting a user list<a class="headerlink" href="#432-requesting-a-user-list" title="Permanent link">&para;</a></h4>
 <p><strong>Client requests a user list</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -5633,7 +5654,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="433-requesting-full-room-information">4.3.3. Requesting full room information</h4>
+<h4 id="433-requesting-full-room-information">4.3.3. Requesting full room information<a class="headerlink" href="#433-requesting-full-room-information" title="Permanent link">&para;</a></h4>
 <p>Room occupants may request both lists (configuration + occupants) with a single request.</p>
 <p><strong>Client requests room information</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -5684,7 +5705,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="44-leaving-the-room">4.4. Leaving the room</h3>
+<h3 id="44-leaving-the-room">4.4. Leaving the room<a class="headerlink" href="#44-leaving-the-room" title="Permanent link">&para;</a></h3>
 <p>Every occupant is allowed to leave the room at any time. It is done by modifying their own affiliation.</p>
 <p><strong>Occupant leaves the room</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -5773,7 +5794,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="na">from=</span><span class="s">&#39;coven@muclight.shakespeare.lit&#39;</span>
 <span class="w">    </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="45-blocking-functionality">4.5. Blocking functionality</h3>
+<h3 id="45-blocking-functionality">4.5. Blocking functionality<a class="headerlink" href="#45-blocking-functionality" title="Permanent link">&para;</a></h3>
 <p>A user MAY choose to automatically deny being added to the room. All stanzas must be directed to MUC Light service. User MAY send more than one item in a single request and mix both 'user' and 'room' elements.</p>
 <p>If the occupant tries to add another user to the room, and this user has set a blocking policy, the server MUST ignore the attempt. No error is returned, this user is simply skipped when processing affiliation change query.</p>
 <p><strong>Service denies adding blocking user</strong></p>
@@ -5839,7 +5860,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="na">from=</span><span class="s">&#39;coven@muclight.shakespeare.lit&#39;</span>
 <span class="w">    </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="451-requesting-a-blocking-list">4.5.1. Requesting a blocking list</h4>
+<h4 id="451-requesting-a-blocking-list">4.5.1. Requesting a blocking list<a class="headerlink" href="#451-requesting-a-blocking-list" title="Permanent link">&para;</a></h4>
 <p>In order to get the current blocking list in the MUC Light service, the client sends an empty IQ get query with a proper namespace.</p>
 <p>The list includes only items with a 'deny' action, since the 'allow' behaviour is default for MUC Light and is only used for the list modification.</p>
 <p><strong>User retrieves a blocking list</strong></p>
@@ -5875,7 +5896,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="452-blocking-a-room">4.5.2. Blocking a room</h4>
+<h4 id="452-blocking-a-room">4.5.2. Blocking a room<a class="headerlink" href="#452-blocking-a-room" title="Permanent link">&para;</a></h4>
 <p>In order to block a room, a query must contain at least one 'room' item with a 'deny' action and a room bare JID in the content.</p>
 <p><strong>User blocks a room</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -5904,7 +5925,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span>
 <span class="w">    </span><span class="na">from=</span><span class="s">&#39;muclight.shakespeare.lit&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="453-blocking-a-user">4.5.3. Blocking a user</h4>
+<h4 id="453-blocking-a-user">4.5.3. Blocking a user<a class="headerlink" href="#453-blocking-a-user" title="Permanent link">&para;</a></h4>
 <p>In order to block a user, a query must contain at least one 'user' item with a 'deny' action and a user bare JID in the content.</p>
 <p><strong>User blocks another user</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -5933,7 +5954,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span>
 <span class="w">    </span><span class="na">from=</span><span class="s">&#39;muclight.shakespeare.lit&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="454-unblocking">4.5.4. Unblocking</h4>
+<h4 id="454-unblocking">4.5.4. Unblocking<a class="headerlink" href="#454-unblocking" title="Permanent link">&para;</a></h4>
 <p>In order to cancel a blocking, a query must contain at least one 'room' or 'user' item with an 'allow' action and an appropriate bare JID in the content.</p>
 <p>Unblocking a JID that is not blocked does not trigger any error. The server MUST return an empty IQ result in such case.</p>
 <p><strong>User cancels blocking</strong></p>
@@ -5963,8 +5984,8 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span>
 <span class="w">    </span><span class="na">from=</span><span class="s">&#39;muclight.shakespeare.lit&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="5-owner-use-cases">5. Owner Use Cases</h2>
-<h3 id="51-creating-a-new-room">5.1. Creating a new room</h3>
+<h2 id="5-owner-use-cases">5. Owner Use Cases<a class="headerlink" href="#5-owner-use-cases" title="Permanent link">&para;</a></h2>
+<h3 id="51-creating-a-new-room">5.1. Creating a new room<a class="headerlink" href="#51-creating-a-new-room" title="Permanent link">&para;</a></h3>
 <p>A room is created by submitting a dedicated stanza. The client application should pick a random room node name, since a human-readable room name is in configuration.</p>
 <p>For rules that apply to the configuration options, please see "Setting room configuration" chapter.</p>
 <p>The client MAY include initial configuration and occupant list (the list MUST NOT include the creator). The server MAY allow sending an incomplete configuration form. In such case the server MUST use the default values for missing fields. The server MAY enforce a minimal occupant list length.</p>
@@ -6074,7 +6095,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="na">from=</span><span class="s">&#39;coven@muclight.shakespeare.lit&#39;</span>
 <span class="w">    </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="511-requesting-a-new-room-with-a-unique-name">5.1.1. Requesting a new room with a unique name</h4>
+<h4 id="511-requesting-a-new-room-with-a-unique-name">5.1.1. Requesting a new room with a unique name<a class="headerlink" href="#511-requesting-a-new-room-with-a-unique-name" title="Permanent link">&para;</a></h4>
 <p>If a client would like to avoid a room JID conflict, it MAY request creating a new room with a server-side generated name, that is verfied to be unique. In order to do so, the client MUST send a creation request to service JID, not room bare JID. The IQ result will originate from the new room bare JID</p>
 <p>The messages with affiliation change notifications MUST have the same ID as IQ set and result.</p>
 <p><strong>Client requests room creation</strong></p>
@@ -6126,7 +6147,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="na">from=</span><span class="s">&#39;muclight.shakespeare.lit&#39;</span>
 <span class="w">    </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="512-room-already-exists">5.1.2. Room already exists</h4>
+<h4 id="512-room-already-exists">5.1.2. Room already exists<a class="headerlink" href="#512-room-already-exists" title="Permanent link">&para;</a></h4>
 <p>If the chosen room name already exists, the service MUST return a 'conflict' error.</p>
 <p><strong>Client requests room creation with existing name</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -6165,7 +6186,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="nt">&lt;/error&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="52-destroying-a-room">5.2. Destroying a room</h3>
+<h3 id="52-destroying-a-room">5.2. Destroying a room<a class="headerlink" href="#52-destroying-a-room" title="Permanent link">&para;</a></h3>
 <p>A room is automatically destroyed when its occupant list becomes empty or the room owner explicitly sends an IQ with a room destroy request.</p>
 <p>Before sending an IQ result, every occupant is notified that its affiliation has changed to 'none'. These notifications include an <code>&lt;x/&gt;</code> element qualified with a "urn:xmpp:muclight:0#destroy" namespace.</p>
 <p>Only the room owner is allowed to destroy it.</p>
@@ -6251,7 +6272,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="na">from=</span><span class="s">&#39;coven@muclight.shakespeare.lit&#39;</span>
 <span class="w">    </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="53-setting-room-configuration">5.3. Setting room configuration</h3>
+<h3 id="53-setting-room-configuration">5.3. Setting room configuration<a class="headerlink" href="#53-setting-room-configuration" title="Permanent link">&para;</a></h3>
 <p>Only room owners can modify the room configuration but the service MAY allow members to change it too.</p>
 <p>All room occupants MUST be notified about a configuration change and both the new and old room version string (<code>&lt;version /&gt;</code> and <code>&lt;prev-version /&gt;</code> respectively).</p>
 <p>"version" and "prev-version" configuration field names are NOT ALLOWED - they are reserved for room versioning.</p>
@@ -6327,7 +6348,7 @@ The service described in this specification attempts to provide a complete solut
 <span class="w">    </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
 <p>The server SHOULD accept incomplete (i.e. delta) configuration forms. In such case, values of the missing fields SHOULD be preserved.</p>
-<h3 id="54-changing-the-occupant-list">5.4. Changing the occupant list</h3>
+<h3 id="54-changing-the-occupant-list">5.4. Changing the occupant list<a class="headerlink" href="#54-changing-the-occupant-list" title="Permanent link">&para;</a></h3>
 <p>The occupant list is modified by a direct affiliation change. Following rules apply:</p>
 <ol>
 <li>There are only 3 affiliations.<ul>
@@ -6490,8 +6511,8 @@ Since <code>hag77</code> has been promoted to a new owner, <code>crone1</code> i
 <span class="w">    </span><span class="na">from=</span><span class="s">&#39;coven@muclight.shakespeare.lit&#39;</span>
 <span class="w">    </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div></p>
-<h2 id="6-interactions-with-rfcs-and-other-xeps">6. Interactions with RFCs and other XEPs</h2>
-<h3 id="61-user-rosters">6.1. User rosters</h3>
+<h2 id="6-interactions-with-rfcs-and-other-xeps">6. Interactions with RFCs and other XEPs<a class="headerlink" href="#6-interactions-with-rfcs-and-other-xeps" title="Permanent link">&para;</a></h2>
+<h3 id="61-user-rosters">6.1. User rosters<a class="headerlink" href="#61-user-rosters" title="Permanent link">&para;</a></h3>
 <p>The service MAY add user's rooms to its roster. It allows the client to skip the separate Disco request to the service.
 Roster items with rooms MUST belong to the group "urn:xmpp:muclight:0" (MUC Light namespace) and include the <code>&lt;version/&gt;</code> element.
 Their subscription type MUST be 'to'.</p>
@@ -6522,7 +6543,7 @@ Their subscription type MUST be 'to'.</p>
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="62-xep-0313-message-archive-management">6.2. XEP-0313 Message Archive Management</h3>
+<h3 id="62-xep-0313-message-archive-management">6.2. XEP-0313 Message Archive Management<a class="headerlink" href="#62-xep-0313-message-archive-management" title="Permanent link">&para;</a></h3>
 <p>This section defines the rules for archiving MUC Light events and messages.
 Stanzas described in the subsections below MUST be archived by the server.
 The stanzas not included here MUST NOT be archived.</p>
@@ -6533,7 +6554,7 @@ the "from" attribute MUST consist of a room full JID with a sender bare JID in t
 As for room notification, e.g. create event, "from" MUST be equal to room bare JID.</p>
 <p>Examples below use MAM v0.4 protocol.
 The archive can be fetched only from a specific room, the client MUST NOT query MUC Light service directly.</p>
-<h4 id="621-groupchat-message-from-occupant">6.2.1. Groupchat message from occupant</h4>
+<h4 id="621-groupchat-message-from-occupant">6.2.1. Groupchat message from occupant<a class="headerlink" href="#621-groupchat-message-from-occupant" title="Permanent link">&para;</a></h4>
 <p>Message from a user MUST be archived with all child elements.</p>
 <p><strong>Occupant queries MAM and receives regular groupchat message</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -6568,7 +6589,7 @@ The archive can be fetched only from a specific room, the client MUST NOT query 
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;mamget1&#39;</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;coven@muclight.shakespeare.lit&#39;</span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="622-affiliation-change">6.2.2. Affiliation change</h4>
+<h4 id="622-affiliation-change">6.2.2. Affiliation change<a class="headerlink" href="#622-affiliation-change" title="Permanent link">&para;</a></h4>
 <p>Every archived affiliation change notification MUST include the <code>&lt;version/&gt;</code> element and MUST NOT contain the <code>&lt;prev-version/&gt;</code> element.</p>
 <p><strong>Occupant queries MAM and receives an affiliation change notification</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -6609,10 +6630,10 @@ The archive can be fetched only from a specific room, the client MUST NOT query 
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;mamget12&#39;</span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="623-room-creation">6.2.3. Room creation</h4>
+<h4 id="623-room-creation">6.2.3. Room creation<a class="headerlink" href="#623-room-creation" title="Permanent link">&para;</a></h4>
 <p>Room creation is archived as an affiliation change that includes ALL initial occupants (including the room creator).</p>
-<h2 id="7-general-error-cases">7. General Error Cases</h2>
-<h3 id="71-client-sends-an-unauthorized-stanza-to-a-room">7.1. Client sends an unauthorized stanza to a room</h3>
+<h2 id="7-general-error-cases">7. General Error Cases<a class="headerlink" href="#7-general-error-cases" title="Permanent link">&para;</a></h2>
+<h3 id="71-client-sends-an-unauthorized-stanza-to-a-room">7.1. Client sends an unauthorized stanza to a room<a class="headerlink" href="#71-client-sends-an-unauthorized-stanza-to-a-room" title="Permanent link">&para;</a></h3>
 <p>If a client sends a stanza to the room, that it does not occupy, the service MUST reply with the 'item-not-found' error.</p>
 <p><strong>Unauthorized IQ</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -6676,9 +6697,9 @@ The archive can be fetched only from a specific room, the client MUST NOT query 
 <span class="w">    </span><span class="nt">&lt;/error&gt;</span>
 <span class="nt">&lt;/message&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="72-client-sends-a-presence-stanza-to-the-service">7.2. Client sends a &lt;presence/&gt; stanza to the service</h3>
+<h3 id="72-client-sends-a-presence-stanza-to-the-service">7.2. Client sends a &lt;presence/&gt; stanza to the service<a class="headerlink" href="#72-client-sends-a-presence-stanza-to-the-service" title="Permanent link">&para;</a></h3>
 <p>The service MUST ignore all <code>&lt;presence/&gt;</code> stanzas sent by the client.</p>
-<h3 id="73-client-sends-an-invalid-stanza-to-the-service">7.3. Client sends an invalid stanza to the service</h3>
+<h3 id="73-client-sends-an-invalid-stanza-to-the-service">7.3. Client sends an invalid stanza to the service<a class="headerlink" href="#73-client-sends-an-invalid-stanza-to-the-service" title="Permanent link">&para;</a></h3>
 <p>If service receives an invalid stanza it MUST reply with a 'bad-request' error.</p>
 <p><strong>Invalid IQ</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -6742,7 +6763,7 @@ The archive can be fetched only from a specific room, the client MUST NOT query 
 <span class="w">    </span><span class="nt">&lt;/error&gt;</span>
 <span class="nt">&lt;/message&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="74-request-sender-has-insufficient-privileges">7.4. Request sender has insufficient privileges</h3>
+<h3 id="74-request-sender-has-insufficient-privileges">7.4. Request sender has insufficient privileges<a class="headerlink" href="#74-request-sender-has-insufficient-privileges" title="Permanent link">&para;</a></h3>
 <p>If the request sender does not have sufficient privileges (but is a room occupant),
 the service MUST reply with a 'not-allowed' error.</p>
 <p>It occurs in the following cases:</p>
@@ -6787,8 +6808,8 @@ the service MUST reply with a 'not-allowed' error.</p>
 <span class="w">    </span><span class="nt">&lt;/error&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="8-implementation-notes">8. Implementation Notes</h2>
-<h3 id="81-xep-0045-mappings-aka-legacy-mode">8.1. XEP-0045 mappings a.k.a. legacy mode</h3>
+<h2 id="8-implementation-notes">8. Implementation Notes<a class="headerlink" href="#8-implementation-notes" title="Permanent link">&para;</a></h2>
+<h3 id="81-xep-0045-mappings-aka-legacy-mode">8.1. XEP-0045 mappings a.k.a. legacy mode<a class="headerlink" href="#81-xep-0045-mappings-aka-legacy-mode" title="Permanent link">&para;</a></h3>
 <p>Some client-side developers might choose to use existing XEP-0045 Multi-User Chat implementations
 to interface with the new MUC Light.
 There may be various reasons to do so: using a familiar protocol,
@@ -6796,7 +6817,7 @@ avoiding additional implementation, quick prototyping etc.
 This section provides suggestions of mappings between XEP-0045 stanzas and the new ones described in this document.
 These mappings are ONLY available to use in the legacy mode, which allows using a subset of classic MUC stanzas but comes with the drawback that some of the functions are limited.</p>
 <p>Operations not described here SHOULD remain unmodified.</p>
-<h4 id="811-discovering-the-features-supported-by-a-muc-service">8.1.1. Discovering the Features Supported by a MUC Service</h4>
+<h4 id="811-discovering-the-features-supported-by-a-muc-service">8.1.1. Discovering the Features Supported by a MUC Service<a class="headerlink" href="#811-discovering-the-features-supported-by-a-muc-service" title="Permanent link">&para;</a></h4>
 <p>A Disco result MAY either include a new <code>&lt;feature/&gt;</code> element with an "http://jabber.org/protocol/muc" namespace
 next to MUC Light one, or completely replace it, which is the RECOMMENDED behaviour.</p>
 <p><strong>Returning a MUC namespace in Disco</strong></p>
@@ -6834,7 +6855,7 @@ next to MUC Light one, or completely replace it, which is the RECOMMENDED behavi
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="812-discovering-occupied-rooms">8.1.2. Discovering Occupied Rooms</h4>
+<h4 id="812-discovering-occupied-rooms">8.1.2. Discovering Occupied Rooms<a class="headerlink" href="#812-discovering-occupied-rooms" title="Permanent link">&para;</a></h4>
 <p>The room list MUST NOT include room versions.</p>
 <p><strong>Service Returns Disco Items Result</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -6867,7 +6888,7 @@ next to MUC Light one, or completely replace it, which is the RECOMMENDED behavi
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="813-changing-a-room-subject">8.1.3. Changing a room subject</h4>
+<h4 id="813-changing-a-room-subject">8.1.3. Changing a room subject<a class="headerlink" href="#813-changing-a-room-subject" title="Permanent link">&para;</a></h4>
 <p>Instead of distributing the configuration change notifications,
 the room MUST route <code>&lt;message/&gt;</code> with a <code>&lt;subject/&gt;</code> like a classic MUC would.
 The client MUST send a classic message <code>&lt;subject/&gt;</code> as well.
@@ -6909,7 +6930,7 @@ The room SHOULD save a new subject in the room configuration.</p>
 <span class="w">    </span><span class="nt">&lt;subject&gt;</span>To<span class="w"> </span>be<span class="w"> </span>or<span class="w"> </span>not<span class="w"> </span>to<span class="w"> </span>be?<span class="nt">&lt;/subject&gt;</span>
 <span class="nt">&lt;/message&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="814-getting-a-room-configuration">8.1.4. Getting a room configuration</h4>
+<h4 id="814-getting-a-room-configuration">8.1.4. Getting a room configuration<a class="headerlink" href="#814-getting-a-room-configuration" title="Permanent link">&para;</a></h4>
 <p>Room configuration is encoded in a Data Form, that simulates the XEP-0045 config form.</p>
 <p>Getting the room configuration does not benefit from room versioning.</p>
 <p><strong>Requesting room configuration</strong></p>
@@ -6971,7 +6992,7 @@ The room SHOULD save a new subject in the room configuration.</p>
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="815-requesting-a-user-list">8.1.5. Requesting a user list</h4>
+<h4 id="815-requesting-a-user-list">8.1.5. Requesting a user list<a class="headerlink" href="#815-requesting-a-user-list" title="Permanent link">&para;</a></h4>
 <p>A user list is retrieved with an affiliation IQ get.</p>
 <p><strong>Requesting affiliation list</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -7020,9 +7041,9 @@ The room SHOULD save a new subject in the room configuration.</p>
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="816-requesting-room-information">8.1.6. Requesting room information</h4>
+<h4 id="816-requesting-room-information">8.1.6. Requesting room information<a class="headerlink" href="#816-requesting-room-information" title="Permanent link">&para;</a></h4>
 <p>There is no XEP-0045 equivalent for getting full room information.</p>
-<h4 id="817-leaving-the-room">8.1.7. Leaving the room</h4>
+<h4 id="817-leaving-the-room">8.1.7. Leaving the room<a class="headerlink" href="#817-leaving-the-room" title="Permanent link">&para;</a></h4>
 <p>Leaving the room is performed by setting the own affiliation to 'none'.
 The service uses <code>&lt;presence/&gt;</code> to notify all occupants (and former occupant) about the change.
 <code>&lt;presence/&gt;</code> to the leaving occupant MUST be of the type "unavailable"
@@ -7082,13 +7103,13 @@ and MUST include a status code 321 (i.e. user leaving due to affiliation change)
 <span class="w">    </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span>
 <span class="w">    </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="818-blocking-functionality">8.1.8. Blocking functionality</h4>
+<h4 id="818-blocking-functionality">8.1.8. Blocking functionality<a class="headerlink" href="#818-blocking-functionality" title="Permanent link">&para;</a></h4>
 <p>The blocking functionality uses a small subset of the Privacy Lists protocol.
 Stanzas MUST be addressed to the sender's bare JID (the <code>to</code> attribute may be skipped).
 The privacy list name MUST be equal to "urn:xmpp:muclight:0".
 Obviously, this method won't work properly in XMPP Server Federation, because privacy stanzas are handled by sender's server and the MUC Light Blocking functionality is handled by a MUC Light service server.
 As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
-<h5 id="8181-request-blocking-list">8.1.8.1. Request blocking list</h5>
+<h5 id="8181-request-blocking-list">8.1.8.1. Request blocking list<a class="headerlink" href="#8181-request-blocking-list" title="Permanent link">&para;</a></h5>
 <p><strong>Retrieving blocking list</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -7128,7 +7149,7 @@ As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h5 id="8182-blocking-a-room">8.1.8.2. Blocking a room</h5>
+<h5 id="8182-blocking-a-room">8.1.8.2. Blocking a room<a class="headerlink" href="#8182-blocking-a-room" title="Permanent link">&para;</a></h5>
 <p>In order to block a room, the client MUST deny a room bare JID in privacy list.</p>
 <p><strong>Blocking a room</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -7153,7 +7174,7 @@ As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-blockroom&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h5 id="8183-blocking-a-user">8.1.8.3. Blocking a user</h5>
+<h5 id="8183-blocking-a-user">8.1.8.3. Blocking a user<a class="headerlink" href="#8183-blocking-a-user" title="Permanent link">&para;</a></h5>
 <p>In order to block a room, the client MUST deny a service JID with user's bare JID in the resource.</p>
 <p><strong>Blocking a user</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -7178,7 +7199,7 @@ As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-blockuser&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h5 id="8184-unblocking">8.1.8.4. Unblocking</h5>
+<h5 id="8184-unblocking">8.1.8.4. Unblocking<a class="headerlink" href="#8184-unblocking" title="Permanent link">&para;</a></h5>
 <p><strong>Unblocking</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -7210,7 +7231,7 @@ As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-getlist&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="819-creating-a-room">8.1.9. Creating a room</h4>
+<h4 id="819-creating-a-room">8.1.9. Creating a room<a class="headerlink" href="#819-creating-a-room" title="Permanent link">&para;</a></h4>
 <p>The room is created in a standard XEP-0045 way. Client MUST use a nick equal to their own bare JID.</p>
 <p>Compatibility mode MUST NOT support a unique room name generation.</p>
 <p><strong>Creating a room</strong></p>
@@ -7238,7 +7259,7 @@ As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
 <span class="w">    </span><span class="nt">&lt;/x&gt;</span>
 <span class="nt">&lt;/presence&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h5 id="8191-room-already-exists">8.1.9.1. Room already exists</h5>
+<h5 id="8191-room-already-exists">8.1.9.1. Room already exists<a class="headerlink" href="#8191-room-already-exists" title="Permanent link">&para;</a></h5>
 <p>If the client attempts to create a room that is already used, it will
 receive an error <code>&lt;presence/&gt;</code> informing that registration is required
 (like in the case of members-only rooms in XEP-0045).</p>
@@ -7259,7 +7280,7 @@ receive an error <code>&lt;presence/&gt;</code> informing that registration is r
 <span class="w">    </span><span class="nt">&lt;/error&gt;</span>
 <span class="nt">&lt;/presence&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="8110-destroying-the-room">8.1.10. Destroying the room</h4>
+<h4 id="8110-destroying-the-room">8.1.10. Destroying the room<a class="headerlink" href="#8110-destroying-the-room" title="Permanent link">&para;</a></h4>
 <p>A classic XEP-0045 method is used but the service SHOULD NOT forward reason and alternate venue JID.</p>
 <p><strong>Destroying the room</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -7338,7 +7359,7 @@ receive an error <code>&lt;presence/&gt;</code> informing that registration is r
 <span class="w">    </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span>
 <span class="w">    </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="8111-setting-room-configuration">8.1.11. Setting room configuration</h4>
+<h4 id="8111-setting-room-configuration">8.1.11. Setting room configuration<a class="headerlink" href="#8111-setting-room-configuration" title="Permanent link">&para;</a></h4>
 <p>Room occupants can use a standard XEP-0045 configuration modification method. The service MUST broadcast only the notification about the configuration change with a status code 104, so every occupant can retrieve the new room configuration in a separate request. The client is allowed to send a config delta in a form.</p>
 <p><strong>Setting room configuration</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -7425,7 +7446,7 @@ receive an error <code>&lt;presence/&gt;</code> informing that registration is r
 <span class="w">    </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span>
 <span class="w">    </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="8112-changing-occupant-list">8.1.12. Changing occupant list</h4>
+<h4 id="8112-changing-occupant-list">8.1.12. Changing occupant list<a class="headerlink" href="#8112-changing-occupant-list" title="Permanent link">&para;</a></h4>
 <p>The service MUST send an affiliation change notification to all participants.
 Leaving users MUST NOT receive any information except for their own "none" affiliation.
 New users MUST receive an invitation message.</p>
@@ -7520,7 +7541,7 @@ New users MUST receive an invitation message.</p>
 <span class="w">    </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span>
 <span class="w">    </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="82-service-limits-and-configuration">8.2. Service limits and configuration</h3>
+<h3 id="82-service-limits-and-configuration">8.2. Service limits and configuration<a class="headerlink" href="#82-service-limits-and-configuration" title="Permanent link">&para;</a></h3>
 <p>The MUC Light service may be abused by a malicious users,
 e.g. due to replicating a single message for every room occupant.
 The list below contains suggested configurable limits that SHOULD be implemented.</p>
@@ -7565,6 +7586,46 @@ The list below contains suggested configurable limits that SHOULD be implemented
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../tutorials/client-certificate/" class="md-footer__link md-footer__link--prev" aria-label="Previous: How to Set up SASL client certificate authentication">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                How to Set up SASL client certificate authentication
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../inbox/" class="md-footer__link md-footer__link--next" aria-label="Next: Inbox">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Inbox
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -7616,7 +7677,7 @@ The list below contains suggested configurable limits that SHOULD be implemented
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

@@ -1353,6 +1353,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../release-options/" class="md-nav__link">
         
   
@@ -4295,24 +4316,24 @@
 <li><strong>Default:</strong> no default - each access rule needs to be specified explicitly.</li>
 <li><strong>Example:</strong> see the <a href="#rule-examples">examples</a> below.</li>
 </ul>
-<h2 id="access-rule-clauses">Access rule clauses</h2>
+<h2 id="access-rule-clauses">Access rule clauses<a class="headerlink" href="#access-rule-clauses" title="Permanent link">&para;</a></h2>
 <p>Whenever a rule is checked to obtain the resulting value for a user, the clauses are traversed one by one until a matching one is found or the list is exhausted (in which case the special value <code>deny</code> is returned).</p>
 <p>Each clause has to contain the following keys:</p>
-<h3 id="accessacl"><code>access.*.acl</code></h3>
+<h3 id="accessacl"><code>access.*.acl</code><a class="headerlink" href="#accessacl" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
 <li><strong>Example:</strong> <code>acl = "local"</code></li>
 </ul>
 <p>The access class defined in the <code>acl</code> section. The user is matched against it. The special name <code>all</code> is a catch-all value that matches any user. If the class does not exist, the clause does not match (there is no error).</p>
-<h3 id="accessvalue"><code>access.*.value</code></h3>
+<h3 id="accessvalue"><code>access.*.value</code><a class="headerlink" href="#accessvalue" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string or integer</li>
 <li><strong>Example:</strong> <code>value = "allow"</code></li>
 </ul>
 <p>For rules determining access, the value will be <code>"allow"</code> or <code>"deny"</code>. For other rules it can be an integer or a string.</p>
-<h2 id="rule-examples">Rule examples</h2>
+<h2 id="rule-examples">Rule examples<a class="headerlink" href="#rule-examples" title="Permanent link">&para;</a></h2>
 <p>The following access rules are already defined in the example configuration file.</p>
-<h3 id="c2s-access">C2S Access</h3>
+<h3 id="c2s-access">C2S Access<a class="headerlink" href="#c2s-access" title="Permanent link">&para;</a></h3>
 <p>The <code>c2s</code> rule is used to allow/deny the users to establish C2S connections:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4329,7 +4350,7 @@
 </ul>
 <p>The <code>blocked</code> access class can be defined in the <a href="../acl/"><code>acl</code> section</a> and match blacklisted users.</p>
 <p>For this rule to take effect, it needs to be referenced in the options of a <a href="../../listeners/listen-c2s/#listenc2saccess">C2S listener</a>.</p>
-<h3 id="c2s-shaper">C2S Shaper</h3>
+<h3 id="c2s-shaper">C2S Shaper<a class="headerlink" href="#c2s-shaper" title="Permanent link">&para;</a></h3>
 <p>The <code>c2s_shaper</code> rule is used to determine the shaper used to limit the incoming traffic on C2S connections:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4346,7 +4367,7 @@
 </ul>
 <p>The <code>admin</code> access class can be defined in the <code>acl</code> to specify admin users who will bypass the <code>normal</code> shaper.</p>
 <p>For this rule to take effect, it needs to be referenced in the options of a <a href="../../listeners/listen-c2s/#listenc2sshaper">C2S listener</a>.</p>
-<h3 id="s2s-shaper">S2S Shaper</h3>
+<h3 id="s2s-shaper">S2S Shaper<a class="headerlink" href="#s2s-shaper" title="Permanent link">&para;</a></h3>
 <p>The <code>s2s_shaper</code> rule is used to determine the shaper used to limit the incoming traffic on C2S connections:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4356,7 +4377,7 @@
 </code></pre></div></td></tr></table></div>
 <p>It assigns the <code>fast</code> shaper to all S2S connections.</p>
 <p>For this rule to take effect, it needs to be referenced in the options of an <a href="../../listeners/listen-s2s/#listens2sshaper">S2S listener</a>.</p>
-<h3 id="muc">MUC</h3>
+<h3 id="muc">MUC<a class="headerlink" href="#muc" title="Permanent link">&para;</a></h3>
 <p>The following rules manage the permissions of MUC operations:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -4381,7 +4402,7 @@
 <span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <p>They are referenced in the options of the <a href="../../modules/mod_muc/"><code>mod_muc</code></a> module.</p>
-<h3 id="registration">Registration</h3>
+<h3 id="registration">Registration<a class="headerlink" href="#registration" title="Permanent link">&para;</a></h3>
 <p>This rule manages the permissions to create new users with <code>mod_register</code>.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4390,7 +4411,7 @@
 <span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <p>It needs to be referenced in the options of the <a href="../../modules/mod_register/"><code>mod_register</code></a> module.</p>
-<h3 id="mam-permissions">MAM permissions</h3>
+<h3 id="mam-permissions">MAM permissions<a class="headerlink" href="#mam-permissions" title="Permanent link">&para;</a></h3>
 <p>These rules set the permissions for MAM operations triggered by IQ stanzas and handled by the <a href="../../modules/mod_mam/"><code>mod_mam</code></a> module.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -4439,7 +4460,7 @@ The last value uses the default setting for the operation, which is to allow the
 <span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="mam-shapers">MAM shapers</h3>
+<h3 id="mam-shapers">MAM shapers<a class="headerlink" href="#mam-shapers" title="Permanent link">&para;</a></h3>
 <p>These rules limit the rate of MAM operations triggered by IQ stanzas.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -4494,7 +4515,7 @@ The last value uses the default setting for the operation, which is to allow the
 </ul>
 <p>The values returned by the rules (<code>mam_shaper</code>, <code>mam_global_shaper</code>) are shaper names, which need to be defined in the <a href="../shaper/#mam-shapers"><code>shaper</code> section</a>.</p>
 <p>MAM for MUC shapers has <code>muc_</code> prefix.</p>
-<h3 id="maximum-number-of-sessions">Maximum number of sessions</h3>
+<h3 id="maximum-number-of-sessions">Maximum number of sessions<a class="headerlink" href="#maximum-number-of-sessions" title="Permanent link">&para;</a></h3>
 <p>The <code>max_user_sessions</code> rule is used to determine the maximum number of sessions a user can open.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4503,7 +4524,7 @@ The last value uses the default setting for the operation, which is to allow the
 <span class="w">  </span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 <p>By default, all users can open at most 10 concurrent sessions.</p>
-<h3 id="maximum-number-of-offline-messages">Maximum number of offline messages</h3>
+<h3 id="maximum-number-of-offline-messages">Maximum number of offline messages<a class="headerlink" href="#maximum-number-of-offline-messages" title="Permanent link">&para;</a></h3>
 <p>The <code>max_user_offline_messages</code> rule is used to determine the maximum number of messages that is stored for a user by the <a href="../../modules/mod_offline/"><code>mod_offline</code> module</a>.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -4520,7 +4541,7 @@ The last value uses the default setting for the operation, which is to allow the
 </ul>
 <p>This means that the admin users can have 5000 messages stored offline, while the others can have at most 100.
 The <code>admin</code> access class can be defined in the <a href="../acl/"><code>acl</code> section</a>.</p>
-<h2 id="for-developers">For developers</h2>
+<h2 id="for-developers">For developers<a class="headerlink" href="#for-developers" title="Permanent link">&para;</a></h2>
 <p>To access the rule functionality, one has to use the <code>acl:match_rule/3</code> function.</p>
 <p>Given the following rule:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -4564,6 +4585,46 @@ If the rule is not host specific, one can use <code>global</code> instead of <co
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../acl/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Options: Acl">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Options: Acl
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../s2s/" class="md-footer__link md-footer__link--next" aria-label="Next: Options: S2S">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Options: S2S
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4615,7 +4676,7 @@ If the rule is not host specific, one can use <code>global</code> instead of <co
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

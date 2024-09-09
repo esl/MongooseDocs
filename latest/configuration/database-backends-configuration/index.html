@@ -1179,6 +1179,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../release-options/" class="md-nav__link">
         
   
@@ -4235,12 +4256,12 @@
   
 
 
-<h1 id="database-backends">Database Backends</h1>
+<h1 id="database-backends">Database Backends<a class="headerlink" href="#database-backends" title="Permanent link">&para;</a></h1>
 <p>MongooseIM can work with several databases, both RDBMS (SQL) and NoSQL ones.
 Some of them require extra work before they can be used.
 For example the SQL databases require defining a schema.
 MongooseIM is tested with CI, so the CI scripts can be used as a reference.</p>
-<h2 id="a-brief-overview">A Brief Overview</h2>
+<h2 id="a-brief-overview">A Brief Overview<a class="headerlink" href="#a-brief-overview" title="Permanent link">&para;</a></h2>
 <p>Data in MongooseIM is either transient or persistent:</p>
 <ul>
 <li><strong>transient</strong>: volatile data changing often, such as session data, stream management data, and other in-memory data.
@@ -4248,7 +4269,7 @@ MongooseIM is tested with CI, so the CI scripts can be used as a reference.</p>
 <li><strong>persistent</strong>: long-lived data, such as roster items, credentials, and chat archives.
  These absolutely need regular and tested backups.</li>
 </ul>
-<h2 id="choosing-a-database-for-mongooseim">Choosing a database for MongooseIM</h2>
+<h2 id="choosing-a-database-for-mongooseim">Choosing a database for MongooseIM<a class="headerlink" href="#choosing-a-database-for-mongooseim" title="Permanent link">&para;</a></h2>
 <p>Here is some general advice on the use of databases.
 Subsequent sections go into more depth on each database: what they are suitable for and how to set them up.</p>
 <p>Transient data:</p>
@@ -4303,8 +4324,8 @@ It is possible to store all data in Mnesia, but only for testing purposes, not f
 <ul>
 <li>LDAP -  Used for: users, shared rosters, vCards</li>
 </ul>
-<h2 id="rdbms">RDBMS</h2>
-<h3 id="mysql">MySQL</h3>
+<h2 id="rdbms">RDBMS<a class="headerlink" href="#rdbms" title="Permanent link">&para;</a></h2>
+<h3 id="mysql">MySQL<a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h3>
 <p><strong>Can be used for</strong>:</p>
 <ul>
 <li>users (credentials)</li>
@@ -4328,7 +4349,7 @@ mysql<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w">
 Please refer to the <a href="../outgoing-connections/#rdbms-options">RDBMS options</a> for more information.</p>
 <p><strong>Version notice</strong></p>
 <p>The required minimum version of MySQL is <code>8.0</code> because MongooseIM uses the JSON data type and the <code>INSERT INTO ... AS ...</code> query syntax.</p>
-<h3 id="postgresql">PostgreSQL</h3>
+<h3 id="postgresql">PostgreSQL<a class="headerlink" href="#postgresql" title="Permanent link">&para;</a></h3>
 <p><strong>Can be used for:</strong></p>
 <ul>
 <li>users (credentials)</li>
@@ -4352,7 +4373,7 @@ You should also configure the Postgres database in the <code>mongooseim.toml</co
 Please refer to the <a href="../outgoing-connections/#rdbms-options">RDBMS options</a>
 and <a href="../general/#database-settings">general database options</a>
 for more information.</p>
-<h3 id="microsoft-sql-server">Microsoft SQL Server</h3>
+<h3 id="microsoft-sql-server">Microsoft SQL Server<a class="headerlink" href="#microsoft-sql-server" title="Permanent link">&para;</a></h3>
 <p>Microsoft SQL Server, sometimes called MSSQL, or Azure SQL Database.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -4457,15 +4478,15 @@ Set the following option in the <code>general</code> section:</p>
 <span class="w">    </span><span class="n">driver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;odbc&quot;</span>
 <span class="w">    </span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;DSN=mongoose-mssql;UID=username;PWD=password&quot;</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="nosql">NoSQL</h2>
-<h3 id="cassandra">Cassandra</h3>
+<h2 id="nosql">NoSQL<a class="headerlink" href="#nosql" title="Permanent link">&para;</a></h2>
+<h3 id="cassandra">Cassandra<a class="headerlink" href="#cassandra" title="Permanent link">&para;</a></h3>
 <p><strong>Setup</strong></p>
 <p>This will prepare Cassandra for connection from MongooseIM. Make sure Cassandra is running, open a new terminal window and enter the following commands:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>$ cqlsh
 $ cqlsh&gt; source &#39;$REPO/priv/casssandra.cql&#39;;
 </code></pre></div></td></tr></table></div></p>
-<h3 id="elasticsearch">ElasticSearch</h3>
+<h3 id="elasticsearch">ElasticSearch<a class="headerlink" href="#elasticsearch" title="Permanent link">&para;</a></h3>
 <p><strong>Can be used for:</strong></p>
 <ul>
 <li>MAM (Message Archive Management)</li>
@@ -4480,14 +4501,14 @@ curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span
 </code></pre></div></td></tr></table></div>
 <p>where <code>$ELASTICSEARCH_URL</code> is a URL pointing to your ElasticSearch node's HTTP API endpoint.</p>
 <p>Please refer to the <a href="../outgoing-connections/#elasticsearch-options">advanced configuration</a> page to check how to configure MongooseIM to connect to ElasticSearch node.</p>
-<h3 id="redis">Redis</h3>
+<h3 id="redis">Redis<a class="headerlink" href="#redis" title="Permanent link">&para;</a></h3>
 <p><strong>Can be used for:</strong></p>
 <ul>
 <li>users sessions</li>
 </ul>
 <p><strong>Setup</strong></p>
 <p>Please refer to the <a href="../outgoing-connections/#redis-specific-options">Redis options</a> for more information.</p>
-<h2 id="ldap">LDAP</h2>
+<h2 id="ldap">LDAP<a class="headerlink" href="#ldap" title="Permanent link">&para;</a></h2>
 <p><strong>Can be used for:</strong></p>
 <ul>
 <li>users (credentials)</li>
@@ -4527,6 +4548,46 @@ curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../TLS-hardening/" class="md-footer__link md-footer__link--prev" aria-label="Previous: TLS Hardening">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                TLS Hardening
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../listeners/listen-c2s/" class="md-footer__link md-footer__link--next" aria-label="Next: Client to server (C2S)">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Client to server (C2S)
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4578,7 +4639,7 @@ curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>

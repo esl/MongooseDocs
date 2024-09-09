@@ -1177,6 +1177,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Options: Instrumentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../configuration/release-options/" class="md-nav__link">
         
   
@@ -4139,13 +4160,13 @@
   
 
 
-<h1 id="route-of-a-message-through-the-system">Route of a message through the system</h1>
+<h1 id="route-of-a-message-through-the-system">Route of a message through the system<a class="headerlink" href="#route-of-a-message-through-the-system" title="Permanent link">&para;</a></h1>
 <p>Let's examine the flow of a message sent from Alice to Bob, both of whom are served by the same domain and connected to the server.</p>
 <p>Note that hooks are called at various stages of routing - they perform many tasks, and many MongooseIM functionalities are implemented through hooks &amp; handlers.
 For a general introduction to hooks, see <a href="../Hooks-and-handlers/">Hooks and Handlers</a>; to get a closer look at a core few, see the <a href="../hooks_description/">hooks description</a>.</p>
-<h2 id="1-senders-c2s-process-receives-the-message">1. Sender's C2S process receives the message</h2>
+<h2 id="1-senders-c2s-process-receives-the-message">1. Sender's C2S process receives the message<a class="headerlink" href="#1-senders-c2s-process-receives-the-message" title="Permanent link">&para;</a></h2>
 <p>Alice's C2S (client-to-server) process, which is a state machine implemented in the <code>mongoose_c2s</code> module, receives data from the TCP socket, and parses each incoming XML element with <code>exml</code> to an internal representation of the stanza, which is then processed by the C2S as a subsequent event.</p>
-<h2 id="2-call-to-user_send_-hooks">2. Call to <code>user_send_*</code> hooks</h2>
+<h2 id="2-call-to-user_send_-hooks">2. Call to <code>user_send_*</code> hooks<a class="headerlink" href="#2-call-to-user_send_-hooks" title="Permanent link">&para;</a></h2>
 <p>Upon some minimal validation of the stanza, the hook <code>user_send_packet</code> is called.
 Next, depending on the type of the stanza, one of the following hooks is called:</p>
 <ul>
@@ -4155,7 +4176,7 @@ Next, depending on the type of the stanza, one of the following hooks is called:
 <li><code>user_send_xmlel</code> for other XML elements.</li>
 </ul>
 <p>Each hook can be handled by multiple modules subscribed to it. Those modules do various complementary tasks, like storing the message in an archive, sending carbon copies, checking the stanza against privacy lists etc. It is possible for a handler to immediately stop routing at this point, preventing execution of any subsequent handlers or hooks. See <a href="../hooks_description/#hooks-called-for-session_established">hooks description</a> for more information.</p>
-<h2 id="3-message-routing">3. Message routing</h2>
+<h2 id="3-message-routing">3. Message routing<a class="headerlink" href="#3-message-routing" title="Permanent link">&para;</a></h2>
 <p>The stanza is routed by <code>ejabberd_router:route/3</code>, which passes it through a chain of routing modules implementing the <code>xmpp_router</code> behaviour and applies the following functions for each of them:</p>
 <ol>
 <li><code>Mod:filter/3</code>, which either drops the stanza, stopping the routing chain, or returns it for further processing, modifying it if necessary.</li>
@@ -4174,17 +4195,17 @@ The default behaviour is the following:</p>
 <p><img alt="Routing chain" src="../routing.png#only-light" /> <!-- https://docs.google.com/drawings/d/1V0n6mPN03TsDsdggXCymoaLnf3JIoPqTr_5lcEF8JrY -->
 <img alt="Routing chain" src="../routing-dark.png#only-dark" /> <!-- https://docs.google.com/drawings/d/14UHBjhNR1yvqj-C3YBm3VU0UokYFvu0TNLb3Qw_Ut_s --></p>
 <p>Assuming that the message from Alice to Bob is not the first stanza addressed to their domain, the routing chain will stop at <code>mongoose_router_localdomain</code>, which will deliver the message locally.</p>
-<h2 id="4-mongoose_local_delivery">4. <code>mongoose_local_delivery</code></h2>
+<h2 id="4-mongoose_local_delivery">4. <code>mongoose_local_delivery</code><a class="headerlink" href="#4-mongoose_local_delivery" title="Permanent link">&para;</a></h2>
 <p>When an external component or a local route is found, the packet is delivered locally by <code>mongoose_local_delivery:do_route/5</code>. Firstly, the <code>filter_local_packet</code> hook is run to check if the stanza should be delivered or dropped. This hook is also a place where modules can add their own functionality evaluated for each locally delivered stanza.</p>
 <p>If the check passes, the next step is to call the handler associated with the component or the local route. Handlers are modules implementing the <code>mongoose_packet_handler</code> behaviour, and stanzas to local users (like Alice and Bob) are handled by the <code>ejabberd_local</code> module.</p>
-<h2 id="5-ejabberd_local-to-ejabberd_sm">5. <code>ejabberd_local</code> to <code>ejabberd_sm</code></h2>
+<h2 id="5-ejabberd_local-to-ejabberd_sm">5. <code>ejabberd_local</code> to <code>ejabberd_sm</code><a class="headerlink" href="#5-ejabberd_local-to-ejabberd_sm" title="Permanent link">&para;</a></h2>
 <p><code>ejabberd_local:process_packet/5</code> checks if the stanza is addressed to a user or to the server itself. For local users like Bob, <code>ejabberd_sm:route/4</code> is called.</p>
-<h2 id="6-ejabberd_sm">6. <code>ejabberd_sm</code></h2>
+<h2 id="6-ejabberd_sm">6. <code>ejabberd_sm</code><a class="headerlink" href="#6-ejabberd_sm" title="Permanent link">&para;</a></h2>
 <p><code>ejabberd_sm</code> determines the available resources of the recipient, takes into account their priorities and whether the message is addressed to a particular resource or a bare JID.
 It appropriately replicates (or not) the message and sends it to the recipient's C2S process(es) by calling <code>mongoose_c2s:route/2</code>.
 In case no resources are available for delivery (hence no C2S processes to pass the message to), the <code>offline_message</code> hook is run.</p>
 <p>As Bob has one online session, the message is sent to the C2S process associated with that session.</p>
-<h2 id="7-recipients-c2s-process-delivers-the-message">7. Recipient's C2S process delivers the message</h2>
+<h2 id="7-recipients-c2s-process-delivers-the-message">7. Recipient's C2S process delivers the message<a class="headerlink" href="#7-recipients-c2s-process-delivers-the-message" title="Permanent link">&para;</a></h2>
 <p>The <code>user_receive_packet</code> hook is run to notify the rest of the system about the stanza delivery.
 Next, depending on the type of the stanza, one of the following hooks is called:</p>
 <ul>
@@ -4225,6 +4246,46 @@ Next, depending on the type of the stanza, one of the following hooks is called:
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../accumulators/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Accumulators">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Accumulators
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../domain_management/" class="md-footer__link md-footer__link--next" aria-label="Next: Domain management">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Domain management
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -4276,7 +4337,7 @@ Next, depending on the type of the stanza, one of the following hooks is called:
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>
