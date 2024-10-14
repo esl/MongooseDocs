@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.35">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.40">
     
     
       
@@ -30,7 +30,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8c3ca2c6.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -1349,6 +1349,15 @@
   <a href="#postgresql" class="md-nav__link">
     <span class="md-ellipsis">
       PostgreSQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cockroachdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      CockroachDB
     </span>
   </a>
   
@@ -4174,6 +4183,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#cockroachdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      CockroachDB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#microsoft-sql-server" class="md-nav__link">
     <span class="md-ellipsis">
       Microsoft SQL Server
@@ -4300,7 +4318,7 @@ Subsequent sections go into more depth on each database: what they are suitable 
 <p>RDBMS - MongooseIM has a strong backend support for relational databases.
  Reliable and battle proven, they are a great choice for regular MongooseIM use cases and features like <code>privacy lists</code>, <code>vcards</code>, <code>roster</code>, <code>private storage</code>, <code>last activity</code> and <code>message archive</code>.
  Never loose your data.
- Use MySQL, MariaDB, PostgreSQL, or MS SQL Server.</p>
+ Use MySQL, MariaDB, PostgreSQL, CockroachDB, or MS SQL Server.</p>
 </li>
 <li>
 <p>Cassandra - Only for MAM (Message Archive Management).</p>
@@ -4370,6 +4388,30 @@ The default schema is defined in the <code>pg.sql</code> file.</p>
 psql<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-U<span class="w"> </span>user<span class="w"> </span>-q<span class="w"> </span>-d<span class="w"> </span>mongooseim<span class="w"> </span>-f<span class="w"> </span>pg.sql
 </code></pre></div></td></tr></table></div>
 You should also configure the Postgres database in the <code>mongooseim.toml</code> file.
+Please refer to the <a href="../outgoing-connections/#rdbms-options">RDBMS options</a>
+and <a href="../general/#database-settings">general database options</a>
+for more information.</p>
+<h3 id="cockroachdb">CockroachDB<a class="headerlink" href="#cockroachdb" title="Permanent link">&para;</a></h3>
+<p><strong>Can be used for:</strong></p>
+<ul>
+<li>users (credentials)</li>
+<li>vcards</li>
+<li>roster</li>
+<li>private storage</li>
+<li>privacy/block lists</li>
+<li>last activity</li>
+<li>mam (message archive management)</li>
+<li>muc_light rooms</li>
+</ul>
+<p><strong>Setup</strong></p>
+<p>The schema files can be found in the <code>priv</code> directory.
+The default schema is defined in the <code>cockroachdb.sql</code> file.</p>
+<p>You can use the following command to apply it on localhost:</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>psql<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-U<span class="w"> </span>user<span class="w"> </span>-p<span class="w"> </span><span class="m">26257</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;CREATE DATABASE mongooseim;&quot;</span>
+psql<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-U<span class="w"> </span>user<span class="w"> </span>-p<span class="w"> </span><span class="m">26257</span><span class="w"> </span>-q<span class="w"> </span>-d<span class="w"> </span>mongooseim<span class="w"> </span>-f<span class="w"> </span>cockroachdb.sql
+</code></pre></div></td></tr></table></div>
+You should also configure the CockroachDB database in the <code>mongooseim.toml</code> file.
 Please refer to the <a href="../outgoing-connections/#rdbms-options">RDBMS options</a>
 and <a href="../general/#database-settings">general database options</a>
 for more information.</p>
@@ -4642,7 +4684,7 @@ curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>
+      <script src="../../assets/javascripts/bundle.525ec568.min.js"></script>
       
     
   </body>
