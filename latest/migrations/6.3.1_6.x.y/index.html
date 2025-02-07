@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.2">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.3">
     
     
       
@@ -4207,6 +4207,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#exml-upgraded-to-40" class="md-nav__link">
+    <span class="md-ellipsis">
+      exml upgraded to 4.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="exml upgraded to 4.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#change-of-internal-format-of-xml-messages-affects-the-ways-to-upgrade-mongooseim-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change of internal format of XML messages affects the ways to upgrade MongooseIM cluster
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archived-xml-mod_mam" class="md-nav__link">
+    <span class="md-ellipsis">
+      Archived XML - mod_mam
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4253,6 +4286,36 @@ set <code>tls.disconnect_on_failure</code> to <code>false</code>. This is requir
 <p>It is also possible to completely disable client certificate verification during TLS
 handshake in <code>just_tls</code> by setting <code>tls.verify_mode</code> to <code>none</code>.</p>
 <p>For more information regarding configuration of TLS for C2S see <a href="../listeners/listen-c2s/#tls-options-for-c2s">Listener modules</a></p>
+<h2 id="exml-upgraded-to-40"><code>exml</code> upgraded to 4.0<a class="headerlink" href="#exml-upgraded-to-40" title="Permanent link">&para;</a></h2>
+<h3 id="change-of-internal-format-of-xml-messages-affects-the-ways-to-upgrade-mongooseim-cluster">Change of internal format of XML messages affects the ways to upgrade MongooseIM cluster<a class="headerlink" href="#change-of-internal-format-of-xml-messages-affects-the-ways-to-upgrade-mongooseim-cluster" title="Permanent link">&para;</a></h3>
+<p><code>exml</code> library used for parsing and emitting of XML messages was upgraded to version 4.0.
+In this new version internal representation of XML elements changed - element attributes
+are stored in a map (previously in a key value list).</p>
+<p>This is a disruptive change, and rollback to previous version is not possible.</p>
+<p>Parsed XML messages are being sent within MongooseIM cluster between Erlang nodes in internal representation,
+so to understand received messages (Erlang terms), all nodes must have the same code that handle XML elements. This makes a rolling upgrade
+(an upgrade of a cluster node by node) not viable for this release.</p>
+<p>One solution is to stop the whole MongooseIM cluster, upgrade and start again.</p>
+<p>The second solution is to configure a new cluster running new version
+alongside the old cluster, and migrate traffic from the old one to the new one.</p>
+<p>There is a third solution, which allows to maintain service availability but not requiring building a full new cluster.
+In this solution, you upgrade nodes one by one (like in the rolling upgrade), but change configuration to not allow
+upgraded node to rejoin the old cluster, but instead run as a new cluster.
+That way all nodes are migrated one by one to the newly formed cluster. Both clusters have access the same database.</p>
+<p>One warning regarding this solution: There is a corner case regarding access to archived messages only while both clusters
+are operating simultaneously. It may happen that users still connected to the old cluster try to retrieve newly archived messages.
+This will result in errors and possibly crashes as the old code doesn't recognise new internal representation.
+We just want to warn the operator about such possibility, the chance of it happening is slight, as we recommend the upgrade
+to be undertaken during the time of minimal traffic.</p>
+<h3 id="archived-xml-mod_mam">Archived XML - mod_mam<a class="headerlink" href="#archived-xml-mod_mam" title="Permanent link">&para;</a></h3>
+<p>Change of XML element representation also affects stored or archived messages, if they are stored in the internal Erlang term format.</p>
+<p>There is a config setting <code>modules.mod_mam.db_message_format</code> which controls the message format for archived messages
+and its default is different depending on the database backend used.
+The default for RDBMS databases is <code>mam_message_compressed_eterm</code> (which is Erlang term format) while for Cassandra it is <code>mam_message_xml</code>.</p>
+<p>Messages stored in XML textual format (<code>mam_message_xml</code>) are not affected by <code>exml</code> version change.</p>
+<p>For messages stored as Erlang term (<code>mam_message_compressed_eterm</code> or <code>mam_message_eterm</code>), we provide transparent retrieval of the old format, while new messages will be written in the archive in
+the new format. This means that the change of the format is transparent in operations of MongooseIM.
+However if you have external tools accessing message archive, you may need to verify that they work correctly with the new internal XML element representation.</p>
 
 
 
@@ -4340,7 +4403,7 @@ handshake in <code>just_tls</code> by setting <code>tls.verify_mode</code> to <c
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.f13b1293.min.js"></script>
+      <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
     
   </body>
