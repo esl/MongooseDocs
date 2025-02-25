@@ -4336,6 +4336,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/6.3.1_6.3.2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.3.1 to 6.3.2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         
   
@@ -4683,6 +4705,11 @@ When SCRAM is enabled, the passwords sent to the auth service are serialised and
 <p>It is transparent when MongooseIM is responsible for all DB operations such as password setting, account creation etc.</p>
 <p>The service CAN perform the (de)serialization of SCRAM-encoded passwords.
 You can find more details on the <a href="../../developers-guide/SCRAM-serialization/">SCRAM serialization</a> page.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you are using MongooseIM 4.1.0 to 6.3.1 with SCRAM authentication and OpenSSL &gt;=3.4.1, a known issue affects hash calculation for algorithms stronger than SHA-1.
+See <a href="../../developers-guide/SCRAM-serialization/#scram-hash-calculation-issue-in-mongooseim-410631">SCRAM hashing issue</a> for details on how to resolve this.</p>
+</div>
 <h2 id="authentication-service-api">Authentication service API<a class="headerlink" href="#authentication-service-api" title="Permanent link">&para;</a></h2>
 <h3 id="url-format">URL format<a class="headerlink" href="#url-format" title="Permanent link">&para;</a></h3>
 <p>All GET requests include the following URL-encoded query string: <code>?user=&lt;username&gt;&amp;server=&lt;domain&gt;&amp;pass=&lt;password&gt;</code>.</p>

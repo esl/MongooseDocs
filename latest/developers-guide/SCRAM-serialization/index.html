@@ -3687,6 +3687,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Known issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scram-hash-calculation-issue-in-mongooseim-410631" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCRAM hash calculation issue in MongooseIM 4.1.0–6.3.1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4186,6 +4210,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/6.3.1_6.3.2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.3.1 to 6.3.2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         
   
@@ -4331,6 +4377,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Known issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scram-hash-calculation-issue-in-mongooseim-410631" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCRAM hash calculation issue in MongooseIM 4.1.0–6.3.1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4458,6 +4528,11 @@ The SCRAM format that was used can be seen below.</p>
 <li><em>Erlang record:</em> <code>#scram{ storedkey = &lt;&lt;"tmi5IE+9pceRV/jkPLFHEaVY33c="&gt;&gt;, serverkey = &lt;&lt;"MiWNa8T3dniVDwmh77ufJ41fpAQ="&gt;&gt;, salt = &lt;&lt;"inKXODlSY5y5SCsLxibi0w=="&gt;&gt;, iterationcount = 4096 }</code></li>
 <li><em>Serialized password:</em> <code>==SCRAM==,tmi5IE+9pceRV/jkPLFHEaVY33c=,MiWNa8T3dniVDwmh77ufJ41fpAQ=,inKXODlSY5y5SCsLxibi0w==,4096</code></li>
 </ul>
+<h2 id="known-issues">Known issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
+<h3 id="scram-hash-calculation-issue-in-mongooseim-410631">SCRAM hash calculation issue in MongooseIM 4.1.0–6.3.1<a class="headerlink" href="#scram-hash-calculation-issue-in-mongooseim-410631" title="Permanent link">&para;</a></h3>
+<p>If you are using MongooseIM 4.1.0 to 6.3.1 with SCRAM authentication and have OpenSSL &gt;=3.4.1 installed, hashes for algorithms stronger than SHA-1 are calculated incorrectly.
+To fix this issue, you must upgrade to MongooseIM 6.3.2, which includes <code>fast_pbkdf2</code> version 2.0 with the bug fixed or downgrade OpenSSL to a version lower than 3.4.1.
+After applying one of these fixes, all affected users must reset their passwords, as the previously stored hashes are incorrect.</p>
 
 
 
