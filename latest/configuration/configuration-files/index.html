@@ -4608,13 +4608,7 @@ By default only the following applications can be found there:</p>
 </li>
 </ul>
 <h2 id="configuring-tls-certificates-keys">Configuring TLS: Certificates &amp; Keys<a class="headerlink" href="#configuring-tls-certificates-keys" title="Permanent link">&para;</a></h2>
-<p>TLS is configured in one of two ways: some modules need a private key and certificate (chain) in <strong>separate</strong> files, while others need both in a <strong>single</strong> file. This is because recent additions use OTP's <code>ssl</code> library, while older modules use <code>p1_tls</code>, respectively.</p>
-<ul>
-<li>Server-to-server connections need both in the <strong>same</strong> <code>.pem</code> file</li>
-<li>Client-to-server connections need them in <strong>separate</strong> files, unless <code>fast_tls</code> is used</li>
-<li>BOSH, WebSockets and REST APIs need them in <strong>separate</strong> files</li>
-</ul>
-<p>In order to create private key &amp; certificate bundle, you may simply concatenate them.</p>
+<p>TLS private key and certificate (chain) may be specified in <strong>separate</strong> files, <code>keyfile</code> and <code>certfile</code> respectively, or the private key can be appended to certificates and provided together in one file specified by <code>certfile</code>.</p>
 <p>More information about configuring TLS for these endpoints is available in the <a href="../../listeners/listen-c2s/#tls-options-for-c2s">listen section configuration</a> page.</p>
 
 

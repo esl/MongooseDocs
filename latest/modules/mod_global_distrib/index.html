@@ -5676,7 +5676,7 @@ It means that disabled endpoints are periodically verified and if Global Distrib
 <p>By default <code>tls</code> is disabled and all data will be sent via standard TCP connections.</p>
 </div>
 <p>To enable TLS support, the <code>cacertfile</code> and <code>certfile</code> options have to be present.
-These options will be passed to the <code>fast_tls</code> driver.</p>
+These options will be passed to the <a href="https://www.erlang.org/doc/apps/ssl/ssl.html">Erlang SSL</a> library.</p>
 <h4 id="modulesmod_global_distribconnectionstlscertfile"><code>modules.mod_global_distrib.connections.tls.certfile</code><a class="headerlink" href="#modulesmod_global_distribconnectionstlscertfile" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
@@ -5692,10 +5692,10 @@ These options will be passed to the <code>fast_tls</code> driver.</p>
 <h4 id="modulesmod_global_distribconnectionstlsciphers"><code>modules.mod_global_distrib.connections.tls.ciphers</code><a class="headerlink" href="#modulesmod_global_distribconnectionstlsciphers" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
-<li><strong>Default:</strong> <code>"TLSv1.2:TLSv1.3"</code></li>
+<li><strong>Default:</strong> this option is not set by default - all supported suites are accepted.</li>
 <li><strong>Example:</strong> <code>ciphers = "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384"</code></li>
 </ul>
-<p>Cipher suites to use with StartTLS or TLS. Please refer to the <a href="https://docs.openssl.org/master/man1/openssl-ciphers/">OpenSSL documentation</a> for the cipher string format.</p>
+<p>Cipher suites to use with StartTLS or TLS. Please refer to the <a href="https://docs.openssl.org/master/man1/openssl-ciphers/">OpenSSL documentation</a> for the cipher string format. See the <a href="https://erlang.org/doc/man/ssl.html#t:ciphers/0">Erlang/OTP SSL documentation</a> for allowed values.</p>
 <h4 id="modulesmod_global_distribconnectionstlsdhfile"><code>modules.mod_global_distrib.connections.tls.dhfile</code><a class="headerlink" href="#modulesmod_global_distribconnectionstlsdhfile" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>

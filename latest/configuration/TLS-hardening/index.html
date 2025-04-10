@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#otp-tls-vs-fast-tls" class="md-skip">
+        <a href="#deprecations" class="md-skip">
           Skip to content
         </a>
       
@@ -1380,15 +1380,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#otp-tls-vs-fast-tls" class="md-nav__link">
-    <span class="md-ellipsis">
-      OTP TLS vs. Fast TLS
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#deprecations" class="md-nav__link">
     <span class="md-ellipsis">
       Deprecations
@@ -1401,15 +1392,6 @@
   <a href="#otp-tls-hardening" class="md-nav__link">
     <span class="md-ellipsis">
       OTP TLS hardening
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fast-tls-hardening" class="md-nav__link">
-    <span class="md-ellipsis">
-      Fast TLS hardening
     </span>
   </a>
   
@@ -4459,15 +4441,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#otp-tls-vs-fast-tls" class="md-nav__link">
-    <span class="md-ellipsis">
-      OTP TLS vs. Fast TLS
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#deprecations" class="md-nav__link">
     <span class="md-ellipsis">
       Deprecations
@@ -4480,15 +4453,6 @@
   <a href="#otp-tls-hardening" class="md-nav__link">
     <span class="md-ellipsis">
       OTP TLS hardening
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fast-tls-hardening" class="md-nav__link">
-    <span class="md-ellipsis">
-      Fast TLS hardening
     </span>
   </a>
   
@@ -4515,79 +4479,18 @@
 
   <h1>TLS Hardening</h1>
 
-<h2 id="otp-tls-vs-fast-tls">OTP TLS vs. Fast TLS<a class="headerlink" href="#otp-tls-vs-fast-tls" title="Permanent link">&para;</a></h2>
-<p>Before we explain the TLS hardening in MongooseIM, we need to describe the TLS libraries used in the project.
-These are "OTP TLS" and "Fast TLS".</p>
-<p>The former is provided by (as the name suggests) OTP as the <code>ssl</code> application.
-Large part of the logic is implemented in Erlang but it calls OpenSSL API for some operations anyway.</p>
-<p>The latter is a community-maintained driver, which is implemented as NIFs (native C code).
-It uses OpenSSL API for all operations.</p>
-<p>Most MongooseIM components use the TLS library provided by OTP.
-However, some of them choose to integrate with <code>fast_tls</code> library instead.
-The former one is used primarily by MIM dependencies, while the latter is used only by MIM modules.</p>
-<p>None of them is strictly better than the other.
-Below you may find a summary of the differences between them.</p>
-<ul>
-<li><code>fast_tls</code> used to be faster, however with the progress of OTP TLS implementation
-and additional optimisations applied in MongooseIM this is no longer true.</li>
-<li><code>just_tls</code> may use slightly more processor time than <code>fast_tls</code>.</li>
-<li>There are options that OTP TLS (a.k.a <code>just_tls</code> in the C2S listener configuration) supports exclusively:<ul>
-<li>Immediate connection drop when the client certificate is invalid</li>
-<li>Certificate Revocation Lists</li>
-<li>More flexible certificate verification options</li>
-</ul>
-</li>
-<li>Allowed protocol versions may be configured:<ul>
-<li>Globally for OTP TLS via an environment variable</li>
-<li>Per socket in Fast TLS via OpenSSL cipher string</li>
-</ul>
-</li>
-</ul>
 <h2 id="deprecations">Deprecations<a class="headerlink" href="#deprecations" title="Permanent link">&para;</a></h2>
 <p>MongooseIM is configured to allow only TLS 1.2 or higher, due to known vulnerabilities in TLS 1.0 and 1.1.
 It is still possible to enable earlier versions, however it is strongly discouraged.</p>
 <h2 id="otp-tls-hardening">OTP TLS hardening<a class="headerlink" href="#otp-tls-hardening" title="Permanent link">&para;</a></h2>
-<p>Protocol list for OTP TLS is set via the <code>protocol_version</code> environment variable.
+<p>The protocol list for OTP TLS is set via the <code>protocol_version</code> environment variable.
 It's an Erlang runtime variable, so it is not configured in the OS but rather in the<code>app.config</code> file.
 It may be found in <code>etc/</code> folder inside MongooseIM release and in <code>[repository root]/rel/files/</code>.</p>
-<p>In order to change the list, please find the following lines:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>{protocol_version, [&#39;tlsv1.2&#39;,
-                    &#39;tlsv1.3&#39;
-          ]}
+<p>In order to change the list, please find the following line:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>{protocol_version, [&#39;tlsv1.2&#39;, &#39;tlsv1.3&#39;]}
 </code></pre></div></td></tr></table></div>
 <p>The remaining valid values are: <code>'tlsv1.1'</code>, <code>tlsv1</code>, <code>sslv3</code>.</p>
-<p>This setting affects the following MongooseIM components:</p>
-<ul>
-<li>Raw XMPP over TCP connections (C2S listener) in the default configuration uses <code>just_tls</code></li>
-<li>All outgoing connections (databases, AMQP, SIP etc.)</li>
-<li>HTTP endpoints</li>
-</ul>
-<h2 id="fast-tls-hardening">Fast TLS hardening<a class="headerlink" href="#fast-tls-hardening" title="Permanent link">&para;</a></h2>
-<p>Fast TLS expects an OpenSSL cipher string as one of optional connection parameters.
-This string is configured individually for every module that uses it.
-By default, MongooseIM sets this option to <code>TLSv1.2:TLSv1.3</code> for each component.</p>
-<p>The list below enumerates all components that use Fast TLS and describes how to change this string.</p>
-<ul>
-<li><code>listen.c2s</code> - main user session abstraction + XMPP over TCP listener, when configured to use <code>fast_tls</code><ul>
-<li>Note that usage of <code>fast_tls</code> for C2S has been deprecated</li>
-<li>Please consult the respective section in <a href="../../listeners/listen-c2s/#listenc2stlsprotocol_options-only-for-fast_tls">Listener modules</a>.</li>
-</ul>
-</li>
-<li><code>listen.s2s</code> - incoming S2S connections (XMPP Federation)<ul>
-<li>Please consult the respective section in <a href="../../listeners/listen-s2s/#tls-options-for-s2s">Listener modules</a>.</li>
-</ul>
-</li>
-<li><code>s2s</code> - outgoing S2S connections (XMPP Federation)<ul>
-<li>Please check <a href="../s2s/#s2sciphers">the documentation</a> for <code>s2s_ciphers</code> option.</li>
-</ul>
-</li>
-<li><code>mod_global_distrib</code> - Global Distribution module<ul>
-<li>Please add <code>connections.tls.ciphers = "string"</code> to <code>modules.mod_global_distrib</code> module, as <a href="../../modules/mod_global_distrib/#tls-options">described in the documentation</a>.</li>
-</ul>
-</li>
-</ul>
+<p>See <a href="https://erlef.github.io/security-wg/secure_coding_and_deployment_hardening/ssl#selecting-protocol-versions-and-ciphers">EEF guidelines for protocol versions and ciphers</a> for more information.</p>
 
 
 

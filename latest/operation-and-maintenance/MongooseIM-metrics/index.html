@@ -4761,12 +4761,12 @@ mnesia_info_running_db_nodes 0
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code># TYPE c2s_xmpp_element_size_in_byte_size histogram
-# HELP c2s_xmpp_element_size_in_byte_size Event: c2s_xmpp_element_size_in, Metric: byte_size
-c2s_xmpp_element_size_in_byte_size_bucket{le=&quot;1&quot;} 0
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code># TYPE xmpp_element_size_in_byte_size histogram
+# HELP xmpp_element_size_in_byte_size Event: xmpp_element_size_in, Metric: byte_size
+xmpp_element_size_in_byte_size_bucket{connection_type=&quot;c2s&quot;,le=&quot;1&quot;,} 0
 ...
-c2s_xmpp_element_size_in_byte_size_bucket{le=&quot;1073741824&quot;} 0
-c2s_xmpp_element_size_in_byte_size_bucket{le=&quot;+Inf&quot;} 0
+xmpp_element_size_in_byte_size_bucket{connection_type=&quot;c2s&quot;,le=&quot;1073741824&quot;} 0
+xmpp_element_size_in_byte_size_bucket{connection_type=&quot;c2s&quot;,le=&quot;+Inf&quot;} 0
 </code></pre></div></td></tr></table></div></p>
 </div>
 <div class="tabbed-block">
@@ -5528,34 +5528,34 @@ available.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>c2s_xmpp_element_size_in_byte_size</code></td>
+<td><code>xmpp_element_size_in_byte_size</code></td>
 <td>histogram</td>
-<td>Size of an XML element received from a client.</td>
+<td>Size of an XML element received from a client, server or component.</td>
 </tr>
 <tr>
-<td><code>c2s_xmpp_element_size_out_byte_size</code></td>
+<td><code>xmpp_element_size_out_byte_size</code></td>
 <td>histogram</td>
-<td>Size of an XML element sent to a client.</td>
+<td>Size of an XML element sent to a client, server or component.</td>
 </tr>
 <tr>
-<td><code>c2s_tcp_data_in_byte_size</code></td>
+<td><code>tcp_data_in_byte_size</code></td>
 <td>counter</td>
-<td>Amount of data received from a client via TCP channel.</td>
+<td>Amount of data received from a client, another XMPP server or component via TCP channel.</td>
 </tr>
 <tr>
-<td><code>c2s_tcp_data_out_byte_size</code></td>
+<td><code>tcp_data_out_byte_size</code></td>
 <td>counter</td>
-<td>Amount of data sent to a client via TCP channel.</td>
+<td>Amount of data sent to a client, another XMPP server or component via TCP channel.</td>
 </tr>
 <tr>
-<td><code>c2s_tls_data_in_byte_size</code></td>
+<td><code>tls_data_in_byte_size</code></td>
 <td>counter</td>
-<td>Amount of data received from a client via TLS channel.</td>
+<td>Amount of data received from a client, another XMPP server or component via TLS channel.</td>
 </tr>
 <tr>
-<td><code>c2s_tls_data_out_byte_size</code></td>
+<td><code>tls_data_out_byte_size</code></td>
 <td>counter</td>
-<td>Amount of data sent to a client via TLS channel.</td>
+<td>Amount of data sent to a client, another XMPP server or component via TLS channel.</td>
 </tr>
 <tr>
 <td><code>mod_bosh_data_received_byte_size</code></td>
@@ -5577,66 +5577,6 @@ available.</p>
 <td>counter</td>
 <td>Amount of data sent to a client via WebSocket connection.</td>
 </tr>
-<tr>
-<td><code>s2s_xmpp_element_size_in_byte_size</code></td>
-<td>histogram</td>
-<td>Size of an XML element received from another XMPP server.</td>
-</tr>
-<tr>
-<td><code>s2s_xmpp_element_size_out_byte_size</code></td>
-<td>histogram</td>
-<td>Size of an XML element sent to another XMPP server.</td>
-</tr>
-<tr>
-<td><code>s2s_tcp_data_in_byte_size</code></td>
-<td>counter</td>
-<td>Amount of data received from another XMPP server via TCP channel.</td>
-</tr>
-<tr>
-<td><code>s2s_tcp_data_out_byte_size</code></td>
-<td>counter</td>
-<td>Amount of data sent to another XMPP server via TCP channel.</td>
-</tr>
-<tr>
-<td><code>s2s_tls_data_in_byte_size</code></td>
-<td>counter</td>
-<td>Amount of data received from another XMPP server via TLS channel.</td>
-</tr>
-<tr>
-<td><code>s2s_tls_data_out_byte_size</code></td>
-<td>counter</td>
-<td>Amount of data sent to another XMPP server via TLS channel.</td>
-</tr>
-<tr>
-<td><code>component_xmpp_element_size_in_byte_size</code></td>
-<td>histogram</td>
-<td>Size of an XML element received from a component.</td>
-</tr>
-<tr>
-<td><code>component_xmpp_element_size_out_byte_size</code></td>
-<td>histogram</td>
-<td>Size of an XML element sent to a component.</td>
-</tr>
-<tr>
-<td><code>component_tcp_data_in_byte_size</code></td>
-<td>counter</td>
-<td>Amount of data received from a component via TCP channel.</td>
-</tr>
-<tr>
-<td><code>component_tcp_data_out_byte_size</code></td>
-<td>counter</td>
-<td>Amount of data sent to a component via TCP channel.</td>
-</tr>
-<tr>
-<td><code>component_tls_data_in_byte_size</code></td>
-<td>counter</td>
-<td>Amount of data received from a component via TLS channel.</td>
-</tr>
-<tr>
-<td><code>component_tls_data_out_byte_size</code></td>
-<td>counter</td>
-<td>Amount of data sent to a component via TLS channel.</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -5651,32 +5591,32 @@ available.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>[global, c2s_xmpp_element_size_in, byte_size]</code></td>
+<td><code>[global, xmpp_element_size_in, c2s, byte_size]</code></td>
 <td>histogram</td>
 <td>Size of an XML element received from a client.</td>
 </tr>
 <tr>
-<td><code>[global, c2s_xmpp_element_size_out, byte_size]</code></td>
+<td><code>[global, xmpp_element_size_out, c2s, byte_size]</code></td>
 <td>histogram</td>
 <td>Size of an XML element sent to a client.</td>
 </tr>
 <tr>
-<td><code>[global, c2s_tcp_data_in, byte_size]</code></td>
+<td><code>[global, tcp_data_in, c2s, byte_size]</code></td>
 <td>spiral</td>
 <td>Amount of data received from a client via TCP channel.</td>
 </tr>
 <tr>
-<td><code>[global, c2s_tcp_data_out, byte_size]</code></td>
+<td><code>[global, tcp_data_out, c2s, byte_size]</code></td>
 <td>spiral</td>
 <td>Amount of data sent to a client via TCP channel.</td>
 </tr>
 <tr>
-<td><code>[global, c2s_tls_data_in, byte_size]</code></td>
+<td><code>[global, tls_data_in, c2s, byte_size]</code></td>
 <td>spiral</td>
 <td>Amount of data received from a client via TLS channel.</td>
 </tr>
 <tr>
-<td><code>[global, c2s_tls_data_out, byte_size]</code></td>
+<td><code>[global, tls_data_out, c2s, byte_size]</code></td>
 <td>spiral</td>
 <td>Amount of data sent to a client via TLS channel.</td>
 </tr>
@@ -5701,62 +5641,62 @@ available.</p>
 <td>Amount of data sent to a client via WebSocket connection.</td>
 </tr>
 <tr>
-<td><code>[global, s2s_xmpp_element_size_in, byte_size]</code></td>
+<td><code>[global, xmpp_element_size_in, s2s, byte_size]</code></td>
 <td>histogram</td>
 <td>Size of an XML element received from another XMPP server.</td>
 </tr>
 <tr>
-<td><code>[global, s2s_xmpp_element_size_out, byte_size]</code></td>
+<td><code>[global, xmpp_element_size_out, s2s, byte_size]</code></td>
 <td>histogram</td>
 <td>Size of an XML element sent to another XMPP server.</td>
 </tr>
 <tr>
-<td><code>[global, s2s_tcp_data_in, byte_size]</code></td>
+<td><code>[global, tcp_data_in, s2s, byte_size]</code></td>
 <td>spiral</td>
 <td>Amount of data received from another XMPP server via TCP channel.</td>
 </tr>
 <tr>
-<td><code>[global, s2s_tcp_data_out, byte_size]</code></td>
+<td><code>[global, tcp_data_out, s2s, byte_size]</code></td>
 <td>spiral</td>
 <td>Amount of data sent to another XMPP server via TCP channel.</td>
 </tr>
 <tr>
-<td><code>[global, s2s_tls_data_in, byte_size]</code></td>
+<td><code>[global, tls_data_in, s2s, byte_size]</code></td>
 <td>spiral</td>
 <td>Amount of data received from another XMPP server via TLS channel.</td>
 </tr>
 <tr>
-<td><code>[global, s2s_tls_data_out, byte_size]</code></td>
+<td><code>[global, tls_data_out, s2s, byte_size]</code></td>
 <td>spiral</td>
 <td>Amount of data sent to another XMPP server via TLS channel.</td>
 </tr>
 <tr>
-<td><code>[global, component_xmpp_element_size_in, byte_size]</code></td>
+<td><code>[global, xmpp_element_size_in, component, byte_size]</code></td>
 <td>histogram</td>
 <td>Size of an XML element received from a component.</td>
 </tr>
 <tr>
-<td><code>[global, component_xmpp_element_size_out, byte_size]</code></td>
+<td><code>[global, xmpp_element_size_out, component, byte_size]</code></td>
 <td>histogram</td>
 <td>Size of an XML element sent to a component.</td>
 </tr>
 <tr>
-<td><code>[global, component_tcp_data_in, byte_size]</code></td>
+<td><code>[global, tcp_data_in, component, byte_size]</code></td>
 <td>spiral</td>
 <td>Amount of data received from a component via TCP channel.</td>
 </tr>
 <tr>
-<td><code>[global, component_tcp_data_out, byte_size]</code></td>
+<td><code>[global, tcp_data_out, component, byte_size]</code></td>
 <td>spiral</td>
 <td>Amount of data sent to a component via TCP channel.</td>
 </tr>
 <tr>
-<td><code>[global, component_tls_data_in, byte_size]</code></td>
+<td><code>[global, tls_data_in, component, byte_size]</code></td>
 <td>spiral</td>
 <td>Amount of data received from a component via TLS channel.</td>
 </tr>
 <tr>
-<td><code>[global, component_tls_data_out, byte_size]</code></td>
+<td><code>[global, tls_data_out, component, byte_size]</code></td>
 <td>spiral</td>
 <td>Amount of data sent to a component via TLS channel.</td>
 </tr>

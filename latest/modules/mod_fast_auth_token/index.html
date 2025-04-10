@@ -2347,6 +2347,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#0-rtt-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      0-RTT Support
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4524,6 +4533,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#0-rtt-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      0-RTT Support
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4579,6 +4597,18 @@ Set it to 0 to disable automatic rotation.</p>
 <span class="w">  </span><span class="n">validity_period</span><span class="p">.</span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;days&quot;</span><span class="p">}</span>
 <span class="w">  </span><span class="n">validity_period</span><span class="p">.</span><span class="n">rotate_before_expire</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;days&quot;</span><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
+<h2 id="0-rtt-support">0-RTT Support<a class="headerlink" href="#0-rtt-support" title="Permanent link">&para;</a></h2>
+<p>For support, set <code>session_tickets = "stateless"</code> and <code>early_data = true</code> for
+the C2S listener on port 5223 (Direct TLS).</p>
+<p>Implementation details:</p>
+<blockquote>
+<p>Servers MUST reject any authentication requests received via TLS 0-RTT payloads
+that do not include a 'count' attribute, or where the count is less than or equal
+to a count that has already been processed for this token.
+This protects against replay attacks that 0-RTT is susceptible to.</p>
+</blockquote>
+<p>Checking this is impossible on the server side, so the client should ensure that
+<code>count</code> is set.</p>
 
 
 
