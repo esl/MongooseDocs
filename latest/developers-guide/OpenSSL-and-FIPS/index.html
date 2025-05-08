@@ -4669,7 +4669,7 @@ In order to enable/disable it, add the following section to <code>app.config</co
 <h2 id="how-to-check-if-the-fips-mode-is-enabled">How to check if the FIPS mode is enabled<a class="headerlink" href="#how-to-check-if-the-fips-mode-is-enabled" title="Permanent link">&para;</a></h2>
 <h3 id="log-message">Log message<a class="headerlink" href="#log-message" title="Permanent link">&para;</a></h3>
 <p>When MongooseIM starts, it prints the following log message if FIPS mode is enabled</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>2015-02-25 14:30:54.501 [warning] &lt;0.242.0&gt;@mongoose_fips:do_notify:37 FIPS mode enabled
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>2015-02-25 14:30:54.501 [warning] &lt;0.242.0&gt;@mongoose_fips:notify:15 FIPS mode enabled
 </code></pre></div></td></tr></table></div>
 <h3 id="run-time-check">Run-time check<a class="headerlink" href="#run-time-check" title="Permanent link">&para;</a></h3>
 <p>Run the following function in the MongooseIM console:</p>
@@ -4677,9 +4677,9 @@ In order to enable/disable it, add the following section to <code>app.config</co
 </code></pre></div></td></tr></table></div>
 <p>The function returns:</p>
 <ul>
+<li>not_supported - erlang compiled without fips support</li>
 <li>not_enabled - fips_mode is not set to true in etc/app.config</li>
 <li>enabled - fips_mode is set to true in etc/app.config</li>
-<li>not_supported - erlang compiled without fips support</li>
 </ul>
 <h3 id="cipher-suites-difference">Cipher suites difference<a class="headerlink" href="#cipher-suites-difference" title="Permanent link">&para;</a></h3>
 <p>A test using a <code>cipher_suites_test.sh</code> script (available in the tools directory) can be performed on MongooseIM with FIPS mode enabled and disabled.

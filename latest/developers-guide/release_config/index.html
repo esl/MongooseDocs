@@ -3554,15 +3554,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#system-install" class="md-nav__link">
     <span class="md-ellipsis">
       System install
@@ -4493,15 +4484,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#system-install" class="md-nav__link">
     <span class="md-ellipsis">
       System install
@@ -4572,16 +4554,7 @@ The help is printed when the script is run without any parameters
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code>configure: OPTIONS
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code>configure: OPTIONS
 
 Specifies which 3rd party deps will be included in the release.
 Writes configure.out file as output - this file can be sourced with:
@@ -4590,15 +4563,6 @@ Writes configure.out file as output - this file can be sourced with:
 
 Writes rel/configure.vars.config which can be used as Reltool input.
 
-3rd party apps:
-
-    with-none           include no 3rd party drivers
-    with-all            include all drivers
-    with-mysql          include mysql driver
-    with-odbc           include an ODBC driver (requires unixodbc to compile)
-    with-pgsql          include pgsql driver
-    with-redis          include redis driver
-
 Options:
 
     prefix    Installation PREFIX directory. Default: /usr/local
@@ -4606,11 +4570,6 @@ Options:
     user      System user to run the server as. Default:
 </code></pre></div></td></tr></table></div>
 <p>This script is also accessible via the make <code>configure</code> target.</p>
-<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
-<p>If <code>mysql</code> and <code>redis</code> are the only drivers that should be included in the
-release, run the following command before <code>make rel</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>$ ./tools/configure with-mysql with-redis
-</code></pre></div></td></tr></table></div>
 <p>You only need to run the <code>./tools/configure</code> command once (unless changing the release's config is needed to
 include some other dependencies).</p>
 <h3 id="system-install">System install<a class="headerlink" href="#system-install" title="Permanent link">&para;</a></h3>
@@ -4620,7 +4579,7 @@ Results should be similar to those described below.</p>
 <p>On Mac:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/configure<span class="w"> </span>with-all<span class="w"> </span><span class="nv">user</span><span class="o">=</span>erszcz<span class="w"> </span><span class="nv">prefix</span><span class="o">=</span>/tmp/mim-sandbox-system<span class="w"> </span><span class="nv">system</span><span class="o">=</span>yes
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>./tools/configure<span class="w"> </span><span class="nv">user</span><span class="o">=</span>erszcz<span class="w"> </span><span class="nv">prefix</span><span class="o">=</span>/tmp/mim-sandbox-system<span class="w"> </span><span class="nv">system</span><span class="o">=</span>yes
 cat<span class="w"> </span>configure.out<span class="w"> </span>rel/configure.vars.config
 <span class="nv">RUNNER_GROUP</span><span class="o">=</span>staff<span class="w"> </span>make<span class="w"> </span>install
 </code></pre></div></td></tr></table></div>
