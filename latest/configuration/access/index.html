@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.13">
     
     
       
@@ -30,7 +30,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -1288,24 +1288,6 @@
   <a href="#c2s-access" class="md-nav__link">
     <span class="md-ellipsis">
       C2S Access
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#c2s-shaper" class="md-nav__link">
-    <span class="md-ellipsis">
-      C2S Shaper
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#s2s-shaper" class="md-nav__link">
-    <span class="md-ellipsis">
-      S2S Shaper
     </span>
   </a>
   
@@ -4613,24 +4595,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#c2s-shaper" class="md-nav__link">
-    <span class="md-ellipsis">
-      C2S Shaper
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#s2s-shaper" class="md-nav__link">
-    <span class="md-ellipsis">
-      S2S Shaper
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#muc" class="md-nav__link">
     <span class="md-ellipsis">
       MUC
@@ -4763,33 +4727,6 @@
 </ul>
 <p>The <code>blocked</code> access class can be defined in the <a href="../acl/"><code>acl</code> section</a> and match blacklisted users.</p>
 <p>For this rule to take effect, it needs to be referenced in the options of a <a href="../../listeners/listen-c2s/#listenc2saccess">C2S listener</a>.</p>
-<h3 id="c2s-shaper">C2S Shaper<a class="headerlink" href="#c2s-shaper" title="Permanent link">&para;</a></h3>
-<p>The <code>c2s_shaper</code> rule is used to determine the shaper used to limit the incoming traffic on C2S connections:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">c2s_shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;admin&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;none&quot;</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;normal&quot;</span><span class="p">}</span>
-<span class="w">  </span><span class="p">]</span>
-</code></pre></div></td></tr></table></div>
-<p>It has the following logic:</p>
-<ul>
-<li>if the access class is <code>admin</code>, the returned value is <code>"none"</code>,</li>
-<li>otherwise, the returned value is <code>"normal"</code>.</li>
-</ul>
-<p>The <code>admin</code> access class can be defined in the <code>acl</code> to specify admin users who will bypass the <code>normal</code> shaper.</p>
-<p>For this rule to take effect, it needs to be referenced in the options of a <a href="../../listeners/listen-c2s/#listenc2sshaper">C2S listener</a>.</p>
-<h3 id="s2s-shaper">S2S Shaper<a class="headerlink" href="#s2s-shaper" title="Permanent link">&para;</a></h3>
-<p>The <code>s2s_shaper</code> rule is used to determine the shaper used to limit the incoming traffic on C2S connections:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="n">s2s_shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="n">acl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;fast&quot;</span><span class="p">}</span>
-<span class="w">  </span><span class="p">]</span>
-</code></pre></div></td></tr></table></div>
-<p>It assigns the <code>fast</code> shaper to all S2S connections.</p>
-<p>For this rule to take effect, it needs to be referenced in the options of an <a href="../../listeners/listen-s2s/#listens2sshaper">S2S listener</a>.</p>
 <h3 id="muc">MUC<a class="headerlink" href="#muc" title="Permanent link">&para;</a></h3>
 <p>The following rules manage the permissions of MUC operations:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -5091,10 +5028,10 @@ If the rule is not host specific, one can use <code>global</code> instead of <co
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
     
   </body>
