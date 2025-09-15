@@ -4524,12 +4524,11 @@
 <p>This module implements <a href="http://xmpp.org/extensions/xep-0191.html">XEP-0191: Blocking command</a>.
 The extension allows blocking the whole communication with a user (or a group of users) with a single command. 
 The protocol is much simpler than privacy lists.</p>
-<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
-<p>None.</p>
-<h2 id="example-configuration">Example Configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_blocking]</span>
-</code></pre></div></td></tr></table></div>
-<p>The module is not configurable because internally it is an interface to privacy lists, so settings like storage backend apply to it automatically.</p>
+<div class="admonition info">
+<p class="admonition-title">Relation to <code>mod_privacy</code></p>
+<p>This module uses <a href="../mod_privacy/"><code>mod_privacy</code></a> as a dependency, because internally it is an interface to privacy lists.
+If you configure <code>mod_blocking</code>, <code>mod_privacy</code> will be started automatically with the same options.</p>
+</div>
 <p>Issuing a blocking command creates a privacy list named "blocking" (if it didn't exist), adds to it items being blocked and sets this list as the default.
 Unblocking contacts removes them from "blocking" privacy list.</p>
 <p>If the user has other online resources which use privacy lists it may result in a different behaviour per resource; this is normal, and provided for in XEP.</p>
@@ -4539,6 +4538,13 @@ Unblocking contacts removes them from "blocking" privacy list.</p>
 The <code>domain</code> part should be then a configured <code>muc</code> or <code>muclight</code> domain, e.g. <code>conference.localhost</code> or <code>muclight.localhost</code>.
 The resource is then respectively user's nickname in case of <code>muc</code> or user's bare jid in case of <code>muclight</code>.</p>
 <p>Note: When a blocked user sends a message to a room, the server does not respond with an error but silently ignores it, i.e. doesn't deliver it to the user that issued the blocking.</p>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<p>Same as in <a href="../mod_privacy/#options"><code>mod_privacy</code></a>.</p>
+<h2 id="example-configuration">Example Configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_blocking]</span>
+<span class="w">  </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rdbms&quot;</span>
+</code></pre></div></td></tr></table></div>
 
 
 
