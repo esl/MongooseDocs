@@ -4541,6 +4541,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/6.4.0_6.4.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.4.0 to 6.4.1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         
   
@@ -4907,9 +4930,9 @@ You can set the following options in this section:</p>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
 <li><strong>Default:</strong> not set</li>
-<li><strong>Example:</strong> <code>tls.certfile = "server.pem"</code></li>
+<li><strong>Example:</strong> <code>tls.certfile = "cert.pem"</code></li>
 </ul>
-<p>Path to the X509 PEM file with a certificate (not protected by a password). If the certificate is signed by an intermediate CA, you should specify here the whole CA chain by concatenating all public keys together and appending the private key after that.</p>
+<p>Path to the X509 PEM file with a certificate (not protected by a password). If the certificate is signed by an intermediate CA, you should specify here the whole CA chain by concatenating all public keys together.</p>
 <h3 id="listenc2stlscacertfile"><code>listen.c2s.tls.cacertfile</code><a class="headerlink" href="#listenc2stlscacertfile" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
@@ -4937,7 +4960,7 @@ You can set the following options in this section:</p>
 <li><strong>Default:</strong> not set</li>
 <li><strong>Example:</strong> <code>tls.keyfile = "key.pem"</code></li>
 </ul>
-<p>Path to the X509 PEM file with the private key. The private key may alternatively be appended to certificates and provided in <code>listen.c2s.tls.certfile</code>.</p>
+<p>Path to the X509 PEM file with the private key.</p>
 <h3 id="listenc2stlspassword"><code>listen.c2s.tls.password</code><a class="headerlink" href="#listenc2stlspassword" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string</li>
@@ -5001,12 +5024,18 @@ which could be used for faster TLS connection, skipping one roundtrip when conne
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.c2s]]</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[[listen.c2s]]</span>
 <span class="w">  </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5222</span>
 <span class="w">  </span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;c2s&quot;</span>
 <span class="w">  </span><span class="n">shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;normal&quot;</span>
 <span class="w">  </span><span class="n">max_stanza_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">65536</span>
-<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">certfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;server.pem&quot;</span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">certfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;cert.pem&quot;</span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">keyfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;key.pem&quot;</span>
 <span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">dhfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;dh_server.pem&quot;</span>
 
 <span class="k">[[listen.c2s]]</span>
@@ -5014,6 +5043,10 @@ which could be used for faster TLS connection, skipping one roundtrip when conne
 <span class="w">  </span><span class="n">access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;c2s&quot;</span>
 <span class="w">  </span><span class="n">shaper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;normal&quot;</span>
 <span class="w">  </span><span class="n">max_stanza_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">65536</span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tls&quot;</span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">certfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;cert.pem&quot;</span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">keyfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;key.pem&quot;</span>
+<span class="w">  </span><span class="n">tls</span><span class="p">.</span><span class="n">dhfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;dh_server.pem&quot;</span>
 </code></pre></div></td></tr></table></div>
 <ul>
 <li>One at port 5222, which accepts a plain TCP connection and allows to use StartTLS for upgrading it to an encrypted one. The files containing the certificate and the DH parameter are also provided.</li>

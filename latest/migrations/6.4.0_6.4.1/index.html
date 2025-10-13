@@ -12,13 +12,13 @@
         <meta name="author" content="Erlang Solutions">
       
       
-        <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/operation-and-maintenance/Cluster-configuration-and-node-management/">
+        <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/migrations/6.4.0_6.4.1/">
       
       
-        <link rel="prev" href="../Cluster-management-considerations/">
+        <link rel="prev" href="../6.3.3_6.4.0/">
       
       
-        <link rel="next" href="../Logging-%26-monitoring/">
+        <link rel="next" href="../jid-from-mam-muc-script/">
       
       
       <link rel="icon" href="../../favicon.ico">
@@ -26,7 +26,7 @@
     
     
       
-        <title>Cluster configuration and node management - MongooseIM Docs</title>
+        <title>6.4.0 to 6.4.1 - MongooseIM Docs</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#environment-configuration" class="md-skip">
+        <a href="#configuration-options" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Cluster configuration and node management
+              6.4.0 to 6.4.1
             
           </span>
         </div>
@@ -3102,20 +3102,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
         
           
           <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
@@ -3131,7 +3129,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             Operation and Maintenance
@@ -3145,7 +3143,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../gdpr-considerations/" class="md-nav__link">
+      <a href="../../operation-and-maintenance/gdpr-considerations/" class="md-nav__link">
         
   
   
@@ -3168,7 +3166,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Cluster-management-considerations/" class="md-nav__link">
+      <a href="../../operation-and-maintenance/Cluster-management-considerations/" class="md-nav__link">
         
   
   
@@ -3188,30 +3186,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Cluster configuration and node management
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../operation-and-maintenance/Cluster-configuration-and-node-management/" class="md-nav__link">
         
   
   
@@ -3222,177 +3200,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#environment-configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Environment configuration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Environment configuration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#file-descriptors" class="md-nav__link">
-    <span class="md-ellipsis">
-      File descriptors
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#vmargs-file" class="md-nav__link">
-    <span class="md-ellipsis">
-      vm.args file
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#port-range" class="md-nav__link">
-    <span class="md-ellipsis">
-      Port range
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#connecting-nodes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Connecting nodes
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Connecting nodes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#initial-node" class="md-nav__link">
-    <span class="md-ellipsis">
-      Initial node
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#new-node-joining-cluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      New node - joining cluster
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#leaving-cluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      Leaving cluster
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#removing-a-node-from-the-cluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      Removing a node from the cluster
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cluster-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      Cluster status
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#load-balancing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Load Balancing
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Load Balancing">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#elastic-load-balancer-elb" class="md-nav__link">
-    <span class="md-ellipsis">
-      Elastic Load Balancer (ELB)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#software-load-balancer" class="md-nav__link">
-    <span class="md-ellipsis">
-      Software load balancer
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dns-based-load-balancing" class="md-nav__link">
-    <span class="md-ellipsis">
-      DNS-based load balancing
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other" class="md-nav__link">
-    <span class="md-ellipsis">
-      Other
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -3405,7 +3212,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Logging-%26-monitoring/" class="md-nav__link">
+      <a href="../../operation-and-maintenance/Logging-%26-monitoring/" class="md-nav__link">
         
   
   
@@ -3428,7 +3235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Logging/" class="md-nav__link">
+      <a href="../../operation-and-maintenance/Logging/" class="md-nav__link">
         
   
   
@@ -3451,7 +3258,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Humio/" class="md-nav__link">
+      <a href="../../operation-and-maintenance/Humio/" class="md-nav__link">
         
   
   
@@ -3474,7 +3281,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Logging-fields/" class="md-nav__link">
+      <a href="../../operation-and-maintenance/Logging-fields/" class="md-nav__link">
         
   
   
@@ -3497,7 +3304,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Rolling-upgrade/" class="md-nav__link">
+      <a href="../../operation-and-maintenance/Rolling-upgrade/" class="md-nav__link">
         
   
   
@@ -3520,7 +3327,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Cluster-restart/" class="md-nav__link">
+      <a href="../../operation-and-maintenance/Cluster-restart/" class="md-nav__link">
         
   
   
@@ -3543,7 +3350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../MongooseIM-metrics/" class="md-nav__link">
+      <a href="../../operation-and-maintenance/MongooseIM-metrics/" class="md-nav__link">
         
   
   
@@ -3566,7 +3373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../System-Metrics-Privacy-Policy/" class="md-nav__link">
+      <a href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/" class="md-nav__link">
         
   
   
@@ -3589,7 +3396,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tls-distribution/" class="md-nav__link">
+      <a href="../../operation-and-maintenance/tls-distribution/" class="md-nav__link">
         
   
   
@@ -3612,7 +3419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../known-issues/" class="md-nav__link">
+      <a href="../../operation-and-maintenance/known-issues/" class="md-nav__link">
         
   
   
@@ -4052,18 +3859,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" checked>
         
           
           <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
@@ -4079,7 +3888,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_14">
             <span class="md-nav__icon md-icon"></span>
             Migration Guide
@@ -4093,7 +3902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/3.1.1_3.2.0/" class="md-nav__link">
+      <a href="../3.1.1_3.2.0/" class="md-nav__link">
         
   
   
@@ -4116,7 +3925,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/3.3.0_3.4.0/" class="md-nav__link">
+      <a href="../3.3.0_3.4.0/" class="md-nav__link">
         
   
   
@@ -4139,7 +3948,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/3.5.0_3.6.0/" class="md-nav__link">
+      <a href="../3.5.0_3.6.0/" class="md-nav__link">
         
   
   
@@ -4162,7 +3971,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/3.6.0_3.7.0/" class="md-nav__link">
+      <a href="../3.6.0_3.7.0/" class="md-nav__link">
         
   
   
@@ -4185,7 +3994,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/3.7.0_4.0.0/" class="md-nav__link">
+      <a href="../3.7.0_4.0.0/" class="md-nav__link">
         
   
   
@@ -4208,7 +4017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/4.0.0_4.0.1/" class="md-nav__link">
+      <a href="../4.0.0_4.0.1/" class="md-nav__link">
         
   
   
@@ -4231,7 +4040,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/4.0.1_4.1.0/" class="md-nav__link">
+      <a href="../4.0.1_4.1.0/" class="md-nav__link">
         
   
   
@@ -4254,7 +4063,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/4.1.0_4.2.0/" class="md-nav__link">
+      <a href="../4.1.0_4.2.0/" class="md-nav__link">
         
   
   
@@ -4277,7 +4086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/4.2.0_5.0.0/" class="md-nav__link">
+      <a href="../4.2.0_5.0.0/" class="md-nav__link">
         
   
   
@@ -4300,7 +4109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/5.0.0_5.1.0/" class="md-nav__link">
+      <a href="../5.0.0_5.1.0/" class="md-nav__link">
         
   
   
@@ -4323,7 +4132,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/5.1.0_6.0.0/" class="md-nav__link">
+      <a href="../5.1.0_6.0.0/" class="md-nav__link">
         
   
   
@@ -4346,7 +4155,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/6.0.0_6.1.0/" class="md-nav__link">
+      <a href="../6.0.0_6.1.0/" class="md-nav__link">
         
   
   
@@ -4369,7 +4178,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/6.1.0_6.2.0/" class="md-nav__link">
+      <a href="../6.1.0_6.2.0/" class="md-nav__link">
         
   
   
@@ -4392,7 +4201,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/6.2.0_6.2.1/" class="md-nav__link">
+      <a href="../6.2.0_6.2.1/" class="md-nav__link">
         
   
   
@@ -4415,7 +4224,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/6.2.1_6.3.0/" class="md-nav__link">
+      <a href="../6.2.1_6.3.0/" class="md-nav__link">
         
   
   
@@ -4438,7 +4247,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/6.3.0_6.3.1/" class="md-nav__link">
+      <a href="../6.3.0_6.3.1/" class="md-nav__link">
         
   
   
@@ -4461,7 +4270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/6.3.1_6.3.2/" class="md-nav__link">
+      <a href="../6.3.1_6.3.2/" class="md-nav__link">
         
   
   
@@ -4484,7 +4293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/6.3.3_6.4.0/" class="md-nav__link">
+      <a href="../6.3.3_6.4.0/" class="md-nav__link">
         
   
   
@@ -4504,10 +4313,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../migrations/6.4.0_6.4.1/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    6.4.0 to 6.4.1
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -4518,6 +4347,48 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration options
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tls-certfile-and-keyfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      TLS certfile and keyfile
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -4530,7 +4401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
+      <a href="../jid-from-mam-muc-script/" class="md-nav__link">
         
   
   
@@ -4622,148 +4493,19 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#environment-configuration" class="md-nav__link">
+  <a href="#configuration-options" class="md-nav__link">
     <span class="md-ellipsis">
-      Environment configuration
+      Configuration options
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Environment configuration">
+    <nav class="md-nav" aria-label="Configuration options">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#file-descriptors" class="md-nav__link">
+  <a href="#tls-certfile-and-keyfile" class="md-nav__link">
     <span class="md-ellipsis">
-      File descriptors
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#vmargs-file" class="md-nav__link">
-    <span class="md-ellipsis">
-      vm.args file
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#port-range" class="md-nav__link">
-    <span class="md-ellipsis">
-      Port range
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#connecting-nodes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Connecting nodes
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Connecting nodes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#initial-node" class="md-nav__link">
-    <span class="md-ellipsis">
-      Initial node
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#new-node-joining-cluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      New node - joining cluster
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#leaving-cluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      Leaving cluster
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#removing-a-node-from-the-cluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      Removing a node from the cluster
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cluster-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      Cluster status
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#load-balancing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Load Balancing
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Load Balancing">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#elastic-load-balancer-elb" class="md-nav__link">
-    <span class="md-ellipsis">
-      Elastic Load Balancer (ELB)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#software-load-balancer" class="md-nav__link">
-    <span class="md-ellipsis">
-      Software load balancer
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dns-based-load-balancing" class="md-nav__link">
-    <span class="md-ellipsis">
-      DNS-based load balancing
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other" class="md-nav__link">
-    <span class="md-ellipsis">
-      Other
+      TLS certfile and keyfile
     </span>
   </a>
   
@@ -4793,244 +4535,27 @@
   
 
 
-  <h1>Cluster configuration and node management</h1>
+  <h1>6.4.0 to 6.4.1</h1>
 
-<h2 id="environment-configuration">Environment configuration<a class="headerlink" href="#environment-configuration" title="Permanent link">&para;</a></h2>
-<h3 id="file-descriptors">File descriptors<a class="headerlink" href="#file-descriptors" title="Permanent link">&para;</a></h3>
-<p>To handle large traffic, some of the system variables need to be tuned.
-Number one on that list is the maximum number of file descriptors which often is set to 1024.
-Each MongooseIM connection consumes ~1 file descriptor, so the default value will not suffice for larger installations - when it is exceeded, emfile errors will appear in logs.</p>
-<p>To check the current limit execute: <code>ulimit -n</code>.</p>
-<p>To list all limits execute: <code>ulimit -a</code>.</p>
-<p>In the example below we set limits for a <code>mongooseim</code> user.
-To increase the limit the following entries should be added in <code>/etc/security/limits.conf</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseim   soft   nofile   1000000
-mongooseim   hard   nofile   1000000
-</code></pre></div></td></tr></table></div>
-<p>If you are using <strong>Ubuntu</strong>, all <code>/etc/pam.d/common-session*</code> files should include <code>session required pam_limits.so</code>.</p>
-<h3 id="vmargs-file"><code>vm.args</code> file<a class="headerlink" href="#vmargs-file" title="Permanent link">&para;</a></h3>
-<p>This file contains Erlang options used when starting the VM.
-It is located in <code>REL_ROOT/etc/vm.args</code> where <code>REL_ROOT</code> is the path to a MongooseIM release
-(ie. <code>_build/prod/rel/mongooseim</code> if you build MongooseIM from source).</p>
-<p>When using an SSL/TLS connection we advise to increase <code>ERL_MAX_PORTS</code> to <code>350000</code>.
-This value specifies how many ports (files, drivers, sockets etc) can be used by the Erlang VM.
-Be cautious - it preallocates some structures inside the VM and will have impact on the memory usage.
-We suggest 350000 for 100 k users when using an SSL/TLS connection or 250000 in other cases.</p>
-<p>To check how memory consumption changes depending on <code>ERL_MAX_PORTS</code>, use the following command:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>env<span class="w"> </span><span class="nv">ERL_MAX_PORTS</span><span class="o">=[</span>given<span class="w"> </span>value<span class="o">]</span><span class="w"> </span>erl<span class="w"> </span>-noinput<span class="w"> </span>-eval<span class="w"> </span><span class="s1">&#39;io:format(&quot;~p~n&quot;,[erlang:memory(system)]).&#39;</span><span class="w"> </span>-s<span class="w"> </span>erlang<span class="w"> </span>halt
-</code></pre></div></td></tr></table></div>
-<p>Another change you need to make when building a MongooseIM cluster is setting the <code>-sname</code>.
-To do it, just set the <code>-sname</code> option in <code>vm.args</code> with node's hostname,
-which <strong>must</strong> be resolvable on other nodes in the cluster.</p>
-<h3 id="port-range">Port range<a class="headerlink" href="#port-range" title="Permanent link">&para;</a></h3>
-<p>To connect to other nodes, a freshly started node uses a port from the range <code>inet_dist_listen_min</code> to <code>inet_dist_listen_max</code>.</p>
-<p>To enable this, add the following line to the <code>vm.args</code> file:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>-kernel inet_dist_listen_min 50000 inet_dist_listen_max 50010
-</code></pre></div></td></tr></table></div>
-<p>Make sure that the range you set provides enough ports for all the nodes in the cluster.</p>
-<p>Remember to keep an epmd port open (port 4369) if any firewall restrictions are required.
-Epmd keeps track of which Erlang node is using which ports on the local machine.</p>
-<h2 id="connecting-nodes">Connecting nodes<a class="headerlink" href="#connecting-nodes" title="Permanent link">&para;</a></h2>
-<p>Checklist:</p>
+<h2 id="configuration-options">Configuration options<a class="headerlink" href="#configuration-options" title="Permanent link">&para;</a></h2>
+<p>There are some possible adjustments to the configuration file that you might need to make before upgrading.</p>
+<h3 id="tls-certfile-and-keyfile">TLS <code>certfile</code> and <code>keyfile</code><a class="headerlink" href="#tls-certfile-and-keyfile" title="Permanent link">&para;</a></h3>
+<p>There are following places in the TOML configuration file where you can set up TLS certificates:</p>
 <ul>
-<li>working directory <code>rel/mongooseim</code> (root of a MongooseIM release or installation)</li>
-<li>the same cookie across all nodes (<code>vm.args</code> <code>-setcookie</code> parameter)</li>
-<li>each node should be able to ping other nodes using its sname
-   (ex. <code>net_adm:ping('mongoose@localhost')</code>)</li>
-<li>RDBMS backend is configured, so CETS could discover nodes</li>
+<li><a href="../../configuration/outgoing-connections/#tls-options">Outgoing connection pools</a></li>
+<li><a href="../../configuration/s2s/#tls-options-for-outgoing-connections">S2S outgoing connections</a></li>
+<li><a href="../../listeners/listen-c2s/#tls-options-for-c2s">C2S listener</a></li>
+<li><a href="../../listeners/listen-s2s/#configuration-options">S2S listener</a></li>
+<li><a href="../../listeners/listen-components/#tls-options-for-components">Component listener</a></li>
+<li><a href="../../listeners/listen-http/#tls-https-options">HTTP listener</a></li>
+<li><a href="../../modules/mod_global_distrib/#tls-options">Global distribution module</a></li>
 </ul>
-<h3 id="initial-node">Initial node<a class="headerlink" href="#initial-node" title="Permanent link">&para;</a></h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="cets" name="__tabbed_1" type="radio" /><input id="mnesia" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="cets">CETS</label><label for="mnesia">Mnesia</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<p>Clustering is automatic. There is no difference between nodes.</p>
-</div>
-<div class="tabbed-block">
-<p>There is no action required on the initial node.</p>
-<p>Just start MongooseIM using <code>mongooseim start</code> or <code>mongooseim live</code>.</p>
-</div>
-</div>
-</div>
-<h3 id="new-node-joining-cluster">New node - joining cluster<a class="headerlink" href="#new-node-joining-cluster" title="Permanent link">&para;</a></h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="cets_1" name="__tabbed_2" type="radio" /><input id="mnesia_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="cets_1">CETS</label><label for="mnesia_1">Mnesia</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<p>Clustering is automatic.</p>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>start
-mongooseimctl<span class="w"> </span>started<span class="w"> </span><span class="c1">#waits until MongooseIM starts</span>
-mongooseimctl<span class="w"> </span>join_cluster<span class="w"> </span>ClusterMember
-</code></pre></div></td></tr></table></div>
-<p><code>ClusterMember</code> is the name of a running node set in <code>vm.args</code> file, for example <code>mongooseim@localhost</code>.
-This node has to be part of the cluster we'd like to join.</p>
-<p>First, MongooseIM will display a warning and a question if the operation should proceed:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>Warning. This will drop all current connections and will discard all persistent data from Mnesia. Do you want to continue? (yes/no)
-</code></pre></div></td></tr></table></div>
-<p>If you type <code>yes</code> MongooseIM will start joining the cluster.
-Successful output may look like the following:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>You have successfully joined the node mongooseim2@localhost to the cluster with node member mongooseim@localhost
-</code></pre></div></td></tr></table></div>
-<p>In order to skip the question you can add option <code>-f</code> which will perform the action
-without displaying the warning and waiting for the confirmation.</p>
-</div>
-</div>
-</div>
-<h3 id="leaving-cluster">Leaving cluster<a class="headerlink" href="#leaving-cluster" title="Permanent link">&para;</a></h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="cets_2" name="__tabbed_3" type="radio" /><input id="mnesia_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="cets_2">CETS</label><label for="mnesia_2">Mnesia</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<p>Stopping the node is enough to leave the cluster.
-If you want to avoid the node joining the cluster again, you have to specify a different <code>cluster_name</code>
-option in the CETS backend configuration. A different Erlang cookie is a good idea too.</p>
-</div>
-<div class="tabbed-block">
-<p>To leave a running node from the cluster, call:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>leave_cluster
-</code></pre></div></td></tr></table></div>
-<p>It only makes sense to use it if the node is part of a cluster, e.g <code>join_cluster</code> was called on that node before.</p>
-<p>Similarly to <code>join_cluster</code> a warning and a question will be displayed unless the option <code>-f</code> is added to the command.</p>
-<p>The successful output from the above command may look like the following:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>The node mongooseim2@localhost has successfully left the cluster
-</code></pre></div></td></tr></table></div>
-</div>
-</div>
-</div>
-<h3 id="removing-a-node-from-the-cluster">Removing a node from the cluster<a class="headerlink" href="#removing-a-node-from-the-cluster" title="Permanent link">&para;</a></h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="cets_3" name="__tabbed_4" type="radio" /><input id="mnesia_3" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="cets_3">CETS</label><label for="mnesia_3">Mnesia</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<p>A stopped node would be automatically removed from the node discovery table in RDBMS database after some time.
-It is needed so other nodes would not try to connect to the stopped node.</p>
-</div>
-<div class="tabbed-block">
-<p>To remove another node from the cluster, call the following command from one of the cluster members:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>remove_from_cluster<span class="w"> </span>RemoteNodeName
-</code></pre></div></td></tr></table></div>
-<p>where <code>RemoteNodeName</code> is the name of the node that we'd like to remove from our cluster.
-This command could be useful when the node is dead and not responding and we'd like to remove it remotely.
-The successful output from the above command may look like the following:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>The node mongooseim2@localhost has been removed from the cluster
-</code></pre></div></td></tr></table></div>
-</div>
-</div>
-</div>
-<h3 id="cluster-status">Cluster status<a class="headerlink" href="#cluster-status" title="Permanent link">&para;</a></h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="cets_4" name="__tabbed_5" type="radio" /><input id="mnesia_4" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="cets_4">CETS</label><label for="mnesia_4">Mnesia</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<p>Run the command:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>cets<span class="w"> </span>systemInfo
-</code></pre></div></td></tr></table></div>
-<p><code>joinedNodes</code> should contain a list of properly joined nodes:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&quot;joinedNodes&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">  </span><span class="s2">&quot;mongooseim@node1&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;mongooseim@node2&quot;</span>
-<span class="p">]</span>
-</code></pre></div></td></tr></table></div>
-<p>It should generally be equal to the list of <code>discoveredNodes</code>.</p>
-<p>If it is not equal, you could have some configuration or networking issues.
-You can check the <code>unavailableNodes</code>, <code>remoteNodesWithUnknownTables</code>,
-and <code>remoteNodesWithMissingTables</code> lists for more information (generally, these lists should be empty).
-You can read the description for other fields of <code>systemInfo</code> in the
-<a href="../../graphql-api/admin-graphql-doc.html#definition-CETSSystemInfo">GraphQL API reference</a>.</p>
-<p>For a properly configured 2 nodes cluster the metrics would show something like that:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="err">mo</span><span class="kc">n</span><span class="err">gooseimc</span><span class="kc">tl</span><span class="w"> </span><span class="err">me</span><span class="kc">tr</span><span class="err">ic</span><span class="w"> </span><span class="err">ge</span><span class="kc">t</span><span class="err">Me</span><span class="kc">tr</span><span class="err">ics</span><span class="w"> </span><span class="mi">--</span><span class="kc">na</span><span class="err">me</span><span class="w"> </span><span class="err">&#39;</span><span class="p">[</span><span class="s2">&quot;global&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;cets&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;system&quot;</span><span class="p">]</span><span class="err">&#39;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;metric&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;getMetrics&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;unavailable_nodes&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cets_system&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;remote_unknown_tables&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;remote_nodes_without_disco&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;remote_nodes_with_unknown_tables&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;remote_nodes_with_missing_tables&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;remote_missing_tables&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;global&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;cets&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;system&quot;</span>
-<span class="w">          </span><span class="p">],</span>
-<span class="w">          </span><span class="nt">&quot;joined_nodes&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;discovery_works&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;discovered_nodes&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;conflict_tables&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;conflict_nodes&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;available_nodes&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">]</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></td></tr></table></div>
-</div>
-<div class="tabbed-block">
-<p>You can use the following commands on any of the running nodes to examine the cluster
-or to see if a newly added node is properly clustered:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>mnesia<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;running db nodes&quot;</span>
-</code></pre></div></td></tr></table></div>
-<p>This command shows all running nodes.
-A healthy cluster should contain all nodes here.
-For example:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>running<span class="w"> </span>db<span class="w"> </span><span class="nv">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>mongooseim@node1,<span class="w"> </span>mongooseim@node2<span class="o">]</span>
-</code></pre></div></td></tr></table></div>
-To see stopped or misbehaving nodes the following command can be useful:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>mnesia<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;stopped db nodes&quot;</span>
-</code></pre></div></td></tr></table></div>
-<p>This command shows which nodes are considered stopped.
-This does not necessarily indicate that they are down but might be a symptom of a communication problem.</p>
-</div>
-</div>
-</div>
-<h2 id="load-balancing">Load Balancing<a class="headerlink" href="#load-balancing" title="Permanent link">&para;</a></h2>
-<h3 id="elastic-load-balancer-elb">Elastic Load Balancer (ELB)<a class="headerlink" href="#elastic-load-balancer-elb" title="Permanent link">&para;</a></h3>
-<p>When using ELB please be advised that some warm-up time may be needed before
-the load balancer works efficiently for a big load.</p>
-<h3 id="software-load-balancer">Software load balancer<a class="headerlink" href="#software-load-balancer" title="Permanent link">&para;</a></h3>
-<p>A good example of load balancing on the application layer are HAProxy and Nginx.</p>
-<h3 id="dns-based-load-balancing">DNS-based load balancing<a class="headerlink" href="#dns-based-load-balancing" title="Permanent link">&para;</a></h3>
-<p>Load balancing can be performed on a DNS level.
-A DNS response can have a number of IP addresses that can be returned to the client side in a random order.</p>
-<p>On the AWS stack this type of balancing is provided by Route53.
-The description of their service can be found in the <a href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/WeightedResourceRecordSets.html">Route53 Developer's Guide</a>.</p>
-<h3 id="other">Other<a class="headerlink" href="#other" title="Permanent link">&para;</a></h3>
-<p>The approaches described above can be mixed - we can use DNS load balancing to pick a software load balancer which will select one of the nodes.</p>
+<p>In all such places, you specify the certificate file with the <code>certfile</code> option,
+and the private key file with the <code>keyfile</code> option.
+However, previous versions of MongooseIM also allowed putting the certificate concatenated with the private key
+into one file referenced with the <code>certfile</code> option.
+This is <strong>no longer accepted</strong> due to an update in Erlang/OTP 28.1,
+and you need to make sure to use separate <code>certfile</code> and <code>keyfile</code> before upgrading MongooseIM.</p>
 
 
 
@@ -5068,7 +4593,7 @@ The description of their service can be found in the <a href="http://docs.aws.am
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../Cluster-management-considerations/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Cluster management considerations">
+          <a href="../6.3.3_6.4.0/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 6.3.3 to 6.4.0">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5078,20 +4603,20 @@ The description of their service can be found in the <a href="http://docs.aws.am
                 Previous
               </span>
               <div class="md-ellipsis">
-                Cluster management considerations
+                6.3.3 to 6.4.0
               </div>
             </div>
           </a>
         
         
           
-          <a href="../Logging-%26-monitoring/" class="md-footer__link md-footer__link--next" aria-label="Next: Logging &amp; monitoring">
+          <a href="../jid-from-mam-muc-script/" class="md-footer__link md-footer__link--next" aria-label="Next: MAM MUC migration helper">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Logging & monitoring
+                MAM MUC migration helper
               </div>
             </div>
             <div class="md-footer__button md-icon">

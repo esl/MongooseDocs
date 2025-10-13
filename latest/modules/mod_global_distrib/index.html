@@ -2547,6 +2547,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionstlskeyfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      modules.mod_global_distrib.connections.tls.keyfile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_global_distribconnectionstlsciphers" class="md-nav__link">
     <span class="md-ellipsis">
       modules.mod_global_distrib.connections.tls.ciphers
@@ -4786,6 +4795,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/6.4.0_6.4.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6.4.0 to 6.4.1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         
   
@@ -5099,6 +5131,15 @@
   <a href="#modulesmod_global_distribconnectionstlscacertfile" class="md-nav__link">
     <span class="md-ellipsis">
       modules.mod_global_distrib.connections.tls.cacertfile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_global_distribconnectionstlskeyfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      modules.mod_global_distrib.connections.tls.keyfile
     </span>
   </a>
   
@@ -5698,20 +5739,29 @@ It means that disabled endpoints are periodically verified and if Global Distrib
 <p class="admonition-title">Note</p>
 <p>By default <code>tls</code> is disabled and all data will be sent via standard TCP connections.</p>
 </div>
-<p>To enable TLS support, the <code>cacertfile</code> and <code>certfile</code> options have to be present.
+<p>To enable TLS support, the <code>cacertfile</code>, <code>certfile</code> and <code>keyfile</code> options have to be present.
 These options will be passed to the <a href="https://www.erlang.org/doc/apps/ssl/ssl.html">Erlang SSL</a> library.</p>
 <h4 id="modulesmod_global_distribconnectionstlscertfile"><code>modules.mod_global_distrib.connections.tls.certfile</code><a class="headerlink" href="#modulesmod_global_distribconnectionstlscertfile" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
 <li><strong>Default:</strong> none, this options is mandatory to enable TLS support</li>
-<li><strong>Example:</strong> <code>certfile = "priv/dc1.pem"</code></li>
+<li><strong>Example:</strong> <code>certfile = "priv/cert.pem"</code></li>
 </ul>
+<p>Path to the X.509 PEM file with a certificate. If the certificate is signed by an intermediate CA, you should specify here the whole CA chain by concatenating all public keys together.</p>
 <h4 id="modulesmod_global_distribconnectionstlscacertfile"><code>modules.mod_global_distrib.connections.tls.cacertfile</code><a class="headerlink" href="#modulesmod_global_distribconnectionstlscacertfile" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> string, path in the file system</li>
 <li><strong>Default:</strong> none, this options is mandatory to enable TLS support</li>
 <li><strong>Example:</strong> <code>cacertfile = "priv/ca.pem"</code></li>
 </ul>
+<p>Path to the X.509 PEM file with a CA chain.</p>
+<h4 id="modulesmod_global_distribconnectionstlskeyfile"><code>modules.mod_global_distrib.connections.tls.keyfile</code><a class="headerlink" href="#modulesmod_global_distribconnectionstlskeyfile" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Syntax:</strong> string, path in the file system</li>
+<li><strong>Default:</strong> none, this options is mandatory to enable TLS support</li>
+<li><strong>Example:</strong> <code>keyfile = "priv/key.pem"</code></li>
+</ul>
+<p>Path to the X.509 PEM file with the private key.</p>
 <h4 id="modulesmod_global_distribconnectionstlsciphers"><code>modules.mod_global_distrib.connections.tls.ciphers</code><a class="headerlink" href="#modulesmod_global_distribconnectionstlsciphers" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> string</li>
