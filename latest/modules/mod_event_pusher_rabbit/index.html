@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#current-status" class="md-skip">
+        <a href="#module-description" class="md-skip">
           Skip to content
         </a>
       
@@ -2645,17 +2645,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#current-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Current status
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#module-description" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2667,15 +2656,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#presence-exchange-options" class="md-nav__link">
+  <a href="#presence-options" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Presence exchange options
+        Presence options
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Presence exchange options">
+    <nav class="md-nav" aria-label="Presence options">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -5685,17 +5674,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#current-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Current status
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#module-description" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5707,15 +5685,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#presence-exchange-options" class="md-nav__link">
+  <a href="#presence-options" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Presence exchange options
+        Presence options
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Presence exchange options">
+    <nav class="md-nav" aria-label="Presence options">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -6022,8 +6000,6 @@
 
   <h1>RabbitMQ backend</h1>
 
-<h2 id="current-status">Current status<a class="headerlink" href="#current-status" title="Permanent link">&para;</a></h2>
-<p><strong>This module is still in an experimental phase.</strong></p>
 <h2 id="module-description">Module Description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
 <p>This module is a backend of <a href="../mod_event_pusher/">mod_event_pusher</a> that enables support for the
 RabbitMQ integration. Currently, there are 5 available notifications:</p>
@@ -6045,7 +6021,9 @@ bare jid (<code>user@domain</code>) and configurable topic e.g <code>alice@local
 to make the module work. It's well advised to read through
 <a href="../../configuration/outgoing-connections/"><em>Advanced configuration/Outgoing connections</em></a>
 section before enabling the module.</p>
-<h2 id="presence-exchange-options">Presence exchange options<a class="headerlink" href="#presence-exchange-options" title="Permanent link">&para;</a></h2>
+<h2 id="presence-options">Presence options<a class="headerlink" href="#presence-options" title="Permanent link">&para;</a></h2>
+<p>To enable user presence notifications, you need to include the <code>presence_exchange</code> section in your configuration.
+The specified exchange will be created automatically.</p>
 <h3 id="modulesmod_event_pusherrabbitpresence_exchangename"><code>modules.mod_event_pusher.rabbit.presence_exchange.name</code><a class="headerlink" href="#modulesmod_event_pusherrabbitpresence_exchangename" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> non-empty string</li>
@@ -6061,6 +6039,8 @@ section before enabling the module.</p>
 </ul>
 <p>Defines RabbitMQ presence exchange type.</p>
 <h2 id="chat-message-options">Chat message options<a class="headerlink" href="#chat-message-options" title="Permanent link">&para;</a></h2>
+<p>To enable private chat message notifications, you need to include the <code>chat_msg_exchange</code> section in your configuration.
+The specified exchange will be created automatically.</p>
 <h3 id="modulesmod_event_pusherrabbitchat_msg_exchangename"><code>modules.mod_event_pusher.rabbit.chat_msg_exchange.name</code><a class="headerlink" href="#modulesmod_event_pusherrabbitchat_msg_exchangename" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> non-empty string</li>
@@ -6090,6 +6070,8 @@ section before enabling the module.</p>
 </ul>
 <p>Defines RabbitMQ chat message received topic name.</p>
 <h2 id="group-chat-message-options">Group chat message options<a class="headerlink" href="#group-chat-message-options" title="Permanent link">&para;</a></h2>
+<p>To enable group chat message notifications, you need to include the <code>groupchat_msg_exchange</code> section in your configuration.
+The specified exchange will be created automatically.</p>
 <h3 id="modulesmod_event_pusherrabbitgroupchat_msg_exchangename"><code>modules.mod_event_pusher.rabbit.groupchat_msg_exchange.name</code><a class="headerlink" href="#modulesmod_event_pusherrabbitgroupchat_msg_exchangename" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> non-empty string</li>
@@ -6119,6 +6101,7 @@ section before enabling the module.</p>
 </ul>
 <p>Defines RabbitMQ group chat message received topic name.</p>
 <h2 id="example-configuration">Example configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
+<p>The following example enables all types of notifications with custom exchange and topic names:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -6126,16 +6109,17 @@ section before enabling the module.</p>
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_event_pusher.rabbit]</span>
-<span class="w">  </span><span class="n">presence_exchange</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="s2">&quot;presence&quot;</span>
-<span class="w">  </span><span class="n">presence_exchange</span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;topic&quot;</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_event_pusher.rabbit]</span>
+<span class="w">  </span><span class="n">presence_exchange</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;presence&quot;</span>
 <span class="w">  </span><span class="n">chat_msg_exchange</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;chat_msg&quot;</span>
 <span class="w">  </span><span class="n">chat_msg_exchange</span><span class="p">.</span><span class="n">sent_topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;chat_msg_sent&quot;</span>
 <span class="w">  </span><span class="n">chat_msg_exchange</span><span class="p">.</span><span class="n">recv_topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;chat_msg_recv&quot;</span>
 <span class="w">  </span><span class="n">groupchat_msg_exchange</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;groupchat_msg&quot;</span>
 <span class="w">  </span><span class="n">groupchat_msg_exchange</span><span class="p">.</span><span class="n">sent_topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;groupchat_msg_sent&quot;</span>
 <span class="w">  </span><span class="n">groupchat_msg_exchange</span><span class="p">.</span><span class="n">recv_topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;groupchat_msg_recv&quot;</span>
+</code></pre></div></td></tr></table></div>
+<p>This alternative version enables only the presence notifications, and uses default settings:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_event_pusher_rabbit.presence_exchange]</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="json-schema-examples">JSON Schema examples<a class="headerlink" href="#json-schema-examples" title="Permanent link">&para;</a></h2>
 <p>The different kinds of notifications deliver slightly different messages.
