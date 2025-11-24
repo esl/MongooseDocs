@@ -2569,23 +2569,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Module Description">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#how-it-works" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How it works
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2596,6 +2579,34 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How it works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-event-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom event processing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -5416,23 +5427,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Module Description">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#how-it-works" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How it works
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -5443,6 +5437,34 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How it works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-event-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom event processing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -5469,15 +5491,10 @@
   <h1>mod_event_pusher</h1>
 
 <h2 id="module-description">Module Description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
-<p>This module is a generic interface for event-pushing backends.
-It defines a single callback, <code>push_event/2</code> that forwards the event to all registered backends.
-Each backend decides how and if to handle the event in its <code>push_event/2</code> implementation.</p>
-<p>Currently supported backends include <a href="../mod_event_pusher_http/">http</a>, <a href="../mod_event_pusher_push/">push</a>, <a href="../mod_event_pusher_rabbit/">rabbit</a> and <a href="../mod_event_pusher_sns/">sns</a>.
+<p>This module is a generic interface for pushing <strong>events</strong> to the configured <strong>backends</strong>.
+The events include presence updates and incoming/outgoing messages.
+Currently supported backends include <a href="../mod_event_pusher_http/">http</a>, <a href="../mod_event_pusher_push/">push</a>, <a href="../mod_event_pusher_rabbit/">rabbit</a> and <a href="../mod_event_pusher_sns/">sns</a>.
 Refer to their specific documentation to learn more about their functions and configuration options.</p>
-<h3 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h3>
-<p>The events are standardized as records that can be found in the <code>mod_event_pusher_events.hrl</code> file.
-Common events like user presence changes (offline and online), chat and groupchat messages (incoming
-and outgoing) are already handled in the <code>mod_event_pusher_hook_translator</code> module, which is a proxy between various hooks and the <code>push_event/2</code> handler.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This module does not support <a href="../../configuration/general/#generalhost_types">dynamic domains</a>.</p>
@@ -5525,6 +5542,34 @@ See the detailed documentation for each backend.</p>
 
 <span class="k">[modules.mod_event_pusher.rabbit]</span>
 </code></pre></div></td></tr></table></div>
+<h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
+<p>The events are standardized as records that can be found in the <code>mod_event_pusher_events.hrl</code> file.
+Common events like user presence changes (offline and online), chat and groupchat messages (incoming and outgoing) are handled in the <code>mod_event_pusher_hook_translator</code> module.
+Each event has a corresponding <a href="../../developers-guide/Hooks-and-handlers/">hook</a>, e.g. <code>user_send_message</code> is run when a user sends a message.
+<code>mod_event_pusher_hook_translator</code> has a handler function for each supported hook.</p>
+<p>Handling an event includes the following steps:</p>
+<ol>
+<li>The event hook is executed, and the corresponding handler function in <code>mod_event_pusher_hook_translator</code> is called.</li>
+<li>The handler function calls <code>mod_event_pusher:push_event(Acc, Event)</code>.</li>
+<li><code>mod_event_pusher:push_event/2</code> runs another hook called <code>push_event</code>.</li>
+<li>All configured backend modules have handlers for the <code>push_event</code> hook, and all these handlers are called.</li>
+</ol>
+<h3 id="custom-event-processing">Custom event processing<a class="headerlink" href="#custom-event-processing" title="Permanent link">&para;</a></h3>
+<p>By implementing your own module handling the <code>push_event</code> hook, you can:</p>
+<ul>
+<li>Push the events to a new service, such as a message queue or a database.</li>
+<li>Filter the events by returning <code>{ok, ...}</code> to keep an event, or <code>{stop, ...}</code> to drop it.</li>
+<li>Add a map with <strong>metadata</strong> to the events. The keys need to be atoms, and the values need to be atoms, binaries or numbers.</li>
+</ul>
+<p>There is an example <a href="https://github.com/esl/MongooseIM/blob/master/big_tests/tests/mod_event_pusher_filter.erl">mod_event_pusher_filter.erl</a> module, demonstrating how to filter the events and append additional metadata.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Execution order of handlers depends on their priorities. In particular, filtering events or adding metadata needs to happend before pushing notifications to external services. The example handler has the priority value of 10, while backends have the priority of 50.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Currently only the <a href="../mod_event_pusher_rabbit/#additional-metadata">rabbit</a> backend supports adding metadata to the published notifications.</p>
+</div>
 
 
 
