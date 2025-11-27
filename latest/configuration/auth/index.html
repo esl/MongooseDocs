@@ -1336,6 +1336,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sasl-external-common-name-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SASL External common name options
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SASL External common name options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authsasl_external_common_nameprefix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        auth.sasl_external_common_name.prefix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authsasl_external_common_namesuffix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        auth.sasl_external_common_name.suffix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#password-related-options" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5606,6 +5645,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sasl-external-common-name-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SASL External common name options
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SASL External common name options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authsasl_external_common_nameprefix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        auth.sasl_external_common_name.prefix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authsasl_external_common_namesuffix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        auth.sasl_external_common_name.suffix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#password-related-options" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5869,6 +5947,11 @@ The following methods are supported:</p>
 <li><code>auth_id</code> - accept a certificate without <code>xmpp_addrs</code> and use the user identity from the authentication request.</li>
 </ul>
 <p>This option allows you to list the enabled ones in the order of preference (they are tried until one succeeds or the list is exhausted).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is another possibility: a custom verification module that you can implement using <a href="https://github.com/esl/MongooseIM/blob/master/src/sasl/cyrsasl_external_verification.erl">cyrsasl_external_verification</a> as an example.
+After including the module in your MongooseIM release, you can put its name in the list of values of the <code>sasl_external</code> option.</p>
+</div>
 <h3 id="authmax_users_per_domain"><code>auth.max_users_per_domain</code><a class="headerlink" href="#authmax_users_per_domain" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer or string <code>"infinity"</code>, representing maximum amount of users that can be registered in a domain</li>
@@ -5880,6 +5963,22 @@ The following methods are supported:</p>
 <p class="admonition-title">Warning</p>
 <p>The limit only works for the following authentication methods: <code>internal</code>, <code>rdbms</code> and <code>ldap</code>.</p>
 </div>
+<h2 id="sasl-external-common-name-options">SASL External common name options<a class="headerlink" href="#sasl-external-common-name-options" title="Permanent link">&para;</a></h2>
+<p>These options are only effective for the <code>SASL EXTERNAL</code> mechanism using <code>common_name</code> (see <a href="#authsasl_external"><code>sasl_external</code></a>).</p>
+<h4 id="authsasl_external_common_nameprefix"><code>auth.sasl_external_common_name.prefix</code><a class="headerlink" href="#authsasl_external_common_nameprefix" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Syntax:</strong> string, a valid <a href="https://www.rfc-editor.org/rfc/rfc6122.html#appendix-A">JID localpart</a></li>
+<li><strong>Default:</strong> empty string</li>
+<li><strong>Example:</strong> <code>sasl_external_common_name.prefix = "user_"</code></li>
+</ul>
+<p>An optional prefix prepended to the value of <code>common_name</code> in order to convert it to a user name.</p>
+<h4 id="authsasl_external_common_namesuffix"><code>auth.sasl_external_common_name.suffix</code><a class="headerlink" href="#authsasl_external_common_namesuffix" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Syntax:</strong> string, a valid <a href="https://www.rfc-editor.org/rfc/rfc6122.html#appendix-A">JID localpart</a></li>
+<li><strong>Default:</strong> empty string</li>
+<li><strong>Example:</strong> <code>sasl_external_common_name.prefix = ".1"</code></li>
+</ul>
+<p>An optional suffix appended to the value of <code>common_name</code> in order to convert it to a user name.</p>
 <h2 id="password-related-options">Password-related options<a class="headerlink" href="#password-related-options" title="Permanent link">&para;</a></h2>
 <p>These options are common to the <code>http</code>, <code>rdbms</code> and <code>internal</code> methods.</p>
 <h3 id="authpasswordformat"><code>auth.password.format</code><a class="headerlink" href="#authpasswordformat" title="Permanent link">&para;</a></h3>
