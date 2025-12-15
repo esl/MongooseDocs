@@ -1386,6 +1386,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#outgoing_poolsmax_worker_queue_len" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        outgoing_pools.*.*.max_worker_queue_len
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1891,17 +1902,6 @@
     <span class="md-ellipsis">
       
         outgoing_pools.rabbit.*.connection.confirms_enabled
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#outgoing_poolsrabbitconnectionmax_worker_queue_len" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        outgoing_pools.rabbit.*.connection.max_worker_queue_len
       
     </span>
   </a>
@@ -6059,6 +6059,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/6.5.0_6.x.x/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6.5.0 to 6.x.x
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         
   
@@ -6232,6 +6260,17 @@
     <span class="md-ellipsis">
       
         outgoing_pools.*.*.call_timeout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outgoing_poolsmax_worker_queue_len" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        outgoing_pools.*.*.max_worker_queue_len
       
     </span>
   </a>
@@ -6749,17 +6788,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#outgoing_poolsrabbitconnectionmax_worker_queue_len" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        outgoing_pools.rabbit.*.connection.max_worker_queue_len
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -7050,6 +7078,18 @@ If a global default pool is not configured, these services will fail.</p>
 <li><strong>Example:</strong> <code>call_timeout = 3000</code></li>
 </ul>
 <p>Number of milliseconds after which a call to the pool will time out.</p>
+<h3 id="outgoing_poolsmax_worker_queue_len"><code>outgoing_pools.*.*.max_worker_queue_len</code><a class="headerlink" href="#outgoing_poolsmax_worker_queue_len" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> not set</li>
+<li><strong>Example:</strong> <code>max_worker_queue_len = 1000</code></li>
+</ul>
+<p>Maximum number of requests waiting in the incoming message queue of a worker. By default there is no such limit.
+When this queue length is reached for all workers, further incoming requests will be dropped.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This option is applicable only to the <code>best_worker</code> strategy. Using it for other strategies is not allowed.</p>
+</div>
 <h2 id="connection-options">Connection options<a class="headerlink" href="#connection-options" title="Permanent link">&para;</a></h2>
 <p>Options specific to a pool connection are defined in a subsection starting with <code>[outgoing_pools.*.*.connection]</code>.
 For example:</p>
@@ -7343,13 +7383,6 @@ Any other <code>Tag</code> can be used for other purposes.</p>
 <li><strong>Example:</strong> <code>confirms_enabled = false</code></li>
 </ul>
 <p>Enables/disables one-to-one publishers confirms.</p>
-<h3 id="outgoing_poolsrabbitconnectionmax_worker_queue_len"><code>outgoing_pools.rabbit.*.connection.max_worker_queue_len</code><a class="headerlink" href="#outgoing_poolsrabbitconnectionmax_worker_queue_len" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Syntax:</strong> non-negative integer or <code>"infinity"</code></li>
-<li><strong>Default:</strong> <code>1000</code></li>
-<li><strong>Example:</strong> <code>max_worker_queue_len = "infinity"</code></li>
-</ul>
-<p>Sets a limit of messages in a worker's mailbox above which the worker starts dropping the messages. If a worker message queue length reaches the limit, messages from the head of the queue are dropped until the queue length is again below the limit. Use <code>infinity</code> to disable.</p>
 <hr />
 <p>To enable TLS, you need to include the <a href="#tls-options">TLS section</a> in the connection options.</p>
 <h2 id="ldap-options">LDAP options<a class="headerlink" href="#ldap-options" title="Permanent link">&para;</a></h2>
