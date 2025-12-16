@@ -1908,6 +1908,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#outgoing_poolsrabbitconnectionreconnectattempts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        outgoing_pools.rabbit.*.connection.reconnect.attempts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outgoing_poolsrabbitconnectionreconnectdelay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        outgoing_pools.rabbit.*.connection.reconnect.delay
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6788,6 +6810,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#outgoing_poolsrabbitconnectionreconnectattempts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        outgoing_pools.rabbit.*.connection.reconnect.attempts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outgoing_poolsrabbitconnectionreconnectdelay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        outgoing_pools.rabbit.*.connection.reconnect.delay
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7383,6 +7427,28 @@ Any other <code>Tag</code> can be used for other purposes.</p>
 <li><strong>Example:</strong> <code>confirms_enabled = false</code></li>
 </ul>
 <p>Enables/disables one-to-one publishers confirms.</p>
+<h3 id="outgoing_poolsrabbitconnectionreconnectattempts"><code>outgoing_pools.rabbit.*.connection.reconnect.attempts</code><a class="headerlink" href="#outgoing_poolsrabbitconnectionreconnectattempts" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer</li>
+<li><strong>Default:</strong> 0</li>
+<li><strong>Example:</strong> <code>reconnect.attempts = 5</code></li>
+</ul>
+<p>By default, a failed connection attempt results in an immediate restart of the affected worker.
+When this happens, its incoming request queue is lost, and any requests present in the queue are dropped.
+To avoid this, you can use this option to specify a number of reconnection attempts before the worker is restarted.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Using this option might result in a lot of requests being accumulated in the worker queues - especially if <code>reconnect.delay</code> multiplied by <code>reconnect.attempts</code> is a long time period.
+Thus, we recommend using the <a href="#outgoing_poolsmax_worker_queue_len"><code>max_worker_queue_len</code></a> option as a safety valve is such cases.</p>
+</div>
+<h3 id="outgoing_poolsrabbitconnectionreconnectdelay"><code>outgoing_pools.rabbit.*.connection.reconnect.delay</code><a class="headerlink" href="#outgoing_poolsrabbitconnectionreconnectdelay" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer (milliseconds)</li>
+<li><strong>Default:</strong> 2000</li>
+<li><strong>Example:</strong> <code>reconnect.delay = 5000</code></li>
+</ul>
+<p>Delay (in milliseconds) between consecutive reconnection attempts.
+This option is effective only if the value of <code>reconnect.attempts</code> is positive.</p>
 <hr />
 <p>To enable TLS, you need to include the <a href="#tls-options">TLS section</a> in the connection options.</p>
 <h2 id="ldap-options">LDAP options<a class="headerlink" href="#ldap-options" title="Permanent link">&para;</a></h2>
