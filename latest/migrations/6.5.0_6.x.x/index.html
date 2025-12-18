@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#configuration-options" class="md-skip">
+        <a href="#ms-sql-and-odbc-are-no-longer-supported" class="md-skip">
           Skip to content
         </a>
       
@@ -5273,6 +5273,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#ms-sql-and-odbc-are-no-longer-supported" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MS SQL and ODBC are no longer supported
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration-options" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5283,6 +5294,17 @@
   
     <nav class="md-nav" aria-label="Configuration options">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#removal-of-rdbms_server_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removal of rdbms_server_type
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#rabbitmq-connection-pool" class="md-nav__link">
@@ -5423,6 +5445,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#ms-sql-and-odbc-are-no-longer-supported" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MS SQL and ODBC are no longer supported
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration-options" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5433,6 +5466,17 @@
   
     <nav class="md-nav" aria-label="Configuration options">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#removal-of-rdbms_server_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removal of rdbms_server_type
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#rabbitmq-connection-pool" class="md-nav__link">
@@ -5472,7 +5516,13 @@
 
   <h1>6.5.0 to 6.x.x</h1>
 
+<h2 id="ms-sql-and-odbc-are-no-longer-supported">MS SQL and ODBC are no longer supported<a class="headerlink" href="#ms-sql-and-odbc-are-no-longer-supported" title="Permanent link">&para;</a></h2>
+<p>The Microsoft SQL Server database is no longer supported, and you cannot set the <a href="../../configuration/outgoing-connections/#outgoing_poolsrdbmsconnectiondriver">RDBMS driver</a> to <code>odbc</code> anymore.
+In case you used this database, you need to migrate to another supported RDBMS, e.g. MySQL, MariaDB, PostgreSQL or CockroachDB.</p>
 <h2 id="configuration-options">Configuration options<a class="headerlink" href="#configuration-options" title="Permanent link">&para;</a></h2>
+<h3 id="removal-of-rdbms_server_type">Removal of <code>rdbms_server_type</code><a class="headerlink" href="#removal-of-rdbms_server_type" title="Permanent link">&para;</a></h3>
+<p>The <code>general.rdbms_server_type</code> option is removed, and it has to be deleted from the TOML configuration file.
+It was used to customize queries for the ODBC driver, which is not supported anymore.</p>
 <h3 id="rabbitmq-connection-pool">RabbitMQ connection pool<a class="headerlink" href="#rabbitmq-connection-pool" title="Permanent link">&para;</a></h3>
 <p>The RabbitMQ-specific connection option <code>max_worker_queue_len</code> is now replaced with a more generic <a href="../../configuration/outgoing-connections/#outgoing_poolsmax_worker_queue_len">worker pool option</a> with the same name.
 Contrary to the removed option, it now ensures that the queue limit is never exceeded.
@@ -5603,10 +5653,10 @@ Make sure you use the new option instead of the removed one.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

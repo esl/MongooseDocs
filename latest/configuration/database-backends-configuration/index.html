@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1714,17 +1714,6 @@
     <span class="md-ellipsis">
       
         CockroachDB
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#microsoft-sql-server" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Microsoft SQL Server
       
     </span>
   </a>
@@ -5611,17 +5600,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#microsoft-sql-server" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Microsoft SQL Server
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -5751,8 +5729,7 @@ Subsequent sections go into more depth on each database: what they are suitable 
 <li>
 <p>RDBMS - MongooseIM has a strong backend support for relational databases.
  Reliable and battle proven, they are a great choice for regular MongooseIM use cases and features like <code>privacy lists</code>, <code>vcards</code>, <code>roster</code>, <code>private storage</code>, <code>last activity</code> and <code>message archive</code>.
- Never loose your data.
- Use MySQL, MariaDB, PostgreSQL, CockroachDB, or MS SQL Server.</p>
+ Supported databases include MySQL, MariaDB, PostgreSQL and CockroachDB.</p>
 </li>
 <li>
 <p>Cassandra - Only for MAM (Message Archive Management).</p>
@@ -5849,115 +5826,6 @@ You should also configure the CockroachDB database in the <code>mongooseim.toml<
 Please refer to the <a href="../outgoing-connections/#rdbms-options">RDBMS options</a>
 and <a href="../general/#database-settings">general database options</a>
 for more information.</p>
-<h3 id="microsoft-sql-server">Microsoft SQL Server<a class="headerlink" href="#microsoft-sql-server" title="Permanent link">&para;</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>MSSQL backend is deprecated and will be removed in the next release.</p>
-</div>
-<p>Microsoft SQL Server, sometimes called MSSQL, or Azure SQL Database.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>MongooseIM can only connect to MSSQL <a href="../../operation-and-maintenance/known-issues/">on Ubuntu Xenial x64</a>.</p>
-</div>
-<p><strong>This can be used for:</strong></p>
-<ul>
-<li>users (credentials)</li>
-<li>vcards</li>
-<li>roster</li>
-<li>private storage</li>
-<li>privacy/block lists</li>
-<li>last activity</li>
-<li>mam (message archive management)</li>
-<li>muc_light rooms</li>
-</ul>
-<p><strong>Setup</strong></p>
-<p>MSSQL can be used from MongooseIM through the ODBC layer with FreeTDS driver, so you need them installed on your system.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Ubuntu</span>
-$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>freetds-dev<span class="w"> </span>tdsodbc
-
-<span class="c1"># CentOS compatible systems (Rocky, Alma)</span>
-$<span class="w"> </span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>freetds
-
-<span class="c1"># macOS</span>
-$<span class="w"> </span>brew<span class="w"> </span>install<span class="w"> </span>freetds
-</code></pre></div></td></tr></table></div>
-<p>Then you need to configure the connection.
-Add your database (<code>mongooseim</code> here) to the <code>/etc/odbc.ini</code> or <code>$HOME/.odbc.ini</code> file:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[mongoose-mssql]</span>
-<span class="c1">; Ubuntu</span>
-<span class="na">Driver</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s">/usr/lib/x86_64-linux-gnu/odbc/libtdsodbc.so</span>
-<span class="na">Setup</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s">/usr/lib/x86_64-linux-gnu/odbc/libtdsS.so</span>
-<span class="c1">; CentOS compatible</span>
-<span class="c1">; Driver      = /usr/lib64/libtdsodbc.so.0</span>
-<span class="c1">; Setup       = /usr/lib64/libtdsS.so</span>
-<span class="c1">; macOS</span>
-<span class="c1">; Driver      = /usr/local/Cellar/freetds/[current version]/lib/libtdsodbc.so</span>
-<span class="na">Server</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s">127.0.0.1</span>
-<span class="na">Port</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s">1433</span>
-<span class="na">Database</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">mongooseim</span>
-<span class="na">Charset</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s">UTF-8</span>
-<span class="na">TDS_Version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">7.2</span>
-<span class="na">client_charset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">UTF-8</span>
-</code></pre></div></td></tr></table></div>
-<p>Please amend the paths above to match your current OS if necessary.</p>
-<p>For more details, please refer to the <a href="http://www.freetds.org/userguide/freetdsconf.html">freetds.conf documentation</a> and
-<a href="http://www.unixodbc.org/odbcinst.html">unixodbc documentation</a>.</p>
-<p>MongooseIM is built with ODBC support by default.</p>
-<p><strong>Deadlocks notice</strong></p>
-<p>If muc_light's backend is set to ODBC and there are many rooms created in parallel in your system,
-there may be some deadlocks due to the <code>READ_COMMITTED_SNAPSHOT</code> set to <code>OFF</code> by default.
-In this case we recommend setting this database property to <code>ON</code>, this will enable row level locking which significantly reduces
-deadlock chances around muc_light operations.</p>
-<p>This property can be set by the following <code>ALTER DATABASE</code> query:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="err">$</span><span class="n">name_of_your_db</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">READ_COMMITTED_SNAPSHOT</span><span class="w"> </span><span class="k">ON</span>
-</code></pre></div></td></tr></table></div>
-<p>The command above may take some time.</p>
-<p>Then you need to import the SQL schema from  <code>mssql2012.sql</code>.
-You can use a Microsoft's GUI tool (the provided .sql files should work with it) or isql, but after a slight modification of the dump file:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>cat<span class="w"> </span>mssql2012.sql<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;\r&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/GO/\n/g&#39;</span><span class="w"> </span><span class="p">|</span>
-isql<span class="w"> </span>mongoose-mssql<span class="w"> </span>username<span class="w"> </span>password<span class="w"> </span>-b
-</code></pre></div></td></tr></table></div>
-<p>The final step is to configure <code>mongooseim.toml</code> appropriately.
-Set the following option in the <code>general</code> section:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[general]</span>
-<span class="w">  </span><span class="n">rdbms_server_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;mssql&quot;</span>
-</code></pre></div></td></tr></table></div>
-<p>Configure the <code>outgoing_pools.rdbms</code> section as follows:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[outgoing_pools.rdbms.default]</span>
-<span class="w">  </span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span>
-
-<span class="w">  </span><span class="k">[outgoing_pools.rdbms.default.connection]</span>
-<span class="w">    </span><span class="n">driver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;odbc&quot;</span>
-<span class="w">    </span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;DSN=mongoose-mssql;UID=username;PWD=password&quot;</span>
-</code></pre></div></td></tr></table></div>
 <h2 id="nosql">NoSQL<a class="headerlink" href="#nosql" title="Permanent link">&para;</a></h2>
 <h3 id="cassandra">Cassandra<a class="headerlink" href="#cassandra" title="Permanent link">&para;</a></h3>
 <p><strong>Setup</strong></p>
@@ -6123,10 +5991,10 @@ curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
