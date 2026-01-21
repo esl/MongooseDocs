@@ -2258,34 +2258,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modules/mod_bosh/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    mod_bosh
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../modules/mod_caps/" class="md-nav__link">
         
   
@@ -2462,10 +2434,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_13" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_12" >
         
           
-          <label class="md-nav__link" for="__nav_9_13" id="__nav_9_13_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9_12" id="__nav_9_12_label" tabindex="0">
             
   
   
@@ -2483,8 +2455,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_13_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9_13">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -5284,6 +5256,56 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#bosh-and-websocket-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BOSH and WebSocket changes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BOSH and WebSocket changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mod_bosh-replaced-with-mongoose_bosh_handler-and-service_bosh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mod_bosh replaced with mongoose_bosh_handler and service_bosh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mod_websockets-replaced-with-mongoose_websocket_handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mod_websockets replaced with mongoose_websocket_handler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration-options" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5456,6 +5478,56 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#bosh-and-websocket-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BOSH and WebSocket changes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BOSH and WebSocket changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mod_bosh-replaced-with-mongoose_bosh_handler-and-service_bosh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mod_bosh replaced with mongoose_bosh_handler and service_bosh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mod_websockets-replaced-with-mongoose_websocket_handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mod_websockets replaced with mongoose_websocket_handler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration-options" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5519,6 +5591,43 @@
 <h2 id="ms-sql-and-odbc-are-no-longer-supported">MS SQL and ODBC are no longer supported<a class="headerlink" href="#ms-sql-and-odbc-are-no-longer-supported" title="Permanent link">&para;</a></h2>
 <p>The Microsoft SQL Server database is no longer supported, and you cannot set the <a href="../../configuration/outgoing-connections/#outgoing_poolsrdbmsconnectiondriver">RDBMS driver</a> to <code>odbc</code> anymore.
 In case you used this database, you need to migrate to another supported RDBMS, e.g. MySQL, MariaDB, PostgreSQL or CockroachDB.</p>
+<h2 id="bosh-and-websocket-changes">BOSH and WebSocket changes<a class="headerlink" href="#bosh-and-websocket-changes" title="Permanent link">&para;</a></h2>
+<h3 id="mod_bosh-replaced-with-mongoose_bosh_handler-and-service_bosh"><code>mod_bosh</code> replaced with <code>mongoose_bosh_handler</code> and <code>service_bosh</code><a class="headerlink" href="#mod_bosh-replaced-with-mongoose_bosh_handler-and-service_bosh" title="Permanent link">&para;</a></h3>
+<p>The <code>mod_bosh</code> module had inconsistent behaviour when configured for multiple host types (or static hosts).
+This is why we have replaced it with <a href="../../configuration/Services/#service_bosh"><code>service_bosh</code></a>.
+You need to change your configuration to use the new service instead of the removed module.
+If you had it configured in <code>host_config</code>, you can use the new option <a href="../../configuration/Services/#servicesservice_boshhost_types"><code>service_bosh.host_types</code></a> to achieve the same effect.</p>
+<p>We have also moved the HTTP handler from <code>mod_bosh</code> to a new module called <code>mongoose_bosh_handler</code>.
+Update the handler name in your configured <a href="../../listeners/listen-http/#handler-types-bosh-mongoose_bosh_handler">HTTP listeners</a> sections if you have it configured.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is also a good opportunity to check if you need BOSH - if not, you can remove the <code>mod_bosh</code> module and HTTP handler without adding the new ones.</p>
+</div>
+<h3 id="mod_websockets-replaced-with-mongoose_websocket_handler"><code>mod_websockets</code> replaced with <code>mongoose_websocket_handler</code><a class="headerlink" href="#mod_websockets-replaced-with-mongoose_websocket_handler" title="Permanent link">&para;</a></h3>
+<p>Following the BOSH refactor, we have also renamed the <code>mod_websockets</code> HTTP handler to <code>mongoose_webdocket_handler</code>.
+Update the handler name in your configured <a href="../../listeners/listen-http/#handler-types-websockets-mongoose_websocket_handler">HTTP listeners</a> sections if you have it configured.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is also a good opportunity to check if you need WebSockets - if not, you can remove the <code>mod_websocket</code> HTTP handler without adding the new one.</p>
+</div>
+<h3 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h3>
+<p>As part of the BOSH and WebSocket refactor, we have updated the names of BOSH and WebSocket metrics. The table below summarizes the changes. The names presented in the table are assuming that Prometheus is used. For more information, e.g. about Prometheus labels or Exometer metrics, follow the links in the table.</p>
+<table>
+<thead>
+<tr>
+<th>Previous metrics</th>
+<th>Current metrics</th>
+<th>More information</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mod_bosh_data_received_byte_size</code>,<br> <code>mod_bosh_data_sent_byte_size</code>,<br> <code>mod_websocket_data_received_byte_size</code>,<br> <code>mod_websocket_data_sent_byte_size</code></td>
+<td><code>bosh_data_received_byte_size</code>, <br> <code>bosh_data_sent_byte_size</code>, <br> <code>websocket_data_received_byte_size</code>, <br> <code>websocket_data_sent_byte_size</code></td>
+<td><a href="../../operation-and-maintenance/MongooseIM-metrics/#network-data-metrics">Network data</a></td>
+</tr>
+</tbody>
+</table>
 <h2 id="configuration-options">Configuration options<a class="headerlink" href="#configuration-options" title="Permanent link">&para;</a></h2>
 <h3 id="removal-of-rdbms_server_type">Removal of <code>rdbms_server_type</code><a class="headerlink" href="#removal-of-rdbms_server_type" title="Permanent link">&para;</a></h3>
 <p>The <code>general.rdbms_server_type</code> option is removed, and it has to be deleted from the TOML configuration file.
