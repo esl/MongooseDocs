@@ -1643,6 +1643,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#certificate-reloading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Certificate reloading
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5410,6 +5421,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#certificate-reloading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Certificate reloading
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5444,6 +5466,12 @@ It may be found in <code>etc/</code> folder inside MongooseIM release and in <co
 </code></pre></div></td></tr></table></div>
 <p>The remaining valid values are: <code>'tlsv1.1'</code>, <code>tlsv1</code>, <code>sslv3</code>.</p>
 <p>See <a href="https://erlef.github.io/security-wg/secure_coding_and_deployment_hardening/ssl#selecting-protocol-versions-and-ciphers">EEF guidelines for protocol versions and ciphers</a> for more information.</p>
+<h2 id="certificate-reloading">Certificate reloading<a class="headerlink" href="#certificate-reloading" title="Permanent link">&para;</a></h2>
+<p>When TLS certificate or key files are modified on disk, Erlang/OTP automatically detects the changes and reloads them without requiring a server restart.
+Certificates are <a href="https://github.com/erlang/otp/blob/master/lib/ssl/src/ssl_pem_cache.erl">cached</a>,
+so new connections will use the updated certificates after at most 120 seconds.
+Note that if the private key file is password-protected, the new key file must use the same password as the original.
+In case the password has been changed, the respective change has to be made to configuration and MongooseIM needs to be restarted.</p>
 
 
 
