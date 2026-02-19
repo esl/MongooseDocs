@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
     
     
       
@@ -5344,6 +5344,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#database-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database migration
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5566,6 +5577,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#database-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database migration
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5636,6 +5658,8 @@ It was used to customize queries for the ODBC driver, which is not supported any
 <p>The RabbitMQ-specific connection option <code>max_worker_queue_len</code> is now replaced with a more generic <a href="../../configuration/outgoing-connections/#outgoing_poolsmax_worker_queue_len">worker pool option</a> with the same name.
 Contrary to the removed option, it now ensures that the queue limit is never exceeded.
 Make sure you use the new option instead of the removed one.</p>
+<h2 id="database-migration">Database migration<a class="headerlink" href="#database-migration" title="Permanent link">&para;</a></h2>
+<p>There is a new table <code>blocklist</code> in the database, which is used by <code>mod_blocklist</code>. See the migrations in the <a href="https://github.com/esl/MongooseIM/tree/master/priv/migrations"><code>priv/migrations</code></a> directory. Although the new table is only needed by this module, we recommend applying the migration anyway to keep the database in sync with the latest schema.</p>
 
 
 
