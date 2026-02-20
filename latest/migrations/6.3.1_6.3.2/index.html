@@ -2290,6 +2290,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../modules/mod_blocklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mod_blocklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../modules/mod_caps/" class="md-nav__link">
         
   
@@ -2466,10 +2494,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_12" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_13" >
         
           
-          <label class="md-nav__link" for="__nav_9_12" id="__nav_9_12_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9_13" id="__nav_9_13_label" tabindex="0">
             
   
   
@@ -2487,8 +2515,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_12_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9_12">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_13">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3325,6 +3353,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../modules/mod_sic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mod_sic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../modules/mod_smart_markers/" class="md-nav__link">
         
   
@@ -3353,14 +3409,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../modules/mod_sic/" class="md-nav__link">
+      <a href="../../modules/mod_stanzaid/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    mod_sic
+    mod_stanzaid
   
 
     
@@ -5671,10 +5727,10 @@
 In our load tests, <code>just_tls</code> is as performant as <code>fast_tls</code> and also has better standards compliance.
 This deprecation affects only C2S, and <code>fast_tls</code> remains as the TLS implementation for S2S.</p>
 <p>To continue using <code>fast_tls</code> for C2S in existing deployment after upgrade, make sure the
-option <a href="../../listeners/listen-c2s/#listenc2stlsmodule"><code>tls.module</code></a> is set to <code>fast_tls</code> for each of your C2S listeners.</p>
+option <code>tls.module</code> is set to <code>fast_tls</code> for each of your C2S listeners.</p>
 <p>If you leave <code>tls.module</code> unset, the TLS module will change from <code>fast_tls</code> to <code>just_tls</code> after the upgrade.
-One consequence is that the <a href="../../listeners/listen-c2s/#listenc2stlsprotocol_options-only-for-fast_tls"><code>tls.protocol_options</code></a> option, which you might have used, will be no longer valid.
-With <code>just_tls</code>, you need to use different options, e.g. <a href="../../listeners/listen-c2s/#listenc2stlsversions-only-for-just_tls"><code>tls.versions</code></a>.</p>
+One consequence is that the <code>tls.protocol_options</code> option, which you might have used, will be no longer valid.
+With <code>just_tls</code>, you need to use different options, e.g. <code>tls.versions</code>.</p>
 <h3 id="channel-binding-for-tls">Channel binding for TLS<a class="headerlink" href="#channel-binding-for-tls" title="Permanent link">&para;</a></h3>
 <p>Note that <code>just_tls</code> currently does not implement <code>channel binding</code> for TLS, which is required for SCRAM_PLUS
 authentication methods. If you depend on using SCRAM_PLUS for authentication, you need to use <code>fast_tls</code>.
@@ -5687,7 +5743,7 @@ We do plan to implement <code>channel binding</code> for <code>just_tls</code> (
 <code>just_tls</code>: <code>verify_mode</code> set to <code>peer</code> and <code>disconnect_on_failure</code> set to <code>true</code>.</li>
 </ul>
 <p>If you want to have the same behaviour for <code>just_tls</code> as it was in <code>fast_tls</code> regarding TLS handshake,
-set <a href="../../listeners/listen-c2s/#listenc2stlsdisconnect_on_failure-only-for-just_tls"><code>tls.disconnect_on_failure</code></a> to <code>false</code>. This is required for example when using <a href="../../tutorials/client-certificate/#enable-sasl-external-mechanism">SASL EXTERNAL</a>.
+set <a href="../../listeners/listen-c2s/#listenc2stlsdisconnect_on_failure"><code>tls.disconnect_on_failure</code></a> to <code>false</code>. This is required for example when using <a href="../../tutorials/client-certificate/#enable-sasl-external-mechanism">SASL EXTERNAL</a>.
 It is also possible to completely disable client certificate verification during TLS
 handshake in <code>just_tls</code> by setting <a href="../../listeners/listen-c2s/#listenc2stlsverify_mode"><code>tls.verify_mode</code></a> to <code>none</code>.</p>
 <p>For more information regarding configuration of TLS for C2S, see <a href="../../listeners/listen-c2s/#tls-options-for-c2s">C2S listener options</a>.</p>
