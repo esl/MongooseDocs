@@ -5373,6 +5373,34 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#instrumentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instrumentation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Instrumentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metrics-for-global-rabbitmq-pools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics for global RabbitMQ pools
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#database-migration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5656,6 +5684,34 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#instrumentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instrumentation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Instrumentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metrics-for-global-rabbitmq-pools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics for global RabbitMQ pools
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#database-migration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5747,6 +5803,32 @@ It was used to customize queries for the ODBC driver, which is not supported any
 <p>The RabbitMQ-specific connection option <code>max_worker_queue_len</code> is now replaced with a more generic <a href="../../configuration/outgoing-connections/#outgoing_poolsmax_worker_queue_len">worker pool option</a> with the same name.
 Contrary to the removed option, it now ensures that the queue limit is never exceeded.
 Make sure you use the new option instead of the removed one.</p>
+<h2 id="instrumentation">Instrumentation<a class="headerlink" href="#instrumentation" title="Permanent link">&para;</a></h2>
+<h3 id="metrics-for-global-rabbitmq-pools">Metrics for global RabbitMQ pools<a class="headerlink" href="#metrics-for-global-rabbitmq-pools" title="Permanent link">&para;</a></h3>
+<p>Global RabbitMQ pools now emit separate metric names without the <code>host_type</code> label.
+This avoids crashes when Exometer is enabled and matches the global RDBMS metrics.
+Update any monitoring or alerts for global pools.</p>
+<table>
+<thead>
+<tr>
+<th>Old event name (now host-type only)</th>
+<th>New global event name</th>
+<th>Labels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wpool_rabbit_connections</code></td>
+<td><code>wpool_global_rabbit_connections</code></td>
+<td><code>pool_tag</code></td>
+</tr>
+<tr>
+<td><code>wpool_rabbit_messages_published</code></td>
+<td><code>wpool_global_rabbit_messages_published</code></td>
+<td><code>pool_tag</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="database-migration">Database migration<a class="headerlink" href="#database-migration" title="Permanent link">&para;</a></h2>
 <p>There is a new table <code>blocklist</code> in the database, which is used by <code>mod_blocklist</code>. See the migrations in the <a href="https://github.com/esl/MongooseIM/tree/master/priv/migrations"><code>priv/migrations</code></a> directory. Although the new table is only needed by this module, we recommend applying the migration anyway to keep the database in sync with the latest schema.</p>
 
