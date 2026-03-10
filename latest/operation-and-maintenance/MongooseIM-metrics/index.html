@@ -5739,21 +5739,19 @@ xmpp_element_in_message_count{connection_type=&quot;c2s&quot;,host_type=&quot;lo
 mnesia_info_running_db_nodes 0
 </code></pre></div></td></tr></table></div></p>
 <p><h3><code>histogram</code></h3></p>
-<p>A histogram collects values over a 60-second sliding window and exposes the number of observations and their sum (as counters), along with the 50th, 75th, 90th, 95th, 99th, and 99.9th percentiles with 1% accuracy.</p>
+<p>A histogram collects values and groups them in buckets.</p>
 <p><strong>Example:</strong>
     <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code># TYPE xmpp_element_in_byte_size summary
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code># TYPE xmpp_element_in_byte_size histogram
 # HELP xmpp_element_in_byte_size Event: xmpp_element_in, Metric: byte_size
-xmpp_element_in_byte_size_count{connection_type=&quot;c2s&quot;,host_type=&quot;localhost&quot;} 0
-xmpp_element_in_byte_size_sum{connection_type=&quot;c2s&quot;,host_type=&quot;localhost&quot;} 0
-xmpp_element_in_byte_size{connection_type=&quot;c2s&quot;,host_type=&quot;localhost&quot;,quantile=&quot;0.5&quot;} 0
+xmpp_element_in_byte_size_bucket{connection_type=&quot;c2s&quot;,host_type=&quot;localhost&quot;,le=&quot;1&quot;} 0
 ...
-xmpp_element_in_byte_size{connection_type=&quot;c2s&quot;,host_type=&quot;localhost&quot;,quantile=&quot;0.999&quot;} 0
+xmpp_element_in_byte_size_bucket{connection_type=&quot;c2s&quot;,host_type=&quot;localhost&quot;,le=&quot;1073741824&quot;} 0
+xmpp_element_in_byte_size_bucket{connection_type=&quot;c2s&quot;,host_type=&quot;localhost&quot;,le=&quot;+Inf&quot;} 0
 </code></pre></div></td></tr></table></div></p>
 </div>
 <div class="tabbed-block">
