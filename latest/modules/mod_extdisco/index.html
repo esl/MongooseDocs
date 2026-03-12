@@ -2833,6 +2833,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#modulesmod_extdiscoservicesecret" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        modules.mod_extdisco.service.secret
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5611,6 +5622,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#modulesmod_extdiscoservicesecret" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        modules.mod_extdisco.service.secret
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5674,14 +5696,14 @@ The main use-case is to help discover STUN/TURN servers to allow for negotiating
 <p>Each advertised service is specified as a TOML table containing the following options listed below.</p>
 <h4 id="modulesmod_extdiscoservicetype"><code>modules.mod_extdisco.service.type</code><a class="headerlink" href="#modulesmod_extdiscoservicetype" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>Syntax:</strong> string</li>
+<li><strong>Syntax:</strong> non-empty string</li>
 <li><strong>Default:</strong> none, this option is required</li>
 <li><strong>Example:</strong> <code>type = "stun"</code></li>
 </ul>
-<p>Service type, common values are <code>"stun"</code>, <code>"turn"</code>, <code>"ftp"</code>.</p>
+<p>Service type, common values are <code>"stun"</code>, <code>"turn"</code>, <code>"turns"</code>, <code>"ftp"</code>.</p>
 <h4 id="modulesmod_extdiscoservicehost"><code>modules.mod_extdisco.service.host</code><a class="headerlink" href="#modulesmod_extdiscoservicehost" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>Syntax:</strong> string</li>
+<li><strong>Syntax:</strong> non-empty string</li>
 <li><strong>Default:</strong> none, this option is required</li>
 <li><strong>Example:</strong> <code>host = "192.168.0.2"</code></li>
 </ul>
@@ -5702,18 +5724,37 @@ The main use-case is to help discover STUN/TURN servers to allow for negotiating
 <p>The underlying transport protocol to be used when communicating with the service.</p>
 <h4 id="modulesmod_extdiscoserviceusername"><code>modules.mod_extdisco.service.username</code><a class="headerlink" href="#modulesmod_extdiscoserviceusername" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>Syntax:</strong> string</li>
+<li><strong>Syntax:</strong> non-empty string</li>
 <li><strong>Default:</strong> none, this option is optional</li>
 <li><strong>Example:</strong> <code>username = "username"</code></li>
 </ul>
 <p>A service-generated username for use at the service.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This option cannot be set together with <code>modules.mod_extdisco.service.secret</code>.</p>
+</div>
 <h4 id="modulesmod_extdiscoservicepassword"><code>modules.mod_extdisco.service.password</code><a class="headerlink" href="#modulesmod_extdiscoservicepassword" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>Syntax:</strong> string</li>
+<li><strong>Syntax:</strong> non-empty string</li>
 <li><strong>Default:</strong> none, this option is optional</li>
 <li><strong>Example:</strong> <code>password = "password"</code></li>
 </ul>
 <p>A service-generated password for use at the service.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This option cannot be set together with <code>modules.mod_extdisco.service.secret</code>.</p>
+</div>
+<h4 id="modulesmod_extdiscoservicesecret"><code>modules.mod_extdisco.service.secret</code><a class="headerlink" href="#modulesmod_extdiscoservicesecret" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Syntax:</strong> non-empty string</li>
+<li><strong>Default:</strong> none, this option is optional</li>
+<li><strong>Example:</strong> <code>secret = "secret"</code></li>
+</ul>
+<p>A secret for username and password generation according to <a href="https://datatracker.ietf.org/doc/html/draft-uberti-behave-turn-rest-00#section-2.2">TURN REST API</a> standard.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This option cannot be set together with <code>modules.mod_extdisco.service.username</code> or <code>modules.mod_extdisco.service.password</code>.</p>
+</div>
 <h2 id="example-configuration">Example Configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
