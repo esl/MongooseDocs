@@ -12,7 +12,7 @@
         <meta name="author" content="Erlang Solutions">
       
       
-        <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/tutorials/ICE_tutorial/">
+        <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/tutorials/coturn_tutorial/">
       
       
         <link rel="prev" href="../push-notifications/MongoosePush-setup/">
@@ -25,11 +25,11 @@
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>How to Set up MongooseICE - MongooseIM Docs</title>
+        <title>How to Set up Coturn - MongooseIM Docs</title>
       
     
     
@@ -86,7 +86,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#how-to-set-up-mongooseice-iceturnstun-server" class="md-skip">
+        <a href="#stun-turn-server-configuration" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              How to Set up MongooseICE
+              How to Set up Coturn
             
           </span>
         </div>
@@ -778,7 +778,7 @@
   <span class="md-ellipsis">
     
   
-    How to Set up MongooseICE
+    How to Set up Coturn
   
 
     
@@ -796,7 +796,7 @@
   <span class="md-ellipsis">
     
   
-    How to Set up MongooseICE
+    How to Set up Coturn
   
 
     
@@ -822,22 +822,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
+  <a href="#nat-and-the-role-of-stunturn-servers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Introduction
+        NAT and the Role of STUN/TURN servers
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Introduction">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-often-turn-is-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Often TURN Is Required
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-deployment-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Deployment Strategy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#which-stunturn-server-to-choose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which STUN/TURN server to choose?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#important-coturn-configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Coturn Configuration Options
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-mechanisms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication mechanisms
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication mechanisms">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#who-is-this-document-for" class="md-nav__link">
+  <a href="#turn-rest-api-authentication-recommended" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Who is this document for?
+        TURN REST API Authentication (Recommended)
       
     </span>
   </a>
@@ -845,43 +900,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#what-is-the-end-result-of-this-tutorial" class="md-nav__link">
+  <a href="#classic-long-term-credentials" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What is the end result of this tutorial?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#what-do-i-need-to-begin" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What do I need to begin?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#general-architecture-of-the-environment-built-with-this-tutorial" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        General architecture of the environment built with this tutorial
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ice-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ICE notes
+        Classic long-term credentials
       
     </span>
   </a>
@@ -894,22 +916,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#setting-up-mongooseim-signalling" class="md-nav__link">
+  <a href="#example-coturn-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setting up MongooseIM (signalling)
+        Example Coturn Configuration
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Setting up MongooseIM (signalling)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-the-stunturn-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing the STUN/TURN Server
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing the STUN/TURN Server">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#generating-temporary-credentials" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration
+        Generating Temporary Credentials
       
     </span>
   </a>
@@ -917,10 +950,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#users" class="md-nav__link">
+  <a href="#using-the-trickle-ice-webrtc-testing-tool" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Users
+        Using the Trickle ICE WebRTC Testing Tool
       
     </span>
   </a>
@@ -933,136 +966,24 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#setting-up-mongooseice-turnstun-server" class="md-nav__link">
+  <a href="#testing-traffic-relaying" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setting up MongooseICE (TURN/STUN server)
+        Testing Traffic Relaying
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Setting up MongooseICE (TURN/STUN server)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#how-to-get-and-configure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How to get and configure
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#setting-up-mangosta-android" class="md-nav__link">
+  <a href="#configuring-mongooseim" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setting up Mangosta-Android
+        Configuring MongooseIM
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Setting up Mangosta-Android">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#how-to-get-and-install" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How to get and install
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-to-configure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How to configure
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#setting-up-raspberrypi" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Setting up RaspberryPi
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Setting up RaspberryPi">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-software" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The software
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-to-get-and-configure_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How to get and configure
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-end-result" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The end result
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="The end result">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#playing-the-video" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Playing the video
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -5596,22 +5517,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
+  <a href="#nat-and-the-role-of-stunturn-servers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Introduction
+        NAT and the Role of STUN/TURN servers
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Introduction">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-often-turn-is-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Often TURN Is Required
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-deployment-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Deployment Strategy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#which-stunturn-server-to-choose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which STUN/TURN server to choose?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#important-coturn-configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Coturn Configuration Options
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-mechanisms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication mechanisms
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication mechanisms">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#who-is-this-document-for" class="md-nav__link">
+  <a href="#turn-rest-api-authentication-recommended" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Who is this document for?
+        TURN REST API Authentication (Recommended)
       
     </span>
   </a>
@@ -5619,43 +5595,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#what-is-the-end-result-of-this-tutorial" class="md-nav__link">
+  <a href="#classic-long-term-credentials" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What is the end result of this tutorial?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#what-do-i-need-to-begin" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What do I need to begin?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#general-architecture-of-the-environment-built-with-this-tutorial" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        General architecture of the environment built with this tutorial
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ice-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ICE notes
+        Classic long-term credentials
       
     </span>
   </a>
@@ -5668,22 +5611,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#setting-up-mongooseim-signalling" class="md-nav__link">
+  <a href="#example-coturn-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setting up MongooseIM (signalling)
+        Example Coturn Configuration
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Setting up MongooseIM (signalling)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-the-stunturn-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing the STUN/TURN Server
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing the STUN/TURN Server">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#generating-temporary-credentials" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration
+        Generating Temporary Credentials
       
     </span>
   </a>
@@ -5691,10 +5645,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#users" class="md-nav__link">
+  <a href="#using-the-trickle-ice-webrtc-testing-tool" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Users
+        Using the Trickle ICE WebRTC Testing Tool
       
     </span>
   </a>
@@ -5707,136 +5661,24 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#setting-up-mongooseice-turnstun-server" class="md-nav__link">
+  <a href="#testing-traffic-relaying" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setting up MongooseICE (TURN/STUN server)
+        Testing Traffic Relaying
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Setting up MongooseICE (TURN/STUN server)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#how-to-get-and-configure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How to get and configure
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#setting-up-mangosta-android" class="md-nav__link">
+  <a href="#configuring-mongooseim" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setting up Mangosta-Android
+        Configuring MongooseIM
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Setting up Mangosta-Android">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#how-to-get-and-install" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How to get and install
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-to-configure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How to configure
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#setting-up-raspberrypi" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Setting up RaspberryPi
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Setting up RaspberryPi">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-software" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The software
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-to-get-and-configure_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How to get and configure
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-end-result" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The end result
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="The end result">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#playing-the-video" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Playing the video
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -5860,130 +5702,203 @@
   
 
 
-<h1 id="how-to-set-up-mongooseice-iceturnstun-server">How to set up MongooseICE (ICE/TURN/STUN server)<a class="headerlink" href="#how-to-set-up-mongooseice-iceturnstun-server" title="Permanent link">&para;</a></h1>
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<h3 id="who-is-this-document-for">Who is this document for?<a class="headerlink" href="#who-is-this-document-for" title="Permanent link">&para;</a></h3>
-<p>This tutorial presents our TURN/STUN server in action.
-You get to see how to set up and configure MongooseICE and examine a system utilising its many talents.</p>
-<p>Are you in need of an application requiring NAT traversal? Want to see how a TURN and STUN server would handle it? Or maybe you just like to tinker with interesting technologies and experience setting them up first hand?</p>
-<p>If that's the case, this tutorial is for you.</p>
-<h3 id="what-is-the-end-result-of-this-tutorial">What is the end result of this tutorial?<a class="headerlink" href="#what-is-the-end-result-of-this-tutorial" title="Permanent link">&para;</a></h3>
-<p>At the end of the tutorial you will have a working environment with two peers, one sending a live video to another.
-The peer-to-peer communication will not be obstructed by any NATs that may occur in the background.
-The live video stream is only an example here - there are many possible use cases for peer-to-peer communication with NAT traversal.
-We chose to build an example application that shows video streaming, because it's vivid, catchy and fun.</p>
-<h3 id="what-do-i-need-to-begin">What do I need to begin?<a class="headerlink" href="#what-do-i-need-to-begin" title="Permanent link">&para;</a></h3>
-<p>Before you begin you have to prepare an environment for setting up the components used in this tutorial.
-Here's a list of things you'll need:
-* One Android phone (or at least an Android emulator).
-The video player in this tutorial is available only as an Android application.
-* RaspberryPi or any other device that is able to <a href="https://elixir-lang.org/install.html">run Elixir code</a>. Oh, and also has <a href="https://ffmpeg.org">ffmpeg</a> installed.
-We are going to use use RaspberryPi 3, to give this tutorial a hint of IoT.
-* At least one machine with a public IPv4 address.
-It is necessary, because both <a href="https://github.com/esl/MongooseIM">MongooseIM</a> and <a href="https://github.com/esl/MongooseICE">MongooseICE</a> servers need to be accessible by all devices that are used in this demo system.
-You could use a private, local IP address, but then you would need to ensure that your phone and the RaspberryPi are behind some kind of a NAT relative to this IP address.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The demo will probably work without the NAT, but then there is no point in setting up a TURN server.</p>
+<h1 id="stun-turn-server-configuration">STUN / TURN Server Configuration<a class="headerlink" href="#stun-turn-server-configuration" title="Permanent link">&para;</a></h1>
+<h2 id="nat-and-the-role-of-stunturn-servers">NAT and the Role of STUN/TURN servers<a class="headerlink" href="#nat-and-the-role-of-stunturn-servers" title="Permanent link">&para;</a></h2>
+<p>Most devices on the internet operate behind Network Address Translation (NAT). NAT allows multiple devices within a private network (for example home or corporate networks) to share a single public IP address.</p>
+<p>While NAT conserves public IPs, it introduces a limitation: devices behind NAT typically cannot accept incoming connections directly. This makes establishing peer-to-peer (P2P) connections more difficult.</p>
+<p>Two protocols are commonly used to solve this problem:</p>
+<ul>
+<li>STUN (Session Traversal Utilities for NAT) allows a client to discover its public IP address and NAT behavior. With this information, two peers can often establish a direct P2P connection.</li>
+<li>TURN (Traversal Using Relays around NAT) serves as a fallback mechanism. When a direct P2P connection cannot be established due to NAT or firewall restrictions, TURN relays traffic through a server.</li>
+</ul>
+<h2 id="how-often-turn-is-required">How Often TURN Is Required<a class="headerlink" href="#how-often-turn-is-required" title="Permanent link">&para;</a></h2>
+<p>Typical connection statistics vary depending on network environments:</p>
+<ul>
+<li>50-90% of connections succeed via direct P2P using STUN</li>
+<li>10-50% require TURN relay due to NAT or firewall restrictions</li>
+</ul>
+<p>Since TURN relays the entire media stream, it is bandwidth heavy and should be used only as a fallback.</p>
+<h2 id="recommended-deployment-strategy">Recommended Deployment Strategy<a class="headerlink" href="#recommended-deployment-strategy" title="Permanent link">&para;</a></h2>
+<p>STUN/TURN servers have networking requirements that make them less suitable for Kubernetes deployments.</p>
+<p>Key reasons:</p>
+<ul>
+<li>STUN/TURN servers require a public IP address</li>
+<li>TURN servers need a large range of UDP ports</li>
+<li>Kubernetes networking and load balancers complicate exposing large port ranges</li>
+</ul>
+<p>For these reasons, the recommended approach is to deploy the TURN server on a dedicated virtual machine with a public IP address.</p>
+<p>If you run the server using <code>Docker</code>, ensure the container uses host networking (<code>--network=host</code>).</p>
+<p>This avoids port mapping overhead and ensures the TURN server can use the full relay port range.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>TURN servers need a large number of file descriptors to operate properly.</p>
+<p>Each TURN allocation consumes at least one file descriptor, often more. If the limit is set too low, the server may be unable to create new allocations and could produce errors like “Too many open files.”</p>
+<p>In production environments, it’s recommended to raise the file descriptor limit (ulimit -n) for the TURN service and verify that system-wide limits can handle the expected number of concurrent connections.</p>
 </div>
-<p>We are going to use 2 VPS (Virtual Private Server) that are located somewhere far far away, both having public IPv4 address. Let's say MongooseICE is bound to <em>1.1.1.1</em>, and MongooseIM to <em>2.2.2.2</em>.</p>
-<h3 id="general-architecture-of-the-environment-built-with-this-tutorial">General architecture of the environment built with this tutorial<a class="headerlink" href="#general-architecture-of-the-environment-built-with-this-tutorial" title="Permanent link">&para;</a></h3>
-<p>This is the architecture of the system we are building:
-<img alt="ICE example architecture" src="ice_architecture.png" /></p>
-<p>As we know by now, <a href="https://github.com/esl/MongooseIM">MongooseIM</a> is bound to <em>2.2.2.2</em>/<em>myxmpp.com</em> and <a href="https://github.com/esl/MongooseICE">MongooseICE</a> to <em>1.1.1.1</em>.
-We also have a RaspberryPi that is connected to a private network (so is behind some NAT) and an Android phone that is connected to an LTE network and also is behind the carrier's NAT.</p>
-<h3 id="ice-notes">ICE notes<a class="headerlink" href="#ice-notes" title="Permanent link">&para;</a></h3>
-<p>The end result of this tutorial not only uses <a href="https://github.com/esl/MongooseICE">MongooseICE</a> and <a href="https://github.com/esl/MongooseIM">MongooseIM</a> servers but also uses custom version of <a href="https://github.com/esl/mangosta-android">Mangosta-Android</a> and <a href="https://github.com/esl/ice_demo">DemoStreamerICE</a>.
-Both projects are custom modified and custom made respectively in order to showcase the video streaming using the data relay capabilities provided by <a href="https://github.com/esl/MongooseICE">MongooseICE</a>.
-The streaming itself, along with the signalling protocol, were prepared only for the case of this demo and <strong>are not a part of the platform</strong>.
-Those components exist only to visualize what can be achieved with <a href="https://github.com/esl/MongooseICE">MongooseICE</a> and what can be built on top of it.</p>
-<h2 id="setting-up-mongooseim-signalling">Setting up MongooseIM (signalling)<a class="headerlink" href="#setting-up-mongooseim-signalling" title="Permanent link">&para;</a></h2>
-<p>The ICE is nothing without signalling. The signalling protocol itself can be designed specifically for the application that is being deployed or can be implemented based on some standards, e.g. <a href="https://xmpp.org/extensions/xep-0166.html">Jingle</a>.
-Here, we chose to implement the simplest signalling possible, i.e. sending relay addresses via XMPP messages.
-No matter if we decide to go with this approach or with <a href="https://xmpp.org/extensions/xep-0166.html">Jingle</a>, we can use the <a href="https://github.com/esl/MongooseIM">MongooseIM</a> XMPP server as a transport layer for the signalling.
-In order to enable signalling we need an instance of <a href="https://github.com/esl/MongooseIM">MongooseIM</a> running with the simplest configuration, since the only thing we need from it is to provide us with means to communicate between two peers.</p>
-<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
-<p>You can find MongooseIM installation instructions on <a href="../../getting-started/Quick-setup/">this page</a>.
-Once you have it installed, you need to modify the <a href="../../configuration/configuration-files/#mongooseimtoml"><code>mongooseim.toml</code></a> config file:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[general]</span>
-<span class="w">  </span><span class="n">hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;myxmpp.com&quot;</span><span class="p">]</span>
-</code></pre></div></td></tr></table></div>
-This sets the virtual hostname of the XMPP server, so that you can register users in this domain.
-After that, you can start MongooseIM with
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>start
-</code></pre></div></td></tr></table></div></p>
-<h3 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h3>
-<p>After we finish setting up <a href="https://github.com/esl/MongooseIM">MongooseIM</a>, we need to register some users.
-For this demo we need two users: <em>movie@myxmpp.com</em> and <em>phone@myxmpp.com</em>, for RaspberryPi and the Android phone respectively.
-In order to do that, type:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>account<span class="w"> </span>registerUser<span class="w"> </span>--username<span class="w"> </span>movie<span class="w"> </span>--domain<span class="w"> </span>myxmpp.com<span class="w"> </span>--password<span class="w"> </span>xmpp_password
-mongooseimctl<span class="w"> </span>account<span class="w"> </span>registerUser<span class="w"> </span>--username<span class="w"> </span>phone<span class="w"> </span>--domain<span class="w"> </span>myxmpp.com<span class="w"> </span>--password<span class="w"> </span>xmpp_password
-</code></pre></div></td></tr></table></div>
-<p>on the machine that has <a href="https://github.com/esl/MongooseIM">MongooseIM</a> installed.</p>
-<p>As you can see here, we have created those two users, both with the password <em>xmpp_password</em> for simplicity.</p>
-<h2 id="setting-up-mongooseice-turnstun-server">Setting up MongooseICE (TURN/STUN server)<a class="headerlink" href="#setting-up-mongooseice-turnstun-server" title="Permanent link">&para;</a></h2>
-<p>Now, since <a href="https://github.com/esl/MongooseIM">MongooseIM</a> handles the signalling, we need the TURN relay and the STUN server to send peer-to-peer data.
-For that we are going to use the star of this tutorial - <a href="https://github.com/esl/MongooseICE">MongooseICE</a>.</p>
-<h3 id="how-to-get-and-configure">How to get and configure<a class="headerlink" href="#how-to-get-and-configure" title="Permanent link">&para;</a></h3>
-<p>The whole documentation that describes all options and deployment methods, can be found on the <a href="https://github.com/esl/MongooseICE">project's github page</a>.
-Let's get to it! (this command assumes that we are on the server for <a href="https://github.com/esl/MongooseICE">MongooseICE</a> and that it has Docker installed):
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--net<span class="o">=</span>host<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;MONGOOSEICE_UDP_RELAY_IP=1.1.1.1&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;MONGOOSEICE_STUN_SECRET=secret&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;MONGOOSEICE_UDP_REALM=myrelay&quot;</span><span class="w"> </span>mongooseim/mongooseice:0.4.0
-</code></pre></div></td></tr></table></div></p>
-<p>This command starts the <a href="https://github.com/esl/MongooseICE">MongooseICE</a> server in the Docker container, attaching its virtual network interface to the network interface of the host machine the Docker daemon is running on.
-There are three important configuration options we have to set via environment variables:</p>
+<h2 id="which-stunturn-server-to-choose">Which STUN/TURN server to choose?<a class="headerlink" href="#which-stunturn-server-to-choose" title="Permanent link">&para;</a></h2>
+<p>The most widely used implementation is Coturn.</p>
+<p>Coturn is an open-source STUN/TURN server that:</p>
 <ul>
-<li><strong>MONGOOSEICE_UDP_RELAY_IP</strong> - This is the IP address that <a href="https://github.com/esl/MongooseICE">MongooseICE</a> provides data relay on. This should be set to public IPv4 address.</li>
-<li><strong>MONGOOSEICE_STUN_SECRET</strong> - This is a secret password that TURN clients need to provide to connect to this server.</li>
-<li><strong>MONGOOSEICE_UDP_REALM</strong> - This is just a name for your TURN relay.</li>
+<li>Fully implements STUN and TURN protocols</li>
+<li>Is actively maintained</li>
+<li>Supports multiple authentication mechanisms</li>
+<li>Is widely adopted in WebRTC infrastructures</li>
 </ul>
-<p>And that's it! <a href="https://github.com/esl/MongooseICE">MongooseICE</a> is now ready to roll!</p>
-<h2 id="setting-up-mangosta-android">Setting up Mangosta-Android<a class="headerlink" href="#setting-up-mangosta-android" title="Permanent link">&para;</a></h2>
-<h3 id="how-to-get-and-install">How to get and install<a class="headerlink" href="#how-to-get-and-install" title="Permanent link">&para;</a></h3>
-<p>The source code of the video-stream-demo-enabled <a href="https://github.com/esl/mangosta-android">Mangosta-Android</a> can be found on the <a href="https://github.com/esl/mangosta-android/tree/ice_demo_kt">ice_demo_kt</a> branch.
-If you want to tinker with it and compile it yourself, you can do that. All you need is <a href="https://developer.android.com/studio">Android Studio 2.3+</a>.
-The compilation is pretty straightforward, so I'm not going to explain it here.
-If you are interested in how it works, most of the code is in the <code>inaka.com.mangosta.videostream</code> package.
-If you don't want to compile this application from source, you can just install <a href="https://drive.google.com/file/d/0B48g-HBQ5xpxclQ2RnBFMUluRU0/view?usp=sharing">this .apk</a> on your phone and that's it.</p>
-<h3 id="how-to-configure">How to configure<a class="headerlink" href="#how-to-configure" title="Permanent link">&para;</a></h3>
-<p>Right after you start <a href="https://github.com/esl/mangosta-android">Mangosta-Android</a> for the first time, you will need to login to your XMPP server.
-In order to do that, just enter the JID you have created for the phone (<em>phone@myxmpp.com</em>), the password (<em>xmpp_password</em>) and the server address (<em>2.2.2.2</em> or <em>myxmpp.com</em> if you've set up the domain to actually point to this IP address), and then confirm by clicking "Enter".</p>
-<p><img alt="Mangosta login" src="mangosta_login.png" /></p>
-<p>After we log in, we can start setting up the connection to the <a href="https://github.com/esl/MongooseICE">MongooseICE</a> server we set up before.
-The process is shown on the screenshots below.</p>
-<p><img alt="Mangosta ICE settings" src="mangosta_ice_settings.png" /></p>
-<p>On the "<em>Configure ICE</em>" screen we have to set 5 fields up:</p>
+<p>Because of its stability, performance, and strong community adoption, Coturn is typically the recommended choice.</p>
+<h2 id="important-coturn-configuration-options">Important Coturn Configuration Options<a class="headerlink" href="#important-coturn-configuration-options" title="Permanent link">&para;</a></h2>
+<p>Below are several key options commonly used when configuring a Coturn server.</p>
 <ul>
-<li><strong>TURN server address</strong> - IPv4 address of our <a href="https://github.com/esl/MongooseICE">MongooseICE</a></li>
-<li><strong>TURN Server port</strong> - since we did not set the port while configuring <a href="https://github.com/esl/MongooseICE">MongooseICE</a> it uses a default one - <strong>3478</strong></li>
-<li><strong>TURN Realm</strong> - Realm name we have set via <em>MONGOOSEICE_UDP_REALM</em> variable. In our case it's "<em>myrelay</em>".</li>
-<li><strong>TURN username</strong> - Current version of <a href="https://github.com/esl/MongooseICE">MongooseICE</a> ignores this, so you may leave it as is.</li>
-<li><strong>TURN password</strong> - The password that we have set via <em>MONGOOSEICE_STUN_SECRET</em> variable. In our case it's "<em>secret</em>"</li>
+<li>
+<p><code>--use-auth-secret</code></p>
+<p>Enables TURN REST API authentication using a shared secret.</p>
+<p>This allows credentials to be generated dynamically by an application server instead of configuring users directly on the TURN server.</p>
+</li>
+<li>
+<p><code>--static-auth-secret</code></p>
+<p>Defines the shared secret used to generate temporary TURN credentials.</p>
+<p>Your application backend uses this same secret to generate usernames and passwords provided to clients.</p>
+</li>
+<li>
+<p><code>--lt-cred-mech</code></p>
+<p>Enables long-term credential authentication, which is the standard authentication mechanism defined in the TURN specification.</p>
+</li>
+<li>
+<p><code>--user</code></p>
+<p>Defines a static username/password pair for the long-term credential authentication method.</p>
+<p>This method stores credentials directly on the TURN server and is mainly used for:</p>
+<ul>
+<li>testing</li>
+<li>small deployments</li>
+<li>debugging</li>
 </ul>
-<p>And that would be all.
-Now you can click "<em>TEST CONNECTION</em>" to, well..., test the connection.
-If everything works, you can "<em>SAVE</em>" the settings.
-Now your <a href="https://github.com/esl/mangosta-android">Mangosta-Android</a> is ready to play streamed video, but we still need the source...</p>
-<h2 id="setting-up-raspberrypi">Setting up RaspberryPi<a class="headerlink" href="#setting-up-raspberrypi" title="Permanent link">&para;</a></h2>
-<p>Let's configure the video source now.
-In our case it will be a RaspberryPi with <a href="https://elixir-lang.org/install.html">Elixir</a> and <a href="https://ffmpeg.org">ffmpeg</a> installed running <a href="https://github.com/esl/ice_demo">our ICE demo application</a>.</p>
-<h3 id="the-software">The software<a class="headerlink" href="#the-software" title="Permanent link">&para;</a></h3>
-<p>For this demo we provide a simple XMPP client that also is able to send live video stream using <a href="https://ffmpeg.org">ffmpeg</a> whenever other peer asks for it via XMPP.
-This client is written in <a href="https://elixir-lang.org/install.html">Elixir</a>, so we can run it from source quite easily.</p>
-<h3 id="how-to-get-and-configure_1">How to get and configure<a class="headerlink" href="#how-to-get-and-configure_1" title="Permanent link">&para;</a></h3>
-<p>You can get the client's sources <a href="https://github.com/esl/ice_demo">here</a>.
-For now we only need to run it, so let's get to it (on our RaspberryPi):
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/esl/ice_demo.git
-<span class="nb">cd</span><span class="w"> </span>ice_demo
-mix<span class="w"> </span>deps.get
-iex<span class="w"> </span>-S<span class="w"> </span>mix
-</code></pre></div></td></tr></table></div></p>
-<p>After a while we should get into Elixir shell.
-In order to enable the streamer, we need to start it, providing some configuration options (in the Elixir shell):
+<p>In production environments, TURN REST API authentication is generally preferred.</p>
+</li>
+<li>
+<p><code>--realm</code></p>
+<p>The realm identifies the authentication domain used by the TURN server.</p>
+<p>It is used during credential generation and validation. Typically, this value matches your application's domain.</p>
+</li>
+<li>
+<p><code>--listening-ip</code></p>
+<p>Specifies the IP address that the TURN server should use for incoming connections.</p>
+<p>By default, Coturn listens on all available network interfaces. Using <code>--listening-ip</code> restricts the server to a specific interface.</p>
+<p>Related option: <code>--relay-ip</code></p>
+</li>
+<li>
+<p><code>--external-ip</code></p>
+<p>Specifies the public IP address of the TURN server.</p>
+<p>This option is required when the server is behind NAT or running in cloud infrastructure.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When setting <code>--external-ip</code>, use the <code>external_ip/internal_ip</code> format, or explicitly whitelist the internal relay IP(s) using the <code>--allowed-peer-ip</code> option. Otherwise, the server may fail in double-relay scenarios (ClientA &lt;-&gt; TURN &lt;-&gt; TURN &lt;-&gt; ClientB). For more details, see <a href="https://github.com/coturn/coturn/issues/1407#issuecomment-4079033944">this issue</a></p>
+</div>
+</li>
+<li>
+<p><code>--listening-port</code></p>
+<p>Defines the primary port for TCP and UDP STUN/TURN connections (default is 3478).</p>
+<p>Related option: <code>--alt-listening-port</code></p>
+</li>
+<li>
+<p><code>--tls-listening-port</code></p>
+<p>Defines the primary port for TLS and DTLS TURN connections (default is 5349).</p>
+<p>Media streams are normally protected using Secure Real-time Transport Protocol (SRTP), so enabling TLS for TURN does not usually provide additional media security. The main purpose of TLS support in TURN is to encapsulate traffic within TLS, allowing it to pass through restrictive firewalls. For this reason, deployments often configure the TLS listening port to 443, which is commonly allowed in most networks.</p>
+<p>Related option: <code>--alt-tls-listening-port</code>, <code>--cert</code>, <code>--pkey</code>, <code>--no-tls</code>, <code>--no-dtls</code></p>
+</li>
+<li>
+<p><code>--alternate-server</code></p>
+<p>Defines an alternative TURN server that clients can use.</p>
+<p>This option can be used for load balancing across multiple TURN servers.</p>
+<p>Related option: <code>--tls-alternate-server</code></p>
+</li>
+<li>
+<p><code>--verbose</code>, <code>--Verbose</code> and <code>--log-file</code></p>
+<p>Options to configure logging</p>
+</li>
+<li>
+<p><code>--denied-peer-ip=&lt;IPaddr[-IPaddr]&gt;</code> and <code>--allowed-peer-ip=&lt;IPaddr[-IPaddr]&gt;</code></p>
+<p>Options to allow or deny specific IP addresses or IP ranges. These settings can be used to prevent the TURN server from relaying TCP connections or UDP packets to hosts within internal or otherwise restricted networks.</p>
+<p>Starting with Coturn version 4.5.2, peering with 127.0.0.1 or ::1 is disabled by default. In some older versions, this behavior can be enforced using the <code>--no-loopback-peers</code> option.</p>
+<p>For versions prior to 4.9.0, an additional workaround is required for CVE-2026-27624:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>denied-peer-ip=::ffff:0.0.0.0-::ffff:255.255.255.255
+</code></pre></div></td></tr></table></div>
+<p>For more information, visit:</p>
+<ul>
+<li>https://www.enablesecurity.com/blog/cve-2020-26262-bypass-of-coturns-access-control-protection/</li>
+<li>https://www.enablesecurity.com/blog/slack-webrtc-turn-compromise-and-bug-bounty/</li>
+<li>https://github.com/coturn/coturn/security/advisories/GHSA-6g6j-r9rf-cm7p</li>
+<li>https://github.com/coturn/coturn/security/advisories/GHSA-j8mm-mpf8-gvjg</li>
+</ul>
+<p>Related option:  <code>--no-multicast-peers</code></p>
+</li>
+<li>
+<p><code>--min-port</code> and <code>--max-port</code></p>
+<p>These options define the UDP relay port range used for relayed TURN traffic.</p>
+<p>Default range is 49152-65535 (according to RFC 5766).
+A larger port range allows the server to support more concurrent relay sessions.
+In most cases, the default range should not be modified.</p>
+</li>
+<li>
+<p><code>--max-bps</code></p>
+<p>Limits the maximum bandwidth per TURN session.</p>
+<p>This can be used to prevent abuse and control bandwidth consumption.</p>
+<p>Related option: <code>--bps-capacity</code></p>
+</li>
+<li>
+<p><code>--user-quota</code> and <code>--total-quota</code></p>
+<p>These options limit the number of concurrent TURN allocations.</p>
+<p>Note that users are ephemeral when using TURN REST API authentication, which affects the meaning of the <code>--user-quota</code> limit.</p>
+</li>
+<li>
+<p><code>--max-allocate-lifetime</code></p>
+<p>Sets the maximum value for the allocation lifetime. Default is 3600 seconds.</p>
+</li>
+<li>
+<p><code>--max-allocate-timeout</code></p>
+<p>Sets the maximum time allowed for full allocation establishment. Default is 60 seconds.</p>
+</li>
+<li>
+<p><code>--no-rfc5780</code></p>
+<p>Disables RFC5780 (NAT behavior discovery) support.</p>
+<p>NAT behavior discovery is not required for Interactive Connectivity Establishment (ICE).</p>
+</li>
+<li>
+<p><code>--no-cli</code></p>
+<p>Turns off the CLI support. The CLI is not needed for a static configuration, so it can be disabled.</p>
+</li>
+<li>
+<p><code>--prometheus</code></p>
+<p>Enables prometheus metrics.</p>
+<p>Related option: <code>--prometheus-port</code></p>
+</li>
+</ul>
+<h2 id="authentication-mechanisms">Authentication mechanisms<a class="headerlink" href="#authentication-mechanisms" title="Permanent link">&para;</a></h2>
+<p>Coturn supports two main authentication methods.</p>
+<h4 id="turn-rest-api-authentication-recommended">TURN REST API Authentication (Recommended)<a class="headerlink" href="#turn-rest-api-authentication-recommended" title="Permanent link">&para;</a></h4>
+<p>This is the preferred method for modern WebRTC deployments.</p>
+<p>Instead of storing users on the TURN server:</p>
+<ul>
+<li>The application server generates temporary TURN credentials.</li>
+<li>The username contains an expiration timestamp.</li>
+<li>The password is generated using HMAC with a shared secret.</li>
+<li>The TURN server verifies the credentials using the same secret.</li>
+</ul>
+<p>This approach has the following advantages:</p>
+<ul>
+<li>No user database on the TURN server</li>
+<li>Credentials expire automatically</li>
+<li>Easy integration with backend services</li>
+</ul>
+<h3 id="classic-long-term-credentials">Classic long-term credentials<a class="headerlink" href="#classic-long-term-credentials" title="Permanent link">&para;</a></h3>
+<p>This older method stores static usernames and passwords directly on the TURN server.</p>
+<p>While simpler, it has some drawbacks:</p>
+<ul>
+<li>credentials must be managed manually</li>
+<li>harder to rotate securely</li>
+<li>less flexible than TURN REST API authentication</li>
+</ul>
+<p>For these reasons, TURN REST API authentication is typically recommended.</p>
+<h2 id="example-coturn-configuration">Example Coturn Configuration<a class="headerlink" href="#example-coturn-configuration" title="Permanent link">&para;</a></h2>
+<p>Below is a sample configuration that uses TURN REST API authentication with a static shared secret:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -5993,30 +5908,237 @@ In order to enable the streamer, we need to start it, providing some configurati
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-<span class="ss">jid</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;movie@myxmpp.com&quot;</span><span class="p">,</span>
-<span class="ss">password</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xmpp_password&quot;</span><span class="p">,</span>
-<span class="ss">host</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;myxmpp.com&quot;</span><span class="p">,</span>
-<span class="ss">turn_addr</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.1.1.1:3784&quot;</span>
-<span class="ss">turn_username</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;username&quot;</span><span class="p">,</span>
-<span class="ss">turn_secret</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">,</span>
-<span class="ss">video_file</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/home/pi/sintel.h264&quot;</span>
-<span class="p">]</span>
-<span class="nc">ICEDemo</span><span class="o">.</span><span class="n">start_movie</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div></p>
-<p>The first 3 options are all about connecting to the XMPP server - we use "<em>movie@myxmpp.com</em>" user that we created earlier.
-Next 3 options are about connecting to the <a href="https://github.com/esl/MongooseICE">MongooseICE</a> server.
-Those are similar to ones we set in <a href="https://github.com/esl/mangosta-android">Mangosta-Android</a>.
-The last one points to the video file that will be streamed on request.
-This file has to be raw, H.264-encoded, video-only file.
-If you are not sure how to get one, you can just use <a href="https://drive.google.com/file/d/0B48g-HBQ5xpxeVlUSks2bVRlLTQ/view?usp=sharing">this one</a> (pre-rendered <a href="https://durian.blender.org/">Sintel, OpenBlender project</a>).
-With this configuration, our RaspberryPi is ready to stream!</p>
-<h2 id="the-end-result">The end result<a class="headerlink" href="#the-end-result" title="Permanent link">&para;</a></h2>
-<h3 id="playing-the-video">Playing the video<a class="headerlink" href="#playing-the-video" title="Permanent link">&para;</a></h3>
-<p>Now we finally can get out phone and start streaming the video!
-In order to do that, we have to click the "<em>New video stream</em>" button as shown on the screenshots below, enter the JID of the RaspberryPi and confirm with the "<em>Stream!</em>" button.</p>
-<p><img alt="Mangosta start streaming" src="mangosta_start_stream.png" /></p>
-<p>Hopefully, now you can see the video on your own mobile device.</p>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="na">realm</span><span class="o">=</span><span class="s">example.com</span>
+
+<span class="c1">## Local IP address</span>
+<span class="na">listening-ip</span><span class="o">=</span><span class="s">192.168.0.1</span>
+<span class="na">relay-ip</span><span class="o">=</span><span class="s">192.168.0.1</span>
+
+<span class="c1">## Public IP address associated with this server (e.g. AWS Elastic IP)</span>
+<span class="na">external-ip</span><span class="o">=</span><span class="s">1.2.3.4/192.168.0.1</span>
+
+<span class="c1">## Authentication (TURN REST API)</span>
+<span class="na">use-auth-secret</span>
+<span class="na">static-auth-secret</span><span class="o">=</span><span class="s">&quot;put_your_shared_secret_here&quot;</span>
+
+<span class="c1">## if you&#39;re wondering what those IP ranges are, check these wiki pages:</span>
+<span class="c1">##    https://en.wikipedia.org/wiki/IPv4#Special-use_addresses</span>
+<span class="c1">##    https://en.wikipedia.org/wiki/IPv6_address#Special_addresses</span>
+<span class="na">no-multicast-peers</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">0.0.0.0-0.255.255.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">10.0.0.0-10.255.255.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">100.64.0.0-100.127.255.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">127.0.0.0-127.255.255.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">169.254.0.0-169.254.255.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">172.16.0.0-172.31.255.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">192.0.0.0-192.0.0.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">192.0.2.0-192.0.2.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">192.88.99.0-192.88.99.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">192.168.0.0-192.168.255.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">198.18.0.0-198.19.255.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">198.51.100.0-198.51.100.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">203.0.113.0-203.0.113.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">240.0.0.0-255.255.255.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">::1</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">64:ff9b::-64:ff9b::ffff:ffff</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">::ffff:0.0.0.0-::ffff:255.255.255.255</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">100::-100::ffff:ffff:ffff:ffff</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">2001::-2001:1ff:ffff:ffff:ffff:ffff:ffff:ffff</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">2002::-2002:ffff:ffff:ffff:ffff:ffff:ffff:ffff</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">fc00::-fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff</span>
+<span class="na">denied-peer-ip</span><span class="o">=</span><span class="s">fe80::-febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff</span>
+
+<span class="na">no-rfc5780</span>
+<span class="na">no-cli</span>
+
+<span class="c1">## Bandwidth limit per session - 5 Mbps</span>
+<span class="na">max-bps</span><span class="o">=</span><span class="s">5000000</span>
+
+<span class="c1">## disable TLS/DTLS</span>
+<span class="na">no-tls</span>
+<span class="na">no-dtls</span>
+
+<span class="c1">## Prometheus metrics on port 9641</span>
+<span class="na">prometheus</span>
+</code></pre></div></td></tr></table></div>
+<p>This configuration can be quickly deployed using a Docker-based approach:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>mkdir<span class="w"> </span>--parents<span class="w"> </span>~/coturn/logs
+chmod<span class="w"> </span>a+w<span class="w"> </span>~/coturn/logs/
+vi<span class="w"> </span>~/coturn/turnserver.conf
+
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--restart<span class="o">=</span>always<span class="w"> </span>--name<span class="o">=</span>coturn<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>--network<span class="o">=</span>host<span class="w"> </span>--ulimit<span class="w"> </span><span class="nv">nofile</span><span class="o">=</span><span class="m">1000000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/coturn/turnserver.conf:/turnserver.conf:ro&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/coturn/logs:/var/log&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>coturn/coturn:4.9.0<span class="w"> </span>-c<span class="w"> </span>/turnserver.conf
+</code></pre></div></td></tr></table></div>
+<h2 id="testing-the-stunturn-server">Testing the STUN/TURN Server<a class="headerlink" href="#testing-the-stunturn-server" title="Permanent link">&para;</a></h2>
+<p>Testing a STUN/TURN server can be complicated.</p>
+<h3 id="generating-temporary-credentials">Generating Temporary Credentials<a class="headerlink" href="#generating-temporary-credentials" title="Permanent link">&para;</a></h3>
+<p>If you are using TURN REST API authentication, you can generate time-limited credentials with <code>openssl</code>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">secret</span><span class="o">=</span><span class="s2">&quot;put_your_shared_secret_here&quot;</span>
+
+<span class="c1">## credentials will expire in 1 hour (3600 seconds)</span>
+<span class="nv">expiration_timestamp</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(($(</span>date<span class="w"> </span><span class="s2">&quot;+%s&quot;</span><span class="k">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">3600</span><span class="k">))</span><span class="s2">&quot;</span>
+
+<span class="nv">username</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">expiration_timestamp</span><span class="si">}</span><span class="s2">:dummy_user&quot;</span>
+<span class="nv">password</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$username</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>dgst<span class="w"> </span>-hmac<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$secret</span><span class="s2">&quot;</span><span class="w"> </span>-sha1<span class="w"> </span>-binary<span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>base64<span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;username: &#39;</span><span class="si">${</span><span class="nv">username</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;password: &#39;</span><span class="si">${</span><span class="nv">password</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="using-the-trickle-ice-webrtc-testing-tool">Using the Trickle ICE WebRTC Testing Tool<a class="headerlink" href="#using-the-trickle-ice-webrtc-testing-tool" title="Permanent link">&para;</a></h3>
+<p>A simple way to validate your setup is with the Trickle ICE WebRTC testing tool, which checks STUN and TURN connectivity directly from your browser.</p>
+<p>Steps:</p>
+<ul>
+<li>Open the test page: https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/</li>
+<li>Enter your STUN/TURN server details</li>
+<li>Start ICE candidate gathering</li>
+<li>Confirm that both server reflexive and relay candidates are returned</li>
+</ul>
+<p>If you see server reflexive and relay candidates, your TURN credentials and listeners are configured correctly.</p>
+<h2 id="testing-traffic-relaying">Testing Traffic Relaying<a class="headerlink" href="#testing-traffic-relaying" title="Permanent link">&para;</a></h2>
+<p>Verifying candidate gathering alone does not guarantee that traffic can be forwarded through the TURN server. A dedicated test is required to ensure relaying works properly.</p>
+<p>One approach is to use the browser based test suite available at <a href="https://test.8x8.vc/">test.8x8.vc</a>, specifically the Connectivity section, which attempts to establish real media paths through the TURN server.</p>
+<p>Alternatively, you can use the <code>turnutils_uclient</code> command-line tool to simulate client behavior and validate relaying:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>turnutils_uclient<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span><span class="m">30</span><span class="w"> </span>-u<span class="w"> </span>&lt;username&gt;<span class="w"> </span>-w<span class="w"> </span>&lt;password&gt;<span class="w"> </span>&lt;TURN-server-IP-address&gt;
+</code></pre></div></td></tr></table></div>
+<p>This tool is bundled with Coturn, so you don’t need to install it separately. You can run it directly from the official Docker image:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--entrypoint<span class="w"> </span>/bin/bash<span class="w"> </span>coturn/coturn
+</code></pre></div></td></tr></table></div>
+<h2 id="configuring-mongooseim">Configuring MongooseIM<a class="headerlink" href="#configuring-mongooseim" title="Permanent link">&para;</a></h2>
+<p>To provision XMPP clients with STUN/TURN credentials, enable and configure the <a href="../../modules/mod_extdisco/">mod_extdisco</a> module as shown below:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_extdisco]</span>
+
+<span class="w">  </span><span class="k">[[modules.mod_extdisco.service]]</span>
+<span class="w">    </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;stun&quot;</span>
+<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.2.3.4&quot;</span>
+<span class="w">    </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3478</span>
+<span class="w">    </span><span class="n">transport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;udp&quot;</span>
+
+<span class="w">  </span><span class="k">[[modules.mod_extdisco.service]]</span>
+<span class="w">    </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;turn&quot;</span>
+<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.2.3.4&quot;</span>
+<span class="w">    </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3478</span>
+<span class="w">    </span><span class="n">transport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;udp&quot;</span>
+<span class="w">    </span><span class="n">secret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;put_your_shared_secret_here&quot;</span>
+
+<span class="w">  </span><span class="k">[[modules.mod_extdisco.service]]</span>
+<span class="w">    </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;turn&quot;</span>
+<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.2.3.4&quot;</span>
+<span class="w">    </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3478</span>
+<span class="w">    </span><span class="n">transport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span>
+<span class="w">    </span><span class="n">secret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;put_your_shared_secret_here&quot;</span>
+</code></pre></div></td></tr></table></div>
+<p>For verification purposes, you can generate a username and password using the <code>mongooseimctl</code> command.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>mongooseimctl<span class="w"> </span>externalServices<span class="w"> </span>getServices<span class="w"> </span>--domain<span class="w"> </span><span class="s2">&quot;domain.with.mod_extdisco.configured&quot;</span><span class="w"> </span>--type<span class="w"> </span>turn
+</code></pre></div></td></tr></table></div>
+<p>Alternatively, you can use the <a href="../../graphql-api/admin-graphql-doc.html#mutation-externalServices">externalServices</a> admin GraphQL mutation:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">mutation</span><span class="w"> </span><span class="nf">MyMutation</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">externalServices</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">getServices</span><span class="p">(</span><span class="n">domain</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;domain.with.mod_extdisco.configured&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;turn&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">expires</span>
+<span class="w">      </span><span class="n">password</span>
+<span class="w">      </span><span class="n">port</span>
+<span class="w">      </span><span class="n">transport</span>
+<span class="w">      </span><span class="n">username</span>
+<span class="w">      </span><span class="n">host</span>
+<span class="w">      </span><span class="n">type</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 
 
 
