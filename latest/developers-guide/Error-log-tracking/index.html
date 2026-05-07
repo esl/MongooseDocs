@@ -5403,6 +5403,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#multi-node-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-node collection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#parallel-groups" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5646,6 +5657,34 @@ exceeds the limit, the test run exits with code 1 and prints:</p>
 my_SUITE: 8 unexpected errors logged, max allowed: 5
 </code></pre></div></td></tr></table></div>
 <p>Suites without <code>max_unexpected_errors_logged</code> are not checked.</p>
+<h2 id="multi-node-collection">Multi-node collection<a class="headerlink" href="#multi-node-collection" title="Permanent link">&para;</a></h2>
+<p>The hook collects errors from all reachable MongooseIM nodes
+(<code>mim</code>, <code>mim2</code>, <code>mim3</code>, <code>fed</code>, <code>reg</code>) using a push-mode design:</p>
+<ul>
+<li>A single <strong>sink</strong> (<code>cth_error_report_sink</code>, a gen_server) runs on
+  the test runner. It owns one ETS table that holds every error
+  entry from every node, keyed by a global monotonic sequence.</li>
+<li>A <strong>logger handler</strong> (<code>log_error_collector</code>) is injected on each
+  reachable MIM node. For every error-level event it sends a
+  <code>{log_entry, Node, Level, Msg, Meta}</code> Erlang message to the sink
+  using <code>[noconnect, nosuspend]</code> (a slow or disconnected runner
+  cannot back-pressure logging).</li>
+<li>After a MIM node restart, the restart caller is responsible for
+  re-injecting the handler. <code>distributed_helper:start_node/2</code> does
+  this automatically by calling <code>cth_error_report_sink:inject/1</code>.
+  Accumulated entries on the runner-side sink are unaffected by
+  node restarts -- only entries logged in the brief window between
+  the node coming up and <code>inject/1</code> returning are missed.</li>
+</ul>
+<p>Each error entry includes the originating node (in the <code>meta</code> map),
+so reports show which node logged each error. Expected error
+patterns apply to all nodes -- a single <code>expect</code> declaration matches
+errors regardless of which node produced them.</p>
+<p><strong>Limitation:</strong> if a MIM node is restarted by a path that does not go
+through <code>distributed_helper:start_node/2</code> (e.g. an external script,
+or a future custom helper), error collection on that node will not
+resume until something calls <code>cth_error_report_sink:inject/1</code>
+explicitly. Plan-fully restarted nodes are fine.</p>
 <h2 id="parallel-groups">Parallel groups<a class="headerlink" href="#parallel-groups" title="Permanent link">&para;</a></h2>
 <p>For parallel test groups, per-testcase error tracking is not possible because
 CT forks the hook state for each parallel testcase. Errors from parallel
