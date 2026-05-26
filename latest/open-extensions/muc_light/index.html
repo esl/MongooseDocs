@@ -8641,9 +8641,8 @@ and MUST include a status code 321 (i.e. user leaving due to affiliation change)
 </code></pre></div></td></tr></table></div>
 <h4 id="818-blocking-functionality">8.1.8. Blocking functionality<a class="headerlink" href="#818-blocking-functionality" title="Permanent link">&para;</a></h4>
 <p>The blocking functionality uses a small subset of the Privacy Lists protocol.
-Stanzas MUST be addressed to the sender's bare JID (the <code>to</code> attribute may be skipped).
+Stanzas MUST be addressed to the MUC Light service bare JID.
 The privacy list name MUST be equal to "urn:xmpp:muclight:0".
-Obviously, this method won't work properly in XMPP Server Federation, because privacy stanzas are handled by sender's server and the MUC Light Blocking functionality is handled by a MUC Light service server.
 As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
 <h5 id="8181-request-blocking-list">8.1.8.1. Request blocking list<a class="headerlink" href="#8181-request-blocking-list" title="Permanent link">&para;</a></h5>
 <p><strong>Retrieving blocking list</strong></p>
@@ -8651,7 +8650,7 @@ As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-getlist&#39;</span><span class="nt">&gt;</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-getlist&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;coven.shakespeare.lit&#39;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;query</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&#39;jabber:iq:privacy&#39;</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;list</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;urn:xmpp:muclight:0&#39;</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
@@ -8670,7 +8669,7 @@ As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-getlist&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="nt">&gt;</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-getlist&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;coven.shakespeare.lit&#39;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;query</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&#39;jabber:iq:privacy&#39;</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;list</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;urn:xmpp:muclight:0&#39;</span><span class="nt">&gt;</span>
 <span class="w">            </span><span class="nt">&lt;item</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;jid&#39;</span>
@@ -8697,7 +8696,7 @@ As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-blockroom&#39;</span><span class="nt">&gt;</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-blockroom&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;coven.shakespeare.lit&#39;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;query</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&#39;jabber:iq:privacy&#39;</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;list</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;urn:xmpp:muclight:0&#39;</span><span class="nt">&gt;</span>
 <span class="w">            </span><span class="nt">&lt;item</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;jid&#39;</span>
@@ -8708,7 +8707,7 @@ As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-blockroom&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-blockroom&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;coven.shakespeare.lit&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
 <h5 id="8183-blocking-a-user">8.1.8.3. Blocking a user<a class="headerlink" href="#8183-blocking-a-user" title="Permanent link">&para;</a></h5>
 <p>In order to block a room, the client MUST deny a service JID with user's bare JID in the resource.</p>
@@ -8722,7 +8721,7 @@ As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-blockuser&#39;</span><span class="nt">&gt;</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;set&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-blockuser&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;coven.shakespeare.lit&#39;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;query</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&#39;jabber:iq:privacy&#39;</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;list</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;urn:xmpp:muclight:0&#39;</span><span class="nt">&gt;</span>
 <span class="w">            </span><span class="nt">&lt;item</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;jid&#39;</span>
@@ -8733,7 +8732,7 @@ As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-blockuser&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-blockuser&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;coven.shakespeare.lit&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
 <h5 id="8184-unblocking">8.1.8.4. Unblocking<a class="headerlink" href="#8184-unblocking" title="Permanent link">&para;</a></h5>
 <p><strong>Unblocking</strong></p>
@@ -8750,7 +8749,7 @@ As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-getlist&#39;</span><span class="nt">&gt;</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;get&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-getlist&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;coven.shakespeare.lit&#39;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;query</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&#39;jabber:iq:privacy&#39;</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;list</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;urn:xmpp:muclight:0&#39;</span><span class="nt">&gt;</span>
 <span class="w">            </span><span class="nt">&lt;item</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;jid&#39;</span>
@@ -8765,7 +8764,7 @@ As opposed to XEP-0016, it is allowed to send "delta" privacy lists.</p>
 <span class="w">    </span><span class="nt">&lt;/query&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-getlist&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;iq</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;result&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;comp-getlist&#39;</span><span class="w"> </span><span class="na">to=</span><span class="s">&#39;crone1@shakespeare.lit/desktop&#39;</span><span class="w"> </span><span class="na">from=</span><span class="s">&#39;coven.shakespeare.lit&#39;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div></td></tr></table></div>
 <h4 id="819-creating-a-room">8.1.9. Creating a room<a class="headerlink" href="#819-creating-a-room" title="Permanent link">&para;</a></h4>
 <p>The room is created in a standard XEP-0045 way. Client MUST use a nick equal to their own bare JID.</p>
