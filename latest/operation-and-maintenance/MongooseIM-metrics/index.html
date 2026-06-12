@@ -6244,6 +6244,11 @@ available.</p>
 <p>Metrics specific to an extension, e.g. Message Archive Management, are described in respective module documentation pages.</p>
 <h3 id="global-gauges">Global gauges<a class="headerlink" href="#global-gauges" title="Permanent link">&para;</a></h3>
 <p>All of these metrics are updated periodically. The interval at which they are probed can be configured with the <a href="../../configuration/instrumentation/#instrumentationprobe_interval"><code>instrumentation.probe_interval</code></a> option.</p>
+<p>The following metrics include labels:</p>
+<ul>
+<li><code>tls_cert_remaining_days</code> - <code>ListenerId</code> identifying the listener (format: <code>&lt;ip-address&gt;@&lt;protocol&gt;/&lt;port&gt;</code>)</li>
+</ul>
+<p>Since Exometer does not support labels, they are included in the metrics names.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="prometheus_5" name="__tabbed_6" type="radio" /><input id="exometer_5" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="prometheus_5">Prometheus</label><label for="exometer_5">Exometer</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -6295,6 +6300,11 @@ available.</p>
 <td><code>system_dist_data_Metric</code></td>
 <td>gauge</td>
 <td>Network stats for Erlang distributed communication. <code>Metric</code> can be <code>recv_oct</code>, <code>recv_cnt</code>, <code>recv_max</code>, <code>send_oct</code>, <code>send_max</code>, <code>send_cnt</code>, <code>send_pend</code> or <code>connections</code>.</td>
+</tr>
+<tr>
+<td><code>tls_cert_remaining_days</code></td>
+<td>gauge</td>
+<td>Number of days until the certificate expires. Negative values indicate that the certificate has already expired. Special values: <code>-32768</code>: invalid certificate; <code>-32767</code>: certificate is not yet valid.</td>
 </tr>
 </tbody>
 </table>
@@ -6348,6 +6358,11 @@ available.</p>
 <td><code>[global, system_dist_data, Metric]</code></td>
 <td>gauge</td>
 <td>Network stats for Erlang distributed communication. <code>Metric</code> can be <code>recv_oct</code>, <code>recv_cnt</code>, <code>recv_max</code>, <code>send_oct</code>, <code>send_max</code>, <code>send_cnt</code>, <code>send_pend</code> or <code>connections</code>.</td>
+</tr>
+<tr>
+<td><code>[global, tls_cert_remaining_days, ListenerId, count]</code></td>
+<td>gauge</td>
+<td>Number of days until the certificate expires. Negative values indicate that the certificate has already expired. Special values: <code>-32768</code>: invalid certificate; <code>-32767</code>: certificate is not yet valid.</td>
 </tr>
 </tbody>
 </table>
