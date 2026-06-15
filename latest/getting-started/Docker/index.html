@@ -12,13 +12,13 @@
         <meta name="author" content="Erlang Solutions">
       
       
-        <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/configuration/Erlang-cookie-security/">
+        <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/getting-started/Docker/">
       
       
-        <link rel="prev" href="../release-options/">
+        <link rel="prev" href="../Quick-setup/">
       
       
-        <link rel="next" href="../TLS-hardening/">
+        <link rel="next" href="../../user-guide/Features/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Erlang Cookie Security - MongooseIM Docs</title>
+        <title>Docker - MongooseIM Docs</title>
       
     
     
@@ -85,6 +85,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#running-mongooseim" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -120,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Erlang Cookie Security
+              Docker
             
           </span>
         </div>
@@ -289,18 +294,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -321,7 +328,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -339,7 +346,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/Installation/" class="md-nav__link">
+      <a href="../Installation/" class="md-nav__link">
         
   
   
@@ -367,7 +374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/Quick-setup/" class="md-nav__link">
+      <a href="../Quick-setup/" class="md-nav__link">
         
   
   
@@ -392,10 +399,35 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../getting-started/Docker/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -411,6 +443,237 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running-mongooseim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running MongooseIM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running MongooseIM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-some-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding some users
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding some users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customising-the-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Customising the configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Customising the configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Database setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#persisting-mnesia-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Persisting Mnesia files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-cets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using CETS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-a-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting up a cluster
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up a cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CETS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CETS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-based-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File-based discovery
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mnesia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mnesia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mnesia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kubernetes notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual clustering
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manual clustering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1065,20 +1328,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -1099,7 +1360,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1117,7 +1378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configuration-files/" class="md-nav__link">
+      <a href="../../configuration/configuration-files/" class="md-nav__link">
         
   
   
@@ -1145,7 +1406,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../general/" class="md-nav__link">
+      <a href="../../configuration/general/" class="md-nav__link">
         
   
   
@@ -1173,7 +1434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../listen/" class="md-nav__link">
+      <a href="../../configuration/listen/" class="md-nav__link">
         
   
   
@@ -1201,7 +1462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../auth/" class="md-nav__link">
+      <a href="../../configuration/auth/" class="md-nav__link">
         
   
   
@@ -1229,7 +1490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../internal-databases/" class="md-nav__link">
+      <a href="../../configuration/internal-databases/" class="md-nav__link">
         
   
   
@@ -1257,7 +1518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../outgoing-connections/" class="md-nav__link">
+      <a href="../../configuration/outgoing-connections/" class="md-nav__link">
         
   
   
@@ -1285,7 +1546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Services/" class="md-nav__link">
+      <a href="../../configuration/Services/" class="md-nav__link">
         
   
   
@@ -1313,7 +1574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Modules/" class="md-nav__link">
+      <a href="../../configuration/Modules/" class="md-nav__link">
         
   
   
@@ -1341,7 +1602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../shaper/" class="md-nav__link">
+      <a href="../../configuration/shaper/" class="md-nav__link">
         
   
   
@@ -1369,7 +1630,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../acl/" class="md-nav__link">
+      <a href="../../configuration/acl/" class="md-nav__link">
         
   
   
@@ -1397,7 +1658,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../access/" class="md-nav__link">
+      <a href="../../configuration/access/" class="md-nav__link">
         
   
   
@@ -1425,7 +1686,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../s2s/" class="md-nav__link">
+      <a href="../../configuration/s2s/" class="md-nav__link">
         
   
   
@@ -1453,7 +1714,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../host_config/" class="md-nav__link">
+      <a href="../../configuration/host_config/" class="md-nav__link">
         
   
   
@@ -1481,7 +1742,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../instrumentation/" class="md-nav__link">
+      <a href="../../configuration/instrumentation/" class="md-nav__link">
         
   
   
@@ -1509,7 +1770,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../release-options/" class="md-nav__link">
+      <a href="../../configuration/release-options/" class="md-nav__link">
         
   
   
@@ -1534,17 +1795,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../configuration/Erlang-cookie-security/" class="md-nav__link">
         
   
   
@@ -1560,7 +1814,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1573,7 +1826,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../TLS-hardening/" class="md-nav__link">
+      <a href="../../configuration/TLS-hardening/" class="md-nav__link">
         
   
   
@@ -1601,7 +1854,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../database-backends-configuration/" class="md-nav__link">
+      <a href="../../configuration/database-backends-configuration/" class="md-nav__link">
         
   
   
@@ -5326,6 +5579,227 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running-mongooseim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running MongooseIM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running MongooseIM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-some-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding some users
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding some users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customising-the-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Customising the configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Customising the configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Database setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#persisting-mnesia-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Persisting Mnesia files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-cets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using CETS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-a-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting up a cluster
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up a cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CETS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CETS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-based-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File-based discovery
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mnesia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mnesia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mnesia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kubernetes notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual clustering
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manual clustering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -5344,17 +5818,370 @@
   
 
 
-  <h1>Erlang Cookie Security</h1>
+  <h1>Docker</h1>
 
-<p>In order for MongooseIM nodes to communicate with each other, they have to share a common secret - i.e. a cookie - which is a feature of the underlying Erlang VM.
-The cookie itself is an UTF-8 string that is up to 255 characters in size.
-Thanks to the cookie, MongooseIM nodes can determine if they are allowed to communicate with each other and with no cookie no communication would flow between the nodes - a feature especially useful when you are running more than one applications on a single machine. </p>
-<p>For ease of deployment and staging, each MongooseIM node is configured with a predefined erlang cookie.
-However, one should remember that for production environments this cookie should be reconfigured to a new secret cookie, as this will secure your system from intrusion.
-You can change the cookie by changing the parameters of the <code>-setcookie</code> parameter in the <code>vm.args</code> file.</p>
-<p>Nonetheless, one should remember that communication between Erlang nodes is unencrypted by default, hence, the cookie is vulnerable to sniffing.
-If one has access to a MongooseIM cookie and figures out the hostname of a node, one can execute shell commands remotely on that node.
-Therefore, one should either provide privacy at the network layer (strongly recommended) or disable port 4369 for ultimate security.</p>
+<p>In this short guide we will set up MongooseIM using Docker and run it as part of a cluster.</p>
+<h2 id="running-mongooseim">Running MongooseIM<a class="headerlink" href="#running-mongooseim" title="Permanent link">&para;</a></h2>
+<p>The container can be created and started with the following command:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-dtP<span class="w"> </span>-h<span class="w"> </span>mongooseim-1<span class="w"> </span>--name<span class="w"> </span>mongooseim-1<span class="w"> </span>docker.trymongoose.im/mongooseim
+</code></pre></div></td></tr></table></div>
+<p>In order to run image built for PR 1006, the command will look like the following:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-dtP<span class="w"> </span>-h<span class="w"> </span>mongooseim-1<span class="w"> </span>--name<span class="w"> </span>mongooseim-1<span class="w"> </span>docker.trymongoose.im/mongooseim:PR-1006
+</code></pre></div></td></tr></table></div>
+<p>You can check that <code>docker logs mongooseim-1</code> shows something similar to:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code>...
+MongooseIM cluster primary node mongooseim@mongooseim-1
+Clustered mongooseim@mongooseim-1 with mongooseim@mongooseim-1
+Root: /usr/lib/mongooseim
+Exec: /usr/lib/mongooseim/erts-13.1.5/bin/erlexec -boot /usr/lib/mongooseim/releases/6.1.0/start -embedded -config /usr/lib/mongooseim/etc/app.config -args_file /usr/lib/mongooseim/etc/vm.args -args_file /usr/lib/mongooseim/etc/vm.dist.args -- live --noshell -noinput +Bd
+when=2023-10-24T14:28:03.386139+00:00 level=warning what=report_transparency pid=&lt;0.574.0&gt; at=service_mongoose_system_metrics:report_transparency/1:175 text=&quot;We are gathering the MongooseIM system&#39;s metrics to analyse the trends and needs of our users, improve MongooseIM, and know where to focus our efforts. For more info on how to customise, read, enable, and disable these metrics visit: \
+- MongooseIM docs - \
+      https://esl.github.io/MongooseDocs/latest/operation-and-maintenance/System-Metrics-Privacy-Policy/ \
+- MongooseIM GitHub page - https://github.com/esl/MongooseIM \
+The last sent report is also written to a file log/system_metrics_report.json&quot; report_filename=log/system_metrics_report.json
+</code></pre></div></td></tr></table></div>
+<p>We can health-check the MongooseIM node with <code>telnet</code>.
+To do that, you need to provide the IP of the container (usually 127.0.0.1) and the published TCP port which translates to container’s port 5222.
+In order to find the port you can use the following docker command:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>$ docker ps -f &quot;name=mongooseim-1&quot; --format &quot;{{.Names}}: {{.Ports}}&quot;
+mongooseim-1: 0.0.0.0:32772-&gt;4369/tcp, 0.0.0.0:32771-&gt;5222/tcp, 0.0.0.0:32770-&gt;5269/tcp, 0.0.0.0:32769-&gt;5280/tcp, 0.0.0.0:32768-&gt;9100/tcp
+</code></pre></div></td></tr></table></div>
+<p>In the example above you can see that port 5222 inside the container was published on port 32771 on the docker host machine.
+It can be used to check if the server is really listening on that port:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>$ telnet 127.0.0.1 32771
+Connected to localhost.
+Escape character is &#39;^]&#39;.
+</code></pre></div></td></tr></table></div>
+<p>Success! MongooseIM is accepting XMPP connections.</p>
+<h3 id="adding-some-users">Adding some users<a class="headerlink" href="#adding-some-users" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>docker exec mongooseim-1 /usr/lib/mongooseim/bin/mongooseimctl account registerUser --username $USER --domain $XMPP_HOST --password $PASSWORD
+</code></pre></div></td></tr></table></div>
+<p>Where:
+* <code>$USER</code> - a username
+* <code>$XMPP_HOST</code> - the XMPP host served by MongooseIM - by default it's localhost
+* <code>$PASSWORD</code> - password used for authentication</p>
+<h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code>$ docker exec mongooseim-1 /usr/lib/mongooseim/bin/mongooseimctl account registerUser --username alice --domain localhost --password secret123
+{
+  &quot;data&quot; : {
+    &quot;account&quot; : {
+      &quot;registerUser&quot; : {
+        &quot;message&quot; : &quot;User alice@localhost successfully registered&quot;,
+        &quot;jid&quot; : &quot;alice@localhost&quot;
+      }
+    }
+  }
+}
+</code></pre></div></td></tr></table></div>
+<h2 id="customising-the-configuration">Customising the configuration<a class="headerlink" href="#customising-the-configuration" title="Permanent link">&para;</a></h2>
+<p>You can override the default configuration files by providing them using docker volumes. Let's assume on the local machine there is directory <code>mongooseim-1</code> with the following content:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>$<span class="w"> </span>tree<span class="w"> </span>mongooseim-1
+mongooseim-1
+└──<span class="w"> </span>mongooseim.toml
+└──<span class="w"> </span>app.config
+└──<span class="w"> </span>vm.args
+</code></pre></div></td></tr></table></div>
+<p>Now we can run the container:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-dt<span class="w"> </span>-h<span class="w"> </span>mongooseim-1<span class="w"> </span>--name<span class="w"> </span>mongooseim-1<span class="w"> </span>-p<span class="w"> </span><span class="m">5222</span>:5222<span class="w"> </span>-v<span class="w"> </span>./mongooseim-1:/member<span class="w"> </span>docker.trymongoose.im/mongooseim
+</code></pre></div></td></tr></table></div>
+<p>The server will use the customised configuration files.
+There is also a <code>vm.dist.args</code> file which can be overwritten in the same way.</p>
+<h3 id="database-setup">Database setup<a class="headerlink" href="#database-setup" title="Permanent link">&para;</a></h3>
+<p>MongooseIM can be integrated with various databases and other external services.
+For example, let's run a <a href="https://hub.docker.com/_/postgres/">PostgreSQL</a> container:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>mongooseim-postgres<span class="w"> </span>--net<span class="w"> </span>mim<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-e<span class="w"> </span><span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>mongooseim<span class="w"> </span>-e<span class="w"> </span><span class="nv">POSTGRES_USER</span><span class="o">=</span>mongooseim<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-v<span class="w"> </span><span class="si">${</span><span class="nv">PATH_TO_MONGOOSEIM_PGSQL_FILE</span><span class="si">}</span>:/docker-entrypoint-initdb.d/pgsql.sql:ro<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-p<span class="w"> </span><span class="m">5432</span>:5432<span class="w"> </span>postgres
+</code></pre></div></td></tr></table></div>
+<p><code>${PATH_TO_MONGOOSEIM_PGSQL_FILE}</code> is an absolute path to <code>priv/pgsql.sql</code>, which can be found in the MongooseIM repo.</p>
+<p>Don't forget to configure the <a href="../../configuration/outgoing-connections/">outgoing connection pools</a> in <code>mongooseim.toml</code> to connect with the services you set up!</p>
+<h4 id="persisting-mnesia-files">Persisting Mnesia files<a class="headerlink" href="#persisting-mnesia-files" title="Permanent link">&para;</a></h4>
+<p>Mnesia files are kept in <code>/var/lib/mongooseim</code> directory inside the container. In some cases it is desired to keep them while updating the image.
+In this case the <code>/var/lib/mongooseim</code> dir should be mounted to a host directory.</p>
+<h4 id="using-cets">Using CETS<a class="headerlink" href="#using-cets" title="Permanent link">&para;</a></h4>
+<p>You can use CETS, which is the recommended backend for transient data, instead of Mnesia - see the <a href="../../tutorials/CETS-configure/">tutorial</a> for more details.</p>
+<h3 id="setting-up-a-cluster">Setting up a cluster<a class="headerlink" href="#setting-up-a-cluster" title="Permanent link">&para;</a></h3>
+<p>There are two methods of clustering: CETS (recommended) and Mnesia, which can be automatic (default) or manual, giving move control over the cluster formation.</p>
+<h4 id="cets">CETS<a class="headerlink" href="#cets" title="Permanent link">&para;</a></h4>
+<p>Ensure that outgoing pools are configured with an RDBMS so that CETS can retrieve a list of MongooseIM nodes using the same relational database and cluster them together.</p>
+<p>Create a user-defined bridge network and start two nodes connected to it:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>mim
+docker<span class="w"> </span>run<span class="w"> </span>-dt<span class="w"> </span>--net<span class="w"> </span>mim<span class="w"> </span>--name<span class="w"> </span>mongooseim-1<span class="w"> </span>-v<span class="w"> </span>./mongooseim-1:/member<span class="w"> </span>docker.trymongoose.im/mongooseim
+docker<span class="w"> </span>run<span class="w"> </span>-dt<span class="w"> </span>--net<span class="w"> </span>mim<span class="w"> </span>--name<span class="w"> </span>mongooseim-2<span class="w"> </span>-v<span class="w"> </span>./mongooseim-2:/member<span class="w"> </span>docker.trymongoose.im/mongooseim
+</code></pre></div></td></tr></table></div>
+<p>The nodes should already form a cluster. Let's check it:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code>$<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>mongooseim-1<span class="w"> </span>/usr/lib/mongooseim/bin/mongooseimctl<span class="w"> </span>cets<span class="w"> </span>systemInfo
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;data&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;cets&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">      </span><span class="s2">&quot;systemInfo&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span><span class="o">(</span>...<span class="o">)</span>
+<span class="w">        </span><span class="s2">&quot;availableNodes&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">          </span><span class="s2">&quot;mongooseim@b5b6a9ac9df8&quot;</span>,
+<span class="w">          </span><span class="s2">&quot;mongooseim@f04c2070b082&quot;</span>
+<span class="w">        </span><span class="o">]</span>
+<span class="w">      </span><span class="o">}</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="w">  </span><span class="o">}</span>
+<span class="o">}</span>
+
+$<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>mongooseim-2<span class="w"> </span>/usr/lib/mongooseim/bin/mongooseimctl<span class="w"> </span>cets<span class="w"> </span>systemInfo
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;data&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;cets&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">      </span><span class="s2">&quot;systemInfo&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span><span class="o">(</span>...<span class="o">)</span>
+<span class="w">        </span><span class="s2">&quot;availableNodes&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">          </span><span class="s2">&quot;mongooseim@b5b6a9ac9df8&quot;</span>,
+<span class="w">          </span><span class="s2">&quot;mongooseim@f04c2070b082&quot;</span>
+<span class="w">        </span><span class="o">]</span>
+<span class="w">      </span><span class="o">}</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="w">  </span><span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<h5 id="file-based-discovery">File-based discovery<a class="headerlink" href="#file-based-discovery" title="Permanent link">&para;</a></h5>
+<p>It is possible to read a list of nodes to cluster from a file. See <a href="../../tutorials/CETS-configure/#cets-with-the-file-discovery-backend">CETS with the file discovery backend</a>.</p>
+<h4 id="mnesia">Mnesia<a class="headerlink" href="#mnesia" title="Permanent link">&para;</a></h4>
+<p>To use the automatic clustering method, your containers need both container names (<code>--name</code> option) and host names (<code>-h</code> option) with the <code>-n</code> suffix,
+where <code>n</code> are consecutive integers starting with <code>1</code> (configurable with <code>MASTER_ORDINAL</code> env variable), e.g. <code>mongooseim-1</code>, <code>mongooseim-2</code> and so on.
+Make sure you have started a node with <code>-${MASTER_ORDINAL}</code> suffix first (e.g. <code>-h mongooseim-1</code> and <code>--name mongooseim-1</code>), as all the other nodes will connect to it when joining the cluster.</p>
+<p>Few things are important here:</p>
+<ol>
+<li>
+<p>The following parameters must be set to the same value if used in docker/docker-compose. The second and all the subsequent containers have the same requirement.</p>
+<ul>
+<li><code>-h</code> option sets <code>HOSTNAME</code> environment variable for the container which in turn sets long hostname of the machine. The <a href="https://github.com/esl/mongooseim-docker/blob/bcaa3c17/member/start.sh#L19">start.sh</a> script uses it to generate the Erlang node name if <code>NODE_TYPE=name</code>.
+If <code>NODE_TYPE=sname</code> (default), short hostname will be used instead. If the value provided to <code>-h</code> option is already a short hostname, it will be used as is,
+otherwise it will be shortened (longest part that doesn't contain '.' character).
+If you need to make the host part of the node name different from <code>HOSTNAME</code> (or use an IP address instead), you can do it with the <code>NODE_HOST</code> environment variable, e.g. <code>-e NODE_HOST=192.168.1.1</code>.</li>
+<li><code>--name</code> is required to provide automatic DNS resolution between the containers. See <a href="https://docs.docker.com/network/bridge/#differences-between-user-defined-bridges-and-the-default-bridge">Docker network documentation</a> page for more details.</li>
+</ul>
+</li>
+<li>
+<p>Format of the host name:</p>
+<ul>
+<li>Host name of the first container must be in the <code>${NODE_NAME}-${MASTER_ORDINAL}</code> format. That allows <a href="https://github.com/esl/mongooseim-docker/blob/bcaa3c17/member/start.sh#L75">start.sh</a> to identify the primary node of the cluster.</li>
+<li>All the subsequent containers must follow the <code>${NODE_NAME}-N</code> host name format, where <code>N</code> &gt; <code>${MASTER_ORDINAL}</code>.</li>
+</ul>
+</li>
+</ol>
+<h5 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h5>
+<p>Create a user-defined bridge network and start two nodes connected to it:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>docker network create mim
+docker run -dt --net mim -h mongooseim-1 --name mongooseim-1 -e JOIN_CLUSTER=true docker.trymongoose.im/mongooseim
+docker run -dt --net mim -h mongooseim-2 --name mongooseim-2 -e JOIN_CLUSTER=true docker.trymongoose.im/mongooseim
+</code></pre></div></td></tr></table></div></p>
+<p>The nodes should already form a cluster. Let's check it:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code>$<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>mongooseim-1<span class="w"> </span>/usr/lib/mongooseim/bin/mongooseimctl<span class="w"> </span>mnesia<span class="w"> </span>systemInfo<span class="w"> </span>--keys<span class="w"> </span><span class="s1">&#39;[&quot;running_db_nodes&quot;]&#39;</span>
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;data&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;mnesia&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">      </span><span class="s2">&quot;systemInfo&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="o">{</span>
+<span class="w">          </span><span class="s2">&quot;result&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">            </span><span class="s2">&quot;mongooseim@mongooseim-2&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;mongooseim@mongooseim-1&quot;</span>
+<span class="w">          </span><span class="o">]</span>,
+<span class="w">          </span><span class="s2">&quot;key&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;running_db_nodes&quot;</span>
+<span class="w">        </span><span class="o">}</span>
+<span class="w">      </span><span class="o">]</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="w">  </span><span class="o">}</span>
+<span class="o">}</span>
+$<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>mongooseim-2<span class="w"> </span>/usr/lib/mongooseim/bin/mongooseimctl<span class="w"> </span>mnesia<span class="w"> </span>systemInfo<span class="w"> </span>--keys<span class="w"> </span><span class="s1">&#39;[&quot;running_db_nodes&quot;]&#39;</span>
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;data&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;mnesia&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">      </span><span class="s2">&quot;systemInfo&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="o">{</span>
+<span class="w">          </span><span class="s2">&quot;result&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">            </span><span class="s2">&quot;mongooseim@mongooseim-1&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;mongooseim@mongooseim-2&quot;</span>
+<span class="w">          </span><span class="o">]</span>,
+<span class="w">          </span><span class="s2">&quot;key&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;running_db_nodes&quot;</span>
+<span class="w">        </span><span class="o">}</span>
+<span class="w">      </span><span class="o">]</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="w">  </span><span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<h5 id="kubernetes-notes">Kubernetes notes<a class="headerlink" href="#kubernetes-notes" title="Permanent link">&para;</a></h5>
+<p>Default clustering may work as part of Kubernetes StatefulSet deployment with only two changes:</p>
+<ul>
+<li><code>MASTER_ORDINAL</code> has to be set to <code>0</code> as <code>StatefulSet</code> starts counting instances from 0</li>
+<li><code>NODE_TYPE</code> has to be set to <code>name</code> (use of long names) as Kubernetes uses FQDN within internal DNS to resolve <code>pod's</code> IP address.
+  Please note that for <code>pod</code> domain to work you have to have headless service running that matches your <code>StatefulSet</code>
+  (see https://kubernetes.io/docs/concepts/services-networking/service/#headless-services)</li>
+</ul>
+<h5 id="manual-clustering">Manual clustering<a class="headerlink" href="#manual-clustering" title="Permanent link">&para;</a></h5>
+<p>With the manual clustering method, you need to explicitly specify the name of the node to join the cluster with via the <code>CLUSTER_WITH</code> environment variable.</p>
+<h6 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h6>
+<p>Let's try providing a name of the node to join the cluster with manually:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-dt<span class="w"> </span>--net<span class="w"> </span>mim<span class="w"> </span>-h<span class="w"> </span>first-node<span class="w"> </span>--name<span class="w"> </span>first-node<span class="w"> </span>docker.trymongoose.im/mongooseim
+docker<span class="w"> </span>run<span class="w"> </span>-dt<span class="w"> </span>--net<span class="w"> </span>mim<span class="w"> </span>-h<span class="w"> </span>second-node<span class="w"> </span>--name<span class="w"> </span>second-node<span class="w"> </span>-e<span class="w"> </span><span class="nv">JOIN_CLUSTER</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span>-e<span class="w"> </span><span class="nv">CLUSTER_WITH</span><span class="o">=</span>mongooseim@first-node<span class="w"> </span>docker.trymongoose.im/mongooseim
+</code></pre></div></td></tr></table></div>
+<p>The first command starts a node which, by default, does not to try to join any clusters (since <code>JOIN_CLUSTER</code> is set to <code>false</code> by default).
+We then tell the second node to join the cluster with the first node.</p>
+<p>You can now check that the nodes have formed the cluster:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code>$<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>first-node<span class="w"> </span>/usr/lib/mongooseim/bin/mongooseimctl<span class="w"> </span>mnesia<span class="w"> </span>systemInfo<span class="w"> </span>--keys<span class="w"> </span><span class="s1">&#39;[&quot;running_db_nodes&quot;]&#39;</span>
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;data&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;mnesia&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">      </span><span class="s2">&quot;systemInfo&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="o">{</span>
+<span class="w">          </span><span class="s2">&quot;result&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">            </span><span class="s2">&quot;mongooseim@second-node&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;mongooseim@first-node&quot;</span>
+<span class="w">          </span><span class="o">]</span>,
+<span class="w">          </span><span class="s2">&quot;key&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;running_db_nodes&quot;</span>
+<span class="w">        </span><span class="o">}</span>
+<span class="w">      </span><span class="o">]</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="w">  </span><span class="o">}</span>
+<span class="o">}</span>
+$<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>second-node<span class="w"> </span>/usr/lib/mongooseim/bin/mongooseimctl<span class="w"> </span>mnesia<span class="w"> </span>systemInfo<span class="w"> </span>--keys<span class="w"> </span><span class="s1">&#39;[&quot;running_db_nodes&quot;]&#39;</span>
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;data&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;mnesia&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">      </span><span class="s2">&quot;systemInfo&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="o">{</span>
+<span class="w">          </span><span class="s2">&quot;result&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">            </span><span class="s2">&quot;mongooseim@first-node&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;mongooseim@second-node&quot;</span>
+<span class="w">          </span><span class="o">]</span>,
+<span class="w">          </span><span class="s2">&quot;key&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;running_db_nodes&quot;</span>
+<span class="w">        </span><span class="o">}</span>
+<span class="w">      </span><span class="o">]</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="w">  </span><span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 
 
 
@@ -5392,7 +6219,7 @@ Therefore, one should either provide privacy at the network layer (strongly reco
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../release-options/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Release Options">
+          <a href="../Quick-setup/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Quick Setup">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5402,20 +6229,20 @@ Therefore, one should either provide privacy at the network layer (strongly reco
                 Previous
               </span>
               <div class="md-ellipsis">
-                Release Options
+                Quick Setup
               </div>
             </div>
           </a>
         
         
           
-          <a href="../TLS-hardening/" class="md-footer__link md-footer__link--next" aria-label="Next: TLS Hardening">
+          <a href="../../user-guide/Features/" class="md-footer__link md-footer__link--next" aria-label="Next: Features">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                TLS Hardening
+                Features
               </div>
             </div>
             <div class="md-footer__button md-icon">
