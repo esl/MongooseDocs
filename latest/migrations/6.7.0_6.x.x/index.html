@@ -3185,6 +3185,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../modules/mod_pubsub_old/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mod_pubsub_old
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../modules/mod_push_service_mongoosepush/" class="md-nav__link">
         
   
@@ -5284,6 +5312,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#mod_pubsub-renamed-to-mod_pubsub_old-and-deprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mod_pubsub renamed to mod_pubsub_old and deprecated
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5473,6 +5512,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#mod_pubsub-renamed-to-mod_pubsub_old-and-deprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mod_pubsub renamed to mod_pubsub_old and deprecated
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5536,6 +5586,19 @@ Also remove <code>modules.mod_muc.default_room.logging</code> option.
 If you need message history, enable and configure <code>mod_mam</code> instead.</p>
 <h3 id="translation-support-removed">Translation support removed<a class="headerlink" href="#translation-support-removed" title="Permanent link">&para;</a></h3>
 <p>System message translations are no longer supported. Remove <code>service_translations</code> from your services configuration and keep message strings in English.</p>
+<h3 id="mod_pubsub-renamed-to-mod_pubsub_old-and-deprecated"><code>mod_pubsub</code> renamed to <code>mod_pubsub_old</code> and deprecated<a class="headerlink" href="#mod_pubsub-renamed-to-mod_pubsub_old-and-deprecated" title="Permanent link">&para;</a></h3>
+<p>The previous PubSub implementation is now available as <a href="../../modules/mod_pubsub_old/"><code>mod_pubsub_old</code></a> and is deprecated.
+The <a href="../../modules/mod_pubsub/"><code>mod_pubsub</code></a> name now refers to a new, performance-focused implementation that supports only selected PEP functionality.</p>
+<p>If your existing configuration uses the old PubSub module name, choose one of the following migration paths:</p>
+<ul>
+<li>
+<p>Update the configuration to use <a href="../../modules/mod_pubsub_old/"><code>mod_pubsub_old</code></a> instead of <code>mod_pubsub</code> if you need the old implementation's full PubSub feature set, generic PubSub component, collection nodes, plugin-based node implementations, or push-notification PubSub nodes.
+  If you monitor PubSub metrics, update your dashboards and alerts to use the <a href="../../modules/mod_pubsub_old/#overall-pubsub-action-metrics"><code>mod_pubsub_old</code> metric names</a>.</p>
+</li>
+<li>
+<p>Use the new <a href="../../modules/mod_pubsub/"><code>mod_pubsub</code></a> for better performance if your deployment only needs the selected PEP features described in its module documentation.</p>
+</li>
+</ul>
 <h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
 <p>The changes to metrics and instrumentation are listed below.</p>
 <h3 id="router_no_route_found-is-now-a-global-metric"><code>router_no_route_found</code> is now a global metric<a class="headerlink" href="#router_no_route_found-is-now-a-global-metric" title="Permanent link">&para;</a></h3>
