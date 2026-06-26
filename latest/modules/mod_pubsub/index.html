@@ -3234,9 +3234,21 @@
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Supported functionality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#node-configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
       
-        <li class="md-nav__item">
+        Node configuration options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#known-omissions-and-limitations" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3244,6 +3256,11 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -5503,9 +5520,21 @@
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Supported functionality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#node-configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
       
-        <li class="md-nav__item">
+        Node configuration options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#known-omissions-and-limitations" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5513,6 +5542,11 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -5602,22 +5636,26 @@ Until the missing functionality is implemented here, deployments that need a gen
 <ul>
 <li><a href="https://xmpp.org/extensions/xep-0060.html#publisher-publish-autocreate">Automatic creation</a> of PEP nodes on publish.</li>
 <li>Explicit node <a href="https://xmpp.org/extensions/xep-0060.html#owner-create">creation</a> and <a href="https://xmpp.org/extensions/xep-0060.html#owner-delete">deletion</a>.</li>
-<li><a href="https://xmpp.org/extensions/xep-0060.html#owner-configure">Node configuration</a> and <a href="https://xmpp.org/extensions/xep-0060.html#publisher-publish-options">publish options</a> with the <a href="https://xmpp.org/extensions/xep-0060.html#accessmodels"><code>pubsub#access_model</code></a> option.</li>
-<li>The <code>open</code> and <code>presence</code> access models.</li>
+<li><a href="https://xmpp.org/extensions/xep-0060.html#owner-configure">Node configuration</a> and <a href="https://xmpp.org/extensions/xep-0060.html#publisher-publish-options">publish options</a>, with supported options described below.</li>
 <li><a href="https://xmpp.org/extensions/xep-0060.html#publisher-publish">Publishing</a> and <a href="https://xmpp.org/extensions/xep-0060.html#publisher-delete">retracting</a> an item.</li>
-<li>Retrieving <a href="https://xmpp.org/extensions/xep-0060.html#subscriber-retrieve-requestall">all items</a> or <a href="https://xmpp.org/extensions/xep-0060.html#subscriber-retrieve-requestone">selected items by ID</a>.</li>
+<li>Retrieving <a href="https://xmpp.org/extensions/xep-0060.html#subscriber-retrieve-requestall">all items</a>, <a href="https://xmpp.org/extensions/xep-0060.html#subscriber-retrieve-requestone">selected items by ID</a>, or the <a href="https://xmpp.org/extensions/xep-0060.html#subscriber-retrieve-requestrecent">most recent N items</a>.</li>
 <li>Explicit <a href="https://xmpp.org/extensions/xep-0060.html#subscriber-subscribe">subscribe</a> and <a href="https://xmpp.org/extensions/xep-0060.html#subscriber-unsubscribe">unsubscribe</a>.</li>
 <li><a href="https://xmpp.org/extensions/xep-0163.html#notify-autosubscribe">Implicit PEP subscriptions</a> based on presence subscription and entity capabilities.</li>
 <li><a href="https://xmpp.org/extensions/xep-0163.html#notify-filterednotifications">Filtered item notifications</a> with <a href="../mod_caps/">mod_caps</a>, and <a href="https://xmpp.org/extensions/xep-0060.html#owner-delete-success">node deletion notifications</a>.</li>
 <li><a href="https://xmpp.org/extensions/xep-0163.html#notify-last">Last published item delivery</a>, with <a href="https://xmpp.org/extensions/xep-0203.html"><code>urn:xmpp:delay</code></a> metadata.</li>
 <li>Service discovery for <a href="https://xmpp.org/extensions/xep-0163.html#support-owner">PEP support</a> on users' bare JIDs, <a href="https://xmpp.org/extensions/xep-0060.html#entity-info">node-qualified disco info</a>, and <a href="https://xmpp.org/extensions/xep-0060.html#entity-nodes">disco items</a> listing discoverable PEP nodes.</li>
 </ul>
-<h2 id="known-omissions-and-limitations">Known omissions and limitations<a class="headerlink" href="#known-omissions-and-limitations" title="Permanent link">&para;</a></h2>
+<h3 id="node-configuration-options">Node configuration options<a class="headerlink" href="#node-configuration-options" title="Permanent link">&para;</a></h3>
+<p><code>mod_pubsub</code> supports the following node configuration and publish options:</p>
+<ul>
+<li><a href="https://xmpp.org/extensions/xep-0060.html#accessmodels"><code>pubsub#access_model</code></a>: controls who can access a node. Supported values are <code>open</code> and <code>presence</code>.</li>
+<li><code>pubsub#max_items</code>: controls how many published items are stored for later retrieval. It defaults to <code>max</code>, which stores all published items. A non-negative integer limits stored items for the node; when the limit is exceeded, the oldest stored item is removed. <code>0</code> allows publish notifications but does not persist items for later retrieval.</li>
+</ul>
+<h3 id="known-omissions-and-limitations">Known omissions and limitations<a class="headerlink" href="#known-omissions-and-limitations" title="Permanent link">&para;</a></h3>
 <p><code>mod_pubsub</code> is intended to grow over time, but it does not implement the full XEP-0060 feature set yet.
 Current intentional omissions and limitations are:</p>
 <ul>
-<li>Access models other than <code>open</code> and <code>presence</code> are not supported.</li>
-<li>Node and publish options other than <code>pubsub#access_model</code> are not supported.</li>
+<li>Node and publish options other than the <a href="#node-configuration-options">supported node configuration options</a> are not supported.</li>
 <li><a href="https://xmpp.org/extensions/xep-0060.html#subscriber-configure">Subscription options</a>, <a href="https://xmpp.org/extensions/xep-0060.html#subscriber-subscribe-multi">multiple subscriptions</a> for the same JID and node, and <a href="https://xmpp.org/extensions/xep-0248.html">collection nodes</a> are not implemented.</li>
 <li><a href="https://xmpp.org/extensions/xep-0060.html#owner-affiliations">Affiliations</a>, <a href="https://xmpp.org/extensions/xep-0060.html#owner-default">default node configuration requests</a>, <a href="https://xmpp.org/extensions/xep-0060.html#owner-purge">purge</a>, and <a href="https://xmpp.org/extensions/xep-0060.html#owner-subscriptions">subscription management by node owners</a> are not implemented.</li>
 <li><a href="https://xmpp.org/extensions/xep-0060.html#subscriber-retrieve-returnsome">Result Set Management</a> is not implemented for item retrieval.</li>
