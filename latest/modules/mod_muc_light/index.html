@@ -3185,6 +3185,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modulesmod_muc_lightpromote_on_last_owner_leave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        modules.mod_muc_light.promote_on_last_owner_leave
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_muc_lightconfig_schema" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5771,6 +5782,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modulesmod_muc_lightpromote_on_last_owner_leave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        modules.mod_muc_light.promote_on_last_owner_leave
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_muc_lightconfig_schema" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5959,6 +5981,14 @@ which can be done with the <a href="#modulesmod_muc_lightall_can_configure">all_
 <p>This is a custom option, not compatible with our <a href="../../open-extensions/muc_light/">MUC Light XEP</a>.
 If a client is adhering to the XEP, its behaviour may be unexpected, and this option should not be enabled.</p>
 </div>
+<h3 id="modulesmod_muc_lightpromote_on_last_owner_leave"><code>modules.mod_muc_light.promote_on_last_owner_leave</code><a class="headerlink" href="#modulesmod_muc_lightpromote_on_last_owner_leave" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Syntax</strong>: boolean</li>
+<li><strong>Default</strong>: <code>true</code></li>
+<li><strong>Example</strong>: <code>promote_on_last_owner_leave = false</code></li>
+</ul>
+<p>When enabled, one of the group members is promoted to owner when the last owner leaves the room.
+Otherwise, leaving the room is rejected.</p>
 <h3 id="modulesmod_muc_lightconfig_schema"><code>modules.mod_muc_light.config_schema</code><a class="headerlink" href="#modulesmod_muc_lightconfig_schema" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> an array of <code>config_schema</code> items, as described below</li>
@@ -5989,22 +6019,28 @@ If a client is adhering to the XEP, its behaviour may be unexpected, and this op
 <span class="w">          </span><span class="n">integer_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span>
 <span class="w">          </span><span class="n">internal_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;display_lines&quot;</span>
 </code></pre></div></td></tr></table></div>
-<p>Defines fields allowed in the room configuration.</p>
-<p>Each <code>config_schema</code> item is a TOML table with the following keys:</p>
+<p>Defines fields allowed in the room configuration. Each <code>config_schema</code> item is a TOML table with the following keys:</p>
 <ul>
 <li><code>field</code> - mandatory, non-empty string - field name.</li>
-<li><code>string_value</code>, <code>integer_value</code>, <code>float_value</code> - exactly one of them has to be present, depending on the type of the field:<ul>
+<li><code>string_value</code>, <code>integer_value</code>, <code>float_value</code>, <code>boolean_value</code> - exactly one of them has to be present, depending on the type of the field:<ul>
 <li><code>string_value</code> - string,</li>
 <li><code>integer_value</code> - integer,</li>
-<li><code>float_value</code> - floating-point number.</li>
+<li><code>float_value</code> - floating-point number,</li>
+<li><code>boolean_value</code> - boolean.</li>
 </ul>
 </li>
 <li><code>internal_key</code> - optional, non-empty string - field name used in the internal representation, useful only for debugging or custom applications. By default it is the same as <code>field</code>.</li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Lack of the <code>roomname</code> field will cause room names in Disco results and Roster items be set to the room username.</p>
+<p>The following internal fields are reserved and have special meaning:</p>
+<ul>
+<li><code>roomname</code> (<code>string_value</code>) - specifies the room name displayed in Disco results and Roster items. If not configured, the room username is used.</li>
+<li><code>all_can_configure</code> (<code>boolean_value</code>) - overrides the <code>all_can_configure</code> module option for the room.</li>
+<li><code>all_can_invite</code> (<code>boolean_value</code>) - overrides the <code>all_can_invite</code> module option for the room.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 </div>
+<p>Internal fields can be specified either explicitly using <code>internal_key</code> or implicitly by the value of <code>field</code>.</p>
 <h2 id="example-configuration">Example Configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
