@@ -1,0 +1,3017 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Documentation for MongooseIM - a mobile messaging platform with focus on performance and scalability" name="description"/>
+<meta content="Erlang Solutions" name="author"/>
+<link href="https://esl.github.io/MongooseDocs/6.8.0/tutorials/jingle/" rel="canonical"/>
+<link href="../iOS_tutorial/" rel="prev"/>
+<link href="../client-certificate/" rel="next"/>
+<link href="../../favicon.ico" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<title>XMPP Audio and Video Basics - MongooseIM Docs</title>
+<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../css/custom.css" rel="stylesheet"/>
+<link href="../../assets/mkdocs_puml/puml.css" rel="stylesheet"/>
+<link href="../../assets/mkdocs_puml/interaction.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#xmpp-audio-and-video-basics">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<div data-md-color-scheme="default" data-md-component="outdated" hidden="">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="MongooseIM Docs" class="md-header__button md-logo" data-md-component="logo" href="../.." title="MongooseIM Docs">
+<img alt="logo" src="../../MongooseIM_logo_white.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            MongooseIM Docs
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              XMPP Audio and Video Basics
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="indigo" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/esl/MongooseIM" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="MongooseIM Docs" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="MongooseIM Docs">
+<img alt="logo" src="../../MongooseIM_logo_white.png"/>
+</a>
+    MongooseIM Docs
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/esl/MongooseIM" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+<span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/Installation/">
+<span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/Quick-setup/">
+<span class="md-ellipsis">
+    
+  
+    Quick Setup
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/Docker/">
+<span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../user-guide/Features/">
+<span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../user-guide/Supported-standards/">
+<span class="md-ellipsis">
+    
+  
+    Supported Standards
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../user-guide/High-level-Architecture/">
+<span class="md-ellipsis">
+    
+  
+    High-level Architecture
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../How-to-build/">
+<span class="md-ellipsis">
+    
+  
+    How to Build MongooseIM from source code
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../CETS-configure/">
+<span class="md-ellipsis">
+    
+  
+    How to configure MongooseIM to use CETS instead of Mnesia
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../push-notifications/Push-notifications/">
+<span class="md-ellipsis">
+    
+  
+    How to Set up Push Notifications
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../push-notifications/Push-notifications-client-side/">
+<span class="md-ellipsis">
+    
+  
+    How to Set up Push Notifications on the client side
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../push-notifications/MongoosePush-setup/">
+<span class="md-ellipsis">
+    
+  
+    How to Set up MongoosePush
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../coturn_tutorial/">
+<span class="md-ellipsis">
+    
+  
+    How to Set up Coturn
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../iOS_tutorial/">
+<span class="md-ellipsis">
+    
+  
+    How to Build an iOS messaging app
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    XMPP Audio and Video Basics
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    
+  
+    XMPP Audio and Video Basics
+  
+
+    
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#overview">
+<span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#jingle-protocol-support">
+<span class="md-ellipsis">
+      
+        Jingle Protocol Support
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-jingle-framework">
+<span class="md-ellipsis">
+      
+        The Jingle Framework
+      
+    </span>
+</a>
+<nav aria-label="The Jingle Framework" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#jingle-application-formats">
+<span class="md-ellipsis">
+      
+        Jingle Application Formats
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#jingle-transport-methods">
+<span class="md-ellipsis">
+      
+        Jingle Transport Methods
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#audio-and-video-call-scenarios">
+<span class="md-ellipsis">
+      
+        Audio and Video Call Scenarios
+      
+    </span>
+</a>
+<nav aria-label="Audio and Video Call Scenarios" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#one-to-one-calls">
+<span class="md-ellipsis">
+      
+        One-to-One Calls
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#small-group-calls-mesh-topology">
+<span class="md-ellipsis">
+      
+        Small Group Calls (Mesh Topology)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#large-conference-calls-star-topology">
+<span class="md-ellipsis">
+      
+        Large Conference Calls (Star Topology)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#other-useful-xeps-for-audiovideo-support">
+<span class="md-ellipsis">
+      
+        Other Useful XEPs for Audio/Video Support
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#jingle-gateways">
+<span class="md-ellipsis">
+      
+        Jingle Gateways
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#sample-one-to-one-session">
+<span class="md-ellipsis">
+      
+        Sample One-to-One Session
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#frequently-asked-questions">
+<span class="md-ellipsis">
+      
+        Frequently Asked Questions
+      
+    </span>
+</a>
+<nav aria-label="Frequently Asked Questions" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-listed-xeps-do-not-provide-all-the-required-functionality-what-are-my-options">
+<span class="md-ellipsis">
+      
+        The listed XEPs do not provide all the required functionality. What are my options?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#is-there-an-alternative-to-using-stunturn-servers">
+<span class="md-ellipsis">
+      
+        Is there an alternative to using STUN/TURN servers?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#do-i-still-need-stunturn-if-i-use-a-public-content-mixer-or-rtp-relay">
+<span class="md-ellipsis">
+      
+        Do I still need STUN/TURN if I use a public content mixer or RTP relay?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#why-is-an-rtp-relay-needed-if-turn-already-acts-as-a-relay">
+<span class="md-ellipsis">
+      
+        Why is an RTP relay needed if TURN already acts as a relay?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#for-more-information-about-stunturn-servers-see-the-dedicated-page">
+<span class="md-ellipsis">
+      
+        For more information about STUN/TURN servers, see the dedicated page.
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../client-certificate/">
+<span class="md-ellipsis">
+    
+  
+    How to Set up SASL client certificate authentication
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Open XMPP Extensions
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Open XMPP Extensions
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../open-extensions/muc_light/">
+<span class="md-ellipsis">
+    
+  
+    MUC light
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../open-extensions/inbox/">
+<span class="md-ellipsis">
+    
+  
+    Inbox
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../open-extensions/smart-markers/">
+<span class="md-ellipsis">
+    
+  
+    Smart Markers
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../open-extensions/token-reconnection/">
+<span class="md-ellipsis">
+    
+  
+    Token-based reconnection
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../open-extensions/mam/">
+<span class="md-ellipsis">
+    
+  
+    MAM
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Configuration
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/configuration-files/">
+<span class="md-ellipsis">
+    
+  
+    Configuration Files
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/general/">
+<span class="md-ellipsis">
+    
+  
+    Options: General
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/listen/">
+<span class="md-ellipsis">
+    
+  
+    Options: Listen
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/auth/">
+<span class="md-ellipsis">
+    
+  
+    Options: Auth
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/internal-databases/">
+<span class="md-ellipsis">
+    
+  
+    Options: Internal Databases
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/outgoing-connections/">
+<span class="md-ellipsis">
+    
+  
+    Options: Outgoing connections
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/Services/">
+<span class="md-ellipsis">
+    
+  
+    Options: Services
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/Modules/">
+<span class="md-ellipsis">
+    
+  
+    Options: Extension Modules
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/shaper/">
+<span class="md-ellipsis">
+    
+  
+    Options: Shaper
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/acl/">
+<span class="md-ellipsis">
+    
+  
+    Options: Acl
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/access/">
+<span class="md-ellipsis">
+    
+  
+    Options: Access
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/s2s/">
+<span class="md-ellipsis">
+    
+  
+    Options: S2S
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/host_config/">
+<span class="md-ellipsis">
+    
+  
+    Options: Host config
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/instrumentation/">
+<span class="md-ellipsis">
+    
+  
+    Options: Instrumentation
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/release-options/">
+<span class="md-ellipsis">
+    
+  
+    Release Options
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/Erlang-cookie-security/">
+<span class="md-ellipsis">
+    
+  
+    Erlang Cookie Security
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/TLS-hardening/">
+<span class="md-ellipsis">
+    
+  
+    TLS Hardening
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../configuration/database-backends-configuration/">
+<span class="md-ellipsis">
+    
+  
+    Database Backends Configuration
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Listeners
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_7_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_7">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Listeners
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../listeners/listen-c2s/">
+<span class="md-ellipsis">
+    
+  
+    Client to server (C2S)
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../listeners/listen-s2s/">
+<span class="md-ellipsis">
+    
+  
+    Server to server (S2S)
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../listeners/listen-components/">
+<span class="md-ellipsis">
+    
+  
+    XMPP components
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../listeners/listen-http/">
+<span class="md-ellipsis">
+    
+  
+    HTTP-based services
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Authentication Methods
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_8_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_8">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Authentication Methods
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../authentication-methods/rdbms/">
+<span class="md-ellipsis">
+    
+  
+    RDBMS
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../authentication-methods/external/">
+<span class="md-ellipsis">
+    
+  
+    External
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../authentication-methods/anonymous/">
+<span class="md-ellipsis">
+    
+  
+    Anonymous
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../authentication-methods/ldap/">
+<span class="md-ellipsis">
+    
+  
+    LDAP
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../authentication-methods/jwt/">
+<span class="md-ellipsis">
+    
+  
+    JWT
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../authentication-methods/http/">
+<span class="md-ellipsis">
+    
+  
+    HTTP
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../authentication-methods/pki/">
+<span class="md-ellipsis">
+    
+  
+    PKI
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../authentication-methods/dummy/">
+<span class="md-ellipsis">
+    
+  
+    Dummy
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Extension modules
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_9_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_9">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Extension modules
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_adhoc/">
+<span class="md-ellipsis">
+    
+  
+    mod_adhoc
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_amp/">
+<span class="md-ellipsis">
+    
+  
+    mod_amp
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_auth_token/">
+<span class="md-ellipsis">
+    
+  
+    mod_auth_token
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_bind2/">
+<span class="md-ellipsis">
+    
+  
+    mod_bind2
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_blocking/">
+<span class="md-ellipsis">
+    
+  
+    mod_blocking
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_blocklist/">
+<span class="md-ellipsis">
+    
+  
+    mod_blocklist
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_broadcast/">
+<span class="md-ellipsis">
+    
+  
+    mod_broadcast
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_caps/">
+<span class="md-ellipsis">
+    
+  
+    mod_caps
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_cache_users/">
+<span class="md-ellipsis">
+    
+  
+    mod_cache_users
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_carboncopy/">
+<span class="md-ellipsis">
+    
+  
+    mod_carboncopy
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_csi/">
+<span class="md-ellipsis">
+    
+  
+    mod_csi
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_disco/">
+<span class="md-ellipsis">
+    
+  
+    mod_disco
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_domain_isolation/">
+<span class="md-ellipsis">
+    
+  
+    mod_domain_isolation
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_9_14" type="checkbox"/>
+<label class="md-nav__link" for="__nav_9_14" id="__nav_9_14_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    mod_event_pusher
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_9_14_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_9_14">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    mod_event_pusher
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_event_pusher/">
+<span class="md-ellipsis">
+    
+  
+    mod_event_pusher
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_event_pusher_http/">
+<span class="md-ellipsis">
+    
+  
+    HTTP backend
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_event_pusher_push/">
+<span class="md-ellipsis">
+    
+  
+    Push backend
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_event_pusher_rabbit/">
+<span class="md-ellipsis">
+    
+  
+    RabbitMQ backend
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_event_pusher_sns/">
+<span class="md-ellipsis">
+    
+  
+    SNS backend
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_extdisco/">
+<span class="md-ellipsis">
+    
+  
+    mod_extdisco
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_external_filter/">
+<span class="md-ellipsis">
+    
+  
+    mod_external_filter
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_fast_auth_token/">
+<span class="md-ellipsis">
+    
+  
+    mod_fast_auth_token
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_global_distrib/">
+<span class="md-ellipsis">
+    
+  
+    mod_global_distrib
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_http_upload/">
+<span class="md-ellipsis">
+    
+  
+    mod_http_upload
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_inbox/">
+<span class="md-ellipsis">
+    
+  
+    mod_inbox
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_keystore/">
+<span class="md-ellipsis">
+    
+  
+    mod_keystore
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_last/">
+<span class="md-ellipsis">
+    
+  
+    mod_last
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_mam/">
+<span class="md-ellipsis">
+    
+  
+    mod_mam
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_muc/">
+<span class="md-ellipsis">
+    
+  
+    mod_muc
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_muc_light/">
+<span class="md-ellipsis">
+    
+  
+    mod_muc_light
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_offline/">
+<span class="md-ellipsis">
+    
+  
+    mod_offline
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_offline_stub/">
+<span class="md-ellipsis">
+    
+  
+    mod_offline_stub
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_ping/">
+<span class="md-ellipsis">
+    
+  
+    mod_ping
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_presence/">
+<span class="md-ellipsis">
+    
+  
+    mod_presence
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_privacy/">
+<span class="md-ellipsis">
+    
+  
+    mod_privacy
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_private/">
+<span class="md-ellipsis">
+    
+  
+    mod_private
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_pubsub/">
+<span class="md-ellipsis">
+    
+  
+    mod_pubsub
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_pubsub_old/">
+<span class="md-ellipsis">
+    
+  
+    mod_pubsub_old
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_push_service_mongoosepush/">
+<span class="md-ellipsis">
+    
+  
+    mod_push_service_mongoosepush
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_register/">
+<span class="md-ellipsis">
+    
+  
+    mod_register
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_roster/">
+<span class="md-ellipsis">
+    
+  
+    mod_roster
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_sasl2/">
+<span class="md-ellipsis">
+    
+  
+    mod_sasl2
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_shared_roster_ldap/">
+<span class="md-ellipsis">
+    
+  
+    mod_shared_roster_ldap
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_sic/">
+<span class="md-ellipsis">
+    
+  
+    mod_sic
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_smart_markers/">
+<span class="md-ellipsis">
+    
+  
+    mod_smart_markers
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_stanzaid/">
+<span class="md-ellipsis">
+    
+  
+    mod_stanzaid
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_stream_management/">
+<span class="md-ellipsis">
+    
+  
+    mod_stream_management
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_time/">
+<span class="md-ellipsis">
+    
+  
+    mod_time
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_vcard/">
+<span class="md-ellipsis">
+    
+  
+    mod_vcard
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../modules/mod_version/">
+<span class="md-ellipsis">
+    
+  
+    mod_version
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    GraphQL API
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_10_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_10">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    GraphQL API
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../graphql-api/User-GraphQL/">
+<span class="md-ellipsis">
+    
+  
+    User
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../graphql-api/Admin-GraphQL/">
+<span class="md-ellipsis">
+    
+  
+    Admin
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_11" type="checkbox"/>
+<label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Operation and Maintenance
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_11_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_11">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Operation and Maintenance
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../operation-and-maintenance/gdpr-considerations/">
+<span class="md-ellipsis">
+    
+  
+    GDPR considerations
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../operation-and-maintenance/Cluster-management-considerations/">
+<span class="md-ellipsis">
+    
+  
+    Cluster management considerations
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../operation-and-maintenance/Cluster-configuration-and-node-management/">
+<span class="md-ellipsis">
+    
+  
+    Cluster configuration and node management
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../operation-and-maintenance/Logging-%26-monitoring/">
+<span class="md-ellipsis">
+    
+  
+    Logging &amp; monitoring
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../operation-and-maintenance/Logging/">
+<span class="md-ellipsis">
+    
+  
+    Logging configuration
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../operation-and-maintenance/Humio/">
+<span class="md-ellipsis">
+    
+  
+    Logging with Humio
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../operation-and-maintenance/Logging-fields/">
+<span class="md-ellipsis">
+    
+  
+    Logging fields
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../operation-and-maintenance/Rolling-upgrade/">
+<span class="md-ellipsis">
+    
+  
+    Rolling upgrade
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../operation-and-maintenance/Cluster-restart/">
+<span class="md-ellipsis">
+    
+  
+    Cluster restart
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../operation-and-maintenance/MongooseIM-metrics/">
+<span class="md-ellipsis">
+    
+  
+    Metrics
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../operation-and-maintenance/System-Metrics-Privacy-Policy/">
+<span class="md-ellipsis">
+    
+  
+    System Metrics Privacy Policy
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../operation-and-maintenance/tls-distribution/">
+<span class="md-ellipsis">
+    
+  
+    Distribution over TLS
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../operation-and-maintenance/known-issues/">
+<span class="md-ellipsis">
+    
+  
+    Known issues
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_12" type="checkbox"/>
+<label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Developer's Guide
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_12_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_12">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer's Guide
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/release_config/">
+<span class="md-ellipsis">
+    
+  
+    Release/Installation configuration
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/Bootstrap-Scripts/">
+<span class="md-ellipsis">
+    
+  
+    Bootstrap scripts
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/Testing-MongooseIM/">
+<span class="md-ellipsis">
+    
+  
+    Testing MongooseIM
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/logging/">
+<span class="md-ellipsis">
+    
+  
+    Logging
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/Hooks-and-handlers/">
+<span class="md-ellipsis">
+    
+  
+    Hooks and Handlers
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/hooks_description/">
+<span class="md-ellipsis">
+    
+  
+    Hooks description
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/accumulators/">
+<span class="md-ellipsis">
+    
+  
+    Accumulators
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/Stanza-routing/">
+<span class="md-ellipsis">
+    
+  
+    Stanza routing
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/domain_management/">
+<span class="md-ellipsis">
+    
+  
+    Domain management
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/mod_amp_developers_guide/">
+<span class="md-ellipsis">
+    
+  
+    mod_amp development
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/mod_muc_light_developers_guide/">
+<span class="md-ellipsis">
+    
+  
+    mod_muc_light developers doc
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/SCRAM-serialization/">
+<span class="md-ellipsis">
+    
+  
+    SCRAM serialization format
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/xep_tool/">
+<span class="md-ellipsis">
+    
+  
+    xep-tool usage
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/OpenSSL-and-FIPS/">
+<span class="md-ellipsis">
+    
+  
+    FIPS mode
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/Basic-iq-handler/">
+<span class="md-ellipsis">
+    
+  
+    Basic IQ Handler
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developers-guide/mongoose_wpool/">
+<span class="md-ellipsis">
+    
+  
+    mongoose_wpool
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_13" type="checkbox"/>
+<label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Migration Guide
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_13_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_13">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Migration Guide
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/3.1.1_3.2.0/">
+<span class="md-ellipsis">
+    
+  
+    3.1.1 to 3.2.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/3.3.0_3.4.0/">
+<span class="md-ellipsis">
+    
+  
+    3.3.0 to 3.4.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/3.5.0_3.6.0/">
+<span class="md-ellipsis">
+    
+  
+    3.5.0 to 3.6.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/3.6.0_3.7.0/">
+<span class="md-ellipsis">
+    
+  
+    3.6.0 to 3.7.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/3.7.0_4.0.0/">
+<span class="md-ellipsis">
+    
+  
+    3.7.0 to 4.0.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/4.0.0_4.0.1/">
+<span class="md-ellipsis">
+    
+  
+    4.0.0 to 4.0.1
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/4.0.1_4.1.0/">
+<span class="md-ellipsis">
+    
+  
+    4.0.1 to 4.1.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/4.1.0_4.2.0/">
+<span class="md-ellipsis">
+    
+  
+    4.1.0 to 4.2.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/4.2.0_5.0.0/">
+<span class="md-ellipsis">
+    
+  
+    4.2.0 to 5.0.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/5.0.0_5.1.0/">
+<span class="md-ellipsis">
+    
+  
+    5.0.0 to 5.1.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/5.1.0_6.0.0/">
+<span class="md-ellipsis">
+    
+  
+    5.1.0 to 6.0.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/6.0.0_6.1.0/">
+<span class="md-ellipsis">
+    
+  
+    6.0.0 to 6.1.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/6.1.0_6.2.0/">
+<span class="md-ellipsis">
+    
+  
+    6.1.0 to 6.2.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/6.2.0_6.2.1/">
+<span class="md-ellipsis">
+    
+  
+    6.2.0 to 6.2.1
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/6.2.1_6.3.0/">
+<span class="md-ellipsis">
+    
+  
+    6.2.1 to 6.3.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/6.3.0_6.3.1/">
+<span class="md-ellipsis">
+    
+  
+    6.3.0 to 6.3.1
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/6.3.1_6.3.2/">
+<span class="md-ellipsis">
+    
+  
+    6.3.1 to 6.3.2
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/6.3.3_6.4.0/">
+<span class="md-ellipsis">
+    
+  
+    6.3.3 to 6.4.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/6.4.0_6.5.0/">
+<span class="md-ellipsis">
+    
+  
+    6.4.0 to 6.5.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/6.5.0_6.6.0/">
+<span class="md-ellipsis">
+    
+  
+    6.5.0 to 6.6.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/6.6.0_6.7.0/">
+<span class="md-ellipsis">
+    
+  
+    6.6.0 to 6.7.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/6.7.0_6.8.0/">
+<span class="md-ellipsis">
+    
+  
+    6.7.0 to 6.8.0
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../migrations/jid-from-mam-muc-script/">
+<span class="md-ellipsis">
+    
+  
+    MAM MUC migration helper
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Contributions/">
+<span class="md-ellipsis">
+    
+  
+    Contributions to the Ecosystem
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../History/">
+<span class="md-ellipsis">
+    
+  
+    MongooseIM History
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#overview">
+<span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#jingle-protocol-support">
+<span class="md-ellipsis">
+      
+        Jingle Protocol Support
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-jingle-framework">
+<span class="md-ellipsis">
+      
+        The Jingle Framework
+      
+    </span>
+</a>
+<nav aria-label="The Jingle Framework" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#jingle-application-formats">
+<span class="md-ellipsis">
+      
+        Jingle Application Formats
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#jingle-transport-methods">
+<span class="md-ellipsis">
+      
+        Jingle Transport Methods
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#audio-and-video-call-scenarios">
+<span class="md-ellipsis">
+      
+        Audio and Video Call Scenarios
+      
+    </span>
+</a>
+<nav aria-label="Audio and Video Call Scenarios" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#one-to-one-calls">
+<span class="md-ellipsis">
+      
+        One-to-One Calls
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#small-group-calls-mesh-topology">
+<span class="md-ellipsis">
+      
+        Small Group Calls (Mesh Topology)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#large-conference-calls-star-topology">
+<span class="md-ellipsis">
+      
+        Large Conference Calls (Star Topology)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#other-useful-xeps-for-audiovideo-support">
+<span class="md-ellipsis">
+      
+        Other Useful XEPs for Audio/Video Support
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#jingle-gateways">
+<span class="md-ellipsis">
+      
+        Jingle Gateways
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#sample-one-to-one-session">
+<span class="md-ellipsis">
+      
+        Sample One-to-One Session
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#frequently-asked-questions">
+<span class="md-ellipsis">
+      
+        Frequently Asked Questions
+      
+    </span>
+</a>
+<nav aria-label="Frequently Asked Questions" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-listed-xeps-do-not-provide-all-the-required-functionality-what-are-my-options">
+<span class="md-ellipsis">
+      
+        The listed XEPs do not provide all the required functionality. What are my options?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#is-there-an-alternative-to-using-stunturn-servers">
+<span class="md-ellipsis">
+      
+        Is there an alternative to using STUN/TURN servers?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#do-i-still-need-stunturn-if-i-use-a-public-content-mixer-or-rtp-relay">
+<span class="md-ellipsis">
+      
+        Do I still need STUN/TURN if I use a public content mixer or RTP relay?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#why-is-an-rtp-relay-needed-if-turn-already-acts-as-a-relay">
+<span class="md-ellipsis">
+      
+        Why is an RTP relay needed if TURN already acts as a relay?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#for-more-information-about-stunturn-servers-see-the-dedicated-page">
+<span class="md-ellipsis">
+      
+        For more information about STUN/TURN servers, see the dedicated page.
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="xmpp-audio-and-video-basics">XMPP Audio and Video Basics<a class="headerlink" href="#xmpp-audio-and-video-basics" title="Permanent link">¶</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¶</a></h2>
+<p>The XMPP standard does not natively support the transmission of audio or video data. Instead, XMPP is commonly used as a signaling layer to establish, manage, and terminate <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol">RTP</a>-based audio and video sessions between clients. This functionality is defined by a collection of XMPP Extension Protocols (XEPs) collectively known as the <a href="https://en.wikipedia.org/wiki/Jingle_(protocol)">Jingle protocol</a>.</p>
+<h2 id="jingle-protocol-support">Jingle Protocol Support<a class="headerlink" href="#jingle-protocol-support" title="Permanent link">¶</a></h2>
+<p>No special support for Jingle is required on the XMPP server itself. However, deploying a robust Jingle-based audio/video solution often requires additional server-side components, including:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Session_Traversal_Utilities_for_NAT">STUN</a>/<a href="https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT">TURN</a> servers for <a href="https://en.wikipedia.org/wiki/NAT_traversal">NAT traversal</a>.</li>
+<li><code>RTP relays</code>, which forward incoming <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol">RTP</a> streams to all participants except the sender. These are useful for small group calls.</li>
+<li><code>Content mixers</code>, which combine multiple <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol">RTP</a> input streams into a single output stream. These are essential for large video conferences.</li>
+<li>XMPP <code>focus agents</code>, which coordinate conference calls. Each participant establishes a Jingle session only with the <code>focus agent</code> and receives conference updates from it.</li>
+<li><code>Gateways</code> for interaction with other systems (e.g. <a href="https://en.wikipedia.org/wiki/Session_Initiation_Protocol">SIP</a>-based infrastructure)</li>
+</ul>
+<p>Each of these components is discussed in more detail later in this tutorial.</p>
+<h2 id="the-jingle-framework">The Jingle Framework<a class="headerlink" href="#the-jingle-framework" title="Permanent link">¶</a></h2>
+<p>The core Jingle specification is <a href="https://xmpp.org/extensions/xep-0166.html">XEP-0166</a>, which defines multimedia sessions and the mechanisms for negotiating, managing, and terminating them. Session negotiation takes place over XMPP, while the actual media exchange usually occurs outside of XMPP.</p>
+<p>During session initialization, peers must agree on:</p>
+<ul>
+<li>Application format - the type of media being exchanged (e.g., audio or video).</li>
+<li>Transport method - how the media data is transmitted.</li>
+<li>Optional security preconditions for the selected transport.</li>
+</ul>
+<p><a href="https://xmpp.org/extensions/xep-0166.html">XEP-0166</a> intentionally does not define specific application formats or transport methods; these are specified in separate XEPs.</p>
+<h3 id="jingle-application-formats">Jingle Application Formats<a class="headerlink" href="#jingle-application-formats" title="Permanent link">¶</a></h3>
+<p>Currently, two major Jingle application formats are defined:</p>
+<ul>
+<li><a href="https://xmpp.org/extensions/xep-0167.html">XEP-0167</a>: Defines Jingle <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol">RTP</a> sessions for audio and video.</li>
+<li><a href="https://xmpp.org/extensions/xep-0234.html">XEP-0234</a>: Defines Jingle file transfer sessions.</li>
+</ul>
+<p>This tutorial focuses exclusively on Jingle <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol">RTP</a> sessions.</p>
+<h3 id="jingle-transport-methods">Jingle Transport Methods<a class="headerlink" href="#jingle-transport-methods" title="Permanent link">¶</a></h3>
+<p>Several XEPs describe transport mechanisms, but only two are suitable for real-time audio and video:</p>
+<ul>
+<li><a href="https://xmpp.org/extensions/xep-0177.html">XEP-0177</a>: Jingle Raw UDP Transport</li>
+<li><a href="https://xmpp.org/extensions/xep-0176.html">XEP-0176</a>: Jingle ICE-UDP Transport</li>
+</ul>
+<p>Raw UDP does not support <a href="https://en.wikipedia.org/wiki/NAT_traversal">NAT traversal</a> or connectivity checks. When <a href="https://en.wikipedia.org/wiki/NAT_traversal">NAT traversal</a> is required (which is almost always the case), clients should use ICE-UDP, as defined in <a href="https://xmpp.org/extensions/xep-0176.html">XEP-0176</a>.</p>
+<h2 id="audio-and-video-call-scenarios">Audio and Video Call Scenarios<a class="headerlink" href="#audio-and-video-call-scenarios" title="Permanent link">¶</a></h2>
+<p>Different call scenarios require different types of server-side infrastructure. Below are the most common configurations.</p>
+<h3 id="one-to-one-calls">One-to-One Calls<a class="headerlink" href="#one-to-one-calls" title="Permanent link">¶</a></h3>
+<p>This is the simplest scenario and is widely supported by interoperable XMPP clients. In fact, many clients support only one-to-one audio/video calls. Key characteristics include:</p>
+<ul>
+<li>Minimal server-side infrastructure requirements.</li>
+<li>Only a <a href="https://en.wikipedia.org/wiki/Session_Traversal_Utilities_for_NAT">STUN</a>/<a href="https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT">TURN</a> server is needed to handle <a href="https://en.wikipedia.org/wiki/NAT_traversal">NAT traversal</a>.</li>
+<li><a href="https://en.wikipedia.org/wiki/Session_Traversal_Utilities_for_NAT">STUN</a> and <a href="https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT">TURN</a> are open standards, and their use is clearly defined by <a href="https://en.wikipedia.org/wiki/Interactive_Connectivity_Establishment">ICE</a> and <a href="https://xmpp.org/extensions/xep-0176.html">XEP-0176</a>.</li>
+<li><a href="https://xmpp.org/extensions/xep-0215.html">XEP-0215</a> (External Service Discovery) allows clients to automatically discover and configure <a href="https://en.wikipedia.org/wiki/Session_Traversal_Utilities_for_NAT">STUN</a>/<a href="https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT">TURN</a> servers.</li>
+</ul>
+<h3 id="small-group-calls-mesh-topology">Small Group Calls (Mesh Topology)<a class="headerlink" href="#small-group-calls-mesh-topology" title="Permanent link">¶</a></h3>
+<p>For small groups (typically up to four participants for video), each participant can establish a separate Jingle session with every other participant. This approach is described in <a href="https://xmpp.org/extensions/xep-0272.html">XEP-0272</a> (MuJi - Multiparty Jingle). However, it has several drawbacks:</p>
+<ul>
+<li>High bandwidth usage: each client must send its media stream N times and receive N streams.</li>
+<li>Strict codec agreement: all participants must use compatible audio/video formats.</li>
+<li>Client-side mixing: each participant must mix incoming audio and video streams locally.</li>
+</ul>
+<div class="puml-container"><div class="puml light" style=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="DESCRIPTION" style="width:272px;height:493px;background:#FFFFFF;" width="272px" height="493px" viewBox="0 0 272 493" zoomAndPan="magnify" preserveAspectRatio="xMidYMid meet" contentStyleType="text/css" class="diagram"><?plantuml 1.2026.7beta11?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><g class="cluster" data-qualified-name="full mesh" id="ent0001" data-source-line="2"><rect x="7" y="7" width="251" height="472.39" fill="none" style="stroke:#181818;stroke-width:1;" rx="2.5" ry="2.5"/><text x="10" y="21.995" fill="#000" font-size="14" textLength="72.912" font-weight="700">full mesh</text></g><g class="entity" data-qualified-name="full mesh.p1" id="ent0002" data-source-line="3"><rect x="131.44" y="42" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="141.44" y="112.865" fill="#000" font-size="14"> </text><path d="M153.832,52 C153.19,52 152.724,52.467 152.724,53.108 L152.724,97.617 C152.724,98.258 153.19,98.725 153.832,98.725 L180.84,98.725 C181.482,98.725 181.949,98.258 181.949,97.617 L181.949,53.108 C181.949,52.467 181.482,52 180.84,52 L153.832,52 M158.557,57.833 L176.057,57.833 L176.057,87 L158.557,87 L158.557,57.833 M167.307,89.917 C168.94,89.917 170.224,91.2 170.224,92.833 C170.224,94.467 168.94,95.75 167.307,95.75 C165.674,95.75 164.39,94.467 164.39,92.833 C164.39,91.2 165.674,89.917 167.307,89.917" fill="#000"/><text x="145.89" y="129.162" fill="#000" font-size="14" textLength="44.782">Peer 1</text></g><g class="entity" data-qualified-name="full mesh.p2" id="ent0003" data-source-line="4"><rect x="23.44" y="202.46" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="33.44" y="273.325" fill="#000" font-size="14"> </text><path d="M45.832,212.46 C45.19,212.46 44.724,212.927 44.724,213.568 L44.724,258.077 C44.724,258.718 45.19,259.185 45.832,259.185 L72.84,259.185 C73.482,259.185 73.949,258.718 73.949,258.077 L73.949,213.568 C73.949,212.927 73.482,212.46 72.84,212.46 L45.832,212.46 M50.557,218.293 L68.057,218.293 L68.057,247.46 L50.557,247.46 L50.557,218.293 M59.307,250.377 C60.94,250.377 62.224,251.66 62.224,253.293 C62.224,254.927 60.94,256.21 59.307,256.21 C57.674,256.21 56.39,254.927 56.39,253.293 C56.39,251.66 57.674,250.377 59.307,250.377" fill="#000"/><text x="37.89" y="289.622" fill="#000" font-size="14" textLength="44.782">Peer 2</text></g><g class="entity" data-qualified-name="full mesh.p3" id="ent0004" data-source-line="5"><rect x="131.44" y="202.46" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="141.44" y="273.325" fill="#000" font-size="14"> </text><path d="M153.832,212.46 C153.19,212.46 152.724,212.927 152.724,213.568 L152.724,258.077 C152.724,258.718 153.19,259.185 153.832,259.185 L180.84,259.185 C181.482,259.185 181.949,258.718 181.949,258.077 L181.949,213.568 C181.949,212.927 181.482,212.46 180.84,212.46 L153.832,212.46 M158.557,218.293 L176.057,218.293 L176.057,247.46 L158.557,247.46 L158.557,218.293 M167.307,250.377 C168.94,250.377 170.224,251.66 170.224,253.293 C170.224,254.927 168.94,256.21 167.307,256.21 C165.674,256.21 164.39,254.927 164.39,253.293 C164.39,251.66 165.674,250.377 167.307,250.377" fill="#000"/><text x="145.89" y="289.622" fill="#000" font-size="14" textLength="44.782">Peer 3</text></g><g class="entity" data-qualified-name="full mesh.p4" id="ent0005" data-source-line="6"><rect x="131.44" y="362.93" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="141.44" y="433.795" fill="#000" font-size="14"> </text><path d="M153.832,372.93 C153.19,372.93 152.724,373.397 152.724,374.038 L152.724,418.547 C152.724,419.188 153.19,419.655 153.832,419.655 L180.84,419.655 C181.482,419.655 181.949,419.188 181.949,418.547 L181.949,374.038 C181.949,373.397 181.482,372.93 180.84,372.93 L153.832,372.93 M158.557,378.763 L176.057,378.763 L176.057,407.93 L158.557,407.93 L158.557,378.763 M167.307,410.847 C168.94,410.847 170.224,412.13 170.224,413.763 C170.224,415.397 168.94,416.68 167.307,416.68 C165.674,416.68 164.39,415.397 164.39,413.763 C164.39,412.13 165.674,410.847 167.307,410.847" fill="#000"/><text x="145.89" y="450.092" fill="#000" font-size="14" textLength="44.782">Peer 4</text></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0003" id="lnk6" data-source-line="8" data-link-type="dependency"><path d="M131.304,147.072 C118.444,165.942 109.424,179.167 96.574,198.037" style="stroke:#181818;stroke-width:1;" fill="none" id="p1-p2"/><polygon points="134.12,142.94,125.746,148.124,131.304,147.072,132.357,152.63,134.12,142.94" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="93.76,202.17,102.132,196.982,96.574,198.037,95.52,192.48,93.76,202.17" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0004" id="lnk7" data-source-line="9" data-link-type="dependency"><path d="M168,147.94 C168,166.81 168,178.3 168,197.17" style="stroke:#181818;stroke-width:1;" fill="none" id="p1-p3"/><polygon points="168,142.94,164,151.94,168,147.94,172,151.94,168,142.94" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="168,202.17,172,193.17,168,197.17,164,193.17,168,202.17" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0005" id="lnk8" data-source-line="10" data-link-type="dependency"><path d="M200.823,147.238 C210.313,165.328 217.21,181.97 222,202.46 C232.16,245.94 232.16,259.45 222,302.93 C217.21,323.42 210.313,340.062 200.823,358.152" style="stroke:#181818;stroke-width:1;" fill="none" id="p1-p4"/><polygon points="198.5,142.81,199.139,152.638,200.823,147.238,206.223,148.922,198.5,142.81" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="198.5,362.58,206.223,356.468,200.823,358.152,199.139,352.752,198.5,362.58" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0003" data-entity-2="ent0004" id="lnk9" data-source-line="11" data-link-type="dependency"><path d="M101.7,252.69 C113.12,252.69 114.54,252.69 125.96,252.69" style="stroke:#181818;stroke-width:1;" fill="none" id="p2-p3"/><polygon points="96.7,252.69,105.7,256.69,101.7,252.69,105.7,248.69,96.7,252.69" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="130.96,252.69,121.96,248.69,125.96,252.69,121.96,256.69,130.96,252.69" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0003" data-entity-2="ent0005" id="lnk10" data-source-line="12" data-link-type="dependency"><path d="M96.695,307.532 C109.555,326.412 118.575,339.638 131.425,358.498" style="stroke:#181818;stroke-width:1;" fill="none" id="p2-p4"/><polygon points="93.88,303.4,95.641,313.09,96.695,307.532,102.253,308.587,93.88,303.4" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="134.24,362.63,132.478,352.94,131.425,358.498,125.867,357.445,134.24,362.63" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0004" data-entity-2="ent0005" id="lnk11" data-source-line="13" data-link-type="dependency"><path d="M168,308.4 C168,327.28 168,338.77 168,357.63" style="stroke:#181818;stroke-width:1;" fill="none" id="p3-p4"/><polygon points="168,303.4,164,312.4,168,308.4,172,312.4,168,303.4" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="168,362.63,172,353.63,168,357.63,164,353.63,168,362.63" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><?plantuml-src XT1D2i8m48RXVKynTk52iA4_RaIyW0WUG92OZare_aWckX3lRaj1r4stxppmmIoK5Jgr29B8norZWJ-AJf5CrnGn26S9BHN26NPKlUHA7mA_8qLc-jQ9UF79Q6Pu90oC91gChCKRJvgOLfsaOWHPG47STXeXloMjOM0oXsS6y7M1tT9BPt6rsPyjd103b3dm2BwSXTK4grbOJx2UXSq4csoGleJTkdKFkzvF6p-X_W_D6AeXXF437rBza_edlDu0?></g></svg></div><div class="puml dark" style=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="DESCRIPTION" style="width:272px;height:493px;background:#1B1B1B;" width="272px" height="493px" viewBox="0 0 272 493" zoomAndPan="magnify" preserveAspectRatio="xMidYMid meet" contentStyleType="text/css" class="diagram"><?plantuml 1.2026.7beta11?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><rect x="0" y="0" width="272" height="493" fill="#1B1B1B" style="stroke:none;"/><g class="cluster" data-qualified-name="full mesh" id="ent0001" data-source-line="2"><rect x="7" y="7" width="251" height="472.39" fill="none" style="stroke:#E7E7E7;stroke-width:1;" rx="2.5" ry="2.5"/><text x="10" y="21.995" fill="#FFF" font-size="14" textLength="72.912" font-weight="700">full mesh</text></g><g class="entity" data-qualified-name="full mesh.p1" id="ent0002" data-source-line="3"><rect x="131.44" y="42" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="141.44" y="112.865" fill="#FFF" font-size="14"> </text><path d="M153.832,52 C153.19,52 152.724,52.467 152.724,53.108 L152.724,97.617 C152.724,98.258 153.19,98.725 153.832,98.725 L180.84,98.725 C181.482,98.725 181.949,98.258 181.949,97.617 L181.949,53.108 C181.949,52.467 181.482,52 180.84,52 L153.832,52 M158.557,57.833 L176.057,57.833 L176.057,87 L158.557,87 L158.557,57.833 M167.307,89.917 C168.94,89.917 170.224,91.2 170.224,92.833 C170.224,94.467 168.94,95.75 167.307,95.75 C165.674,95.75 164.39,94.467 164.39,92.833 C164.39,91.2 165.674,89.917 167.307,89.917" fill="#FFF"/><text x="145.89" y="129.162" fill="#FFF" font-size="14" textLength="44.782">Peer 1</text></g><g class="entity" data-qualified-name="full mesh.p2" id="ent0003" data-source-line="4"><rect x="23.44" y="202.46" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="33.44" y="273.325" fill="#FFF" font-size="14"> </text><path d="M45.832,212.46 C45.19,212.46 44.724,212.927 44.724,213.568 L44.724,258.077 C44.724,258.718 45.19,259.185 45.832,259.185 L72.84,259.185 C73.482,259.185 73.949,258.718 73.949,258.077 L73.949,213.568 C73.949,212.927 73.482,212.46 72.84,212.46 L45.832,212.46 M50.557,218.293 L68.057,218.293 L68.057,247.46 L50.557,247.46 L50.557,218.293 M59.307,250.377 C60.94,250.377 62.224,251.66 62.224,253.293 C62.224,254.927 60.94,256.21 59.307,256.21 C57.674,256.21 56.39,254.927 56.39,253.293 C56.39,251.66 57.674,250.377 59.307,250.377" fill="#FFF"/><text x="37.89" y="289.622" fill="#FFF" font-size="14" textLength="44.782">Peer 2</text></g><g class="entity" data-qualified-name="full mesh.p3" id="ent0004" data-source-line="5"><rect x="131.44" y="202.46" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="141.44" y="273.325" fill="#FFF" font-size="14"> </text><path d="M153.832,212.46 C153.19,212.46 152.724,212.927 152.724,213.568 L152.724,258.077 C152.724,258.718 153.19,259.185 153.832,259.185 L180.84,259.185 C181.482,259.185 181.949,258.718 181.949,258.077 L181.949,213.568 C181.949,212.927 181.482,212.46 180.84,212.46 L153.832,212.46 M158.557,218.293 L176.057,218.293 L176.057,247.46 L158.557,247.46 L158.557,218.293 M167.307,250.377 C168.94,250.377 170.224,251.66 170.224,253.293 C170.224,254.927 168.94,256.21 167.307,256.21 C165.674,256.21 164.39,254.927 164.39,253.293 C164.39,251.66 165.674,250.377 167.307,250.377" fill="#FFF"/><text x="145.89" y="289.622" fill="#FFF" font-size="14" textLength="44.782">Peer 3</text></g><g class="entity" data-qualified-name="full mesh.p4" id="ent0005" data-source-line="6"><rect x="131.44" y="362.93" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="141.44" y="433.795" fill="#FFF" font-size="14"> </text><path d="M153.832,372.93 C153.19,372.93 152.724,373.397 152.724,374.038 L152.724,418.547 C152.724,419.188 153.19,419.655 153.832,419.655 L180.84,419.655 C181.482,419.655 181.949,419.188 181.949,418.547 L181.949,374.038 C181.949,373.397 181.482,372.93 180.84,372.93 L153.832,372.93 M158.557,378.763 L176.057,378.763 L176.057,407.93 L158.557,407.93 L158.557,378.763 M167.307,410.847 C168.94,410.847 170.224,412.13 170.224,413.763 C170.224,415.397 168.94,416.68 167.307,416.68 C165.674,416.68 164.39,415.397 164.39,413.763 C164.39,412.13 165.674,410.847 167.307,410.847" fill="#FFF"/><text x="145.89" y="450.092" fill="#FFF" font-size="14" textLength="44.782">Peer 4</text></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0003" id="lnk6" data-source-line="8" data-link-type="dependency"><path d="M131.304,147.072 C118.444,165.942 109.424,179.167 96.574,198.037" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p1-p2"/><polygon points="134.12,142.94,125.746,148.124,131.304,147.072,132.357,152.63,134.12,142.94" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="93.76,202.17,102.132,196.982,96.574,198.037,95.52,192.48,93.76,202.17" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0004" id="lnk7" data-source-line="9" data-link-type="dependency"><path d="M168,147.94 C168,166.81 168,178.3 168,197.17" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p1-p3"/><polygon points="168,142.94,164,151.94,168,147.94,172,151.94,168,142.94" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="168,202.17,172,193.17,168,197.17,164,193.17,168,202.17" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0005" id="lnk8" data-source-line="10" data-link-type="dependency"><path d="M200.823,147.238 C210.313,165.328 217.21,181.97 222,202.46 C232.16,245.94 232.16,259.45 222,302.93 C217.21,323.42 210.313,340.062 200.823,358.152" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p1-p4"/><polygon points="198.5,142.81,199.139,152.638,200.823,147.238,206.223,148.922,198.5,142.81" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="198.5,362.58,206.223,356.468,200.823,358.152,199.139,352.752,198.5,362.58" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0003" data-entity-2="ent0004" id="lnk9" data-source-line="11" data-link-type="dependency"><path d="M101.7,252.69 C113.12,252.69 114.54,252.69 125.96,252.69" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p2-p3"/><polygon points="96.7,252.69,105.7,256.69,101.7,252.69,105.7,248.69,96.7,252.69" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="130.96,252.69,121.96,248.69,125.96,252.69,121.96,256.69,130.96,252.69" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0003" data-entity-2="ent0005" id="lnk10" data-source-line="12" data-link-type="dependency"><path d="M96.695,307.532 C109.555,326.412 118.575,339.638 131.425,358.498" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p2-p4"/><polygon points="93.88,303.4,95.641,313.09,96.695,307.532,102.253,308.587,93.88,303.4" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="134.24,362.63,132.478,352.94,131.425,358.498,125.867,357.445,134.24,362.63" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0004" data-entity-2="ent0005" id="lnk11" data-source-line="13" data-link-type="dependency"><path d="M168,308.4 C168,327.28 168,338.77 168,357.63" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p3-p4"/><polygon points="168,303.4,164,312.4,168,308.4,172,312.4,168,303.4" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="168,362.63,172,353.63,168,357.63,164,353.63,168,362.63" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><?plantuml-src XStBgi8m58NXUPzYsu43mOPUd8Zu0YBu08B4PDk4vaQoemFntQqK3aSddVxhWxNGJfWi4HHHI5l68dzKlIQLhpbX5DuHEgg4j-oe1yMrEKH-HqhC3jABT0dP6cPv8eoC55fCJEADPqDCyZXKdxs8A8YxtY2KjsmCZ4gLy2m0_YsmMmRb7Qus-xE34sA4kWIU8DIpi9bWCmlR2RQpi9jWLumorB1RI_zmw_tqyHNQtz1zGZE6g7j5VwJv9UrNUBq1?></g></svg></div></div>
+<p><a href="https://en.wikipedia.org/wiki/Session_Traversal_Utilities_for_NAT">STUN</a>/<a href="https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT">TURN</a> servers can still be used to establish peer-to-peer connections, similar to one-to-one calls.</p>
+<p><a href="https://xmpp.org/extensions/xep-0272.html">XEP-0272</a> also suggests using <code>RTP relays</code> to reduce upstream bandwidth usage.</p>
+<div class="puml-container"><div class="puml light" style=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="DESCRIPTION" style="width:478px;height:500px;background:#FFFFFF;" width="478px" height="500px" viewBox="0 0 478 500" zoomAndPan="magnify" preserveAspectRatio="xMidYMid meet" contentStyleType="text/css" class="diagram"><?plantuml 1.2026.7beta11?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><g class="cluster" data-qualified-name="relay example" id="ent0001" data-source-line="2"><rect x="7" y="7" width="445" height="479.39" fill="none" style="stroke:#181818;stroke-width:1;" rx="2.5" ry="2.5"/><text x="10" y="21.995" fill="#000" font-size="14" textLength="111.521" font-weight="700">relay example</text></g><g class="cluster" data-qualified-name="relay example.p2i" id="ent0003" data-source-line="4"><rect x="39" y="166.46" width="262" height="167.47" fill="none" style="stroke:#181818;stroke-width:1;" rx="2.5" ry="2.5"/><text x="42" y="181.455" fill="#000" font-size="14" font-weight="700"> </text></g><g class="entity" data-qualified-name="relay example.p1" id="ent0002" data-source-line="3"><rect x="261.44" y="42" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="271.44" y="112.865" fill="#000" font-size="14"> </text><path d="M283.832,52 C283.19,52 282.724,52.467 282.724,53.108 L282.724,97.617 C282.724,98.258 283.19,98.725 283.832,98.725 L310.84,98.725 C311.482,98.725 311.949,98.258 311.949,97.617 L311.949,53.108 C311.949,52.467 311.482,52 310.84,52 L283.832,52 M288.557,57.833 L306.057,57.833 L306.057,87 L288.557,87 L288.557,57.833 M297.307,89.917 C298.94,89.917 300.224,91.2 300.224,92.833 C300.224,94.467 298.94,95.75 297.307,95.75 C295.674,95.75 294.39,94.467 294.39,92.833 C294.39,91.2 295.674,89.917 297.307,89.917" fill="#000"/><text x="275.89" y="129.162" fill="#000" font-size="14" textLength="44.782">Peer 1</text></g><g class="entity" data-qualified-name="relay example.p3" id="ent0006" data-source-line="8"><rect x="325.44" y="209.46" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="335.44" y="280.325" fill="#000" font-size="14"> </text><path d="M347.832,219.46 C347.19,219.46 346.724,219.927 346.724,220.568 L346.724,265.077 C346.724,265.718 347.19,266.185 347.832,266.185 L374.84,266.185 C375.482,266.185 375.949,265.718 375.949,265.077 L375.949,220.568 C375.949,219.927 375.482,219.46 374.84,219.46 L347.832,219.46 M352.557,225.293 L370.057,225.293 L370.057,254.46 L352.557,254.46 L352.557,225.293 M361.307,257.377 C362.94,257.377 364.224,258.66 364.224,260.293 C364.224,261.927 362.94,263.21 361.307,263.21 C359.674,263.21 358.39,261.927 358.39,260.293 C358.39,258.66 359.674,257.377 361.307,257.377" fill="#000"/><text x="339.89" y="296.622" fill="#000" font-size="14" textLength="44.782">Peer 3</text></g><g class="entity" data-qualified-name="relay example.p4" id="ent0007" data-source-line="9"><rect x="307.44" y="369.93" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="317.44" y="440.795" fill="#000" font-size="14"> </text><path d="M329.832,379.93 C329.19,379.93 328.724,380.397 328.724,381.038 L328.724,425.547 C328.724,426.188 329.19,426.655 329.832,426.655 L356.84,426.655 C357.482,426.655 357.949,426.188 357.949,425.547 L357.949,381.038 C357.949,380.397 357.482,379.93 356.84,379.93 L329.832,379.93 M334.557,385.763 L352.057,385.763 L352.057,414.93 L334.557,414.93 L334.557,385.763 M343.307,417.847 C344.94,417.847 346.224,419.13 346.224,420.763 C346.224,422.397 344.94,423.68 343.307,423.68 C341.674,423.68 340.39,422.397 340.39,420.763 C340.39,419.13 341.674,417.847 343.307,417.847" fill="#000"/><text x="321.89" y="457.092" fill="#000" font-size="14" textLength="44.782">Peer 4</text></g><g class="entity" data-qualified-name="relay example.GMN8" id="ent0009" data-source-line="11"><path d="M23.21,407.59 L23.21,432.723 L254.787,432.723 L254.787,417.59 L244.787,407.59 L23.21,407.59" style="stroke:#181818;stroke-width:0.5;" fill="#FEFFDD"/><path d="M244.787,407.59 L244.787,417.59 L254.787,417.59 L244.787,407.59" style="stroke:#181818;stroke-width:1;" fill="#FEFFDD"/><text x="29.21" y="424.657" fill="#000" font-size="13" textLength="210.577">Peer 2 application infrastructure</text></g><g class="entity" data-qualified-name="relay example.p2i.p2" id="ent0004" data-source-line="5"><rect x="82.44" y="209.46" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="92.44" y="280.325" fill="#000" font-size="14"> </text><path d="M104.832,219.46 C104.19,219.46 103.724,219.927 103.724,220.568 L103.724,265.077 C103.724,265.718 104.19,266.185 104.832,266.185 L131.84,266.185 C132.482,266.185 132.949,265.718 132.949,265.077 L132.949,220.568 C132.949,219.927 132.482,219.46 131.84,219.46 L104.832,219.46 M109.557,225.293 L127.057,225.293 L127.057,254.46 L109.557,254.46 L109.557,225.293 M118.307,257.377 C119.94,257.377 121.224,258.66 121.224,260.293 C121.224,261.927 119.94,263.21 118.307,263.21 C116.674,263.21 115.39,261.927 115.39,260.293 C115.39,258.66 116.674,257.377 118.307,257.377" fill="#000"/><text x="96.89" y="296.622" fill="#000" font-size="14" textLength="44.782">Peer 2</text></g><g class="entity" data-qualified-name="relay example.p2i.r1" id="ent0005" data-source-line="6"><rect x="190.85" y="241.55" width="86.295" height="36.297" fill="#ADD8E6" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="200.85" y="264.545" fill="#000" font-size="14" textLength="66.295">RTP relay</text></g><g class="link" data-entity-1="ent0003" data-entity-2="ent0009" id="lnk10" data-source-line="11" data-link-type="association"><path d="M58.83,334.182 C58.885,334.33 58.94,334.478 58.995,334.626 C59.216,335.217 59.441,335.807 59.67,336.394 C61.503,341.091 63.6,345.646 66,349.93 C79.58,374.15 104.45,394.99 121.35,407.31" style="stroke:#181818;stroke-width:1;stroke-dasharray:7,7;" fill="none" id="p2i-GMN8"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0004" id="lnk11" data-source-line="13" data-link-type="dependency"><path d="M261.06,102.88 C233.92,111.55 197.62,126.65 173,150.46 C156.32,166.59 145.945,184.362 137.305,204.582" style="stroke:#EE82EE;stroke-width:1;" fill="none" id="p1-to-p2"/><polygon points="135.34,209.18,142.555,202.476,137.305,204.582,135.198,199.332,135.34,209.18" fill="#EE82EE" style="stroke:#EE82EE;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0006" id="lnk12" data-source-line="14" data-link-type="dependency"><path d="M319.004,147.543 C327.104,168.483 332.906,183.487 341.006,204.427" style="stroke:#181818;stroke-width:1;" fill="none" id="p1-p3"/><polygon points="317.2,142.88,316.716,152.717,319.004,147.543,324.178,149.831,317.2,142.88" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="342.81,209.09,343.294,199.253,341.006,204.427,335.832,202.139,342.81,209.09" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0007" id="lnk13" data-source-line="15" data-link-type="dependency"><path d="M339.69,101.544 C367.28,108.934 398.35,122.29 416,150.46 C463.06,225.59 450.73,268.36 416,349.93 C408.66,367.16 398.515,378.938 384.825,390.538" style="stroke:#181818;stroke-width:1;" fill="none" id="p1-p4"/><polygon points="334.86,100.25,342.519,106.442,339.69,101.544,344.588,98.715,334.86,100.25" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="381.01,393.77,390.462,391.004,384.825,390.538,385.291,384.9,381.01,393.77" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0004" data-entity-2="ent0005" id="lnk14" data-source-line="16" data-link-type="dependency"><path d="M155.84,259.69 C167.44,259.69 174.04,259.69 185.64,259.69" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="p2-to-r1"/><polygon points="190.64,259.69,181.64,255.69,185.64,259.69,181.64,263.69,190.64,259.69" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0005" id="lnk16" data-source-line="17" data-link-type="dependency"><path d="M276.996,147.543 C264.106,180.853 249.71,218.08 240.75,241.25" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="p1-backto-r1"/><polygon points="278.8,142.88,271.822,149.83,276.996,147.543,279.282,152.717,278.8,142.88" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0006" id="lnk17" data-source-line="18" data-link-type="dependency"><path d="M277.5,259.69 C293.34,259.69 304.19,259.69 320.03,259.69" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="r1-to-p3"/><polygon points="325.03,259.69,316.03,255.69,320.03,259.69,316.03,263.69,325.03,259.69" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0007" id="lnk18" data-source-line="19" data-link-type="dependency"><path d="M241.61,278.22 C250.04,296.77 264.61,326.56 281,349.93 C288.74,360.97 294.734,368.423 303.824,378.463" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="r1-to-p4"/><polygon points="307.18,382.17,304.105,372.814,303.824,378.463,298.174,378.183,307.18,382.17" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0006" data-entity-2="ent0004" id="lnk19" data-source-line="20" data-link-type="dependency"><path d="M340.83,209.23 C329.56,188.11 313.69,165.11 293,150.46 C274.4,137.29 213.15,143.91 190.5,146.46 C182.57,147.36 179.26,145.52 173,150.46 C154.32,165.21 143.478,183.444 135.118,204.464" style="stroke:#EE82EE;stroke-width:1;" fill="none" id="p3-to-p2"/><polygon points="133.27,209.11,140.313,202.225,135.118,204.464,132.879,199.269,133.27,209.11" fill="#EE82EE" style="stroke:#EE82EE;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0006" data-entity-2="ent0007" id="lnk20" data-source-line="21" data-link-type="dependency"><path d="M355.787,315.368 C353.647,334.248 352.334,345.802 350.194,364.662" style="stroke:#181818;stroke-width:1;" fill="none" id="p3-p4"/><polygon points="356.35,310.4,351.362,318.892,355.787,315.368,359.311,319.793,356.35,310.4" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="349.63,369.63,354.619,361.138,350.194,364.662,346.67,360.236,349.63,369.63" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0004" data-entity-2="ent0007" id="lnk22" data-source-line="22" data-link-type="dependency"><path d="M141.7,314.329 C150.08,329.239 158.78,339.93 173,349.93 C209.72,375.75 230.65,352.46 272,369.93 C284.14,375.05 296.34,382.38 307.16,389.82" style="stroke:#EE82EE;stroke-width:1;" fill="none" id="p2-backto-p4"/><polygon points="139.25,309.97,140.173,319.776,141.7,314.329,147.147,315.856,139.25,309.97" fill="#EE82EE" style="stroke:#EE82EE;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><?plantuml-src XP3DQiCm48JlUOfj0ZqK7E7OlOIG5oY5K7ei54NUn2BwGrebBINlNjdEJ-C6VDJCDxkpUf16g5WXr4Gkp1dp_33TIghZEWRqmXf2GrDXDNkLkvfBzUBv7YamlQki29ykQiKq3uIUKOqQ0wjmmwCYfkIsfca3Z3mAucQh4COU5Vy6_EBQAHp3pmZWZmkBHrTRWq_Fomy3AqGF-HXu09Vtm4wToNR2q8pPYUwZR-yhQ0krlizXqfPUguW9FGvsAxgvnI1OTc0vIgInXB2sH5Q3tJGtp4yjWJkdfE0ahG5fDZxzgu-2eiScw7B8AdimsJA5OBANLY5r-k9Y57sXR8GPPBwvB0dzAzCxYwuXxnZda2l-UvS5jrP2hx6RcaM_LNdUVCMElm00?></g></svg></div><div class="puml dark" style=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="DESCRIPTION" style="width:478px;height:500px;background:#1B1B1B;" width="478px" height="500px" viewBox="0 0 478 500" zoomAndPan="magnify" preserveAspectRatio="xMidYMid meet" contentStyleType="text/css" class="diagram"><?plantuml 1.2026.7beta11?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><rect x="0" y="0" width="478" height="500" fill="#1B1B1B" style="stroke:none;"/><g class="cluster" data-qualified-name="relay example" id="ent0001" data-source-line="2"><rect x="7" y="7" width="445" height="479.39" fill="none" style="stroke:#E7E7E7;stroke-width:1;" rx="2.5" ry="2.5"/><text x="10" y="21.995" fill="#FFF" font-size="14" textLength="111.521" font-weight="700">relay example</text></g><g class="cluster" data-qualified-name="relay example.p2i" id="ent0003" data-source-line="4"><rect x="39" y="166.46" width="262" height="167.47" fill="none" style="stroke:#E7E7E7;stroke-width:1;" rx="2.5" ry="2.5"/><text x="42" y="181.455" fill="#FFF" font-size="14" font-weight="700"> </text></g><g class="entity" data-qualified-name="relay example.p1" id="ent0002" data-source-line="3"><rect x="261.44" y="42" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="271.44" y="112.865" fill="#FFF" font-size="14"> </text><path d="M283.832,52 C283.19,52 282.724,52.467 282.724,53.108 L282.724,97.617 C282.724,98.258 283.19,98.725 283.832,98.725 L310.84,98.725 C311.482,98.725 311.949,98.258 311.949,97.617 L311.949,53.108 C311.949,52.467 311.482,52 310.84,52 L283.832,52 M288.557,57.833 L306.057,57.833 L306.057,87 L288.557,87 L288.557,57.833 M297.307,89.917 C298.94,89.917 300.224,91.2 300.224,92.833 C300.224,94.467 298.94,95.75 297.307,95.75 C295.674,95.75 294.39,94.467 294.39,92.833 C294.39,91.2 295.674,89.917 297.307,89.917" fill="#FFF"/><text x="275.89" y="129.162" fill="#FFF" font-size="14" textLength="44.782">Peer 1</text></g><g class="entity" data-qualified-name="relay example.p3" id="ent0006" data-source-line="8"><rect x="325.44" y="209.46" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="335.44" y="280.325" fill="#FFF" font-size="14"> </text><path d="M347.832,219.46 C347.19,219.46 346.724,219.927 346.724,220.568 L346.724,265.077 C346.724,265.718 347.19,266.185 347.832,266.185 L374.84,266.185 C375.482,266.185 375.949,265.718 375.949,265.077 L375.949,220.568 C375.949,219.927 375.482,219.46 374.84,219.46 L347.832,219.46 M352.557,225.293 L370.057,225.293 L370.057,254.46 L352.557,254.46 L352.557,225.293 M361.307,257.377 C362.94,257.377 364.224,258.66 364.224,260.293 C364.224,261.927 362.94,263.21 361.307,263.21 C359.674,263.21 358.39,261.927 358.39,260.293 C358.39,258.66 359.674,257.377 361.307,257.377" fill="#FFF"/><text x="339.89" y="296.622" fill="#FFF" font-size="14" textLength="44.782">Peer 3</text></g><g class="entity" data-qualified-name="relay example.p4" id="ent0007" data-source-line="9"><rect x="307.44" y="369.93" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="317.44" y="440.795" fill="#FFF" font-size="14"> </text><path d="M329.832,379.93 C329.19,379.93 328.724,380.397 328.724,381.038 L328.724,425.547 C328.724,426.188 329.19,426.655 329.832,426.655 L356.84,426.655 C357.482,426.655 357.949,426.188 357.949,425.547 L357.949,381.038 C357.949,380.397 357.482,379.93 356.84,379.93 L329.832,379.93 M334.557,385.763 L352.057,385.763 L352.057,414.93 L334.557,414.93 L334.557,385.763 M343.307,417.847 C344.94,417.847 346.224,419.13 346.224,420.763 C346.224,422.397 344.94,423.68 343.307,423.68 C341.674,423.68 340.39,422.397 340.39,420.763 C340.39,419.13 341.674,417.847 343.307,417.847" fill="#FFF"/><text x="321.89" y="457.092" fill="#FFF" font-size="14" textLength="44.782">Peer 4</text></g><g class="entity" data-qualified-name="relay example.GMN8" id="ent0009" data-source-line="11"><path d="M23.21,407.59 L23.21,432.723 L254.787,432.723 L254.787,417.59 L244.787,407.59 L23.21,407.59" style="stroke:#E7E7E7;stroke-width:0.5;" fill="#714137"/><path d="M244.787,407.59 L244.787,417.59 L254.787,417.59 L244.787,407.59" style="stroke:#E7E7E7;stroke-width:1;" fill="#714137"/><text x="29.21" y="424.657" fill="#FFF" font-size="13" textLength="210.577">Peer 2 application infrastructure</text></g><g class="entity" data-qualified-name="relay example.p2i.p2" id="ent0004" data-source-line="5"><rect x="82.44" y="209.46" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="92.44" y="280.325" fill="#FFF" font-size="14"> </text><path d="M104.832,219.46 C104.19,219.46 103.724,219.927 103.724,220.568 L103.724,265.077 C103.724,265.718 104.19,266.185 104.832,266.185 L131.84,266.185 C132.482,266.185 132.949,265.718 132.949,265.077 L132.949,220.568 C132.949,219.927 132.482,219.46 131.84,219.46 L104.832,219.46 M109.557,225.293 L127.057,225.293 L127.057,254.46 L109.557,254.46 L109.557,225.293 M118.307,257.377 C119.94,257.377 121.224,258.66 121.224,260.293 C121.224,261.927 119.94,263.21 118.307,263.21 C116.674,263.21 115.39,261.927 115.39,260.293 C115.39,258.66 116.674,257.377 118.307,257.377" fill="#FFF"/><text x="96.89" y="296.622" fill="#FFF" font-size="14" textLength="44.782">Peer 2</text></g><g class="entity" data-qualified-name="relay example.p2i.r1" id="ent0005" data-source-line="6"><rect x="190.85" y="241.55" width="86.295" height="36.297" fill="#ADD8E6" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="200.85" y="264.545" fill="#FFF" font-size="14" textLength="66.295">RTP relay</text></g><g class="link" data-entity-1="ent0003" data-entity-2="ent0009" id="lnk10" data-source-line="11" data-link-type="association"><path d="M58.83,334.182 C58.885,334.33 58.94,334.478 58.995,334.626 C59.216,335.217 59.441,335.807 59.67,336.394 C61.503,341.091 63.6,345.646 66,349.93 C79.58,374.15 104.45,394.99 121.35,407.31" style="stroke:#E7E7E7;stroke-width:1;stroke-dasharray:7,7;" fill="none" id="p2i-GMN8"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0004" id="lnk11" data-source-line="13" data-link-type="dependency"><path d="M261.06,102.88 C233.92,111.55 197.62,126.65 173,150.46 C156.32,166.59 145.945,184.362 137.305,204.582" style="stroke:#EE82EE;stroke-width:1;" fill="none" id="p1-to-p2"/><polygon points="135.34,209.18,142.555,202.476,137.305,204.582,135.198,199.332,135.34,209.18" fill="#EE82EE" style="stroke:#EE82EE;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0006" id="lnk12" data-source-line="14" data-link-type="dependency"><path d="M319.004,147.543 C327.104,168.483 332.906,183.487 341.006,204.427" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p1-p3"/><polygon points="317.2,142.88,316.716,152.717,319.004,147.543,324.178,149.831,317.2,142.88" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="342.81,209.09,343.294,199.253,341.006,204.427,335.832,202.139,342.81,209.09" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0007" id="lnk13" data-source-line="15" data-link-type="dependency"><path d="M339.69,101.544 C367.28,108.934 398.35,122.29 416,150.46 C463.06,225.59 450.73,268.36 416,349.93 C408.66,367.16 398.515,378.938 384.825,390.538" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p1-p4"/><polygon points="334.86,100.25,342.519,106.442,339.69,101.544,344.588,98.715,334.86,100.25" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="381.01,393.77,390.462,391.004,384.825,390.538,385.291,384.9,381.01,393.77" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0004" data-entity-2="ent0005" id="lnk14" data-source-line="16" data-link-type="dependency"><path d="M155.84,259.69 C167.44,259.69 174.04,259.69 185.64,259.69" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="p2-to-r1"/><polygon points="190.64,259.69,181.64,255.69,185.64,259.69,181.64,263.69,190.64,259.69" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0005" id="lnk16" data-source-line="17" data-link-type="dependency"><path d="M276.996,147.543 C264.106,180.853 249.71,218.08 240.75,241.25" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="p1-backto-r1"/><polygon points="278.8,142.88,271.822,149.83,276.996,147.543,279.282,152.717,278.8,142.88" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0006" id="lnk17" data-source-line="18" data-link-type="dependency"><path d="M277.5,259.69 C293.34,259.69 304.19,259.69 320.03,259.69" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="r1-to-p3"/><polygon points="325.03,259.69,316.03,255.69,320.03,259.69,316.03,263.69,325.03,259.69" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0007" id="lnk18" data-source-line="19" data-link-type="dependency"><path d="M241.61,278.22 C250.04,296.77 264.61,326.56 281,349.93 C288.74,360.97 294.734,368.423 303.824,378.463" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="r1-to-p4"/><polygon points="307.18,382.17,304.105,372.814,303.824,378.463,298.174,378.183,307.18,382.17" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0006" data-entity-2="ent0004" id="lnk19" data-source-line="20" data-link-type="dependency"><path d="M340.83,209.23 C329.56,188.11 313.69,165.11 293,150.46 C274.4,137.29 213.15,143.91 190.5,146.46 C182.57,147.36 179.26,145.52 173,150.46 C154.32,165.21 143.478,183.444 135.118,204.464" style="stroke:#EE82EE;stroke-width:1;" fill="none" id="p3-to-p2"/><polygon points="133.27,209.11,140.313,202.225,135.118,204.464,132.879,199.269,133.27,209.11" fill="#EE82EE" style="stroke:#EE82EE;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0006" data-entity-2="ent0007" id="lnk20" data-source-line="21" data-link-type="dependency"><path d="M355.787,315.368 C353.647,334.248 352.334,345.802 350.194,364.662" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p3-p4"/><polygon points="356.35,310.4,351.362,318.892,355.787,315.368,359.311,319.793,356.35,310.4" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="349.63,369.63,354.619,361.138,350.194,364.662,346.67,360.236,349.63,369.63" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0004" data-entity-2="ent0007" id="lnk22" data-source-line="22" data-link-type="dependency"><path d="M141.7,314.329 C150.08,329.239 158.78,339.93 173,349.93 C209.72,375.75 230.65,352.46 272,369.93 C284.14,375.05 296.34,382.38 307.16,389.82" style="stroke:#EE82EE;stroke-width:1;" fill="none" id="p2-backto-p4"/><polygon points="139.25,309.97,140.173,319.776,141.7,314.329,147.147,315.856,139.25,309.97" fill="#EE82EE" style="stroke:#EE82EE;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><?plantuml-src XP1RQm8n48NV_HLJXJuKrh2NleZu1qf1IXyB9MPdtM1k91DjAVxtPbqlTIluc7E-CtCc3z885Mk4biY56MEUxwPhIMrSnO1UM4DeQ2giPgzoqtAfNZpV8WMcDxKLuTD5hPZcWT0pQb5ZO3KsF2fYDVURQUUFF0hYPgqGnXuL_mRyujef7CFF2E2F2_D7rrg3Jy-B3mDBH0_v67W0bm_0NYtaOSAz6SMH7g9lxqiu53huFeU9akkMLYfYGlTtkvNztF8kMFLWDKgaiOImiaHMWssw6sR7bi2TKr9majQ0D8rFt-gZeEYn2xeSijhkJBP88PXifLL8lJu_6-LGg3gXWCntboLXU6LwPz5rv0tZ57BbV--yuDfAw2LsLRCSjgfEco_O_XS0?></g></svg></div></div>
+<p>To further reduce downstream bandwidth and CPU usage, <code>content mixers</code> can be introduced.</p>
+<div class="puml-container"><div class="puml light" style=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="DESCRIPTION" style="width:512px;height:500px;background:#FFFFFF;" width="512px" height="500px" viewBox="0 0 512 500" zoomAndPan="magnify" preserveAspectRatio="xMidYMid meet" contentStyleType="text/css" class="diagram"><?plantuml 1.2026.7beta11?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><g class="cluster" data-qualified-name="mixer example" id="ent0001" data-source-line="2"><rect x="7" y="7" width="480" height="479.39" fill="none" style="stroke:#181818;stroke-width:1;" rx="2.5" ry="2.5"/><text x="10" y="21.995" fill="#000" font-size="14" textLength="116.566" font-weight="700">mixer example</text></g><g class="cluster" data-qualified-name="mixer example.p2i" id="ent0003" data-source-line="4"><rect x="39" y="166.46" width="297" height="167.47" fill="none" style="stroke:#181818;stroke-width:1;" rx="2.5" ry="2.5"/><text x="42" y="181.455" fill="#000" font-size="14" font-weight="700"> </text></g><g class="entity" data-qualified-name="mixer example.p1" id="ent0002" data-source-line="3"><rect x="299.44" y="42" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="309.44" y="112.865" fill="#000" font-size="14"> </text><path d="M321.832,52 C321.19,52 320.724,52.467 320.724,53.108 L320.724,97.617 C320.724,98.258 321.19,98.725 321.832,98.725 L348.84,98.725 C349.482,98.725 349.949,98.258 349.949,97.617 L349.949,53.108 C349.949,52.467 349.482,52 348.84,52 L321.832,52 M326.557,57.833 L344.057,57.833 L344.057,87 L326.557,87 L326.557,57.833 M335.307,89.917 C336.94,89.917 338.224,91.2 338.224,92.833 C338.224,94.467 336.94,95.75 335.307,95.75 C333.674,95.75 332.39,94.467 332.39,92.833 C332.39,91.2 333.674,89.917 335.307,89.917" fill="#000"/><text x="313.89" y="129.162" fill="#000" font-size="14" textLength="44.782">Peer 1</text></g><g class="entity" data-qualified-name="mixer example.p3" id="ent0006" data-source-line="8"><rect x="360.44" y="209.46" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="370.44" y="280.325" fill="#000" font-size="14"> </text><path d="M382.832,219.46 C382.19,219.46 381.724,219.927 381.724,220.568 L381.724,265.077 C381.724,265.718 382.19,266.185 382.832,266.185 L409.84,266.185 C410.482,266.185 410.949,265.718 410.949,265.077 L410.949,220.568 C410.949,219.927 410.482,219.46 409.84,219.46 L382.832,219.46 M387.557,225.293 L405.057,225.293 L405.057,254.46 L387.557,254.46 L387.557,225.293 M396.307,257.377 C397.94,257.377 399.224,258.66 399.224,260.293 C399.224,261.927 397.94,263.21 396.307,263.21 C394.674,263.21 393.39,261.927 393.39,260.293 C393.39,258.66 394.674,257.377 396.307,257.377" fill="#000"/><text x="374.89" y="296.622" fill="#000" font-size="14" textLength="44.782">Peer 3</text></g><g class="entity" data-qualified-name="mixer example.p4" id="ent0007" data-source-line="9"><rect x="324.44" y="369.93" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="334.44" y="440.795" fill="#000" font-size="14"> </text><path d="M346.832,379.93 C346.19,379.93 345.724,380.397 345.724,381.038 L345.724,425.547 C345.724,426.188 346.19,426.655 346.832,426.655 L373.84,426.655 C374.482,426.655 374.949,426.188 374.949,425.547 L374.949,381.038 C374.949,380.397 374.482,379.93 373.84,379.93 L346.832,379.93 M351.557,385.763 L369.057,385.763 L369.057,414.93 L351.557,414.93 L351.557,385.763 M360.307,417.847 C361.94,417.847 363.224,419.13 363.224,420.763 C363.224,422.397 361.94,423.68 360.307,423.68 C358.674,423.68 357.39,422.397 357.39,420.763 C357.39,419.13 358.674,417.847 360.307,417.847" fill="#000"/><text x="338.89" y="457.092" fill="#000" font-size="14" textLength="44.782">Peer 4</text></g><g class="entity" data-qualified-name="mixer example.GMN8" id="ent0009" data-source-line="11"><path d="M23.21,407.59 L23.21,432.723 L254.787,432.723 L254.787,417.59 L244.787,407.59 L23.21,407.59" style="stroke:#181818;stroke-width:0.5;" fill="#FEFFDD"/><path d="M244.787,407.59 L244.787,417.59 L254.787,417.59 L244.787,407.59" style="stroke:#181818;stroke-width:1;" fill="#FEFFDD"/><text x="29.21" y="424.657" fill="#000" font-size="13" textLength="210.577">Peer 2 application infrastructure</text></g><g class="entity" data-qualified-name="mixer example.p2i.p2" id="ent0004" data-source-line="5"><rect x="238.44" y="209.46" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="248.44" y="280.325" fill="#000" font-size="14"> </text><path d="M260.832,219.46 C260.19,219.46 259.724,219.927 259.724,220.568 L259.724,265.077 C259.724,265.718 260.19,266.185 260.832,266.185 L287.84,266.185 C288.482,266.185 288.949,265.718 288.949,265.077 L288.949,220.568 C288.949,219.927 288.482,219.46 287.84,219.46 L260.832,219.46 M265.557,225.293 L283.057,225.293 L283.057,254.46 L265.557,254.46 L265.557,225.293 M274.307,257.377 C275.94,257.377 277.224,258.66 277.224,260.293 C277.224,261.927 275.94,263.21 274.307,263.21 C272.674,263.21 271.39,261.927 271.39,260.293 C271.39,258.66 272.674,257.377 274.307,257.377" fill="#000"/><text x="252.89" y="296.622" fill="#000" font-size="14" textLength="44.782">Peer 2</text></g><g class="entity" data-qualified-name="mixer example.p2i.m1" id="ent0005" data-source-line="6"><rect x="82.84" y="241.55" width="120.311" height="36.297" fill="#90EE90" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="92.84" y="264.545" fill="#000" font-size="14" textLength="100.311">Content mixer</text></g><g class="link" data-entity-1="ent0003" data-entity-2="ent0009" id="lnk10" data-source-line="11" data-link-type="association"><path d="M59.741,334.169 C59.797,334.318 59.853,334.466 59.909,334.614 C60.135,335.205 60.364,335.795 60.597,336.382 C62.464,341.083 64.586,345.641 67,349.93 C80.53,373.95 105.02,394.84 121.65,407.22" style="stroke:#181818;stroke-width:1;stroke-dasharray:7,7;" fill="none" id="p2i-GMN8"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0005" id="lnk11" data-source-line="13" data-link-type="dependency"><path d="M299.12,106.23 C275.13,115.9 244.12,130.83 221,150.46 C189.93,176.85 167.113,213.725 154.393,236.935" style="stroke:#90EE90;stroke-width:1;" fill="none" id="p1-to-m1"/><polygon points="151.99,241.32,159.823,235.35,154.393,236.935,152.808,231.505,151.99,241.32" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0006" id="lnk12" data-source-line="14" data-link-type="dependency"><path d="M356.03,147.571 C363.75,168.511 369.26,183.459 376.98,204.399" style="stroke:#181818;stroke-width:1;" fill="none" id="p1-p3"/><polygon points="354.3,142.88,353.66,152.708,356.03,147.571,361.166,149.941,354.3,142.88" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="378.71,209.09,379.35,199.262,376.98,204.399,371.844,202.029,378.71,209.09" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0007" id="lnk13" data-source-line="15" data-link-type="dependency"><path d="M377.6,102.116 C404.39,109.726 434.03,123.07 451,150.46 C497.68,225.83 490.16,270.39 451,349.93 C439.85,372.56 421.654,387.326 401.944,398.976" style="stroke:#181818;stroke-width:1;" fill="none" id="p1-p4"/><polygon points="372.79,100.75,380.354,107.057,377.6,102.116,382.54,99.361,372.79,100.75" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="397.64,401.52,407.423,400.384,401.944,398.976,403.352,393.497,397.64,401.52" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0004" id="lnk14" data-source-line="16" data-link-type="dependency"><path d="M203.59,259.69 C215.12,259.69 221.65,259.69 233.18,259.69" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-to-p2"/><polygon points="238.18,259.69,229.18,255.69,233.18,259.69,229.18,263.69,238.18,259.69" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0004" id="lnk16" data-source-line="17" data-link-type="dependency"><path d="M315.97,147.571 C308.25,168.511 301.01,188.15 293.29,209.09" style="stroke:#EE82EE;stroke-width:1;" fill="none" id="p1-backto-p2"/><polygon points="317.7,142.88,310.834,149.941,315.97,147.571,318.34,152.708,317.7,142.88" fill="#EE82EE" style="stroke:#EE82EE;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0004" data-entity-2="ent0006" id="lnk17" data-source-line="18" data-link-type="dependency"><path d="M311.7,259.69 C327.8,259.69 338.91,259.69 355.01,259.69" style="stroke:#EE82EE;stroke-width:1;" fill="none" id="p2-to-p3"/><polygon points="360.01,259.69,351.01,255.69,355.01,259.69,351.01,263.69,360.01,259.69" fill="#EE82EE" style="stroke:#EE82EE;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0004" data-entity-2="ent0007" id="lnk18" data-source-line="19" data-link-type="dependency"><path d="M296.3,310.42 C302.3,323.46 309.09,337.38 316,349.93 C319.6,356.46 320.955,358.941 325.035,365.521" style="stroke:#EE82EE;stroke-width:1;" fill="none" id="p2-to-p4"/><polygon points="327.67,369.77,326.327,360.013,325.035,365.521,319.528,364.229,327.67,369.77" fill="#EE82EE" style="stroke:#EE82EE;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0006" id="lnk20" data-source-line="20" data-link-type="dependency"><path d="M153.025,236.919 C164.665,212.269 186.67,173.33 221,150.46 C227.64,146.04 230.57,147.36 238.5,146.46 C258.28,144.23 311.75,138.96 328,150.46 C348.69,165.11 364.56,188.11 375.83,209.23" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-backto-p3"/><polygon points="150.89,241.44,158.35,235.01,153.025,236.919,151.116,231.594,150.89,241.44" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0006" data-entity-2="ent0007" id="lnk21" data-source-line="21" data-link-type="dependency"><path d="M384.602,315.276 C380.312,334.156 377.649,345.895 373.359,364.755" style="stroke:#181818;stroke-width:1;" fill="none" id="p3-p4"/><polygon points="385.71,310.4,379.815,318.29,384.602,315.276,387.616,320.063,385.71,310.4" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="372.25,369.63,378.147,361.741,373.359,364.755,370.346,359.967,372.25,369.63" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0007" id="lnk23" data-source-line="22" data-link-type="dependency"><path d="M157.133,282.143 C170.813,301.933 192.73,330.04 221,349.93 C240.91,363.94 249.97,359.57 272,369.93 C289.58,378.19 308.48,388.44 324.33,397.45" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-backto-p4"/><polygon points="154.29,278.03,156.117,287.708,157.133,282.143,162.698,283.159,154.29,278.03" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><?plantuml-src XP3BQiCm54Jt-OhR5BeeECAFRaB8fijIw0SKYY9Vso9w8LqbWP9_h_neIDn2jZDdHdFr88rGiKReY5nOC-RvSTLAwk8k1lJ26a93As4rUvVxZalrvla1AJ2zhwq8NovgnJGFX9vHXne3gx7XKH5JikrerGCBZuAuQHN2KiiJUi0JrqxX4huN05SkR9vSPmq-lsm_3NnWGlCby00kdu6ZMiYXuLv7CT5pz7My3uPH0wDpU1o6jnxH9FvyTs0vbfTtmMe4gqKYZIM4dIMo6cpJ7xAUfW9tJad1ILe3qZG-VQwFWgB7FkXoo6fxDDdsxzRaRNxDOS-DK2KXHJBVHtgXcCSBoABhdLHya5OXJUebKiwCI_UrNaAciA5_5vQpGIavlfdG6_Ry0m00?></g></svg></div><div class="puml dark" style=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="DESCRIPTION" style="width:512px;height:500px;background:#1B1B1B;" width="512px" height="500px" viewBox="0 0 512 500" zoomAndPan="magnify" preserveAspectRatio="xMidYMid meet" contentStyleType="text/css" class="diagram"><?plantuml 1.2026.7beta11?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><rect x="0" y="0" width="512" height="500" fill="#1B1B1B" style="stroke:none;"/><g class="cluster" data-qualified-name="mixer example" id="ent0001" data-source-line="2"><rect x="7" y="7" width="480" height="479.39" fill="none" style="stroke:#E7E7E7;stroke-width:1;" rx="2.5" ry="2.5"/><text x="10" y="21.995" fill="#FFF" font-size="14" textLength="116.566" font-weight="700">mixer example</text></g><g class="cluster" data-qualified-name="mixer example.p2i" id="ent0003" data-source-line="4"><rect x="39" y="166.46" width="297" height="167.47" fill="none" style="stroke:#E7E7E7;stroke-width:1;" rx="2.5" ry="2.5"/><text x="42" y="181.455" fill="#FFF" font-size="14" font-weight="700"> </text></g><g class="entity" data-qualified-name="mixer example.p1" id="ent0002" data-source-line="3"><rect x="299.44" y="42" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="309.44" y="112.865" fill="#FFF" font-size="14"> </text><path d="M321.832,52 C321.19,52 320.724,52.467 320.724,53.108 L320.724,97.617 C320.724,98.258 321.19,98.725 321.832,98.725 L348.84,98.725 C349.482,98.725 349.949,98.258 349.949,97.617 L349.949,53.108 C349.949,52.467 349.482,52 348.84,52 L321.832,52 M326.557,57.833 L344.057,57.833 L344.057,87 L326.557,87 L326.557,57.833 M335.307,89.917 C336.94,89.917 338.224,91.2 338.224,92.833 C338.224,94.467 336.94,95.75 335.307,95.75 C333.674,95.75 332.39,94.467 332.39,92.833 C332.39,91.2 333.674,89.917 335.307,89.917" fill="#FFF"/><text x="313.89" y="129.162" fill="#FFF" font-size="14" textLength="44.782">Peer 1</text></g><g class="entity" data-qualified-name="mixer example.p3" id="ent0006" data-source-line="8"><rect x="360.44" y="209.46" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="370.44" y="280.325" fill="#FFF" font-size="14"> </text><path d="M382.832,219.46 C382.19,219.46 381.724,219.927 381.724,220.568 L381.724,265.077 C381.724,265.718 382.19,266.185 382.832,266.185 L409.84,266.185 C410.482,266.185 410.949,265.718 410.949,265.077 L410.949,220.568 C410.949,219.927 410.482,219.46 409.84,219.46 L382.832,219.46 M387.557,225.293 L405.057,225.293 L405.057,254.46 L387.557,254.46 L387.557,225.293 M396.307,257.377 C397.94,257.377 399.224,258.66 399.224,260.293 C399.224,261.927 397.94,263.21 396.307,263.21 C394.674,263.21 393.39,261.927 393.39,260.293 C393.39,258.66 394.674,257.377 396.307,257.377" fill="#FFF"/><text x="374.89" y="296.622" fill="#FFF" font-size="14" textLength="44.782">Peer 3</text></g><g class="entity" data-qualified-name="mixer example.p4" id="ent0007" data-source-line="9"><rect x="324.44" y="369.93" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="334.44" y="440.795" fill="#FFF" font-size="14"> </text><path d="M346.832,379.93 C346.19,379.93 345.724,380.397 345.724,381.038 L345.724,425.547 C345.724,426.188 346.19,426.655 346.832,426.655 L373.84,426.655 C374.482,426.655 374.949,426.188 374.949,425.547 L374.949,381.038 C374.949,380.397 374.482,379.93 373.84,379.93 L346.832,379.93 M351.557,385.763 L369.057,385.763 L369.057,414.93 L351.557,414.93 L351.557,385.763 M360.307,417.847 C361.94,417.847 363.224,419.13 363.224,420.763 C363.224,422.397 361.94,423.68 360.307,423.68 C358.674,423.68 357.39,422.397 357.39,420.763 C357.39,419.13 358.674,417.847 360.307,417.847" fill="#FFF"/><text x="338.89" y="457.092" fill="#FFF" font-size="14" textLength="44.782">Peer 4</text></g><g class="entity" data-qualified-name="mixer example.GMN8" id="ent0009" data-source-line="11"><path d="M23.21,407.59 L23.21,432.723 L254.787,432.723 L254.787,417.59 L244.787,407.59 L23.21,407.59" style="stroke:#E7E7E7;stroke-width:0.5;" fill="#714137"/><path d="M244.787,407.59 L244.787,417.59 L254.787,417.59 L244.787,407.59" style="stroke:#E7E7E7;stroke-width:1;" fill="#714137"/><text x="29.21" y="424.657" fill="#FFF" font-size="13" textLength="210.577">Peer 2 application infrastructure</text></g><g class="entity" data-qualified-name="mixer example.p2i.p2" id="ent0004" data-source-line="5"><rect x="238.44" y="209.46" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="248.44" y="280.325" fill="#FFF" font-size="14"> </text><path d="M260.832,219.46 C260.19,219.46 259.724,219.927 259.724,220.568 L259.724,265.077 C259.724,265.718 260.19,266.185 260.832,266.185 L287.84,266.185 C288.482,266.185 288.949,265.718 288.949,265.077 L288.949,220.568 C288.949,219.927 288.482,219.46 287.84,219.46 L260.832,219.46 M265.557,225.293 L283.057,225.293 L283.057,254.46 L265.557,254.46 L265.557,225.293 M274.307,257.377 C275.94,257.377 277.224,258.66 277.224,260.293 C277.224,261.927 275.94,263.21 274.307,263.21 C272.674,263.21 271.39,261.927 271.39,260.293 C271.39,258.66 272.674,257.377 274.307,257.377" fill="#FFF"/><text x="252.89" y="296.622" fill="#FFF" font-size="14" textLength="44.782">Peer 2</text></g><g class="entity" data-qualified-name="mixer example.p2i.m1" id="ent0005" data-source-line="6"><rect x="82.84" y="241.55" width="120.311" height="36.297" fill="#90EE90" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="92.84" y="264.545" fill="#FFF" font-size="14" textLength="100.311">Content mixer</text></g><g class="link" data-entity-1="ent0003" data-entity-2="ent0009" id="lnk10" data-source-line="11" data-link-type="association"><path d="M59.741,334.169 C59.797,334.318 59.853,334.466 59.909,334.614 C60.135,335.205 60.364,335.795 60.597,336.382 C62.464,341.083 64.586,345.641 67,349.93 C80.53,373.95 105.02,394.84 121.65,407.22" style="stroke:#E7E7E7;stroke-width:1;stroke-dasharray:7,7;" fill="none" id="p2i-GMN8"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0005" id="lnk11" data-source-line="13" data-link-type="dependency"><path d="M299.12,106.23 C275.13,115.9 244.12,130.83 221,150.46 C189.93,176.85 167.113,213.725 154.393,236.935" style="stroke:#90EE90;stroke-width:1;" fill="none" id="p1-to-m1"/><polygon points="151.99,241.32,159.823,235.35,154.393,236.935,152.808,231.505,151.99,241.32" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0006" id="lnk12" data-source-line="14" data-link-type="dependency"><path d="M356.03,147.571 C363.75,168.511 369.26,183.459 376.98,204.399" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p1-p3"/><polygon points="354.3,142.88,353.66,152.708,356.03,147.571,361.166,149.941,354.3,142.88" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="378.71,209.09,379.35,199.262,376.98,204.399,371.844,202.029,378.71,209.09" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0007" id="lnk13" data-source-line="15" data-link-type="dependency"><path d="M377.6,102.116 C404.39,109.726 434.03,123.07 451,150.46 C497.68,225.83 490.16,270.39 451,349.93 C439.85,372.56 421.654,387.326 401.944,398.976" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p1-p4"/><polygon points="372.79,100.75,380.354,107.057,377.6,102.116,382.54,99.361,372.79,100.75" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="397.64,401.52,407.423,400.384,401.944,398.976,403.352,393.497,397.64,401.52" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0004" id="lnk14" data-source-line="16" data-link-type="dependency"><path d="M203.59,259.69 C215.12,259.69 221.65,259.69 233.18,259.69" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-to-p2"/><polygon points="238.18,259.69,229.18,255.69,233.18,259.69,229.18,263.69,238.18,259.69" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0004" id="lnk16" data-source-line="17" data-link-type="dependency"><path d="M315.97,147.571 C308.25,168.511 301.01,188.15 293.29,209.09" style="stroke:#EE82EE;stroke-width:1;" fill="none" id="p1-backto-p2"/><polygon points="317.7,142.88,310.834,149.941,315.97,147.571,318.34,152.708,317.7,142.88" fill="#EE82EE" style="stroke:#EE82EE;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0004" data-entity-2="ent0006" id="lnk17" data-source-line="18" data-link-type="dependency"><path d="M311.7,259.69 C327.8,259.69 338.91,259.69 355.01,259.69" style="stroke:#EE82EE;stroke-width:1;" fill="none" id="p2-to-p3"/><polygon points="360.01,259.69,351.01,255.69,355.01,259.69,351.01,263.69,360.01,259.69" fill="#EE82EE" style="stroke:#EE82EE;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0004" data-entity-2="ent0007" id="lnk18" data-source-line="19" data-link-type="dependency"><path d="M296.3,310.42 C302.3,323.46 309.09,337.38 316,349.93 C319.6,356.46 320.955,358.941 325.035,365.521" style="stroke:#EE82EE;stroke-width:1;" fill="none" id="p2-to-p4"/><polygon points="327.67,369.77,326.327,360.013,325.035,365.521,319.528,364.229,327.67,369.77" fill="#EE82EE" style="stroke:#EE82EE;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0006" id="lnk20" data-source-line="20" data-link-type="dependency"><path d="M153.025,236.919 C164.665,212.269 186.67,173.33 221,150.46 C227.64,146.04 230.57,147.36 238.5,146.46 C258.28,144.23 311.75,138.96 328,150.46 C348.69,165.11 364.56,188.11 375.83,209.23" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-backto-p3"/><polygon points="150.89,241.44,158.35,235.01,153.025,236.919,151.116,231.594,150.89,241.44" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0006" data-entity-2="ent0007" id="lnk21" data-source-line="21" data-link-type="dependency"><path d="M384.602,315.276 C380.312,334.156 377.649,345.895 373.359,364.755" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p3-p4"/><polygon points="385.71,310.4,379.815,318.29,384.602,315.276,387.616,320.063,385.71,310.4" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="372.25,369.63,378.147,361.741,373.359,364.755,370.346,359.967,372.25,369.63" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0007" id="lnk23" data-source-line="22" data-link-type="dependency"><path d="M157.133,282.143 C170.813,301.933 192.73,330.04 221,349.93 C240.91,363.94 249.97,359.57 272,369.93 C289.58,378.19 308.48,388.44 324.33,397.45" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-backto-p4"/><polygon points="154.29,278.03,156.117,287.708,157.133,282.143,162.698,283.159,154.29,278.03" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><?plantuml-src XP3DQiCm48JlUOfj2ZqKR64xlOIGIu-bq0Se54LUsoBwGrebWP9th_pJaBY5N6U-6StgGHgXOetG4RcmPippOzvAwk8k1lJ26a93kR2QlSjznwLwy_o059ZUrrQ4BnUrOfe7Gi-eGus1rTZmg8ZLtE_ptbzu5CHDgn2MMfxG0vwuTWgNyBq0k79Xy-GwQ_3vPVjfu0CJMYo11t3531pLKWuDzphAYPwZh-DvC8mQ65t0ev9jHwr7D8a_tnrOZUNLNN0rWgj58eqbX9qbiXfiqn-odgO2Tqv9mKbQ0z8qFlsjZuAYnpxe2iXgUpJPzk_Mv6r-pM7FZR1AGefale_qGZcFbv15rpkf-22jGfhKIwIQ6PVkQxs2J653_owiPeDISdmpeJVi-GS0?></g></svg></div></div>
+<p>However, to ensure interoperability, each client must independently allocate its own <code>RTP relay</code> and <code>content mixer</code>.</p>
+<div class="puml-container"><div class="puml light" style=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="DESCRIPTION" style="width:634px;height:500px;background:#FFFFFF;" width="634px" height="500px" viewBox="0 0 634 500" zoomAndPan="magnify" preserveAspectRatio="xMidYMid meet" contentStyleType="text/css" class="diagram"><?plantuml 1.2026.7beta11?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><g class="cluster" data-qualified-name="complex mesh example" id="ent0001" data-source-line="2"><rect x="7" y="7" width="601" height="479.39" fill="none" style="stroke:#181818;stroke-width:1;" rx="2.5" ry="2.5"/><text x="10" y="21.995" fill="#000" font-size="14" textLength="184.857" font-weight="700">complex mesh example</text></g><g class="cluster" data-qualified-name="complex mesh example.p2i" id="ent0003" data-source-line="5"><rect x="39" y="166.46" width="418" height="167.47" fill="none" style="stroke:#181818;stroke-width:1;" rx="2.5" ry="2.5"/><text x="42" y="181.455" fill="#000" font-size="14" font-weight="700"> </text></g><g class="entity" data-qualified-name="complex mesh example.p1" id="ent0002" data-source-line="4"><rect x="417.44" y="42" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="427.44" y="112.865" fill="#000" font-size="14"> </text><path d="M439.832,52 C439.19,52 438.724,52.467 438.724,53.108 L438.724,97.617 C438.724,98.258 439.19,98.725 439.832,98.725 L466.84,98.725 C467.482,98.725 467.949,98.258 467.949,97.617 L467.949,53.108 C467.949,52.467 467.482,52 466.84,52 L439.832,52 M444.557,57.833 L462.057,57.833 L462.057,87 L444.557,87 L444.557,57.833 M453.307,89.917 C454.94,89.917 456.224,91.2 456.224,92.833 C456.224,94.467 454.94,95.75 453.307,95.75 C451.674,95.75 450.39,94.467 450.39,92.833 C450.39,91.2 451.674,89.917 453.307,89.917" fill="#000"/><text x="431.89" y="129.162" fill="#000" font-size="14" textLength="44.782">Peer 1</text></g><g class="entity" data-qualified-name="complex mesh example.p3" id="ent0007" data-source-line="10"><rect x="481.44" y="209.46" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="491.44" y="280.325" fill="#000" font-size="14"> </text><path d="M503.832,219.46 C503.19,219.46 502.724,219.927 502.724,220.568 L502.724,265.077 C502.724,265.718 503.19,266.185 503.832,266.185 L530.84,266.185 C531.482,266.185 531.949,265.718 531.949,265.077 L531.949,220.568 C531.949,219.927 531.482,219.46 530.84,219.46 L503.832,219.46 M508.557,225.293 L526.057,225.293 L526.057,254.46 L508.557,254.46 L508.557,225.293 M517.307,257.377 C518.94,257.377 520.224,258.66 520.224,260.293 C520.224,261.927 518.94,263.21 517.307,263.21 C515.674,263.21 514.39,261.927 514.39,260.293 C514.39,258.66 515.674,257.377 517.307,257.377" fill="#000"/><text x="495.89" y="296.622" fill="#000" font-size="14" textLength="44.782">Peer 3</text></g><g class="entity" data-qualified-name="complex mesh example.p4" id="ent0008" data-source-line="11"><rect x="417.44" y="369.93" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="427.44" y="440.795" fill="#000" font-size="14"> </text><path d="M439.832,379.93 C439.19,379.93 438.724,380.397 438.724,381.038 L438.724,425.547 C438.724,426.188 439.19,426.655 439.832,426.655 L466.84,426.655 C467.482,426.655 467.949,426.188 467.949,425.547 L467.949,381.038 C467.949,380.397 467.482,379.93 466.84,379.93 L439.832,379.93 M444.557,385.763 L462.057,385.763 L462.057,414.93 L444.557,414.93 L444.557,385.763 M453.307,417.847 C454.94,417.847 456.224,419.13 456.224,420.763 C456.224,422.397 454.94,423.68 453.307,423.68 C451.674,423.68 450.39,422.397 450.39,420.763 C450.39,419.13 451.674,417.847 453.307,417.847" fill="#000"/><text x="431.89" y="457.092" fill="#000" font-size="14" textLength="44.782">Peer 4</text></g><g class="entity" data-qualified-name="complex mesh example.GMN9" id="ent0010" data-source-line="13"><path d="M23.21,407.59 L23.21,432.723 L254.787,432.723 L254.787,417.59 L244.787,407.59 L23.21,407.59" style="stroke:#181818;stroke-width:0.5;" fill="#FEFFDD"/><path d="M244.787,407.59 L244.787,417.59 L254.787,417.59 L244.787,407.59" style="stroke:#181818;stroke-width:1;" fill="#FEFFDD"/><text x="29.21" y="424.657" fill="#000" font-size="13" textLength="210.577">Peer 2 application infrastructure</text></g><g class="entity" data-qualified-name="complex mesh example.p2i.p2" id="ent0004" data-source-line="6"><rect x="238.44" y="209.46" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="248.44" y="280.325" fill="#000" font-size="14"> </text><path d="M260.832,219.46 C260.19,219.46 259.724,219.927 259.724,220.568 L259.724,265.077 C259.724,265.718 260.19,266.185 260.832,266.185 L287.84,266.185 C288.482,266.185 288.949,265.718 288.949,265.077 L288.949,220.568 C288.949,219.927 288.482,219.46 287.84,219.46 L260.832,219.46 M265.557,225.293 L283.057,225.293 L283.057,254.46 L265.557,254.46 L265.557,225.293 M274.307,257.377 C275.94,257.377 277.224,258.66 277.224,260.293 C277.224,261.927 275.94,263.21 274.307,263.21 C272.674,263.21 271.39,261.927 271.39,260.293 C271.39,258.66 272.674,257.377 274.307,257.377" fill="#000"/><text x="252.89" y="296.622" fill="#000" font-size="14" textLength="44.782">Peer 2</text></g><g class="entity" data-qualified-name="complex mesh example.p2i.m1" id="ent0005" data-source-line="7"><rect x="82.84" y="241.55" width="120.311" height="36.297" fill="#90EE90" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="92.84" y="264.545" fill="#000" font-size="14" textLength="100.311">Content mixer</text></g><g class="entity" data-qualified-name="complex mesh example.p2i.r1" id="ent0006" data-source-line="8"><rect x="346.85" y="241.55" width="86.295" height="36.297" fill="#ADD8E6" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="356.85" y="264.545" fill="#000" font-size="14" textLength="66.295">RTP relay</text></g><g class="link" data-entity-1="ent0003" data-entity-2="ent0010" id="lnk11" data-source-line="13" data-link-type="association"><path d="M59.741,334.169 C59.797,334.318 59.853,334.466 59.909,334.614 C60.135,335.205 60.364,335.795 60.597,336.382 C62.464,341.083 64.586,345.641 67,349.93 C80.53,373.95 105.02,394.84 121.65,407.22" style="stroke:#181818;stroke-width:1;stroke-dasharray:7,7;" fill="none" id="p2i-GMN9"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0005" id="lnk12" data-source-line="15" data-link-type="dependency"><path d="M417.35,94.52 C368.61,97.85 281.6,109.57 221,150.46 C186.83,173.52 164.627,212.334 152.957,236.594" style="stroke:#90EE90;stroke-width:1;" fill="none" id="p1-to-m1"/><polygon points="150.79,241.1,158.296,234.724,152.957,236.594,151.087,231.256,150.79,241.1" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0007" id="lnk13" data-source-line="16" data-link-type="dependency"><path d="M475.004,147.543 C483.104,168.483 488.906,183.487 497.006,204.427" style="stroke:#181818;stroke-width:1;" fill="none" id="p1-p3"/><polygon points="473.2,142.88,472.716,152.717,475.004,147.543,480.178,149.831,473.2,142.88" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="498.81,209.09,499.294,199.253,497.006,204.427,491.832,202.139,498.81,209.09" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0008" id="lnk14" data-source-line="17" data-link-type="dependency"><path d="M495.69,101.544 C523.28,108.934 554.35,122.29 572,150.46 C619.06,225.59 616.06,273 572,349.93 C554.71,380.12 523.256,396.714 495.506,406.854" style="stroke:#181818;stroke-width:1;" fill="none" id="p1-p4"/><polygon points="490.86,100.25,498.519,106.442,495.69,101.544,500.588,98.715,490.86,100.25" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="490.81,408.57,500.636,409.238,495.506,406.854,497.89,401.724,490.81,408.57" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0004" id="lnk15" data-source-line="18" data-link-type="dependency"><path d="M203.59,259.69 C215.12,259.69 221.65,259.69 233.18,259.69" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-to-p2"/><polygon points="238.18,259.69,229.18,255.69,233.18,259.69,229.18,263.69,238.18,259.69" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0004" data-entity-2="ent0006" id="lnk16" data-source-line="19" data-link-type="dependency"><path d="M311.84,259.69 C323.44,259.69 330.04,259.69 341.64,259.69" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="p2-to-r1"/><polygon points="346.64,259.69,337.64,255.69,341.64,259.69,337.64,263.69,346.64,259.69" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0006" id="lnk18" data-source-line="20" data-link-type="dependency"><path d="M432.996,147.543 C420.106,180.853 405.71,218.08 396.75,241.25" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="p1-backto-r1"/><polygon points="434.8,142.88,427.822,149.83,432.996,147.543,435.282,152.717,434.8,142.88" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0006" data-entity-2="ent0007" id="lnk19" data-source-line="21" data-link-type="dependency"><path d="M433.5,259.69 C449.34,259.69 460.19,259.69 476.03,259.69" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="r1-to-p3"/><polygon points="481.03,259.69,472.03,255.69,476.03,259.69,472.03,263.69,481.03,259.69" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0006" data-entity-2="ent0008" id="lnk20" data-source-line="22" data-link-type="dependency"><path d="M397.09,278.26 C405.95,300.18 419.577,333.934 432.177,365.114" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="r1-to-p4"/><polygon points="434.05,369.75,434.387,359.907,432.177,365.114,426.969,362.904,434.05,369.75" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0007" id="lnk22" data-source-line="23" data-link-type="dependency"><path d="M153.025,236.919 C164.665,212.269 186.67,173.33 221,150.46 C227.64,146.04 230.57,147.36 238.5,146.46 C281.12,141.65 388.88,141.65 431.5,146.46 C439.43,147.36 442.49,145.85 449,150.46 C469.69,165.11 485.56,188.11 496.83,209.23" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-backto-p3"/><polygon points="150.89,241.44,158.35,235.01,153.025,236.919,151.116,231.594,150.89,241.44" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0007" data-entity-2="ent0008" id="lnk23" data-source-line="24" data-link-type="dependency"><path d="M496.057,315.036 C488.427,333.916 483.493,346.134 475.873,364.994" style="stroke:#181818;stroke-width:1;" fill="none" id="p3-p4"/><polygon points="497.93,310.4,490.849,317.246,496.057,315.036,498.266,320.243,497.93,310.4" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="474,369.63,481.08,362.784,475.873,364.994,473.663,359.787,474,369.63" fill="#181818" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0008" id="lnk25" data-source-line="25" data-link-type="dependency"><path d="M156.521,282.268 C169.881,302.438 191.74,331.14 221,349.93 C237.69,360.64 355.53,392.96 416.95,409.37" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-backto-p4"/><polygon points="153.76,278.1,155.395,287.812,156.521,282.268,162.065,283.394,153.76,278.1" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><?plantuml-src XP5FQy904CNlVegfXHuASKbYBo9UUYm5AJqMoffCaiNznsQsMehVlRk9sXg576VUxytEcxqJkf2-H6Y8RBjWpF7Th1RK-8rlqHL64sgQ5KQnLx5jk90lZdyXjKnjIrEqdzOhoHHl2HsZ1XMshCIAUqbCYhgXMGGc3WlYkfO8qp3AIjn381l0FO_L57uc4u1_52mVR6CqFZwjFZIi4HsaK-0js7G0zjrCX140OpEo8pr4d_kSeCGUNSUe5Ewx0BL3r4F-xNqTIic_EzQTs8tq6D33Q9QytoCV1USzE8_dqOOGDeR8A31LpBmufW9khHG59s4q25svy1_E5-GTHgDD8IdDJYUhwrX1Mvx4Rf-BnZmqWYLnqH8RsT2U_Od3CuGwyJQwRWZdYVcrTdxzKWfe8h6Ycp7omTR1t3yUq0lsy0i0?></g></svg></div><div class="puml dark" style=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="DESCRIPTION" style="width:634px;height:500px;background:#1B1B1B;" width="634px" height="500px" viewBox="0 0 634 500" zoomAndPan="magnify" preserveAspectRatio="xMidYMid meet" contentStyleType="text/css" class="diagram"><?plantuml 1.2026.7beta11?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><rect x="0" y="0" width="634" height="500" fill="#1B1B1B" style="stroke:none;"/><g class="cluster" data-qualified-name="complex mesh example" id="ent0001" data-source-line="2"><rect x="7" y="7" width="601" height="479.39" fill="none" style="stroke:#E7E7E7;stroke-width:1;" rx="2.5" ry="2.5"/><text x="10" y="21.995" fill="#FFF" font-size="14" textLength="184.857" font-weight="700">complex mesh example</text></g><g class="cluster" data-qualified-name="complex mesh example.p2i" id="ent0003" data-source-line="5"><rect x="39" y="166.46" width="418" height="167.47" fill="none" style="stroke:#E7E7E7;stroke-width:1;" rx="2.5" ry="2.5"/><text x="42" y="181.455" fill="#FFF" font-size="14" font-weight="700"> </text></g><g class="entity" data-qualified-name="complex mesh example.p1" id="ent0002" data-source-line="4"><rect x="417.44" y="42" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="427.44" y="112.865" fill="#FFF" font-size="14"> </text><path d="M439.832,52 C439.19,52 438.724,52.467 438.724,53.108 L438.724,97.617 C438.724,98.258 439.19,98.725 439.832,98.725 L466.84,98.725 C467.482,98.725 467.949,98.258 467.949,97.617 L467.949,53.108 C467.949,52.467 467.482,52 466.84,52 L439.832,52 M444.557,57.833 L462.057,57.833 L462.057,87 L444.557,87 L444.557,57.833 M453.307,89.917 C454.94,89.917 456.224,91.2 456.224,92.833 C456.224,94.467 454.94,95.75 453.307,95.75 C451.674,95.75 450.39,94.467 450.39,92.833 C450.39,91.2 451.674,89.917 453.307,89.917" fill="#FFF"/><text x="431.89" y="129.162" fill="#FFF" font-size="14" textLength="44.782">Peer 1</text></g><g class="entity" data-qualified-name="complex mesh example.p3" id="ent0007" data-source-line="10"><rect x="481.44" y="209.46" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="491.44" y="280.325" fill="#FFF" font-size="14"> </text><path d="M503.832,219.46 C503.19,219.46 502.724,219.927 502.724,220.568 L502.724,265.077 C502.724,265.718 503.19,266.185 503.832,266.185 L530.84,266.185 C531.482,266.185 531.949,265.718 531.949,265.077 L531.949,220.568 C531.949,219.927 531.482,219.46 530.84,219.46 L503.832,219.46 M508.557,225.293 L526.057,225.293 L526.057,254.46 L508.557,254.46 L508.557,225.293 M517.307,257.377 C518.94,257.377 520.224,258.66 520.224,260.293 C520.224,261.927 518.94,263.21 517.307,263.21 C515.674,263.21 514.39,261.927 514.39,260.293 C514.39,258.66 515.674,257.377 517.307,257.377" fill="#FFF"/><text x="495.89" y="296.622" fill="#FFF" font-size="14" textLength="44.782">Peer 3</text></g><g class="entity" data-qualified-name="complex mesh example.p4" id="ent0008" data-source-line="11"><rect x="417.44" y="369.93" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="427.44" y="440.795" fill="#FFF" font-size="14"> </text><path d="M439.832,379.93 C439.19,379.93 438.724,380.397 438.724,381.038 L438.724,425.547 C438.724,426.188 439.19,426.655 439.832,426.655 L466.84,426.655 C467.482,426.655 467.949,426.188 467.949,425.547 L467.949,381.038 C467.949,380.397 467.482,379.93 466.84,379.93 L439.832,379.93 M444.557,385.763 L462.057,385.763 L462.057,414.93 L444.557,414.93 L444.557,385.763 M453.307,417.847 C454.94,417.847 456.224,419.13 456.224,420.763 C456.224,422.397 454.94,423.68 453.307,423.68 C451.674,423.68 450.39,422.397 450.39,420.763 C450.39,419.13 451.674,417.847 453.307,417.847" fill="#FFF"/><text x="431.89" y="457.092" fill="#FFF" font-size="14" textLength="44.782">Peer 4</text></g><g class="entity" data-qualified-name="complex mesh example.GMN9" id="ent0010" data-source-line="13"><path d="M23.21,407.59 L23.21,432.723 L254.787,432.723 L254.787,417.59 L244.787,407.59 L23.21,407.59" style="stroke:#E7E7E7;stroke-width:0.5;" fill="#714137"/><path d="M244.787,407.59 L244.787,417.59 L254.787,417.59 L244.787,407.59" style="stroke:#E7E7E7;stroke-width:1;" fill="#714137"/><text x="29.21" y="424.657" fill="#FFF" font-size="13" textLength="210.577">Peer 2 application infrastructure</text></g><g class="entity" data-qualified-name="complex mesh example.p2i.p2" id="ent0004" data-source-line="6"><rect x="238.44" y="209.46" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="248.44" y="280.325" fill="#FFF" font-size="14"> </text><path d="M260.832,219.46 C260.19,219.46 259.724,219.927 259.724,220.568 L259.724,265.077 C259.724,265.718 260.19,266.185 260.832,266.185 L287.84,266.185 C288.482,266.185 288.949,265.718 288.949,265.077 L288.949,220.568 C288.949,219.927 288.482,219.46 287.84,219.46 L260.832,219.46 M265.557,225.293 L283.057,225.293 L283.057,254.46 L265.557,254.46 L265.557,225.293 M274.307,257.377 C275.94,257.377 277.224,258.66 277.224,260.293 C277.224,261.927 275.94,263.21 274.307,263.21 C272.674,263.21 271.39,261.927 271.39,260.293 C271.39,258.66 272.674,257.377 274.307,257.377" fill="#FFF"/><text x="252.89" y="296.622" fill="#FFF" font-size="14" textLength="44.782">Peer 2</text></g><g class="entity" data-qualified-name="complex mesh example.p2i.m1" id="ent0005" data-source-line="7"><rect x="82.84" y="241.55" width="120.311" height="36.297" fill="#90EE90" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="92.84" y="264.545" fill="#FFF" font-size="14" textLength="100.311">Content mixer</text></g><g class="entity" data-qualified-name="complex mesh example.p2i.r1" id="ent0006" data-source-line="8"><rect x="346.85" y="241.55" width="86.295" height="36.297" fill="#ADD8E6" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="356.85" y="264.545" fill="#FFF" font-size="14" textLength="66.295">RTP relay</text></g><g class="link" data-entity-1="ent0003" data-entity-2="ent0010" id="lnk11" data-source-line="13" data-link-type="association"><path d="M59.741,334.169 C59.797,334.318 59.853,334.466 59.909,334.614 C60.135,335.205 60.364,335.795 60.597,336.382 C62.464,341.083 64.586,345.641 67,349.93 C80.53,373.95 105.02,394.84 121.65,407.22" style="stroke:#E7E7E7;stroke-width:1;stroke-dasharray:7,7;" fill="none" id="p2i-GMN9"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0005" id="lnk12" data-source-line="15" data-link-type="dependency"><path d="M417.35,94.52 C368.61,97.85 281.6,109.57 221,150.46 C186.83,173.52 164.627,212.334 152.957,236.594" style="stroke:#90EE90;stroke-width:1;" fill="none" id="p1-to-m1"/><polygon points="150.79,241.1,158.296,234.724,152.957,236.594,151.087,231.256,150.79,241.1" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0007" id="lnk13" data-source-line="16" data-link-type="dependency"><path d="M475.004,147.543 C483.104,168.483 488.906,183.487 497.006,204.427" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p1-p3"/><polygon points="473.2,142.88,472.716,152.717,475.004,147.543,480.178,149.831,473.2,142.88" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="498.81,209.09,499.294,199.253,497.006,204.427,491.832,202.139,498.81,209.09" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0008" id="lnk14" data-source-line="17" data-link-type="dependency"><path d="M495.69,101.544 C523.28,108.934 554.35,122.29 572,150.46 C619.06,225.59 616.06,273 572,349.93 C554.71,380.12 523.256,396.714 495.506,406.854" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p1-p4"/><polygon points="490.86,100.25,498.519,106.442,495.69,101.544,500.588,98.715,490.86,100.25" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="490.81,408.57,500.636,409.238,495.506,406.854,497.89,401.724,490.81,408.57" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0004" id="lnk15" data-source-line="18" data-link-type="dependency"><path d="M203.59,259.69 C215.12,259.69 221.65,259.69 233.18,259.69" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-to-p2"/><polygon points="238.18,259.69,229.18,255.69,233.18,259.69,229.18,263.69,238.18,259.69" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0004" data-entity-2="ent0006" id="lnk16" data-source-line="19" data-link-type="dependency"><path d="M311.84,259.69 C323.44,259.69 330.04,259.69 341.64,259.69" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="p2-to-r1"/><polygon points="346.64,259.69,337.64,255.69,341.64,259.69,337.64,263.69,346.64,259.69" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0006" id="lnk18" data-source-line="20" data-link-type="dependency"><path d="M432.996,147.543 C420.106,180.853 405.71,218.08 396.75,241.25" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="p1-backto-r1"/><polygon points="434.8,142.88,427.822,149.83,432.996,147.543,435.282,152.717,434.8,142.88" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0006" data-entity-2="ent0007" id="lnk19" data-source-line="21" data-link-type="dependency"><path d="M433.5,259.69 C449.34,259.69 460.19,259.69 476.03,259.69" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="r1-to-p3"/><polygon points="481.03,259.69,472.03,255.69,476.03,259.69,472.03,263.69,481.03,259.69" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0006" data-entity-2="ent0008" id="lnk20" data-source-line="22" data-link-type="dependency"><path d="M397.09,278.26 C405.95,300.18 419.577,333.934 432.177,365.114" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="r1-to-p4"/><polygon points="434.05,369.75,434.387,359.907,432.177,365.114,426.969,362.904,434.05,369.75" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0007" id="lnk22" data-source-line="23" data-link-type="dependency"><path d="M153.025,236.919 C164.665,212.269 186.67,173.33 221,150.46 C227.64,146.04 230.57,147.36 238.5,146.46 C281.12,141.65 388.88,141.65 431.5,146.46 C439.43,147.36 442.49,145.85 449,150.46 C469.69,165.11 485.56,188.11 496.83,209.23" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-backto-p3"/><polygon points="150.89,241.44,158.35,235.01,153.025,236.919,151.116,231.594,150.89,241.44" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0007" data-entity-2="ent0008" id="lnk23" data-source-line="24" data-link-type="dependency"><path d="M496.057,315.036 C488.427,333.916 483.493,346.134 475.873,364.994" style="stroke:#E7E7E7;stroke-width:1;" fill="none" id="p3-p4"/><polygon points="497.93,310.4,490.849,317.246,496.057,315.036,498.266,320.243,497.93,310.4" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><polygon points="474,369.63,481.08,362.784,475.873,364.994,473.663,359.787,474,369.63" fill="#E7E7E7" style="stroke:#E7E7E7;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0005" data-entity-2="ent0008" id="lnk25" data-source-line="25" data-link-type="dependency"><path d="M156.521,282.268 C169.881,302.438 191.74,331.14 221,349.93 C237.69,360.64 355.53,392.96 416.95,409.37" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-backto-p4"/><polygon points="153.76,278.1,155.395,287.812,156.521,282.268,162.065,283.394,153.76,278.1" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><?plantuml-src XP5FQm8n4CNlVegfXHuAQzXTUn7nqcCfIEcnKEBkx2QOVsGdrLByxarSjNKLFCwytvlCczn9KwbG8mWYryqOytmpQIM9i0eT-ieQGaEJochsAjU2I_NY-HTIn_IwjbNtwO9MJFEEq3CIgB5ZDJOyA68rz-j9qaSUA-AcLGZZECaft4841U2MfseCFwCHm3yAvWzEM8EFJuiF0qj43_aOU0Sk7u1zjv1n1C2j6SM17gBFVKpGSej-p-WSxfLi1RKUqGpvj_TbB1N_thF-oAvKm8ZkRcOf-ptAc-2q1wVfFCOImieIMGssIPbdXrJ0dLEouYIj0MaQ7x_3Xug2nsHqEMIrtPXiSHahQlEZkD_dh36DZMZ9VBAaHZ6q5t_Yy0onpe9BhYl2QM9vgPrUFvSYcYbiw6gCSh1rDFUFH_ICtVq2?></g></svg></div></div>
+<p>This results in inefficiencies, as the same optimization components are duplicated for each participant. In practice, this approach often evolves from a mesh topology into a star topology.</p>
+<h3 id="large-conference-calls-star-topology">Large Conference Calls (Star Topology)<a class="headerlink" href="#large-conference-calls-star-topology" title="Permanent link">¶</a></h3>
+<p>Large conferences require a centralized architecture. In this model:</p>
+<ul>
+<li>A <code>content mixer</code> and <code>RTP relay</code> (often implemented as a single component) are allocated for the conference.</li>
+<li>A <code>focus agent</code> is responsible for allocating and managing these resources.</li>
+<li>Each participant establishes an individual Jingle session with the <code>focus agent</code>, similar to a one-to-one call.</li>
+</ul>
+<div class="puml-container"><div class="puml light" style=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="DESCRIPTION" style="width:539px;height:436px;background:#FFFFFF;" width="539px" height="436px" viewBox="0 0 539 436" zoomAndPan="magnify" preserveAspectRatio="xMidYMid meet" contentStyleType="text/css" class="diagram"><?plantuml 1.2026.7beta11?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><g class="cluster" data-qualified-name="conference example" id="ent0001" data-source-line="2"><rect x="7" y="7" width="518" height="415.22" fill="none" style="stroke:#181818;stroke-width:1;" rx="2.5" ry="2.5"/><text x="10" y="21.995" fill="#000" font-size="14" textLength="159.38" font-weight="700">conference example</text></g><g class="cluster" data-qualified-name="conference example.fai" id="ent0006" data-source-line="7"><rect x="39" y="166.46" width="309" height="103.3" fill="none" style="stroke:#181818;stroke-width:1;" rx="2.5" ry="2.5"/><text x="42" y="181.455" fill="#000" font-size="14" font-weight="700"> </text></g><g class="entity" data-qualified-name="conference example.p1" id="ent0002" data-source-line="3"><rect x="216.44" y="42" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="226.44" y="112.865" fill="#000" font-size="14"> </text><path d="M238.832,52 C238.19,52 237.724,52.467 237.724,53.108 L237.724,97.617 C237.724,98.258 238.19,98.725 238.832,98.725 L265.84,98.725 C266.482,98.725 266.949,98.258 266.949,97.617 L266.949,53.108 C266.949,52.467 266.482,52 265.84,52 L238.832,52 M243.557,57.833 L261.057,57.833 L261.057,87 L243.557,87 L243.557,57.833 M252.307,89.917 C253.94,89.917 255.224,91.2 255.224,92.833 C255.224,94.467 253.94,95.75 252.307,95.75 C250.674,95.75 249.39,94.467 249.39,92.833 C249.39,91.2 250.674,89.917 252.307,89.917" fill="#000"/><text x="230.89" y="129.162" fill="#000" font-size="14" textLength="44.782">Peer 1</text></g><g class="entity" data-qualified-name="conference example.p2" id="ent0003" data-source-line="4"><rect x="93.44" y="42" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="103.44" y="112.865" fill="#000" font-size="14"> </text><path d="M115.832,52 C115.19,52 114.724,52.467 114.724,53.108 L114.724,97.617 C114.724,98.258 115.19,98.725 115.832,98.725 L142.84,98.725 C143.482,98.725 143.949,98.258 143.949,97.617 L143.949,53.108 C143.949,52.467 143.482,52 142.84,52 L115.832,52 M120.557,57.833 L138.057,57.833 L138.057,87 L120.557,87 L120.557,57.833 M129.307,89.917 C130.94,89.917 132.224,91.2 132.224,92.833 C132.224,94.467 130.94,95.75 129.307,95.75 C127.674,95.75 126.39,94.467 126.39,92.833 C126.39,91.2 127.674,89.917 129.307,89.917" fill="#000"/><text x="107.89" y="129.162" fill="#000" font-size="14" textLength="44.782">Peer 2</text></g><g class="entity" data-qualified-name="conference example.p3" id="ent0004" data-source-line="5"><rect x="23.44" y="305.76" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="33.44" y="376.625" fill="#000" font-size="14"> </text><path d="M45.832,315.76 C45.19,315.76 44.724,316.227 44.724,316.868 L44.724,361.377 C44.724,362.018 45.19,362.485 45.832,362.485 L72.84,362.485 C73.482,362.485 73.949,362.018 73.949,361.377 L73.949,316.868 C73.949,316.227 73.482,315.76 72.84,315.76 L45.832,315.76 M50.557,321.593 L68.057,321.593 L68.057,350.76 L50.557,350.76 L50.557,321.593 M59.307,353.677 C60.94,353.677 62.224,354.96 62.224,356.593 C62.224,358.227 60.94,359.51 59.307,359.51 C57.674,359.51 56.39,358.227 56.39,356.593 C56.39,354.96 57.674,353.677 59.307,353.677" fill="#000"/><text x="37.89" y="392.922" fill="#000" font-size="14" textLength="44.782">Peer 3</text></g><g class="entity" data-qualified-name="conference example.p4" id="ent0005" data-source-line="6"><rect x="131.44" y="305.76" width="73.117" height="100.464" fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="141.44" y="376.625" fill="#000" font-size="14"> </text><path d="M153.832,315.76 C153.19,315.76 152.724,316.227 152.724,316.868 L152.724,361.377 C152.724,362.018 153.19,362.485 153.832,362.485 L180.84,362.485 C181.482,362.485 181.949,362.018 181.949,361.377 L181.949,316.868 C181.949,316.227 181.482,315.76 180.84,315.76 L153.832,315.76 M158.557,321.593 L176.057,321.593 L176.057,350.76 L158.557,350.76 L158.557,321.593 M167.307,353.677 C168.94,353.677 170.224,354.96 170.224,356.593 C170.224,358.227 168.94,359.51 167.307,359.51 C165.674,359.51 164.39,358.227 164.39,356.593 C164.39,354.96 165.674,353.677 167.307,353.677" fill="#000"/><text x="145.89" y="392.922" fill="#000" font-size="14" textLength="44.782">Peer 4</text></g><g class="entity" data-qualified-name="conference example.GMN9" id="ent0010" data-source-line="12"><path d="M239.37,343.42 L239.37,368.553 L508.64,368.553 L508.64,353.42 L498.64,343.42 L239.37,343.42" style="stroke:#181818;stroke-width:0.5;" fill="#FEFFDD"/><path d="M498.64,343.42 L498.64,353.42 L508.64,353.42 L498.64,343.42" style="stroke:#181818;stroke-width:1;" fill="#FEFFDD"/><text x="245.37" y="360.487" fill="#000" font-size="13" textLength="248.27">Focus agent application infrastructure</text></g><g class="entity" data-qualified-name="conference example.fai.m1" id="ent0007" data-source-line="8"><rect x="62.84" y="209.46" width="120.311" height="36.297" fill="#90EE90" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="72.84" y="232.455" fill="#000" font-size="14" textLength="100.311">Content mixer</text></g><g class="entity" data-qualified-name="conference example.fai.r1" id="ent0008" data-source-line="9"><rect x="217.85" y="209.46" width="86.295" height="36.297" fill="#ADD8E6" style="stroke:#181818;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="227.85" y="232.455" fill="#000" font-size="14" textLength="66.295">RTP relay</text></g><g class="link" data-entity-1="ent0006" data-entity-2="ent0010" id="lnk11" data-source-line="12" data-link-type="association"><path d="M348.094,258.689 C348.14,258.859 348.186,259.03 348.232,259.201 C348.324,259.543 348.416,259.887 348.509,260.233 C348.695,260.924 348.883,261.622 349.073,262.326 C349.452,263.735 349.838,265.169 350.229,266.624 C351.012,269.535 351.818,272.53 352.639,275.58 C359.203,299.978 366.695,327.835 370.83,343.22" style="stroke:#181818;stroke-width:1;stroke-dasharray:7,7;" fill="none" id="fai-GMN9"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0007" id="lnk12" data-source-line="14" data-link-type="dependency"><path d="M216.09,131.09 C191.17,156.66 162.92,185.649 143.68,205.389" style="stroke:#90EE90;stroke-width:1;" fill="none" id="p1-to-m1"/><polygon points="140.19,208.97,149.336,205.317,143.68,205.389,143.607,199.733,140.19,208.97" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0003" data-entity-2="ent0007" id="lnk13" data-source-line="15" data-link-type="dependency"><path d="M127.39,142.89 C126.17,166.15 125.062,187.377 124.182,204.177" style="stroke:#90EE90;stroke-width:1;" fill="none" id="p2-to-m1"/><polygon points="123.92,209.17,128.385,200.392,124.182,204.177,120.396,199.973,123.92,209.17" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0007" data-entity-2="ent0004" id="lnk15" data-source-line="16" data-link-type="dependency"><path d="M112.01,250.655 C104.37,265.985 95.14,284.51 84.71,305.41" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-backto-p3"/><polygon points="114.24,246.18,106.646,252.451,112.01,250.655,113.806,256.019,114.24,246.18" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0007" data-entity-2="ent0005" id="lnk17" data-source-line="17" data-link-type="dependency"><path d="M130.935,250.891 C136.385,266.221 142.9,284.51 150.35,305.41" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-backto-p4"/><polygon points="129.26,246.18,128.506,256,130.935,250.891,136.044,253.32,129.26,246.18" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0007" data-entity-2="ent0008" id="lnk18" data-source-line="18" data-link-type="dependency"><path d="M183.64,227.61 C194.93,227.61 201.21,227.61 212.49,227.61" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="m1-to-r1"/><polygon points="217.49,227.61,208.49,223.61,212.49,227.61,208.49,231.61,217.49,227.61" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0008" id="lnk20" data-source-line="19" data-link-type="dependency"><path d="M256.278,147.881 C257.668,171.141 258.95,192.37 259.95,209.17" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="p1-backto-r1"/><polygon points="255.98,142.89,252.524,152.113,256.278,147.881,260.51,151.635,255.98,142.89" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0003" data-entity-2="ent0008" id="lnk22" data-source-line="20" data-link-type="dependency"><path d="M170.655,123.371 C182.095,132.461 190.54,139.88 201,150.46 C219.34,169.01 237.47,193.01 248.92,209.06" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="p2-backto-r1"/><polygon points="166.74,120.26,171.298,128.991,170.655,123.371,176.275,122.727,166.74,120.26" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0008" data-entity-2="ent0004" id="lnk23" data-source-line="21" data-link-type="dependency"><path d="M247.07,246.22 C235.95,259.09 219.24,275.94 201,285.76 C166.06,304.55 149.14,287.34 114,305.76 C108.04,308.88 106.175,309.735 100.715,314.015" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="r1-to-p3"/><polygon points="96.78,317.1,106.331,314.696,100.715,314.015,101.395,308.4,96.78,317.1" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0008" data-entity-2="ent0005" id="lnk24" data-source-line="22" data-link-type="dependency"><path d="M248.07,246.18 C236.79,261.51 222.835,280.484 207.445,301.384" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="r1-to-p4"/><polygon points="204.48,305.41,213.038,300.535,207.445,301.384,206.596,295.791,204.48,305.41" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><?plantuml-src XP5BImCn483l_HNZ2Xw4RTZjUYdIY-15X28U1KcpixkXUP5CR4NwtytkAjG-x2KmytsJcKokf14grWWTaGjpnZpVJ5j9NLp5W5vOGsXeAgncptBTSQcUFFz02aolQol2kujQCSq3eMVKeSR0QcnuLCIKR3kQziB4eo1kMeMGfIiRz6W40cwvTWep-9e0x2bmV-CwQ_3sRl5cO8deeSY01t35HR4SnVAYE1l5sKMn6iNgG1oo3PV3y7_GmxWqq7ABVj1q0TV3DbgFQ0xzbzTb2XN_75p_wwvKnAJk9kambX1MbiXgi4tVTWwFLiG0lErRSUUK59oaDI1DuzD_-2WeUkohNG5vRJScNnnFuif_s0pow4wIwXn9YTptYGGFdvBYiSgT1UKn-9ak3NCMLVjezmq0?></g></svg></div><div class="puml dark" style=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="DESCRIPTION" style="width:539px;height:436px;background:#1B1B1B;" width="539px" height="436px" viewBox="0 0 539 436" zoomAndPan="magnify" preserveAspectRatio="xMidYMid meet" contentStyleType="text/css" class="diagram"><?plantuml 1.2026.7beta11?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><rect x="0" y="0" width="539" height="436" fill="#1B1B1B" style="stroke:none;"/><g class="cluster" data-qualified-name="conference example" id="ent0001" data-source-line="2"><rect x="7" y="7" width="518" height="415.22" fill="none" style="stroke:#E7E7E7;stroke-width:1;" rx="2.5" ry="2.5"/><text x="10" y="21.995" fill="#FFF" font-size="14" textLength="159.38" font-weight="700">conference example</text></g><g class="cluster" data-qualified-name="conference example.fai" id="ent0006" data-source-line="7"><rect x="39" y="166.46" width="309" height="103.3" fill="none" style="stroke:#E7E7E7;stroke-width:1;" rx="2.5" ry="2.5"/><text x="42" y="181.455" fill="#FFF" font-size="14" font-weight="700"> </text></g><g class="entity" data-qualified-name="conference example.p1" id="ent0002" data-source-line="3"><rect x="216.44" y="42" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="226.44" y="112.865" fill="#FFF" font-size="14"> </text><path d="M238.832,52 C238.19,52 237.724,52.467 237.724,53.108 L237.724,97.617 C237.724,98.258 238.19,98.725 238.832,98.725 L265.84,98.725 C266.482,98.725 266.949,98.258 266.949,97.617 L266.949,53.108 C266.949,52.467 266.482,52 265.84,52 L238.832,52 M243.557,57.833 L261.057,57.833 L261.057,87 L243.557,87 L243.557,57.833 M252.307,89.917 C253.94,89.917 255.224,91.2 255.224,92.833 C255.224,94.467 253.94,95.75 252.307,95.75 C250.674,95.75 249.39,94.467 249.39,92.833 C249.39,91.2 250.674,89.917 252.307,89.917" fill="#FFF"/><text x="230.89" y="129.162" fill="#FFF" font-size="14" textLength="44.782">Peer 1</text></g><g class="entity" data-qualified-name="conference example.p2" id="ent0003" data-source-line="4"><rect x="93.44" y="42" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="103.44" y="112.865" fill="#FFF" font-size="14"> </text><path d="M115.832,52 C115.19,52 114.724,52.467 114.724,53.108 L114.724,97.617 C114.724,98.258 115.19,98.725 115.832,98.725 L142.84,98.725 C143.482,98.725 143.949,98.258 143.949,97.617 L143.949,53.108 C143.949,52.467 143.482,52 142.84,52 L115.832,52 M120.557,57.833 L138.057,57.833 L138.057,87 L120.557,87 L120.557,57.833 M129.307,89.917 C130.94,89.917 132.224,91.2 132.224,92.833 C132.224,94.467 130.94,95.75 129.307,95.75 C127.674,95.75 126.39,94.467 126.39,92.833 C126.39,91.2 127.674,89.917 129.307,89.917" fill="#FFF"/><text x="107.89" y="129.162" fill="#FFF" font-size="14" textLength="44.782">Peer 2</text></g><g class="entity" data-qualified-name="conference example.p3" id="ent0004" data-source-line="5"><rect x="23.44" y="305.76" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="33.44" y="376.625" fill="#FFF" font-size="14"> </text><path d="M45.832,315.76 C45.19,315.76 44.724,316.227 44.724,316.868 L44.724,361.377 C44.724,362.018 45.19,362.485 45.832,362.485 L72.84,362.485 C73.482,362.485 73.949,362.018 73.949,361.377 L73.949,316.868 C73.949,316.227 73.482,315.76 72.84,315.76 L45.832,315.76 M50.557,321.593 L68.057,321.593 L68.057,350.76 L50.557,350.76 L50.557,321.593 M59.307,353.677 C60.94,353.677 62.224,354.96 62.224,356.593 C62.224,358.227 60.94,359.51 59.307,359.51 C57.674,359.51 56.39,358.227 56.39,356.593 C56.39,354.96 57.674,353.677 59.307,353.677" fill="#FFF"/><text x="37.89" y="392.922" fill="#FFF" font-size="14" textLength="44.782">Peer 3</text></g><g class="entity" data-qualified-name="conference example.p4" id="ent0005" data-source-line="6"><rect x="131.44" y="305.76" width="73.117" height="100.464" fill="#313139" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="141.44" y="376.625" fill="#FFF" font-size="14"> </text><path d="M153.832,315.76 C153.19,315.76 152.724,316.227 152.724,316.868 L152.724,361.377 C152.724,362.018 153.19,362.485 153.832,362.485 L180.84,362.485 C181.482,362.485 181.949,362.018 181.949,361.377 L181.949,316.868 C181.949,316.227 181.482,315.76 180.84,315.76 L153.832,315.76 M158.557,321.593 L176.057,321.593 L176.057,350.76 L158.557,350.76 L158.557,321.593 M167.307,353.677 C168.94,353.677 170.224,354.96 170.224,356.593 C170.224,358.227 168.94,359.51 167.307,359.51 C165.674,359.51 164.39,358.227 164.39,356.593 C164.39,354.96 165.674,353.677 167.307,353.677" fill="#FFF"/><text x="145.89" y="392.922" fill="#FFF" font-size="14" textLength="44.782">Peer 4</text></g><g class="entity" data-qualified-name="conference example.GMN9" id="ent0010" data-source-line="12"><path d="M239.37,343.42 L239.37,368.553 L508.64,368.553 L508.64,353.42 L498.64,343.42 L239.37,343.42" style="stroke:#E7E7E7;stroke-width:0.5;" fill="#714137"/><path d="M498.64,343.42 L498.64,353.42 L508.64,353.42 L498.64,343.42" style="stroke:#E7E7E7;stroke-width:1;" fill="#714137"/><text x="245.37" y="360.487" fill="#FFF" font-size="13" textLength="248.27">Focus agent application infrastructure</text></g><g class="entity" data-qualified-name="conference example.fai.m1" id="ent0007" data-source-line="8"><rect x="62.84" y="209.46" width="120.311" height="36.297" fill="#90EE90" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="72.84" y="232.455" fill="#FFF" font-size="14" textLength="100.311">Content mixer</text></g><g class="entity" data-qualified-name="conference example.fai.r1" id="ent0008" data-source-line="9"><rect x="217.85" y="209.46" width="86.295" height="36.297" fill="#ADD8E6" style="stroke:#E7E7E7;stroke-width:0.5;" rx="2.5" ry="2.5"/><text x="227.85" y="232.455" fill="#FFF" font-size="14" textLength="66.295">RTP relay</text></g><g class="link" data-entity-1="ent0006" data-entity-2="ent0010" id="lnk11" data-source-line="12" data-link-type="association"><path d="M348.094,258.689 C348.14,258.859 348.186,259.03 348.232,259.201 C348.324,259.543 348.416,259.887 348.509,260.233 C348.695,260.924 348.883,261.622 349.073,262.326 C349.452,263.735 349.838,265.169 350.229,266.624 C351.012,269.535 351.818,272.53 352.639,275.58 C359.203,299.978 366.695,327.835 370.83,343.22" style="stroke:#E7E7E7;stroke-width:1;stroke-dasharray:7,7;" fill="none" id="fai-GMN9"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0007" id="lnk12" data-source-line="14" data-link-type="dependency"><path d="M216.09,131.09 C191.17,156.66 162.92,185.649 143.68,205.389" style="stroke:#90EE90;stroke-width:1;" fill="none" id="p1-to-m1"/><polygon points="140.19,208.97,149.336,205.317,143.68,205.389,143.607,199.733,140.19,208.97" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0003" data-entity-2="ent0007" id="lnk13" data-source-line="15" data-link-type="dependency"><path d="M127.39,142.89 C126.17,166.15 125.062,187.377 124.182,204.177" style="stroke:#90EE90;stroke-width:1;" fill="none" id="p2-to-m1"/><polygon points="123.92,209.17,128.385,200.392,124.182,204.177,120.396,199.973,123.92,209.17" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0007" data-entity-2="ent0004" id="lnk15" data-source-line="16" data-link-type="dependency"><path d="M112.01,250.655 C104.37,265.985 95.14,284.51 84.71,305.41" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-backto-p3"/><polygon points="114.24,246.18,106.646,252.451,112.01,250.655,113.806,256.019,114.24,246.18" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0007" data-entity-2="ent0005" id="lnk17" data-source-line="17" data-link-type="dependency"><path d="M130.935,250.891 C136.385,266.221 142.9,284.51 150.35,305.41" style="stroke:#90EE90;stroke-width:1;" fill="none" id="m1-backto-p4"/><polygon points="129.26,246.18,128.506,256,130.935,250.891,136.044,253.32,129.26,246.18" fill="#90EE90" style="stroke:#90EE90;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0007" data-entity-2="ent0008" id="lnk18" data-source-line="18" data-link-type="dependency"><path d="M183.64,227.61 C194.93,227.61 201.21,227.61 212.49,227.61" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="m1-to-r1"/><polygon points="217.49,227.61,208.49,223.61,212.49,227.61,208.49,231.61,217.49,227.61" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0002" data-entity-2="ent0008" id="lnk20" data-source-line="19" data-link-type="dependency"><path d="M256.278,147.881 C257.668,171.141 258.95,192.37 259.95,209.17" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="p1-backto-r1"/><polygon points="255.98,142.89,252.524,152.113,256.278,147.881,260.51,151.635,255.98,142.89" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0003" data-entity-2="ent0008" id="lnk22" data-source-line="20" data-link-type="dependency"><path d="M170.655,123.371 C182.095,132.461 190.54,139.88 201,150.46 C219.34,169.01 237.47,193.01 248.92,209.06" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="p2-backto-r1"/><polygon points="166.74,120.26,171.298,128.991,170.655,123.371,176.275,122.727,166.74,120.26" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0008" data-entity-2="ent0004" id="lnk23" data-source-line="21" data-link-type="dependency"><path d="M247.07,246.22 C235.95,259.09 219.24,275.94 201,285.76 C166.06,304.55 149.14,287.34 114,305.76 C108.04,308.88 106.175,309.735 100.715,314.015" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="r1-to-p3"/><polygon points="96.78,317.1,106.331,314.696,100.715,314.015,101.395,308.4,96.78,317.1" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><g class="link" data-entity-1="ent0008" data-entity-2="ent0005" id="lnk24" data-source-line="22" data-link-type="dependency"><path d="M248.07,246.18 C236.79,261.51 222.835,280.484 207.445,301.384" style="stroke:#ADD8E6;stroke-width:1;" fill="none" id="r1-to-p4"/><polygon points="204.48,305.41,213.038,300.535,207.445,301.384,206.596,295.791,204.48,305.41" fill="#ADD8E6" style="stroke:#ADD8E6;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><?plantuml-src XP5DImCn48Rl_HLZ1G_2DknslHJfHV0YGX6FWgJPsTtGV34xiHNfVpUxgr2hjPV0pFCayoQvq4wPM26qpA5R245oEsiqjt4TEoJb7QFZcV9MFEfDAxLv8Fc6t0cxgRpgNaEqHbZPCPBW5Yrsei9QHiEYahIPzNn2g5YwnY1Cquar4Zg5W3jfWy4fV4m03XIulGgjTtXzitnni48aoASWEmZvMR4OnUAiE1_5-Lcn7CNoI1owjTH3-1_eRdmpi7g7D6WsXqkZcvORGdJ7_jFpAfL6lWykVRjh4p6f-qbQd6U4jMVs5dpTZrt0lLUn0zdqesG8HYl9sZlGhgRq7HGLHy9-TyWXg_pMPSlVIKBn3vj35iEVf3n5KYEZlf7WyLLIFUuA9q7n6tobIs5Eel8GxJy1?></g></svg></div></div>
+<p>Conference management is partially defined by:</p>
+<ul>
+<li><a href="https://xmpp.org/extensions/xep-0298.html">XEP-0298</a> (COIN - Conference Information)</li>
+<li><a href="https://xmpp.org/extensions/xep-0340.html">XEP-0340</a> (COLIBRI - Conferences with Lightweight Bridging)</li>
+</ul>
+<p>Typically, one of the participants takes on the role of the <code>focus agent</code>; however, this role does not need to be held by a call participant. Instead, the <code>focus agent</code> may also be implemented as a server-side entity, such as:</p>
+<ul>
+<li>a custom XMPP server extension module, or</li>
+<li>an external XMPP component.</li>
+</ul>
+<p>While it is technically possible to host the <code>mixer</code> and <code>relay</code> on a participant’s device, this usually leads to poor performance.</p>
+<p>Introducing a <code>content mixer</code> provides several advantages:</p>
+<ul>
+<li>Relaxed codec compatibility requirements (e.g., different participants can use different formats).</li>
+<li>Support for multiple output formats, such as high and low-resolution video streams.</li>
+<li>The ability to implement server-side call recording.</li>
+</ul>
+<p>However, this architecture also eliminates true end-to-end encryption.</p>
+<h2 id="other-useful-xeps-for-audiovideo-support">Other Useful XEPs for Audio/Video Support<a class="headerlink" href="#other-useful-xeps-for-audiovideo-support" title="Permanent link">¶</a></h2>
+<p>Besides the mentioned Jingle specifications, the following XEPs are particularly relevant for audio and video implementations:</p>
+<table>
+<thead>
+<tr>
+<th>XEP</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://xmpp.org/extensions/xep-0353.html">XEP-0353</a></td>
+<td>Jingle Message Initiation</td>
+<td>Defines a lightweight, message-based mechanism for initiating Jingle audio/video sessions, including appropriate selection among multiple available responder resources (connected responder devices).</td>
+</tr>
+<tr>
+<td><a href="https://xmpp.org/extensions/xep-0320.html">XEP-0320</a></td>
+<td>Use of DTLS-SRTP in Jingle Sessions</td>
+<td>Describes how to secure Jingle RTP media streams using DTLS-SRTP.</td>
+</tr>
+<tr>
+<td><a href="https://xmpp.org/extensions/xep-0482.html">XEP-0482</a></td>
+<td>Call Invites</td>
+<td>Partially overlaps with <a href="https://xmpp.org/extensions/xep-0353.html">XEP-0353</a>, but provides a more generic call invitation mechanism not limited to Jingle.</td>
+</tr>
+</tbody>
+</table>
+<p>Several additional XEPs define the mapping between <a href="https://en.wikipedia.org/wiki/Session_Description_Protocol">SDP</a> and Jingle protocols:</p>
+<ul>
+<li><a href="https://xmpp.org/extensions/xep-0338.html">XEP-0338</a> Jingle Grouping Framework</li>
+<li><a href="https://xmpp.org/extensions/xep-0339.html">XEP-0339</a> Source-Specific Media Attributes in Jingle</li>
+<li><a href="https://xmpp.org/extensions/xep-0293.html">XEP-0293</a> Jingle RTP Feedback Negotiation</li>
+<li><a href="https://xmpp.org/extensions/xep-0294.html">XEP-0294</a> Jingle RTP Header Extensions Negotiation</li>
+<li><a href="https://xmpp.org/extensions/xep-0507.html">XEP-0507</a> Jingle Content Category</li>
+</ul>
+<p>Finally, the following XEPs provide guidelines for audio and video codec support:</p>
+<ul>
+<li><a href="https://xmpp.org/extensions/xep-0299.html">XEP-0299</a> Codecs for Jingle Video</li>
+<li><a href="https://xmpp.org/extensions/xep-0266.html">XEP-0266</a> Codecs for Jingle Audio</li>
+</ul>
+<h2 id="jingle-gateways">Jingle Gateways<a class="headerlink" href="#jingle-gateways" title="Permanent link">¶</a></h2>
+<p>Because Jingle media is transported outside the XMPP connection and audio/video is carried over <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol">RTP</a> sessions, it is possible to implement signaling-only gateways to <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol">RTP</a>/<a href="https://en.wikipedia.org/wiki/Session_Description_Protocol">SDP</a>-compatible systems such as <a href="https://en.wikipedia.org/wiki/Session_Initiation_Protocol">SIP</a>-based communicators and IP telephony infrastructure.</p>
+<p>A gateway is typically implemented as a custom XMPP server extension module or as an external XMPP component. From the XMPP client’s perspective, it appears as a regular Jingle endpoint, so no separate XEP is required to define its behavior.</p>
+<p>In practice, however, such gateways often rely on additional protocol extensions and implementation-specific customizations.</p>
+<p>Please note that SIP compatibility is among the initial objectives of the Jingle protocol. There are some attempts to standardize the mapping of Jingle actions to SIP methods (see <a href="http://tools.ietf.org/html/draft-ietf-stox-media">draft-ietf-stox-media</a>).</p>
+<h2 id="sample-one-to-one-session">Sample One-to-One Session<a class="headerlink" href="#sample-one-to-one-session" title="Permanent link">¶</a></h2>
+<p>Below is a sequence diagram of a successful one-to-one Jingle session establishment and termination:</p>
+<div class="mermaid">sequenceDiagram
+    participant Alice
+    participant XMPP as XMPP Server
+    participant Bob
+    participant TURN as STUN/TURN Server
+
+    rect rgba(0, 255, 255, 0.5)
+        note right of Alice: XEP-0215: External Service Discovery (optional)
+        note right of Alice: Usually performed right after connection
+        Alice-&gt;&gt;XMPP: External Service Discovery IQ
+        XMPP--&gt;&gt;Alice: STUN/TURN server address and credentials
+        Bob-&gt;&gt;XMPP: External Service Discovery IQ
+        XMPP--&gt;&gt;Bob: STUN/TURN server address and credentials
+    end
+
+    rect rgba(0, 255, 255, 0.5)
+        note right of Alice: XEP-0353: Jingle Message Initiation (optional)
+        Alice-&gt;&gt;Bob: propose jingle-message
+        Bob--&gt;&gt;Alice: ringing jingle-message
+        Bob--&gt;&gt;Alice: proceed jingle-message
+    end
+
+    rect rgba(255, 255, 0, 0.5)
+        note right of Alice: ICE candidate gathering &amp; Jingle session setup
+        note right of Alice:  XEP-0166: Jingle<br/>XEP-0167: Jingle RTP Sessions<br/>XEP-0176: Jingle ICE-UDP Transport Method
+        Alice-&gt;&gt;TURN: STUN binding request
+        TURN--&gt;&gt;Alice: server-reflexive ICE candidate
+        Alice-&gt;&gt;TURN: TURN allocate request
+        TURN--&gt;&gt;Alice: relay ICE candidate
+        Alice-&gt;&gt;Bob: jingle session-initiate IQ
+        Bob--&gt;&gt;Alice: result IQ
+        Bob-&gt;&gt;TURN: STUN binding request
+        TURN--&gt;&gt;Bob: server-reflexive ICE candidate
+        Bob-&gt;&gt;TURN: TURN allocate request
+        TURN--&gt;&gt;Bob: relay ICE candidate
+        Bob-&gt;&gt;Alice: jingle session-accept IQ
+        Alice--&gt;&gt;Bob: result IQ
+    end
+
+    rect rgba(255, 255, 0, 0.5)
+        note right of Alice: non-XMPP traffic
+        Alice&lt;&lt;-&gt;&gt;Bob: ICE connectivity checks
+        Alice&lt;&lt;-&gt;&gt;Bob: RTP/SRTP Media Session
+    end
+
+    rect rgba(255, 255, 0, 0.5)
+        note right of Alice: Session termination
+        note right of Alice:  XEP-0166: Jingle
+        Alice-&gt;&gt;Bob: jingle session-terminate IQ
+        Bob--&gt;&gt;Alice: result IQ
+    end
+
+    rect rgba(0, 255, 255, 0.5)
+        note right of Alice: XEP-0353: Jingle Message Initiation (optional)
+        Alice-&gt;&gt;Bob: finish jingle-message
+        Bob-&gt;&gt;Alice: finish jingle-message
+    end
+</div>
+<p>For simplicity, the diagram assumes that participants gather <code>host</code>, <code>server-reflexive</code> and <code>relay</code> <a href="https://en.wikipedia.org/wiki/Interactive_Connectivity_Establishment">ICE</a> candidates before the <code>session-initiate</code> and <code>session-accept</code> exchange and include them directly in the Jingle IQs. In practice, however, the <code>Trickle ICE</code> connectivity-check procedure can be used to reduce connection establishment time. In this case, the <code>&lt;transport/&gt;</code> element in the <code>session-initiate</code> and <code>session-accept</code> IQs is left empty, and each <a href="https://en.wikipedia.org/wiki/Interactive_Connectivity_Establishment">ICE</a> candidate is sent separately as the payload of a <code>transport-info</code> IQs.</p>
+<p>Candidates may also be renegotiated via <code>transport-info</code> IQs after media flow has begun, enabling adaptation to changing network conditions (for example, switching from a mobile network to Wi-Fi).</p>
+<h2 id="frequently-asked-questions">Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permanent link">¶</a></h2>
+<h3 id="the-listed-xeps-do-not-provide-all-the-required-functionality-what-are-my-options">The listed XEPs do not provide all the required functionality. What are my options?<a class="headerlink" href="#the-listed-xeps-do-not-provide-all-the-required-functionality-what-are-my-options" title="Permanent link">¶</a></h3>
+<p>Standardizing group audio and video calling is challenging. Because there is no common protocol standard for <code>RTP relays</code> or <code>content mixers</code>, XEPs tend to push vendor-specific logic onto the client side. As a result, interoperable group calling is not widely supported by XMPP clients. If interoperability is not a strict requirement, existing XEPs can serve as useful design references.</p>
+<h3 id="is-there-an-alternative-to-using-stunturn-servers">Is there an alternative to using <a href="https://en.wikipedia.org/wiki/Session_Traversal_Utilities_for_NAT">STUN</a>/<a href="https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT">TURN</a> servers?<a class="headerlink" href="#is-there-an-alternative-to-using-stunturn-servers" title="Permanent link">¶</a></h3>
+<p>Yes. <a href="https://xmpp.org/extensions/xep-0278.html">XEP-0278</a> (Jingle Relay Nodes) provides an alternative, but it has not seen widespread adoption. In practice, <a href="https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT">TURN</a> servers are more flexible and commonly used.</p>
+<h3 id="do-i-still-need-stunturn-if-i-use-a-public-content-mixer-or-rtp-relay">Do I still need <a href="https://en.wikipedia.org/wiki/Session_Traversal_Utilities_for_NAT">STUN</a>/<a href="https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT">TURN</a> if I use a public <code>content mixer</code> or <code>RTP relay</code>?<a class="headerlink" href="#do-i-still-need-stunturn-if-i-use-a-public-content-mixer-or-rtp-relay" title="Permanent link">¶</a></h3>
+<p>Yes. Even with public IP addresses, a <a href="https://en.wikipedia.org/wiki/Session_Traversal_Utilities_for_NAT">STUN</a>/<a href="https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT">TURN</a> server is recommended as a fallback mechanism, particularly for clients behind strict firewalls.</p>
+<h3 id="why-is-an-rtp-relay-needed-if-turn-already-acts-as-a-relay">Why is an <code>RTP relay</code> needed if <a href="https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT">TURN</a> already acts as a relay?<a class="headerlink" href="#why-is-an-rtp-relay-needed-if-turn-already-acts-as-a-relay" title="Permanent link">¶</a></h3>
+<p>TURN servers are not designed for efficient multicasting. When sending media to multiple peers via <a href="https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT">TURN</a>, the client must still upload the same stream multiple times. <code>RTP relays</code> are better suited for distributing a single incoming stream to many recipients.</p>
+<h3 id="for-more-information-about-stunturn-servers-see-the-dedicated-page">For more information about <a href="https://en.wikipedia.org/wiki/Session_Traversal_Utilities_for_NAT">STUN</a>/<a href="https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT">TURN</a> servers, see the <a href="../coturn_tutorial/">dedicated page</a>.<a class="headerlink" href="#for-more-information-about-stunturn-servers-see-the-dedicated-page" title="Permanent link">¶</a></h3>
+</article>
+</div>
+<script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: How to Build an iOS messaging app" class="md-footer__link md-footer__link--prev" href="../iOS_tutorial/">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</div>
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                Previous
+              </span>
+<div class="md-ellipsis">
+                How to Build an iOS messaging app
+              </div>
+</div>
+</a>
+<a aria-label="Next: How to Set up SASL client certificate authentication" class="md-footer__link md-footer__link--next" href="../client-certificate/">
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                Next
+              </span>
+<div class="md-ellipsis">
+                How to Set up SASL client certificate authentication
+              </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://hub.docker.com/r/erlangsolutions/mongooseim/" rel="noopener" target="_blank" title="hub.docker.com">
+<svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1zm0-204.3h-66.1v60.7h66.1zm78.2 144.8H362v59.4h66.1zm-156.3-72.1h-66.1v60.1h66.1zm78.1 0h-66.1v60.1h66.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1zm78.1 0h-66.1v59.4h66.1zm-78.1-72.1h-66.1v60.1h66.1z"></path></svg>
+</a>
+<a class="md-social__link" href="https://github.com/esl/MongooseIM" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<div class="md-progress" data-md-component="progress" role="progressbar"></div>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script src="../../assets/mkdocs_puml/puml.js"></script>
+<script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+<script src="../../assets/mkdocs_puml/interaction.js"></script>
+<script type="module">import mermaid from "https://unpkg.com/mermaid@11.1.0/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script></body>
+</html>
