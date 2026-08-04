@@ -5860,8 +5860,8 @@ These hooks are run in <code>mongoose_c2s</code> after the C2S process receives 
 <li><a href="../../modules/mod_event_pusher/"><code>mod_event_pusher</code></a> - sends selected messages to an external service.</li>
 <li><a href="../../modules/mod_inbox/"><code>mod_inbox</code></a> - stores messages in the user's inbox.</li>
 <li><a href="../../modules/mod_mam/"><code>mod_mam</code></a> - stores outgoing messages in an archive.</li>
-<li><a href="../../modules/mod_ping/"><code>mod_ping</code></a> - upon reception of every message from the client, this module (re)starts a timer;
- if nothing more is received from the client within 60 seconds, it sends an IQ ping, to which the client should reply - which starts another timer.</li>
+<li><a href="../../modules/mod_ping/"><code>mod_ping</code></a> - upon reception of every stanza from the client, this module (re)starts a timer;
+ if no more stanzas are received from the client within <code>ping_interval</code>, it sends an IQ ping, to which the client should reply - which starts another timer.</li>
 <li><a href="../../modules/mod_presence/"><code>mod_presence</code></a> - handles presence stanzas, updating the user presence state and broadcasting presence updates.</li>
 <li><a href="../../modules/mod_privacy/"><code>mod_privacy</code></a> - filters sent stanzas according to privacy lists and handles privacy-related IQ requests.</li>
 <li><a href="../../modules/mod_register/"><code>mod_register</code></a> - registers a new user when a registration IQ is received. <code>user_send_xmlel</code> is used because the stanza is received while the session is not established.</li>
