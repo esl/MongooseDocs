@@ -3086,17 +3086,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#modulesmod_muc_lightlegacy_mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        modules.mod_muc_light.legacy_mode
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#modulesmod_muc_lightrooms_per_user" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5509,6 +5498,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/6.8.0_6.x.x/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6.8.0 to 6.x.x
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         
   
@@ -5676,17 +5693,6 @@
     <span class="md-ellipsis">
       
         modules.mod_muc_light.equal_occupants
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modulesmod_muc_lightlegacy_mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        modules.mod_muc_light.legacy_mode
       
     </span>
   </a>
@@ -5898,18 +5904,6 @@ It means that every occupant will be a <code>member</code>, even the room creato
 <p>This option does not implicitly set <code>all_can_invite</code> to <code>true</code>. 
 If that option is set to <code>false</code>, nobody will be able to join the room after the initial creation request.</p>
 </div>
-<h3 id="modulesmod_muc_lightlegacy_mode"><code>modules.mod_muc_light.legacy_mode</code><a class="headerlink" href="#modulesmod_muc_lightlegacy_mode" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Syntax:</strong> boolean</li>
-<li><strong>Default:</strong> <code>false</code></li>
-<li><strong>Example:</strong> <code>legacy_mode = true</code></li>
-</ul>
-<p>Enables XEP-0045 compatibility mode. 
-It allows using a subset of classic MUC stanzas with some MUC Light functions limited.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This option is <strong>deprecated</strong> and will be removed in the next release.</p>
-</div>
 <h3 id="modulesmod_muc_lightrooms_per_user"><code>modules.mod_muc_light.rooms_per_user</code><a class="headerlink" href="#modulesmod_muc_lightrooms_per_user" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> positive integer or the string <code>"infinity"</code></li>
@@ -6059,11 +6053,9 @@ Otherwise, leaving the room is rejected.</p>
 <span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_muc_light]</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_muc_light]</span>
 <span class="w">  </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;muclight.example.com&quot;</span>
 <span class="w">  </span><span class="n">equal_occupants</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<span class="w">  </span><span class="n">legacy_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">  </span><span class="n">rooms_per_user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
 <span class="w">  </span><span class="n">blocking</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
 <span class="w">  </span><span class="n">all_can_configure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
@@ -6075,11 +6067,11 @@ Otherwise, leaving the room is rejected.</p>
 <span class="w">  </span><span class="k">[modules.mod_muc_light.cache_affs]</span>
 <span class="w">    </span><span class="n">time_to_live</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span>
 
-<span class="w">  </span><span class="k">[[modules.mod_muc_light.config_schema]]</span><span class="w"> </span>
+<span class="w">  </span><span class="k">[[modules.mod_muc_light.config_schema]]</span>
 <span class="w">    </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;roomname&quot;</span>
 <span class="w">    </span><span class="n">string_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;The Room&quot;</span>
 
-<span class="w">  </span><span class="k">[[modules.mod_muc_light.config_schema]]</span><span class="w"> </span>
+<span class="w">  </span><span class="k">[[modules.mod_muc_light.config_schema]]</span>
 <span class="w">    </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;display-lines&quot;</span>
 <span class="w">    </span><span class="n">integer_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span>
 <span class="w">    </span><span class="n">internal_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;display_lines&quot;</span>
