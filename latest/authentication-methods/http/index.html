@@ -6002,7 +6002,9 @@ See <a href="../../developers-guide/SCRAM-serialization/#scram-hash-calculation-
 <li>201 - created</li>
 <li>200 - success, return value in response body</li>
 </ul>
-<p>Whenever the specification says "anything else", service should use one of the codes from the list above.</p>
+<p>Whenever the specification says "anything else", service should use one of the codes from the list above.
+Any other status code (e.g. 500 or 503) is logged and treated as a failure of the operation,
+i.e. authentication is rejected and registration or password change is not allowed.</p>
 <p>Some requests consider multiple return codes a "success".
 It is up to the server-side developer to pick one of the codes.</p>
 <h3 id="http-header-content-length">HTTP header <code>Content-Length</code><a class="headerlink" href="#http-header-content-length" title="Permanent link">&para;</a></h3>
