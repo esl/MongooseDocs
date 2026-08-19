@@ -3172,6 +3172,45 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modulesmod_pubsubdefault_node_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>modules.mod_pubsub.default_node_config</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="modules.mod_pubsub.default_node_config">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_pubsubdefault_node_configaccess_model" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>modules.mod_pubsub.default_node_config.access_model</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_pubsubdefault_node_configmax_items" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>modules.mod_pubsub.default_node_config.max_items</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_pubsubiqdisctype" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -5462,6 +5501,45 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modulesmod_pubsubdefault_node_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>modules.mod_pubsub.default_node_config</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="modules.mod_pubsub.default_node_config">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_pubsubdefault_node_configaccess_model" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>modules.mod_pubsub.default_node_config.access_model</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_pubsubdefault_node_configmax_items" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>modules.mod_pubsub.default_node_config.max_items</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modulesmod_pubsubiqdisctype" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -5533,8 +5611,8 @@ Until the missing functionality is implemented here, deployments that need a gen
 <h3 id="node-configuration-options">Node configuration options<a class="headerlink" href="#node-configuration-options" title="Permanent link">&para;</a></h3>
 <p><code>mod_pubsub</code> supports the following node configuration and publish options:</p>
 <ul>
-<li><a href="https://xmpp.org/extensions/xep-0060.html#accessmodels"><code>pubsub#access_model</code></a>: controls who can access a node. Supported values are <code>open</code> and <code>presence</code>.</li>
-<li><code>pubsub#max_items</code>: controls how many published items are stored for later retrieval. It defaults to <code>max</code>, which stores all published items up to the server-wide <a href="#modulesmod_pubsubmax_items_per_node"><code>max_items_per_node</code></a> limit. A non-negative integer limits stored items for the node; when the limit is exceeded, the oldest stored item is removed. <code>0</code> allows publish notifications but does not persist items for later retrieval.</li>
+<li><a href="https://xmpp.org/extensions/xep-0060.html#accessmodels"><code>pubsub#access_model</code></a>: controls who can access a node. Supported values are <code>open</code> and <code>presence</code>. It defaults to <a href="#modulesmod_pubsubdefault_node_configaccess_model"><code>default_node_config.access_model</code></a>.</li>
+<li><code>pubsub#max_items</code>: controls how many published items are stored for later retrieval. It defaults to <a href="#modulesmod_pubsubdefault_node_configmax_items"><code>default_node_config.max_items</code></a>. A non-negative integer limits stored items for the node; when the limit is exceeded, the oldest stored item is removed. <code>0</code> allows publish notifications but does not persist items for later retrieval.</li>
 </ul>
 <h3 id="known-omissions-and-limitations">Known omissions and limitations<a class="headerlink" href="#known-omissions-and-limitations" title="Permanent link">&para;</a></h3>
 <p><code>mod_pubsub</code> is intended to grow over time, but it does not implement the full XEP-0060 feature set yet.
@@ -5563,6 +5641,25 @@ The <code>rdbms</code> backend requires a <code>default</code> RDBMS connection 
 <p>Maximum number of items stored in a node.
 The effective limit is the lower of this value and <code>pubsub#max_items</code>.
 If you reduce this limit, excess items for each already existing node are removed when it is next configured or receives a published item.</p>
+<h3 id="modulesmod_pubsubdefault_node_config"><code>modules.mod_pubsub.default_node_config</code><a class="headerlink" href="#modulesmod_pubsubdefault_node_config" title="Permanent link">&para;</a></h3>
+<p>Default configuration applied to newly created PEP nodes, including nodes auto-created on publish.
+Request-level node configuration and publish options override these values.</p>
+<h4 id="modulesmod_pubsubdefault_node_configaccess_model"><code>modules.mod_pubsub.default_node_config.access_model</code><a class="headerlink" href="#modulesmod_pubsubdefault_node_configaccess_model" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Syntax:</strong> string, one of <code>"presence"</code>, <code>"open"</code></li>
+<li><strong>Default:</strong> <code>"presence"</code></li>
+<li><strong>Example:</strong> <code>default_node_config.access_model = "open"</code></li>
+</ul>
+<p>Default value of <code>pubsub#access_model</code> for newly created nodes.
+The default <code>presence</code> as required for <a href="https://xmpp.org/extensions/xep-0163.html#approach-presence">PEP</a>.</p>
+<h4 id="modulesmod_pubsubdefault_node_configmax_items"><code>modules.mod_pubsub.default_node_config.max_items</code><a class="headerlink" href="#modulesmod_pubsubdefault_node_configmax_items" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Syntax:</strong> non-negative integer or <code>"infinity"</code></li>
+<li><strong>Default:</strong> <code>"infinity"</code></li>
+<li><strong>Example:</strong> <code>default_node_config.max_items = 100</code></li>
+</ul>
+<p>Default value of <code>pubsub#max_items</code> for newly created nodes.
+The <code>"infinity"</code> value is exposed in node configuration forms as <code>max</code>, and stores all published items up to the <a href="#modulesmod_pubsubmax_items_per_node"><code>max_items_per_node</code></a> limit.</p>
 <h3 id="modulesmod_pubsubiqdisctype"><code>modules.mod_pubsub.iqdisc.type</code><a class="headerlink" href="#modulesmod_pubsubiqdisctype" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Syntax:</strong> string, one of <code>"one_queue"</code>, <code>"no_queue"</code>, <code>"queues"</code>, <code>"parallel"</code></li>
@@ -5585,6 +5682,13 @@ For details, please refer to <a href="../../configuration/Modules/#iq-processing
 <span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_pubsub]</span>
 <span class="w">  </span><span class="n">iqdisc</span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"queues"</span>
 <span class="w">  </span><span class="n">iqdisc</span><span class="p">.</span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span>
+</code></pre></div></td></tr></table></div>
+<p>The example below makes newly created PEP nodes open by default and stores only the most recent item per node, unless the create request or publish options override these values:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_pubsub]</span>
+<span class="w">  </span><span class="n">default_node_config</span><span class="p">.</span><span class="n">access_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"open"</span>
+<span class="w">  </span><span class="n">default_node_config</span><span class="p">.</span><span class="n">max_items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
 </code></pre></div></td></tr></table></div>
 
 
