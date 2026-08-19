@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="zensical-0.0.56">
     
     
       
@@ -33,10 +33,15 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.20815dad.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.dfe2e883.min.css">
       
       
 
@@ -50,18 +55,14 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
       
     
     
       <link rel="stylesheet" href="../../css/custom.css">
     
-      <link rel="stylesheet" href="../../assets/mkdocs_puml/puml.css">
-    
-      <link rel="stylesheet" href="../../assets/mkdocs_puml/interaction.css">
-    
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
     
       
 
@@ -82,11 +83,11 @@
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
     <div data-md-component="skip">
       
         
-        <a href="#general-listener-options" class="md-skip">
+        <a href="#options-listen" class="md-skip">
           Skip to content
         </a>
       
@@ -108,12 +109,12 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="MongooseIM Docs" class="md-header__button md-logo" aria-label="MongooseIM Docs" data-md-component="logo">
       
-  <img src="../../MongooseIM_logo_white.png" alt="logo">
+  <img src="../../MongooseIM_logo_white.png" alt="MongooseIM Docs">
 
     </a>
-    <label class="md-header__button md-icon" for="__drawer">
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -165,57 +166,30 @@
     
       
       
-        <label class="md-header__button md-icon" for="__search">
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
         </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
 </div>
       
     
-    
-      <div class="md-header__source">
+    <div class="md-header__source">
+      
         <a href="https://github.com/esl/MongooseIM" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
   </div>
 </a>
-      </div>
-    
+      
+    </div>
   </nav>
   
 </header>
@@ -243,7 +217,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="MongooseIM Docs" class="md-nav__button md-logo" aria-label="MongooseIM Docs" data-md-component="logo">
       
-  <img src="../../MongooseIM_logo_white.png" alt="logo">
+  <img src="../../MongooseIM_logo_white.png" alt="MongooseIM Docs">
 
     </a>
     MongooseIM Docs
@@ -253,7 +227,7 @@
       <a href="https://github.com/esl/MongooseIM" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -277,8 +251,7 @@
   <span class="md-ellipsis">
     
   
-    Home
-  
+  Home
 
     
   </span>
@@ -315,8 +288,7 @@
   <span class="md-ellipsis">
     
   
-    Getting Started
-  
+  Getting Started
 
     
   </span>
@@ -331,8 +303,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Getting Started
-  
+  Getting Started
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
@@ -351,8 +322,7 @@
   <span class="md-ellipsis">
     
   
-    Installation
-  
+  Installation
 
     
   </span>
@@ -379,8 +349,7 @@
   <span class="md-ellipsis">
     
   
-    Quick Setup
-  
+  Quick Setup
 
     
   </span>
@@ -407,8 +376,7 @@
   <span class="md-ellipsis">
     
   
-    Docker
-  
+  Docker
 
     
   </span>
@@ -453,8 +421,7 @@
   <span class="md-ellipsis">
     
   
-    User Guide
-  
+  User Guide
 
     
   </span>
@@ -469,8 +436,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    User Guide
-  
+  User Guide
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
@@ -489,8 +455,7 @@
   <span class="md-ellipsis">
     
   
-    Features
-  
+  Features
 
     
   </span>
@@ -517,8 +482,7 @@
   <span class="md-ellipsis">
     
   
-    Supported Standards
-  
+  Supported Standards
 
     
   </span>
@@ -545,8 +509,7 @@
   <span class="md-ellipsis">
     
   
-    High-level Architecture
-  
+  High-level Architecture
 
     
   </span>
@@ -591,8 +554,7 @@
   <span class="md-ellipsis">
     
   
-    Tutorials
-  
+  Tutorials
 
     
   </span>
@@ -607,8 +569,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Tutorials
-  
+  Tutorials
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
@@ -627,8 +588,7 @@
   <span class="md-ellipsis">
     
   
-    How to Build MongooseIM from source code
-  
+  How to Build MongooseIM from source code
 
     
   </span>
@@ -655,8 +615,7 @@
   <span class="md-ellipsis">
     
   
-    How to configure MongooseIM to use CETS instead of Mnesia
-  
+  How to configure MongooseIM to use CETS instead of Mnesia
 
     
   </span>
@@ -683,8 +642,7 @@
   <span class="md-ellipsis">
     
   
-    How to Set up Push Notifications
-  
+  How to Set up Push Notifications
 
     
   </span>
@@ -711,8 +669,7 @@
   <span class="md-ellipsis">
     
   
-    How to Set up Push Notifications on the client side
-  
+  How to Set up Push Notifications on the client side
 
     
   </span>
@@ -739,8 +696,7 @@
   <span class="md-ellipsis">
     
   
-    How to Set up MongoosePush
-  
+  How to Set up MongoosePush
 
     
   </span>
@@ -767,8 +723,7 @@
   <span class="md-ellipsis">
     
   
-    How to Set up Coturn
-  
+  How to Set up Coturn
 
     
   </span>
@@ -795,8 +750,7 @@
   <span class="md-ellipsis">
     
   
-    How to Build an iOS messaging app
-  
+  How to Build an iOS messaging app
 
     
   </span>
@@ -823,8 +777,7 @@
   <span class="md-ellipsis">
     
   
-    XMPP Audio and Video Basics
-  
+  XMPP Audio and Video Basics
 
     
   </span>
@@ -851,8 +804,7 @@
   <span class="md-ellipsis">
     
   
-    How to Set up SASL client certificate authentication
-  
+  How to Set up SASL client certificate authentication
 
     
   </span>
@@ -897,8 +849,7 @@
   <span class="md-ellipsis">
     
   
-    Open XMPP Extensions
-  
+  Open XMPP Extensions
 
     
   </span>
@@ -913,8 +864,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Open XMPP Extensions
-  
+  Open XMPP Extensions
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
@@ -933,8 +883,7 @@
   <span class="md-ellipsis">
     
   
-    MUC light
-  
+  MUC light
 
     
   </span>
@@ -961,8 +910,7 @@
   <span class="md-ellipsis">
     
   
-    Inbox
-  
+  Inbox
 
     
   </span>
@@ -989,8 +937,7 @@
   <span class="md-ellipsis">
     
   
-    Smart Markers
-  
+  Smart Markers
 
     
   </span>
@@ -1017,8 +964,7 @@
   <span class="md-ellipsis">
     
   
-    Token-based reconnection
-  
+  Token-based reconnection
 
     
   </span>
@@ -1045,8 +991,7 @@
   <span class="md-ellipsis">
     
   
-    MAM
-  
+  MAM
 
     
   </span>
@@ -1093,8 +1038,7 @@
   <span class="md-ellipsis">
     
   
-    Configuration
-  
+  Configuration
 
     
   </span>
@@ -1109,8 +1053,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Configuration
-  
+  Configuration
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
@@ -1129,8 +1072,7 @@
   <span class="md-ellipsis">
     
   
-    Configuration Files
-  
+  Configuration Files
 
     
   </span>
@@ -1157,8 +1099,7 @@
   <span class="md-ellipsis">
     
   
-    Options: General
-  
+  Options: General
 
     
   </span>
@@ -1181,8 +1122,10 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
+      
+      
+        
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
@@ -1192,8 +1135,7 @@
   <span class="md-ellipsis">
     
   
-    Options: Listen
-  
+  Options: Listen
 
     
   </span>
@@ -1203,15 +1145,14 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="./" class="md-nav__link md-nav__link--active">
+      <a href="././" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    Options: Listen
-  
+  Options: Listen
 
     
   </span>
@@ -1222,23 +1163,26 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
   
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On this page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
   <a href="#general-listener-options" class="md-nav__link">
     <span class="md-ellipsis">
-      
+      <span class="md-typeset">
         General listener options
-      
+      </span>
     </span>
   </a>
   
@@ -1248,9 +1192,9 @@
           <li class="md-nav__item">
   <a href="#listenport" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.port
-      
+      <span class="md-typeset">
+        <code>listen.*.port</code>
+      </span>
     </span>
   </a>
   
@@ -1259,9 +1203,9 @@
           <li class="md-nav__item">
   <a href="#listenip_address" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.ip_address
-      
+      <span class="md-typeset">
+        <code>listen.*.ip_address</code>
+      </span>
     </span>
   </a>
   
@@ -1270,9 +1214,9 @@
           <li class="md-nav__item">
   <a href="#listenproto" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.proto
-      
+      <span class="md-typeset">
+        <code>listen.*.proto</code>
+      </span>
     </span>
   </a>
   
@@ -1281,9 +1225,9 @@
           <li class="md-nav__item">
   <a href="#listenip_version" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.ip_version
-      
+      <span class="md-typeset">
+        <code>listen.*.ip_version</code>
+      </span>
     </span>
   </a>
   
@@ -1292,9 +1236,9 @@
           <li class="md-nav__item">
   <a href="#listenhibernate_after" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.hibernate_after
-      
+      <span class="md-typeset">
+        <code>listen.*.hibernate_after</code>
+      </span>
     </span>
   </a>
   
@@ -1308,9 +1252,9 @@
         <li class="md-nav__item">
   <a href="#xmpp-listener-options" class="md-nav__link">
     <span class="md-ellipsis">
-      
+      <span class="md-typeset">
         XMPP listener options
-      
+      </span>
     </span>
   </a>
   
@@ -1320,9 +1264,9 @@
           <li class="md-nav__item">
   <a href="#listenbacklog" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.backlog
-      
+      <span class="md-typeset">
+        <code>listen.*.backlog</code>
+      </span>
     </span>
   </a>
   
@@ -1331,9 +1275,9 @@
           <li class="md-nav__item">
   <a href="#listenproxy_protocol" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.proxy_protocol
-      
+      <span class="md-typeset">
+        <code>listen.*.proxy_protocol</code>
+      </span>
     </span>
   </a>
   
@@ -1342,9 +1286,9 @@
           <li class="md-nav__item">
   <a href="#listenmax_stanza_size" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.max_stanza_size
-      
+      <span class="md-typeset">
+        <code>listen.*.max_stanza_size</code>
+      </span>
     </span>
   </a>
   
@@ -1353,9 +1297,9 @@
           <li class="md-nav__item">
   <a href="#listennum_acceptors" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.num_acceptors
-      
+      <span class="md-typeset">
+        <code>listen.*.num_acceptors</code>
+      </span>
     </span>
   </a>
   
@@ -1364,9 +1308,9 @@
           <li class="md-nav__item">
   <a href="#listenshaper" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.shaper
-      
+      <span class="md-typeset">
+        <code>listen.*.shaper</code>
+      </span>
     </span>
   </a>
   
@@ -1375,9 +1319,9 @@
           <li class="md-nav__item">
   <a href="#listenmax_connections" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.max_connections
-      
+      <span class="md-typeset">
+        <code>listen.*.max_connections</code>
+      </span>
     </span>
   </a>
   
@@ -1386,9 +1330,9 @@
           <li class="md-nav__item">
   <a href="#listenreuse_port" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.reuse_port
-      
+      <span class="md-typeset">
+        <code>listen.*.reuse_port</code>
+      </span>
     </span>
   </a>
   
@@ -1397,9 +1341,9 @@
           <li class="md-nav__item">
   <a href="#listenstate_timeout" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.state_timeout
-      
+      <span class="md-typeset">
+        <code>listen.*.state_timeout</code>
+      </span>
     </span>
   </a>
   
@@ -1433,8 +1377,7 @@
   <span class="md-ellipsis">
     
   
-    Options: Auth
-  
+  Options: Auth
 
     
   </span>
@@ -1461,8 +1404,7 @@
   <span class="md-ellipsis">
     
   
-    Options: Internal Databases
-  
+  Options: Internal Databases
 
     
   </span>
@@ -1489,8 +1431,7 @@
   <span class="md-ellipsis">
     
   
-    Options: Outgoing connections
-  
+  Options: Outgoing connections
 
     
   </span>
@@ -1517,8 +1458,7 @@
   <span class="md-ellipsis">
     
   
-    Options: Services
-  
+  Options: Services
 
     
   </span>
@@ -1545,8 +1485,7 @@
   <span class="md-ellipsis">
     
   
-    Options: Extension Modules
-  
+  Options: Extension Modules
 
     
   </span>
@@ -1573,8 +1512,7 @@
   <span class="md-ellipsis">
     
   
-    Options: Shaper
-  
+  Options: Shaper
 
     
   </span>
@@ -1601,8 +1539,7 @@
   <span class="md-ellipsis">
     
   
-    Options: Acl
-  
+  Options: Acl
 
     
   </span>
@@ -1629,8 +1566,7 @@
   <span class="md-ellipsis">
     
   
-    Options: Access
-  
+  Options: Access
 
     
   </span>
@@ -1657,8 +1593,7 @@
   <span class="md-ellipsis">
     
   
-    Options: S2S
-  
+  Options: S2S
 
     
   </span>
@@ -1685,8 +1620,7 @@
   <span class="md-ellipsis">
     
   
-    Options: Host config
-  
+  Options: Host config
 
     
   </span>
@@ -1713,8 +1647,7 @@
   <span class="md-ellipsis">
     
   
-    Options: Instrumentation
-  
+  Options: Instrumentation
 
     
   </span>
@@ -1741,8 +1674,7 @@
   <span class="md-ellipsis">
     
   
-    Release Options
-  
+  Release Options
 
     
   </span>
@@ -1769,8 +1701,7 @@
   <span class="md-ellipsis">
     
   
-    Erlang Cookie Security
-  
+  Erlang Cookie Security
 
     
   </span>
@@ -1797,8 +1728,7 @@
   <span class="md-ellipsis">
     
   
-    TLS Hardening
-  
+  TLS Hardening
 
     
   </span>
@@ -1825,8 +1755,7 @@
   <span class="md-ellipsis">
     
   
-    Database Backends Configuration
-  
+  Database Backends Configuration
 
     
   </span>
@@ -1871,8 +1800,7 @@
   <span class="md-ellipsis">
     
   
-    Listeners
-  
+  Listeners
 
     
   </span>
@@ -1887,8 +1815,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Listeners
-  
+  Listeners
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
@@ -1907,8 +1834,7 @@
   <span class="md-ellipsis">
     
   
-    Client to server (C2S)
-  
+  Client to server (C2S)
 
     
   </span>
@@ -1935,8 +1861,7 @@
   <span class="md-ellipsis">
     
   
-    Server to server (S2S)
-  
+  Server to server (S2S)
 
     
   </span>
@@ -1963,8 +1888,7 @@
   <span class="md-ellipsis">
     
   
-    XMPP components
-  
+  XMPP components
 
     
   </span>
@@ -1991,8 +1915,7 @@
   <span class="md-ellipsis">
     
   
-    HTTP-based services
-  
+  HTTP-based services
 
     
   </span>
@@ -2037,8 +1960,7 @@
   <span class="md-ellipsis">
     
   
-    Authentication Methods
-  
+  Authentication Methods
 
     
   </span>
@@ -2053,8 +1975,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Authentication Methods
-  
+  Authentication Methods
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
@@ -2073,8 +1994,7 @@
   <span class="md-ellipsis">
     
   
-    RDBMS
-  
+  RDBMS
 
     
   </span>
@@ -2101,8 +2021,7 @@
   <span class="md-ellipsis">
     
   
-    External
-  
+  External
 
     
   </span>
@@ -2129,8 +2048,7 @@
   <span class="md-ellipsis">
     
   
-    Anonymous
-  
+  Anonymous
 
     
   </span>
@@ -2157,8 +2075,7 @@
   <span class="md-ellipsis">
     
   
-    LDAP
-  
+  LDAP
 
     
   </span>
@@ -2185,8 +2102,7 @@
   <span class="md-ellipsis">
     
   
-    JWT
-  
+  JWT
 
     
   </span>
@@ -2213,8 +2129,7 @@
   <span class="md-ellipsis">
     
   
-    HTTP
-  
+  HTTP
 
     
   </span>
@@ -2241,8 +2156,7 @@
   <span class="md-ellipsis">
     
   
-    PKI
-  
+  PKI
 
     
   </span>
@@ -2269,8 +2183,7 @@
   <span class="md-ellipsis">
     
   
-    Dummy
-  
+  Dummy
 
     
   </span>
@@ -2315,8 +2228,7 @@
   <span class="md-ellipsis">
     
   
-    Extension modules
-  
+  Extension modules
 
     
   </span>
@@ -2331,8 +2243,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Extension modules
-  
+  Extension modules
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
@@ -2351,8 +2262,7 @@
   <span class="md-ellipsis">
     
   
-    mod_adhoc
-  
+  mod_adhoc
 
     
   </span>
@@ -2379,8 +2289,7 @@
   <span class="md-ellipsis">
     
   
-    mod_amp
-  
+  mod_amp
 
     
   </span>
@@ -2407,8 +2316,7 @@
   <span class="md-ellipsis">
     
   
-    mod_auth_token
-  
+  mod_auth_token
 
     
   </span>
@@ -2435,8 +2343,7 @@
   <span class="md-ellipsis">
     
   
-    mod_bind2
-  
+  mod_bind2
 
     
   </span>
@@ -2463,8 +2370,7 @@
   <span class="md-ellipsis">
     
   
-    mod_blocking
-  
+  mod_blocking
 
     
   </span>
@@ -2491,8 +2397,7 @@
   <span class="md-ellipsis">
     
   
-    mod_blocklist
-  
+  mod_blocklist
 
     
   </span>
@@ -2519,8 +2424,7 @@
   <span class="md-ellipsis">
     
   
-    mod_broadcast
-  
+  mod_broadcast
 
     
   </span>
@@ -2547,8 +2451,7 @@
   <span class="md-ellipsis">
     
   
-    mod_caps
-  
+  mod_caps
 
     
   </span>
@@ -2575,8 +2478,7 @@
   <span class="md-ellipsis">
     
   
-    mod_cache_users
-  
+  mod_cache_users
 
     
   </span>
@@ -2603,8 +2505,7 @@
   <span class="md-ellipsis">
     
   
-    mod_carboncopy
-  
+  mod_carboncopy
 
     
   </span>
@@ -2631,8 +2532,7 @@
   <span class="md-ellipsis">
     
   
-    mod_csi
-  
+  mod_csi
 
     
   </span>
@@ -2659,8 +2559,7 @@
   <span class="md-ellipsis">
     
   
-    mod_disco
-  
+  mod_disco
 
     
   </span>
@@ -2687,8 +2586,7 @@
   <span class="md-ellipsis">
     
   
-    mod_domain_isolation
-  
+  mod_domain_isolation
 
     
   </span>
@@ -2726,8 +2624,7 @@
   <span class="md-ellipsis">
     
   
-    mod_event_pusher
-  
+  mod_event_pusher
 
     
   </span>
@@ -2742,8 +2639,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    mod_event_pusher
-  
+  mod_event_pusher
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
@@ -2762,8 +2658,7 @@
   <span class="md-ellipsis">
     
   
-    mod_event_pusher
-  
+  mod_event_pusher
 
     
   </span>
@@ -2790,8 +2685,7 @@
   <span class="md-ellipsis">
     
   
-    HTTP backend
-  
+  HTTP backend
 
     
   </span>
@@ -2818,8 +2712,7 @@
   <span class="md-ellipsis">
     
   
-    Push backend
-  
+  Push backend
 
     
   </span>
@@ -2846,8 +2739,7 @@
   <span class="md-ellipsis">
     
   
-    RabbitMQ backend
-  
+  RabbitMQ backend
 
     
   </span>
@@ -2874,8 +2766,7 @@
   <span class="md-ellipsis">
     
   
-    SNS backend
-  
+  SNS backend
 
     
   </span>
@@ -2910,8 +2801,7 @@
   <span class="md-ellipsis">
     
   
-    mod_extdisco
-  
+  mod_extdisco
 
     
   </span>
@@ -2938,8 +2828,7 @@
   <span class="md-ellipsis">
     
   
-    mod_external_filter
-  
+  mod_external_filter
 
     
   </span>
@@ -2966,8 +2855,7 @@
   <span class="md-ellipsis">
     
   
-    mod_fast_auth_token
-  
+  mod_fast_auth_token
 
     
   </span>
@@ -2994,8 +2882,7 @@
   <span class="md-ellipsis">
     
   
-    mod_global_distrib
-  
+  mod_global_distrib
 
     
   </span>
@@ -3022,8 +2909,7 @@
   <span class="md-ellipsis">
     
   
-    mod_http_upload
-  
+  mod_http_upload
 
     
   </span>
@@ -3050,8 +2936,7 @@
   <span class="md-ellipsis">
     
   
-    mod_inbox
-  
+  mod_inbox
 
     
   </span>
@@ -3078,8 +2963,7 @@
   <span class="md-ellipsis">
     
   
-    mod_keystore
-  
+  mod_keystore
 
     
   </span>
@@ -3106,8 +2990,7 @@
   <span class="md-ellipsis">
     
   
-    mod_last
-  
+  mod_last
 
     
   </span>
@@ -3134,8 +3017,7 @@
   <span class="md-ellipsis">
     
   
-    mod_mam
-  
+  mod_mam
 
     
   </span>
@@ -3162,8 +3044,7 @@
   <span class="md-ellipsis">
     
   
-    mod_muc
-  
+  mod_muc
 
     
   </span>
@@ -3190,8 +3071,7 @@
   <span class="md-ellipsis">
     
   
-    mod_muc_light
-  
+  mod_muc_light
 
     
   </span>
@@ -3218,8 +3098,7 @@
   <span class="md-ellipsis">
     
   
-    mod_offline
-  
+  mod_offline
 
     
   </span>
@@ -3246,8 +3125,7 @@
   <span class="md-ellipsis">
     
   
-    mod_offline_stub
-  
+  mod_offline_stub
 
     
   </span>
@@ -3274,8 +3152,7 @@
   <span class="md-ellipsis">
     
   
-    mod_ping
-  
+  mod_ping
 
     
   </span>
@@ -3302,8 +3179,7 @@
   <span class="md-ellipsis">
     
   
-    mod_presence
-  
+  mod_presence
 
     
   </span>
@@ -3330,8 +3206,7 @@
   <span class="md-ellipsis">
     
   
-    mod_privacy
-  
+  mod_privacy
 
     
   </span>
@@ -3358,8 +3233,7 @@
   <span class="md-ellipsis">
     
   
-    mod_private
-  
+  mod_private
 
     
   </span>
@@ -3386,8 +3260,7 @@
   <span class="md-ellipsis">
     
   
-    mod_pubsub
-  
+  mod_pubsub
 
     
   </span>
@@ -3414,8 +3287,7 @@
   <span class="md-ellipsis">
     
   
-    mod_pubsub_old
-  
+  mod_pubsub_old
 
     
   </span>
@@ -3442,8 +3314,7 @@
   <span class="md-ellipsis">
     
   
-    mod_push_service_mongoosepush
-  
+  mod_push_service_mongoosepush
 
     
   </span>
@@ -3470,8 +3341,7 @@
   <span class="md-ellipsis">
     
   
-    mod_register
-  
+  mod_register
 
     
   </span>
@@ -3498,8 +3368,7 @@
   <span class="md-ellipsis">
     
   
-    mod_roster
-  
+  mod_roster
 
     
   </span>
@@ -3526,8 +3395,7 @@
   <span class="md-ellipsis">
     
   
-    mod_sasl2
-  
+  mod_sasl2
 
     
   </span>
@@ -3554,8 +3422,7 @@
   <span class="md-ellipsis">
     
   
-    mod_shared_roster_ldap
-  
+  mod_shared_roster_ldap
 
     
   </span>
@@ -3582,8 +3449,7 @@
   <span class="md-ellipsis">
     
   
-    mod_sic
-  
+  mod_sic
 
     
   </span>
@@ -3610,8 +3476,7 @@
   <span class="md-ellipsis">
     
   
-    mod_smart_markers
-  
+  mod_smart_markers
 
     
   </span>
@@ -3638,8 +3503,7 @@
   <span class="md-ellipsis">
     
   
-    mod_stanzaid
-  
+  mod_stanzaid
 
     
   </span>
@@ -3666,8 +3530,7 @@
   <span class="md-ellipsis">
     
   
-    mod_stream_management
-  
+  mod_stream_management
 
     
   </span>
@@ -3694,8 +3557,7 @@
   <span class="md-ellipsis">
     
   
-    mod_time
-  
+  mod_time
 
     
   </span>
@@ -3722,8 +3584,7 @@
   <span class="md-ellipsis">
     
   
-    mod_vcard
-  
+  mod_vcard
 
     
   </span>
@@ -3750,8 +3611,7 @@
   <span class="md-ellipsis">
     
   
-    mod_version
-  
+  mod_version
 
     
   </span>
@@ -3796,8 +3656,7 @@
   <span class="md-ellipsis">
     
   
-    GraphQL API
-  
+  GraphQL API
 
     
   </span>
@@ -3812,8 +3671,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    GraphQL API
-  
+  GraphQL API
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
@@ -3832,8 +3690,7 @@
   <span class="md-ellipsis">
     
   
-    User
-  
+  User
 
     
   </span>
@@ -3860,8 +3717,7 @@
   <span class="md-ellipsis">
     
   
-    Admin
-  
+  Admin
 
     
   </span>
@@ -3906,8 +3762,7 @@
   <span class="md-ellipsis">
     
   
-    Operation and Maintenance
-  
+  Operation and Maintenance
 
     
   </span>
@@ -3922,8 +3777,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Operation and Maintenance
-  
+  Operation and Maintenance
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
@@ -3942,8 +3796,7 @@
   <span class="md-ellipsis">
     
   
-    GDPR considerations
-  
+  GDPR considerations
 
     
   </span>
@@ -3970,8 +3823,7 @@
   <span class="md-ellipsis">
     
   
-    Cluster management considerations
-  
+  Cluster management considerations
 
     
   </span>
@@ -3998,8 +3850,7 @@
   <span class="md-ellipsis">
     
   
-    Cluster configuration and node management
-  
+  Cluster configuration and node management
 
     
   </span>
@@ -4026,8 +3877,7 @@
   <span class="md-ellipsis">
     
   
-    Logging & monitoring
-  
+  Logging & monitoring
 
     
   </span>
@@ -4054,8 +3904,7 @@
   <span class="md-ellipsis">
     
   
-    Logging configuration
-  
+  Logging configuration
 
     
   </span>
@@ -4082,8 +3931,7 @@
   <span class="md-ellipsis">
     
   
-    Logging with Humio
-  
+  Logging with Humio
 
     
   </span>
@@ -4110,8 +3958,7 @@
   <span class="md-ellipsis">
     
   
-    Logging fields
-  
+  Logging fields
 
     
   </span>
@@ -4138,8 +3985,7 @@
   <span class="md-ellipsis">
     
   
-    Rolling upgrade
-  
+  Rolling upgrade
 
     
   </span>
@@ -4166,8 +4012,7 @@
   <span class="md-ellipsis">
     
   
-    Cluster restart
-  
+  Cluster restart
 
     
   </span>
@@ -4194,8 +4039,7 @@
   <span class="md-ellipsis">
     
   
-    Metrics
-  
+  Metrics
 
     
   </span>
@@ -4222,8 +4066,7 @@
   <span class="md-ellipsis">
     
   
-    System Metrics Privacy Policy
-  
+  System Metrics Privacy Policy
 
     
   </span>
@@ -4250,8 +4093,7 @@
   <span class="md-ellipsis">
     
   
-    Distribution over TLS
-  
+  Distribution over TLS
 
     
   </span>
@@ -4278,8 +4120,7 @@
   <span class="md-ellipsis">
     
   
-    Known issues
-  
+  Known issues
 
     
   </span>
@@ -4324,8 +4165,7 @@
   <span class="md-ellipsis">
     
   
-    Developer's Guide
-  
+  Developer's Guide
 
     
   </span>
@@ -4340,8 +4180,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Developer's Guide
-  
+  Developer's Guide
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
@@ -4360,8 +4199,7 @@
   <span class="md-ellipsis">
     
   
-    Release/Installation configuration
-  
+  Release/Installation configuration
 
     
   </span>
@@ -4388,8 +4226,7 @@
   <span class="md-ellipsis">
     
   
-    Bootstrap scripts
-  
+  Bootstrap scripts
 
     
   </span>
@@ -4416,8 +4253,34 @@
   <span class="md-ellipsis">
     
   
-    Testing MongooseIM
+  Testing MongooseIM
+
+    
+  </span>
   
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers-guide/Building-the-documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Building the documentation
 
     
   </span>
@@ -4444,8 +4307,7 @@
   <span class="md-ellipsis">
     
   
-    Logging
-  
+  Logging
 
     
   </span>
@@ -4472,8 +4334,7 @@
   <span class="md-ellipsis">
     
   
-    Hooks and Handlers
-  
+  Hooks and Handlers
 
     
   </span>
@@ -4500,8 +4361,7 @@
   <span class="md-ellipsis">
     
   
-    Hooks description
-  
+  Hooks description
 
     
   </span>
@@ -4528,8 +4388,7 @@
   <span class="md-ellipsis">
     
   
-    Accumulators
-  
+  Accumulators
 
     
   </span>
@@ -4556,8 +4415,7 @@
   <span class="md-ellipsis">
     
   
-    Stanza routing
-  
+  Stanza routing
 
     
   </span>
@@ -4584,8 +4442,7 @@
   <span class="md-ellipsis">
     
   
-    Domain management
-  
+  Domain management
 
     
   </span>
@@ -4612,8 +4469,7 @@
   <span class="md-ellipsis">
     
   
-    mod_amp development
-  
+  mod_amp development
 
     
   </span>
@@ -4640,8 +4496,7 @@
   <span class="md-ellipsis">
     
   
-    mod_muc_light developers doc
-  
+  mod_muc_light developers doc
 
     
   </span>
@@ -4668,8 +4523,7 @@
   <span class="md-ellipsis">
     
   
-    SCRAM serialization format
-  
+  SCRAM serialization format
 
     
   </span>
@@ -4696,8 +4550,7 @@
   <span class="md-ellipsis">
     
   
-    xep-tool usage
-  
+  xep-tool usage
 
     
   </span>
@@ -4724,8 +4577,7 @@
   <span class="md-ellipsis">
     
   
-    FIPS mode
-  
+  FIPS mode
 
     
   </span>
@@ -4752,8 +4604,7 @@
   <span class="md-ellipsis">
     
   
-    Basic IQ Handler
-  
+  Basic IQ Handler
 
     
   </span>
@@ -4780,8 +4631,7 @@
   <span class="md-ellipsis">
     
   
-    mongoose_wpool
-  
+  mongoose_wpool
 
     
   </span>
@@ -4826,8 +4676,7 @@
   <span class="md-ellipsis">
     
   
-    Migration Guide
-  
+  Migration Guide
 
     
   </span>
@@ -4842,8 +4691,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Migration Guide
-  
+  Migration Guide
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
@@ -4862,8 +4710,7 @@
   <span class="md-ellipsis">
     
   
-    3.1.1 to 3.2.0
-  
+  3.1.1 to 3.2.0
 
     
   </span>
@@ -4890,8 +4737,7 @@
   <span class="md-ellipsis">
     
   
-    3.3.0 to 3.4.0
-  
+  3.3.0 to 3.4.0
 
     
   </span>
@@ -4918,8 +4764,7 @@
   <span class="md-ellipsis">
     
   
-    3.5.0 to 3.6.0
-  
+  3.5.0 to 3.6.0
 
     
   </span>
@@ -4946,8 +4791,7 @@
   <span class="md-ellipsis">
     
   
-    3.6.0 to 3.7.0
-  
+  3.6.0 to 3.7.0
 
     
   </span>
@@ -4974,8 +4818,7 @@
   <span class="md-ellipsis">
     
   
-    3.7.0 to 4.0.0
-  
+  3.7.0 to 4.0.0
 
     
   </span>
@@ -5002,8 +4845,7 @@
   <span class="md-ellipsis">
     
   
-    4.0.0 to 4.0.1
-  
+  4.0.0 to 4.0.1
 
     
   </span>
@@ -5030,8 +4872,7 @@
   <span class="md-ellipsis">
     
   
-    4.0.1 to 4.1.0
-  
+  4.0.1 to 4.1.0
 
     
   </span>
@@ -5058,8 +4899,7 @@
   <span class="md-ellipsis">
     
   
-    4.1.0 to 4.2.0
-  
+  4.1.0 to 4.2.0
 
     
   </span>
@@ -5086,8 +4926,7 @@
   <span class="md-ellipsis">
     
   
-    4.2.0 to 5.0.0
-  
+  4.2.0 to 5.0.0
 
     
   </span>
@@ -5114,8 +4953,7 @@
   <span class="md-ellipsis">
     
   
-    5.0.0 to 5.1.0
-  
+  5.0.0 to 5.1.0
 
     
   </span>
@@ -5142,8 +4980,7 @@
   <span class="md-ellipsis">
     
   
-    5.1.0 to 6.0.0
-  
+  5.1.0 to 6.0.0
 
     
   </span>
@@ -5170,8 +5007,7 @@
   <span class="md-ellipsis">
     
   
-    6.0.0 to 6.1.0
-  
+  6.0.0 to 6.1.0
 
     
   </span>
@@ -5198,8 +5034,7 @@
   <span class="md-ellipsis">
     
   
-    6.1.0 to 6.2.0
-  
+  6.1.0 to 6.2.0
 
     
   </span>
@@ -5226,8 +5061,7 @@
   <span class="md-ellipsis">
     
   
-    6.2.0 to 6.2.1
-  
+  6.2.0 to 6.2.1
 
     
   </span>
@@ -5254,8 +5088,7 @@
   <span class="md-ellipsis">
     
   
-    6.2.1 to 6.3.0
-  
+  6.2.1 to 6.3.0
 
     
   </span>
@@ -5282,8 +5115,7 @@
   <span class="md-ellipsis">
     
   
-    6.3.0 to 6.3.1
-  
+  6.3.0 to 6.3.1
 
     
   </span>
@@ -5310,8 +5142,7 @@
   <span class="md-ellipsis">
     
   
-    6.3.1 to 6.3.2
-  
+  6.3.1 to 6.3.2
 
     
   </span>
@@ -5338,8 +5169,7 @@
   <span class="md-ellipsis">
     
   
-    6.3.3 to 6.4.0
-  
+  6.3.3 to 6.4.0
 
     
   </span>
@@ -5366,8 +5196,7 @@
   <span class="md-ellipsis">
     
   
-    6.4.0 to 6.5.0
-  
+  6.4.0 to 6.5.0
 
     
   </span>
@@ -5394,8 +5223,7 @@
   <span class="md-ellipsis">
     
   
-    6.5.0 to 6.6.0
-  
+  6.5.0 to 6.6.0
 
     
   </span>
@@ -5422,8 +5250,7 @@
   <span class="md-ellipsis">
     
   
-    6.6.0 to 6.7.0
-  
+  6.6.0 to 6.7.0
 
     
   </span>
@@ -5450,8 +5277,7 @@
   <span class="md-ellipsis">
     
   
-    6.7.0 to 6.8.0
-  
+  6.7.0 to 6.8.0
 
     
   </span>
@@ -5478,8 +5304,7 @@
   <span class="md-ellipsis">
     
   
-    6.8.0 to 6.x.x
-  
+  6.8.0 to 6.x.x
 
     
   </span>
@@ -5506,8 +5331,7 @@
   <span class="md-ellipsis">
     
   
-    MAM MUC migration helper
-  
+  MAM MUC migration helper
 
     
   </span>
@@ -5541,8 +5365,7 @@
   <span class="md-ellipsis">
     
   
-    Contributions to the Ecosystem
-  
+  Contributions to the Ecosystem
 
     
   </span>
@@ -5568,8 +5391,7 @@
   <span class="md-ellipsis">
     
   
-    MongooseIM History
-  
+  MongooseIM History
 
     
   </span>
@@ -5591,26 +5413,42 @@
               
               <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
   
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On this page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
   <a href="#general-listener-options" class="md-nav__link">
     <span class="md-ellipsis">
-      
+      <span class="md-typeset">
         General listener options
-      
+      </span>
     </span>
   </a>
   
@@ -5620,9 +5458,9 @@
           <li class="md-nav__item">
   <a href="#listenport" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.port
-      
+      <span class="md-typeset">
+        <code>listen.*.port</code>
+      </span>
     </span>
   </a>
   
@@ -5631,9 +5469,9 @@
           <li class="md-nav__item">
   <a href="#listenip_address" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.ip_address
-      
+      <span class="md-typeset">
+        <code>listen.*.ip_address</code>
+      </span>
     </span>
   </a>
   
@@ -5642,9 +5480,9 @@
           <li class="md-nav__item">
   <a href="#listenproto" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.proto
-      
+      <span class="md-typeset">
+        <code>listen.*.proto</code>
+      </span>
     </span>
   </a>
   
@@ -5653,9 +5491,9 @@
           <li class="md-nav__item">
   <a href="#listenip_version" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.ip_version
-      
+      <span class="md-typeset">
+        <code>listen.*.ip_version</code>
+      </span>
     </span>
   </a>
   
@@ -5664,9 +5502,9 @@
           <li class="md-nav__item">
   <a href="#listenhibernate_after" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.hibernate_after
-      
+      <span class="md-typeset">
+        <code>listen.*.hibernate_after</code>
+      </span>
     </span>
   </a>
   
@@ -5680,9 +5518,9 @@
         <li class="md-nav__item">
   <a href="#xmpp-listener-options" class="md-nav__link">
     <span class="md-ellipsis">
-      
+      <span class="md-typeset">
         XMPP listener options
-      
+      </span>
     </span>
   </a>
   
@@ -5692,9 +5530,9 @@
           <li class="md-nav__item">
   <a href="#listenbacklog" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.backlog
-      
+      <span class="md-typeset">
+        <code>listen.*.backlog</code>
+      </span>
     </span>
   </a>
   
@@ -5703,9 +5541,9 @@
           <li class="md-nav__item">
   <a href="#listenproxy_protocol" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.proxy_protocol
-      
+      <span class="md-typeset">
+        <code>listen.*.proxy_protocol</code>
+      </span>
     </span>
   </a>
   
@@ -5714,9 +5552,9 @@
           <li class="md-nav__item">
   <a href="#listenmax_stanza_size" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.max_stanza_size
-      
+      <span class="md-typeset">
+        <code>listen.*.max_stanza_size</code>
+      </span>
     </span>
   </a>
   
@@ -5725,9 +5563,9 @@
           <li class="md-nav__item">
   <a href="#listennum_acceptors" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.num_acceptors
-      
+      <span class="md-typeset">
+        <code>listen.*.num_acceptors</code>
+      </span>
     </span>
   </a>
   
@@ -5736,9 +5574,9 @@
           <li class="md-nav__item">
   <a href="#listenshaper" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.shaper
-      
+      <span class="md-typeset">
+        <code>listen.*.shaper</code>
+      </span>
     </span>
   </a>
   
@@ -5747,9 +5585,9 @@
           <li class="md-nav__item">
   <a href="#listenmax_connections" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.max_connections
-      
+      <span class="md-typeset">
+        <code>listen.*.max_connections</code>
+      </span>
     </span>
   </a>
   
@@ -5758,9 +5596,9 @@
           <li class="md-nav__item">
   <a href="#listenreuse_port" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.reuse_port
-      
+      <span class="md-typeset">
+        <code>listen.*.reuse_port</code>
+      </span>
     </span>
   </a>
   
@@ -5769,9 +5607,9 @@
           <li class="md-nav__item">
   <a href="#listenstate_timeout" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        listen.*.state_timeout
-      
+      <span class="md-typeset">
+        <code>listen.*.state_timeout</code>
+      </span>
     </span>
   </a>
   
@@ -5796,14 +5634,11 @@
               <article class="md-content__inner md-typeset">
                 
                   
-
-
   
   
 
 
-  <h1>Options: Listen</h1>
-
+<h1 id="options-listen">Options: Listen<a class="headerlink" href="#options-listen" title="Permanent link">&para;</a></h1>
 <p>The <code>listen</code> section specifies how MongooseIM handles incoming connections.</p>
 <ul>
 <li>
@@ -5905,7 +5740,7 @@ The default, recommended value of 0 means that the client processes will hiberna
 <li><strong>Example:</strong> <code>shaper = "normal"</code></li>
 </ul>
 <p>The shaper name that determines what traffic shaper is used to limit the incoming XMPP traffic to prevent the server from being flooded with incoming data.
-The shaper referenced here needs to be defined in the <a href="../shaper/"><code>shaper</code></a> configuration section.
+The shaper referenced here needs to be defined in the <a href="../../configuration/shaper/"><code>shaper</code></a> configuration section.
 The value of the shaper name needs to be either the shaper name or the string <code>"none"</code>, which means no shaper.</p>
 <h3 id="listenmax_connections"><code>listen.*.max_connections</code><a class="headerlink" href="#listenmax_connections" title="Permanent link">&para;</a></h3>
 <ul>
@@ -5940,6 +5775,8 @@ The value of the shaper name needs to be either the shaper name or the string <c
 
 
 
+
+
                 
               </article>
             </div>
@@ -5952,7 +5789,7 @@ The value of the shaper name needs to be either the shaper name or the string <c
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
   Back to top
 </button>
         
@@ -5968,7 +5805,7 @@ The value of the shaper name needs to be either the shaper name or the string <c
           <a href="../general/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Options: General">
             <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
             </div>
             <div class="md-footer__title">
               <span class="md-footer__direction">
@@ -5993,7 +5830,7 @@ The value of the shaper name needs to be either the shaper name or the string <c
             </div>
             <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </div>
           </a>
         
@@ -6006,8 +5843,8 @@ The value of the shaper name needs to be either the shaper name or the string <c
   
   
     Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
     </a>
   
 </div>
@@ -6023,7 +5860,7 @@ The value of the shaper name needs to be either the shaper name or the string <c
       
     
     <a href="https://hub.docker.com/r/erlangsolutions/mongooseim/" target="_blank" rel="noopener" title="hub.docker.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1zm0-204.3h-66.1v60.7h66.1zm78.2 144.8H362v59.4h66.1zm-156.3-72.1h-66.1v60.1h66.1zm78.1 0h-66.1v60.1h66.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1zm78.1 0h-66.1v59.4h66.1zm-78.1-72.1h-66.1v60.1h66.1z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M349.9 236.3h-66.1v-59.4h66.1zm0-204.3h-66.1v60.7h66.1zm78.2 144.8H362v59.4h66.1zm-156.3-72.1h-66.1v60.1h66.1zm78.1 0h-66.1v60.1h66.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1zm78.1 0h-66.1v59.4h66.1zm-78.1-72.1h-66.1v60.1h66.1z"/></svg>
     </a>
   
     
@@ -6034,7 +5871,7 @@ The value of the shaper name needs to be either the shaper name or the string <c
       
     
     <a href="https://github.com/esl/MongooseIM" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M216.5 362.5c-66-8-112.5-55.5-112.5-117 0-25 9-52 24-70-6.5-16.5-5.5-51.5 2-66 20-2.5 47 8 63 22.5 19-6 39-9 63.5-9s44.5 3 62.5 8.5c15.5-14 43-24.5 63-22 7 13.5 8 48.5 1.5 65.5 16 19 24.5 44.5 24.5 70.5 0 61.5-46.5 108-113.5 116.5 17 11 28.5 35 28.5 62.5v52c0 15 12.5 23.5 27.5 17.5C441 459.5 512 369 512 257 512 115.5 397 0 255.5 0S0 115.5 0 257c0 111 70.5 203 165.5 237.5 13.5 5 26.5-4 26.5-17.5v-40c-7 3-16 5-24 5-33 0-52.5-18-66.5-51.5-5.5-13.5-11.5-21.5-23-23-6-.5-8-3-8-6 0-6 10-10.5 20-10.5 14.5 0 27 9 40 27.5 10 14.5 20.5 21 33 21s20.5-4.5 32-16c8.5-8.5 15-16 21-21"/></svg>
     </a>
   
 </div>
@@ -6054,16 +5891,10 @@ The value of the shaper name needs to be either the shaper name or the string <c
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.top", "navigation.footer", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.instant.progress","navigation.top","navigation.footer","content.tabs.link","toc.follow"],"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
-      
-        <script src="../../assets/mkdocs_puml/puml.js"></script>
-      
-        <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
-      
-        <script src="../../assets/mkdocs_puml/interaction.js"></script>
+      <script src="../../assets/javascripts/bundle.e886cdf1.min.js"></script>
       
     
   </body>
