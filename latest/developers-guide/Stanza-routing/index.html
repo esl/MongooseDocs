@@ -5224,6 +5224,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/6.8.1_6.x.x/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  6.8.1 to 6.x.x
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         
   
@@ -5481,7 +5508,8 @@ The default behaviour is the following:</p>
 <h2 id="6-ejabberd_sm">6. <code>ejabberd_sm</code><a class="headerlink" href="#6-ejabberd_sm" title="Permanent link">&para;</a></h2>
 <p><code>ejabberd_sm</code> determines the available resources of the recipient, takes into account their priorities and whether the message is addressed to a particular resource or a bare JID.
 It appropriately replicates (or not) the message and sends it to the recipient's C2S process(es) by calling <code>mongoose_c2s:route/2</code>.
-In case no resources are available for delivery (hence no C2S processes to pass the message to), the <code>offline_message</code> hook is run.</p>
+Afterwards, the <code>message_routed</code> hook is run with the recipient status derived from local sessions.
+Then, in case no resources are available for delivery (hence no C2S processes to pass the message to), the <code>offline_message</code> hook is run.</p>
 <p>As Bob has one online session, the message is sent to the C2S process associated with that session.</p>
 <h2 id="7-recipients-c2s-process-delivers-the-message">7. Recipient's C2S process delivers the message<a class="headerlink" href="#7-recipients-c2s-process-delivers-the-message" title="Permanent link">&para;</a></h2>
 <p>The <code>user_receive_packet</code> hook is run to notify the rest of the system about the stanza delivery.
