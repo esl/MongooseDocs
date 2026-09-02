@@ -2693,6 +2693,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#message-notification-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Message notification rules
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#custom-plugins" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -5614,6 +5625,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#message-notification-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Message notification rules
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#custom-plugins" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -5751,7 +5773,7 @@ the title of push notification) and filter which messages will trigger the notif
 In order to achieve that, you need to create a plugin module that implements the
 <code>mod_event_pusher_push_plugin</code> behaviour and enable this plugin in the <code>plugin_module</code> section as
 above.</p>
-<p>A plugin module handles the dynamic configuration of push notifications. 
+<p>A plugin module handles the dynamic configuration of push notifications.
 It contains the filtering and custom logic for notifying about messages.</p>
 <p>Two plugin implementations are provided.
 They offer different behaviour considering unacknowledged messages when using <a href="https://xmpp.org/extensions/xep-0198.html">XEP-0198: Stream Management</a>:</p>
@@ -5768,6 +5790,12 @@ They offer different behaviour considering unacknowledged messages when using <a
 notifications) should be uniquely identified. The only correct way to identify a device from the
 XMPP standpoint is to use the data provided with the <a href="https://xmpp.org/extensions/xep-0357.html#enabling">enable stanza</a>. Because of that,
 each device should (re)enable the push notifications at the beginning of each and every connection.</p>
+<h3 id="message-notification-rules">Message notification rules<a class="headerlink" href="#message-notification-rules" title="Permanent link">&para;</a></h3>
+<p>For regular chat and groupchat messages, both provided plugins send push notifications if one of the following conditions occurs at the moment of routing:</p>
+<ul>
+<li>Recipient has no online sessions selected for delivery.</li>
+<li>Recipient has one or more online sessions selected for delivery, but <a href=".././mod_csi/"><code>mod_csi</code></a> is enabled, and all these sessions are in the <code>inactive</code> CSI state.</li>
+</ul>
 <h3 id="custom-plugins">Custom plugins<a class="headerlink" href="#custom-plugins" title="Permanent link">&para;</a></h3>
 <p>A custom module implementing the optional callbacks of <code>mod_event_pusher_push_plugin</code>
 may be used as a plugin to change the default behaviour. In the case of not implemented callbacks

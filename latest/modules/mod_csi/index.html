@@ -2383,13 +2383,30 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#modulesmod_csibuffer_max" class="md-nav__link">
+  <a href="#modulesmod_csibuffer" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>modules.mod_csi.buffer_max</code>
+        <code>modules.mod_csi.buffer</code>
       </span>
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="modules.mod_csi.buffer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_csibuffermax_size" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>modules.mod_csi.buffer.max_size</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5378,13 +5395,30 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#modulesmod_csibuffer_max" class="md-nav__link">
+  <a href="#modulesmod_csibuffer" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>modules.mod_csi.buffer_max</code>
+        <code>modules.mod_csi.buffer</code>
       </span>
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="modules.mod_csi.buffer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulesmod_csibuffermax_size" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>modules.mod_csi.buffer.max_size</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5437,19 +5471,31 @@
 <h2 id="module-description">Module Description<a class="headerlink" href="#module-description" title="Permanent link">&para;</a></h2>
 <p>Enables <a href="http://xmpp.org/extensions/xep-0352.html">XEP-0352: Client State Indication</a> functionality.</p>
 <p>The XEP doesn't <strong>require</strong> any specific server behaviour in response to CSI stanzas, there are only some suggestions.
-The implementation in MongooseIM will simply buffer all packets (up to a configured limit) when the session is "inactive" and will flush the buffer when it becomes "active" again.</p>
+MongooseIM stores the reported client state in the user's session. Other modules can use this information, for example to send push notifications for <code>inactive</code> sessions.</p>
 <h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
-<h3 id="modulesmod_csibuffer_max"><code>modules.mod_csi.buffer_max</code><a class="headerlink" href="#modulesmod_csibuffer_max" title="Permanent link">&para;</a></h3>
+<h3 id="modulesmod_csibuffer"><code>modules.mod_csi.buffer</code><a class="headerlink" href="#modulesmod_csibuffer" title="Permanent link">&para;</a></h3>
+<p>By default, <code>mod_csi</code> does not buffer stanzas. To enable buffering, configure this section.
+When buffering is enabled, MongooseIM buffers packets up to the configured limit while the session is <code>inactive</code>, and flushes the buffer when it becomes <code>active</code> again.</p>
+<h4 id="modulesmod_csibuffermax_size"><code>modules.mod_csi.buffer.max_size</code><a class="headerlink" href="#modulesmod_csibuffermax_size" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Syntax:</strong> non-negative integer or the string <code>"infinity"</code></li>
 <li><strong>Default:</strong> <code>20</code></li>
-<li><strong>Example:</strong> <code>buffer_max = 40</code></li>
+<li><strong>Example:</strong> <code>buffer.max_size = 40</code></li>
 </ul>
-<p>Buffer size for messages queued when session was <code>inactive</code>.</p>
+<p>Maximum number of messages buffered while the session is <code>inactive</code>.</p>
 <h2 id="example-configuration">Example Configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h2>
+<p>CSI without buffering:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_csi]</span>
+</code></pre></div></td></tr></table></div>
+<p>CSI with default buffering:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_csi]</span>
-<span class="w">  </span><span class="n">buffer_max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span>
+<span class="w">  </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+</code></pre></div></td></tr></table></div>
+<p>CSI with buffering and a custom maximum buffer size:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[modules.mod_csi]</span>
+<span class="w">  </span><span class="n">buffer</span><span class="p">.</span><span class="n">max_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
 <p>If you'd like to learn more about metrics in MongooseIM, please visit <a href="../../operation-and-maintenance/MongooseIM-metrics/">MongooseIM metrics</a> page.</p>

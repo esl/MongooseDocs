@@ -4351,6 +4351,34 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#get_user_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>get_user_status</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="get_user_status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#handler-examples_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Handler examples
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#remove_user" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -4363,7 +4391,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#handler-examples_5" class="md-nav__link">
+  <a href="#handler-examples_6" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         Handler examples
@@ -5679,6 +5707,34 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#get_user_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>get_user_status</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="get_user_status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#handler-examples_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Handler examples
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#remove_user" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -5691,7 +5747,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#handler-examples_5" class="md-nav__link">
+  <a href="#handler-examples_6" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         Handler examples
@@ -5895,18 +5951,29 @@ Keep that in mind when registering the handlers and appropriately use the atom <
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">message_routed</span><span class="p">(</span><span class="nv">UserStatus</span><span class="p">,</span><span class="w"> </span><span class="nv">Acc</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>This hook is run after routing a message to an existing local user.
-The <code>UserStatus</code> argument is <code>online</code> if the message was routed to at least one online session (i.e. with an integer priority), and <code>offline</code> otherwise.
-For users with no selected C2S process, the hook is run before <code>offline_message</code> or <code>offline_groupchat_message</code>.</p>
+The <code>UserStatus</code> argument is <code>{online, StatusMap}</code> if the message was routed to at least one online session (i.e. with an integer priority), and <code>offline</code> otherwise.
+For users with no selected C2S process, the hook is run before <code>offline_message</code> or <code>offline_groupchat_message</code>.
+The <code>StatusMap</code> is built with the <code>get_user_status</code> hook.</p>
 <h3 id="handler-examples_4">Handler examples<a class="headerlink" href="#handler-examples_4" title="Permanent link">&para;</a></h3>
 <p>This hook is handled by the following module:</p>
 <ul>
 <li><a href="../../modules/mod_event_pusher/"><code>mod_event_pusher</code></a> - generates events e.g. for push notifications.</li>
 </ul>
+<h2 id="get_user_status"><code>get_user_status</code><a class="headerlink" href="#get_user_status" title="Permanent link">&para;</a></h2>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">get_user_status</span><span class="p">(</span><span class="nv">HostType</span><span class="p">,</span><span class="w"> </span><span class="nv">Sessions</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>This hook is run by <code>ejabberd_sm</code> to collect extra status information for online sessions selected for message routing.
+It accumulates a map. If no handler is registered, the result is an empty map.</p>
+<h3 id="handler-examples_5">Handler examples<a class="headerlink" href="#handler-examples_5" title="Permanent link">&para;</a></h3>
+<p>This hook is handled by the following module:</p>
+<ul>
+<li><a href="../../modules/mod_csi/"><code>mod_csi</code></a> - adds <code>client_state</code>: <code>active</code> or <code>inactive</code>.</li>
+</ul>
 <h2 id="remove_user"><code>remove_user</code><a class="headerlink" href="#remove_user" title="Permanent link">&para;</a></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nn">mongoose_hooks</span><span class="p">:</span><span class="nf">remove_user</span><span class="p">(</span><span class="nv">Acc</span><span class="p">,</span><span class="w"> </span><span class="nv">LServer</span><span class="p">,</span><span class="w"> </span><span class="nv">LUser</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p><code>remove_user</code> is run by <code>ejabberd_auth</code> - the authentication module - when a request is made to remove the user from the database of the server.</p>
-<h3 id="handler-examples_5">Handler examples<a class="headerlink" href="#handler-examples_5" title="Permanent link">&para;</a></h3>
+<h3 id="handler-examples_6">Handler examples<a class="headerlink" href="#handler-examples_6" title="Permanent link">&para;</a></h3>
 <p>This hook is used by multiple modules, since removing a user requires many cleanup operations:</p>
 <ul>
 <li><a href="../../modules/mod_auth_token/"><code>mod_auth_token</code></a> removes user's authentication tokens;</li>
@@ -5985,6 +6052,7 @@ This is the perfect place to plug in custom security control.</p>
 <li>get_mam_pm_gdpr_data</li>
 <li>get_pep_recipients</li>
 <li>get_personal_data</li>
+<li>get_user_status</li>
 <li>inbox_unread_count</li>
 <li>invitation_sent</li>
 <li>is_muc_room_owner</li>

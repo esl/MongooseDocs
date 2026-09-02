@@ -5169,6 +5169,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#mod_csi-buffering" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>mod_csi</code> buffering
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5315,6 +5326,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#mod_csi-buffering" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>mod_csi</code> buffering
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5335,13 +5357,17 @@
 
 <h1 id="681-to-6xx">6.8.1 to 6.x.x<a class="headerlink" href="#681-to-6xx" title="Permanent link">&para;</a></h1>
 <h2 id="mod_event_pusher-received-message-events"><code>mod_event_pusher</code> received message events<a class="headerlink" href="#mod_event_pusher-received-message-events" title="Permanent link">&para;</a></h2>
-<p><code>mod_event_pusher</code> no longer creates received-message events for non-user targets such as:</p>
+<p><a href="../../modules/mod_event_pusher/"><code>mod_event_pusher</code></a> no longer creates received-message events for non-user targets such as:</p>
 <ul>
 <li>A user-less JID (e.g. server).</li>
 <li>A multi-user chat room.</li>
 <li>A nonexistent user.</li>
 </ul>
 <p>These events were not valid user-delivery notifications and were unwanted for push-notification logic.</p>
+<h2 id="mod_csi-buffering"><code>mod_csi</code> buffering<a class="headerlink" href="#mod_csi-buffering" title="Permanent link">&para;</a></h2>
+<p><a href="../../modules/mod_csi/"><code>mod_csi</code></a> no longer buffers stanzas by default.
+In order to keep buffering enabled, make sure the <a href="../../modules/mod_csi/#modulesmod_csibuffer"><code>buffer</code></a> section is present.
+If you used the <code>buffer_max</code> option, use <a href="../../modules/mod_csi/#modulesmod_csibuffermax_size"><code>buffer.max_size</code></a> instead.</p>
 
 
 
