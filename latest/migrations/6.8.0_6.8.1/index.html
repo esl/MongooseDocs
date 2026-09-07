@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="zensical-0.0.57">
+      <meta name="generator" content="zensical-0.0.59">
     
     
       
@@ -5159,6 +5159,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#graphql-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        GraphQL API
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GraphQL API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metric-values-use-the-safeint-scalar" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Metric values use the <code>SafeInt</code> scalar
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5349,6 +5377,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#graphql-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        GraphQL API
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GraphQL API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metric-values-use-the-safeint-scalar" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Metric values use the <code>SafeInt</code> scalar
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5374,6 +5430,13 @@
 <p>The <code>legacy_mode</code> option of <a href="../../modules/mod_muc_light/"><code>mod_muc_light</code></a>, deprecated in 6.8.0, is now removed together with the XEP-0045 compatibility codec.</p>
 <p>MUC Light now always speaks the protocol described in <a href="../../open-extensions/muc_light/">MUC Light</a>, so clients using classic MUC stanzas need to be updated.
 Alternatively, enable <a href="../../modules/mod_muc/"><code>mod_muc</code></a>, which implements XEP-0045 in full - but note that rooms stored by <code>mod_muc_light</code> are not visible to <code>mod_muc</code>, and there is no script migrating them.</p>
+<h2 id="graphql-api">GraphQL API<a class="headerlink" href="#graphql-api" title="Permanent link">&para;</a></h2>
+<h3 id="metric-values-use-the-safeint-scalar">Metric values use the <code>SafeInt</code> scalar<a class="headerlink" href="#metric-values-use-the-safeint-scalar" title="Permanent link">&para;</a></h3>
+<p>Metric values in the admin GraphQL API are no longer typed as <code>Int</code>.
+The <code>Int</code> scalar is limited to 32 bits by the GraphQL specification, so values above 2^31 - such as <code>system_memory</code> gauges on a node using more than 2 GiB, or <code>ms_since_reset</code> on a node running for more than 25 days - could not be returned at all.</p>
+<p>The affected fields (<code>CounterMetric.value</code>, <code>CounterMetric.ms_since_reset</code>, <code>GaugeMetric.value</code>, <code>SpiralMetric.count</code> and <code>MetricDictEntry.value</code>) now use the new <code>SafeInt</code> scalar, which accepts any integer exactly representable by clients parsing JSON numbers as IEEE 754 doubles, i.e. from -(2^53 - 1) to 2^53 - 1.</p>
+<p>Values are still serialised as JSON numbers, so clients reading them as integers need no changes.
+Only the type name reported by introspection is different, which may require regenerating statically typed clients.</p>
 
 
 
@@ -5505,7 +5568,7 @@ Alternatively, enable <a href="../../modules/mod_muc/"><code>mod_muc</code></a>,
       <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["navigation.instant","navigation.instant.progress","navigation.top","navigation.footer","content.tabs.link","toc.follow"],"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.49251538.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6970bfe9.min.js"></script>
       
     
   </body>
