@@ -786,9 +786,10 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Enabling push notifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#publish-options" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -796,6 +797,11 @@
       </span>
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -5321,6 +5327,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../migrations/6.9.0_6.x.x/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  6.9.0 to 6.x.x
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         
   
@@ -5500,9 +5533,10 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Enabling push notifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#publish-options" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -5510,6 +5544,11 @@
       </span>
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -5586,13 +5625,13 @@
 Depending on whether you plan to use PubSub-full or PubSub-less configuration, some of the steps may be unnecessary.</p>
 <h2 id="registering-with-a-push-service-provider">Registering with a Push Service provider<a class="headerlink" href="#registering-with-a-push-service-provider" title="Permanent link">&para;</a></h2>
 <p>First, the client application has to get a device-specific token from the Push Service Provider
-(FCM or APNS). This process is different, depending on the platform, so please consult your Push
+(FCM or APNs). This process is different, depending on the platform, so please consult your Push
 Service Provider's manual to see how to get this token. For example,
 <a href="https://firebase.google.com/docs/cloud-messaging/android/client">here</a> you can learn about setting
 up <em>FCM</em> on <em>Android</em> platform and
 <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/HandlingRemoteNotifications.html#/apple_ref/doc/uid/TP40008194-CH6-SW1">here</a>
-you can learn about setting up <em>APNS</em> on <em>iOS</em> platform.</p>
-<p>After this step, your application shall be able to receive <em>FCM</em> or <em>APNS</em> token - it will be
+you can learn about setting up <em>APNs</em> on <em>iOS</em> platform.</p>
+<p>After this step, your application shall be able to receive <em>FCM</em> or <em>APNs</em> token - it will be
 required in the next step of this tutorial.</p>
 <h2 id="setting-up-an-xmpp-pubsub-node">Setting up an XMPP <code>pubsub</code> node<a class="headerlink" href="#setting-up-an-xmpp-pubsub-node" title="Permanent link">&para;</a></h2>
 <p>This step is specific to the PubSub-full push configuration that you chose for your MongooseIM
@@ -5641,14 +5680,14 @@ with the <code>push</code> node support. The client sends the following stanza t
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
 <p>The <code>pubsub.mypubsub.com</code> will be used as a gateway for all notifications
-and will pass them through to the APNS and/or FCM.</p>
+and will pass them through to the APNs and/or FCM.</p>
 <p>The most important and only difference from the standard node creation
 is the <code>type='push'</code> part of the <code>create</code> element.
 According to <a href="https://xmpp.org/extensions/xep-0357.html#enabling">XEP-0357: Push Notifications</a>, a PubSub node is
 required to route the push notification mechanism. This implies you need a node that will handle
 your push notifications, hence we create a node called <code>punsub_node_for_my_private_iphone</code>.
 This node should be unique to the device and you may reuse nodes already created this way.
-The token obtained from <em>APNS</em> or <em>FCM</em> is a good option to ensure this uniqueness,
+The token obtained from <em>APNs</em> or <em>FCM</em> is a good option to ensure this uniqueness,
 by either using it directly or within some custom node name generation.
 It is also important from the security perspective to configure the node with:</p>
 <ul>
@@ -5706,42 +5745,20 @@ Let's assume this server is available under the domain <code>mychat.com</code>.<
 <span class="w">      </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">var=</span><span class="s">'device_id'</span><span class="nt">&gt;&lt;value&gt;</span>your_pns_device_token<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
 <span class="w">      </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">var=</span><span class="s">'silent'</span><span class="nt">&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
 <span class="w">      </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">var=</span><span class="s">'topic'</span><span class="nt">&gt;&lt;value&gt;</span>some_apns_topic<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
-<span class="w">      </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">var=</span><span class="s">'priority'</span><span class="nt">&gt;&lt;value&gt;</span>some_priority<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
+<span class="w">      </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">var=</span><span class="s">'priority'</span><span class="nt">&gt;&lt;value&gt;</span>high<span class="nt">&lt;/value&gt;&lt;/field&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/x&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/enable&gt;</span>
 <span class="nt">&lt;/iq&gt;</span>
 </code></pre></div></td></tr></table></div>
-<p>We have now enabled push notifications to be send to the <code>pubsub.mypubsub.com</code> domain
+<p>We have now enabled push notifications to be sent to the <code>pubsub.mypubsub.com</code> domain
 on the node <code>punsub_node_for_my_private_iphone</code> created previously, or in the case of PubSub-less,
 for whatever unique node name we give here, for example any variation of the token obtained from
-<em>APNS</em> or <em>FCM</em>. Please note that <code>publish-options</code> are specific to various XMPP Push Services.</p>
-<h2 id="publish-options">Publish options<a class="headerlink" href="#publish-options" title="Permanent link">&para;</a></h2>
-<p>For <a href="../../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a> the next <code>publish-options</code> are mandatory:</p>
-<ul>
-<li><code>device_id</code> - device token (here: <code>your_pns_device_token</code>) that you received from your push notification service provider (as described in <a href="#registering-with-a-push-service-provider">Registering with Push Service provider</a>)</li>
-<li><code>service</code> - push notification service provider name (<code>apns</code> or <code>fcm</code>)</li>
-</ul>
-<p>there are also some other <code>publish-options</code> supported:</p>
-<ul>
-<li><code>mode</code> - which may be either <code>prod</code> or <code>dev</code> (default to <code>prod</code>). Decides which connection pool
-    type on <a href="https://github.com/esl/MongoosePush">MongoosePush</a> shall be used. This may be used when <em>APNS</em> on <a href="https://github.com/esl/MongoosePush">MongoosePush</a> is
-    configured to work with both production and development certificate.</li>
-<li><code>click_action</code> - action to perform when notification is clicked on the device. <code>activity</code> on
-    <em>Android</em> and <code>category</code> on <em>iOS</em>. Please refer to your platform / push notification service
-    provider for more info.</li>
-<li><code>topic</code> - currently only used with <em>APNS</em>. The value is passed to <em>APNS</em> as <code>topic</code> header. For
-    more information please refer to <em>APNS</em> documentation.</li>
-<li><code>silent</code> - if set to <code>true</code>, all notifications will be "silent". This means that only the data
-    payload will be send to the push notifications provider with no notification. The data payload
-    will contain all notification fields as defined in <a href="https://xmpp.org/extensions/xep-0357.html">XEP-0357: Push Notifications</a>.</li>
-<li><code>priority</code> — which may be either <code>normal</code> or <code>high</code>, and if not given, defaults to <code>normal</code>.
-    This value will set the push notification priority. Please refer to FCM / APNS documentation for
-    more details on those values.</li>
-<li><code>sound</code> - sound that should be played when a notification arrives. Please refer to <em>FCM</em>/<em>APNS</em> documentation for more details.</li>
-<li><code>mutable_content</code> - only applicable to <em>APNS</em>. If set to <code>true</code>, sets "mutable-content=1" in the <em>APNS</em> payload.</li>
-<li><code>time_to_live</code> - only applicable to <em>FCM</em>. Maximum lifespan of an FCM notification. Please refer to the <em>FCM</em> documentation for more details.</li>
-</ul>
-<p>Any other <code>publish-options</code> are ignored by <a href="../../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a></p>
+<em>APNs</em> or <em>FCM</em>. Please note that <code>publish-options</code> are specific to various XMPP Push Services.</p>
+<h3 id="publish-options">Publish options<a class="headerlink" href="#publish-options" title="Permanent link">&para;</a></h3>
+<p>When using <a href="../../../modules/mod_push_service_mongoosepush/">mod_push_service_mongoosepush</a>, see the MongoosePush
+<a href="../../../modules/mod_push_service_mongoosepush/#request-parameters">request parameters</a>
+for the supported <code>publish-options</code> and how MongooseIM maps them to MongoosePush requests.
+In particular, <code>device_id</code> and <code>service</code> publish options are mandatory.</p>
 <h2 id="disabling-push-notifications">Disabling push notifications<a class="headerlink" href="#disabling-push-notifications" title="Permanent link">&para;</a></h2>
 <p>Disabling push notifications is very simple. Just send the following stanza to your XMPP chat server:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>

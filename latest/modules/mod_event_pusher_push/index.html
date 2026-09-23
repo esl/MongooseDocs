@@ -5440,6 +5440,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../migrations/6.9.0_6.x.x/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  6.9.0 to 6.x.x
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../migrations/jid-from-mam-muc-script/" class="md-nav__link">
         
   
@@ -5958,16 +5985,21 @@ Omitting <code>conditions</code> makes the rule match unconditionally.</p>
 <li><strong>Syntax:</strong> string, one of <code>"message"</code>, <code>"jingle"</code></li>
 <li><strong>Default:</strong> no default</li>
 </ul>
-<p>Determines the content of the last message body in the push notification:</p>
+<p>Determines the content of the push notification:</p>
 <ul>
-<li><code>"message"</code> includes the message body,</li>
-<li><code>"jingle"</code> builds it from a valid Jingle Message Initiation element in the format <code>Jingle message: &lt;action&gt;, session ID: &lt;id&gt;</code>.</li>
+<li><code>"message"</code> builds <a href="https://xmpp.org/extensions/xep-0357.html">XEP-0357: Push Notifications</a> notification content from the message body, sender JID and unread count.</li>
+<li><code>"jingle"</code> builds JMI content from a valid <a href="https://xmpp.org/extensions/xep-0353.html">Jingle Message Initiation</a> element and the sender JID:
+  <code>type</code> is <code>jmi</code>, <code>jmi-sid</code> is the element's <code>id</code>, and <code>jmi-from</code> is the sender's full JID.</li>
 </ul>
 <p>This option is mandatory when <code>action</code> is <code>"push"</code> and cannot be specified when <code>action</code> is <code>"skip"</code>.
 If the selected content cannot be built from the stanza, the notification is <strong>not</strong> sent and a warning is logged, so make sure to match <code>conditions</code> with <code>content</code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Jingle notifications are experimental and very likely to change in future versions.</p>
+<div class="admonition note">
+<p class="admonition-title">APNs topics and push content</p>
+<p>MongooseIM sends JMI content only to APNs registrations whose <code>topic</code> ends in <code>.voip</code>.
+It sends non-JMI content only to APNs registrations with no <code>topic</code> or one that does not end in <code>.voip</code>.
+To receive both types, a client must enable two registrations with different <code>node</code> values:
+one using its regular APNs device token and one using its PushKit token and <code>.voip</code> topic.
+This filtering does not apply to FCM registrations.</p>
 </div>
 <h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
 <p>This example configuration enables the module with the RDBMS backend, and using a virtual pubsub host.
