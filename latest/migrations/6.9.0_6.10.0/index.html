@@ -12,7 +12,7 @@
         <meta name="author" content="Erlang Solutions">
       
       
-        <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/migrations/6.9.0_6.x.x/">
+        <link rel="canonical" href="https://esl.github.io/MongooseDocs/latest/migrations/6.9.0_6.10.0/">
       
       
       
@@ -30,7 +30,7 @@
     
     
       
-        <title>6.9.0 to 6.x.x - MongooseIM Docs</title>
+        <title>6.9.0 to 6.10.0 - MongooseIM Docs</title>
       
     
     
@@ -124,7 +124,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              6.9.0 to 6.x.x
+              6.9.0 to 6.10.0
             
           </span>
         </div>
@@ -5166,7 +5166,7 @@
   <span class="md-ellipsis">
     
   
-  6.9.0 to 6.x.x
+  6.9.0 to 6.10.0
 
     
   </span>
@@ -5183,7 +5183,7 @@
   <span class="md-ellipsis">
     
   
-  6.9.0 to 6.x.x
+  6.9.0 to 6.10.0
 
     
   </span>
@@ -5213,6 +5213,17 @@
     <span class="md-ellipsis">
       <span class="md-typeset">
         Jingle push notification content
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jwt-algorithm-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        JWT algorithm names
       </span>
     </span>
   </a>
@@ -5366,6 +5377,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#jwt-algorithm-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        JWT algorithm names
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5386,7 +5408,7 @@
   
 
 
-<h1 id="690-to-6xx">6.9.0 to 6.x.x<a class="headerlink" href="#690-to-6xx" title="Permanent link">&para;</a></h1>
+<h1 id="690-to-6100">6.9.0 to 6.10.0<a class="headerlink" href="#690-to-6100" title="Permanent link">&para;</a></h1>
 <h2 id="jingle-push-notification-content">Jingle push notification content<a class="headerlink" href="#jingle-push-notification-content" title="Permanent link">&para;</a></h2>
 <p>The <code>jingle</code> content source in <code>mod_event_pusher_push</code> rules now generates Jingle Message Initiation
 (JMI) content instead of a regular notification with a synthetic message body. See the
@@ -5397,6 +5419,11 @@ for the current payload.</p>
 <a href="../../modules/mod_push_service_mongoosepush/#request-parameters">request parameter documentation</a>
 for the MongoosePush mapping and version requirement. Update MongoosePush and any custom push
 integrations before upgrading MongooseIM.</p>
+<h2 id="jwt-algorithm-names">JWT algorithm names<a class="headerlink" href="#jwt-algorithm-names" title="Permanent link">&para;</a></h2>
+<p>The accepted values of <a href="../../authentication-methods/jwt/#authjwtalgorithm"><code>auth.jwt.algorithm</code></a>
+now correctly include <code>HS384</code>, <code>RS384</code> and <code>ES384</code>.
+The previously accepted misspellings <code>HS386</code>, <code>RS386</code> and <code>ES386</code> are rejected at startup.
+Replace any of these misspellings in your configuration with the corresponding <code>384</code> value.</p>
 
 
 
